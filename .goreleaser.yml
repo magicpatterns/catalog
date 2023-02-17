@@ -1,7 +1,5 @@
 # .goreleaser.yml
 
-project_name: cli
-
 builds:
   - binary: cli
     goos:
@@ -10,12 +8,11 @@ builds:
     goarch:
       - amd64
       - arm64
-    id: "cli"
-    main: ./cli/
     env:
       - CGO_ENABLED=0
     flags:
       - -mod=vendor
+  - main: ./cli/
 
 release:
   prerelease: auto
