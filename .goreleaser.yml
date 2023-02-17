@@ -11,8 +11,7 @@ builds:
       - amd64
       - arm64
     id: "cli"
-    dir: .
-    main: ./cli/cmd
+    main: ./cli/
     env:
       - CGO_ENABLED=0
     flags:
