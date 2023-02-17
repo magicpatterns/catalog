@@ -38,6 +38,6 @@ jobs:
           workdir: ./cli
           distribution: goreleaser
           version: ${{ env.GITHUB_REF_NAME }}
-          args: release -f ../goreleaser.yaml --clean
+          args: release -f ../.goreleaser.yaml --clean
         env:
           GITHUB_TOKEN: ${{ secrets.PUBLISHER_TOKEN }}
