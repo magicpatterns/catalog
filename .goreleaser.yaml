@@ -8,6 +8,17 @@ builds:
     - windows
     - darwin
 
+brews:
+  - name: mirrorful
+    homepage: "https://github.com/Mirrorful/mirrorful"
+    tap:
+      owner: Mirrorful
+      name: homebrew-mirrorful
+    commit_author:
+      name: alexdanilowicz
+      email: alex.danilowicz@gmail.com
+    commit_msg_template: "Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
+
 archives:
   - format: tar.gz
     # this name template makes the OS and Arch compatible with the results of uname.
@@ -36,13 +47,3 @@ changelog:
 # Feel free to remove those if you don't want/use them.
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj
-
-brews:
-  - name: mirrorful
-    homepage: "https://github.com/Mirrorful/mirrorful"
-    tap:
-      owner: Mirrorful
-      name: homebrew-mirrorful
-    commit_author:
-      name: alexdanilowicz
-      email: alex.danilowicz@gmail.com
