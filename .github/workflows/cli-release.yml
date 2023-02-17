@@ -34,6 +34,7 @@ jobs:
           go-version: 1.17
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
+        working-directory: ./cli
         with:
           distribution: goreleaser
           version: ${{ env.GITHUB_REF_NAME }}
