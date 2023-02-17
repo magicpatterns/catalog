@@ -1,11 +1,17 @@
 {
   "name": "mirrorful-init",
-  "version": "1.0.1",
-  "description": "Easiest way to add Mirrorful to your project",
+  "version": "1.0.4",
+  "description": "CLI  to add Mirrorful to your project",
+  "keywords": [
+    "cli",
+    "mirrorful",
+    "design system",
+    "npx",
+    "nodejs"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "tsc --build",
-    "publish": "prepublish; npm publish",
+    "build": "tsc --build",
     "clean": "tsc --build --clean"
   },
   "repository": {
@@ -18,9 +24,7 @@
     "url": "https://github.com/Mirrorful/mirrorful/issues"
   },
   "homepage": "https://github.com/Mirrorful/mirrorful#readme",
-  "bin": {
-    "mirrorful-init": "./dist/index.js"
-  },
+  "bin": "index.js",
   "devDependencies": {
     "typescript": "^4.9.5"
   }
