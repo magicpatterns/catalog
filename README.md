@@ -1,3 +1,3 @@
-<h1>Mirrorful</h1>
+# Mirrorful
 
 Open-source infrastructure to manage your design system.
