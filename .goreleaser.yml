@@ -3,20 +3,20 @@
 project_name: mirrorful_cli
 
 builds:
-  binary: cli
-  goos:
-    - darwin
-    - linux
-  goarch:
-    - amd64
-    - arm64
-  env:
-    - CGO_ENABLED=0
-  flags:
-    - -mod=vendor
-  id: "mirrorful_cli"
-  dir: .
-  main: ./cli
+  - binary: cli
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -mod=vendor
+    id: "mirrorful_cli"
+    dir: .
+    main: ./cli
 
 release:
   prerelease: auto
