@@ -1,10 +1,11 @@
 {
   "name": "mirrorful-init",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easiest way to add Mirrorful to your project",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --build",
+    "prepublish": "tsc --build",
+    "publish": "prepublish; npm publish",
     "clean": "tsc --build --clean"
   },
   "repository": {
