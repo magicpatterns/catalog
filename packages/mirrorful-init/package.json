@@ -1,0 +1,26 @@
+{
+  "name": "mirrorful-init",
+  "version": "1.0.0",
+  "description": "Easiest way to add Mirrorful to your project",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mirrorful/mirrorful.git"
+  },
+  "author": "Mirrorful Team <founders@mirrorful.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mirrorful/mirrorful/issues"
+  },
+  "homepage": "https://github.com/Mirrorful/mirrorful#readme",
+  "bin": {
+    "mirrorful-init": "./dist/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
