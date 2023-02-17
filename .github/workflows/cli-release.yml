@@ -37,6 +37,6 @@ jobs:
         with:
           distribution: goreleaser
           version: ${{ env.GITHUB_REF_NAME }}
-          args: release --rm-dist
+          args: release -f .goreleaser.yml --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.PUBLISHER_TOKEN }}
