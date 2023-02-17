@@ -1,5 +1,5 @@
 builds:
-  - binary: mirrorful-cli
+  - binary: mirrorful
     goos:
       - darwin
       - linux
