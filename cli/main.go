@@ -1,6 +1,5 @@
 /*
 Copyright © 2023 North Park Labs, Inc.
-
 */
 package main
 
