@@ -12,7 +12,7 @@ builds:
       - arm64
     id: "cli"
     dir: .
-    main: ./cli
+    main: ./cli/cmd
     env:
       - CGO_ENABLED=0
     flags:
