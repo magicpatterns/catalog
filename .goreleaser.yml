@@ -1,7 +1,8 @@
 # .goreleaser.yml
 
 builds:
-  - binary: cli
+  - main: ./cli/main.go
+    binary: cli
     goos:
       - darwin
       - linux
@@ -12,7 +13,6 @@ builds:
       - CGO_ENABLED=0
     flags:
       - -mod=vendor
-  - main: ./cli/
 
 release:
   prerelease: auto
