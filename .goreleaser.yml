@@ -1,41 +1,38 @@
-project_name: mirrorful_cli
+# .goreleaser.yml
+
+project_name: cli
 
 builds:
-
-- binary: cli
-  goos:
-  - darwin
-  - linux
+  - binary: cli
+    goos:
+      - darwin
+      - linux
     goarch:
-  - amd64
-  - arm64
+      - amd64
+      - arm64
+    id: "cli"
+    dir: .
+    main: ./cli
     env:
-  - CGO_ENABLED=0
+      - CGO_ENABLED=0
     flags:
-  - -mod=vendor
-
-id: "mirrorful_cli"
-dir: .
-main: ./cli  
+      - -mod=vendor
 
 release:
-prerelease: auto
+  prerelease: auto
 
 universal_binaries:
-
-- replace: true
+  - replace: true
 
 brews:
-
-- name: cli
-  homepage: "https://github.com/Mirrorful/mirrorful"
-  tap:
-  owner: Mirrorful
-  name: homebrew-mirrorful
-  commit_author:
-  name: alexdanilowicz
-  email: alexdanilowicz
-  
+  - name: cli
+    homepage: "https://github.com/Mirrorful/mirrorful"
+    tap:
+      owner: Mirrorful
+      name: homebrew-mirrorful
+    commit_author:
+      name: alexdanilowicz
+      email: alex@mirrorful.io
 
 checksum:
-name_template: 'checksums.txt'
+  name_template: "checksums.txt"
