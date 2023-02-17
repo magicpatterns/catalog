@@ -1,0 +1,34 @@
+builds:
+
+- binary: cli
+  goos:
+  - darwin
+  - linux
+    goarch:
+  - amd64
+  - arm64
+    env:
+  - CGO_ENABLED=0
+    flags:
+  - -mod=vendor
+
+release:
+prerelease: auto
+
+universal_binaries:
+
+- replace: true
+
+brews:
+
+- name: cli
+  homepage: "https://github.com/Mirrorful/mirrorful"
+  tap:
+  owner: Mirrorful
+  name: homebrew-mirrorful
+  commit_author:
+  name: alexdanilowicz
+  email: alexdanilowicz
+
+checksum:
+name_template: 'checksums.txt'
