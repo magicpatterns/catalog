@@ -15,7 +15,6 @@ builds:
     flags:
       - -mod=vendor
     id: "mirrorful_cli"
-    dir: .
     main: ./cli
 
 release:
