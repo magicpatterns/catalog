@@ -9,6 +9,7 @@ import { getPkgManager } from "./helpers/get-pkg-manager";
 import { validateNpmName } from "./helpers/validate-pkg";
 import packageJson from "./package.json";
 import fs from "fs";
+import { init } from "./init";
 
 let projectPath: string = "";
 
@@ -83,7 +84,17 @@ async function run(): Promise<void> {
   >;
 
   try {
-    console.log("Hello");
+    await init({
+      appPath: resolvedProjectPath,
+      packageManager,
+      example: undefined,
+      examplePath: program.examplePath,
+      typescript: program.typescript,
+      eslint: program.eslint,
+      experimentalApp: program.experimentalApp,
+      srcDir: program.srcDir,
+      importAlias: program.importAlias,
+    });
   } catch (reason) {
     console.error(reason);
   }
