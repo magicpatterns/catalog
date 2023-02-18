@@ -1,0 +1,40 @@
+{
+  "name": "mirrorful",
+  "version": "1.0.0",
+  "description": "CLI to use mirrorful in your project",
+  "keywords": [
+    "cli",
+    "mirrorful",
+    "design system",
+    "npx",
+    "nodejs"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mirrorful/mirrorful.git"
+  },
+  "author": "Mirrorful Team <founders@mirrorful.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mirrorful/mirrorful/issues"
+  },
+  "homepage": "https://github.com/Mirrorful/mirrorful#readme",
+  "bin": "index.js",
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "@types/validate-npm-package-name": "^4.0.0",
+    "chalk": "2.4.2",
+    "commander": "2.20.0",
+    "conf": "10.2.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "prompts": "2.1.0",
+    "typescript": "^4.9.5",
+    "update-check": "^1.5.4"
+  }
+}
