@@ -2,6 +2,11 @@
 @import '@radix-ui/colors/mauve.css';
 @import '@radix-ui/colors/violet.css';
 
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
 .icon-button {
   padding: 8px;
   cursor: pointer;
@@ -18,15 +23,17 @@
 }
 
 .mirrorful-label {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 6px;
 }
 
 .mirrorful-button {
   font-size: 14px;
   font-weight: bold;
-  background-color: var(--violet10);
-  padding: 12px 24px;
+  background-color: var(--violet9);
+  padding: 12px 22px;
   color: white;
   border-radius: 8px;
   border: none;
@@ -35,7 +42,14 @@
 }
 
 .mirrorful-button:hover {
-  background-color: var(--violet12);
+  background-color: var(--violet11);
+}
+
+.mirrorful-input {
+  padding: 6px 10px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  font-size: 16px;
 }
 
 .DropdownMenuContent,

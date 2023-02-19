@@ -9,11 +9,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { TColorData } from 'types'
 import { EditColorDialog } from './EditColorDialog'
 
-export function ColorRow() {
-  const [colorData, setColorData] = useState<TColorData>({
-    hex: '#805AD5',
-    name: 'Purple',
-  })
+export function ColorRow({ colorData }: { colorData: TColorData }) {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false)
 
   const colorScale = generateDefaultColorScale(colorData.hex)

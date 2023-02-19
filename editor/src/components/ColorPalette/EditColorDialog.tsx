@@ -20,17 +20,20 @@ export function EditColorDialog({
       <Dialog.Portal>
         <Dialog.Overlay className="DialogOverlay" />
         <Dialog.Content className="DialogContent">
-          <Dialog.Title className="DialogTitle">Edit Color</Dialog.Title>
-          <div style={{ display: 'flex' }}>
+          <Dialog.Title className="DialogTitle">
+            <span style={{ fontSize: 24 }}>
+              {defaultData ? 'Edit Color' : 'Add Color'}
+            </span>
+          </Dialog.Title>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', marginTop: 18 }}
+          >
             <div
               style={{
-                width: '150px',
                 display: 'flex',
-                flexDirection: 'row-reverse',
-                marginRight: '8px',
               }}
             >
-              <div className="mirrorful-label">Color Name:</div>
+              <div className="mirrorful-label">Color Name</div>
             </div>
             <input
               className="mirrorful-input"
@@ -38,16 +41,15 @@ export function EditColorDialog({
               onChange={(e) => setColorName(e.target.value)}
             />
           </div>
-          <div style={{ display: 'flex' }}>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', marginTop: 18 }}
+          >
             <div
               style={{
-                width: '150px',
                 display: 'flex',
-                flexDirection: 'row-reverse',
-                marginRight: '8px',
               }}
             >
-              <div className="mirrorful-label">Hex Code:</div>
+              <div className="mirrorful-label">Hex Code</div>
             </div>
             <input
               className="mirrorful-input"
