@@ -4,8 +4,11 @@ import { TColorData } from 'types'
 
 const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
 
-// TODO: This doesn't work in production
-const rootPath = `../.mirrorful/`
+// Our working directory is 2 levels below node_modules in production, so we go up 3 levels
+let rootPath = `../../../.mirrorful`
+if (process.env.NODE_ENV === 'development') {
+  rootPath = '../.mirrorful'
+}
 
 const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
   let scssContent = ``

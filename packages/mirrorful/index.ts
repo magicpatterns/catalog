@@ -11,9 +11,18 @@ const handleSigTerm = () => process.exit(0)
 process.on('SIGINT', handleSigTerm)
 process.on('SIGTERM', handleSigTerm)
 
-const program = new Commander.Command(packageJson.name).version(
-  packageJson.version
-)
+let verbose: boolean = false
+const program = new Commander.Command(packageJson.name)
+  .version(packageJson.version)
+  .option('-v, --verbose', 'Enable verbose output')
+
+program.parse(process.argv)
+const options = program.opts() as { verbose: boolean }
+verbose = options.verbose ? true : false
+if (verbose) {
+  console.log('Verbose mode enabled.')
+  console.log()
+}
 
 const packageManager = !!program.useNpm
   ? 'npm'
@@ -52,10 +61,10 @@ async function main() {
     console.log(`Starting Mirrorful in ${chalk.green(process.cwd())}.`)
     console.log()
 
-    // NOTE(Danilowicz): for now, use root as project path
     await init({
       appPath: process.cwd(),
       packageManager,
+      verbose,
     })
   } catch (reason) {
     console.error(reason)
@@ -72,7 +81,7 @@ main()
     } else {
       console.log(
         chalk.red(
-          'Unexpected error. Please report it as a bug to founders@mirrorful.io:'
+          'Unexpected error. Please report it as a bug to the Mirrorful Support Team <founders@mirrorful.io>'
         ) + '\n',
         reason
       )

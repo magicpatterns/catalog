@@ -8,9 +8,11 @@ import spawn from 'cross-spawn'
 export async function init({
   appPath,
   packageManager,
+  verbose,
 }: {
   appPath: string
   packageManager: PackageManager
+  verbose: boolean
 }) {
   const root = path.resolve(appPath)
 
@@ -24,11 +26,14 @@ export async function init({
     process.exit(1)
   }
 
-  // TODO(Danilowicz): everything is development right now
   await makeDir('.mirrorful')
   const port = 5050 // don't hard code this
 
-  process.chdir(`node_modules/mirrorful/editor`)
+  if (process.env.NODE_ENV === 'production') {
+    process.chdir(`node_modules/mirrorful/editor`)
+  } else {
+    process.chdir(`editor`)
+  }
 
   // Assume success
   console.log(`${chalk.green('Success!')}`)
@@ -44,8 +49,12 @@ export async function init({
   console.log('to start Mirrorful development at any time 🚀')
   console.log()
 
-  // TODO(Danilowicz): This problem means yarn needs to be installed globally?
-  spawn.sync('yarn', ['run', 'start', '-p', port.toString()], {
-    stdio: 'inherit',
+  let command = 'start'
+  if (process.env.NODE_ENV === 'development') {
+    command = 'dev'
+  }
+  // TODO(Danilowicz): This probably means yarn needs to be installed globally?
+  spawn.sync('yarn', ['run', command, '-p', port.toString()], {
+    stdio: verbose ? 'inherit' : 'ignore',
   })
 }
