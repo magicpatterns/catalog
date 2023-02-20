@@ -3,22 +3,32 @@ import fs from 'fs'
 import { TColorData } from 'types'
 
 const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
+const rootPath = `../.mirrorful/`
 
-const generateCssFile = async (colorData: TColorData[]) => {
-  let cssContent = `:root {`
+const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
+  let scssContent = ``
+
+  let cssContent = `:root {\n`
 
   colorData.forEach((color) => {
-    cssContent += `\n  --color-${color.name.toLowerCase()}: ${color.hex};`
+    scssContent += `$color-${color.name.toLowerCase()}: ${color.hex};\n`
+    cssContent += `--color-${color.name.toLowerCase()}: ${color.hex};\n`
     getKeys(color.scale).forEach((key) => {
-      cssContent += `\n  --color-${color.name.toLowerCase()}-${key}: ${
+      cssContent += `--color-${color.name.toLowerCase()}-${key}: ${
         color.scale[key]
-      };`
+      };\n`
+      scssContent += `$color-${color.name.toLowerCase()}-${key}: ${
+        color.scale[key]
+      };\n`
     })
   })
 
-  cssContent += `\n}`
+  cssContent += `}\n`
 
-  await fs.writeFileSync('../.mirrorful/theme.css', cssContent)
+  scssContent += `\n${cssContent}`
+
+  await fs.writeFileSync(`${rootPath}/theme.css`, cssContent)
+  await fs.writeFileSync(`${rootPath}/theme.scss`, scssContent)
 }
 
 export default async function handler(
@@ -27,7 +37,7 @@ export default async function handler(
 ) {
   const body = JSON.parse(req.body)
 
-  await generateCssFile(body.colorData)
+  await generateCssFile({ colorData: body.colorData })
 
   return res.status(200).json({ message: 'Success' })
 }
