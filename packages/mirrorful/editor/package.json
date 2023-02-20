@@ -1,7 +1,12 @@
 {
   "name": "editor",
   "version": "0.1.0",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mirrorful/mirrorful.git"
+  },
+  "author": "Mirrorful Team <founders@mirrorful.io>",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

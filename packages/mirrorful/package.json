@@ -1,6 +1,6 @@
 {
   "name": "mirrorful",
-  "version": "1.0.19",
+  "version": "1.0.21",
   "description": "Manage your design system at scale",
   "keywords": [
     "mirrorful",
@@ -16,7 +16,7 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "local": "cross-env NODE_ENV=development tsc --build; node ./dist/index.js",
-    "prepub": "cross-env NODE_ENV=production tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm version patch"
+    "prepub": "tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm version patch"
   },
   "repository": {
     "type": "git",

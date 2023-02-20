@@ -29,10 +29,12 @@ export async function init({
   await makeDir('.mirrorful')
   const port = 5050 // don't hard code this
 
-  if (process.env.NODE_ENV === 'production') {
-    process.chdir(`node_modules/mirrorful/editor`)
-  } else {
+  // NOTE: it seems that 'production' is not a valid NODE_ENV value at this time
+  // Right now it's either 'development' or undefined
+  if (process.env.NODE_ENV === 'development') {
     process.chdir(`editor`)
+  } else {
+    process.chdir(`node_modules/mirrorful/editor`)
   }
 
   // Assume success
