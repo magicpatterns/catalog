@@ -1,149 +1,85 @@
 #!/usr/bin/env node
-/* eslint-disable import/no-extraneous-dependencies */
-import chalk from "chalk";
-import Commander from "commander";
-import Conf from "conf";
-import path from "path";
-import checkForUpdate from "update-check";
-import { getPkgManager } from "./helpers/get-pkg-manager";
-import { validateNpmName } from "./helpers/validate-pkg";
-import packageJson from "./package.json";
-import fs from "fs";
-import { init } from "./init";
 
-let projectPath: string = "";
+import chalk from 'chalk'
+import checkForUpdate from 'update-check'
+import packageJson from './package.json'
+import Commander from 'commander'
+import { getPkgManager } from './helpers/get-pkg-manager'
+import { init } from './init'
 
-const handleSigTerm = () => process.exit(0);
+const handleSigTerm = () => process.exit(0)
+process.on('SIGINT', handleSigTerm)
+process.on('SIGTERM', handleSigTerm)
 
-process.on("SIGINT", handleSigTerm);
-process.on("SIGTERM", handleSigTerm);
-
-const onPromptState = (state: any) => {
-  if (state.aborted) {
-    // If we don't re-enable the terminal cursor before exiting
-    // the program, the cursor will remain hidden
-    process.stdout.write("\x1B[?25h");
-    process.stdout.write("\n");
-    process.exit(1);
-  }
-};
-
-const program = new Commander.Command(packageJson.name)
-  .version(packageJson.version)
-  .arguments("<project-directory>")
-  .usage(`${chalk.green("<project-directory>")} [options]`)
-  .action((name) => {
-    projectPath = name;
-  })
-  //   .option(
-  //     "--ts, --typescript",
-  //     `
-  //   Print hello world
-  // `
-  //   )
-  .allowUnknownOption()
-  .parse(process.argv);
+const program = new Commander.Command(packageJson.name).version(
+  packageJson.version
+)
 
 const packageManager = !!program.useNpm
-  ? "npm"
+  ? 'npm'
   : !!program.usePnpm
-  ? "pnpm"
-  : getPkgManager();
+  ? 'pnpm'
+  : getPkgManager()
 
-async function run(): Promise<void> {
-  const conf = new Conf({ projectName: "mirrorful" });
-
-  if (program.resetPreferences) {
-    conf.clear();
-    console.log(`Preferences reset successfully`);
-    return;
-  }
-
-  if (typeof projectPath === "string") {
-    projectPath = projectPath.trim();
-  }
-
-  if (!projectPath) {
-    console.log(
-      "\nPlease specify the project directory:\n" +
-        `  ${chalk.cyan(program.name())} ${chalk.green(
-          "<project-directory>"
-        )}\n` +
-        "For example:\n" +
-        `  ${chalk.cyan(program.name())} ${chalk.green("my-app")}\n\n` +
-        `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`
-    );
-    process.exit(1);
-  }
-
-  const resolvedProjectPath = path.resolve(projectPath);
-
-  const preferences = (conf.get("preferences") || {}) as Record<
-    string,
-    boolean | string
-  >;
-
+async function notifyUpdate() {
   try {
-    await init({
-      appPath: resolvedProjectPath,
-      packageManager,
-      example: undefined,
-      examplePath: program.examplePath,
-      typescript: program.typescript,
-      eslint: program.eslint,
-      experimentalApp: program.experimentalApp,
-      srcDir: program.srcDir,
-      importAlias: program.importAlias,
-    });
-  } catch (reason) {
-    console.error(reason);
-  }
-  conf.set("preferences", preferences);
-}
+    const res = await checkForUpdate(packageJson).catch(() => null)
 
-const update = checkForUpdate(packageJson).catch(() => null);
-
-async function notifyUpdate(): Promise<void> {
-  try {
-    const res = await update;
     if (res?.latest) {
       const updateMessage =
-        packageManager === "yarn"
-          ? "yarn global add mirrorful"
-          : packageManager === "pnpm"
-          ? "pnpm add -g mirrorful"
-          : "npm i -g mirrorful";
+        packageManager === 'yarn'
+          ? 'yarn add mirrorful@latest'
+          : packageManager === 'pnpm'
+          ? 'pnpm up mirrorful@ltatest'
+          : 'npm i mirrorful@latest'
 
       console.log(
-        chalk.yellow.bold("A new version of `mirrorful` is available!") +
-          "\n" +
-          "You can update by running: " +
+        chalk.yellow.bold('A new version of `mirrorful` is available!') +
+          '\n' +
+          'You can update by running: ' +
           chalk.cyan(updateMessage) +
-          "\n"
-      );
+          '\n'
+      )
     }
-    process.exit();
+    process.exit()
   } catch {
     // ignore error
   }
 }
 
-run()
+async function main() {
+  try {
+    console.log(`Starting Mirrorful in ${chalk.green(process.cwd())}.`)
+    console.log()
+
+    // NOTE(Danilowicz): for now, use root as project path
+    await init({
+      appPath: process.cwd(),
+      packageManager,
+    })
+  } catch (reason) {
+    console.error(reason)
+  }
+}
+
+main()
   .then(notifyUpdate)
   .catch(async (reason) => {
-    console.log();
-    console.log("Aborting installation.");
+    console.log()
+    console.log('Aborting installation.')
     if (reason.command) {
-      console.log(`  ${chalk.cyan(reason.command)} has failed.`);
+      console.log(`  ${chalk.cyan(reason.command)} has failed.`)
     } else {
       console.log(
-        chalk.red("Unexpected error. Please report it as a bug:") + "\n",
+        chalk.red(
+          'Unexpected error. Please report it as a bug to founders@mirrorful.io:'
+        ) + '\n',
         reason
-      );
+      )
     }
-    console.log();
+    console.log()
 
-    await notifyUpdate();
+    await notifyUpdate()
 
-    process.exit(1);
-  });
+    process.exit(1)
+  })

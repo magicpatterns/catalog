@@ -1,7 +1,7 @@
 {
   "name": "mirrorful",
-  "version": "1.0.1",
-  "description": "CLI to use mirrorful in your project",
+  "version": "1.02",
+  "description": "Manage your design system at scale with Mirrorful",
   "keywords": [
     "cli",
     "mirrorful",
@@ -27,25 +27,16 @@
   "homepage": "https://github.com/Mirrorful/mirrorful#readme",
   "bin": "dist/index.js",
   "dependencies": {
-    "@types/tar": "^6.1.4",
-    "async-retry": "^1.3.3",
-    "async-sema": "^3.1.1",
     "chalk": "2.4.2",
     "commander": "2.20.0",
-    "conf": "10.2.0",
     "cross-spawn": "^7.0.3",
     "fs": "^0.0.1-security",
-    "glob": "^8.1.0",
     "path": "^0.12.7",
-    "prompts": "2.1.0",
     "rimraf": "^4.1.2",
-    "tar": "^6.1.13",
     "update-check": "^1.5.4"
   },
   "devDependencies": {
-    "@types/async-retry": "^1.4.5",
     "@types/cross-spawn": "^6.0.2",
-    "@types/glob": "^8.0.1",
     "@types/node": "^18.14.0",
     "@types/validate-npm-package-name": "^4.0.0",
     "typescript": "^4.9.5"
