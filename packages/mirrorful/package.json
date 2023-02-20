@@ -1,7 +1,7 @@
 {
   "name": "mirrorful",
-  "version": "1.02",
-  "description": "Manage your design system at scale with Mirrorful",
+  "version": "1.0.2",
+  "description": "Manage your design system at scale",
   "keywords": [
     "cli",
     "mirrorful",
@@ -20,15 +20,15 @@
     "url": "git+https://github.com/Mirrorful/mirrorful.git"
   },
   "author": "Mirrorful Team <founders@mirrorful.io>",
-  "license": "MIT",
+  "license": "SEE LICENSE IN PROJECT ROOT",
   "bugs": {
     "url": "https://github.com/Mirrorful/mirrorful/issues"
   },
   "homepage": "https://github.com/Mirrorful/mirrorful#readme",
   "bin": "dist/index.js",
   "dependencies": {
-    "chalk": "2.4.2",
-    "commander": "2.20.0",
+    "chalk": "^2.4.2",
+    "commander": "^2.20.0",
     "cross-spawn": "^7.0.3",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
