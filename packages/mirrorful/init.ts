@@ -46,6 +46,6 @@ export async function init({
 
   // TODO(Danilowicz): This problem means yarn needs to be installed globally?
   spawn.sync('yarn', ['run', 'start', '-p', port.toString()], {
-    stdio: 'ignore', // don't print next output (perhaps we want this for errors tho?)
+    stdio: 'inherit',
   })
 }
