@@ -11,15 +11,15 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
   let cssContent = `:root {\n`
 
   colorData.forEach((color) => {
-    scssContent += `$color-${color.name.toLowerCase()}: ${color.hex}\n`
+    scssContent += `$color-${color.name.toLowerCase()}: ${color.hex};\n`
     cssContent += `--color-${color.name.toLowerCase()}: ${color.hex};\n`
     getKeys(color.scale).forEach((key) => {
       cssContent += `--color-${color.name.toLowerCase()}-${key}: ${
         color.scale[key]
       };\n`
-      scssContent += `$color-${color.name.toLowerCase()}-${key}}: ${
+      scssContent += `$color-${color.name.toLowerCase()}-${key}: ${
         color.scale[key]
-      }\n`
+      };\n`
     })
   })
 
