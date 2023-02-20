@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.5.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@next/font": "13.1.6",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-dialog": "^1.0.2",
@@ -21,6 +24,7 @@
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "feather-icons-react": "^0.6.2",
+    "framer-motion": "^9.0.4",
     "next": "13.1.6",
     "prettier": "^2.8.4",
     "react": "18.2.0",
