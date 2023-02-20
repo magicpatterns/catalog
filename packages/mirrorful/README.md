@@ -2,16 +2,16 @@
 
 ## Installation
 
-To get started, install Mirrorful and Next as a development dependency of your project:
+To get started, install Mirrorful as a development dependency of your project:
 
 ```bash
-yarn add mirrorful --dev; yarn add next --dev
+yarn add mirrorful --dev
 ```
 
 or
 
 ```
-npm install mirrorful --save-dev; npm install next --save-dev
+npm install mirrorful --save-dev
 ```
 
 ```
