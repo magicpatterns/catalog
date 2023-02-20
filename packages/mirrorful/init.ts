@@ -25,21 +25,26 @@ export async function init({
   }
 
   // TODO(Danilowicz): everything is development right now
-  const NODE_ENV = 'development'
   await makeDir('.mirrorful')
   const port = 5050 // don't hard code this
-  const result = spawn.sync('yarn', ['run', 'dev'], {
-    stdio: 'inherit',
-  })
+
+  process.chdir('editor')
+
+  // Assume success
+  console.log(`${chalk.green('Success!')}`)
+  console.log()
+  console.log(`url: ${chalk.cyan(`${`http://localhost:`}${port.toString()}`)}`)
+  console.log()
 
   const useYarn = packageManager === 'yarn'
-  console.log(`${chalk.green('Success!')} 🚀`)
-  console.log()
-  console.log(`Running on port ${chalk.cyan(port.toString())}`)
-  console.log()
   console.log('Inside your project, you can run:')
   console.log()
   console.log(chalk.cyan(`  ${useYarn ? 'yarn run ' : 'npx '}mirrorful`))
-  console.log('to start the mirrorful development server at any time.')
   console.log()
+  console.log('to start Mirrorful development at any time 🚀')
+  console.log()
+
+  spawn.sync('yarn', ['run', 'start', '-p', port.toString()], {
+    stdio: 'ignore', // don't print next output (perhaps we want this for errors tho?)
+  })
 }

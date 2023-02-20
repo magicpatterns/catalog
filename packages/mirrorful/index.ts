@@ -30,7 +30,7 @@ async function notifyUpdate() {
         packageManager === 'yarn'
           ? 'yarn add mirrorful@latest'
           : packageManager === 'pnpm'
-          ? 'pnpm up mirrorful@ltatest'
+          ? 'pnpm up mirrorful@latest'
           : 'npm i mirrorful@latest'
 
       console.log(
