@@ -1,6 +1,6 @@
 {
   "name": "mirrorful",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Manage your design system at scale",
   "keywords": [
     "mirrorful",
@@ -15,27 +15,21 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "local": "tsc --build; node ./dist/index.js"
+    "local": "cross-env NODE_ENV=development tsc --build; node ./dist/index.js",
+    "prepub": "cross-env NODE_ENV=production tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm version patch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mirrorful/mirrorful.git"
   },
   "author": "Mirrorful Team <founders@mirrorful.io>",
-  "license": "SEE LICENSE IN PROJECT ROOT",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Mirrorful/mirrorful/issues"
   },
   "homepage": "https://github.com/Mirrorful/mirrorful#readme",
   "bin": "dist/index.js",
   "dependencies": {
-    "chalk": "^2.4.2",
-    "commander": "^2.20.0",
-    "cross-spawn": "^7.0.3",
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7",
-    "rimraf": "^4.1.2",
-    "update-check": "^1.5.4",
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
@@ -44,21 +38,29 @@
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-dropdown-menu": "^2.0.2",
     "@radix-ui/react-separator": "^1.0.1",
+    "chalk": "^2.4.2",
+    "commander": "^2.20.0",
+    "cross-spawn": "^7.0.3",
     "feather-icons-react": "^0.6.2",
     "framer-motion": "^9.0.4",
+    "fs": "^0.0.1-security",
     "next": "13.1.6",
+    "path": "^0.12.7",
     "prettier": "^2.8.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tinycolor2": "^1.6.0"
+    "rimraf": "^4.1.2",
+    "tinycolor2": "^1.6.0",
+    "update-check": "^1.5.4"
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
     "@types/node": "^18.14.0",
-    "@types/validate-npm-package-name": "^4.0.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@types/tinycolor2": "^1.4.3",
+    "@types/validate-npm-package-name": "^4.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "typescript": "^4.9.5"

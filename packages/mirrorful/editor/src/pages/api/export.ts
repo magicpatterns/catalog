@@ -3,7 +3,9 @@ import fs from 'fs'
 import { TColorData } from 'types'
 
 const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
-const rootPath = `../.mirrorful/`
+
+// Our working directory is 2 levels below node_modules, so we go up 3 levels
+const ROOT_PATH = `../../../.mirrorful`
 
 const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
   let scssContent = ``
@@ -27,8 +29,8 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
 
   scssContent += `\n${cssContent}`
 
-  await fs.writeFileSync(`${rootPath}/theme.css`, cssContent)
-  await fs.writeFileSync(`${rootPath}/theme.scss`, scssContent)
+  await fs.writeFileSync(`${ROOT_PATH}/theme.css`, cssContent)
+  await fs.writeFileSync(`${ROOT_PATH}/theme.scss`, scssContent)
 }
 
 export default async function handler(
