@@ -9,8 +9,9 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+# We purposely push .next folder to the repository so it goes along with npm.
+#/.next/
+#/out/
 
 # production
 /build

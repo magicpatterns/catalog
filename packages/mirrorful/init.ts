@@ -44,6 +44,7 @@ export async function init({
   console.log('to start Mirrorful development at any time 🚀')
   console.log()
 
+  // TODO(Danilowicz): This problem means yarn needs to be installed globally?
   spawn.sync('yarn', ['run', 'start', '-p', port.toString()], {
     stdio: 'ignore', // don't print next output (perhaps we want this for errors tho?)
   })
