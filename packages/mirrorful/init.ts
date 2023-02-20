@@ -50,7 +50,7 @@ export async function init({
   console.log()
 
   let command = 'start'
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV === 'development') {
     command = 'dev'
   }
   // TODO(Danilowicz): This probably means yarn needs to be installed globally?

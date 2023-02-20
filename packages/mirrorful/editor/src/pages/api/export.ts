@@ -55,8 +55,8 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
 
   scssContent += `\n${cssContent}`
 
-  await fs.writeFileSync(`${ROOT_PATH}/theme.css`, cssContent)
-  await fs.writeFileSync(`${ROOT_PATH}/theme.scss`, scssContent)
+  await fs.writeFileSync(`${rootPath}/theme.css`, cssContent)
+  await fs.writeFileSync(`${rootPath}/theme.scss`, scssContent)
 }
 
 export default async function handler(
