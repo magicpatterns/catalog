@@ -28,7 +28,7 @@ export async function init({
   await makeDir('.mirrorful')
   const port = 5050 // don't hard code this
 
-  process.chdir('editor')
+  process.chdir(`node_modules/mirrorful/editor`)
 
   // Assume success
   console.log(`${chalk.green('Success!')}`)

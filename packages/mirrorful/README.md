@@ -1,5 +1,7 @@
 # Mirrorful
 
+## Installation
+
 To get started, install Mirrorful as a development dependency of your project:
 
 ```bash
@@ -10,6 +12,18 @@ or
 
 ```
 npm install mirrorful --save-dev
+```
+
+## Usage
+
+```
+yarn run mirrorful
+```
+
+or
+
+```
+npx mirrorful
 ```
 
 This will start the Mirrorful local editor. ✨
