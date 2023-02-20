@@ -2,7 +2,7 @@ import * as Separator from '@radix-ui/react-separator'
 import { Text } from 'components/core/Text'
 import { useState } from 'react'
 import tinycolor from 'tinycolor2'
-import { generateDefaultColorScale } from './utils'
+import { generateDefaultColorShades } from './utils'
 import FeatherIcon from 'feather-icons-react'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -12,7 +12,7 @@ import { EditColorDialog } from './EditColorDialog'
 export function ColorRow({ colorData }: { colorData: TColorData }) {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false)
 
-  const colorScale = generateDefaultColorScale(colorData.hex)
+  const colorScale = generateDefaultColorShades(colorData.base)
 
   return (
     <>
@@ -30,7 +30,7 @@ export function ColorRow({ colorData }: { colorData: TColorData }) {
                 width: '26px',
                 height: '26px',
                 borderRadius: '50%',
-                backgroundColor: colorData.hex,
+                backgroundColor: colorData.base,
               }}
             />
             <div style={{ marginLeft: 8, fontSize: 22 }}>{colorData.name}</div>
@@ -82,7 +82,7 @@ export function ColorRow({ colorData }: { colorData: TColorData }) {
               setColorHex(e.target.value)
             }}
           /> */}
-          Hex Code: {colorData.hex}
+          Hex Code: {colorData.base}
         </Text>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ display: 'flex' }}>
