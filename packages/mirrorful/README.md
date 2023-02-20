@@ -10,33 +10,26 @@ yarn add mirrorful --dev
 
 or
 
-```
+```bash
 npm install mirrorful --save-dev
-```
-
 ```
 
 ## Usage
 
+Run mirrorful and it will start a local editor ✨
+
 ```
-
 yarn run mirrorful
-
 ```
 
 or
 
 ```
-
 npx mirrorful
-
 ```
-
-This will start the Mirrorful local editor. ✨
 
 ## FAQ
 
 1. Should I commit `.mirrorful` to source?
 
-Yes.
-```
+Yes. It's a good idea to commit `.mirrorful` to source so that other developers can use the same configuration.

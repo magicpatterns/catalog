@@ -10,3 +10,6 @@ editor/src
 
 # No need for this, as it's all in dist
 *.ts
+
+# Ignore the locally created .mirrorful folder
+.mirrorful
