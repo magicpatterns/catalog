@@ -1,13 +1,21 @@
 # Mirrorful
 
-To get started, use the following command:
+To get started, install Mirrorful as a development dependency of your project:
 
 ```bash
-npx mirrorful init
+yarn add mirrorful --dev
 ```
 
-To run the editor, use the following command:
+or
 
-```bash
-npx mirrorful editor
 ```
+npm install mirrorful --save-dev
+```
+
+This will start the Mirrorful local editor. ✨
+
+## FAQ
+
+1. Should I commit `.mirrorful` to source?
+
+Yes.

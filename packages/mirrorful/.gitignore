@@ -1,2 +1,5 @@
 
 dist
+
+# ignore our own mirrorful folder
+.mirrorful
