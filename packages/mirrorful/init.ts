@@ -3,6 +3,7 @@ import path from 'path'
 import { PackageManager } from './helpers/get-pkg-manager'
 import { isWriteable } from './helpers/is-writeable'
 import { makeDir } from './helpers/make-dir'
+import spawn from 'cross-spawn'
 
 export async function init({
   appPath,
@@ -23,9 +24,14 @@ export async function init({
     process.exit(1)
   }
 
+  // TODO(Danilowicz): everything is development right now
+  const NODE_ENV = 'development'
   await makeDir('.mirrorful')
+  const port = 5050 // don't hard code this
+  const result = spawn.sync('yarn', ['run', 'dev'], {
+    stdio: 'inherit',
+  })
 
-  const port = 5000
   const useYarn = packageManager === 'yarn'
   console.log(`${chalk.green('Success!')} 🚀`)
   console.log()
