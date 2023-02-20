@@ -13,7 +13,7 @@ export function EditColorDialog({
   defaultData?: TColorData
 }) {
   const [colorName, setColorName] = useState<string>(defaultData?.name ?? '')
-  const [colorHex, setColorHex] = useState<string>(defaultData?.hex ?? '')
+  const [colorHex, setColorHex] = useState<string>(defaultData?.base ?? '')
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>

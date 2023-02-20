@@ -1,1 +1,33 @@
-{"__ssr_module_mapping__":{},"__edge_ssr_module_mapping__":{},"__entry_css_files__":{},"/Users/zeus/code/mirrorful/packages/mirrorful/editor/src/main.css":{"default":{"id":"54380","name":"default","chunks":["static/css/8a2ed23dc3736379.css"]}},"/Users/zeus/code/mirrorful/packages/mirrorful/editor/node_modules/@radix-ui/colors/blackA.css":{"default":{"id":"null","name":"default","chunks":["static/css/8a2ed23dc3736379.css"]}},"/Users/zeus/code/mirrorful/packages/mirrorful/editor/node_modules/@radix-ui/colors/mauve.css":{"default":{"id":"null","name":"default","chunks":["static/css/8a2ed23dc3736379.css"]}},"/Users/zeus/code/mirrorful/packages/mirrorful/editor/node_modules/@radix-ui/colors/violet.css":{"default":{"id":"null","name":"default","chunks":["static/css/8a2ed23dc3736379.css"]}}}
+{
+  "__ssr_module_mapping__": {},
+  "__edge_ssr_module_mapping__": {},
+  "__entry_css_files__": {},
+  "/Users/teddy/Documents/repos/mirrorful/packages/mirrorful/editor/src/main.css": {
+    "default": {
+      "id": "./src/main.css",
+      "name": "default",
+      "chunks": []
+    }
+  },
+  "/Users/teddy/Documents/repos/mirrorful/packages/mirrorful/editor/node_modules/@radix-ui/colors/blackA.css": {
+    "default": {
+      "id": "null",
+      "name": "default",
+      "chunks": []
+    }
+  },
+  "/Users/teddy/Documents/repos/mirrorful/packages/mirrorful/editor/node_modules/@radix-ui/colors/mauve.css": {
+    "default": {
+      "id": "null",
+      "name": "default",
+      "chunks": []
+    }
+  },
+  "/Users/teddy/Documents/repos/mirrorful/packages/mirrorful/editor/node_modules/@radix-ui/colors/violet.css": {
+    "default": {
+      "id": "null",
+      "name": "default",
+      "chunks": []
+    }
+  }
+}

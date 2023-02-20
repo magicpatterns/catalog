@@ -3,14 +3,16 @@ import { ColorRow } from './ColorRow'
 import { useState } from 'react'
 import { TColorData } from '../../types'
 import { Button, Box } from '@chakra-ui/react'
-import { generateDefaultColorScale } from './utils'
+import { generateDefaultColorShades } from './utils'
 
 export function ColorPaletteSection() {
   const [colors, setColors] = useState<TColorData[]>([
     {
       name: 'Pink',
-      hex: '#ED64A6',
-      scale: generateDefaultColorScale('#ED64A6'),
+      base: '#ED64A6',
+      hover: '#ED66A6',
+      active: '#ED61A6',
+      shades: generateDefaultColorShades('#ED64A6'),
     },
   ])
 
