@@ -5,9 +5,20 @@ import { TColorData } from 'types'
 const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
 
 // Our working directory is 2 levels below node_modules in production, so we go up 3 levels
-let rootPath = `../../../.mirrorful`
-if (process.env.NODE_ENV === 'development') {
-  rootPath = '../.mirrorful'
+export const rootPath =
+  process.env.NODE_ENV === 'development'
+    ? '../.mirrorful'
+    : '../../../.mirrorful'
+
+const generateStorageFile = async ({
+  colorData,
+}: {
+  colorData: TColorData[]
+}) => {
+  await fs.writeFileSync(
+    `${rootPath}/store.json`,
+    JSON.stringify({ colorData })
+  )
 }
 
 const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
@@ -17,7 +28,7 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
 
   colorData.forEach((color) => {
     scssContent += `$color-${color.name.toLowerCase()}: ${color.base};\n`
-    cssContent += `--color-${color.name.toLowerCase()}: ${color.base};\n`
+    cssContent += `  --color-${color.name.toLowerCase()}: ${color.base};\n`
 
     if (color.hover) {
       cssContent += `  --color-${color.name.toLowerCase()}-hover: ${
@@ -40,7 +51,7 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
     if (color.shades) {
       getKeys(color.shades).forEach((key) => {
         if (color.shades) {
-          cssContent += `--color-${color.name.toLowerCase()}-${key}: ${
+          cssContent += `  --color-${color.name.toLowerCase()}-${key}: ${
             color.shades[key]
           };\n`
           scssContent += `$color-${color.name.toLowerCase()}-${key}: ${
@@ -65,6 +76,7 @@ export default async function handler(
 ) {
   const body = JSON.parse(req.body)
 
+  await generateStorageFile({ colorData: body.colorData })
   await generateCssFile({ colorData: body.colorData })
 
   return res.status(200).json({ message: 'Success' })
