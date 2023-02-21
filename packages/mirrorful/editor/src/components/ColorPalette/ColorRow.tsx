@@ -1,5 +1,4 @@
 import * as Separator from '@radix-ui/react-separator'
-import { Text } from 'components/core/Text'
 import { useState } from 'react'
 import tinycolor from 'tinycolor2'
 import { generateDefaultColorShades } from './utils'
@@ -7,10 +6,36 @@ import FeatherIcon from 'feather-icons-react'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import * as Dialog from '@radix-ui/react-dialog'
 import { TColorData } from 'types'
-import { EditColorDialog } from './EditColorDialog'
+import { Box, Button, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import { EditColorModal } from './EditColorModal'
 
-export function ColorRow({ colorData }: { colorData: TColorData }) {
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState<boolean>(false)
+function ColorPanel({ title, hex }: { title: string; hex: string }) {
+  return (
+    <Box
+      bgColor={hex}
+      css={{
+        width: 150,
+        height: 150,
+        color: tinycolor(hex).isDark() ? 'white' : 'black',
+        padding: '8px',
+      }}
+    >
+      <Text fontWeight={600}>{title}</Text>
+      <Text>{hex}</Text>
+    </Box>
+  )
+}
+
+export function ColorRow({
+  colorData,
+  onUpdateColorData,
+  onDeleteColorData,
+}: {
+  colorData: TColorData
+  onUpdateColorData: (colorData: TColorData) => void
+  onDeleteColorData: () => void
+}) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const colorScale = generateDefaultColorShades(colorData.base)
 
@@ -35,36 +60,6 @@ export function ColorRow({ colorData }: { colorData: TColorData }) {
             />
             <div style={{ marginLeft: 8, fontSize: 22 }}>{colorData.name}</div>
           </div>
-
-          <DropdownMenu.Root>
-            <DropdownMenu.Trigger asChild>
-              <div className="icon-button">
-                <FeatherIcon
-                  icon="more-vertical"
-                  style={{ width: '16px', height: '16px' }}
-                />
-              </div>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Portal>
-              <DropdownMenu.Content
-                sideOffset={5}
-                className="DropdownMenuContent"
-              >
-                <DropdownMenu.Item
-                  className="DropdownMenuItem"
-                  onSelect={() => {
-                    console.log('selecting!!!')
-                    setIsEditDialogOpen(true)
-                  }}
-                >
-                  Edit Color
-                </DropdownMenu.Item>
-                <DropdownMenu.Item className="DropdownMenuItem">
-                  Delete Color
-                </DropdownMenu.Item>
-              </DropdownMenu.Content>
-            </DropdownMenu.Portal>
-          </DropdownMenu.Root>
         </div>
         <Separator.Root
           style={{
@@ -74,16 +69,16 @@ export function ColorRow({ colorData }: { colorData: TColorData }) {
             height: '1px',
           }}
         />
-        <Text>
-          {/* <input
-            type="text"
-            value={colorHex}
-            onChange={(e) => {
-              setColorHex(e.target.value)
-            }}
-          /> */}
-          Hex Code: {colorData.base}
-        </Text>
+        <Stack direction="row" spacing={0}>
+          <ColorPanel title={'Base'} hex={colorData.base} />
+          {colorData.hover && (
+            <ColorPanel title={'Hover'} hex={colorData.hover} />
+          )}
+          {colorData.active && (
+            <ColorPanel title={'Active'} hex={colorData.active} />
+          )}
+        </Stack>
+
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ display: 'flex' }}>
             {/* TODO: Click to copy to clipboard */}
@@ -91,8 +86,8 @@ export function ColorRow({ colorData }: { colorData: TColorData }) {
               <div
                 key={weight}
                 style={{
-                  width: '24px',
-                  height: '24px',
+                  width: 30,
+                  height: 30,
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -110,11 +105,28 @@ export function ColorRow({ colorData }: { colorData: TColorData }) {
             ))}
           </div>
         </div>
+        <Button onClick={() => onOpen()} css={{ marginTop: '12px' }}>
+          Edit Color
+        </Button>
+
+        <Button
+          onClick={() => {
+            onDeleteColorData()
+          }}
+          css={{ marginTop: '12px', marginLeft: '12px' }}
+        >
+          Delete Color
+        </Button>
       </div>
-      <EditColorDialog
-        isOpen={isEditDialogOpen}
-        onOpenChange={(newState) => setIsEditDialogOpen(newState)}
-        defaultData={colorData}
+      <EditColorModal
+        isOpen={isOpen}
+        onClose={(updatedColorData?: TColorData) => {
+          if (updatedColorData) {
+            onUpdateColorData(updatedColorData)
+          }
+          onClose()
+        }}
+        initialColorData={colorData}
       />
     </>
   )
