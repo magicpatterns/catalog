@@ -1,12 +1,15 @@
 import * as Separator from '@radix-ui/react-separator'
-import { useState } from 'react'
 import tinycolor from 'tinycolor2'
 import { generateDefaultColorShades } from './utils'
-import FeatherIcon from 'feather-icons-react'
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import * as Dialog from '@radix-ui/react-dialog'
 import { TColorData } from 'types'
-import { Box, Button, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Stack,
+  Text,
+  useDisclosure,
+  Badge,
+} from '@chakra-ui/react'
 import { EditColorModal } from './EditColorModal'
 
 function ColorPanel({ title, hex }: { title: string; hex: string }) {
@@ -30,10 +33,14 @@ export function ColorRow({
   colorData,
   onUpdateColorData,
   onDeleteColorData,
+  onSetAsPrimary,
+  onSetAsSecondary,
 }: {
   colorData: TColorData
   onUpdateColorData: (colorData: TColorData) => void
   onDeleteColorData: () => void
+  onSetAsPrimary: () => void
+  onSetAsSecondary: () => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -59,6 +66,10 @@ export function ColorRow({
               }}
             />
             <div style={{ marginLeft: 8, fontSize: 22 }}>{colorData.name}</div>
+            <Box css={{ marginLeft: 12 }}>
+              {colorData.isPrimary && <Badge colorScheme="blue">PRIMARY</Badge>}
+              {colorData.isSecondary && <Badge>SECONDARY</Badge>}
+            </Box>
           </div>
         </div>
         <Separator.Root
@@ -105,18 +116,18 @@ export function ColorRow({
             ))}
           </div>
         </div>
-        <Button onClick={() => onOpen()} css={{ marginTop: '12px' }}>
-          Edit Color
-        </Button>
-
-        <Button
-          onClick={() => {
-            onDeleteColorData()
-          }}
-          css={{ marginTop: '12px', marginLeft: '12px' }}
-        >
-          Delete Color
-        </Button>
+        <Stack direction="row" css={{ marginTop: 16 }}>
+          <Button onClick={() => onOpen()}>Edit Color</Button>
+          <Button onClick={() => onSetAsPrimary()}>Set as Primary</Button>
+          <Button onClick={() => onSetAsSecondary()}>Set as Secondary</Button>
+          <Button
+            onClick={() => {
+              onDeleteColorData()
+            }}
+          >
+            Delete Color
+          </Button>
+        </Stack>
       </div>
       <EditColorModal
         isOpen={isOpen}

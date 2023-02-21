@@ -59,6 +59,30 @@ export function ColorPaletteSection() {
 
               setColors(newColors)
             }}
+            onSetAsPrimary={() => {
+              const newColors = [...colors]
+
+              const colorIndex = newColors.findIndex(
+                (ec) => ec.name === color.name
+              )
+
+              newColors.forEach((color) => (color.isPrimary = false))
+              newColors[colorIndex].isPrimary = true
+              console.log(newColors)
+              setColors(newColors)
+            }}
+            onSetAsSecondary={() => {
+              const newColors = [...colors]
+
+              const colorIndex = newColors.findIndex(
+                (ec) => ec.name === color.name
+              )
+
+              newColors.forEach((color) => (color.isSecondary = false))
+              newColors[colorIndex].isSecondary = true
+
+              setColors(newColors)
+            }}
           />
         ))}
         <Box
