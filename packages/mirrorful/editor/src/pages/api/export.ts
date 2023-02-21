@@ -28,7 +28,7 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
 
   colorData.forEach((color) => {
     scssContent += `$color-${color.name.toLowerCase()}: ${color.base};\n`
-    cssContent += `--color-${color.name.toLowerCase()}: ${color.base};\n`
+    cssContent += `  --color-${color.name.toLowerCase()}: ${color.base};\n`
 
     if (color.hover) {
       cssContent += `  --color-${color.name.toLowerCase()}-hover: ${
@@ -51,7 +51,7 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
     if (color.shades) {
       getKeys(color.shades).forEach((key) => {
         if (color.shades) {
-          cssContent += `--color-${color.name.toLowerCase()}-${key}: ${
+          cssContent += `  --color-${color.name.toLowerCase()}-${key}: ${
             color.shades[key]
           };\n`
           scssContent += `$color-${color.name.toLowerCase()}-${key}: ${
