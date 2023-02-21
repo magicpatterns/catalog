@@ -1,4 +1,5 @@
 import {
+  Checkbox,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -36,6 +37,12 @@ export function EditColorModal({
   const [active, setActive] = useState<string | undefined>(
     initialColorData?.active
   )
+  const [isPrimary, setIsPrimary] = useState<boolean>(
+    initialColorData?.isPrimary ?? false
+  )
+  const [isSecondary, setIsSecondary] = useState<boolean>(
+    initialColorData?.isSecondary ?? false
+  )
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -52,11 +59,6 @@ export function EditColorModal({
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {/* {!email && hasTriedSubmitting ? (
-              <FormErrorMessage>Email is required</FormErrorMessage>
-            ) : (
-              <FormHelperText>This is how we will contact you.</FormHelperText>
-            )} */}
           </FormControl>
           <FormControl css={{ marginTop: 16 }}>
             <FormLabel>
@@ -78,7 +80,7 @@ export function EditColorModal({
           <FormControl css={{ marginTop: 16 }}>
             <FormLabel>
               <Box css={{ display: 'flex', alignItems: 'center' }}>
-                Hover Color{' '}
+                Hover Color (Optional)
                 <Box
                   css={{ height: '14px', width: '14px', marginLeft: '8px' }}
                   bgColor={hover}
@@ -95,7 +97,7 @@ export function EditColorModal({
           <FormControl css={{ marginTop: 16 }}>
             <FormLabel>
               <Box css={{ display: 'flex', alignItems: 'center' }}>
-                Active Color{' '}
+                Active Color (Optional)
                 <Box
                   css={{ height: '14px', width: '14px', marginLeft: '8px' }}
                   bgColor={active}
@@ -109,6 +111,17 @@ export function EditColorModal({
               onChange={(e) => setActive(e.target.value)}
             />
           </FormControl>
+          {/* <FormControl css={{ marginTop: 16 }}>
+            <Checkbox
+              checked={!!isPrimary}
+              onChange={(event) => {
+                setIsPrimary(event.target.checked)
+              }}
+              defaultChecked={isPrimary}
+            >
+              This is the Primary
+            </Checkbox>
+          </FormControl> */}
         </ModalBody>
 
         <ModalFooter>
@@ -120,6 +133,8 @@ export function EditColorModal({
                 hover,
                 active,
                 shades: generateDefaultColorShades(base),
+                isPrimary,
+                isSecondary,
               })
             }}
           >

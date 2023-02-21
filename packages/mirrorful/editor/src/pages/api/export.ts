@@ -22,9 +22,37 @@ const generateStorageFile = async ({
 }
 
 const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
-  let scssContent = ``
+  let primaryColor = colorData.find((c) => c.isPrimary)
+  let secondaryColor = colorData.find((c) => c.isSecondary)
 
+  let scssContent = ``
   let cssContent = `:root {\n`
+
+  if (primaryColor) {
+    cssContent += `  --color-primary: ${primaryColor.base};\n`
+    if (primaryColor.hover) {
+      cssContent += `  --color-primary-hover: ${primaryColor.hover};\n`
+      scssContent += `$color-primary-hover: ${primaryColor.hover};\n`
+    }
+
+    if (primaryColor.active) {
+      cssContent += `  --color-primary-active: ${primaryColor.active};\n`
+      scssContent += `$color-primary-active: ${primaryColor.active};\n`
+    }
+  }
+
+  if (secondaryColor) {
+    cssContent += `  --color-secondary: ${secondaryColor.base};\n`
+    if (secondaryColor.hover) {
+      cssContent += `  --color-secondary-hover: ${secondaryColor.hover};\n`
+      scssContent += `$color-secondary-hover: ${secondaryColor.hover};\n`
+    }
+
+    if (secondaryColor.active) {
+      cssContent += `  --color-secondary-active: ${secondaryColor.active};\n`
+      scssContent += `$color-secondary-active: ${secondaryColor.active};\n`
+    }
+  }
 
   colorData.forEach((color) => {
     scssContent += `$color-${color.name.toLowerCase()}: ${color.base};\n`
