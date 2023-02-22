@@ -56,6 +56,15 @@ export function ExportSuccessModal({
             <li>
               <Code>theme.scss</Code>
             </li>
+            <li>
+              <Code>theme.json</Code>
+            </li>
+            <li>
+              <Code>theme.js</Code>
+            </li>
+            <li>
+              <Code>theme.ts</Code>
+            </li>
           </ul>
           <Text css={{ marginTop: '12px' }}>
             To learn more about how to import these generated files, visit our

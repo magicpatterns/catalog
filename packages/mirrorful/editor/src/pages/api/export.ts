@@ -98,6 +98,57 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
   await fs.writeFileSync(`${rootPath}/theme.scss`, scssContent)
 }
 
+const generateJsonFile = async ({ colorData }: { colorData: TColorData[] }) => {
+  let primaryColor = colorData.find((c) => c.isPrimary)
+  let secondaryColor = colorData.find((c) => c.isSecondary)
+
+  let tsContent = `module.export = `
+  let jsContent = `module.export = `
+  let jsonContent = ''
+
+  const themeObj = new Map<
+    string,
+    Omit<TColorData, 'name' | 'isSecondary' | 'isPrimary'>
+  >()
+
+  if (primaryColor) {
+    themeObj.set('primary', {
+      base: primaryColor.base,
+      hover: primaryColor.hover,
+      active: primaryColor.active,
+      shades: primaryColor.shades,
+    })
+  }
+
+  if (secondaryColor) {
+    themeObj.set('secondary', {
+      base: secondaryColor.base,
+      hover: secondaryColor.hover,
+      active: secondaryColor.active,
+      shades: secondaryColor.shades,
+    })
+  }
+
+  colorData.forEach((color) => {
+    themeObj.set(color.name.toLowerCase(), {
+      base: color.base,
+      hover: color.hover,
+      active: color.active,
+      shades: color.shades,
+    })
+  })
+
+  const rawJsonObject = Object.fromEntries(themeObj)
+
+  tsContent += JSON.stringify(rawJsonObject, null, 2)
+  jsContent += JSON.stringify(rawJsonObject, null, 2)
+  jsonContent += JSON.stringify(rawJsonObject, null, 2)
+
+  await fs.writeFileSync(`${rootPath}/theme.js`, jsContent)
+  await fs.writeFileSync(`${rootPath}/theme.ts`, tsContent)
+  await fs.writeFileSync(`${rootPath}/theme.json`, jsonContent)
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -106,6 +157,7 @@ export default async function handler(
 
   await generateStorageFile({ colorData: body.colorData })
   await generateCssFile({ colorData: body.colorData })
+  await generateJsonFile({ colorData: body.colorData })
 
   return res.status(200).json({ message: 'Success' })
 }
