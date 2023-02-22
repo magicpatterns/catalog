@@ -18,9 +18,10 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import { TColorData } from 'types'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { generateDefaultColorShades } from './utils'
 import { ColorPicker } from './ColorPicker'
+import { Color } from '@hello-pangea/color-picker'
 
 export function EditColorModal({
   isOpen,
@@ -31,8 +32,13 @@ export function EditColorModal({
   onClose: (newColorData?: TColorData) => void
   initialColorData?: TColorData
 }) {
+  const presetColors: string[] = []
   const [name, setName] = useState<string>(initialColorData?.name ?? '')
   const [base, setBase] = useState<string>(initialColorData?.base ?? '')
+
+  // NOTE: hover and active should default to empty strings not undefined
+  // to fix the controlled vs uncontrolled warning, but that requires
+  // backend cleanup
   const [hover, setHover] = useState<string | undefined>(
     initialColorData?.hover
   )
@@ -46,13 +52,23 @@ export function EditColorModal({
     initialColorData?.isSecondary ?? false
   )
 
-  // const [showColorPicker, setShowColorPicker] = useState<boolean>(false)
+  const [colorPickerColor, setColorPickerColor] = useState<Color>(
+    initialColorData?.base ?? '#000000'
+  )
+
+  const [showBaseColorPicker, setShowBaseColorPicker] = useState<boolean>(false)
+  const [showHoverColorPicker, setShowHoverColorPicker] =
+    useState<boolean>(false)
+  const [showActiveColorPicker, setShowActiveColorPicker] =
+    useState<boolean>(false)
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Edit Color</ModalHeader>
+        <ModalHeader>
+          {initialColorData ? 'Edit Color' : 'Add Color'}
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody
           css={{
@@ -62,12 +78,17 @@ export function EditColorModal({
         >
           <Flex flexDirection="column" mr="10">
             <FormControl>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>Variable Name</FormLabel>
               <Input
-                placeholder="e.g. Acme, Inc. Sky Blue"
+                placeholder="e.g. Pepsi Blue"
                 size="md"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                onFocus={(e) => {
+                  setShowBaseColorPicker(true)
+                  setShowHoverColorPicker(false)
+                  setShowActiveColorPicker(false)
+                }}
               />
             </FormControl>
             <FormControl css={{ marginTop: 16 }}>
@@ -81,10 +102,25 @@ export function EditColorModal({
                 </Box>
               </FormLabel>
               <Input
+                ref={function (input) {
+                  if (showBaseColorPicker && input) {
+                    input.focus()
+                  }
+                }}
                 placeholder="e.g. #D3AC3"
                 size="md"
                 value={base}
-                onChange={(e) => setBase(e.target.value)}
+                onChange={(e) => {
+                  setColorPickerColor(e.target.value)
+                  setBase(e.target.value)
+                }}
+                onFocus={(e) => {
+                  setShowHoverColorPicker(false)
+                  setShowActiveColorPicker(false)
+
+                  setColorPickerColor(e.target.value)
+                  setShowBaseColorPicker(true)
+                }}
               />
             </FormControl>
             <FormControl css={{ marginTop: 16 }}>
@@ -98,10 +134,22 @@ export function EditColorModal({
                 </Box>
               </FormLabel>
               <Input
+                ref={function (input) {
+                  if (showHoverColorPicker && input) {
+                    input.focus()
+                  }
+                }}
                 placeholder="e.g. #D3AC3"
                 size="md"
                 value={hover}
                 onChange={(e) => setHover(e.target.value)}
+                onFocus={(e) => {
+                  setShowBaseColorPicker(false)
+                  setShowActiveColorPicker(false)
+
+                  setColorPickerColor(e.target.value)
+                  setShowHoverColorPicker(true)
+                }}
               />
             </FormControl>
             <FormControl css={{ marginTop: 16 }}>
@@ -115,10 +163,22 @@ export function EditColorModal({
                 </Box>
               </FormLabel>
               <Input
+                ref={function (input) {
+                  if (showActiveColorPicker && input) {
+                    input.focus()
+                  }
+                }}
                 placeholder="e.g. #D3AC3"
                 size="md"
                 value={active}
                 onChange={(e) => setActive(e.target.value)}
+                onFocus={(e) => {
+                  setShowBaseColorPicker(false)
+                  setShowHoverColorPicker(false)
+
+                  setColorPickerColor(e.target.value)
+                  setShowActiveColorPicker(true)
+                }}
               />
             </FormControl>
             {/* <FormControl css={{ marginTop: 16 }}>
@@ -133,7 +193,33 @@ export function EditColorModal({
             </Checkbox>
           </FormControl> */}
           </Flex>
-          <ColorPicker />
+          {showBaseColorPicker && (
+            <ColorPicker
+              onChange={(colorPickerColor) => {
+                setBase(colorPickerColor.hex)
+              }}
+              colorPickerColor={colorPickerColor}
+              presetColors={presetColors}
+            />
+          )}
+          {showHoverColorPicker && (
+            <ColorPicker
+              onChange={(colorPickerColor) => {
+                setHover(colorPickerColor.hex)
+              }}
+              colorPickerColor={colorPickerColor}
+              presetColors={presetColors}
+            />
+          )}
+          {showActiveColorPicker && (
+            <ColorPicker
+              onChange={(colorPickerColor) => {
+                setActive(colorPickerColor.hex)
+              }}
+              colorPickerColor={colorPickerColor}
+              presetColors={presetColors}
+            />
+          )}
         </ModalBody>
 
         <ModalFooter>
@@ -150,7 +236,7 @@ export function EditColorModal({
               })
             }}
           >
-            {initialColorData ? 'Update' : 'Add'}
+            {initialColorData ? 'Save' : 'Add'}
           </Button>
         </ModalFooter>
       </ModalContent>

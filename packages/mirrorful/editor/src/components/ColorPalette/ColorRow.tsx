@@ -77,7 +77,6 @@ export function ColorRow({
   onSetAsSecondary: () => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
   const colorScale = generateDefaultColorShades(colorData.base)
 
   return (
