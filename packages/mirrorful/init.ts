@@ -29,8 +29,6 @@ export async function init({
   await makeDir('.mirrorful')
   const port = 5050 // don't hard code this
 
-  // NOTE: it seems that 'production' is not a valid NODE_ENV value at this time
-  // Right now it's either 'development' or undefined
   if (process.env.NODE_ENV === 'development') {
     process.chdir(`editor`)
   } else {
@@ -40,15 +38,16 @@ export async function init({
   // Assume success
   console.log(`${chalk.green('Success!')}`)
   console.log()
-  console.log(`url: ${chalk.cyan(`${`http://localhost:`}${port.toString()}`)}`)
-  console.log()
+  console.log(
+    `Visit: ${chalk.cyan(`${`http://localhost:`}${port.toString()}`)}`
+  )
 
   const useYarn = packageManager === 'yarn'
   console.log('Inside your project, you can run:')
   console.log()
   console.log(chalk.cyan(`  ${useYarn ? 'yarn run ' : 'npx '}mirrorful`))
   console.log()
-  console.log('to start Mirrorful development at any time 🚀')
+  console.log('to start the visual editor at any time 🚀')
   console.log()
 
   let command = 'start'

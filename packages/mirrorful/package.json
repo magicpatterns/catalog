@@ -1,7 +1,7 @@
 {
   "name": "mirrorful",
-  "version": "1.0.24",
-  "description": "Manage your design system at scale",
+  "version": "1.0.29",
+  "description": "Simple, open-source design system infrastructure.",
   "keywords": [
     "mirrorful",
     "design system",
@@ -15,7 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "local": "cross-env NODE_ENV=development tsc --build; node ./dist/index.js",
+    "local": "tsc --build; cross-env NODE_ENV=development node ./dist/index.js --verbose",
     "prepub": "tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm version patch"
   },
   "repository": {
