@@ -1,5 +1,5 @@
-module.export = {
-  'lizard green': {
+export const Tokens = {
+  primary: {
     base: '#48BB78',
     hover: '',
     active: '',
@@ -16,7 +16,24 @@ module.export = {
       '900': '#25643f',
     },
   },
-  'hot pink': {
+  'lizard-green': {
+    base: '#48BB78',
+    hover: '',
+    active: '',
+    shades: {
+      '50': '#b8e4ca',
+      '100': '#a1dcba',
+      '200': '#8bd4a9',
+      '300': '#75cc99',
+      '400': '#5ec388',
+      '500': '#48bb78',
+      '600': '#3ea66a',
+      '700': '#36905b',
+      '800': '#2d7a4d',
+      '900': '#25643f',
+    },
+  },
+  'hot-pink': {
     base: '#ED64A6',
     hover: '',
     active: '',
@@ -33,7 +50,7 @@ module.export = {
       '900': '#c01668',
     },
   },
-  'cool teal': {
+  'cool-teal': {
     base: '#38B2AC',
     hover: '',
     active: '',

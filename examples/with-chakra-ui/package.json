@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
@@ -25,6 +26,6 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
-    "mirrorful": "^1.0.29"
+    "mirrorful": "^1.0.30"
   }
 }

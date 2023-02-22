@@ -249,6 +249,13 @@
   dependencies:
     "@chakra-ui/shared-utils" "2.0.5"
 
+"@chakra-ui/icons@^2.0.17":
+  version "2.0.17"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/icons/-/icons-2.0.17.tgz#625a46d169707aad36d65c04a4626a422f92e5ae"
+  integrity sha512-HMJP0WrJgAmFR9+Xh/CBH0nVnGMsJ4ZC8MK6tMgxPKd9/muvn0I4hsicHqdPlLpmB0TlxlhkBAKaVMtOdz6F0w==
+  dependencies:
+    "@chakra-ui/icon" "3.0.16"
+
 "@chakra-ui/image@2.0.15":
   version "2.0.15"
   resolved "https://registry.yarnpkg.com/@chakra-ui/image/-/image-2.0.15.tgz#7f275f8f3edbb420e0613afd5023ad9cf442d09d"
@@ -2975,10 +2982,10 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
 
-mirrorful@^1.0.29:
-  version "1.0.29"
-  resolved "https://registry.yarnpkg.com/mirrorful/-/mirrorful-1.0.29.tgz#0cdcaea2fb795534df9227d67b92e92bd181c5fb"
-  integrity sha512-K1xav3rMaTf8hjqGWMOeoQZ5EtGSmYCjxO0275Zcfjyrf5XwXVILUisDoDuwiWzdrXcwnJlwjrtE04Y/Tk/1lg==
+mirrorful@^1.0.30:
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/mirrorful/-/mirrorful-1.0.30.tgz#2773ff6b010629ed6caf3eb14017529fb1e01295"
+  integrity sha512-i6fX2E3j/5pRKx5vgyge58NBC5uXSSylSfEspoy1yrZSL1O0uwL1Wv9htsKELWJGiM7YQwqNU0VZ+/HfrzUhAw==
   dependencies:
     "@chakra-ui/react" "^2.5.1"
     "@emotion/react" "^11.10.6"
