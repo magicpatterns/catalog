@@ -17,7 +17,7 @@ import {
   Box,
 } from '@chakra-ui/react'
 import { TColorData } from 'types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { generateDefaultColorShades } from './utils'
 
 export function EditColorModal({
