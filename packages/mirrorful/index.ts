@@ -32,8 +32,10 @@ const packageManager = !!program.useNpm
 
 async function notifyUpdate() {
   try {
-    const res = await checkForUpdate(packageJson).catch(() => null)
-
+    console.log(
+      'Running Mirrorful version: ' + chalk.green(packageJson.version)
+    )
+    const res = await checkForUpdate(packageJson)
     if (res?.latest) {
       const updateMessage =
         packageManager === 'yarn'
@@ -50,9 +52,11 @@ async function notifyUpdate() {
           '\n'
       )
     }
-    process.exit()
-  } catch {
+  } catch (e) {
     // ignore error
+    if (verbose) {
+      console.log(chalk.yellow.bold('WARNING: could not check for update '), e)
+    }
   }
 }
 
@@ -71,11 +75,11 @@ async function main() {
   }
 }
 
-main()
-  .then(notifyUpdate)
+notifyUpdate()
+  .then(main)
   .catch(async (reason) => {
     console.log()
-    console.log('Aborting installation.')
+    console.log('Aborting.')
     if (reason.command) {
       console.log(`  ${chalk.cyan(reason.command)} has failed.`)
     } else {
