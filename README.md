@@ -65,11 +65,11 @@ To learn more on how to get started, visit our [getting started guide](https://g
 
 ## 🎨 Why should I use Mirrorful?
 
-Mirrorful makes design system management simple. We're on a mission to help all projects on the Internet be as beautiful as they can be. The bar is getting higher. As Linear says, "software has lost its magic."
+Design systems are the building blocks of your app, but many projects don't adopt them until it's too late because they believe it will slow you down. Mirrorful will speed you up. Its lightweight and dead simple. 
 
-Design systems are the building blocks of your app, but many projects don't adopt them until it's too late.
+We're on a mission to help your project be as beautiful as possible. The bar for high quality design is getting higher. We want to help everyone add simple design tokens to new (and existing!) projects.
 
-Install Mirrorful in 5 minutes today, and then design at scale forever. We believe all you need is a source of truth, color variables, and a few design tokens and you are set up for success.
+Install Mirrorful in 5 minutes today, and then design at scale forever. We believe all you need is a source of truth, color variables, a few design tokens and you are set up for success.
 
 ## ❤️ Community & Support
 
