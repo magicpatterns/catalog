@@ -1,5 +1,5 @@
 import { extendTheme } from '@chakra-ui/react'
-import Tokens from '../.mirrorful/theme'
+import { Tokens } from '../.mirrorful/theme'
 
 export const exampleTheme = extendTheme({
   fonts: {

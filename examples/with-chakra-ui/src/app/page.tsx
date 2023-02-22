@@ -31,7 +31,7 @@ export default function Home() {
           changes!
         </Text>
         <Stack spacing={8} direction="row">
-          {['pink', 'green', 'teal'].map((color) => (
+          {['pink', 'green', 'teal'].map((colexor) => (
             <Stack key="color" direction="column" spacing={4}>
               <Text>
                 Color Scheme:{' '}

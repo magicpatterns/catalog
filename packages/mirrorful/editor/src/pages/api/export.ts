@@ -105,8 +105,8 @@ const generateJsonFile = async ({ colorData }: { colorData: TColorData[] }) => {
   let primaryColor = colorData.find((c) => c.isPrimary)
   let secondaryColor = colorData.find((c) => c.isSecondary)
 
-  let tsContent = `export default `
-  let jsContent = `export default `
+  let tsContent = `export const Tokens = `
+  let jsContent = `export const Tokens = `
   let jsonContent = ''
 
   const themeObj = new Map<
