@@ -1,8 +1,6 @@
 import { ColorRow } from './ColorRow'
-import { useEffect, useState } from 'react'
 import { TColorData } from '../../types'
 import { Button, Box, useDisclosure, Stack, Heading } from '@chakra-ui/react'
-import { generateDefaultColorShades } from './utils'
 import { EditColorModal } from './EditColorModal'
 
 export function ColorPaletteSection({
@@ -13,8 +11,6 @@ export function ColorPaletteSection({
   onUpdateColors: (newColors: TColorData[]) => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const [isAddingNewColor, setIsAddingNewColor] = useState<boolean>(false)
 
   return (
     <Box>
