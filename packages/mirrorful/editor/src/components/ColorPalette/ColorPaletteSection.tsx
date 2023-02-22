@@ -1,45 +1,22 @@
 import { ColorRow } from './ColorRow'
-import { useEffect, useState } from 'react'
 import { TColorData } from '../../types'
 import { Button, Box, useDisclosure, Stack, Heading } from '@chakra-ui/react'
-import { generateDefaultColorShades } from './utils'
 import { EditColorModal } from './EditColorModal'
 
-export function ColorPaletteSection() {
-  const [colors, setColors] = useState<TColorData[]>([])
-
+export function ColorPaletteSection({
+  colors,
+  onUpdateColors,
+}: {
+  colors: TColorData[]
+  onUpdateColors: (newColors: TColorData[]) => void
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const [isExporting, setIsExporting] = useState<boolean>(false)
-
-  const handleExport = async () => {
-    setIsExporting(true)
-
-    await fetch('/api/export', {
-      method: 'POST',
-      body: JSON.stringify({
-        colorData: colors,
-      }),
-    })
-
-    setIsExporting(false)
-  }
-
-  useEffect(() => {
-    const fetchStoredData = async () => {
-      const response = await fetch('/api/store')
-      const data = await response.json()
-      setColors(data.colorData)
-    }
-
-    fetchStoredData()
-  }, [])
 
   return (
     <Box>
       <Heading>Color Palette</Heading>
-      <Box css={{ marginTop: '16px' }}>
-        <Stack direction="column" alignItems="flex-start" spacing={8}>
+      <Box css={{ marginTop: '24px' }}>
+        <Stack direction="column" alignItems="flex-start" spacing={12}>
           {colors.map((color) => (
             <ColorRow
               key={color.name}
@@ -51,12 +28,12 @@ export function ColorPaletteSection() {
                 )
                 newColors[colorIndex] = updatedColorData
 
-                setColors(newColors)
+                onUpdateColors(newColors)
               }}
               onDeleteColorData={() => {
                 const newColors = colors.filter((c) => c.name !== color.name)
 
-                setColors(newColors)
+                onUpdateColors(newColors)
               }}
               onSetAsPrimary={() => {
                 const newColors = [...colors]
@@ -68,7 +45,7 @@ export function ColorPaletteSection() {
                 newColors.forEach((color) => (color.isPrimary = false))
                 newColors[colorIndex].isPrimary = true
                 console.log(newColors)
-                setColors(newColors)
+                onUpdateColors(newColors)
               }}
               onSetAsSecondary={() => {
                 const newColors = [...colors]
@@ -80,7 +57,7 @@ export function ColorPaletteSection() {
                 newColors.forEach((color) => (color.isSecondary = false))
                 newColors[colorIndex].isSecondary = true
 
-                setColors(newColors)
+                onUpdateColors(newColors)
               }}
             />
           ))}
@@ -95,13 +72,6 @@ export function ColorPaletteSection() {
           }}
         >
           <Button onClick={() => onOpen()}>Add New Color</Button>
-          <Button
-            onClick={handleExport}
-            css={{ marginTop: '16px' }}
-            isLoading={isExporting}
-          >
-            Save and Config
-          </Button>
         </Box>
       </Box>
       <EditColorModal
@@ -115,7 +85,7 @@ export function ColorPaletteSection() {
 
             newColors.push(colorData)
 
-            setColors(newColors)
+            onUpdateColors(newColors)
           }
           onClose()
         }}
