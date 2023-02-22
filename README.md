@@ -49,7 +49,7 @@ And more..
 
 ## 🚀 Get started
 
-Mirrorful is a simple NPM package intended to be installed as dev dependency.
+Mirrorful is a NPM package intended to be installed as dev dependency.
 
 ```bash
 npm install mirrorful --save-dev
@@ -61,20 +61,20 @@ or
 yarn add mirrorful --dev
 ```
 
-To learn more on how to get started, visit our [getting started guide](../packages/mirrorful/README.md).
+To learn more on how to get started, visit our [getting started guide](https://github.com/Mirrorful/mirrorful/blob/main/packages/mirrorful/README.md).
 
 ## 🎨 Why should I use Mirrorful?
 
-Mirrorful makes design system management simple. We're on a mission to help all projects on the Internet be as beautiful as they can be. The bar for quality is getting higher. As Linear says, "software has lost its magic."
+Mirrorful makes design system management simple. We're on a mission to help all projects on the Internet be as beautiful as they can be. The bar is getting higher. As Linear says, "software has lost its magic."
 
 Design systems are the building blocks of your app, but many projects don't adopt them until it's too late.
 
-Install Mirrorful in 5 minutes today, and then design at scale forever. We believe all you need is a source of truth, color variables, a few design tokens and you are set up for success.
+Install Mirrorful in 5 minutes today, and then design at scale forever. We believe all you need is a source of truth, color variables, and a few design tokens and you are set up for success.
 
 ## ❤️ Community & Support
 
 - [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - for live discussion with the community and the Mirrorful team.
-- [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - For help with building and deeper conversations about features.
+- [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - for help with building and deeper conversations about features.
 - [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - for any bugs and errors you encounter using Mirrorful.
 - [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates. Share your memes!
 
@@ -98,14 +98,15 @@ There are a lot of new features coming very frequently. Star this repo to stay u
 
 ## 🛠️ Contributing
 
-Whether it's big or small, we love contributions ❤️. The maintainers of this repo have built open-source projects before and love it. Welcome!
+Whether it's big or small, we love contributions. The maintainers of this repo have built open-source projects before and love it. Welcome!
 
 Not sure where to get started? You can:
 
-- [Book a free, non-pressure pairing sessions with one of our teammates](<[https://usemotion.com/meet/teddyni/meet?d=15](https://usemotion.com/meet/teddyni/meet?d=15)>)!
-- Join our <a href="[https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA)">Slack</a> and ask us any questions there.
+- [Book a free, non-pressure pairing sessions with one of our teammates](https://usemotion.com/meet/teddyni/meet?d=15)!
 
-All contributors will be added to our README with their permission.
+- Join our [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) and ask us any questions there.
+
+No matter the PR, all the Github avatars of contributors will be added to the Mirrorful README with their permission.
 
 ## 🪞 Contributors
 

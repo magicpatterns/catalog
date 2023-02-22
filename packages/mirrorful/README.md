@@ -39,7 +39,7 @@
 
 ## 🚀 Get started
 
-Mirrorful is a simple NPM package intended to be installed as dev dependency.
+Mirrorful is a NPM package intended to be installed as dev dependency.
 
 ```bash
 npm install mirrorful --save-dev
@@ -51,9 +51,9 @@ or
 yarn add mirrorful --dev
 ```
 
-## Usage
+## ✨ Usage
 
-Run mirrorful and it will start a local editor ✨
+Run mirrorful and it will start a local editor at `localhost:5050`.
 
 ```
 yarn run mirrorful
@@ -65,29 +65,28 @@ or
 npx mirrorful
 ```
 
-## FAQ
+## 🤔 FAQ
 
-1. Should I commit `.mirrorful` to source?
+**Should I commit `.mirrorful` to source?**
 
-Yes. It's a good idea to commit `.mirrorful` to source so that other developers can use the same configuration.
+Yes. It's a good idea to commit `.mirrorful` to source, so that other developers can use the same configuration.
 
 ## ❤️ Community & Support
 
 - [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - for live discussion with the community and the Mirrorful team.
-- [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - For help with building and deeper conversations about features.
+- [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - for help with building and deeper conversations about features.
 - [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - for any bugs and errors you encounter using Mirrorful.
 - [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates. Share your memes!
 
 ## 🛠️ Contributing
 
-Whether it's big or small, we love contributions ❤️. The maintainers of this repo have built open-source projects before and love it. Welcome!
+Whether it's big or small, we love contributions. The maintainers of this repo have built open-source projects before and love it. Welcome!
 
 Not sure where to get started? You can:
 
-- [Book a free, non-pressure pairing sessions with one of our teammates](<[https://usemotion.com/meet/teddyni/meet?d=15](https://usemotion.com/meet/teddyni/meet?d=15)>)!
-- Join our <a href="[https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA)">Slack</a> and ask us any questions there.
+- [Book a free, non-pressure pairing sessions with one of our teammates](https://usemotion.com/meet/teddyni/meet?d=15)!
 
-All contributors will be added to our README with their permission.
+- Join our [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) and ask us any questions there.
 
 ## 🪞 Contributors
 
