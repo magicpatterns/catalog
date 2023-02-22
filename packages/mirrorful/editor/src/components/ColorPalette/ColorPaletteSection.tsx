@@ -1,8 +1,7 @@
-import { Heading } from 'components/core/Heading'
 import { ColorRow } from './ColorRow'
 import { useEffect, useState } from 'react'
 import { TColorData } from '../../types'
-import { Button, Box, useDisclosure } from '@chakra-ui/react'
+import { Button, Box, useDisclosure, Stack, Heading } from '@chakra-ui/react'
 import { generateDefaultColorShades } from './utils'
 import { EditColorModal } from './EditColorModal'
 
@@ -38,53 +37,56 @@ export function ColorPaletteSection() {
   }, [])
 
   return (
-    <div>
+    <Box>
       <Heading>Color Palette</Heading>
-      <div>
-        {colors.map((color) => (
-          <ColorRow
-            key={color.name}
-            colorData={color}
-            onUpdateColorData={(updatedColorData: TColorData) => {
-              const newColors = [...colors]
-              const colorIndex = colors.findIndex(
-                (ec) => ec.name === color.name
-              )
-              newColors[colorIndex] = updatedColorData
+      <Box css={{ marginTop: '16px' }}>
+        <Stack direction="column" alignItems="flex-start">
+          {colors.map((color) => (
+            <ColorRow
+              key={color.name}
+              colorData={color}
+              onUpdateColorData={(updatedColorData: TColorData) => {
+                const newColors = [...colors]
+                const colorIndex = colors.findIndex(
+                  (ec) => ec.name === color.name
+                )
+                newColors[colorIndex] = updatedColorData
 
-              setColors(newColors)
-            }}
-            onDeleteColorData={() => {
-              const newColors = colors.filter((c) => c.name !== color.name)
+                setColors(newColors)
+              }}
+              onDeleteColorData={() => {
+                const newColors = colors.filter((c) => c.name !== color.name)
 
-              setColors(newColors)
-            }}
-            onSetAsPrimary={() => {
-              const newColors = [...colors]
+                setColors(newColors)
+              }}
+              onSetAsPrimary={() => {
+                const newColors = [...colors]
 
-              const colorIndex = newColors.findIndex(
-                (ec) => ec.name === color.name
-              )
+                const colorIndex = newColors.findIndex(
+                  (ec) => ec.name === color.name
+                )
 
-              newColors.forEach((color) => (color.isPrimary = false))
-              newColors[colorIndex].isPrimary = true
-              console.log(newColors)
-              setColors(newColors)
-            }}
-            onSetAsSecondary={() => {
-              const newColors = [...colors]
+                newColors.forEach((color) => (color.isPrimary = false))
+                newColors[colorIndex].isPrimary = true
+                console.log(newColors)
+                setColors(newColors)
+              }}
+              onSetAsSecondary={() => {
+                const newColors = [...colors]
 
-              const colorIndex = newColors.findIndex(
-                (ec) => ec.name === color.name
-              )
+                const colorIndex = newColors.findIndex(
+                  (ec) => ec.name === color.name
+                )
 
-              newColors.forEach((color) => (color.isSecondary = false))
-              newColors[colorIndex].isSecondary = true
+                newColors.forEach((color) => (color.isSecondary = false))
+                newColors[colorIndex].isSecondary = true
 
-              setColors(newColors)
-            }}
-          />
-        ))}
+                setColors(newColors)
+              }}
+            />
+          ))}
+        </Stack>
+
         <Box
           css={{
             display: 'flex',
@@ -102,7 +104,7 @@ export function ColorPaletteSection() {
             Save and Config
           </Button>
         </Box>
-      </div>
+      </Box>
       <EditColorModal
         isOpen={isOpen}
         onClose={(colorData?: TColorData) => {
@@ -119,6 +121,6 @@ export function ColorPaletteSection() {
           onClose()
         }}
       />
-    </div>
+    </Box>
   )
 }
