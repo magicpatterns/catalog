@@ -1,7 +1,7 @@
 {
   "name": "mirrorful",
   "version": "1.0.28",
-  "description": "Manage your design system at scale",
+  "description": "Simple, open-source design system infrastructure.",
   "keywords": [
     "mirrorful",
     "design system",
