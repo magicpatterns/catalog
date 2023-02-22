@@ -10,7 +10,6 @@ export function ColorPaletteSection() {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const [isAddingNewColor, setIsAddingNewColor] = useState<boolean>(false)
   const [isExporting, setIsExporting] = useState<boolean>(false)
 
   const handleExport = async () => {
@@ -40,7 +39,7 @@ export function ColorPaletteSection() {
     <Box>
       <Heading>Color Palette</Heading>
       <Box css={{ marginTop: '16px' }}>
-        <Stack direction="column" alignItems="flex-start">
+        <Stack direction="column" alignItems="flex-start" spacing={8}>
           {colors.map((color) => (
             <ColorRow
               key={color.name}
