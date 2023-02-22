@@ -13,13 +13,13 @@ export const exampleTheme = extendTheme({
       ...Tokens.primary.shades,
     },
     green: {
-      ...Tokens.green.shades,
+      ...Tokens['lizard-green'].shades,
     },
     pink: {
-      ...Tokens.pink.shades,
+      ...Tokens['hot-pink'].shades,
     },
     teal: {
-      ...Tokens.teal.shades,
+      ...Tokens['cool-teal'].shades,
     },
   },
 })
