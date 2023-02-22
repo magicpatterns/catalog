@@ -3,7 +3,7 @@ export default function Head() {
     <>
       <title>Mirrorful Editor</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
-      <meta name="description" content="Manage your design system at scale" />
+      <meta name="description" content="Local editor for your design system" />
       <link rel="icon" href="/favicon.ico" />
     </>
   )

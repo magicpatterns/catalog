@@ -15,10 +15,12 @@ import {
   FormHelperText,
   FormLabel,
   Box,
+  Flex,
 } from '@chakra-ui/react'
 import { TColorData } from 'types'
 import { useEffect, useState } from 'react'
 import { generateDefaultColorShades } from './utils'
+import { ColorPicker } from './ColorPicker'
 
 export function EditColorModal({
   isOpen,
@@ -44,74 +46,82 @@ export function EditColorModal({
     initialColorData?.isSecondary ?? false
   )
 
+  // const [showColorPicker, setShowColorPicker] = useState<boolean>(false)
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Edit Color</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          <FormControl>
-            <FormLabel>Color Name</FormLabel>
-            <Input
-              placeholder="e.g. Pink"
-              size="md"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </FormControl>
-          <FormControl css={{ marginTop: 16 }}>
-            <FormLabel>
-              <Box css={{ display: 'flex', alignItems: 'center' }}>
-                Base Color{' '}
-                <Box
-                  css={{ height: '14px', width: '14px', marginLeft: '8px' }}
-                  bgColor={base}
-                />
-              </Box>
-            </FormLabel>
-            <Input
-              placeholder="e.g. #D3AC3"
-              size="md"
-              value={base}
-              onChange={(e) => setBase(e.target.value)}
-            />
-          </FormControl>
-          <FormControl css={{ marginTop: 16 }}>
-            <FormLabel>
-              <Box css={{ display: 'flex', alignItems: 'center' }}>
-                Hover Color (Optional)
-                <Box
-                  css={{ height: '14px', width: '14px', marginLeft: '8px' }}
-                  bgColor={hover}
-                />
-              </Box>
-            </FormLabel>
-            <Input
-              placeholder="e.g. #D3AC3"
-              size="md"
-              value={hover}
-              onChange={(e) => setHover(e.target.value)}
-            />
-          </FormControl>
-          <FormControl css={{ marginTop: 16 }}>
-            <FormLabel>
-              <Box css={{ display: 'flex', alignItems: 'center' }}>
-                Active Color (Optional)
-                <Box
-                  css={{ height: '14px', width: '14px', marginLeft: '8px' }}
-                  bgColor={active}
-                />
-              </Box>
-            </FormLabel>
-            <Input
-              placeholder="e.g. #D3AC3"
-              size="md"
-              value={active}
-              onChange={(e) => setActive(e.target.value)}
-            />
-          </FormControl>
-          {/* <FormControl css={{ marginTop: 16 }}>
+        <ModalBody
+          css={{
+            flexDirection: 'row',
+            display: 'flex',
+          }}
+        >
+          <Flex flexDirection="column" mr="10">
+            <FormControl>
+              <FormLabel>Name</FormLabel>
+              <Input
+                placeholder="e.g. Acme, Inc. Sky Blue"
+                size="md"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </FormControl>
+            <FormControl css={{ marginTop: 16 }}>
+              <FormLabel>
+                <Box css={{ display: 'flex', alignItems: 'center' }}>
+                  Base Color{' '}
+                  <Box
+                    css={{ height: '14px', width: '14px', marginLeft: '8px' }}
+                    bgColor={base}
+                  />
+                </Box>
+              </FormLabel>
+              <Input
+                placeholder="e.g. #D3AC3"
+                size="md"
+                value={base}
+                onChange={(e) => setBase(e.target.value)}
+              />
+            </FormControl>
+            <FormControl css={{ marginTop: 16 }}>
+              <FormLabel>
+                <Box css={{ display: 'flex', alignItems: 'center' }}>
+                  Hover Color (Optional)
+                  <Box
+                    css={{ height: '14px', width: '14px', marginLeft: '8px' }}
+                    bgColor={hover}
+                  />
+                </Box>
+              </FormLabel>
+              <Input
+                placeholder="e.g. #D3AC3"
+                size="md"
+                value={hover}
+                onChange={(e) => setHover(e.target.value)}
+              />
+            </FormControl>
+            <FormControl css={{ marginTop: 16 }}>
+              <FormLabel>
+                <Box css={{ display: 'flex', alignItems: 'center' }}>
+                  Active Color (Optional)
+                  <Box
+                    css={{ height: '14px', width: '14px', marginLeft: '8px' }}
+                    bgColor={active}
+                  />
+                </Box>
+              </FormLabel>
+              <Input
+                placeholder="e.g. #D3AC3"
+                size="md"
+                value={active}
+                onChange={(e) => setActive(e.target.value)}
+              />
+            </FormControl>
+            {/* <FormControl css={{ marginTop: 16 }}>
             <Checkbox
               checked={!!isPrimary}
               onChange={(event) => {
@@ -122,6 +132,8 @@ export function EditColorModal({
               This is the Primary
             </Checkbox>
           </FormControl> */}
+          </Flex>
+          <ColorPicker />
         </ModalBody>
 
         <ModalFooter>
