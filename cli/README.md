@@ -1,1 +1,0 @@
-# Mirrorful Go CLI
