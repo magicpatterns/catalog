@@ -2,6 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import fs from 'fs'
 import { TColorData } from 'types'
 
+const sanitizeName = (name: string) => {
+  return name.toLowerCase().split(' ').join('-')
+}
 const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
 
 // Our working directory is 2 levels below node_modules in production, so we go up 3 levels
@@ -55,23 +58,23 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
   }
 
   colorData.forEach((color) => {
-    scssContent += `$color-${color.name.toLowerCase()}: ${color.base};\n`
-    cssContent += `  --color-${color.name.toLowerCase()}: ${color.base};\n`
+    scssContent += `$color-${sanitizeName(color.name)}: ${color.base};\n`
+    cssContent += `  --color-${sanitizeName(color.name)}: ${color.base};\n`
 
     if (color.hover) {
-      cssContent += `  --color-${color.name.toLowerCase()}-hover: ${
+      cssContent += `  --color-${sanitizeName(color.name)}-hover: ${
         color.hover
       };\n`
-      scssContent += `$color-${color.name.toLowerCase()}-hover: ${
+      scssContent += `$color-${sanitizeName(color.name)}-hover: ${
         color.hover
       };\n`
     }
 
     if (color.active) {
-      cssContent += `  --color-${color.name.toLowerCase()}-active: ${
+      cssContent += `  --color-${sanitizeName(color.name)}-active: ${
         color.active
       };\n`
-      scssContent += `$color-${color.name.toLowerCase()}-active: ${
+      scssContent += `$color-${sanitizeName(color.name)}-active: ${
         color.active
       };\n`
     }
@@ -79,10 +82,10 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
     if (color.shades) {
       getKeys(color.shades).forEach((key) => {
         if (color.shades) {
-          cssContent += `  --color-${color.name.toLowerCase()}-${key}: ${
+          cssContent += `  --color-${sanitizeName(color.name)}-${key}: ${
             color.shades[key]
           };\n`
-          scssContent += `$color-${color.name.toLowerCase()}-${key}: ${
+          scssContent += `$color-${sanitizeName(color.name)}-${key}: ${
             color.shades[key]
           };\n`
         }
@@ -102,8 +105,8 @@ const generateJsonFile = async ({ colorData }: { colorData: TColorData[] }) => {
   let primaryColor = colorData.find((c) => c.isPrimary)
   let secondaryColor = colorData.find((c) => c.isSecondary)
 
-  let tsContent = `module.export = `
-  let jsContent = `module.export = `
+  let tsContent = `export default `
+  let jsContent = `export default `
   let jsonContent = ''
 
   const themeObj = new Map<
@@ -130,7 +133,7 @@ const generateJsonFile = async ({ colorData }: { colorData: TColorData[] }) => {
   }
 
   colorData.forEach((color) => {
-    themeObj.set(color.name.toLowerCase(), {
+    themeObj.set(sanitizeName(color.name), {
       base: color.base,
       hover: color.hover,
       active: color.active,
