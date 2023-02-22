@@ -1,5 +1,6 @@
 <h1 align="center">
-  Mirrorful
+  <img width="300" src="./assets/logo-light-mode.png#gh-light-mode-only" alt="Mirrorful">
+  <img width="300" src="./assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
 </h1>
 <p align="center">
   <p align="center">Simple, open-source design system infrastructure.</p>
@@ -32,6 +33,8 @@
   </a>
 </h4>
 
+<img src="./assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
+
 **[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure in the form of an NPM package. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app. Take 5 minutes today, design at scale forever.
 
 - **Start new projects with a source of truth** - export your CSS variables and structure your code in a scalable manner.
@@ -39,7 +42,7 @@
 - **Generate colors** - get creative inspiration by generating colors with the Mirrorful theme editor.
 - 🔜 **AI-powered theming**
 - 🔜 **Eslint rules**
-- 🔜 **Propogate tokens across projects**
+- 🔜 **Propagate tokens across projects**
 - 🔜 **Figma integrations**
 
 And more..
@@ -48,15 +51,17 @@ And more..
 
 Mirrorful is a simple NPM package intended to be installed as dev dependency.
 
-```
+```bash
 npm install mirrorful --save-dev
 ```
+
 or
-```
+
+```bash
 yarn add mirrorful --dev
 ```
 
- To learn more on how to get started, visit our [getting started guide](../packages/mirrorful/README.md).
+To learn more on how to get started, visit our [getting started guide](../packages/mirrorful/README.md).
 
 ## 🎨 Why should I use Mirrorful?
 
@@ -70,25 +75,26 @@ Install Mirrorful in 5 minutes today, and then design at scale forever. We belie
 
 - [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - for live discussion with the community and the Mirrorful team.
 - [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - For help with building and deeper conversations about features.
-- [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) -  for any bugs and errors you encounter using Mirrorful.
+- [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - for any bugs and errors you encounter using Mirrorful.
 - [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates. Share your memes!
 
 ## 🏘 Open-source vs. paid
 
-This repo is entirely MIT licensed, with the exception of any underr a `ee` directory which contains premium enterprise features requiring a Mirrorful license. We're currently focused on developing non-enterprise offerings first that should suit most use-cases.
+This repo is entirely MIT licensed, with the exception of any under a `ee` directory which contains premium enterprise features requiring a Mirrorful license. We're currently focused on developing non-enterprise offerings first that should suit most use-cases.
 
-We are working hard to make Mirrorful more extensive. Need any integrations or want a new feature? Feel free to [create an issue](https://github.com/Mirrorful/mirrorful/issues) or contribute directly to the repository. *(The first draft of this README was made by a contributor!)*
-
+We are working hard to make Mirrorful more extensive. Need any integrations or want a new feature? Feel free to [create an issue](https://github.com/Mirrorful/mirrorful/issues) or contribute directly to the repository. _(The first draft of this README was made by a contributor!)_
 
 ## 🛡 Security
 
-Please do not file GitHub issues or post on our public forum for security vulnerabilities as they are public.
+Mirrorful takes security issues very seriously. If you have any concerns about Mirrorful or believe you have uncovered a vulnerability, please get in touch via the e-mail address [support@mirrorful.io](mailto:support@mirrorful.io). In the message, try to provide a description of the issue and ideally a way of reproducing it. The team will get back to you **immediately**.
 
-Mirrorful takes security issues very seriously. If you have any concerns about Mirrorful or believe you have uncovered a vulnerability, please get in touch via the e-mail address  [support@mirrorful.io](mailto:support@mirrorful.io). In the message, try to provide a description of the issue and ideally a way of reproducing it. The team will get back to you **immediately**.
+Please do not file GitHub issues or post on our public forum for security vulnerabilities as they are public.
 
 ## ⭐ Stay Up-to-Date
 
- There are a lot of new features coming very frequently. Star this repo to stay up to date.
+There are a lot of new features coming very frequently. Star this repo to stay up to date.
+
+<img width="300" src="./assets/creative.png" alt="Charlie Painting">
 
 ## 🛠️ Contributing
 
@@ -96,7 +102,7 @@ Whether it's big or small, we love contributions ❤️. The maintainers of this
 
 Not sure where to get started? You can:
 
-- [Book a free, non-pressure pairing sessions with one of our teammates]([https://usemotion.com/meet/teddyni/meet?d=15](https://usemotion.com/meet/teddyni/meet?d=15))!
+- [Book a free, non-pressure pairing sessions with one of our teammates](<[https://usemotion.com/meet/teddyni/meet?d=15](https://usemotion.com/meet/teddyni/meet?d=15)>)!
 - Join our <a href="[https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA)">Slack</a> and ask us any questions there.
 
 All contributors will be added to our README with their permission.
@@ -109,8 +115,7 @@ All contributors will be added to our README with their permission.
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
-<a href="https://github.com/alexdanilowicz"><img src="https://avatars.githubusercontent.com/u/29822597?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/teddarific"><img src="https://avatars.githubusercontent.com/u/16343600" width="50" height="50" alt=""/></a> <a href="https://github.com/isabellytubao"><img src="https://avatars.githubusercontent.com/u/113177368" width="50" height="50" alt=""/></a> <a href="https://github.com/gfang200"><img src="https://avatars.githubusercontent.com/u/13005240?v=4" width="50" height="50" alt=""/></a>  <a href="https://github.com/sallyxu"><img src="https://avatars.githubusercontent.com/u/1229627" width="50" height="50" alt=""/></a> 
-
+<a href="https://github.com/alexdanilowicz"><img src="https://avatars.githubusercontent.com/u/29822597?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/teddarific"><img src="https://avatars.githubusercontent.com/u/16343600" width="50" height="50" alt=""/></a> <a href="https://github.com/isabellytubao"><img src="https://avatars.githubusercontent.com/u/113177368" width="50" height="50" alt=""/></a> <a href="https://github.com/gfang200"><img src="https://avatars.githubusercontent.com/u/13005240?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/sallyxu"><img src="https://avatars.githubusercontent.com/u/1229627" width="50" height="50" alt=""/></a>
 
 ## 🌎 Translations
 

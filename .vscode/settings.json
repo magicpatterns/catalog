@@ -6,5 +6,6 @@
     "**/node_modules": true,
     "**/.next": true,
     "**/vendor": true
-  }
+  },
+  "cSpell.words": ["Mirrorful"]
 }
