@@ -1,6 +1,5 @@
 <h1 align="center">
-  <img width="300" src="./../../assets/logo-light-mode.png#gh-light-mode-only" alt="Mirrorful">
-  <img width="300" src="./../../assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
+  <img width="300" src="https://raw.githubusercontent.com/Mirrorful/mirrorful/main/assets/logo-light-mode.png" alt="Mirrorful">
 </h1>
 <p align="center">
   <p align="center">Simple, open-source design system infrastructure.</p>
@@ -33,13 +32,13 @@
   </a>
 </h4>
 
-<img src="./../../assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
+<img src="https://raw.githubusercontent.com/Mirrorful/mirrorful/main/assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
 
 **[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
 
 ## 🚀 Get started
 
-Mirrorful is a NPM package intended to be installed as dev dependency.
+Mirrorful intended to be installed as dev dependency.
 
 ```bash
 npm install mirrorful --save-dev
@@ -53,7 +52,7 @@ yarn add mirrorful --dev
 
 ## ✨ Usage
 
-Run mirrorful and it will start a local editor at `localhost:5050`.
+The following commands will start a local editor at `localhost:5050`.
 
 ```
 yarn run mirrorful
@@ -70,6 +69,14 @@ npx mirrorful
 **Should I commit `.mirrorful` to source?**
 
 Yes. It's a good idea to commit `.mirrorful` to source, so that other developers can use the same configuration.
+
+**Why should I use Mirrorful?**
+
+Design systems are the building blocks of your app, but many projects don't adopt them until it's too late because they believe it will slow you down. Mirrorful will speed you up. Its lightweight and dead simple.
+
+We're on a mission to help your project be as beautiful as possible. The bar for high quality design is getting higher. We want to help everyone add simple design tokens to new (and existing!) projects.
+
+Install Mirrorful in 5 minutes today, and then design at scale forever. We believe all you need is a source of truth, color variables, a few design tokens and you are set up for success.
 
 ## ❤️ Community & Support
 
