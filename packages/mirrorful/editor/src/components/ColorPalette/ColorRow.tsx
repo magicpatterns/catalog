@@ -57,7 +57,11 @@ function ColorPanel({ title, hex }: { title: string; hex: string }) {
           display: 'flex',
         }}
       >
-        <Box bgColor={hex} css={{ flexGrow: 1, borderRadius: 8 }} />
+        <Box
+          bgColor={hex}
+          border={`0.5px solid ${tinycolor(hex).isDark() ? 'white' : 'black'}`}
+          css={{ flexGrow: 1, borderRadius: 8 }}
+        />
       </Box>
     </Box>
   )
@@ -77,7 +81,6 @@ export function ColorRow({
   onSetAsSecondary: () => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
   const colorScale = generateDefaultColorShades(colorData.base)
 
   return (
