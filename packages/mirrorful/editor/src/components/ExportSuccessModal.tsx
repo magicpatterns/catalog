@@ -22,6 +22,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  Link,
 } from '@chakra-ui/react'
 import { TColorData } from 'types'
 import { useState } from 'react'
@@ -99,8 +100,14 @@ export function ExportSuccessModal({
             </TabPanels>
           </Tabs>
           <Text css={{ marginTop: '12px' }}>
-            To learn more about how to import these generated files, visit our
-            documentation here.
+            To learn more about how to import these generated files, visit our{' '}
+            <Link
+              isExternal
+              color="blue.500"
+              href="https://github.com/Mirrorful/mirrorful"
+            >
+              documentation here.
+            </Link>
           </Text>
         </ModalBody>
 

@@ -73,7 +73,7 @@ export default function Editor() {
 
       <Box
         padding={{
-          base: '64px 48px 16px 48px',
+          base: '80px 48px 16px 48px',
         }}
       >
         <ColorPaletteSection colors={colors} onUpdateColors={setColors} />
