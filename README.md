@@ -86,6 +86,24 @@ or
 npx mirrorful
 ```
 
+## Export Formats
+
+After configuring your theme in the editor, you can export it to be used by your app.
+
+We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`
+
+You can then either consume your new tokens through CSS Variables or Javascript constants!
+
+**Using CSS Variables**
+
+<img src="./packages/mirrorful/editor/public/css_vars_example.png" width="400" alt="CSS Variables Example" />
+
+**Using Javascript Constants**
+
+<img src="./packages/mirrorful/editor/public/token_example.png" width="400" alt="Javascript Constants Example" />
+
+
+
 ## ❤️ Community & Support
 
 - [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - for live discussion with the community and the Mirrorful team.
