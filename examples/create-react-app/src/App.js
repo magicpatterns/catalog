@@ -1,4 +1,5 @@
 import brick from './brick.gif'
+import './App.css'
 
 function App() {
   return (
