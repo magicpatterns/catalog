@@ -35,17 +35,16 @@
 
 <img src="./assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
 
-**[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure in the form of an NPM package. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app. Take 5 minutes today, design at scale forever.
+**[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app as CSS Variables or JSON. Take 5 minutes today, design at scale forever.
 
 - **Start new projects with a source of truth** - export your CSS variables and structure your code in a scalable manner.
 - **Visually modify your theme** - say goodbye to clunky JSON, and hello to editing your theme visually.
 - **Generate colors** - get creative inspiration by generating colors with the Mirrorful theme editor.
-- 🔜 **AI-powered theming**
 - 🔜 **Eslint rules**
 - 🔜 **Propagate tokens across projects**
-- 🔜 **Figma integrations**
+- 🔜 **Figma integration**
 
-And more..
+And more...
 
 ## 🚀 Get started
 
@@ -65,7 +64,7 @@ To learn more on how to get started, visit our [getting started guide](https://g
 
 ## 🎨 Why should I use Mirrorful?
 
-Design systems are the building blocks of your app, but many projects don't adopt them until it's too late because they believe it will slow you down. Mirrorful will speed you up. Its lightweight and dead simple. 
+Design systems are the building blocks of your app, but many projects don't adopt them until it's too late because they are hard to set up correctly. Mirrorful gets you set up for a basic design system in minutes while leaving flexibility down the line for customizations. Its lightweight and dead simple. 
 
 We're on a mission to help your project be as beautiful as possible. The bar for high quality design is getting higher. We want to help everyone add simple design tokens to new (and existing!) projects.
 
