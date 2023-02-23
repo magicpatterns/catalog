@@ -102,7 +102,15 @@ You can then either consume your new tokens through CSS Variables or Javascript 
 
 <img src="./packages/mirrorful/editor/public/token_example.png" width="400" alt="Javascript Constants Example" />
 
+## 🤝 Component Library Agnostic
 
+We strive to be component library agnostic. Whether you're using Material UI, Chakra UI, Tailwind, Ant Design, or even your in-house library, Mirrorful hooks right in.
+
+Check out our examples:
+
+- [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
+
+Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues)
 
 ## ❤️ Community & Support
 
