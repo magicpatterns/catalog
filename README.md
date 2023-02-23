@@ -40,6 +40,8 @@
 - **Start new projects with a source of truth** - export your CSS variables and structure your code in a scalable manner.
 - **Visually modify your theme** - say goodbye to clunky JSON, and hello to editing your theme visually.
 - **Generate colors** - get creative inspiration by generating colors with the Mirrorful theme editor.
+- 🔜 **Theme Templates**
+- 🔜 **Lightweight Headless Component Library**
 - 🔜 **Eslint rules**
 - 🔜 **Propagate tokens across projects**
 - 🔜 **Figma integration**
