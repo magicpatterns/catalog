@@ -16,7 +16,7 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "local": "tsc --build; cross-env NODE_ENV=development node ./dist/index.js --verbose",
-    "prepub": "tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm version patch"
+    "prepub": "tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm version patch; "
   },
   "repository": {
     "type": "git",
