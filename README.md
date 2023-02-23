@@ -52,7 +52,7 @@ And more...
 
 ## 🎨 Why should I use Mirrorful?
 
-Design systems are the building blocks of your app, but many projects don't adopt them until it's too late because they are hard to set up correctly. Mirrorful gets you set up for a basic design system in minutes while leaving flexibility down the line for customizations. Its lightweight and dead simple. 
+Design systems are the building blocks of your app, but many projects don't adopt them until it's too late because they are hard to set up correctly. Mirrorful gets you set up for a basic design system in minutes while leaving flexibility down the line for customizations. Its lightweight and dead simple.
 
 We're on a mission to help your project be as beautiful as possible. The bar for high quality design is getting higher. We want to help everyone add simple design tokens to new (and existing!) projects.
 
@@ -109,6 +109,7 @@ We strive to be component library agnostic. Whether you're using Material UI, Ch
 Check out our examples:
 
 - [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
+- [Mirrorful 🤝 Basic Create React App](https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app)
 
 Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues)
 
