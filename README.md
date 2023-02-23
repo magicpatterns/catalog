@@ -86,7 +86,7 @@ or
 npx mirrorful
 ```
 
-## Export Formats
+## 💿 Export Formats
 
 After configuring your theme in the editor, you can export it to be used by your app.
 
