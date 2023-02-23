@@ -78,10 +78,7 @@ export default function Editor() {
       >
         <ColorPaletteSection colors={colors} onUpdateColors={setColors} />
       </Box>
-      <ExportSuccessModal
-        isOpen={isExportSuccessModalOpen}
-        onClose={onExportSuccessModalClose}
-      />
+      <ExportSuccessModal isOpen={true} onClose={onExportSuccessModalClose} />
     </Box>
   )
 }

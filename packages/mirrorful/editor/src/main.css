@@ -332,3 +332,11 @@ body {
 .IconButton:focus {
   box-shadow: 0 0 0 2px var(--violet7);
 }
+
+.primary-button {
+  background-color: var(--color-primary);
+}
+
+.primary-button:hover {
+  background-color: var(--color-primary-hover);
+}
