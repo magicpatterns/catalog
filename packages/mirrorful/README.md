@@ -161,4 +161,6 @@ No matter the PR, all the Github avatars of contributors will be added to the Mi
 
 ## 🌎 Translations
 
-Mirrorful is currently available in English and coming soon in Spanish. Help us translate our documentation and UI to your language! You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).
+Mirrorful is currently available in English and coming soon in Spanish. Help us translate our documentation and UI to your language!
+
+You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).
