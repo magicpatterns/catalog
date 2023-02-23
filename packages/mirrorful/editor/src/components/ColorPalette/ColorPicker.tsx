@@ -9,7 +9,7 @@ export function ColorPicker({
 }: {
   presetColors: string[]
   colorPickerColor: Color
-  onChange: (colorPickerColor: ColorResult) => void
+  onChange: (colorPickerColor: ColorResult, event: any) => void
 }) {
   return (
     <Box width="250px">
@@ -17,8 +17,8 @@ export function ColorPicker({
         width="100%"
         color={colorPickerColor}
         onChange={onChange}
-        presetColors={presetColors}
         disableAlpha
+        presetColors={presetColors}
       />
     </Box>
   )
