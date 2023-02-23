@@ -68,7 +68,7 @@ npx mirrorful
 
 **Should I commit `.mirrorful` to source?**
 
-Yes. It's a good idea to commit `.mirrorful` to source, so that other developers can use the same configuration.
+Yes — the `.mirrorful` folder contains your theme configuration used by your app.
 
 **Why should I use Mirrorful?**
 
