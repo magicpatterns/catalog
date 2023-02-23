@@ -45,7 +45,7 @@
     "feather-icons-react": "^0.6.2",
     "framer-motion": "^9.0.4",
     "fs": "^0.0.1-security",
-    "next": "13.1.6",
+    "next": "^12.0.0",
     "path": "^0.12.7",
     "prettier": "^2.8.4",
     "react": "18.2.0",
