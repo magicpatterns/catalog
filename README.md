@@ -106,6 +106,8 @@ You can then either consume your new tokens through CSS Variables or Javascript 
 
 We strive to be component library agnostic. Whether you're using Material UI, Chakra UI, Tailwind, Ant Design, or even your in-house library, Mirrorful hooks right in.
 
+⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory.
+
 Check out our examples:
 
 - [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
