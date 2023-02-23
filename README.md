@@ -37,9 +37,11 @@
 
 **[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app as CSS Variables or JSON. Take 5 minutes today, design at scale forever.
 
-- **Start new projects with a source of truth** - export your CSS variables and structure your code in a scalable manner.
-- **Visually modify your theme** - say goodbye to clunky JSON, and hello to editing your theme visually.
-- **Generate colors** - get creative inspiration by generating colors with the Mirrorful theme editor.
+Create the building blocks for fast frontend development!
+
+- **Start new projects with a source of truth**
+- **Visually modify your theme**
+- **Generate colors**
 - 🔜 **Theme Templates**
 - 🔜 **Lightweight Headless Component Library**
 - 🔜 **Eslint rules**
@@ -54,7 +56,7 @@ Design systems are the building blocks of your app, but many projects don't adop
 
 We're on a mission to help your project be as beautiful as possible. The bar for high quality design is getting higher. We want to help everyone add simple design tokens to new (and existing!) projects.
 
-Install Mirrorful in 5 minutes today, and then design at scale forever. We believe all you need is a source of truth, color variables, a few design tokens and you are set up for success.
+Simple design systems also speed up development — even early-stage projects! One report suggests its 47% faster to build a simple form using a design system. It's useful for engineers, designers, and especially your customers if there isn't a random color for each button in your app.
 
 ## 🚀 Get started
 
@@ -69,8 +71,6 @@ or
 ```bash
 yarn add mirrorful --dev
 ```
-
-To learn more on how to get started, visit our [getting started guide](https://github.com/Mirrorful/mirrorful/blob/main/packages/mirrorful/README.md).
 
 ## ✨ Usage
 
@@ -102,7 +102,15 @@ You can then either consume your new tokens through CSS Variables or Javascript 
 
 <img src="./packages/mirrorful/editor/public/token_example.png" width="400" alt="Javascript Constants Example" />
 
+## 🤝 Component Library Agnostic
 
+We strive to be component library agnostic. Whether you're using Material UI, Chakra UI, Tailwind, Ant Design, or even your in-house library, Mirrorful hooks right in.
+
+Check out our examples:
+
+- [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
+
+Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues)
 
 ## ❤️ Community & Support
 
