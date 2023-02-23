@@ -17,6 +17,11 @@ import {
   Box,
   Icon,
   Code,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
 } from '@chakra-ui/react'
 import { TColorData } from 'types'
 import { useState } from 'react'
@@ -45,27 +50,54 @@ export function ExportSuccessModal({
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text>
-            Your tokens can now be imported by your app. The following files
-            were generated:
+          <Text css={{ marginBottom: '24px' }}>
+            Your tokens can now be imported by your app.
           </Text>
-          <ul style={{ paddingLeft: '30px', marginTop: '12px' }}>
-            <li>
-              <Code>theme.css</Code>
-            </li>
-            <li>
-              <Code>theme.scss</Code>
-            </li>
-            <li>
-              <Code>theme.json</Code>
-            </li>
-            <li>
-              <Code>theme.js</Code>
-            </li>
-            <li>
-              <Code>theme.ts</Code>
-            </li>
-          </ul>
+          <Tabs>
+            <TabList>
+              <Tab>HTML / SCSS</Tab>
+              <Tab>Javascript / Typescript</Tab>
+            </TabList>
+
+            <TabPanels>
+              <TabPanel>
+                <Text>
+                  <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
+                  <Code>theme.css</Code>
+                </Text>
+                <img
+                  src="/import_css.png"
+                  style={{ borderRadius: 8, marginTop: 8 }}
+                />
+                <Text css={{ marginTop: 12 }}>
+                  <span style={{ fontWeight: 'bold' }}>2.</span> Your CSS
+                  Variables can now be accessed anywhere in your app!
+                </Text>
+                <img
+                  src="/css_vars_example.png"
+                  style={{ borderRadius: 8, marginTop: 8 }}
+                />
+              </TabPanel>
+              <TabPanel>
+                <Text>
+                  <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
+                  <Code>tokens</Code>
+                  <img
+                    src="/import_tokens.png"
+                    style={{ borderRadius: 8, marginTop: 8 }}
+                  />
+                  <Text css={{ marginTop: 12 }}>
+                    <span style={{ fontWeight: 'bold' }}>2.</span> Use your
+                    tokens anywhere as constants!
+                  </Text>
+                  <img
+                    src="/token_example.png"
+                    style={{ borderRadius: 8, marginTop: 8 }}
+                  />
+                </Text>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
           <Text css={{ marginTop: '12px' }}>
             To learn more about how to import these generated files, visit our
             documentation here.
