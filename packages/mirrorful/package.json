@@ -1,6 +1,6 @@
 {
   "name": "mirrorful",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Simple, open-source design system infrastructure.",
   "keywords": [
     "mirrorful",
@@ -16,7 +16,7 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "local": "tsc --build; cross-env NODE_ENV=development node ./dist/index.js --verbose",
-    "prepub": "tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm version patch"
+    "prepub": "tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..;"
   },
   "repository": {
     "type": "git",
