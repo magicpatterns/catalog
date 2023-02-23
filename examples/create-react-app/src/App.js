@@ -1,5 +1,4 @@
 import brick from './brick.gif'
-import './.mirrorful/theme.css'
 import './App.css'
 
 function App() {
