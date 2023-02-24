@@ -27,7 +27,6 @@ import {
 import { TColorData } from 'types'
 import { useState } from 'react'
 import { FiCheckCircle } from 'react-icons/fi'
-import { CodeSnippet } from './General/CodeSnippet'
 import Highlight from 'react-highlight'
 import 'highlight.js/styles/atom-one-dark.css'
 
