@@ -4,6 +4,7 @@ import { PackageManager } from './helpers/get-pkg-manager'
 import { isWriteable } from './helpers/is-writeable'
 import { makeDir } from './helpers/make-dir'
 import spawn from 'cross-spawn'
+import { findNodeModulesPath } from './helpers/find-node-modules'
 
 export async function init({
   appPath,
@@ -30,13 +31,21 @@ export async function init({
   const port = 5050 // don't hard code this
 
   if (process.env.NODE_ENV === 'development') {
+    // just run the editor in its own directory
     process.chdir(`editor`)
   } else {
-    process.chdir(`node_modules/mirrorful/editor`)
+    // find where the node_modules folder is
+    const nodeModulesPath = findNodeModulesPath()
+    if (nodeModulesPath) {
+      process.chdir(`${nodeModulesPath}/mirrorful/editor`)
+    }
   }
 
-  // Assume success
-  console.log(`${chalk.green('Success!')}`)
+  let command = 'start'
+  if (process.env.NODE_ENV === 'development') {
+    command = 'dev'
+  }
+
   console.log()
   console.log(
     `Visit: ${chalk.cyan(`${`http://localhost:`}${port.toString()}`)}`
@@ -50,13 +59,9 @@ export async function init({
   console.log('to start the visual editor at any time 🚀')
   console.log()
 
-  let command = 'start'
-  if (process.env.NODE_ENV === 'development') {
-    command = 'dev'
-  }
-
   const outputMode = verbose ? 'inherit' : 'ignore'
   const output = spawn.sync('yarn', ['run', command, '-p', port.toString()], {
+    // if you use pipe, then control + c throws an empty error
     stdio: [outputMode, outputMode, 'inherit'],
   })
   if (output.stderr || output.error) {

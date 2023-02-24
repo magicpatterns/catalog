@@ -1,6 +1,6 @@
 {
   "name": "mirrorful",
-  "version": "2.0.9",
+  "version": "2.0.12",
   "description": "Simple, open-source design system infrastructure.",
   "keywords": [
     "mirrorful",
@@ -14,9 +14,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --build",
-    "clean": "tsc --build --clean",
-    "local": "tsc --build; cross-env NODE_ENV=development node ./dist/index.js",
-    "prepub": "npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..;"
+    "local": "rm -rf ./dist; tsc --build; cross-env NODE_ENV=development node ./dist/cli/index.js",
+    "prepub": "rm -rf ./dist; npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..;",
+    "testprod": "rm -rf ./dist; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm link; echo '‼️ Now go to a test project and run npm link mirrorful; yarn run mirrorful'"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
     "url": "https://github.com/Mirrorful/mirrorful/issues"
   },
   "homepage": "https://github.com/Mirrorful/mirrorful#readme",
-  "bin": "dist/index.js",
+  "bin": "dist/cli/index.js",
   "dependencies": {
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",

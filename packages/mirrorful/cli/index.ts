@@ -2,7 +2,7 @@
 
 import chalk from 'chalk'
 import checkForUpdate from 'update-check'
-import packageJson from './package.json'
+import packageJson from '../package.json'
 import Commander from 'commander'
 import { getPkgManager } from './helpers/get-pkg-manager'
 import { init } from './init'
