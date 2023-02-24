@@ -27,6 +27,8 @@ import {
 import { TColorData } from 'types'
 import { useState } from 'react'
 import { FiCheckCircle } from 'react-icons/fi'
+import Highlight from 'react-highlight'
+import 'highlight.js/styles/atom-one-dark.css'
 
 export function ExportSuccessModal({
   isOpen,
@@ -62,40 +64,38 @@ export function ExportSuccessModal({
 
             <TabPanels>
               <TabPanel>
-                <Text>
+                <Text css={{ marginBottom: 8 }}>
                   <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
                   <Code>theme.css</Code>
                 </Text>
-                <img
-                  src="/import_css.png"
-                  style={{ borderRadius: 8, marginTop: 8 }}
-                />
-                <Text css={{ marginTop: 12 }}>
+                <Highlight language="javascript" className="code-snippet">
+                  {`import './.mirrorful/theme.css'`}
+                </Highlight>{' '}
+                <Text css={{ marginTop: 12, marginBottom: 8 }}>
                   <span style={{ fontWeight: 'bold' }}>2.</span> Your CSS
                   Variables can now be accessed anywhere in your app!
                 </Text>
-                <img
-                  src="/css_vars_example.png"
-                  style={{ borderRadius: 8, marginTop: 8 }}
-                />
+                <Highlight language="css" className="code-snippet">
+                  {`.primary-button {\n    background-color: var(--color-primary);\n}\n\n.primary-button:hover {\n    background-color: var(--color-primary-hover);\n}`}
+                </Highlight>
               </TabPanel>
               <TabPanel>
-                <Text>
+                <Text css={{ marginBottom: 8 }}>
                   <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-                  <Code>tokens</Code>
-                  <img
-                    src="/import_tokens.png"
-                    style={{ borderRadius: 8, marginTop: 8 }}
-                  />
-                  <Text css={{ marginTop: 12 }}>
-                    <span style={{ fontWeight: 'bold' }}>2.</span> Use your
-                    tokens anywhere as constants!
-                  </Text>
-                  <img
-                    src="/token_example.png"
-                    style={{ borderRadius: 8, marginTop: 8 }}
-                  />
+                  <Code>Tokens</Code>
                 </Text>
+
+                <Highlight language="javascript" className="code-snippet">
+                  {`import { Tokens } from './.mirrorful/theme'`}
+                </Highlight>
+
+                <Text css={{ marginTop: 12, marginBottom: 8 }}>
+                  <span style={{ fontWeight: 'bold' }}>2.</span> Use your tokens
+                  anywhere as constants!
+                </Text>
+                <Highlight language="javascript" className="code-snippet">
+                  {`<Button\n   style={{ backgroundColor: Tokens.primary.base}}\n   _hover={{ backgroundColor: Tokens.primary.hover }}\n   _active={{ backgroundColor: Tokens.primary.active }}\n>\n   Click here\n</Button>`}
+                </Highlight>
               </TabPanel>
             </TabPanels>
           </Tabs>
