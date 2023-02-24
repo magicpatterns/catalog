@@ -340,3 +340,9 @@ body {
 .primary-button:hover {
   background-color: var(--color-primary-hover);
 }
+
+.code-snippet {
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 12px;
+}
