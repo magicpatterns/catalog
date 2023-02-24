@@ -2,9 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { rootPath } from './export'
 import fs from 'fs'
 
-const readStorageFile = async () => {
-  const data = await fs.readFileSync(`${rootPath}/store.json`, 'utf8')
-
+const readStorageFile = async (): Promise<{ colorData: string[] }> => {
+  const data = await fs.promises.readFile(`${rootPath}/store.json`, 'utf8')
   return JSON.parse(data)
 }
 
@@ -12,15 +11,20 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  let data = {
+  let data: { colorData: string[] } = {
     colorData: [],
   }
 
-  // TODO: Should surface this error somewhere.
   try {
     data = await readStorageFile()
   } catch (e) {
-    console.error(e)
+    // @ts-ignore
+    if (e && e.code === 'ENOENT') {
+      // File doesn't exist, so we'll just return an empty object.
+      return res.status(404).json(data)
+    } else {
+      throw e
+    }
   }
 
   return res.status(200).json(data)

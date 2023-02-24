@@ -54,8 +54,24 @@ export async function init({
   if (process.env.NODE_ENV === 'development') {
     command = 'dev'
   }
-  // TODO(Danilowicz): This probably means yarn needs to be installed globally?
-  spawn.sync('yarn', ['run', command, '-p', port.toString()], {
-    stdio: verbose ? 'inherit' : 'ignore',
+
+  const outputMode = verbose ? 'inherit' : 'ignore'
+  const output = spawn.sync('yarn', ['run', command, '-p', port.toString()], {
+    stdio: [outputMode, outputMode, 'inherit'],
   })
+  if (output.stderr || output.error) {
+    console.log(
+      chalk.red(
+        'Unexpected error. Please report it as a bug on our repo: https://github.com/Mirrorful/mirrorful'
+      ) + '\n'
+    )
+    if (output.stderr) {
+      console.log()
+      console.log(`Stderr: ${output.stderr}`)
+    }
+    if (output.error) {
+      console.log()
+      console.log(`Error: ${output.error}`)
+    }
+  }
 }
