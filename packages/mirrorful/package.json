@@ -1,6 +1,6 @@
 {
   "name": "mirrorful",
-  "version": "2.0.5",
+  "version": "2.0.9",
   "description": "Simple, open-source design system infrastructure.",
   "keywords": [
     "mirrorful",
@@ -15,8 +15,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "local": "tsc --build; cross-env NODE_ENV=development node ./dist/index.js --verbose",
-    "prepub": "tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm version patch;"
+    "local": "tsc --build; cross-env NODE_ENV=development node ./dist/index.js",
+    "prepub": "npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..;"
   },
   "repository": {
     "type": "git",
@@ -34,7 +34,6 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@hello-pangea/color-picker": "^3.2.2",
-    "@next/font": "13.1.6",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-dropdown-menu": "^2.0.2",
