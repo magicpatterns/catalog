@@ -3,7 +3,7 @@
   <img width="300" src="./assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
 </h1>
 <p align="center">
-  <p align="center">Simple, open-source design system infrastructure.</p>
+  <p align="center">Create the building blocks of your app with simpple, open-source design system infrastructure.</p>
 </p>
 
 <h4 align="center">
