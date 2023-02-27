@@ -1,6 +1,14 @@
 import { ColorRow } from './ColorRow'
 import { TColorData } from '../../types'
-import { Button, Box, useDisclosure, Stack, Heading } from '@chakra-ui/react'
+import {
+  Button,
+  Box,
+  useDisclosure,
+  Stack,
+  Heading,
+  Text,
+  Divider,
+} from '@chakra-ui/react'
 import { EditColorModal } from './EditColorModal'
 
 export function ColorPaletteSection({
@@ -14,9 +22,21 @@ export function ColorPaletteSection({
 
   return (
     <Box>
-      <Heading>Color Palette</Heading>
+      <Heading fontSize={36} fontWeight="black">
+        Color Palette
+      </Heading>
+      <Text
+        fontSize={18}
+        fontWeight="medium"
+        color="gray.600"
+        css={{ marginTop: '12px' }}
+      >
+        {`Add and edit the colors in your theme. `}
+      </Text>
+
+      <Divider css={{ borderWidth: '2px', margin: '12px 0' }} />
       <Box css={{ marginTop: '24px' }}>
-        <Stack direction="column" alignItems="flex-start" spacing={12}>
+        <Stack direction="column" alignItems="flex-start" spacing={32}>
           {colors.map((color) => (
             <ColorRow
               key={color.name}
@@ -44,7 +64,6 @@ export function ColorPaletteSection({
 
                 newColors.forEach((color) => (color.isPrimary = false))
                 newColors[colorIndex].isPrimary = true
-                console.log(newColors)
                 onUpdateColors(newColors)
               }}
               onSetAsSecondary={() => {
@@ -68,10 +87,16 @@ export function ColorPaletteSection({
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-start',
-            padding: '18px',
+            padding: '18px 0',
+            marginTop: '32px',
           }}
         >
-          <Button onClick={() => onOpen()}>Add New Color</Button>
+          <Button
+            onClick={() => onOpen()}
+            css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}
+          >
+            Add New Color
+          </Button>
         </Box>
       </Box>
       <EditColorModal
