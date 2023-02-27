@@ -1,5 +1,4 @@
 import {
-  Checkbox,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -7,18 +6,15 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Text,
   Button,
   FormControl,
   Input,
-  FormErrorMessage,
-  FormHelperText,
   FormLabel,
   Box,
   Flex,
 } from '@chakra-ui/react'
 import { TColorData } from 'types'
-import { useEffect, useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { generateDefaultColorShades } from './utils'
 import { ColorPicker } from './ColorPicker'
 import { Color } from '@hello-pangea/color-picker'
@@ -51,12 +47,9 @@ export function EditColorModal({
   const [active, setActive] = useState<string | undefined>(
     initialColorData?.active
   )
-  const [isPrimary, setIsPrimary] = useState<boolean>(
-    initialColorData?.isPrimary ?? false
-  )
-  const [isSecondary, setIsSecondary] = useState<boolean>(
-    initialColorData?.isSecondary ?? false
-  )
+
+  const isPrimary = initialColorData?.isPrimary ?? false
+  const isSecondary = initialColorData?.isSecondary ?? false
 
   const [colorPickerColor, setColorPickerColor] = useState<Color>(
     initialColorData?.base ?? '#000000'
@@ -277,17 +270,6 @@ export function EditColorModal({
                 onBlur={onActiveBlur}
               />
             </FormControl>
-            {/* <FormControl css={{ marginTop: 16 }}>
-            <Checkbox
-              checked={!!isPrimary}
-              onChange={(event) => {
-                setIsPrimary(event.target.checked)
-              }}
-              defaultChecked={isPrimary}
-            >
-              This is the Primary
-            </Checkbox>
-          </FormControl> */}
           </Flex>
           {showBaseColorPicker && (
             <ColorPicker
