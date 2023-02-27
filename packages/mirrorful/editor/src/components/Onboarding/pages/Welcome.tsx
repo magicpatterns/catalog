@@ -20,7 +20,7 @@ export function Welcome({
         }}
       >
         <Heading fontWeight="black" fontSize={36}>
-          Welcome to Mirrorful!
+          Welcome to Mirrorful
         </Heading>
         <Text
           fontSize={20}
@@ -49,6 +49,7 @@ export function Welcome({
             onClick={() => {
               onUpdatePage(1)
             }}
+            variant="ui"
           />
         </Box>
         {/* <Box css={{ width: '1px', backgroundColor: 'black' }} /> */}
@@ -60,6 +61,7 @@ export function Welcome({
           <OnboardingCard
             title="I already have my own theme."
             onClick={onFinishOnboarding}
+            variant="system"
           />
         </Box>
       </Box>
