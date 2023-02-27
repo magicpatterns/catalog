@@ -44,7 +44,7 @@ export function ColorPaletteSection({
 
                 newColors.forEach((color) => (color.isPrimary = false))
                 newColors[colorIndex].isPrimary = true
-                console.log(newColors)
+
                 onUpdateColors(newColors)
               }}
               onSetAsSecondary={() => {
