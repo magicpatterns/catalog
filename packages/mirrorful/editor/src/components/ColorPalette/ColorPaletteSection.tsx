@@ -36,53 +36,51 @@ export function ColorPaletteSection({
 
       <Divider css={{ borderWidth: '2px', margin: '12px 0' }} />
       <Box css={{ marginTop: '24px' }}>
-        {colors.length > 0 && (
-          <Stack direction="column" alignItems="flex-start" spacing={32}>
-            {colors.map((color) => (
-              <ColorRow
-                key={color.name}
-                colorData={color}
-                onUpdateColorData={(updatedColorData: TColorData) => {
-                  const newColors = [...colors]
-                  const colorIndex = colors.findIndex(
-                    (ec) => ec.name === color.name
-                  )
-                  newColors[colorIndex] = updatedColorData
+        <Stack direction="column" alignItems="flex-start" spacing={32}>
+          {colors.map((color) => (
+            <ColorRow
+              key={color.name}
+              colorData={color}
+              onUpdateColorData={(updatedColorData: TColorData) => {
+                const newColors = [...colors]
+                const colorIndex = colors.findIndex(
+                  (ec) => ec.name === color.name
+                )
+                newColors[colorIndex] = updatedColorData
 
-                  onUpdateColors(newColors)
-                }}
-                onDeleteColorData={() => {
-                  const newColors = colors.filter((c) => c.name !== color.name)
+                onUpdateColors(newColors)
+              }}
+              onDeleteColorData={() => {
+                const newColors = colors.filter((c) => c.name !== color.name)
 
-                  onUpdateColors(newColors)
-                }}
-                onSetAsPrimary={() => {
-                  const newColors = [...colors]
+                onUpdateColors(newColors)
+              }}
+              onSetAsPrimary={() => {
+                const newColors = [...colors]
 
-                  const colorIndex = newColors.findIndex(
-                    (ec) => ec.name === color.name
-                  )
+                const colorIndex = newColors.findIndex(
+                  (ec) => ec.name === color.name
+                )
 
-                  newColors.forEach((color) => (color.isPrimary = false))
-                  newColors[colorIndex].isPrimary = true
-                  onUpdateColors(newColors)
-                }}
-                onSetAsSecondary={() => {
-                  const newColors = [...colors]
+                newColors.forEach((color) => (color.isPrimary = false))
+                newColors[colorIndex].isPrimary = true
+                onUpdateColors(newColors)
+              }}
+              onSetAsSecondary={() => {
+                const newColors = [...colors]
 
-                  const colorIndex = newColors.findIndex(
-                    (ec) => ec.name === color.name
-                  )
+                const colorIndex = newColors.findIndex(
+                  (ec) => ec.name === color.name
+                )
 
-                  newColors.forEach((color) => (color.isSecondary = false))
-                  newColors[colorIndex].isSecondary = true
+                newColors.forEach((color) => (color.isSecondary = false))
+                newColors[colorIndex].isSecondary = true
 
-                  onUpdateColors(newColors)
-                }}
-              />
-            ))}
-          </Stack>
-        )}
+                onUpdateColors(newColors)
+              }}
+            />
+          ))}
+        </Stack>
 
         <Box
           css={{
