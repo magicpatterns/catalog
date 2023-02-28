@@ -6,9 +6,11 @@ import { ExportSuccessModal } from './ExportSuccessModal'
 import { Onboarding } from './Onboarding'
 
 export function Dashboard() {
+  const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
+    useState<boolean>(false)
+
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
   const [colors, setColors] = useState<TColorData[]>([])
-
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
@@ -17,16 +19,12 @@ export function Dashboard() {
 
   useEffect(() => {
     const fetchStoredData = async () => {
-      try {
-        const response = await fetch('/api/store')
-        const data = await response.json()
-        if (!data || !data.colorData || data.colorData.length === 0) {
-          setShowOnboarding(true)
-        }
-        setColors(data.colorData)
-      } catch (e) {
-        // setShowOnboarding(true)
+      const response = await fetch('/api/store')
+      const data = await response.json()
+      if (!data || !data.colorData || data.colorData.length === 0) {
+        setShowOnboarding(true)
       }
+      setColors(data.colorData ?? [])
     }
 
     fetchStoredData()
@@ -43,11 +41,12 @@ export function Dashboard() {
     onExportSuccessModalOpen()
   }
 
-  if (showOnboarding) {
+  if (!shouldForceSkipOnboarding && showOnboarding) {
     return (
       <Onboarding
         onFinishOnboarding={() => {
           setShowOnboarding(false)
+          setShouldForceSkipOnboarding(true)
         }}
       />
     )

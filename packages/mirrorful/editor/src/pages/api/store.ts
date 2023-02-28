@@ -20,8 +20,8 @@ export default async function handler(
   } catch (e) {
     // @ts-ignore
     if (e && e.code === 'ENOENT') {
-      // File doesn't exist, so we'll just return an empty object.
-      return res.status(200).json(data)
+      // File doesn't exist, so we'll just return an empty colorData: []
+      return res.status(200).json({ colorData: [] })
     } else {
       throw e
     }
