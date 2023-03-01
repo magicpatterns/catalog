@@ -1,5 +1,6 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
 import { OnboardingCard } from '../OnboardingCard'
+import posthog from 'posthog-js'
 
 export function Welcome({
   onUpdatePage,
@@ -47,6 +48,7 @@ export function Welcome({
           <OnboardingCard
             title="I don't have a theme yet."
             onClick={() => {
+              posthog.capture('NO_THEME_YET')
               onUpdatePage(1)
             }}
             variant="ui"
@@ -60,7 +62,10 @@ export function Welcome({
         >
           <OnboardingCard
             title="I already have my own theme."
-            onClick={onFinishOnboarding}
+            onClick={() => {
+              posthog.capture('ALREADY_HAS_THEME')
+              onFinishOnboarding()
+            }}
             variant="system"
           />
         </Box>
