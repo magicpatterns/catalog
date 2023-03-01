@@ -1,4 +1,5 @@
 import tinycolor from 'tinycolor2'
+import { VALID_CSS_COLORS } from './validCssColors'
 
 export const newShade = (hexColor: string, magnitude: number) => {
   hexColor = hexColor.replace(`#`, ``)
@@ -49,5 +50,37 @@ export const generateDefaultColorShades = (primary: string) => {
     900: tinycolor(primary)
       .darken(scaleDiff * 4)
       .toHexString(),
+  }
+}
+
+export const handleInvalidColor = (input: string) => {
+  // Check if input is a valid hex code
+  const hexRegex = /^#?([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/
+  if (hexRegex.test(input)) {
+    if (input.startsWith('#')) {
+      return input
+    } else {
+      return `#${input}`
+    }
+  }
+
+  // Check if input is a valid color name
+  const lowerCaseInput = input.toLowerCase()
+  if (VALID_CSS_COLORS.includes(lowerCaseInput)) {
+    return lowerCaseInput
+  }
+
+  const validSubsetRegex = /^#?[0-9A-Fa-f]{0,6}$/ // regex to validate if input is a valid subset of a hexcode
+  const randomHex = Math.floor(Math.random() * 16777215).toString(16) // generate a random valid hexcode
+
+  if (validSubsetRegex.test(input)) {
+    // check if input is a valid subset of a hexcode
+    if (input.startsWith('#')) {
+      return `${input}${randomHex.slice(input.length - 1)}` // use input as the first part and append random characters as necessary to make a valid hexcode
+    } else {
+      return `#${input}${randomHex.slice(input.length)}` // use input as the first part and append random characters as necessary to make a valid hexcode
+    }
+  } else {
+    return `#${randomHex}` // generate a completely random valid hexcode
   }
 }
