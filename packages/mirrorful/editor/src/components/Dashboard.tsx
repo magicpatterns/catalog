@@ -4,6 +4,7 @@ import { TColorData } from 'types'
 import { ColorPaletteSection } from './ColorPalette/ColorPaletteSection'
 import { ExportSuccessModal } from './ExportSuccessModal'
 import { Onboarding } from './Onboarding'
+import posthog from 'posthog-js'
 
 export function Dashboard() {
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
@@ -31,6 +32,8 @@ export function Dashboard() {
   }, [showOnboarding])
 
   const handleExport = async () => {
+    posthog.capture('EXPORT_CONFIG')
+
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({
