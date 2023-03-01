@@ -35,6 +35,10 @@
 
 <img src="./assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
 
+
+**Read this in other languages**: <kbd>[<img title="English" alt="English language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="22">](i18n/README.en.md)</kbd>
+<kbd>[<img title="German" alt="German language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/de.svg" width="22">](i18n/README.de.md)</kbd>
+
 **[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app as CSS Variables or JSON. Take 5 minutes today, design at scale forever.
 
 Create the building blocks for fast frontend development!
@@ -161,9 +165,10 @@ No matter the PR, all the Github avatars of contributors will be added to the Mi
 <!-- markdownlint-disable -->
 
 <a href="https://github.com/alexdanilowicz"><img src="https://avatars.githubusercontent.com/u/29822597?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/teddarific"><img src="https://avatars.githubusercontent.com/u/16343600" width="50" height="50" alt=""/></a> <a href="https://github.com/isabellytubao"><img src="https://avatars.githubusercontent.com/u/113177368" width="50" height="50" alt=""/></a> <a href="https://github.com/gfang200"><img src="https://avatars.githubusercontent.com/u/13005240?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/sallyxu"><img src="https://avatars.githubusercontent.com/u/1229627" width="50" height="50" alt=""/></a> <a href="https://github.com/zachsnoek"><img src="https://avatars.githubusercontent.com/u/26049962" width="50" height="50" alt=""/></a>
+<a href="https://github.com/tobiasdossinger"><img src="https://avatars.githubusercontent.com/u/33021996?v=4" width="50" height="50" alt=""/></a>
 
 ## 🌎 Translations
 
-Mirrorful is currently available in English and [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md). Spanish is coming soon. Help us translate our documentation and UI to your language!
+Mirrorful is currently available in English and [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md). Help us translate our documentation and UI to your language!
 
 You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).
