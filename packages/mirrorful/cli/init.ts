@@ -30,24 +30,24 @@ export async function init({
 
   await makeDir('.mirrorful')
 
-  try {
-    await fs.promises.access('.mirrorful/store.json', fs.constants.F_OK)
-    if (verbose) {
-      console.log('store.json exists.')
-    }
-  } catch (error: any) {
-    if (error && error.code === 'ENOENT') {
-      if (verbose) {
-        console.log('store.json does not exist, creating...')
-      }
-      await fs.promises.writeFile(
-        '.mirrorful/store.json',
-        JSON.stringify({ colorData: [] })
-      )
-    } else {
-      throw error
-    }
-  }
+  // try {
+  //   await fs.promises.access('.mirrorful/store.json', fs.constants.F_OK)
+  //   if (verbose) {
+  //     console.log('store.json exists.')
+  //   }
+  // } catch (error: any) {
+  //   if (error && error.code === 'ENOENT') {
+  //     if (verbose) {
+  //       console.log('store.json does not exist, creating...')
+  //     }
+  //     await fs.promises.writeFile(
+  //       '.mirrorful/store.json',
+  //       JSON.stringify({ colorData: [] })
+  //     )
+  //   } else {
+  //     throw error
+  //   }
+  // }
   const port = 5050 // don't hard code this
 
   if (process.env.NODE_ENV === 'development') {

@@ -41,6 +41,7 @@
     "@radix-ui/react-separator": "^1.0.1",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
+    "conf": "^10.0.2",
     "cross-spawn": "^7.0.3",
     "feather-icons-react": "^0.6.2",
     "framer-motion": "^9.0.4",
@@ -59,6 +60,7 @@
     "update-check": "^1.5.4"
   },
   "devDependencies": {
+    "@types/conf": "^3.0.0",
     "@types/cross-spawn": "^6.0.2",
     "@types/node": "^18.14.0",
     "@types/react": "18.0.28",

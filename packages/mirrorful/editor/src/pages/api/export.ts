@@ -1,27 +1,19 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fs from 'fs'
 import { TColorData } from 'types'
+import { rootPath, store } from 'storeUtils'
 
 const sanitizeName = (name: string) => {
   return name.toLowerCase().split(' ').join('-')
 }
 const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
 
-// Our working directory is 2 levels below node_modules in production, so we go up 3 levels
-export const rootPath =
-  process.env.NODE_ENV === 'development'
-    ? '../.mirrorful'
-    : '../../../.mirrorful'
-
 const generateStorageFile = async ({
   colorData,
 }: {
   colorData: TColorData[]
 }) => {
-  await fs.writeFileSync(
-    `${rootPath}/store.json`,
-    JSON.stringify({ colorData })
-  )
+  store.set('tokens', { colorData })
 }
 
 const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
