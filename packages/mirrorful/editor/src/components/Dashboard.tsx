@@ -41,6 +41,18 @@ export function Dashboard() {
     onExportSuccessModalOpen()
   }
 
+  const handleUpdate = async (data: TColorData[]) => {
+    setColors(() => {
+      return data
+    })
+    await fetch('/api/export', {
+      method: 'POST',
+      body: JSON.stringify({
+        colorData: data,
+      }),
+    })
+  }
+
   if (!shouldForceSkipOnboarding && showOnboarding) {
     return (
       <Onboarding
@@ -93,7 +105,7 @@ export function Dashboard() {
           base: '80px 48px 16px 48px',
         }}
       >
-        <ColorPaletteSection colors={colors} onUpdateColors={setColors} />
+        <ColorPaletteSection colors={colors} onUpdateColors={handleUpdate} />
       </Box>
       <ExportSuccessModal
         isOpen={isExportSuccessModalOpen}
