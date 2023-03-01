@@ -1,6 +1,6 @@
 <h1 align="center">
-  <img width="300" src="./assets/logo-light-mode.png#gh-light-mode-only" alt="Mirrorful">
-  <img width="300" src="./assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
+  <img width="300" src="./../assets/logo-light-mode.png#gh-light-mode-only" alt="Mirrorful">
+  <img width="300" src="./../assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
 </h1>
 <p align="center">
   <p align="center">Erstellen Sie die Bausteine für Ihre Anwendung mit einem einfachen und quelloffenen Designsystem.</p>
@@ -33,7 +33,7 @@
   </a>
 </h4>
 
-<img src="./assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
+<img src="./../assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
 
 **[Mirrorful](https://mirrorful.com)** ist ein einfaches, quelloffenes Designsystem. Installieren Sie Mirrorful, um Farben und andere Design-Token für Ihr Projekt zu generieren. Importieren Sie diese Tokens dann direkt in Ihre App als CSS-Variablen oder JSON. Nehmen Sie sich heute 5 Minuten Zeit und gestalten Sie für Langlebigkeit und Skalierbarkeit.
 
@@ -138,7 +138,7 @@ Bitte reichen Sie keine GitHub-Probleme ein und posten Sie keine Sicherheitslüc
 
 Es gibt eine Menge neuer Funktionen, die sehr häufig kommen. Geben Sie diesem Repo einen Stern, um auf dem Laufenden zu bleiben.
 
-<img width="300" src="./assets/creative.png" alt="Charlie Painting">
+<img width="300" src="./../assets/creative.png" alt="Charlie Painting">
 
 ## 🛠️ Contributing
 
