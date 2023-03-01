@@ -118,9 +118,10 @@ export function EditColorModal({
           css={{
             flexDirection: 'row',
             display: 'flex',
+            gap: 24,
           }}
         >
-          <Flex flexDirection="column" mr="10">
+          <Flex flexDirection="column" flex="1">
             <FormControl>
               <FormLabel>Variable Name</FormLabel>
               <Input
@@ -276,33 +277,35 @@ export function EditColorModal({
               </InputGroup>
             </FormControl>
           </Flex>
-          {showBaseColorPicker && (
-            <ColorPicker
-              onChange={(colorPickerColor, event) => {
-                setBase(colorPickerColor.hex)
-              }}
-              colorPickerColor={colorPickerColor}
-              presetColors={presetColors}
-            />
-          )}
-          {showHoverColorPicker && (
-            <ColorPicker
-              onChange={(colorPickerColor) => {
-                setHover(colorPickerColor.hex)
-              }}
-              colorPickerColor={colorPickerColor}
-              presetColors={presetColors}
-            />
-          )}
-          {showActiveColorPicker && (
-            <ColorPicker
-              onChange={(colorPickerColor) => {
-                setActive(colorPickerColor.hex)
-              }}
-              colorPickerColor={colorPickerColor}
-              presetColors={presetColors}
-            />
-          )}
+          <Box flex="1">
+            {showBaseColorPicker && (
+              <ColorPicker
+                onChange={(colorPickerColor, event) => {
+                  setBase(colorPickerColor.hex)
+                }}
+                colorPickerColor={colorPickerColor}
+                presetColors={presetColors}
+              />
+            )}
+            {showHoverColorPicker && (
+              <ColorPicker
+                onChange={(colorPickerColor) => {
+                  setHover(colorPickerColor.hex)
+                }}
+                colorPickerColor={colorPickerColor}
+                presetColors={presetColors}
+              />
+            )}
+            {showActiveColorPicker && (
+              <ColorPicker
+                onChange={(colorPickerColor) => {
+                  setActive(colorPickerColor.hex)
+                }}
+                colorPickerColor={colorPickerColor}
+                presetColors={presetColors}
+              />
+            )}
+          </Box>
         </ModalBody>
 
         <ModalFooter>

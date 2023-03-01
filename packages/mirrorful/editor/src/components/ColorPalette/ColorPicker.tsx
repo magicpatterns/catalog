@@ -12,7 +12,15 @@ export function ColorPicker({
   onChange: (colorPickerColor: ColorResult, event: any) => void
 }) {
   return (
-    <Box width="250px">
+    <Box
+      sx={{
+        // HACK: `<SketchPicker />`'s `style` prop does a shallow merge,
+        //  so this lets us preserve the other `.sketch-picker` styles
+        '.sketch-picker': {
+          boxSizing: 'border-box !important',
+        },
+      }}
+    >
       <SketchPicker
         width="100%"
         color={colorPickerColor}
