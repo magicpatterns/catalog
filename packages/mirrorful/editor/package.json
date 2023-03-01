@@ -27,6 +27,7 @@
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "@types/tinycolor2": "^1.4.3",
+    "conf": "^10.0.2",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "feather-icons-react": "^0.6.2",
@@ -41,5 +42,8 @@
     "react-icons": "^4.7.1",
     "tinycolor2": "^1.6.0",
     "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "@types/conf": "^3.0.0"
   }
 }
