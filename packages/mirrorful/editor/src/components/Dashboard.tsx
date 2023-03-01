@@ -45,9 +45,7 @@ export function Dashboard() {
   }
 
   const handleUpdate = async (data: TColorData[]) => {
-    setColors(() => {
-      return data
-    })
+    setColors(data)
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({
