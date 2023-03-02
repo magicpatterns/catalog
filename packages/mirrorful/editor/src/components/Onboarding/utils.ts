@@ -76,9 +76,8 @@ export function generatePalette(
 
     randomizedColors.push({
       name: nameThatColor(modifiedHsl),
-      base: tinycolor(modifiedHsl).toHexString(),
-      isPrimary: false,
-      isSecondary: false,
+      baseColor: tinycolor(modifiedHsl).toHexString(),
+      variants: {},
     })
   })
 
