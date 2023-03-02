@@ -19,11 +19,6 @@ export function ColorPaletteSection({
   onUpdateColors: (newColors: TColorData[]) => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const emptyColor = {
-    isPrimary: false,
-    isSecondary: false,
-    base: '#ddd'
-  }
 
   function handleAddColorCss () {
     const cssObj = {
