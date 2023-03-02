@@ -33,7 +33,7 @@ export function AddColorRow ({ backgroundColorString }: {backgroundColorString: 
     // Returns row with 'Click to add color' message based on standard ColorRow, but without the clutter / functionality
     return (
           <Box css={{ display: 'flex' }}>
-            <Box css={{ width: 350, display: 'flex', alignItems: 'center' }}>
+            <Box css={{ width: 350 }}>
               <Box>
                 <Heading fontWeight='extrabold' fontSize={28} color='#777'>
                   Click to add color...
