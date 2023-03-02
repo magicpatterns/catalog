@@ -85,11 +85,11 @@ export function ColorPaletteSection({
             />
           ))}
         </Stack>
-        
+
         <Box
           css={{
             padding: '18px 0',
-            marginTop: '112px',
+            marginTop: '7rem',
             opacity: '0.4'
           }}
           onClick={() => onOpen()}
