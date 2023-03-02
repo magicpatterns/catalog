@@ -71,14 +71,10 @@ export function ColorRow({
   colorData,
   onUpdateColorData,
   onDeleteColorData,
-  onSetAsPrimary,
-  onSetAsSecondary,
 }: {
   colorData: TColorData
   onUpdateColorData: (colorData: TColorData) => void
   onDeleteColorData: () => void
-  onSetAsPrimary: () => void
-  onSetAsSecondary: () => void
 }) {
   const {
     isOpen: isColorNameModalOpen,
@@ -106,6 +102,7 @@ export function ColorRow({
               Edit Color Name
             </Button>
             <Button onClick={() => onAddVariantModalOpen()}>Add Variant</Button>
+            <Button onClick={() => onDeleteColorData()}>Delete Color</Button>
           </Stack>
         </Box>
         <Box css={{ display: 'flex' }}>

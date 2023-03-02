@@ -30,12 +30,8 @@ export function Onboarding({
     const colors: TColorData[] = [
       {
         name: primaryColorName,
-        base: primaryColorHex,
-        hover: generateDefaultColorShades(primaryColorHex)['700'],
-        active: generateDefaultColorShades(primaryColorHex)['800'],
-        shades: generateDefaultColorShades(primaryColorHex),
-        isPrimary: true,
-        isSecondary: false,
+        baseColor: primaryColorHex,
+        variants: {},
       },
       ...latestPalette,
     ]

@@ -66,29 +66,6 @@ export function ColorPaletteSection({
 
                 onUpdateColors(newColors)
               }}
-              onSetAsPrimary={() => {
-                const newColors = [...colors]
-
-                const colorIndex = newColors.findIndex(
-                  (ec) => ec.name === color.name
-                )
-
-                newColors.forEach((color) => (color.isPrimary = false))
-                newColors[colorIndex].isPrimary = true
-                onUpdateColors(newColors)
-              }}
-              onSetAsSecondary={() => {
-                const newColors = [...colors]
-
-                const colorIndex = newColors.findIndex(
-                  (ec) => ec.name === color.name
-                )
-
-                newColors.forEach((color) => (color.isSecondary = false))
-                newColors[colorIndex].isSecondary = true
-
-                onUpdateColors(newColors)
-              }}
             />
           ))}
         </Stack>

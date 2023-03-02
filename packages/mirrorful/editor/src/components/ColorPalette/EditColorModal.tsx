@@ -39,34 +39,13 @@ export function EditColorModal({
 
   const presetColors: string[] = []
   const [name, setName] = useState<string>(initialColorData?.name ?? '')
-  const [base, setBase] = useState<string>(initialColorData?.base ?? '')
-
-  // NOTE: hover and active should default to empty strings not undefined
-  // to fix the controlled vs uncontrolled warning, but that requires
-  // backend cleanup
-  const [hover, setHover] = useState<string | undefined>(
-    initialColorData?.hover
-  )
-  const [active, setActive] = useState<string | undefined>(
-    initialColorData?.active
-  )
-
-  const isPrimary = initialColorData?.isPrimary ?? false
-  const isSecondary = initialColorData?.isSecondary ?? false
+  const [base, setBase] = useState<string>(initialColorData?.baseColor ?? '')
 
   const [colorPickerColor, setColorPickerColor] = useState<Color>(
-    initialColorData?.base ?? '#000000'
+    initialColorData?.baseColor ?? '#000000'
   )
 
   const [showBaseColorPicker, setShowBaseColorPicker] = useState<boolean>(true)
-  const [showHoverColorPicker, setShowHoverColorPicker] =
-    useState<boolean>(false)
-  const [showActiveColorPicker, setShowActiveColorPicker] =
-    useState<boolean>(false)
-
-  const shouldRecommendHover = !!base && !hover
-  const shouldRecommendActive = !!base && !active
-  const shades = generateDefaultColorShades(base)
 
   const onBaseBlur = () => {
     const value = handleInvalidColor(base)
@@ -74,35 +53,13 @@ export function EditColorModal({
     setBase(value)
   }
 
-  const onHoverBlur = () => {
-    if (hover) {
-      const value = handleInvalidColor(hover)
-      setColorPickerColor(value)
-      setHover(value)
-    }
-  }
-
-  const onActiveBlur = () => {
-    if (active) {
-      const value = handleInvalidColor(active)
-      setColorPickerColor(value)
-      setActive(value)
-    }
-  }
-
   const handleClose = () => {
-    onActiveBlur()
     onBaseBlur()
-    onHoverBlur()
 
     onClose({
       name,
-      base,
-      hover,
-      active,
-      shades,
-      isPrimary,
-      isSecondary,
+      baseColor: base,
+      variants: {},
     })
   }
 
@@ -131,8 +88,6 @@ export function EditColorModal({
                 onChange={(e) => setName(e.target.value)}
                 onFocus={(e) => {
                   setShowBaseColorPicker(true)
-                  setShowHoverColorPicker(false)
-                  setShowActiveColorPicker(false)
                 }}
                 onKeyPress={(event) => {
                   if (event.key === 'Enter' && baseRef.current) {
@@ -165,9 +120,6 @@ export function EditColorModal({
                 }}
                 onBlur={onBaseBlur}
                 onFocus={(e) => {
-                  setShowHoverColorPicker(false)
-                  setShowActiveColorPicker(false)
-
                   setColorPickerColor(e.target.value)
                   setShowBaseColorPicker(true)
                 }}
@@ -178,128 +130,12 @@ export function EditColorModal({
                 }}
               />
             </FormControl>
-            <FormControl css={{ marginTop: 16 }}>
-              <FormLabel>
-                <Box css={{ display: 'flex', alignItems: 'center' }}>
-                  Hover Color (Optional)
-                  <Box
-                    css={{ height: '14px', width: '14px', marginLeft: '8px' }}
-                    bgColor={hover}
-                    border={`0.5px solid ${
-                      tinycolor(hover).isDark() ? 'white' : 'black'
-                    }`}
-                  />{' '}
-                </Box>
-              </FormLabel>
-              <InputGroup>
-                <Input
-                  ref={hoverRef}
-                  placeholder="e.g. #D3AC3"
-                  size="md"
-                  value={hover}
-                  onChange={(e) => setHover(e.target.value)}
-                  onFocus={(e) => {
-                    setShowBaseColorPicker(false)
-                    setShowActiveColorPicker(false)
-
-                    setColorPickerColor(e.target.value)
-                    setShowHoverColorPicker(true)
-                  }}
-                  onKeyPress={(event) => {
-                    if (event.key === 'Enter' && activeColorRef.current) {
-                      activeColorRef.current.focus()
-                    }
-                  }}
-                  onBlur={onHoverBlur}
-                />
-                <InputRightElement>
-                  {shouldRecommendHover && (
-                    <IconButton
-                      icon={<FaMagic />}
-                      onClick={() => {
-                        setColorPickerColor(shades['600'])
-                        setHover(shades['600'])
-                      }}
-                      size="sm"
-                      aria-label="Use recommended hover"
-                    />
-                  )}
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
-            <FormControl css={{ marginTop: 16 }}>
-              <FormLabel>
-                <Box css={{ display: 'flex', alignItems: 'center' }}>
-                  Active Color (Optional)
-                  <Box
-                    css={{ height: '14px', width: '14px', marginLeft: '8px' }}
-                    bgColor={active}
-                    border={`0.5px solid ${
-                      tinycolor(active).isDark() ? 'white' : 'black'
-                    }`}
-                  />
-                </Box>
-              </FormLabel>
-              <InputGroup>
-                <Input
-                  ref={activeColorRef}
-                  placeholder="e.g. #D3AC3"
-                  size="md"
-                  value={active}
-                  onChange={(e) => setActive(e.target.value)}
-                  onFocus={(e) => {
-                    setShowBaseColorPicker(false)
-                    setShowHoverColorPicker(false)
-
-                    setColorPickerColor(e.target.value)
-                    setShowActiveColorPicker(true)
-                  }}
-                  onKeyPress={(event) => {
-                    if (event.key === 'Enter') {
-                      handleClose()
-                    }
-                  }}
-                  onBlur={onActiveBlur}
-                />
-                <InputRightElement>
-                  {shouldRecommendActive && (
-                    <IconButton
-                      icon={<FaMagic />}
-                      onClick={() => {
-                        setColorPickerColor(shades['700'])
-                        setActive(shades['700'])
-                      }}
-                      size="sm"
-                      aria-label="Use recommended active"
-                    />
-                  )}
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
           </Flex>
           <Box flex="1">
             {showBaseColorPicker && (
               <ColorPicker
                 onChange={(colorPickerColor, event) => {
                   setBase(colorPickerColor.hex)
-                }}
-                colorPickerColor={colorPickerColor}
-                presetColors={presetColors}
-              />
-            )}
-            {showHoverColorPicker && (
-              <ColorPicker
-                onChange={(colorPickerColor) => {
-                  setHover(colorPickerColor.hex)
-                }}
-                colorPickerColor={colorPickerColor}
-                presetColors={presetColors}
-              />
-            )}
-            {showActiveColorPicker && (
-              <ColorPicker
-                onChange={(colorPickerColor) => {
-                  setActive(colorPickerColor.hex)
                 }}
                 colorPickerColor={colorPickerColor}
                 presetColors={presetColors}
