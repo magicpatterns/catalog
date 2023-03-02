@@ -20,6 +20,16 @@ export function ColorPaletteSection({
   onUpdateColors: (newColors: TColorData[]) => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  
+  function handleAddColorCss () {
+    const cssObj = {
+      padding: '18px 0',
+      marginTop: '0'
+    }
+    if(colors.length > 0)
+      cssObj.marginTop = 'var(--chakra-space-32)'
+    return cssObj
+  }
 
   return (
     <Box>
@@ -60,16 +70,8 @@ export function ColorPaletteSection({
           ))}
         </Stack>
 
-        <Box
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
-            padding: '18px 0',
-            marginTop: '32px',
-          }}
-        >
-          <AddColorSkeleton backgroundColorString='#eee' />
+        <Box css={ handleAddColorCss } onClick={() => onOpen()}>
+          <AddColorSkeleton backgroundColorString='#ddd' numberOfMockVariants={4}/>
         </Box>
       </Box>
       <EditColorModal
