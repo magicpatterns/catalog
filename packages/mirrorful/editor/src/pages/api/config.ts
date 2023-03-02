@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fs from 'fs'
-import { rootPath, store } from '../../storeUtils'
+import { rootPath, store } from '../../store/store'
 
 const readStorageFile = async (): Promise<{ colorData: string[] }> => {
   const data = await fs.promises.readFile(`${rootPath}/store.json`, 'utf8')

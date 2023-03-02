@@ -32,6 +32,10 @@ export async function init({
 
   const port = 5050 // don't hard code this
 
+  if (verbose) {
+    console.log('Current directory:', process.cwd())
+  }
+
   let isUsingNextJs = false
   if (process.env.NODE_ENV === 'development') {
     // just run the editor in its own directory
@@ -40,16 +44,18 @@ export async function init({
     // find where the node_modules folder is
     const nodeModulesPath = findNodeModulesPath()
     if (nodeModulesPath) {
-      process.chdir(`${nodeModulesPath}/mirrorful/editor`)
-
       try {
-        await fs.promises.access(
-          `${nodeModulesPath}/.bin/next`,
-          fs.constants.F_OK
-        )
+        await fs.promises.access(`next.config.js`, fs.constants.F_OK)
         isUsingNextJs = true
       } catch (e) {
+        if (verbose) {
+          console.log('Non-mirrorful next.config.js not found: ', e)
+        }
         isUsingNextJs = false
+      }
+      process.chdir(`${nodeModulesPath}/mirrorful/editor`)
+      if (verbose) {
+        console.log('New working directory:', process.cwd())
       }
     }
   }
