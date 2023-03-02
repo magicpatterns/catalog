@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "../node_modules/.bin/next start",
+    "next-start": "../node_modules/.bin/next start",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {

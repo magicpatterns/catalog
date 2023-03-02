@@ -30,26 +30,9 @@ export async function init({
 
   await makeDir('.mirrorful')
 
-  // try {
-  //   await fs.promises.access('.mirrorful/store.json', fs.constants.F_OK)
-  //   if (verbose) {
-  //     console.log('store.json exists.')
-  //   }
-  // } catch (error: any) {
-  //   if (error && error.code === 'ENOENT') {
-  //     if (verbose) {
-  //       console.log('store.json does not exist, creating...')
-  //     }
-  //     await fs.promises.writeFile(
-  //       '.mirrorful/store.json',
-  //       JSON.stringify({ colorData: [] })
-  //     )
-  //   } else {
-  //     throw error
-  //   }
-  // }
   const port = 5050 // don't hard code this
 
+  let isUsingNextJs = false
   if (process.env.NODE_ENV === 'development') {
     // just run the editor in its own directory
     process.chdir(`editor`)
@@ -58,15 +41,30 @@ export async function init({
     const nodeModulesPath = findNodeModulesPath()
     if (nodeModulesPath) {
       process.chdir(`${nodeModulesPath}/mirrorful/editor`)
+
+      try {
+        await fs.promises.access(
+          `${nodeModulesPath}/.bin/next`,
+          fs.constants.F_OK
+        )
+        isUsingNextJs = true
+      } catch (e) {
+        isUsingNextJs = false
+      }
     }
   }
 
   let command = 'start'
+  if (isUsingNextJs) {
+    if (verbose) {
+      console.log('NextJS app detected.')
+    }
+    command = 'next-start' // this is a custom command that uses the .bin/next
+  }
   if (process.env.NODE_ENV === 'development') {
     command = 'dev'
   }
 
-  console.log()
   console.log(
     `Visit: ${chalk.cyan(`${`http://localhost:`}${port.toString()}`)}`
   )
