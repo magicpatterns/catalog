@@ -24,6 +24,18 @@ export function ColorPaletteSection({
     isSecondary: false,
     base: '#ddd'
   }
+
+  function handleAddColorCss () {
+    const cssObj = {
+      padding: '18px 0',
+      marginTop: '0',
+      opacity: '0.4'
+    }
+    if(colors.length > 0)
+      cssObj.marginTop = 'var(--chakra-space-32)'
+    return cssObj
+  }
+
   return (
     <Box>
       <Heading fontSize={36} fontWeight="black">
@@ -85,13 +97,9 @@ export function ColorPaletteSection({
             />
           ))}
         </Stack>
-
+        
         <Box
-          css={{
-            padding: '18px 0',
-            marginTop: '7rem',
-            opacity: '0.4'
-          }}
+          css={handleAddColorCss}
           onClick={() => onOpen()}
         >
             <ColorRow
