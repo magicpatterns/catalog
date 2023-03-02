@@ -55,7 +55,7 @@ export function EditColorModal({
     initialColorData?.base ?? '#000000'
   )
 
-  const [showBaseColorPicker, setShowBaseColorPicker] = useState<boolean>(false)
+  const [showBaseColorPicker, setShowBaseColorPicker] = useState<boolean>(true)
   const [showHoverColorPicker, setShowHoverColorPicker] =
     useState<boolean>(false)
   const [showActiveColorPicker, setShowActiveColorPicker] =
