@@ -20,7 +20,7 @@ export function Dashboard() {
 
   useEffect(() => {
     const fetchStoredData = async () => {
-      const response = await fetch('/api/store')
+      const response = await fetch('/api/config')
       const data = await response.json()
       if (!data || !data.colorData || data.colorData.length === 0) {
         setShowOnboarding(true)
