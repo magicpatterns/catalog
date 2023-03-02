@@ -1,6 +1,6 @@
 export type TColorData = {
   name: string
-  base: string
+  defaultColor?: string
   variants: {
     [key: string]: string
   }
