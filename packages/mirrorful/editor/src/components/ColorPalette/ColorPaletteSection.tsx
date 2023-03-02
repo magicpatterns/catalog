@@ -10,6 +10,7 @@ import {
   Divider,
 } from '@chakra-ui/react'
 import { EditColorModal } from './EditColorModal'
+import { AddColorSkeleton } from './AddColorSkeleton'
 
 export function ColorPaletteSection({
   colors,
@@ -68,12 +69,7 @@ export function ColorPaletteSection({
             marginTop: '32px',
           }}
         >
-          <Button
-            onClick={() => onOpen()}
-            css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}
-          >
-            Add New Color
-          </Button>
+          <AddColorSkeleton backgroundColorString='#eee' />
         </Box>
       </Box>
       <EditColorModal
