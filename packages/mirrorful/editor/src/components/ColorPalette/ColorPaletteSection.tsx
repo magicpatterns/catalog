@@ -19,7 +19,11 @@ export function ColorPaletteSection({
   onUpdateColors: (newColors: TColorData[]) => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
+  const emptyColor = {
+    isPrimary: false,
+    isSecondary: false,
+    base: '#ddd'
+  }
   return (
     <Box>
       <Heading fontSize={36} fontWeight="black">
@@ -81,22 +85,22 @@ export function ColorPaletteSection({
             />
           ))}
         </Stack>
-
+        
         <Box
           css={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
             padding: '18px 0',
-            marginTop: '32px',
+            marginTop: '112px',
+            opacity: '0.4'
           }}
+          onClick={() => onOpen()}
         >
-          <Button
-            onClick={() => onOpen()}
-            css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}
-          >
-            Add New Color
-          </Button>
+            <ColorRow
+              colorData={{ name: 'Click to add color...', base: '#EEE', isPrimary: false, isSecondary: false }}
+              onUpdateColorData={() => {}}
+              onDeleteColorData={() => {}}
+              onSetAsPrimary={() => {}}
+              onSetAsSecondary={() => {}}
+            />
         </Box>
       </Box>
       <EditColorModal
