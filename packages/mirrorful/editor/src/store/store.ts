@@ -1,4 +1,5 @@
 import Conf from 'conf'
+import { ZeroPointZeroPointTwoMigration } from './migrations'
 
 // Our working directory is 2 levels below node_modules in production, so we go up 3 levels
 export const rootPath =
@@ -8,7 +9,7 @@ export const rootPath =
 
 export const store = new Conf({
   projectName: 'Mirrorful',
-  projectVersion: '0.0.1',
+  projectVersion: '0.0.2',
   cwd: `${rootPath}/store`,
   defaults: {
     tokens: {
@@ -20,5 +21,7 @@ export const store = new Conf({
       `[main-config] migrate from ${context.fromVersion} → ${context.toVersion}`
     )
   },
-  migrations: {},
+  migrations: {
+    '0.0.2': ZeroPointZeroPointTwoMigration,
+  },
 })
