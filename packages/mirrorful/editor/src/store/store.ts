@@ -9,7 +9,7 @@ export const rootPath =
 
 export const store = new Conf({
   projectName: 'Mirrorful',
-  projectVersion: '0.0.1',
+  projectVersion: '0.0.2',
   cwd: `${rootPath}/store`,
   defaults: {
     tokens: {

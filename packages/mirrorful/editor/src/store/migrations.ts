@@ -34,7 +34,7 @@ export const ZeroPointZeroPointTwoMigration = (
   } = {
     colorData: [],
   }
-  newTokens.colorData = tokens.colorData.map((color) => {
+  newTokens.colorData = tokens.colorData.map((color): TColorData => {
     const variants = new Map<string, string>()
     if (color.hover) {
       variants.set('Hover', color.hover)
@@ -59,8 +59,10 @@ export const ZeroPointZeroPointTwoMigration = (
 
     return {
       name: color.name,
-      base: color.base,
+      baseColor: color.base,
       variants: Object.fromEntries(variants),
     }
   })
+
+  store.set('tokens', newTokens)
 }

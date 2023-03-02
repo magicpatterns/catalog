@@ -21,8 +21,12 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
   let cssContent = `:root {\n`
 
   colorData.forEach((color) => {
-    scssContent += `$color-${sanitizeName(color.name)}: ${color.base};\n`
-    cssContent += `  --color-${sanitizeName(color.name)}: ${color.base};\n`
+    if (color.baseColor) {
+      scssContent += `$color-${sanitizeName(color.name)}: ${color.baseColor};\n`
+      cssContent += `  --color-${sanitizeName(color.name)}: ${
+        color.baseColor
+      };\n`
+    }
 
     getKeys(color.variants).forEach((key) => {
       if (color.variants[key]) {
@@ -36,8 +40,8 @@ const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
     })
   })
 
-  scssContent += `\n${cssContent}`
   cssContent += `}\n`
+  scssContent += `\n${cssContent}`
 
   await fs.writeFileSync(`${rootPath}/theme.css`, cssContent)
   await fs.writeFileSync(`${rootPath}/theme.scss`, scssContent)
@@ -52,7 +56,7 @@ const generateJsonFile = async ({ colorData }: { colorData: TColorData[] }) => {
 
   colorData.forEach((color) => {
     themeObj.set(sanitizeName(color.name), {
-      base: color.base,
+      ...(color.baseColor && { base: color.baseColor }),
       ...color.variants,
     })
   })

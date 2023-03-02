@@ -1,7 +1,7 @@
 import * as Separator from '@radix-ui/react-separator'
 import tinycolor from 'tinycolor2'
 import { generateDefaultColorShades } from './utils'
-import { TColorData } from 'types'
+import { TColorData, TColorVariant } from 'types'
 import {
   Box,
   Button,
@@ -21,48 +21,60 @@ import {
   MenuDivider,
   IconButton,
   Icon,
+  Link,
+  Checkbox,
 } from '@chakra-ui/react'
 import { EditColorModal } from './EditColorModal'
-import {
-  FiMoreVertical,
-  FiTrash,
-  FiEdit,
-  FiAward,
-  FiBookmark,
-} from 'react-icons/fi'
+import { EditColorNameModal } from './EditColorNameModal'
+import { useState } from 'react'
+import { EditVariantModal } from './EditVariantModal'
+import { AddVariantModal } from './AddVariantModal'
 
-function ColorPanel({ title, hex }: { title: string; hex: string }) {
+function VariantSquare({
+  variant,
+  onUpdateVariant,
+}: {
+  variant: TColorVariant
+  onUpdateVariant: (newVariant: TColorVariant) => void
+}) {
+  const [isHovering, setIsHovering] = useState<boolean>(false)
+  const {
+    isOpen: isEditVariantModalOpen,
+    onOpen: onEditVariantModalOpen,
+    onClose: onEditVariantModalClose,
+  } = useDisclosure()
+
+  const { name, color } = variant
+
   return (
     <Box
       css={{
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        padding: '14px 6px 6px 6px',
+        backgroundColor: color,
+        width: 110,
+        height: 110,
+        padding: '8px',
+        color: tinycolor(color).isDark() ? 'white' : 'black',
         borderRadius: 8,
-        border: '1px solid #DFDFDF',
-        boxShadow: `0px 8px 15px rgba(0, 0, 0, 0.25)`,
+        marginRight: '24px',
+        border: '1px solid gray',
+        position: 'relative',
       }}
+      onMouseOver={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
-      <Box>
-        <Text fontWeight={500}>
-          {title} {hex}
-        </Text>
-      </Box>
-      <Box
-        css={{
-          width: 150,
-          height: 150,
-          padding: '16px',
-          display: 'flex',
-        }}
-      >
-        <Box
-          bgColor={hex}
-          border={`0.5px solid ${tinycolor(hex).isDark() ? 'white' : 'black'}`}
-          css={{ flexGrow: 1, borderRadius: 8 }}
-        />
-      </Box>
+      <Text fontSize={14} fontWeight="black">
+        {name.toUpperCase()}
+      </Text>
+      <Text fontSize={18} fontWeight="medium">
+        {color.toUpperCase()}
+      </Text>
+      <Link onClick={onEditVariantModalOpen}>Edit</Link>
+      <EditVariantModal
+        isOpen={isEditVariantModalOpen}
+        onClose={onEditVariantModalClose}
+        initialVariant={variant}
+        onUpdateVariant={onUpdateVariant}
+      />
     </Box>
   )
 }
@@ -80,177 +92,111 @@ export function ColorRow({
   onSetAsPrimary: () => void
   onSetAsSecondary: () => void
 }) {
-  const colorScale = generateDefaultColorShades(colorData.base)
+  // const colorScale = generateDefaultColorShades(colorData.baseColor)
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: isColorNameModalOpen,
+    onOpen: onColorNameModalOpen,
+    onClose: onColorNameModalClose,
+  } = useDisclosure()
+
+  const {
+    isOpen: isAddVariantModalOpen,
+    onOpen: onAddVariantModalOpen,
+    onClose: onAddVariantModalClose,
+  } = useDisclosure()
 
   return (
     <>
       <Box css={{ display: 'flex' }}>
-        <Box css={{ width: 350 }}>
+        <Box css={{ width: 350, paddingRight: '64px' }}>
           <Box>
             <Heading fontWeight="extrabold" fontSize={28}>
               {colorData.name}
             </Heading>
-            <Text
-              fontWeight="bold"
-              color="gray.600"
-              fontSize={16}
-              css={{ marginTop: '8px' }}
-            >
-              {colorData.base.toUpperCase()}
-            </Text>
-            <Text
-              fontWeight="bold"
-              color="gray.600"
-              fontSize={16}
-              css={{ marginTop: '4px' }}
-            >
-              {tinycolor(colorData.base).toRgbString()}
-            </Text>
-            <Text
-              fontWeight="bold"
-              color="gray.600"
-              fontSize={16}
-              css={{ marginTop: '4px' }}
-            >
-              {tinycolor(colorData.base).toHslString()}
-            </Text>
           </Box>
+          <Stack direction="column" css={{ marginTop: '32px' }} spacing={4}>
+            <Button onClick={() => onColorNameModalOpen()}>
+              Edit Color Name
+            </Button>
+            <Button onClick={() => onAddVariantModalOpen()}>Add Variant</Button>
+          </Stack>
         </Box>
         <Box css={{ display: 'flex' }}>
-          <Box
-            css={{
-              backgroundColor: colorData.base,
-              width: 200,
-              height: 200,
-              padding: '16px',
-              borderRadius: '12px 0 0 12px',
-              color: tinycolor(colorData.base).isDark() ? 'white' : 'black',
-            }}
-          >
-            <Text fontSize={14} fontWeight="black">
-              BASE
-            </Text>
-            <Text fontSize={22} fontWeight="medium">
-              {colorData.base.toUpperCase()}
-            </Text>
-          </Box>
-          <Box css={{ display: 'flex', flexDirection: 'column' }}>
+          {colorData.baseColor && (
             <Box
               css={{
-                backgroundColor: colorData.hover,
-                width: 200,
-                height: 100,
-                padding: '16px',
-                color: tinycolor(colorData.hover ?? '#ffffff').isDark()
+                backgroundColor: colorData.baseColor,
+                width: 240,
+                height: 240,
+                padding: '24px',
+                borderRadius: 8,
+                color: tinycolor(colorData.baseColor).isDark()
                   ? 'white'
                   : 'black',
-                borderRadius: '0 12px 0 0',
-                border: colorData.hover ? 'none' : '1px dashed black',
+                border: '1px solid gray',
               }}
             >
-              <Text fontSize={14} fontWeight="black">
-                HOVER
+              <Text fontSize={18} fontWeight="black">
+                BASE
               </Text>
-              <Text fontSize={colorData.hover ? 22 : 16} fontWeight="medium">
-                {colorData.hover ? colorData.hover.toUpperCase() : 'Not set.'}
-              </Text>
-            </Box>
-            <Box
-              css={{
-                backgroundColor: colorData.active,
-                width: 200,
-                height: 100,
-                padding: '16px',
-                color: tinycolor(colorData.active ?? '#ffffff').isDark()
-                  ? 'white'
-                  : 'black',
-                borderRadius: '0 0 12px 0',
-                border: colorData.active ? 'none' : '1px dashed black',
-              }}
-            >
-              <Text fontSize={14} fontWeight="black">
-                ACTIVE
-              </Text>
-              <Text fontSize={colorData.active ? 22 : 16} fontWeight="medium">
-                {colorData.active ? colorData.active.toUpperCase() : 'Not set.'}
+              <Text fontSize={24} fontWeight="medium">
+                {colorData.baseColor.toUpperCase()}
               </Text>
             </Box>
-          </Box>
-        </Box>
-        <Box
-          css={{ display: 'flex', alignItems: 'center', marginLeft: '64px' }}
-        >
+          )}
+
           <Box
             css={{
               display: 'flex',
-              width: 250,
+              flexDirection: 'column',
               flexWrap: 'wrap',
-              alignItems: 'center',
+              marginLeft: '24px',
+              justifyContent: 'space-between',
             }}
+            height={240}
           >
-            {Object.keys(colorScale).map((weight) => (
-              <Box
-                key={weight}
-                style={{
-                  width: 50,
-                  height: 50,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  fontSize: '14px',
-                  // @ts-ignore
-                  color: tinycolor(colorScale[weight]).isDark()
-                    ? 'white'
-                    : 'black',
-                  // @ts-ignore
-                  backgroundColor: colorScale[weight],
+            {Object.keys(colorData.variants).map((variant) => (
+              <VariantSquare
+                key={variant}
+                variant={{
+                  name: variant,
+                  color: colorData.variants[variant],
+                  isBase: colorData.variants[variant] === colorData.baseColor,
                 }}
-              >
-                {weight}
-              </Box>
+                onUpdateVariant={(newVariant: TColorVariant) => {
+                  const updatedVariants = { ...colorData.variants }
+                  delete updatedVariants.variant
+                  updatedVariants[newVariant.name] = newVariant.color
+
+                  const updatedColorData = {
+                    ...colorData,
+                    variants: updatedVariants,
+                  }
+                  if (newVariant.isBase) {
+                    updatedColorData.baseColor = newVariant.color
+                  } else if (
+                    !newVariant.isBase &&
+                    updatedColorData.baseColor === newVariant.color
+                  ) {
+                    delete updatedColorData.baseColor
+                  }
+
+                  onUpdateColorData(updatedColorData)
+                }}
+              />
             ))}
           </Box>
         </Box>
-        <Stack css={{ marginLeft: '32px' }}>
-          <Button
-            css={{ marginTop: '16px' }}
-            backgroundColor={colorData.base}
-            color={tinycolor(colorData.base).isDark() ? 'white' : 'black'}
-            _hover={{
-              backgroundColor: colorData.hover ?? colorScale['600'],
-            }}
-            _active={{
-              backgroundColor: colorData.active ?? colorScale['700'],
-            }}
-            leftIcon={<Icon as={FiEdit} />}
-            onClick={() => {
-              onOpen()
-            }}
-          >
-            Edit
-          </Button>
-          <Button leftIcon={<Icon as={FiTrash} />} onClick={onDeleteColorData}>
-            Delete
-          </Button>
-          <Button
-            leftIcon={<Icon as={FiAward} />}
-            onClick={() => {
-              onSetAsPrimary()
-            }}
-          >
-            Set as Primary
-          </Button>
-          <Button
-            leftIcon={<Icon as={FiBookmark} />}
-            onClick={() => {
-              onSetAsSecondary()
-            }}
-          >
-            Set as Secondary
-          </Button>
-        </Stack>
       </Box>
+      <EditColorNameModal
+        isOpen={isColorNameModalOpen}
+        onClose={onColorNameModalClose}
+        initialColorName={colorData.name}
+        onUpdateColorName={(newName: string) => {
+          onUpdateColorData({ ...colorData, name: newName })
+        }}
+      />
       <EditColorModal
         isOpen={isOpen}
         onClose={(updatedColorData?: TColorData) => {
@@ -260,6 +206,16 @@ export function ColorRow({
           onClose()
         }}
         initialColorData={colorData}
+      />
+      <AddVariantModal
+        isOpen={isAddVariantModalOpen}
+        onClose={onAddVariantModalClose}
+        onAddVariant={(newVariant: TColorVariant) => {
+          const updatedVariants = { ...colorData.variants }
+          updatedVariants[newVariant.name] = newVariant.color
+
+          onUpdateColorData({ ...colorData, variants: updatedVariants })
+        }}
       />
     </>
   )
