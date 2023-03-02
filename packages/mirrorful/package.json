@@ -1,6 +1,6 @@
 {
   "name": "mirrorful",
-  "version": "3.0.1",
+  "version": "3.0.4",
   "description": "Simple, open-source design system infrastructure.",
   "keywords": [
     "mirrorful",
@@ -16,6 +16,7 @@
     "build": "tsc --build",
     "local": "rm -rf ./dist; tsc --build; cross-env NODE_ENV=development node ./dist/cli/index.js",
     "prepub": "rm -rf ./dist; npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..;",
+    "release:patch": "rm -rf ./dist; npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm publish;",
     "testprod": "rm -rf ./dist; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm link; echo '‼️ Now go to a test project and run npm link mirrorful; yarn run mirrorful'"
   },
   "repository": {
