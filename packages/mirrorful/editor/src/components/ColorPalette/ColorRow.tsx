@@ -8,19 +8,7 @@ import {
   Stack,
   Text,
   useDisclosure,
-  Badge,
   Heading,
-  Divider,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  IconButton,
-  Icon,
   Link,
   Checkbox,
 } from '@chakra-ui/react'
@@ -92,8 +80,6 @@ export function ColorRow({
   onSetAsPrimary: () => void
   onSetAsSecondary: () => void
 }) {
-  // const colorScale = generateDefaultColorShades(colorData.baseColor)
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     isOpen: isColorNameModalOpen,
     onOpen: onColorNameModalOpen,
@@ -196,16 +182,6 @@ export function ColorRow({
         onUpdateColorName={(newName: string) => {
           onUpdateColorData({ ...colorData, name: newName })
         }}
-      />
-      <EditColorModal
-        isOpen={isOpen}
-        onClose={(updatedColorData?: TColorData) => {
-          if (updatedColorData) {
-            onUpdateColorData(updatedColorData)
-          }
-          onClose()
-        }}
-        initialColorData={colorData}
       />
       <AddVariantModal
         isOpen={isAddVariantModalOpen}
