@@ -1,4 +1,5 @@
 import { ColorRow } from './ColorRow'
+import { AddColorRow } from './AddColorRow'
 import { TColorData } from '../../types'
 import {
   Button,
@@ -23,8 +24,7 @@ export function ColorPaletteSection({
   function handleAddColorCss () {
     const cssObj = {
       padding: '18px 0',
-      marginTop: '0',
-      opacity: '0.4'
+      marginTop: '0'
     }
     if(colors.length > 0)
       cssObj.marginTop = 'var(--chakra-space-32)'
@@ -97,13 +97,7 @@ export function ColorPaletteSection({
           css={handleAddColorCss}
           onClick={() => onOpen()}
         >
-            <ColorRow
-              colorData={{ name: 'Click to add color...', base: '#EEE', isPrimary: false, isSecondary: false }}
-              onUpdateColorData={() => {}}
-              onDeleteColorData={() => {}}
-              onSetAsPrimary={() => {}}
-              onSetAsSecondary={() => {}}
-            />
+            <AddColorRow backgroundColorString='#fff'/>
         </Box>
       </Box>
       <EditColorModal
