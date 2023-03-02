@@ -371,7 +371,7 @@ export function ColorRow({
             ))}
           </Box>
         </Box>
-        <Stack css={{ marginLeft: '32px' }}>
+        <Stack css={{ marginLeft: '32px', width: '188px' }}>
           <Button
             css={{ marginTop: '16px' }}
             backgroundColor={colorData.base}
@@ -394,19 +394,21 @@ export function ColorRow({
           </Button>
           <Button
             leftIcon={<Icon as={FiAward} />}
+            isDisabled={colorData.isPrimary}
             onClick={() => {
               onSetAsPrimary()
             }}
           >
-            Set as Primary
+            {colorData.isPrimary ? 'Already Primary': 'Set as Primary'}
           </Button>
           <Button
             leftIcon={<Icon as={FiBookmark} />}
+            isDisabled={colorData.isSecondary}
             onClick={() => {
               onSetAsSecondary()
             }}
           >
-            Set as Secondary
+            {colorData.isSecondary ? 'Already Secondary': 'Set as Secondary'}
           </Button>
         </Stack>
       </Box>
