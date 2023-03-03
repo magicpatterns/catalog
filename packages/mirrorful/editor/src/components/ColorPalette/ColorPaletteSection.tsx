@@ -82,17 +82,16 @@ export function ColorPaletteSection({
           if (colorData) {
             const newColors = [...colors]
             // Here, we are be checking if there are multiple instances of the colour, each having an incremented number...
-            const existingColorRegex = new RegExp("(" + colorData.name + ")(?: ([0-9]+))?")
+            const existingColorRegex:RegExp = new RegExp("(" + colorData.name + ")(?: ([0-9]+))?")
             // The string that will be finally assigned as a color name:
-            let finalName = ''
+            let finalName:string = ''
             // The maximum number that will be incremented to in the event of multiple colors of the same name
-            let maxNum = 0
+            let maxNum:number = 0
 
             // Iterate the color list:
             newColors.map((col) => {
-                // const existingRegex = new RegExp("(" + newName + ")(?: ([0-9]+))?")
                 // Do a regex check to find both the color name, and it's number
-                let match = col.name.match(existingColorRegex)
+                let match: RegExpMatchArray | null = col.name.match(existingColorRegex)
 
                 // If we have a match, construct the (incremented) final color name
                 if(match)
@@ -107,11 +106,9 @@ export function ColorPaletteSection({
                         finalName = colorData.name + ' 2'
                 }
             })
-            
-            // Lastly, construct the final string and assign it to the colorData.name
-            finalName = finalName === '' ? colorData.name : finalName
-            colorData.name = finalName
-            
+            // Lastly, construct the final string and assign it to the colorData.name if it's not blank
+            colorData.name = finalName === '' ? colorData.name : finalName
+
             newColors.push(colorData)
 
             onUpdateColors(newColors)
