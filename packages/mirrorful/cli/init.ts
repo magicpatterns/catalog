@@ -4,8 +4,8 @@ import { PackageManager } from './helpers/get-pkg-manager'
 import { isWriteable } from './helpers/is-writeable'
 import { makeDir } from './helpers/make-dir'
 import spawn from 'cross-spawn'
-import { findNodeModulesPath } from './helpers/find-node-modules'
 import fs from 'fs'
+const { getInstalledPath } = require('get-installed-path')
 
 export async function init({
   appPath,
@@ -28,7 +28,16 @@ export async function init({
     process.exit(1)
   }
 
+  // // HACK: if a src file exists, plop it in src/mirrorful
+  // try {
+  //   await fs.promises.access(`./src`, fs.constants.F_OK)
+  //   await makeDir('./src/mirrorful')
+  // } catch (e) {
+  //   if (verbose) {
+  //     console.log('No src file found: ', e)
+  //   }
   await makeDir('.mirrorful')
+  //}
 
   const port = 5050 // don't hard code this
 
@@ -41,22 +50,23 @@ export async function init({
     // just run the editor in its own directory
     process.chdir(`editor`)
   } else {
-    // find where the node_modules folder is
-    const nodeModulesPath = findNodeModulesPath()
-    if (nodeModulesPath) {
-      try {
-        await fs.promises.access(`next.config.js`, fs.constants.F_OK)
-        isUsingNextJs = true
-      } catch (e) {
-        if (verbose) {
-          console.log('Non-mirrorful next.config.js not found: ', e)
-        }
-        isUsingNextJs = false
-      }
-      process.chdir(`${nodeModulesPath}/mirrorful/editor`)
+    const installedPath = await getInstalledPath('mirrorful')
+    if (verbose) {
+      console.log('Installed path', installedPath)
+    }
+    try {
+      await fs.promises.access(`next.config.js`, fs.constants.F_OK)
+      isUsingNextJs = true
+    } catch (e) {
       if (verbose) {
-        console.log('New working directory:', process.cwd())
+        console.log('Non-mirrorful next.config.js not found: ', e)
       }
+      isUsingNextJs = false
+    }
+    // Change directory to be the editor
+    process.chdir(`${installedPath}/editor`)
+    if (verbose) {
+      console.log('New working directory:', process.cwd())
     }
   }
 

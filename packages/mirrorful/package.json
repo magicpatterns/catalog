@@ -1,6 +1,6 @@
 {
   "name": "mirrorful",
-  "version": "3.0.6",
+  "version": "3.0.9",
   "description": "Simple, open-source design system infrastructure.",
   "keywords": [
     "mirrorful",
@@ -15,6 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --build",
     "local": "rm -rf ./dist; tsc --build; cross-env NODE_ENV=development node ./dist/cli/index.js",
+    "local:prod": "rm -rf ./dist; tsc --build; cross-env node ./dist/cli/index.js",
     "prepub": "rm -rf ./dist; npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..;",
     "release:patch": "rm -rf ./dist; npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm publish;",
     "testprod": "rm -rf ./dist; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm link; echo '‼️ Now go to a test project and run npm link mirrorful; yarn run mirrorful'"
@@ -47,6 +48,7 @@
     "feather-icons-react": "^0.6.2",
     "framer-motion": "^9.0.4",
     "fs": "^0.0.1-security",
+    "get-installed-path": "^4.0.8",
     "lottie-react": "^2.4.0",
     "next": "^12.0.0",
     "path": "^0.12.7",
