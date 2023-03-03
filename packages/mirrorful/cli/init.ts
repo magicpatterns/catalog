@@ -50,12 +50,9 @@ export async function init({
     // just run the editor in its own directory
     process.chdir(`editor`)
   } else {
-    const absolutePathToMirrorfulIndexJS = await getInstalledPath('mirrorful')
+    const installedPath = await getInstalledPath('mirrorful')
     if (verbose) {
-      console.log(
-        'Absolute path to mirrorful index.js:',
-        absolutePathToMirrorfulIndexJS
-      )
+      console.log('Installed path', installedPath)
     }
     try {
       await fs.promises.access(`next.config.js`, fs.constants.F_OK)
@@ -67,7 +64,7 @@ export async function init({
       isUsingNextJs = false
     }
     // Change directory to be the editor
-    process.chdir(`${absolutePathToMirrorfulIndexJS}/editor`)
+    process.chdir(`${installedPath}/editor`)
     if (verbose) {
       console.log('New working directory:', process.cwd())
     }
