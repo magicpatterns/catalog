@@ -75,8 +75,7 @@ export function Onboarding({
         initialPalette={palette}
         onUpdatePalette={(newPalette: TColorData[]) => {
           newPalette.map((color) => {
-            let shades = generateDefaultColorShades(color.baseColor)
-            color.variants = shades
+            color.variants = generateDefaultColorShades(color.baseColor)
           })
           handleExport(primaryColor, primaryName, newPalette)
           setPalette(newPalette)
