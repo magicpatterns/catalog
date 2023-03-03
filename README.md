@@ -114,7 +114,7 @@ Example:
 Example:
 
 ```javascript
-<button backgroundColor={{ Tokens.primary.base}}>Click here</button>
+<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
 ```
 
 ## 🤝 Component Library Agnostic
