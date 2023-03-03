@@ -32,7 +32,7 @@ export function AddColorSkeleton ({ backgroundColorString, numberOfMockVariants 
     
     const mockVariants = []
 
-    for(let i=0; i < numberOfMockVariants; i++)
+    for(let i:number = 0; i < numberOfMockVariants; i++)
     {
         mockVariants.push(i)    
     }
