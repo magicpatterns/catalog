@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img width="300" src="./assets/logo-light-mode.png" alt="Mirrorful">
+  <img width="300" src="./../../assets/logo-light-mode.png" alt="Mirrorful">
 </h1>
 <p align="center">
   <p align="center">Create the building blocks of your app with simple, open-source design system infrastructure.</p>
@@ -32,7 +32,10 @@
   </a>
 </h4>
 
-<img src="./assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
+<img src="./../../assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
+
+**Read this in other languages**: <kbd>[<img title="English" alt="English language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="22">](i18n/README.en.md)</kbd>
+<kbd>[<img title="German" alt="German language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/de.svg" width="22">](i18n/README.de.md)</kbd>
 
 **[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app as CSS Variables or JSON. Take 5 minutes today, design at scale forever.
 
@@ -91,19 +94,33 @@ After configuring your theme in the editor, you can export it to be used by your
 
 We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`
 
-You can then either consume your new tokens through CSS Variables or Javascript constants!
-
 **Using CSS Variables**
 
-<img src="./packages/mirrorful/editor/public/css_vars_example.png" width="400" alt="CSS Variables Example" />
+Example:
+
+```css
+.primary-button {
+  background-color: var(--color-primary);
+}
+
+.primary-button:hover {
+  background-color: var(--color-primary-hover);
+}
+```
 
 **Using Javascript Constants**
 
-<img src="./packages/mirrorful/editor/public/token_example.png" width="400" alt="Javascript Constants Example" />
+Example:
+
+```javascript
+<button backgroundColor={{ Tokens.primary.base}}>Click here</button>
+```
 
 ## 🤝 Component Library Agnostic
 
 We strive to be component library agnostic. Whether you're using Material UI, Chakra UI, Tailwind, Ant Design, or even your in-house library, Mirrorful hooks right in.
+
+⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory.
 
 Check out our examples:
 
@@ -129,13 +146,11 @@ We are working hard to make Mirrorful more extensive. Need any integrations or w
 
 Mirrorful takes security issues very seriously. If you have any concerns about Mirrorful or believe you have uncovered a vulnerability, please get in touch via the e-mail address [support@mirrorful.io](mailto:support@mirrorful.io). In the message, try to provide a description of the issue and ideally a way of reproducing it. The team will get back to you **immediately**.
 
-Please do not file GitHub issues or post on our public forum for security vulnerabilities as they are public.
-
 ## ⭐ Stay Up-to-Date
 
 There are a lot of new features coming very frequently. Star this repo to stay up to date.
 
-<img width="300" src="./assets/creative.png" alt="Charlie Painting">
+<img width="300" src="./../../assets/tower.png" alt="Build">
 
 ## 🛠️ Contributing
 
@@ -151,16 +166,12 @@ No matter the PR, all the Github avatars of contributors will be added to the Mi
 
 ## 🪞 Contributors
 
-[//]: contributor-faces
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-<a href="https://github.com/alexdanilowicz"><img src="https://avatars.githubusercontent.com/u/29822597?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/teddarific"><img src="https://avatars.githubusercontent.com/u/16343600" width="50" height="50" alt=""/></a> <a href="https://github.com/isabellytubao"><img src="https://avatars.githubusercontent.com/u/113177368" width="50" height="50" alt=""/></a> <a href="https://github.com/gfang200"><img src="https://avatars.githubusercontent.com/u/13005240?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/sallyxu"><img src="https://avatars.githubusercontent.com/u/1229627" width="50" height="50" alt=""/></a>
+<a href="https://github.com/alexdanilowicz"><img src="https://avatars.githubusercontent.com/u/29822597?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/teddarific"><img src="https://avatars.githubusercontent.com/u/16343600" width="50" height="50" alt=""/></a> <a href="https://github.com/isabellytubao"><img src="https://avatars.githubusercontent.com/u/113177368" width="50" height="50" alt=""/></a> <a href="https://github.com/gfang200"><img src="https://avatars.githubusercontent.com/u/13005240?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/sallyxu"><img src="https://avatars.githubusercontent.com/u/1229627" width="50" height="50" alt=""/></a> <a href="https://github.com/zachsnoek"><img src="https://avatars.githubusercontent.com/u/26049962" width="50" height="50" alt=""/></a>
+<a href="https://github.com/tobiasdossinger"><img src="https://avatars.githubusercontent.com/u/33021996?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/lagneshthakur"><img src="https://avatars.githubusercontent.com/u/13376802?v=4" width="50" height="50" alt=""/></a>
 
 ## 🌎 Translations
 
-Mirrorful is currently available in English and coming soon in Spanish. Help us translate our documentation and UI to your language!
+Mirrorful is currently available in English and [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md). Help us translate our documentation and UI to your language!
 
 You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).
