@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img width="300" src="./../../assets/logo-light-mode.png" alt="Mirrorful">
+  <img width="300" src="./assets/logo-light-mode.png" alt="Mirrorful">
 </h1>
 <p align="center">
   <p align="center">Create the building blocks of your app with simple, open-source design system infrastructure.</p>
@@ -32,7 +32,7 @@
   </a>
 </h4>
 
-<img src="./../../assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
+<img src="./assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
 
 **Read this in other languages**: <kbd>[<img title="English" alt="English language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="22">](i18n/README.en.md)</kbd>
 <kbd>[<img title="German" alt="German language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/de.svg" width="22">](i18n/README.de.md)</kbd>
@@ -113,7 +113,7 @@ Example:
 Example:
 
 ```javascript
-<button backgroundColor={{ Tokens.primary.base}}>Click here</button>
+<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
 ```
 
 ## 🤝 Component Library Agnostic
@@ -150,7 +150,7 @@ Mirrorful takes security issues very seriously. If you have any concerns about M
 
 There are a lot of new features coming very frequently. Star this repo to stay up to date.
 
-<img width="300" src="./../../assets/tower.png" alt="Build">
+<img width="300" src="./assets/tower.png" alt="Build">
 
 ## 🛠️ Contributing
 
