@@ -31,7 +31,9 @@ export function Onboarding({
       {
         name: primaryColorName,
         baseColor: primaryColorHex,
-        variants: {},
+        variants: {
+          '500': primaryColorHex,
+        },
       },
       ...latestPalette,
     ]
