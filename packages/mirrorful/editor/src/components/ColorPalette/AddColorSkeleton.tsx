@@ -1,35 +1,15 @@
 import {
     Box,
-    Button,
-    Stack,
     Text,
-    useDisclosure,
-    Badge,
     Heading,
-    Divider,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
-    IconButton,
-    Icon,
   } from '@chakra-ui/react'
-  import tinycolor from 'tinycolor2'
-  import { generateDefaultColorShades, handleInvalidColor } from './utils'
-  import { TColorData, TColorVariant } from 'types'
-
-  // Accepts: backgroundColorString, a valid CSS color string, eg '#EEE' or 'steel-blue', which sets the color of row elements.  An invalid color results in random assignment
-export function AddColorSkeleton ({ backgroundColorString, numberOfMockVariants }: { backgroundColorString: string, numberOfMockVariants: number } ) {
+  
+  // Accepts: numberOfMockVariants - how many variant squares you want to see after the base color...
+export function AddColorSkeleton ({ numberOfMockVariants }: { numberOfMockVariants: number } ) {
 
     // Check to ensure input color is valid, adjust if not.
-    backgroundColorString = handleInvalidColor(backgroundColorString)
-
-    const colorScale = generateDefaultColorShades(backgroundColorString)
-    
+    // Not sure how to set this Chakra grey.500, but did color pick, and this is the value:
+    const backgroundColorString:string = '#edf2f7'
     const mockVariants = []
 
     for(let i:number = 0; i < numberOfMockVariants; i++)
@@ -46,7 +26,7 @@ export function AddColorSkeleton ({ backgroundColorString, numberOfMockVariants 
                 width: 110,
                 height: 110,
                 padding: '8px',
-                color: tinycolor(backgroundColorString).isDark() ? 'white' : 'black',
+                color: 'black',
                 borderRadius: 8,
                 marginRight: '24px',
                 border: '1px solid gray',
@@ -68,7 +48,7 @@ export function AddColorSkeleton ({ backgroundColorString, numberOfMockVariants 
         <Box css={{ display: 'flex', opacity: '0.4' }}>
             <Box css={{ width: 350, paddingRight: '64px' }}>
                 <Heading fontWeight="extrabold" fontSize={28}>
-                Click to add color...
+                  Click to add color...
                 </Heading>
             </Box>
         {backgroundColorString && (
@@ -79,9 +59,7 @@ export function AddColorSkeleton ({ backgroundColorString, numberOfMockVariants 
               height: 240,
               padding: '24px',
               borderRadius: 8,
-              color: tinycolor(backgroundColorString).isDark()
-                ? 'white'
-                : 'black',
+              color: 'black',
               border: '1px solid gray',
               
             }}

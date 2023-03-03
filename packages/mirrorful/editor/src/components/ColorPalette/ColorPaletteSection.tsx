@@ -21,16 +21,6 @@ export function ColorPaletteSection({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   
-  function handleAddColorCss () {
-    const cssObj = {
-      padding: '18px 0',
-      marginTop: '0'
-    }
-    if(colors.length > 0)
-      cssObj.marginTop = 'var(--chakra-space-32)'
-    return cssObj
-  }
-
   return (
     <Box>
       <Heading fontSize={36} fontWeight="black">
@@ -70,8 +60,10 @@ export function ColorPaletteSection({
           ))}
         </Stack>
 
-        <Box css={ handleAddColorCss } onClick={() => onOpen()}>
-          <AddColorSkeleton backgroundColorString='#ddd' numberOfMockVariants={4}/>
+        <Box css={{ padding: '18px 0',
+            marginTop: colors.length > 0 ? '32px' : '0'
+          }} onClick={() => onOpen()}>
+          <AddColorSkeleton numberOfMockVariants={4}/>
         </Box>
       </Box>
       <EditColorModal
