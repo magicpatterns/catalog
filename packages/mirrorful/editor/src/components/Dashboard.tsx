@@ -66,7 +66,11 @@ export function Dashboard() {
   }
 
   return (
-    <Box>
+    <Box
+      css={{
+        marginTop: '25px',
+      }}
+    >
       <Box
         css={{
           position: 'fixed',
