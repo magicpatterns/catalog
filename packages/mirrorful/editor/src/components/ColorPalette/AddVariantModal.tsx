@@ -13,7 +13,7 @@ import {
   Box,
   Checkbox,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { TColorVariant } from 'types'
 
 export function AddVariantModal({
@@ -35,6 +35,12 @@ export function AddVariantModal({
     onAddVariant(variant)
     onClose()
   }
+
+  useEffect(() => {
+    if (!isOpen) {
+      setVariant({ name: '', color: '', isBase: false })
+    }
+  }, [isOpen])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">

@@ -172,11 +172,8 @@ export function ColorRow({
                 }}
                 onDeleteVariant={() => {
                   const updatedVariants = { ...colorData.variants }
-                  console.log(updatedVariants)
-                  console.log(variant)
                   delete updatedVariants[variant]
 
-                  console.log(updatedVariants)
                   const updatedColorData = {
                     ...colorData,
                     variants: updatedVariants,
