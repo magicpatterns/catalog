@@ -81,10 +81,37 @@ export function ColorPaletteSection({
         onClose={(colorData?: TColorData) => {
           if (colorData) {
             const newColors = [...colors]
-            if (newColors.find((c) => c.name === colorData.name)) {
-              colorData.name = colorData.name += ' 2'
-            }
+            // Here, we are be checking if there are multiple instances of the colour, each having an incremented number...
+            const existingColorRegex = new RegExp("(" + colorData.name + ")(?: ([0-9]+))?")
+            // The string that will be finally assigned as a color name:
+            let finalName = ''
+            // The maximum number that will be incremented to in the event of multiple colors of the same name
+            let maxNum = 0
 
+            // Iterate the color list:
+            newColors.map((col) => {
+                // const existingRegex = new RegExp("(" + newName + ")(?: ([0-9]+))?")
+                // Do a regex check to find both the color name, and it's number
+                let match = col.name.match(existingColorRegex)
+
+                // If we have a match, construct the (incremented) final color name
+                if(match)
+                {
+                    // match[2] represents the number this iteration color has previously been incremented to.  If it's incremented value is bigger than the last iteration, assign it to maxNum
+                    maxNum = parseInt(match[2])+1 > maxNum ? parseInt(match[2])+1 : maxNum
+                    
+                    // If we have zero, it means the color name exists, but hasn't yet been incremented, so we assign 2.  Otherwise, assign the max number
+                    if (maxNum > 0)
+                        finalName = colorData.name + ' ' + maxNum
+                    else
+                        finalName = colorData.name + ' 2'
+                }
+            })
+            
+            // Lastly, construct the final string and assign it to the colorData.name
+            finalName = finalName === '' ? colorData.name : finalName
+            colorData.name = finalName
+            
             newColors.push(colorData)
 
             onUpdateColors(newColors)
