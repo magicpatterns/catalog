@@ -21,11 +21,13 @@ export function EditVariantModal({
   onClose,
   initialVariant,
   onUpdateVariant,
+  onDeleteVariant,
 }: {
   isOpen: boolean
   onClose: () => void
   initialVariant: TColorVariant
   onUpdateVariant: (newVariant: TColorVariant) => void
+  onDeleteVariant: () => void
 }) {
   const [variant, setVariant] = useState<TColorVariant>(initialVariant)
 
@@ -79,7 +81,16 @@ export function EditVariantModal({
           </Box>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={handleSave}>Save</Button>
+          <Button
+            onClick={handleSave}
+            css={{ marginRight: '12px' }}
+            colorScheme="green"
+          >
+            Save
+          </Button>
+          <Button onClick={onDeleteVariant} colorScheme="red">
+            Delete
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

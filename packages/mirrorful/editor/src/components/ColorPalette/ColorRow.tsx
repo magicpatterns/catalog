@@ -21,9 +21,11 @@ import { AddVariantModal } from './AddVariantModal'
 function VariantSquare({
   variant,
   onUpdateVariant,
+  onDeleteVariant,
 }: {
   variant: TColorVariant
   onUpdateVariant: (newVariant: TColorVariant) => void
+  onDeleteVariant: () => void
 }) {
   const [isHovering, setIsHovering] = useState<boolean>(false)
   const {
@@ -62,6 +64,7 @@ function VariantSquare({
         onClose={onEditVariantModalClose}
         initialVariant={variant}
         onUpdateVariant={onUpdateVariant}
+        onDeleteVariant={onDeleteVariant}
       />
     </Box>
   )
@@ -162,6 +165,20 @@ export function ColorRow({
                     !newVariant.isBase &&
                     updatedColorData.baseColor === newVariant.color
                   ) {
+                    delete updatedColorData.baseColor
+                  }
+
+                  onUpdateColorData(updatedColorData)
+                }}
+                onDeleteVariant={() => {
+                  const updatedVariants = { ...colorData.variants }
+                  delete updatedVariants[variant]
+
+                  const updatedColorData = {
+                    ...colorData,
+                    variants: updatedVariants,
+                  }
+                  if (colorData.variants[variant] === colorData.baseColor) {
                     delete updatedColorData.baseColor
                   }
 
