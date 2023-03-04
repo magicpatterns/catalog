@@ -1,0 +1,25 @@
+{
+  "name": "nuxt-3-example",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
+    "lint:fix": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore ."
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@nuxt/eslint-config": "^0.1.1",
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "mirrorful": "^3.0.15",
+    "nuxt": "^3.2.3"
+  },
+  "dependencies": {
+    "eslint": "^8.35.0",
+    "eslint-plugin-nuxt": "^4.0.0"
+  }
+}
