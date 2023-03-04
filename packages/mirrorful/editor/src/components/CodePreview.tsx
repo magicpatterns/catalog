@@ -20,11 +20,11 @@ export function CodePreview({
             </Highlight>
             <Tooltip placement='top' closeDelay={500} hasArrow label={tooltip}>
                 <CopyIcon style={{color: 'white'}} className='highlight-copy' cursor={'pointer'} onClick={async () => {
-                setTooltip('Copied');
-                setTimeout(()=>{
-                    setTooltip('Copy');
-                },1000);
-                await navigator.clipboard.writeText(text);
+                    await navigator.clipboard.writeText(text);
+                    setTooltip('Copied');
+                    setTimeout(()=>{
+                        setTooltip('Copy');
+                    },1000);
                 }}/>
             </Tooltip>
       </div>
