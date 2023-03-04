@@ -20,7 +20,6 @@ export function CodePreview({
             </Highlight>
             <Tooltip placement='top' closeDelay={500} hasArrow label={tooltip}>
                 <CopyIcon style={{color: 'white'}} className='highlight-copy' cursor={'pointer'} onClick={async () => {
-                console.log(`copied '${text}' from icon`);
                 setTooltip('Copied');
                 setTimeout(()=>{
                     setTooltip('Copy');
