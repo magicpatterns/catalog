@@ -22,7 +22,7 @@ export function ColorPaletteSection({
 
   return (
     <Box>
-      <Heading fontSize={36} fontWeight="black">
+      <Heading fontSize={48} fontWeight="black">
         Color Palette
       </Heading>
       <Text
