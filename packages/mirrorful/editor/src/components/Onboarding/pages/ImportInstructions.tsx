@@ -105,7 +105,7 @@ export function ImportInstructions({
       >
         <Tabs>
           <TabList>
-            <Tab>HTML / SCSS</Tab>
+            <Tab>CSS / SCSS</Tab>
             <Tab>Javascript / Typescript</Tab>
           </TabList>
 
@@ -115,12 +115,20 @@ export function ImportInstructions({
                 <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
                 <Code>theme.css</Code>
               </Text>
-              <CodePreview language='javascript' textClass='code-snippet' text={`import './.mirrorful/theme.css'`} />
+              <CodePreview
+                language="javascript"
+                textClass="code-snippet"
+                text={`import './.mirrorful/theme.css'`}
+              />
               <Text css={{ marginTop: 12, marginBottom: 8 }}>
                 <span style={{ fontWeight: 'bold' }}>2.</span> Your CSS
                 Variables can now be accessed anywhere in your app!
               </Text>
-              <CodePreview language='css' textClass='code-snippet' text={`.primary-button {\n    background-color: var(--color-primary);\n}\n\n.primary-button:hover {\n    background-color: var(--color-primary-hover);\n}`} />
+              <CodePreview
+                language="css"
+                textClass="code-snippet"
+                text={`.primary-button {\n    background-color: var(--color-primary);\n}\n\n.primary-button:hover {\n    background-color: var(--color-primary-hover);\n}`}
+              />
             </TabPanel>
             <TabPanel>
               <Text css={{ marginBottom: 8 }}>
@@ -128,13 +136,21 @@ export function ImportInstructions({
                 <Code>Tokens</Code>
               </Text>
 
-              <CodePreview language='javascript' textClass='code-snippet' text={`import { Tokens } from './.mirrorful/theme'`} />
+              <CodePreview
+                language="javascript"
+                textClass="code-snippet"
+                text={`import { Tokens } from './.mirrorful/theme'`}
+              />
 
               <Text css={{ marginTop: 12, marginBottom: 8 }}>
                 <span style={{ fontWeight: 'bold' }}>2.</span> Use your tokens
                 anywhere as constants!
               </Text>
-              <CodePreview language='javascript' textClass='code-snippet' text={`<Button\n   style={{ backgroundColor: Tokens.primary.base}}\n   _hover={{ backgroundColor: Tokens.primary.hover }}\n   _active={{ backgroundColor: Tokens.primary.active }}\n>\n   Click here\n</Button>`} />
+              <CodePreview
+                language="javascript"
+                textClass="code-snippet"
+                text={`<button\n   style={{ backgroundColor: Tokens.primary.base}}\n> Click here\n</button>`}
+              />
             </TabPanel>
           </TabPanels>
         </Tabs>

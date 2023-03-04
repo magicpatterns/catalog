@@ -346,11 +346,3 @@ body {
   padding: 8px;
   font-size: 12px;
 }
-
-.highlight-copy {
-  position: absolute;
-  display: inline;
-  right: 0;
-  top: 0;
-  margin: 7px;
-}
