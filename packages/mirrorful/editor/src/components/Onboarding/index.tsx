@@ -1,6 +1,7 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from 'components/ColorPalette/utils'
 import { useState } from 'react'
+import { defaultTypography } from 'store/migrations'
 import { TColorData } from 'types'
 import { OnboardingCard } from './OnboardingCard'
 import { OnboardingContainer } from './OnboardingContainer'
@@ -31,7 +32,7 @@ export function Onboarding({
       {
         name: primaryColorName,
         baseColor: primaryColorHex,
-        variants: {},
+        variants: generateDefaultColorShades(primaryColorHex),
       },
       ...latestPalette,
     ]
@@ -40,6 +41,7 @@ export function Onboarding({
       method: 'POST',
       body: JSON.stringify({
         colorData: colors,
+        typography: defaultTypography,
       }),
     })
   }
@@ -74,6 +76,11 @@ export function Onboarding({
       <OtherColors
         initialPalette={palette}
         onUpdatePalette={(newPalette: TColorData[]) => {
+          newPalette.map((color) => {
+            if (color.baseColor) {
+              color.variants = generateDefaultColorShades(color.baseColor)
+            }
+          })
           handleExport(primaryColor, primaryName, newPalette)
           setPalette(newPalette)
         }}

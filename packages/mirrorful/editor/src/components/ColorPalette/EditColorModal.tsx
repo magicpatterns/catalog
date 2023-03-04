@@ -59,7 +59,9 @@ export function EditColorModal({
     onClose({
       name,
       baseColor: base,
-      variants: {},
+      variants: {
+        '500': base,
+      },
     })
   }
 
