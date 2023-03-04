@@ -3130,10 +3130,10 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.8.tgz"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
 
-mirrorful@^2.0.23:
-  version "2.0.23"
-  resolved "https://registry.yarnpkg.com/mirrorful/-/mirrorful-2.0.23.tgz#1121cf4e48fa279d28fb56a940f3c6e611aaed06"
-  integrity sha512-Jk73di+TiLmatcIMbpN6G6spYwUh/J2fa5v+4a4Bvd13LeC3RE0bFtSG2QikxII4w1Bebn7TWTji7RNlHcrITw==
+mirrorful@^3.0.15:
+  version "3.0.15"
+  resolved "https://registry.yarnpkg.com/mirrorful/-/mirrorful-3.0.15.tgz#57467c60773b36508adeba3cd947e2f3ae409193"
+  integrity sha512-VscKjpqcqt15R6cSB42y0u9h+oLcVidQ8mHVk2pWl3qBlxN7rN8Eia+orjPukTGQZXM47PQrPdwKVJID5pVH8g==
   dependencies:
     "@chakra-ui/icons" "^2.0.17"
     "@chakra-ui/react" "^2.5.1"
