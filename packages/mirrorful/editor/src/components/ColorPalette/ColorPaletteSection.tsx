@@ -20,7 +20,7 @@ export function ColorPaletteSection({
   onUpdateColors: (newColors: TColorData[]) => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  
+
   return (
     <Box>
       <Heading fontSize={48} fontWeight="black">
@@ -60,10 +60,14 @@ export function ColorPaletteSection({
           ))}
         </Stack>
 
-        <Box css={{ padding: '18px 0',
-            marginTop: colors.length > 0 ? '32px' : '0'
-          }} onClick={() => onOpen()}>
-          <AddColorSkeleton numberOfMockVariants={4}/>
+        <Box
+          css={{
+            padding: '18px 0',
+            marginTop: colors.length > 0 ? '32px' : '0',
+          }}
+          onClick={() => onOpen()}
+        >
+          <AddColorSkeleton numberOfMockVariants={4} />
         </Box>
       </Box>
       <EditColorModal
