@@ -1,20 +1,28 @@
 export type TColorData = {
   name: string
-  base: string
-  hover?: string
-  active?: string
-  shades?: {
-    '50': string
-    '100': string
-    '200': string
-    '300': string
-    '400': string
-    '500': string
-    '600': string
-    '700': string
-    '800': string
-    '900': string
+  baseColor?: string
+  variants: {
+    [key: string]: string
   }
-  isPrimary: boolean
-  isSecondary: boolean
+}
+
+export type TColorVariant = {
+  name: string
+  color: string
+  isBase: boolean
+}
+
+export type TFontSizeVariant = {
+  name: string
+  value: number
+  unit: 'px' | 'rem' | 'em'
+}
+
+export type TTypographyData = {
+  fontSizes: TFontSizeVariant[]
+}
+
+export type TTokens = {
+  colorData: TColorData[]
+  typography: TTypographyData
 }

@@ -22,7 +22,7 @@ export function ColorPaletteSection({
 
   return (
     <Box>
-      <Heading fontSize={36} fontWeight="black">
+      <Heading fontSize={48} fontWeight="black">
         Color Palette
       </Heading>
       <Text
@@ -52,29 +52,6 @@ export function ColorPaletteSection({
               }}
               onDeleteColorData={() => {
                 const newColors = colors.filter((c) => c.name !== color.name)
-
-                onUpdateColors(newColors)
-              }}
-              onSetAsPrimary={() => {
-                const newColors = [...colors]
-
-                const colorIndex = newColors.findIndex(
-                  (ec) => ec.name === color.name
-                )
-
-                newColors.forEach((color) => (color.isPrimary = false))
-                newColors[colorIndex].isPrimary = true
-                onUpdateColors(newColors)
-              }}
-              onSetAsSecondary={() => {
-                const newColors = [...colors]
-
-                const colorIndex = newColors.findIndex(
-                  (ec) => ec.name === color.name
-                )
-
-                newColors.forEach((color) => (color.isSecondary = false))
-                newColors[colorIndex].isSecondary = true
 
                 onUpdateColors(newColors)
               }}
