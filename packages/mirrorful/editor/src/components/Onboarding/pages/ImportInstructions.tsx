@@ -11,13 +11,10 @@ import {
   Text,
   Code,
 } from '@chakra-ui/react'
-import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
 import { generateDefaultColorShades } from 'components/ColorPalette/utils'
-import { useState } from 'react'
 import tinycolor from 'tinycolor2'
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import { NUMBER_OF_STEPS_IN_NEW_FLOW } from '../constants'
-import Highlight from 'react-highlight'
 import { CodePreview } from 'components/CodePreview'
 
 export function ImportInstructions({

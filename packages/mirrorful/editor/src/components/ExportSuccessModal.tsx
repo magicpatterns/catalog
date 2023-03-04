@@ -1,5 +1,4 @@
 import {
-  Checkbox,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -9,11 +8,6 @@ import {
   ModalCloseButton,
   Text,
   Button,
-  FormControl,
-  Input,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
   Box,
   Icon,
   Code,
@@ -22,15 +16,10 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  Link,
-  IconButton,
+  Link
 } from '@chakra-ui/react'
-import { TColorData } from 'types'
-import { useState } from 'react'
 import { FiCheckCircle } from 'react-icons/fi'
-import Highlight from 'react-highlight'
 import 'highlight.js/styles/atom-one-dark.css'
-import { CopyIcon } from '@chakra-ui/icons'
 import { CodePreview } from './CodePreview'
 
 export function ExportSuccessModal({
