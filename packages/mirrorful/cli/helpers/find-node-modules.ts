@@ -1,14 +1,14 @@
 import path from 'path'
 import fs from 'fs'
 
-export function findNodeModulesPath() {
+export function findNodeModulesMirrorfulPath() {
   // Get the current working directory
   const cwd = process.cwd()
 
   // Traverse up the directory tree until we find the node_modules directory
   let dir = cwd
   while (dir !== path.parse(dir).root) {
-    const nodeModulesDir = path.join(dir, 'node_modules')
+    const nodeModulesDir = path.join(dir, 'node_modules/mirrorful')
     if (fs.existsSync(nodeModulesDir)) {
       return nodeModulesDir
     }
