@@ -11,13 +11,11 @@ import {
   Text,
   Code,
 } from '@chakra-ui/react'
-import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
 import { generateDefaultColorShades } from 'components/ColorPalette/utils'
-import { useState } from 'react'
 import tinycolor from 'tinycolor2'
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import { NUMBER_OF_STEPS_IN_NEW_FLOW } from '../constants'
-import Highlight from 'react-highlight'
+import { CodePreview } from 'components/CodePreview'
 
 export function ImportInstructions({
   primaryColor,
@@ -107,7 +105,7 @@ export function ImportInstructions({
       >
         <Tabs>
           <TabList>
-            <Tab>HTML / SCSS</Tab>
+            <Tab>CSS / SCSS</Tab>
             <Tab>Javascript / Typescript</Tab>
           </TabList>
 
@@ -117,16 +115,20 @@ export function ImportInstructions({
                 <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
                 <Code>theme.css</Code>
               </Text>
-              <Highlight language="javascript" className="code-snippet">
-                {`import './.mirrorful/theme.css'`}
-              </Highlight>{' '}
+              <CodePreview
+                language="javascript"
+                textClass="code-snippet"
+                text={`import './.mirrorful/theme.css'`}
+              />
               <Text css={{ marginTop: 12, marginBottom: 8 }}>
                 <span style={{ fontWeight: 'bold' }}>2.</span> Your CSS
                 Variables can now be accessed anywhere in your app!
               </Text>
-              <Highlight language="css" className="code-snippet">
-                {`.primary-button {\n    background-color: var(--color-primary);\n}\n\n.primary-button:hover {\n    background-color: var(--color-primary-hover);\n}`}
-              </Highlight>
+              <CodePreview
+                language="css"
+                textClass="code-snippet"
+                text={`.primary-button {\n    background-color: var(--color-primary);\n}\n\n.primary-button:hover {\n    background-color: var(--color-primary-hover);\n}`}
+              />
             </TabPanel>
             <TabPanel>
               <Text css={{ marginBottom: 8 }}>
@@ -134,17 +136,21 @@ export function ImportInstructions({
                 <Code>Tokens</Code>
               </Text>
 
-              <Highlight language="javascript" className="code-snippet">
-                {`import { Tokens } from './.mirrorful/theme'`}
-              </Highlight>
+              <CodePreview
+                language="javascript"
+                textClass="code-snippet"
+                text={`import { Tokens } from './.mirrorful/theme'`}
+              />
 
               <Text css={{ marginTop: 12, marginBottom: 8 }}>
                 <span style={{ fontWeight: 'bold' }}>2.</span> Use your tokens
                 anywhere as constants!
               </Text>
-              <Highlight language="javascript" className="code-snippet">
-                {`<Button\n   style={{ backgroundColor: Tokens.primary.base}}\n   _hover={{ backgroundColor: Tokens.primary.hover }}\n   _active={{ backgroundColor: Tokens.primary.active }}\n>\n   Click here\n</Button>`}
-              </Highlight>
+              <CodePreview
+                language="javascript"
+                textClass="code-snippet"
+                text={`<button\n   style={{ backgroundColor: Tokens.primary.base}}\n> Click here\n</button>`}
+              />
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -99,6 +99,5 @@ export function generatePalette(
 
     nameSet.add(color.name)
   })
-
   return randomizedColors
 }
