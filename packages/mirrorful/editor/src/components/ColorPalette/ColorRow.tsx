@@ -17,6 +17,7 @@ import { EditColorNameModal } from './EditColorNameModal'
 import { useState } from 'react'
 import { EditVariantModal } from './EditVariantModal'
 import { AddVariantModal } from './AddVariantModal'
+import { ColorVariantPlaceholder } from './ColorVariantPlaceholder'
 
 function VariantSquare({
   variant,
@@ -186,6 +187,7 @@ export function ColorRow({
                 }}
               />
             ))}
+            <ColorVariantPlaceholder onClick={() => onAddVariantModalOpen()} />
           </Box>
         </Box>
       </Box>
