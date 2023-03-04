@@ -3,7 +3,7 @@
   <img width="300" src="./../assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
 </h1>
 <p align="center">
-  <p align="center">Erstellen Sie die Bausteine für Ihre Anwendung mit einem einfachen und quelloffenen Designsystem.</p>
+  <p align="center">Erstellen Sie die Bausteine für Ihre Anwendung mit einem einfachen und Open-Source-Designsystem.</p>
 </p>
 
 <h4 align="center">
@@ -35,11 +35,11 @@
 
 <img src="./../assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
 
-**[Mirrorful](https://mirrorful.com)** ist ein einfaches, quelloffenes Designsystem. Installieren Sie Mirrorful, um Farben und andere Design-Token für Ihr Projekt zu generieren. Importieren Sie diese Tokens dann direkt in Ihre App als CSS-Variablen oder JSON. Nehmen Sie sich heute 5 Minuten Zeit und gestalten Sie für Langlebigkeit und Skalierbarkeit.
+**[Mirrorful](https://mirrorful.com)** ist ein einfaches, Open-Source-Designsystem. Installieren Sie Mirrorful, um Farben und andere Design-Token für Ihr Projekt zu generieren. Importieren Sie diese Tokens dann direkt in Ihre App als CSS-Variablen oder JSON. Nehmen Sie sich heute 5 Minuten Zeit und gestalten Sie für Langlebigkeit und Skalierbarkeit.
 
 Erstellen Sie die Bausteine für eine schnelle Frontend-Entwicklung!
 
-- **Starte neue Projekte mit einer single source of truth**
+- **Starte neue Projekte mit einer Single Source of Truth**
 - **Ändere visuell dein Theme**
 - **Generiere Farben**
 - 🔜 **Theme-Vorlagen**
@@ -96,12 +96,25 @@ Sie können dann entweder Ihre neuen Token als CSS-Variablen oder JavaScript-Kon
 
 **Verwenden von CSS-Variablen**
 
-<img src="./packages/mirrorful/editor/public/css_vars_example.png" width="400" alt="Beispiel für CSS-Variablen" />
+Beispiel:
+
+```css
+.primary-button {
+  background-color: var(--color-primary);
+}
+
+.primary-button:hover {
+  background-color: var(--color-primary-hover);
+}
+```
 
 **JavaScript-Konstanten verwenden**
 
-<img src="./packages/mirrorful/editor/public/token_example.png" width="400" alt="Beispiel für JavaScript-Konstanten" />
+Beispiel:
 
+```javascript
+<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
+```
 ## 🤝 Agnostische Komponentenbibliothek
 
 Wir bemühen uns, unabhängig von Komponentenbibliotheken zu sein. Ganz gleich, ob Sie Material UI, Chakra UI, Tailwind, Ant Design oder sogar Ihre eigene Bibliothek verwenden, Mirrorful fügt sich nahtlos ein.
@@ -122,7 +135,7 @@ Suchen Sie ein konkretes Beispiel? [Fragen Sie hier eines an!](https://github.co
 - [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - für alle Bugs und Fehler, auf die Sie bei Mirrorful stoßen.
 - [Twitter](https://twitter.com/mirrorful) - Bleiben Sie auf dem Laufenden über die neuesten Produktaktualisierungen. Teilen Sie Ihre Memes!
 
-## 🏘 Open-source vs. paid
+## 🏘 Open-Source vs. Bezahlt
 
 Dieses Repo ist vollständig MIT-lizenziert, mit Ausnahme derjenigen, die unter dem `ee`-Verzeichnis liegen und Premium-Unternehmensfunktionen enthalten, die eine Mirrorful-Lizenz erfordern. Wir konzentrieren uns derzeit zunächst auf die Entwicklung von Nicht-Unternehmensangeboten, die für die meisten Anwendungsfälle geeignet sein sollten.
 
@@ -136,11 +149,11 @@ Bitte reichen Sie keine GitHub-Probleme ein und posten Sie keine Sicherheitslüc
 
 ## ⭐ Bleiben Sie auf dem Laufenden
 
-Es gibt eine Menge neuer Funktionen, die sehr häufig kommen. Geben Sie diesem Repo einen Stern, um auf dem Laufenden zu bleiben.
+Es gibt eine Menge neuer Funktionen, die sehr häufig erscheinen. Geben Sie diesem Repo eine Stern, um auf dem Laufenden zu bleiben.
 
-<img width="300" src="./../assets/creative.png" alt="Charlie Painting">
+<img width="300" src="../assets/tower.png" alt="Bauen">
 
-## 🛠️ Contributing
+## 🛠️ Mitwirken
 
 Ob groß oder klein, wir lieben Beiträge. Die Betreuer dieses Repos haben schon früher Open-Source-Projekte aufgebaut und lieben es. Herzlich willkommen!
 
@@ -164,6 +177,6 @@ Unabhängig von dem PR werden alle GitHub-Avatare der Mitwirkenden mit deren Erl
 
 ## 🌎 Übersetzungen
 
-Mirrorful ist derzeit auf Englisch und demnächst auch auf Spanisch verfügbar. Helfen Sie uns, unsere Dokumentation und Benutzeroberfläche in Ihre Sprache zu übersetzen!
+Mirrorful ist derzeit auf Englisch, Deutsch und demnächst auch auf Spanisch verfügbar. Helfen Sie uns, unsere Dokumentation und Benutzeroberfläche in Ihre Sprache zu übersetzen!
 
 Alle Informationen finden Sie unter [diesem Issue](https://github.com/Mirrorful/mirrorful/issues/18).
