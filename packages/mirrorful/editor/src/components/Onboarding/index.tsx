@@ -32,9 +32,7 @@ export function Onboarding({
       {
         name: primaryColorName,
         baseColor: primaryColorHex,
-        variants: {
-          '500': primaryColorHex,
-        },
+        variants: generateDefaultColorShades(primaryColorHex),
       },
       ...latestPalette,
     ]
@@ -78,6 +76,11 @@ export function Onboarding({
       <OtherColors
         initialPalette={palette}
         onUpdatePalette={(newPalette: TColorData[]) => {
+          newPalette.map((color) => {
+            if (color.baseColor) {
+              color.variants = generateDefaultColorShades(color.baseColor)
+            }
+          })
           handleExport(primaryColor, primaryName, newPalette)
           setPalette(newPalette)
         }}
