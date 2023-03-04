@@ -1,32 +1,7 @@
 import Conf from 'conf'
-import { TColorData } from 'types'
+import { TColorData, TTypographyData } from 'types'
 
-export const ZeroPointZeroPointTwoMigration = (
-  store: Conf<{
-    tokens: {
-      colorData: {
-        name: string
-        base: string
-        hover?: string
-        active?: string
-        shades?: {
-          '50': string
-          '100': string
-          '200': string
-          '300': string
-          '400': string
-          '500': string
-          '600': string
-          '700': string
-          '800': string
-          '900': string
-        }
-        isPrimary: boolean
-        isSecondary: boolean
-      }[]
-    }
-  }>
-) => {
+export const ZeroPointZeroPointTwoMigration = (store: Conf<any>) => {
   const tokens = store.get('tokens')
 
   let newTokens: {
@@ -34,7 +9,7 @@ export const ZeroPointZeroPointTwoMigration = (
   } = {
     colorData: [],
   }
-  newTokens.colorData = tokens.colorData.map((color): TColorData => {
+  newTokens.colorData = tokens.colorData.map((color: any): TColorData => {
     const variants = new Map<string, string>()
     if (color.hover) {
       variants.set('Hover', color.hover)
@@ -65,4 +40,32 @@ export const ZeroPointZeroPointTwoMigration = (
   })
 
   store.set('tokens', newTokens)
+}
+
+export const defaultTypography: TTypographyData = {
+  fontSizes: [
+    {
+      value: 1,
+      unit: 'rem',
+      name: 'sm',
+    },
+    {
+      value: 1.2,
+      unit: 'rem',
+      name: 'md',
+    },
+    {
+      value: 1.4,
+      unit: 'rem',
+      name: 'lg',
+    },
+  ],
+}
+
+export const ZeroPointZeroPointThreeMigration = (store: Conf<any>) => {
+  const tokens = store.get('tokens')
+  const updatedTokens = { ...tokens }
+
+  updatedTokens.typography = defaultTypography
+  store.set('tokens', updatedTokens)
 }

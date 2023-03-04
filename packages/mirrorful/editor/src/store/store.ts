@@ -1,5 +1,10 @@
 import Conf from 'conf'
-import { ZeroPointZeroPointTwoMigration } from './migrations'
+import { TTokens } from 'types'
+import {
+  ZeroPointZeroPointTwoMigration,
+  ZeroPointZeroPointThreeMigration,
+  defaultTypography,
+} from './migrations'
 
 // Our working directory is 2 levels below node_modules in production, so we go up 3 levels
 export const rootPath =
@@ -7,13 +12,14 @@ export const rootPath =
     ? '../.mirrorful'
     : '../../../.mirrorful'
 
-export const store = new Conf({
+export const store = new Conf<{ tokens: TTokens }>({
   projectName: 'Mirrorful',
-  projectVersion: '0.0.2',
+  projectVersion: '0.0.3',
   cwd: `${rootPath}/store`,
   defaults: {
     tokens: {
       colorData: [],
+      typography: defaultTypography,
     },
   },
   beforeEachMigration: (store, context) => {
@@ -23,5 +29,6 @@ export const store = new Conf({
   },
   migrations: {
     '0.0.2': ZeroPointZeroPointTwoMigration,
+    '0.0.3': ZeroPointZeroPointThreeMigration,
   },
 })
