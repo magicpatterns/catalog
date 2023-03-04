@@ -12,7 +12,7 @@ import {
   FormLabel,
   Box,
   Checkbox,
-  Text
+  Text,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { TColorVariant } from 'types'
@@ -36,8 +36,8 @@ export function EditVariantModal({
 
   const handleSave = () => {
     // Save the submitted color value
-    const oldColor:string = variant.color
-    
+    const oldColor: string = variant.color
+
     // Check for blank / missing color
     if (!variant.color) {
       setError('Please enter a color.')
@@ -47,8 +47,7 @@ export function EditVariantModal({
     // If color is invalid, handleInvalidColor will reassign a value to the variant.color
     variant.color = handleInvalidColor(variant.color)
     // If there's a reassignment, they'll no longer match, so we can alert the user...
-    if(variant.color != oldColor)
-    {
+    if (variant.color !== oldColor) {
       setError('This is not a valid color')
       variant.color = oldColor
       return
@@ -91,7 +90,7 @@ export function EditVariantModal({
                 errorBorderColor="red.400"
                 isInvalid={!!error}
               />
-              { error && (
+              {error && (
                 <Text
                   css={{ alignSelf: 'flex-start', marginTop: '8px' }}
                   color="red.400"
