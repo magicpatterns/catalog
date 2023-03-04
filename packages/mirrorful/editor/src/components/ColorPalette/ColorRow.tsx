@@ -187,7 +187,7 @@ export function ColorRow({
                 }}
               />
             ))}
-            <ColorVariantPlaceholder onClick={() => onAddVariantModalOpen()} backgroundColorString='#eee'/>
+            <ColorVariantPlaceholder onClick={() => onAddVariantModalOpen()} />
           </Box>
         </Box>
       </Box>
