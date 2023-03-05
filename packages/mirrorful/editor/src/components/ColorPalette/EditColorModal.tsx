@@ -105,15 +105,13 @@ export function EditColorModal({
                   <Box
                     css={{ height: '14px', width: '14px', marginLeft: '8px' }}
                     bgColor={base}
-                    border={`0.5px solid ${
-                      tinycolor(base).isDark() ? 'white' : 'black'
-                    }`}
+                    border={'1px solid black'}
                   />
                 </Box>
               </FormLabel>
               <Input
                 ref={baseRef}
-                placeholder="e.g. #D3AC3"
+                placeholder="e.g. #D3AC3B"
                 size="md"
                 value={base}
                 onChange={(e) => {
