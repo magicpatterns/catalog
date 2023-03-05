@@ -1,9 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 @import '~/.mirrorful/theme.css';
 
-.primary-button {
-    background-color: var(--color-violet-500);
-}
-
-.primary-button:hover {
-    background-color: var(--color-violet);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

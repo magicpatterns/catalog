@@ -1,18 +1,14 @@
 export const Tokens = {
-  "nuxt-green": {
+  "brand": {
     "500": "#09ed70",
     "base": "#09ed70"
   },
-  "blue": {
-    "500": "#0928ed",
-    "base": "#0928ed"
+  "secondary": {
+    "500": "#7d7c7c",
+    "base": "#7d7c7c"
   },
-  "red": {
-    "500": "#ed0946",
-    "base": "#ed0946"
-  },
-  "orange": {
-    "500": "#ed9709",
-    "base": "#ed9709"
+  "primary": {
+    "500": "#171717",
+    "base": "#171717"
   }
 }
