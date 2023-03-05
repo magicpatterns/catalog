@@ -10,7 +10,7 @@
 
     <div class="wrapper-panel">
       <h2 class="description">
-        Ui-Button-Component + Mirrorful - From CSS-File
+        Ui-Button-Component + Mirrorful - Plain CSS-Variable
       </h2>
       <ui-button :type="'button'" styling-plain-css>Hover me</ui-button>
     </div>
