@@ -1,0 +1,9 @@
+@import '~/.mirrorful/theme.css';
+
+.primary-button {
+    background-color: var(--color-violet-500);
+}
+
+.primary-button:hover {
+    background-color: var(--color-violet);
+}

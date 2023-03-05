@@ -16,7 +16,8 @@
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "mirrorful": "^3.0.15",
-    "nuxt": "^3.2.3"
+    "nuxt": "^3.2.3",
+    "sass": "^1.58.3"
   },
   "dependencies": {
     "eslint": "^8.35.0",
