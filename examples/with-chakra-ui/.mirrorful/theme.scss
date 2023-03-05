@@ -31,9 +31,11 @@ $color-cool-teal-600: #319b95;
 $color-cool-teal-700: #29837f;
 $color-cool-teal-800: #226c69;
 $color-cool-teal-900: #1b5552;
+$font-size-small: 1rem;
+$font-size-md: 1.2rem;
+$font-size-lg: 1.4rem;
 
 :root {
-  --color-primary: #48BB78;
   --color-lizard-green: #48BB78;
   --color-lizard-green-50: #b8e4ca;
   --color-lizard-green-100: #a1dcba;
@@ -67,4 +69,7 @@ $color-cool-teal-900: #1b5552;
   --color-cool-teal-700: #29837f;
   --color-cool-teal-800: #226c69;
   --color-cool-teal-900: #1b5552;
+  --font-size-small: 1rem;
+  --font-size-md: 1.2rem;
+  --font-size-lg: 1.4rem;
 }
