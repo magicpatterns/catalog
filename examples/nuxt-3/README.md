@@ -2,7 +2,7 @@
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-# Nuxt 3 Setup
+# Project Setup
 
 Make sure to install the dependencies:
 
@@ -17,7 +17,17 @@ npm install
 pnpm install
 ```
 
-## Development Server
+# Using Mirrorful
+
+To run Mirrorful's visual theme editor,
+
+```bash
+yarn run mirrorful
+```
+
+The following commands will start a local editor at http://localhost:5050
+
+## Nuxt 3 Development Server
 
 Start the development server on http://localhost:3000
 
@@ -29,7 +39,7 @@ yarn dev
 npm run dev
 ```
 
-## Production
+## Nuxt 3 Production
 
 Build the application for production:
 
@@ -42,18 +52,7 @@ Locally preview production build:
 ```bash
 npm run preview
 ```
+
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
-----
-
-# Using Mirrorful
-
-To run Mirrorful's visual theme editor,
-
-```bash
-yarn run mirrorful
-```
-
-The following commands will start a local editor at  http://localhost:5050
-
-
+---

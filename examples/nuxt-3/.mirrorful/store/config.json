@@ -1,0 +1,39 @@
+{
+	"tokens": {
+		"colorData": [
+			{
+				"name": "Nuxt Green",
+				"baseColor": "#09ed70",
+				"variants": {
+					"500": "#09ed70"
+				}
+			},
+			{
+				"name": "Blue",
+				"baseColor": "#0928ed",
+				"variants": {
+					"500": "#0928ed"
+				}
+			},
+			{
+				"name": "Red",
+				"baseColor": "#ed0946",
+				"variants": {
+					"500": "#ed0946"
+				}
+			},
+			{
+				"name": "Orange",
+				"baseColor": "#ed9709",
+				"variants": {
+					"500": "#ed9709"
+				}
+			}
+		]
+	},
+	"__internal__": {
+		"migrations": {
+			"version": "0.0.2"
+		}
+	}
+}
