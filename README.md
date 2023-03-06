@@ -9,7 +9,7 @@
 <h4 align="center">
   <a href="https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA">Slack</a> |
   <a href="https://mirrorful.com/">Website</a> |
-  <a href="https://www.npmjs.com/package/mirrorful">NPM Package</a> |
+  <a href="https://www.npmjs.com/package/mirrorful">NPM Package</a> | <a href="https://www.mirrorful.com/docs/home/intropage">Docs</a>
 </h4>
 
 <h4 align="center">
@@ -23,7 +23,7 @@
     <img src="https://img.shields.io/github/commit-activity/m/Mirrorful/mirrorful" alt="git commit activity" />
   </a>
   <a href="https://www.npmjs.com/package/mirrorful">
-    <img src="https://img.shields.io/badge/Downloads-1k-orange" alt="Mirrorful downloads" />
+    <img src="https://img.shields.io/badge/Downloads-2.1k-orange" alt="Mirrorful downloads" />
   </a>
   <a href="https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA">
     <img src="https://img.shields.io/badge/chat-on%20Slack-blueviolet" alt="Slack community channel" />
@@ -39,9 +39,7 @@
 <kbd>[<img title="German" alt="German language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/de.svg" width="22">](i18n/README.de.md)</kbd>
 <kbd>[<img title="Swedish" alt="Swedish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/se.svg" width="22">](i18n/README.sv.md)</kbd>
 
-**[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app as CSS Variables or JSON. Take 5 minutes today, design at scale forever.
-
-Create the building blocks for fast frontend development!
+**[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
 
 - **Start new projects with a source of truth**
 - **Visually modify your theme**
@@ -141,7 +139,7 @@ Looking for a specific example? [Request one here!](https://github.com/Mirrorful
 
 ## 🏘 Open-source vs. paid
 
-This repo is entirely MIT licensed, with the exception of any under a `ee` directory which contains premium enterprise features requiring a Mirrorful license. We're currently focused on developing non-enterprise offerings first that should suit most use-cases.
+This repo is entirely MIT licensed.
 
 We are working hard to make Mirrorful more extensive. Need any integrations or want a new feature? Feel free to [create an issue](https://github.com/Mirrorful/mirrorful/issues) or contribute directly to the repository. _(The first draft of this README was made by a contributor!)_
 
@@ -149,7 +147,7 @@ We are working hard to make Mirrorful more extensive. Need any integrations or w
 
 Mirrorful takes security issues very seriously. If you have any concerns about Mirrorful or believe you have uncovered a vulnerability, please get in touch via the e-mail address [support@mirrorful.io](mailto:support@mirrorful.io). In the message, try to provide a description of the issue and ideally a way of reproducing it. The team will get back to you **immediately**.
 
-## ⭐ Stay Up-to-Date
+## ⭐ Stay Up to Date
 
 There are a lot of new features coming very frequently. Star this repo to stay up to date.
 
@@ -169,9 +167,9 @@ No matter the PR, all the Github avatars of contributors will be added to the Mi
 
 ## 🪞 Contributors
 
-<a href="https://github.com/alexdanilowicz"><img src="https://avatars.githubusercontent.com/u/29822597?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/teddarific"><img src="https://avatars.githubusercontent.com/u/16343600" width="50" height="50" alt=""/></a> <a href="https://github.com/isabellytubao"><img src="https://avatars.githubusercontent.com/u/113177368" width="50" height="50" alt=""/></a> <a href="https://github.com/gfang200"><img src="https://avatars.githubusercontent.com/u/13005240?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/sallyxu"><img src="https://avatars.githubusercontent.com/u/1229627" width="50" height="50" alt=""/></a> <a href="https://github.com/zachsnoek"><img src="https://avatars.githubusercontent.com/u/26049962" width="50" height="50" alt=""/></a>
-<a href="https://github.com/tobiasdossinger"><img src="https://avatars.githubusercontent.com/u/33021996?v=4" width="50" height="50" alt=""/></a>
-<a href="https://github.com/lagneshthakur"><img src="https://avatars.githubusercontent.com/u/13376802?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/mirrorful/mirrorful/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mirrorful/mirrorful" />
+</a>
 
 ## 🌎 Translations
 
