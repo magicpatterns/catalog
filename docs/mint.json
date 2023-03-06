@@ -1,56 +1,53 @@
 {
-    "name": "Mirrorful",
-    "logo": {
-      "light": "/logo/light.png",
-      "dark": "/logo/dark.png"
+  "name": "Mirrorful",
+  "logo": {
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#4299E1",
+    "light": "#8BCBFF",
+    "dark": "#2581CD",
+    "anchors": {
+      "from": "#9F7AEA",
+      "to": "#2581CD"
+    }
+  },
+  "topbarCtaButton": {
+    "type": "github",
+    "url": "https://github.com/Mirrorful/mirrorful"
+  },
+  "anchors": [
+    {
+      "name": "Slack",
+      "icon": "slack",
+      "url": "https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA"
     },
-    "favicon": "/favicon.svg",
-    "colors": {
-      "primary": "#4299E1",
-      "light": "#8BCBFF",
-      "dark": "#2581CD",
-      "anchors": {
-        "from": "#9F7AEA",
-        "to": "#2581CD"
-      }
-    },
-    "topbarCtaButton": {
-      "type": "github",
-      "url": "https://github.com/Mirrorful/mirrorful"
-    },
-    "anchors": [
-      {
-        "name": "Slack",
-        "icon": "slack",
-        "url": "https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA"
-      },
-      {
-        "name": "NPM Package",
-        "icon": "npm",
-        "url": "https://www.npmjs.com/package/mirrorful"
-      }
-    ],
-    "navigation": [
-      {
-        "group": "Home",
-        "pages": [
-            "home/intropage",
-            "home/why",
-            "home/get-started",
-            "home'export-formats",
-            "home/component-library",
-            "home/community-support",
-            "home/open-source-vs-paid",
-            "home/security",
-            "home/stay-up=to-date",
-            "home/contributing",
-            "home/translations"
-        ]
-      }
-    ],
-    "footerSocials":
-      {
-          "twitter": "https://twitter.com/mirrorful",
-          "slack": "https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA"
-      }
+    {
+      "name": "NPM Package",
+      "icon": "npm",
+      "url": "https://www.npmjs.com/package/mirrorful"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Home",
+      "pages": [
+        "home/intropage",
+        "home/why",
+        "home/get-started",
+        "home/export-formats",
+        "home/component-library",
+        "home/community-support",
+        "home/open-source-vs-paid",
+        "home/security",
+        "home/contributing"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/mirrorful",
+    "slack": "https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA"
   }
+}
