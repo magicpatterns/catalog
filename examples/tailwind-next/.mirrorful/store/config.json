@@ -1,0 +1,78 @@
+{
+	"tokens": {
+		"colorData": [
+			{
+				"name": "Acme Inc Purple",
+				"baseColor": "#9F7AEA",
+				"variants": {
+					"50": "#fefeff",
+					"100": "#ebe4fb",
+					"200": "#d8c9f7",
+					"300": "#c5aff2",
+					"400": "#b294ee",
+					"500": "#9f7aea",
+					"600": "#8c60e6",
+					"700": "#7945e2",
+					"800": "#662bdd",
+					"900": "#5820ca"
+				}
+			},
+			{
+				"name": "Acme Inc Error Red",
+				"baseColor": "#ea7a92",
+				"variants": {
+					"50": "#fffefe",
+					"100": "#fbe4e9",
+					"200": "#f7c9d3",
+					"300": "#f2afbd",
+					"400": "#ee94a8",
+					"500": "#ea7a92",
+					"600": "#e6607c",
+					"700": "#e24567",
+					"800": "#dd2b51",
+					"900": "#ca2044"
+				}
+			},
+			{
+				"name": "Acme Inc Blue",
+				"baseColor": "#7aeae2",
+				"variants": {
+					"50": "#feffff",
+					"100": "#e4fbf9",
+					"200": "#c9f7f3",
+					"300": "#aff2ee",
+					"400": "#94eee8",
+					"500": "#7aeae2",
+					"600": "#60e6dc",
+					"700": "#45e2d6",
+					"800": "#2bddd1",
+					"900": "#20cabe"
+				}
+			}
+		],
+		"typography": {
+			"fontSizes": [
+				{
+					"value": 1,
+					"unit": "rem",
+					"name": "sm"
+				},
+				{
+					"value": 1.2,
+					"unit": "rem",
+					"name": "md"
+				},
+				{
+					"value": 1.4,
+					"unit": "rem",
+					"name": "lg"
+				}
+			]
+		}
+	},
+	"__internal__": {
+		"migrations": {
+			"version": "0.0.3"
+		}
+	}
+}
