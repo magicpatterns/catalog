@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Tokens } from './../../.mirrorful/theme.js'
 
 export default function Home() {
   return (
@@ -10,10 +11,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1 className="text-2xl font-bold text-acme-inc-purple-400">
-          Hello world from a Nextjs app with Mirrorful and Tailwind. This uses
-          the Acme Inc. Purple Color!
-        </h1>
+        <h1>Hello world from a Nextjs app with Mirrorful and Tailwind!</h1>
+        <h2 className="text-acme-inc-purple-400">
+          This uses Tailwind + Mirrorful. Custom Acme Inc. Purple Color!
+        </h2>
+        <h2 style={{ color: Tokens['acme-inc-blue'][800] }}>
+          This is a regular JS + Mirrorful usage. Not tailwind.
+        </h2>
       </main>
     </>
   )
