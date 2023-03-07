@@ -115,6 +115,7 @@ We strive to be component library agnostic. Whether you're using Material UI, Ch
 
 Check out our examples:
 
+- [Mirrorful 🤝 Tailwind CSS (and Next)](https://github.com/Mirrorful/mirrorful/tree/main/examples/tailwind-next)
 - [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
 - [Mirrorful 🤝 Basic Create React App](https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app)
 - [Mirrorful 🤝 Basic Nuxt 3 App](https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3)
