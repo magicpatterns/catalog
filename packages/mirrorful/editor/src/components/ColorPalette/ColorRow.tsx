@@ -16,7 +16,7 @@ import { EditColorModal } from './EditColorModal'
 import { EditColorNameModal } from './EditColorNameModal'
 import { useState } from 'react'
 import { EditVariantModal } from './EditVariantModal'
-import { AddVariantModal } from './AddVariantModal'
+import { ColorVariantPlaceholder } from './ColorVariantPlaceholder'
 
 function VariantSquare({
   variant,
@@ -152,7 +152,7 @@ export function ColorRow({
                 }}
                 onUpdateVariant={(newVariant: TColorVariant) => {
                   const updatedVariants = { ...colorData.variants }
-                  delete updatedVariants.variant
+                  delete updatedVariants[variant]
                   updatedVariants[newVariant.name] = newVariant.color
 
                   const updatedColorData = {
@@ -186,6 +186,7 @@ export function ColorRow({
                 }}
               />
             ))}
+            <ColorVariantPlaceholder onClick={() => onAddVariantModalOpen()} />
           </Box>
         </Box>
       </Box>
@@ -197,10 +198,10 @@ export function ColorRow({
           onUpdateColorData({ ...colorData, name: newName })
         }}
       />
-      <AddVariantModal
+      <EditVariantModal
         isOpen={isAddVariantModalOpen}
         onClose={onAddVariantModalClose}
-        onAddVariant={(newVariant: TColorVariant) => {
+        onUpdateVariant={(newVariant: TColorVariant) => {
           const updatedVariants = { ...colorData.variants }
           updatedVariants[newVariant.name] = newVariant.color
 

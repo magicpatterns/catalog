@@ -26,6 +26,6 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
-    "mirrorful": "^1.0.30"
+    "mirrorful": "^3.1.2"
   }
 }

@@ -9,8 +9,22 @@ You can then either consume your new tokens through CSS Variables or Javascript 
 
 ## Using CSS Variables
 
-![](/image/export-1.png)
+Example:
+
+```css
+.primary-button {
+  background-color: var(--color-primary);
+}
+
+.primary-button:hover {
+  background-color: var(--color-primary-hover);
+}
+```
 
 ## Using Javascript Constants
 
-![](/image/export-2.png)
+Example:
+
+```javascript
+<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
+```

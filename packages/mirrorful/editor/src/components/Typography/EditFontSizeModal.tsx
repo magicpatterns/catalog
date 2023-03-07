@@ -55,10 +55,10 @@ export function EditFontSizeModal({
 
   useEffect(() => {
     if (!isOpen) {
-      setVariant({ name: '', value: 1, unit: 'rem' })
+      setVariant(initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem' })
       setError(null)
     }
-  }, [isOpen])
+  }, [isOpen, initialFontSizeVariant])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">

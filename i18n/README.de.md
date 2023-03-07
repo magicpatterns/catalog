@@ -115,6 +115,7 @@ Beispiel:
 ```javascript
 <button backgroundColor={{ Tokens.primary.base }}>Click here</button>
 ```
+
 ## 🤝 Agnostische Komponentenbibliothek
 
 Wir bemühen uns, unabhängig von Komponentenbibliotheken zu sein. Ganz gleich, ob Sie Material UI, Chakra UI, Tailwind, Ant Design oder sogar Ihre eigene Bibliothek verwenden, Mirrorful fügt sich nahtlos ein.
@@ -161,7 +162,7 @@ Sie wissen nicht, wo Sie anfangen sollen? Sie können:
 
 - [Buchen Sie ein kostenloses, druckfreies Pairing mit einem unserer Teammitglieder (auf Englisch)](https://usemotion.com/meet/teddyni/meet?d=15)!
 
-- Treten Sie unserem [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) bei und stellen Sie uns dort Ihre Fragen. 
+- Treten Sie unserem [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) bei und stellen Sie uns dort Ihre Fragen.
 
 Unabhängig von dem PR werden alle GitHub-Avatare der Mitwirkenden mit deren Erlaubnis in die README von Mirrorful aufgenommen.
 
