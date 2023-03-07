@@ -1,4 +1,4 @@
-export const Tokens = {
+exports.Tokens = {
   'acme-inc-purple': {
     50: '#fefeff',
     100: '#ebe4fb',

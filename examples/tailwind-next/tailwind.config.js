@@ -1,4 +1,4 @@
-const tokens = require('./.mirrorful/theme.js')
+const mirrorful = require('./.mirrorful/theme.js')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: tokens,
+      colors: mirrorful.Tokens,
     },
   },
   plugins: [],
