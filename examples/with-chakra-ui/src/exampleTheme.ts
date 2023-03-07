@@ -10,16 +10,16 @@ export const exampleTheme = extendTheme({
   },
   colors: {
     primary: {
-      ...Tokens.primary.shades,
+      ...Tokens['lizard-green'],
     },
     green: {
-      ...Tokens['lizard-green'].shades,
+      ...Tokens['lizard-green'],
     },
     pink: {
-      ...Tokens['hot-pink'].shades,
+      ...Tokens['hot-pink'],
     },
     teal: {
-      ...Tokens['cool-teal'].shades,
+      ...Tokens['cool-teal'],
     },
   },
 })
