@@ -61,9 +61,6 @@ export function AddColorSkeleton({
             border: '1px solid gray',
           }}
         >
-          {/* <Text fontSize={18} fontWeight="black">
-            BASE
-          </Text> */}
           <AddIcon boxSize={6} />
         </Box>
       )}
