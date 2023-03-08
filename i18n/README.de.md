@@ -63,7 +63,7 @@ Einfache Designsysteme beschleunigen auch die Entwicklung - selbst bei Projekten
 Mirrorful ist ein NPM-Paket, das als devDependency installiert werden sollte.
 
 ```bash
-npm install mirrorful --save-dev
+npm install mirrorful -D
 ```
 
 oder

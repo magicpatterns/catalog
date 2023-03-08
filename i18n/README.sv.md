@@ -35,8 +35,8 @@
 
 <img src="./../assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
 
-**[Mirrorful](https://mirrorful.com)** är en enkel och öppen källkods-designsystem-infrastruktur. Installera Mirrorful för att generera färger 
-och andra design tokens för ditt projekt. Sedan, importera dessa token direkt in till din app som CSS variabler eller JSON. Tar 5 minuter per 
+**[Mirrorful](https://mirrorful.com)** är en enkel och öppen källkods-designsystem-infrastruktur. Installera Mirrorful för att generera färger
+och andra design tokens för ditt projekt. Sedan, importera dessa token direkt in till din app som CSS variabler eller JSON. Tar 5 minuter per
 dag, designa i skala för evigt.
 
 Skapa byggstenarna för snabb front-end utveckling!
@@ -54,15 +54,15 @@ och mer...
 
 ## 🎨 Varför ska jag använda Mirrorful?
 
-Designsystem är grundstenarna i din app, men många projekt tar inte upp dem förrän det är för sent eftersom de är svåra att sätta upp korrekt. 
-Med Mirrorful kan du sätta upp ett grundläggande designsystem på några minuter samtidigt som du lämnar flexibilitet längre fram för anpassningar. 
+Designsystem är grundstenarna i din app, men många projekt tar inte upp dem förrän det är för sent eftersom de är svåra att sätta upp korrekt.
+Med Mirrorful kan du sätta upp ett grundläggande designsystem på några minuter samtidigt som du lämnar flexibilitet längre fram för anpassningar.
 Det är lättviktigt och väldigt enkelt.
 
-Vi har som mål att hjälpa ditt projekt att vara så vackert som möjligt. Kraven på högkvalitativ design blir allt högre. Vi vill hjälpa alla att 
+Vi har som mål att hjälpa ditt projekt att vara så vackert som möjligt. Kraven på högkvalitativ design blir allt högre. Vi vill hjälpa alla att
 lägga till enkla designtokens till nya (och befintliga!) projekt.
 
-Enkla designsystem ökar också utvecklingstakten - även för projekt i tidiga stadier! En rapport visar att det är 47% snabbare att bygga ett enkelt 
-formulär med hjälp av ett designsystem. Det är användbart för ingenjörer, designers och framför allt dina kunder om det inte finns en slumpmässig 
+Enkla designsystem ökar också utvecklingstakten - även för projekt i tidiga stadier! En rapport visar att det är 47% snabbare att bygga ett enkelt
+formulär med hjälp av ett designsystem. Det är användbart för ingenjörer, designers och framför allt dina kunder om det inte finns en slumpmässig
 färg för varje knapp i din app.
 
 ## 🚀 Kom igång
@@ -70,13 +70,13 @@ färg för varje knapp i din app.
 Mirrorful är ett NPM packet avsett att installeras som dev-dependency.
 
 ```bash
-npm install mirrorful --save-dev
+npm install mirrorful -D
 ```
 
 eller
 
 ```bash
-yarn add mirrorful --dev
+yarn add mirrorful -D
 ```
 
 ## ✨ Användning
@@ -123,10 +123,10 @@ Exempel:
 
 ## 🤝 Komponentbibliotek-agnostisk
 
-Vi strävar efter att vara komponentbiblioteksagnostiska. Oavsett om du använder Material UI, Chakra UI, Tailwind, Ant Design eller till och med 
+Vi strävar efter att vara komponentbiblioteksagnostiska. Oavsett om du använder Material UI, Chakra UI, Tailwind, Ant Design eller till och med
 ditt egna bibliotek, integrerar sig Mirrorful sömlöst.
 
-`⚠️ create-react-app` kan varna för att du försöker importera från en plats utanför `src`-mappen. Vi arbetar på en långsiktig lösning, men för 
+`⚠️ create-react-app` kan varna för att du försöker importera från en plats utanför `src`-mappen. Vi arbetar på en långsiktig lösning, men för
 tillfället rekommenderar vi att du gör en kopia av `.mirrorful`-mappen i din `src` mapp
 
 Titta på våra exempel:
@@ -148,14 +148,14 @@ Letar du efter ett specifikt exmepel? [Begär en här!](https://github.com/Mirro
 Den här repo:en är helt licensierad under MIT-licensen, med undantag för eventuella filer under en `ee` katalog som innehåller företagsfunktioner s
 om kräver en Mirrorful-licens. För närvarande fokuserar vi på att utveckla icke-företagsmässiga erbjudanden som bör passa de flesta användningsfall.
 
-Vi arbetar hårt för att göra Mirrorful mer omfattande. Behöver du några integreringar eller vill ha en ny funktion? 
-Känn dig fri att [skapa en issue](https://github.com/Mirrorful/mirrorful/issues) eller bidra direkt till kodbasen. 
+Vi arbetar hårt för att göra Mirrorful mer omfattande. Behöver du några integreringar eller vill ha en ny funktion?
+Känn dig fri att [skapa en issue](https://github.com/Mirrorful/mirrorful/issues) eller bidra direkt till kodbasen.
 _(Den första versionen av denna README gjordes av en bidragsgivare!)_
 
 ## 🛡 Säkerhet
 
-Mirrorful tar säkerhetsfrågor på stort allvar. Om du har några oro kring Mirrorful eller tror att du har upptäckt en sårbarhet, 
-vänligen kontakta oss via e-postadressen [support@mirrorful.io](mailto:support@mirrorful.io). Försök att ge en beskrivning av 
+Mirrorful tar säkerhetsfrågor på stort allvar. Om du har några oro kring Mirrorful eller tror att du har upptäckt en sårbarhet,
+vänligen kontakta oss via e-postadressen [support@mirrorful.io](mailto:support@mirrorful.io). Försök att ge en beskrivning av
 problemet och helst en metod för att återskapa det. Vårt team kommer att svara dig **omedelbart**.
 
 ## ⭐ Håll dig uppdaterad
