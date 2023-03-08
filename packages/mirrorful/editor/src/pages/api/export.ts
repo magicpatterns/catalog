@@ -58,12 +58,16 @@ const generateJsonFile = async ({ colorData, typography }: TTokens) => {
   let jsContent = `export const Tokens = `
   let jsonContent = ''
 
-  const themeObj = new Map<string, { [key: string]: string }>()
+  const themeObj = new Map<
+    string,
+    { [key: string]: string | { [key: string]: string } }
+  >()
 
+  const colorObj = new Map<string, { [key: string]: string }>()
   const fontSizeObj = new Map<string, string>()
 
   colorData.forEach((color) => {
-    themeObj.set(sanitizeName(color.name), {
+    colorObj.set(sanitizeName(color.name), {
       ...(color.baseColor && { base: color.baseColor }),
       ...color.variants,
     })
@@ -73,6 +77,7 @@ const generateJsonFile = async ({ colorData, typography }: TTokens) => {
     fontSizeObj.set(sanitizeName(color.name), `${color.value}${color.unit}`)
   })
 
+  themeObj.set('colors', Object.fromEntries(colorObj))
   themeObj.set('fontSizes', Object.fromEntries(fontSizeObj))
 
   const rawJsonObject = Object.fromEntries(themeObj)
