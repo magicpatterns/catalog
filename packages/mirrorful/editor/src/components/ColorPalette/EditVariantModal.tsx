@@ -42,6 +42,12 @@ export function EditVariantModal({
     // Save the submitted color value
     const oldColor: string = variant.color
 
+    // Check for blank name
+    if (!variant.name) {
+      setError('Please enter a variant name.')
+      return
+    }
+
     // Check for blank / missing color
     if (!variant.color) {
       setError('Please enter a color.')
@@ -65,6 +71,7 @@ export function EditVariantModal({
   useEffect(() => {
     if (!isOpen) {
       setVariant(initialVariant ?? { name: '', color: '', isBase: false })
+      setError(null)
     }
   }, [isOpen, initialVariant])
 
@@ -119,18 +126,7 @@ export function EditVariantModal({
                   onChange={(e) =>
                     setVariant({ ...variant, color: e.target.value })
                   }
-                  errorBorderColor="red.400"
-                  isInvalid={!!error}
                 />
-                {error && (
-                  <Text
-                    css={{ alignSelf: 'flex-start', marginTop: '8px' }}
-                    color="red.400"
-                    fontWeight="medium"
-                  >
-                    {error}
-                  </Text>
-                )}
               </FormControl>
               <FormControl css={{ marginTop: '32px' }}>
                 <Checkbox
@@ -161,6 +157,15 @@ export function EditVariantModal({
               />
             </Box>
           </Box>
+          {error && (
+            <Text
+              css={{ alignSelf: 'flex-start', marginTop: '32px' }}
+              color="red.400"
+              fontWeight="medium"
+            >
+              {error}
+            </Text>
+          )}
         </ModalBody>
         <ModalFooter>
           <Button
