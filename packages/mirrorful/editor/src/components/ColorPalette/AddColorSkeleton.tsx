@@ -33,12 +33,6 @@ export function AddColorSkeleton({
         }}
       >
         <AddIcon boxSize={2} />
-        {/* <Text fontSize={14} fontWeight="black">
-          Variant
-        </Text> */}
-        {/* <Text fontSize={18} fontWeight="medium">
-          Not set
-        </Text> */}
       </Box>
     )
   }
