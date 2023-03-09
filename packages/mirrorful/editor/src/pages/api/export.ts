@@ -3,8 +3,8 @@ import fs from 'fs'
 import { TColorData, TTokens } from 'types'
 import { rootPath, store } from 'store/store'
 
-const sanitizeName = (name: string) => {
-  return name.toLowerCase().split(' ').join('-')
+const sanitizeName = (name: string | number) => {
+  return `${name}`.toLowerCase().split(' ').join('-')
 }
 const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
 
@@ -26,12 +26,12 @@ const generateCssFile = async ({ colorData, typography }: TTokens) => {
 
     getKeys(color.variants).forEach((key) => {
       if (color.variants[key]) {
-        scssContent += `$color-${sanitizeName(color.name)}-${key}: ${
-          color.variants[key]
-        };\n`
-        cssContent += `  --color-${sanitizeName(color.name)}-${key}: ${
-          color.variants[key]
-        };\n`
+        scssContent += `$color-${sanitizeName(color.name)}-${sanitizeName(
+          key
+        )}: ${color.variants[key]};\n`
+        cssContent += `  --color-${sanitizeName(color.name)}-${sanitizeName(
+          key
+        )}: ${color.variants[key]};\n`
       }
     })
   })
@@ -54,6 +54,7 @@ const generateCssFile = async ({ colorData, typography }: TTokens) => {
 
 const generateJsonFile = async ({ colorData, typography }: TTokens) => {
   let tsContent = `export const Tokens = `
+  let cjsContent = `exports.Tokens = `
   let jsContent = `export const Tokens = `
   let jsonContent = ''
 
@@ -78,8 +79,10 @@ const generateJsonFile = async ({ colorData, typography }: TTokens) => {
 
   tsContent += JSON.stringify(rawJsonObject, null, 2)
   jsContent += JSON.stringify(rawJsonObject, null, 2)
+  cjsContent += JSON.stringify(rawJsonObject, null, 2)
   jsonContent += JSON.stringify(rawJsonObject, null, 2)
 
+  await fs.writeFileSync(`${rootPath}/theme_cjs.js`, cjsContent)
   await fs.writeFileSync(`${rootPath}/theme.js`, jsContent)
   await fs.writeFileSync(`${rootPath}/theme.ts`, tsContent)
   await fs.writeFileSync(`${rootPath}/theme.json`, jsonContent)
