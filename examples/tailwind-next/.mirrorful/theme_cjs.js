@@ -1,4 +1,4 @@
-{
+exports.Tokens = {
   "colors": {
     "purple": {
       "50": "#fefeff",
