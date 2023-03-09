@@ -18,7 +18,7 @@
 				}
 			},
 			{
-				"name": "Green",
+				"name": "Yellow",
 				"baseColor": "#e8ea7a",
 				"variants": {
 					"50": "#fffffe",
@@ -50,7 +50,7 @@
 				}
 			},
 			{
-				"name": "Green 2",
+				"name": "Green",
 				"baseColor": "#7aeabd",
 				"variants": {
 					"50": "#feffff",

@@ -13,9 +13,9 @@ export default function Home() {
       <main>
         <h1>Hello world from a Nextjs app with Mirrorful and Tailwind!</h1>
         <h2 className="text-purple-400">
-          This uses Tailwind + Mirrorful. Custom Acme Inc. Purple Color!
+          This uses Tailwind + Mirrorful. Custom Purple Color!
         </h2>
-        <h2 style={{ color: Tokens['colors']['green-2'][800] }}>
+        <h2 style={{ color: Tokens['colors']['green'][800] }}>
           This is a regular JS + Mirrorful usage. Not tailwind.
         </h2>
       </main>

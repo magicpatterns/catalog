@@ -13,7 +13,7 @@ exports.Tokens = {
       "900": "#5820ca",
       "base": "#9F7AEA"
     },
-    "green": {
+    "yellow": {
       "50": "#fffffe",
       "100": "#fafbe4",
       "200": "#f6f7c9",
@@ -39,7 +39,7 @@ exports.Tokens = {
       "900": "#ca2020",
       "base": "#ea7a7a"
     },
-    "green-2": {
+    "green": {
       "50": "#feffff",
       "100": "#e4fbf1",
       "200": "#c9f7e4",
