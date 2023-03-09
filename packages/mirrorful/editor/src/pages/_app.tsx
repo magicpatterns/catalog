@@ -4,6 +4,9 @@ import '../main.css'
 import posthog from 'posthog-js'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { IntlProvider } from "react-intl";
+import en from "../lang/en.json";
+import de from "../lang/de.json";
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready
@@ -17,6 +20,8 @@ if (typeof window !== 'undefined') {
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
+  const { locale } = useRouter()
+  if(!locale) return
 
   useEffect(() => {
     // Track page views
@@ -28,9 +33,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [])
 
+  const messages = {
+    en,
+    de
+  };
+
   return (
     <ChakraProvider>
-      <Component {...pageProps} />
+      <IntlProvider locale={locale} messages={messages[locale]}>
+        <Component {...pageProps} />
+      </IntlProvider>
     </ChakraProvider>
   )
 }

@@ -6,6 +6,7 @@ import { ExportSuccessModal } from './ExportSuccessModal'
 import { Onboarding } from './Onboarding'
 import posthog from 'posthog-js'
 import { TypographySection } from './Typography/TypographySection'
+import { useIntl } from "react-intl"
 
 export function Dashboard() {
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
@@ -84,6 +85,8 @@ export function Dashboard() {
     )
   }
 
+  const intl = useIntl();
+  const title = intl.formatMessage({ id: "common.headline" });
   return (
     <Box>
       <Box
@@ -107,7 +110,7 @@ export function Dashboard() {
             <img src="/mirrorful_logo.png" style={{ height: '39px' }} />
           </Box>
           <Button colorScheme="blue" onClick={handleExport}>
-            Export Config
+            {title}
           </Button>
           <Box />
         </Box>
