@@ -2,7 +2,7 @@
 	"tokens": {
 		"colorData": [
 			{
-				"name": "Acme Inc Purple",
+				"name": "Purple",
 				"baseColor": "#9F7AEA",
 				"variants": {
 					"50": "#fefeff",
@@ -18,35 +18,51 @@
 				}
 			},
 			{
-				"name": "Acme Inc Error Red",
-				"baseColor": "#ea7a92",
+				"name": "Yellow",
+				"baseColor": "#e8ea7a",
 				"variants": {
-					"50": "#fffefe",
-					"100": "#fbe4e9",
-					"200": "#f7c9d3",
-					"300": "#f2afbd",
-					"400": "#ee94a8",
-					"500": "#ea7a92",
-					"600": "#e6607c",
-					"700": "#e24567",
-					"800": "#dd2b51",
-					"900": "#ca2044"
+					"50": "#fffffe",
+					"100": "#fafbe4",
+					"200": "#f6f7c9",
+					"300": "#f1f2af",
+					"400": "#edee94",
+					"500": "#e8ea7a",
+					"600": "#e3e660",
+					"700": "#dfe245",
+					"800": "#dadd2b",
+					"900": "#c7ca20"
 				}
 			},
 			{
-				"name": "Acme Inc Blue",
-				"baseColor": "#7aeae2",
+				"name": "Red",
+				"baseColor": "#ea7a7a",
+				"variants": {
+					"50": "#fffefe",
+					"100": "#fbe4e4",
+					"200": "#f7c9c9",
+					"300": "#f2afaf",
+					"400": "#ee9494",
+					"500": "#ea7a7a",
+					"600": "#e66060",
+					"700": "#e24545",
+					"800": "#dd2b2b",
+					"900": "#ca2020"
+				}
+			},
+			{
+				"name": "Green",
+				"baseColor": "#7aeabd",
 				"variants": {
 					"50": "#feffff",
-					"100": "#e4fbf9",
-					"200": "#c9f7f3",
-					"300": "#aff2ee",
-					"400": "#94eee8",
-					"500": "#7aeae2",
-					"600": "#60e6dc",
-					"700": "#45e2d6",
-					"800": "#2bddd1",
-					"900": "#20cabe"
+					"100": "#e4fbf1",
+					"200": "#c9f7e4",
+					"300": "#aff2d7",
+					"400": "#94eeca",
+					"500": "#7aeabd",
+					"600": "#60e6b0",
+					"700": "#45e2a3",
+					"800": "#2bdd96",
+					"900": "#20ca85"
 				}
 			}
 		],
