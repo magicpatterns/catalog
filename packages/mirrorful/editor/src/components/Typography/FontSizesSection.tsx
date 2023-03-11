@@ -33,17 +33,17 @@ export function FontSizesSection({
       if (font.unit == 'rem') {
         rem.push(font)
       }
-      if (font.unit == 'px') {
-        px.push(font)
-      }
       if (font.unit == 'em') {
         em.push(font)
+      }
+      if (font.unit == 'px') {
+        px.push(font)
       }
     })
 
     rem.sort((a, b) => a.value - b.value)
-    px.sort((a, b) => a.value - b.value)
     em.sort((a, b) => a.value - b.value)
+    px.sort((a, b) => a.value - b.value)
 
     return rem.concat(px, em)
   }
