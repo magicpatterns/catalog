@@ -166,7 +166,7 @@ export function OtherColors({
                   css={{
                     height: '40px',
                     width: '120px',
-                    backgroundColor: color.base,
+                    backgroundColor: color.baseColor,
                     marginLeft: '16px',
                     borderRadius: 8,
                   }}

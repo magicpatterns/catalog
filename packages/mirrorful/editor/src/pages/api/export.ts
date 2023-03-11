@@ -1,144 +1,93 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fs from 'fs'
-import { TColorData } from 'types'
-import { rootPath, store } from 'storeUtils'
+import { TColorData, TTokens } from 'types'
+import { rootPath, store } from 'store/store'
 
-const sanitizeName = (name: string) => {
-  return name.toLowerCase().split(' ').join('-')
+const sanitizeName = (name: string | number) => {
+  return `${name}`.toLowerCase().split(' ').join('-')
 }
 const getKeys = Object.keys as <T extends object>(obj: T) => Array<keyof T>
 
-const generateStorageFile = async ({
-  colorData,
-}: {
-  colorData: TColorData[]
-}) => {
-  store.set('tokens', { colorData })
+const generateStorageFile = async ({ colorData, typography }: TTokens) => {
+  store.set('tokens', { colorData, typography })
 }
 
-const generateCssFile = async ({ colorData }: { colorData: TColorData[] }) => {
-  let primaryColor = colorData.find((c) => c.isPrimary)
-  let secondaryColor = colorData.find((c) => c.isSecondary)
-
+const generateCssFile = async ({ colorData, typography }: TTokens) => {
   let scssContent = ``
   let cssContent = `:root {\n`
 
-  if (primaryColor) {
-    cssContent += `  --color-primary: ${primaryColor.base};\n`
-    if (primaryColor.hover) {
-      cssContent += `  --color-primary-hover: ${primaryColor.hover};\n`
-      scssContent += `$color-primary-hover: ${primaryColor.hover};\n`
-    }
-
-    if (primaryColor.active) {
-      cssContent += `  --color-primary-active: ${primaryColor.active};\n`
-      scssContent += `$color-primary-active: ${primaryColor.active};\n`
-    }
-  }
-
-  if (secondaryColor) {
-    cssContent += `  --color-secondary: ${secondaryColor.base};\n`
-    if (secondaryColor.hover) {
-      cssContent += `  --color-secondary-hover: ${secondaryColor.hover};\n`
-      scssContent += `$color-secondary-hover: ${secondaryColor.hover};\n`
-    }
-
-    if (secondaryColor.active) {
-      cssContent += `  --color-secondary-active: ${secondaryColor.active};\n`
-      scssContent += `$color-secondary-active: ${secondaryColor.active};\n`
-    }
-  }
-
   colorData.forEach((color) => {
-    scssContent += `$color-${sanitizeName(color.name)}: ${color.base};\n`
-    cssContent += `  --color-${sanitizeName(color.name)}: ${color.base};\n`
-
-    if (color.hover) {
-      cssContent += `  --color-${sanitizeName(color.name)}-hover: ${
-        color.hover
-      };\n`
-      scssContent += `$color-${sanitizeName(color.name)}-hover: ${
-        color.hover
+    if (color.baseColor) {
+      scssContent += `$color-${sanitizeName(color.name)}: ${color.baseColor};\n`
+      cssContent += `  --color-${sanitizeName(color.name)}: ${
+        color.baseColor
       };\n`
     }
 
-    if (color.active) {
-      cssContent += `  --color-${sanitizeName(color.name)}-active: ${
-        color.active
-      };\n`
-      scssContent += `$color-${sanitizeName(color.name)}-active: ${
-        color.active
-      };\n`
-    }
+    getKeys(color.variants).forEach((key) => {
+      if (color.variants[key]) {
+        scssContent += `$color-${sanitizeName(color.name)}-${sanitizeName(
+          key
+        )}: ${color.variants[key]};\n`
+        cssContent += `  --color-${sanitizeName(color.name)}-${sanitizeName(
+          key
+        )}: ${color.variants[key]};\n`
+      }
+    })
+  })
 
-    if (color.shades) {
-      getKeys(color.shades).forEach((key) => {
-        if (color.shades) {
-          cssContent += `  --color-${sanitizeName(color.name)}-${key}: ${
-            color.shades[key]
-          };\n`
-          scssContent += `$color-${sanitizeName(color.name)}-${key}: ${
-            color.shades[key]
-          };\n`
-        }
-      })
-    }
+  typography.fontSizes.forEach((fontSize) => {
+    scssContent += `$font-size-${sanitizeName(fontSize.name)}: ${
+      fontSize.value
+    }${fontSize.unit};\n`
+    cssContent += `  --font-size-${sanitizeName(fontSize.name)}: ${
+      fontSize.value
+    }${fontSize.unit};\n`
   })
 
   cssContent += `}\n`
-
   scssContent += `\n${cssContent}`
 
   await fs.writeFileSync(`${rootPath}/theme.css`, cssContent)
   await fs.writeFileSync(`${rootPath}/theme.scss`, scssContent)
 }
 
-const generateJsonFile = async ({ colorData }: { colorData: TColorData[] }) => {
-  let primaryColor = colorData.find((c) => c.isPrimary)
-  let secondaryColor = colorData.find((c) => c.isSecondary)
-
+const generateJsonFile = async ({ colorData, typography }: TTokens) => {
   let tsContent = `export const Tokens = `
+  let cjsContent = `exports.Tokens = `
   let jsContent = `export const Tokens = `
   let jsonContent = ''
 
   const themeObj = new Map<
     string,
-    Omit<TColorData, 'name' | 'isSecondary' | 'isPrimary'>
+    { [key: string]: string | { [key: string]: string } }
   >()
 
-  if (primaryColor) {
-    themeObj.set('primary', {
-      base: primaryColor.base,
-      hover: primaryColor.hover,
-      active: primaryColor.active,
-      shades: primaryColor.shades,
-    })
-  }
-
-  if (secondaryColor) {
-    themeObj.set('secondary', {
-      base: secondaryColor.base,
-      hover: secondaryColor.hover,
-      active: secondaryColor.active,
-      shades: secondaryColor.shades,
-    })
-  }
+  const colorObj = new Map<string, { [key: string]: string }>()
+  const fontSizeObj = new Map<string, string>()
 
   colorData.forEach((color) => {
-    themeObj.set(sanitizeName(color.name), {
-      base: color.base,
-      hover: color.hover,
-      active: color.active,
-      shades: color.shades,
+    colorObj.set(sanitizeName(color.name), {
+      ...(color.baseColor && { base: color.baseColor }),
+      ...color.variants,
     })
   })
+
+  typography.fontSizes.forEach((color) => {
+    fontSizeObj.set(sanitizeName(color.name), `${color.value}${color.unit}`)
+  })
+
+  themeObj.set('colors', Object.fromEntries(colorObj))
+  themeObj.set('fontSizes', Object.fromEntries(fontSizeObj))
 
   const rawJsonObject = Object.fromEntries(themeObj)
 
   tsContent += JSON.stringify(rawJsonObject, null, 2)
   jsContent += JSON.stringify(rawJsonObject, null, 2)
+  cjsContent += JSON.stringify(rawJsonObject, null, 2)
   jsonContent += JSON.stringify(rawJsonObject, null, 2)
 
+  await fs.writeFileSync(`${rootPath}/theme_cjs.js`, cjsContent)
   await fs.writeFileSync(`${rootPath}/theme.js`, jsContent)
   await fs.writeFileSync(`${rootPath}/theme.ts`, tsContent)
   await fs.writeFileSync(`${rootPath}/theme.json`, jsonContent)
@@ -150,9 +99,18 @@ export default async function handler(
 ) {
   const body = JSON.parse(req.body)
 
-  await generateStorageFile({ colorData: body.colorData })
-  await generateCssFile({ colorData: body.colorData })
-  await generateJsonFile({ colorData: body.colorData })
+  await generateStorageFile({
+    colorData: body.colorData,
+    typography: body.typography,
+  })
+  await generateCssFile({
+    colorData: body.colorData,
+    typography: body.typography,
+  })
+  await generateJsonFile({
+    colorData: body.colorData,
+    typography: body.typography,
+  })
 
   return res.status(200).json({ message: 'Success' })
 }

@@ -4,7 +4,7 @@ import { PackageManager } from './helpers/get-pkg-manager'
 import { isWriteable } from './helpers/is-writeable'
 import { makeDir } from './helpers/make-dir'
 import spawn from 'cross-spawn'
-import { findNodeModulesPath } from './helpers/find-node-modules'
+import { findNodeModulesMirrorfulPath } from './helpers/find-node-modules'
 import fs from 'fs'
 
 export async function init({
@@ -42,7 +42,7 @@ export async function init({
     process.chdir(`editor`)
   } else {
     // find where the node_modules folder is
-    const nodeModulesPath = findNodeModulesPath()
+    const nodeModulesPath = findNodeModulesMirrorfulPath()
     if (nodeModulesPath) {
       try {
         await fs.promises.access(`next.config.js`, fs.constants.F_OK)
@@ -53,7 +53,7 @@ export async function init({
         }
         isUsingNextJs = false
       }
-      process.chdir(`${nodeModulesPath}/mirrorful/editor`)
+      process.chdir(`${nodeModulesPath}/editor`)
       if (verbose) {
         console.log('New working directory:', process.cwd())
       }

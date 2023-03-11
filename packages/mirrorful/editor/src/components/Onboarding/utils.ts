@@ -67,8 +67,8 @@ export function generatePalette(
 
   const randomizedColors: TColorData[] = []
 
-  colors.forEach((color, index) => {
-    const hslColor = tinycolor(color).toHsl()
+  colors.forEach((c, index) => {
+    const hslColor = tinycolor(c).toHsl()
 
     const modifiedHsl = {
       ...hslColor,
@@ -77,9 +77,10 @@ export function generatePalette(
 
     randomizedColors.push({
       name: nameThatColor(modifiedHsl),
-      base: tinycolor(modifiedHsl).toHexString(),
-      isPrimary: false,
-      isSecondary: false,
+      baseColor: tinycolor(modifiedHsl).toHexString(),
+      variants: {
+        '500': tinycolor(modifiedHsl).toHexString(),
+      },
     })
   })
 
@@ -99,7 +100,6 @@ export function generatePalette(
   
     nameSet.add(color.name)
   })
-  console.log(randomizedColors)
   return randomizedColors
   
 }
