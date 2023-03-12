@@ -1,37 +1,13 @@
 /// <reference types="jest" />
 
-import { handleInvalidColor } from '../editor/src/components/ColorPalette/utils'
+import { handleInvalidColor, newShade } from '../editor/src/components/ColorPalette/utils'
+
+
+//********** Testing for handleInvalidColor function **********//
 
 const hexRegEx = /^#?([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/
-
-test('handleInvalidColor - Blank returns random hex', () => {
-    expect(handleInvalidColor('')).toMatch(hexRegEx)
-})
-
-test('handleInvalidColor - Invalid symbols returns random hex', () => {
-    expect(handleInvalidColor('#$%Fff')).toMatch(hexRegEx)
-})
-
-test('handleInvalidColor - Invalid chars returns random hex', () => {
-    expect(handleInvalidColor('#hg0Off')).toMatch(hexRegEx)
-})
-
-test('handleInvalidColor - Extra hashes returns random hex', () => {
-    expect(handleInvalidColor('##eeFff')).toMatch(hexRegEx)
-})
-
-test('handleInvalidColor - Wrong number of digits returns random hex', () => {
-    expect(handleInvalidColor('#11223')).toMatch(hexRegEx)
-})
-
-test('handleInvalidColor - Correct input returns same hex', () => {
-    expect(handleInvalidColor('#aaafff')).toBe('#aaafff')
-    expect(handleInvalidColor('#AAAFFF')).toBe('#AAAFFF')
-    expect(handleInvalidColor('#111aaa')).toBe('#111aaa')
-})
-
 // https://www.tutorialrepublic.com/css-reference/css-color-names.php
-// This list should be sourced from other, more authoritative sources...
+// This list should be sourced from another, more authoritative sources...
 const validCssColors = [
     'aqua',
     'black',
@@ -192,6 +168,31 @@ const validCssColors = [
     'yellowgreen'
 ]
 
+test('handleInvalidColor - Blank returns random hex', () => {
+    expect(handleInvalidColor('')).toMatch(hexRegEx)
+})
+
+test('handleInvalidColor - Invalid symbols returns random hex', () => {
+    expect(handleInvalidColor('#$%Fff')).toMatch(hexRegEx)
+})
+
+test('handleInvalidColor - Invalid chars returns random hex', () => {
+    expect(handleInvalidColor('#hg0Off')).toMatch(hexRegEx)
+})
+
+test('handleInvalidColor - Extra hashes returns random hex', () => {
+    expect(handleInvalidColor('##eeFff')).toMatch(hexRegEx)
+})
+
+test('handleInvalidColor - Wrong number of digits returns random hex', () => {
+    expect(handleInvalidColor('#11223')).toMatch(hexRegEx)
+})
+
+test('handleInvalidColor - Correct input returns same hex', () => {
+    expect(handleInvalidColor('#aaafff')).toBe('#aaafff')
+    expect(handleInvalidColor('#AAAFFF')).toBe('#AAAFFF')
+    expect(handleInvalidColor('#111aaa')).toBe('#111aaa')
+})
 
 test('handleInvalidColor - Correct CSS color names accepted and returned LC', () => {
     validCssColors.forEach(color => {
@@ -201,3 +202,8 @@ test('handleInvalidColor - Correct CSS color names accepted and returned LC', ()
         expect(handleInvalidColor(color)).toBe(color.toLowerCase())
     })    
 });
+
+//********** Testing for newShade function **********//
+test('newShade - Blank returns random hex', () => {
+    expect(handleInvalidColor('')).toMatch(hexRegEx)
+})
