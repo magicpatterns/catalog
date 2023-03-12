@@ -7,6 +7,6 @@ export default async function openBrowser({ url, port }: props) {
 
     console.log('🚀 Opening Mirrorful in your browser! ', res)
   } catch (error) {
-    console.log('🚀 ~ file: openBrowser.ts:10 ~ openBrowser ~ error:', error)
+    console.log('Go to localhost:5050 to open Mirrorful. Could not open automatically: ', error)
   }
 }
