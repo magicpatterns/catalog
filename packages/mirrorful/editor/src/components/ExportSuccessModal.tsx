@@ -59,9 +59,9 @@ export function ExportSuccessModal({
               <TabPanel>
                 <Text css={{ marginBottom: 8 }}>
                   <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-                  <Code>theme.css</Code> (actual path may vary but you can
-                  always reference the <Code>.mirrorful</Code> folder that was
-                  created)
+                  <Code>theme.css</Code> (actual path may vary. You can
+                  reference the <Code>.mirrorful</Code> folder in the root of
+                  your project)
                 </Text>
                 <CodePreview
                   language="javascript"
@@ -81,8 +81,9 @@ export function ExportSuccessModal({
               <TabPanel>
                 <Text css={{ marginBottom: 8 }}>
                   <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-                  <Code>Tokens</Code> (actual path may vary but you can always
-                  reference the <Code>.mirrorful</Code> folder that was created)
+                  <Code>Tokens</Code> (actual path may vary. You can reference
+                  the <Code>.mirrorful</Code> folder in the root of your
+                  project)
                 </Text>
 
                 <CodePreview
@@ -105,8 +106,8 @@ export function ExportSuccessModal({
                 <Text css={{ marginBottom: 8 }}>
                   <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
                   <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code>{' '}
-                  (actual path may vary but you can always reference the{' '}
-                  <Code>.mirrorful</Code> folder that was created)
+                  (actual path may vary. You can reference the{' '}
+                  <Code>.mirrorful</Code> folder in the root of your project)
                 </Text>
 
                 <CodePreview
