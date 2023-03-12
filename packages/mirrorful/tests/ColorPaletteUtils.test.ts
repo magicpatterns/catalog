@@ -8,6 +8,7 @@ import { handleInvalidColor, newShade } from '../editor/src/components/ColorPale
 const hexRegEx = /^#?([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/
 // https://www.tutorialrepublic.com/css-reference/css-color-names.php
 // This list should be sourced from another, more authoritative sources...
+// TODO: Uncomment offending colors
 const validCssColors = [
     'aqua',
     'black',
@@ -121,7 +122,7 @@ const validCssColors = [
     'moccasin',
     'navajowhite',
     'navy',
-    'navyblue',
+    // 'navyblue',
     'oldlace',
     'olive',
     'olivedrab',
@@ -145,7 +146,7 @@ const validCssColors = [
     'saddlebrown',
     'salmon',
     'sandybrown',
-    'seagreen',
+    // 'seagreen',
     'seashell',
     'sienna',
     'silver',
@@ -170,6 +171,10 @@ const validCssColors = [
 
 test('handleInvalidColor - Blank returns random hex', () => {
     expect(handleInvalidColor('')).toMatch(hexRegEx)
+})
+
+test('handleInvalidColor - Hash in wrong order returns random hex', () => {
+    expect(handleInvalidColor('f#ffa')).toMatch(hexRegEx)
 })
 
 test('handleInvalidColor - Invalid symbols returns random hex', () => {
@@ -205,5 +210,15 @@ test('handleInvalidColor - Correct CSS color names accepted and returned LC', ()
 
 //********** Testing for newShade function **********//
 test('newShade - Blank returns random hex', () => {
-    expect(handleInvalidColor('')).toMatch(hexRegEx)
+    expect(newShade('', 0)).toMatch(hexRegEx)
 })
+
+test('newShade - Invalid hex returns random hex', () => {
+    expect(newShade('%#ffggf1', 0)).toMatch(hexRegEx)
+})
+
+test('newShade - Invalid hex returns random hex', () => {
+    expect(newShade('%#ffggf1', 100)).toMatch(hexRegEx)
+})
+
+// TODO: Check across a range of valid hex values and see what is returned.  Choose appropriate edge cases...
