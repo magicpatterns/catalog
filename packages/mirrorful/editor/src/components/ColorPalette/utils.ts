@@ -56,12 +56,19 @@ export const generateDefaultColorShades = (primary: string) => {
 export const handleInvalidColor = (input: string) => {
   // Check if input is a valid hex code
   const hexRegex = /^#?([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/
+
+  // Check if input is a valid rgb/rgba
+  const rgbColorRegex = /^rgba?\((\d{1,3}), (\d{1,3}), (\d{1,3})(, (\d+(\.\d+)?))?\)$/;
+
   if (hexRegex.test(input)) {
     if (input.startsWith('#')) {
       return input
     } else {
       return `#${input}`
     }
+  }
+  else if(rgbColorRegex.test(input)){
+    return input
   }
 
   // Check if input is a valid color name
