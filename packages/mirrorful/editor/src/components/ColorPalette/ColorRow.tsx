@@ -142,50 +142,52 @@ export function ColorRow({
             }}
             height={240}
           >
-            {Object.keys(colorData.variants).map((variant) => (
-              <VariantSquare
-                key={variant}
-                variant={{
-                  name: variant,
-                  color: colorData.variants[variant],
-                  isBase: colorData.variants[variant] === colorData.baseColor,
-                }}
-                onUpdateVariant={(newVariant: TColorVariant) => {
-                  const updatedVariants = { ...colorData.variants }
-                  delete updatedVariants[variant]
-                  updatedVariants[newVariant.name] = newVariant.color
+            {Object.keys(colorData.variants)
+              .sort()
+              .map((variant) => (
+                <VariantSquare
+                  key={variant}
+                  variant={{
+                    name: variant,
+                    color: colorData.variants[variant],
+                    isBase: colorData.variants[variant] === colorData.baseColor,
+                  }}
+                  onUpdateVariant={(newVariant: TColorVariant) => {
+                    const updatedVariants = { ...colorData.variants }
+                    delete updatedVariants[variant]
+                    updatedVariants[newVariant.name] = newVariant.color
 
-                  const updatedColorData = {
-                    ...colorData,
-                    variants: updatedVariants,
-                  }
-                  if (newVariant.isBase) {
-                    updatedColorData.baseColor = newVariant.color
-                  } else if (
-                    !newVariant.isBase &&
-                    updatedColorData.baseColor === newVariant.color
-                  ) {
-                    delete updatedColorData.baseColor
-                  }
+                    const updatedColorData = {
+                      ...colorData,
+                      variants: updatedVariants,
+                    }
+                    if (newVariant.isBase) {
+                      updatedColorData.baseColor = newVariant.color
+                    } else if (
+                      !newVariant.isBase &&
+                      updatedColorData.baseColor === newVariant.color
+                    ) {
+                      delete updatedColorData.baseColor
+                    }
 
-                  onUpdateColorData(updatedColorData)
-                }}
-                onDeleteVariant={() => {
-                  const updatedVariants = { ...colorData.variants }
-                  delete updatedVariants[variant]
+                    onUpdateColorData(updatedColorData)
+                  }}
+                  onDeleteVariant={() => {
+                    const updatedVariants = { ...colorData.variants }
+                    delete updatedVariants[variant]
 
-                  const updatedColorData = {
-                    ...colorData,
-                    variants: updatedVariants,
-                  }
-                  if (colorData.variants[variant] === colorData.baseColor) {
-                    delete updatedColorData.baseColor
-                  }
+                    const updatedColorData = {
+                      ...colorData,
+                      variants: updatedVariants,
+                    }
+                    if (colorData.variants[variant] === colorData.baseColor) {
+                      delete updatedColorData.baseColor
+                    }
 
-                  onUpdateColorData(updatedColorData)
-                }}
-              />
-            ))}
+                    onUpdateColorData(updatedColorData)
+                  }}
+                />
+              ))}
             <ColorVariantPlaceholder onClick={() => onAddVariantModalOpen()} />
           </Box>
         </Box>
@@ -204,7 +206,7 @@ export function ColorRow({
         onUpdateVariant={(newVariant: TColorVariant) => {
           const updatedVariants = { ...colorData.variants }
           updatedVariants[newVariant.name] = newVariant.color
-
+          if (newVariant.isBase) colorData.baseColor = newVariant.color
           onUpdateColorData({ ...colorData, variants: updatedVariants })
         }}
       />
