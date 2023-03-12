@@ -17,6 +17,7 @@ import { EditColorNameModal } from './EditColorNameModal'
 import { useState } from 'react'
 import { EditVariantModal } from './EditVariantModal'
 import { ColorVariantPlaceholder } from './ColorVariantPlaceholder'
+import { AlertDialogDelete } from 'components/AlertDialogDelete'
 
 function VariantSquare({
   variant,
@@ -91,6 +92,12 @@ export function ColorRow({
     onClose: onAddVariantModalClose,
   } = useDisclosure()
 
+  const {
+    isOpen: isAlertDialogOpen,
+    onOpen: onDeleteAlertDialogOpen,
+    onClose: onDeleteAlertDialogClose,
+  } = useDisclosure()
+
   return (
     <>
       <Box css={{ display: 'flex' }}>
@@ -105,7 +112,9 @@ export function ColorRow({
               Edit Color Name
             </Button>
             <Button onClick={() => onAddVariantModalOpen()}>Add Variant</Button>
-            <Button onClick={() => onDeleteColorData()}>Delete Color</Button>
+            <Button onClick={() => onDeleteAlertDialogOpen()}>
+              Delete Color
+            </Button>
           </Stack>
         </Box>
         <Box css={{ display: 'flex' }}>
@@ -207,6 +216,11 @@ export function ColorRow({
 
           onUpdateColorData({ ...colorData, variants: updatedVariants })
         }}
+      />
+      <AlertDialogDelete
+        isOpen={isAlertDialogOpen}
+        onClose={onDeleteAlertDialogClose}
+        onDelete={() => onDeleteColorData()}
       />
     </>
   )
