@@ -6,6 +6,7 @@ import { makeDir } from './helpers/make-dir'
 import spawn from 'cross-spawn'
 import { findNodeModulesMirrorfulPath } from './helpers/find-node-modules'
 import fs from 'fs'
+import openBrowser from './helpers/openBrowser'
 
 export async function init({
   appPath,
@@ -31,7 +32,7 @@ export async function init({
   await makeDir('.mirrorful')
 
   const port = 5050 // don't hard code this
-
+  await openBrowser({ url: 'http://localhost', port: port.toString() })
   if (verbose) {
     console.log('Current directory:', process.cwd())
   }
