@@ -32,7 +32,7 @@ export async function init({
   await makeDir('.mirrorful')
 
   const port = 5050 // don't hard code this
-  await openBrowser({ url: 'http://localhost', port: port.toString() })
+  await openBrowser({ url: 'http://localhost', port })
   if (verbose) {
     console.log('Current directory:', process.cwd())
   }
