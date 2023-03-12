@@ -204,7 +204,7 @@ export function ColorRow({
         onUpdateVariant={(newVariant: TColorVariant) => {
           const updatedVariants = { ...colorData.variants }
           updatedVariants[newVariant.name] = newVariant.color
-
+          if (newVariant.isBase) colorData.baseColor = newVariant.color
           onUpdateColorData({ ...colorData, variants: updatedVariants })
         }}
       />
