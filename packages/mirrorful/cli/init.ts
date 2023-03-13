@@ -32,7 +32,7 @@ export async function init({
   await makeDir('.mirrorful')
 
   const port = 5050 // don't hard code this
-  await openBrowser({ url: 'http://localhost', port })
+  // await openBrowser({ url: 'http://localhost', port })
   if (verbose) {
     console.log('Current directory:', process.cwd())
   }
@@ -43,7 +43,7 @@ export async function init({
     process.chdir(`editor`)
   } else {
     // find where the node_modules folder is
-    const nodeModulesPath = findNodeModulesMirrorfulPath()
+    const nodeModulesPath = await findNodeModulesMirrorfulPath()
     if (nodeModulesPath) {
       try {
         await fs.promises.access(`next.config.js`, fs.constants.F_OK)
@@ -84,24 +84,29 @@ export async function init({
   console.log('to start the visual editor at any time 🚀')
   console.log()
 
-  const outputMode = verbose ? 'inherit' : 'ignore'
-  const output = spawn.sync('yarn', ['run', command, '-p', port.toString()], {
-    // if you use pipe, then control + c throws an empty error
-    stdio: [outputMode, outputMode, 'inherit'],
-  })
-  if (output.stderr || output.error) {
-    console.log(
-      chalk.red(
-        'Unexpected error. Please report it as a bug on our repo: https://github.com/Mirrorful/mirrorful'
-      ) + '\n'
-    )
+  try {
+    const outputMode = verbose ? 'inherit' : 'ignore'
+    const output = spawn('yarn', ['run', command, '-p', port.toString()], {
+      // if you use pipe, then control + c throws an empty error
+      stdio: [outputMode, outputMode, 'inherit'],
+    })
+
+    openBrowser({ url: 'http://localhost', port })
+
     if (output.stderr) {
+      console.log(
+        chalk.red(
+          'Unexpected error. Please report it as a bug on our repo: https://github.com/Mirrorful/mirrorful'
+        ) + '\n'
+      )
+
       console.log()
       console.log(`Stderr: ${output.stderr}`)
     }
-    if (output.error) {
+  } catch (error) {
+    if (error instanceof Error) {
       console.log()
-      console.log(`Error: ${output.error}`)
+      console.log(`Error: ${error.message}`)
     }
   }
 }
