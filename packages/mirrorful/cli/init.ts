@@ -91,7 +91,7 @@ export async function init({
       stdio: [outputMode, outputMode, 'inherit'],
     })
 
-    openBrowser({ url: 'http://localhost', port })
+    await openBrowser({ url: 'http://localhost', port })
 
     if (output.stderr) {
       console.log(
