@@ -10,6 +10,7 @@ import {
   TabPanel,
   Text,
   Code,
+  Link
 } from '@chakra-ui/react'
 import { generateDefaultColorShades } from 'components/ColorPalette/utils'
 import tinycolor from 'tinycolor2'
@@ -98,11 +99,19 @@ export function ImportInstructions({
         css={{
           width: '60%',
           display: 'flex',
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
           padding: '40px',
         }}
       >
+
+
+
+
+
+        <Box css={{ paddingTop: '32px' }}>
+
         <Tabs>
           <TabList>
             <Tab>CSS / SCSS</Tab>
@@ -178,6 +187,25 @@ export function ImportInstructions({
             </TabPanel>
           </TabPanels>
         </Tabs>
+
+        </Box>
+
+
+        <Box>
+          <Text css={{ marginTop: '12px' }}>          
+            A <code>.mirrorful</code> folder containing the theme files is created at the root of your project.
+          </Text>
+          <Text css={{ marginTop: '12px' }}>
+            To learn more about how to import these generated files, visit our{' '}
+            <Link
+              isExternal
+              color="blue.500"
+              href="https://github.com/Mirrorful/mirrorful"
+            >
+              documentation here.
+            </Link>
+          </Text>
+        </Box>
       </Box>
     </Box>
   )

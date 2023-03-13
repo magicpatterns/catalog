@@ -123,6 +123,9 @@ export function ExportSuccessModal({
               </TabPanel>
             </TabPanels>
           </Tabs>
+          <Text css={{ marginTop: '12px' }}>          
+            A <code>.mirrorful</code> folder containing the theme files is created at the root of your project.
+          </Text>
           <Text css={{ marginTop: '12px' }}>
             To learn more about how to import these generated files, visit our{' '}
             <Link
@@ -131,6 +134,16 @@ export function ExportSuccessModal({
               href="https://github.com/Mirrorful/mirrorful"
             >
               documentation here.
+            </Link>
+          </Text>
+          <Text css={{ marginTop: '12px' }}>  
+            <b>Note:</b> Projects generated using<Code>create-react-app</Code> might face this known{' '}
+            <Link
+              isExternal
+              color="red.500"
+              href="https://github.com/Mirrorful/mirrorful/issues/41"
+            >
+              issue.
             </Link>
           </Text>
         </ModalBody>
