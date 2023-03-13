@@ -12,17 +12,14 @@ import {
   FormLabel,
   Box,
   Flex,
-  InputRightElement,
-  IconButton,
-  InputGroup,
 } from '@chakra-ui/react'
 import { TColorData } from 'types'
 import { useState, useRef } from 'react'
-import { generateDefaultColorShades, handleInvalidColor } from './utils'
+import { handleInvalidColor } from './utils'
 import { ColorPicker } from './ColorPicker'
 import { Color } from '@hello-pangea/color-picker'
-import tinycolor from 'tinycolor2'
-import { FaMagic } from 'react-icons/fa'
+
+const INITIAL_COLOR_PICKER_COLOR = '#000000'
 
 export function EditColorModal({
   isOpen,
@@ -35,14 +32,13 @@ export function EditColorModal({
 }) {
   const baseRef = useRef<HTMLInputElement | null>(null)
   const hoverRef = useRef<HTMLInputElement | null>(null)
-  const activeColorRef = useRef<HTMLInputElement | null>(null)
 
   const presetColors: string[] = []
   const [name, setName] = useState<string>(initialColorData?.name ?? '')
   const [base, setBase] = useState<string>(initialColorData?.baseColor ?? '')
 
   const [colorPickerColor, setColorPickerColor] = useState<Color>(
-    initialColorData?.baseColor ?? '#000000'
+    initialColorData?.baseColor ?? INITIAL_COLOR_PICKER_COLOR
   )
 
   const [showBaseColorPicker, setShowBaseColorPicker] = useState<boolean>(true)
@@ -55,7 +51,6 @@ export function EditColorModal({
 
   const handleClose = () => {
     onBaseBlur()
-
     onClose({
       name,
       baseColor: base,
@@ -63,6 +58,10 @@ export function EditColorModal({
         '500': base,
       },
     })
+
+    setName('')
+    setBase('')
+    setColorPickerColor(INITIAL_COLOR_PICKER_COLOR)
   }
 
   return (
@@ -134,7 +133,7 @@ export function EditColorModal({
           <Box flex="1">
             {showBaseColorPicker && (
               <ColorPicker
-                onChange={(colorPickerColor, event) => {
+                onChange={(colorPickerColor) => {
                   setBase(colorPickerColor.hex)
                 }}
                 colorPickerColor={colorPickerColor}
