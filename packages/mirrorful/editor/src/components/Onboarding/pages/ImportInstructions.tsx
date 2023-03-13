@@ -105,13 +105,7 @@ export function ImportInstructions({
           padding: '40px',
         }}
       >
-
-
-
-
-
         <Box css={{ paddingTop: '32px' }}>
-
         <Tabs>
           <TabList>
             <Tab>CSS / SCSS</Tab>
@@ -187,10 +181,7 @@ export function ImportInstructions({
             </TabPanel>
           </TabPanels>
         </Tabs>
-
         </Box>
-
-
         <Box>
           <Text css={{ marginTop: '12px' }}>          
             A <code>.mirrorful</code> folder containing the theme files is created at the root of your project.
