@@ -15,6 +15,7 @@ import {
   InputRightElement,
   IconButton,
   InputGroup,
+  Tooltip
 } from '@chakra-ui/react'
 import { TColorData } from 'types'
 import { useState, useRef } from 'react'
@@ -83,6 +84,7 @@ export function EditColorModal({
           <Flex flexDirection="column" flex="1">
             <FormControl>
               <FormLabel>Variable Name</FormLabel>
+              <Tooltip placement="left" closeDelay={500} hasArrow label={"Note: Variable names don't necessarily need a hyphen."}>
               <Input
                 placeholder="e.g. Pepsi Blue"
                 size="md"
@@ -97,6 +99,7 @@ export function EditColorModal({
                   }
                 }}
               />
+              </Tooltip>
             </FormControl>
             <FormControl css={{ marginTop: 16 }}>
               <FormLabel>

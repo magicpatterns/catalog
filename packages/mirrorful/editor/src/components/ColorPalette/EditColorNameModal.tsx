@@ -15,6 +15,7 @@ import {
   InputRightElement,
   IconButton,
   InputGroup,
+  Tooltip
 } from '@chakra-ui/react'
 import { useState } from 'react'
 
@@ -51,10 +52,12 @@ export function EditColorNameModal({
         >
           <FormControl>
             <FormLabel>Color Name</FormLabel>
+            <Tooltip placement="left" closeDelay={500} hasArrow label={"Note: Variable names don't necessarily need a hyphen."}>
             <Input
               value={colorName}
               onChange={(e) => setColorName(e.target.value)}
             />
+            </Tooltip>
           </FormControl>
         </ModalBody>
         <ModalFooter>

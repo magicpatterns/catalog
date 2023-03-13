@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Input, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Heading, Input, Stack, Text, Tooltip } from '@chakra-ui/react'
 import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
 import { generateDefaultColorShades } from 'components/ColorPalette/utils'
 import { useState } from 'react'
@@ -119,6 +119,8 @@ export function NamePrimary({
         >
           Color Name:
         </Text>
+
+        <Tooltip placement="top" closeDelay={500} hasArrow label={"Note: Variable names don't necessarily need a hyphen."}>
         <Input
           placeholder="e.g. Blue"
           css={{ width: '100%' }}
@@ -130,6 +132,8 @@ export function NamePrimary({
             setName(e.currentTarget.value)
           }}
         />
+        </Tooltip>
+
         {error && (
           <Text
             css={{ alignSelf: 'flex-start', marginTop: '8px' }}
