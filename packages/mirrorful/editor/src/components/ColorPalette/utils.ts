@@ -80,7 +80,12 @@ export const handleInvalidColor = (input: string) => {
 
   // Check if input is a valid subset of a hexcode
   const validSubsetRegex = /^#?[0-9A-Fa-f]{0,6}$/ // regex to validate if input is a valid subset of a hexcode
-  const randomHex = Math.floor(Math.random() * 16777215).toString(16) // generate a random valid hexcode
+
+  let randomHex: String = ''
+  for (let i: number = 0; i < 6; i++) {
+    randomHex += Math.floor(Math.random() * 16).toString(16) // Generate six random hex digits.
+  }
+
   if (validSubsetRegex.test(sanitizedInput)) {
     // check if input is a valid subset of a hexcode
     if (sanitizedInput.startsWith('#')) {
