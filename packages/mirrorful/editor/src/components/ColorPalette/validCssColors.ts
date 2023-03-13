@@ -147,4 +147,6 @@ export const VALID_CSS_COLORS = [
   'whitesmoke',
   'yellow',
   'yellowgreen',
+  'navyblue',
+  'seagreen',
 ]
