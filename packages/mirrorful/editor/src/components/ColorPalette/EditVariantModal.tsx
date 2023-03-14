@@ -201,6 +201,7 @@ export function EditVariantModal({
       </Modal>
       {onDeleteVariant && (
         <AlertDialogDelete
+          tokenName={variant.name}
           isOpen={isAlertDialogOpen}
           onClose={onDeleteAlertDialogClose}
           onDelete={() => onDeleteVariant()}

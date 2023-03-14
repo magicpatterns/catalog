@@ -10,10 +10,12 @@ import {
 import React from 'react'
 
 export function AlertDialogDelete({
+  tokenName,
   isOpen,
   onClose,
   onDelete,
 }: {
+  tokenName: string
   isOpen: boolean
   onClose: () => void
   onDelete: () => void
@@ -29,11 +31,12 @@ export function AlertDialogDelete({
       <AlertDialogOverlay>
         <AlertDialogContent>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
-            Delete Alert
+            Are you sure?
           </AlertDialogHeader>
 
           <AlertDialogBody>
-            Are you sure? You can't undo this action afterwards.
+            Are you sure you want to delete {`"${tokenName}"`}? You {`can't`}{' '}
+            undo this action.
           </AlertDialogBody>
 
           <AlertDialogFooter>

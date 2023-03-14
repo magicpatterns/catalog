@@ -218,6 +218,7 @@ export function ColorRow({
         }}
       />
       <AlertDialogDelete
+        tokenName={colorData.name}
         isOpen={isAlertDialogOpen}
         onClose={onDeleteAlertDialogClose}
         onDelete={() => onDeleteColorData()}

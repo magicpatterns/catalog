@@ -139,6 +139,7 @@ export function EditFontSizeModal({
         </ModalContent>
       </Modal>
       <AlertDialogDelete
+        tokenName={variant.name}
         isOpen={isAlertDialogOpen}
         onClose={onDeleteAlertDialogClose}
         onDelete={() => onDeleteFontSizeVariant()}
