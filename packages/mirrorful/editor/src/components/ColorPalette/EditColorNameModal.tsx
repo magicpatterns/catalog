@@ -59,7 +59,7 @@ export function EditColorNameModal({
                   closeDelay={500}
                   hasArrow
                   label={"Variable names don't need a hyphen."}>
-                    <InfoIcon css={{ marginTop: '5px' }} />
+                    <InfoIcon css={{ marginTop: '5px', marginLeft: '-6px' }} />
                 </Tooltip>
             </Flex>
             <Input
