@@ -52,7 +52,7 @@ export function EditColorNameModal({
           }}
         >
           <FormControl>
-            <Flex flex="1">
+            <Flex>
               <FormLabel>Color Name</FormLabel>
               <Tooltip
                   placement="right"
