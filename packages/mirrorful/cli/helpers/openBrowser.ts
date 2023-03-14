@@ -22,7 +22,5 @@ async function waitToOpenBrowser(port: number) {
     )}`
   )
   console.log()
-  let timer = setInterval(() => {}, 1000)
   await sleep(5000)
-  clearInterval(timer)
 }
