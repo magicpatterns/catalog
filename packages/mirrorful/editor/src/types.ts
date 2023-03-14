@@ -26,3 +26,10 @@ export type TTokens = {
   colorData: TColorData[]
   typography: TTypographyData
 }
+
+export type TExportFileType = 'css' | 'scss' | 'js' | 'ts'
+
+export type TConfig = {
+  tokens: TTokens
+  files: TExportFileType[]
+}
