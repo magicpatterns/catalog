@@ -86,7 +86,7 @@ export function EditColorModal({
         >
           <Flex flexDirection="column" flex="1">
             <FormControl>
-                <Flex  flex="1">
+                <Flex flex="1">
                   <FormLabel>Variable Name</FormLabel>
                   <Tooltip
                   placement="right"
