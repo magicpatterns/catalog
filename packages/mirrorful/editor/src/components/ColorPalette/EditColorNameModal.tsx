@@ -17,6 +17,7 @@ import {
   InputGroup,
   Tooltip
 } from '@chakra-ui/react'
+import { InfoIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
 
 export function EditColorNameModal({
@@ -51,13 +52,20 @@ export function EditColorNameModal({
           }}
         >
           <FormControl>
-            <FormLabel>Color Name</FormLabel>
-            <Tooltip placement="left" closeDelay={500} hasArrow label={"Note: Variable names don't necessarily need a hyphen."}>
+            <Flex  flex="1">
+              <FormLabel>Color Name</FormLabel>
+              <Tooltip
+                  placement="right"
+                  closeDelay={500}
+                  hasArrow
+                  label={"Variable names don't need a hyphen."}>
+                    <InfoIcon css={{ marginTop: '5px' }} />
+                </Tooltip>
+            </Flex>
             <Input
               value={colorName}
               onChange={(e) => setColorName(e.target.value)}
             />
-            </Tooltip>
           </FormControl>
         </ModalBody>
         <ModalFooter>
