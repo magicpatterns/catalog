@@ -72,16 +72,10 @@ export async function init({
     command = 'dev'
   }
 
-  console.log(
-    `Visit: ${chalk.cyan(`${`http://localhost:`}${port.toString()}`)}`
-  )
-
   const useYarn = packageManager === 'yarn'
   console.log('Inside your project, you can run:')
-  console.log()
   console.log(chalk.cyan(`  ${useYarn ? 'yarn run ' : 'npx '}mirrorful`))
-  console.log()
-  console.log('to start the visual editor at any time 🚀')
+  console.log('to start the visual editor at any time.')
   console.log()
 
   try {
