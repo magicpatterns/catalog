@@ -12,7 +12,12 @@ import {
   FormLabel,
   Box,
   Flex,
+  InputRightElement,
+  IconButton,
+  InputGroup,
+  Tooltip,
 } from '@chakra-ui/react'
+import { InfoIcon } from '@chakra-ui/icons'
 import { TColorData } from 'types'
 import { useState, useRef } from 'react'
 import { handleInvalidColor } from './utils'
@@ -81,21 +86,30 @@ export function EditColorModal({
         >
           <Flex flexDirection="column" flex="1">
             <FormControl>
-              <FormLabel>Variable Name</FormLabel>
-              <Input
-                placeholder="e.g. Pepsi Blue"
-                size="md"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                onFocus={(e) => {
-                  setShowBaseColorPicker(true)
-                }}
-                onKeyPress={(event) => {
-                  if (event.key === 'Enter' && baseRef.current) {
-                    baseRef.current.focus()
-                  }
-                }}
-              />
+                <Flex>
+                  <FormLabel>Variable Name</FormLabel>
+                  <Tooltip
+                  placement="right"
+                  closeDelay={500}
+                  hasArrow
+                  label={"Variable names don't need a hyphen."}>
+                  <InfoIcon css={{ marginTop: '5px', marginLeft: '-6px' }} />
+                  </Tooltip>
+                </Flex>
+                <Input
+                  placeholder="e.g. Pepsi Blue"
+                  size="md"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  onFocus={(e) => {
+                    setShowBaseColorPicker(true)
+                  }}
+                  onKeyPress={(event) => {
+                    if (event.key === 'Enter' && baseRef.current) {
+                      baseRef.current.focus()
+                    }
+                  }}
+                />
             </FormControl>
             <FormControl css={{ marginTop: 16 }}>
               <FormLabel>
