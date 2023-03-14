@@ -1,9 +1,9 @@
-import { Box, Button, Heading, Input, Stack, Text, Tooltip, Flex } from '@chakra-ui/react'
+import { Box, Button, Heading, Input, Stack, Text } from '@chakra-ui/react'
 import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
 import { generateDefaultColorShades } from 'components/ColorPalette/utils'
 import { useState } from 'react'
 import tinycolor from 'tinycolor2'
-import { ArrowBackIcon, ArrowForwardIcon, InfoIcon } from '@chakra-ui/icons'
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { NUMBER_OF_STEPS_IN_NEW_FLOW } from '../constants'
 
 export function NamePrimary({
@@ -113,21 +113,12 @@ export function NamePrimary({
           }}
           bgColor={primaryColor}
         />
-        <Flex>
             <Text
               css={{ alignSelf: 'flex-start', marginBottom: '4px' }}
               fontWeight="bold"
             >
               Color Name:
             </Text>
-            <Tooltip
-                  placement="right"
-                  closeDelay={500}
-                  hasArrow
-                  label={"Variable names don't need a hyphen."}>
-                <InfoIcon css={{ marginTop: '5px', marginLeft: '4px' }} />
-            </Tooltip>
-          </Flex>
         <Input
           placeholder="e.g. Blue"
           css={{ width: '100%' }}
