@@ -1,7 +1,7 @@
 import Conf from 'conf'
-import { TColorData, TTypographyData } from 'types'
+import { TColorData, TConfig, TTypographyData } from 'types'
 
-export const ZeroPointZeroPointTwoMigration = (store: Conf<any>) => {
+export const ZeroPointZeroPointTwoMigration = (store: Conf<TConfig>) => {
   const tokens = store.get('tokens')
 
   let newTokens: {
@@ -62,10 +62,16 @@ export const defaultTypography: TTypographyData = {
   ],
 }
 
-export const ZeroPointZeroPointThreeMigration = (store: Conf<any>) => {
+export const ZeroPointZeroPointThreeMigration = (store: Conf<TConfig>) => {
   const tokens = store.get('tokens')
   const updatedTokens = { ...tokens }
 
   updatedTokens.typography = defaultTypography
   store.set('tokens', updatedTokens)
+}
+
+export const defaultFiles: TConfig['files'] = ['css', 'scss', 'js', 'ts']
+
+export const ZeroPointZeroPointFourMigration = (store: Conf<TConfig>) => {
+  store.set('files', defaultFiles)
 }

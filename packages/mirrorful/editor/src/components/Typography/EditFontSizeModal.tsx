@@ -87,9 +87,9 @@ export function EditFontSizeModal({
               <Input
                 value={variant.value}
                 onChange={(e) =>
-                  setVariant({ ...variant, value: Number(e.target.value) })
+                  setVariant({ ...variant, value: e.target.value })
                 }
-                type='number'
+                type="number"
               />
             </FormControl>
             <FormControl css={{ marginTop: '32px' }}>
