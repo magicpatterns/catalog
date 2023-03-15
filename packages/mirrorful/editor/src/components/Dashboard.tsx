@@ -142,6 +142,7 @@ export function Dashboard() {
       </Box>
       <Box css={{ marginBottom: '64px' }} />
       <ExportSuccessModal
+        primaryName={colors && colors[0] ? colors[0].name : 'primary'}
         isOpen={isExportSuccessModalOpen}
         onClose={onExportSuccessModalClose}
       />

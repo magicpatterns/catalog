@@ -93,6 +93,7 @@ export function Onboarding({
     content = (
       <ImportInstructions
         primaryColor={primaryColor}
+        primaryName={primaryName}
         onUpdatePage={setPage}
         onFinish={onFinishOnboarding}
       />
