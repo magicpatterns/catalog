@@ -30,7 +30,7 @@ export const toScss = ({ colorData, typography }: TTokens): string => {
     )
   })
 
-  content.push(toCss({ colorData, typography }))
+  content.push('', toCss({ colorData, typography }))
 
   return content.join('\n')
 }
