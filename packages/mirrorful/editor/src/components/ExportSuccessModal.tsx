@@ -77,7 +77,7 @@ export function ExportSuccessModal({
                 <CodePreview
                   language="css"
                   textClass="code-snippet"
-                  text={`.${primaryName}-button {\n    background-color: var(--color-${primaryName});\n}\n\n.${primaryName}-button:hover {\n    background-color: var(--color-${primaryName}-hover);\n}`}
+                  text={`.${primaryName.toLowerCase()}-button {\n    background-color: var(--color-${primaryName.toLowerCase()});\n}\n\n.${primaryName.toLowerCase()}-button:hover {\n    background-color: var(--color-${primaryName.toLowerCase()}-hover);\n}`}
                 />
               </TabPanel>
               <TabPanel>
@@ -101,7 +101,7 @@ export function ExportSuccessModal({
                 <CodePreview
                   language="javascript"
                   textClass="code-snippet"
-                  text={`<button\n   style={{ backgroundColor: Tokens.colors.${primaryName}.base }}\n> Click here\n</button>`}
+                  text={`<button\n   style={{ backgroundColor: Tokens.colors.${primaryName.toLowerCase()}.base }}\n> Click here\n</button>`}
                 />
               </TabPanel>
               <TabPanel>
