@@ -23,9 +23,11 @@ import 'highlight.js/styles/atom-one-dark.css'
 import { CodePreview } from './CodePreview'
 
 export function ExportSuccessModal({
+  primaryName,
   isOpen,
   onClose,
 }: {
+  primaryName: string
   isOpen: boolean
   onClose: () => void
 }) {
@@ -75,7 +77,7 @@ export function ExportSuccessModal({
                 <CodePreview
                   language="css"
                   textClass="code-snippet"
-                  text={`.primary-button {\n    background-color: var(--color-primary);\n}\n\n.primary-button:hover {\n    background-color: var(--color-primary-hover);\n}`}
+                  text={`.${primaryName}-button {\n    background-color: var(--color-${primaryName});\n}\n\n.${primaryName}-button:hover {\n    background-color: var(--color-${primaryName}-hover);\n}`}
                 />
               </TabPanel>
               <TabPanel>
@@ -99,7 +101,7 @@ export function ExportSuccessModal({
                 <CodePreview
                   language="javascript"
                   textClass="code-snippet"
-                  text={`<button\n   style={{ backgroundColor: Tokens.primary.base}}\n> Click here\n</button>`}
+                  text={`<button\n   style={{ backgroundColor: Tokens.${primaryName}.base}}\n> Click here\n</button>`}
                 />
               </TabPanel>
               <TabPanel>
