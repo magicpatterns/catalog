@@ -1,6 +1,6 @@
 import { useDisclosure, Box, Button } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { TColorData, TTypographyData } from 'types'
+import { TColorData, TConfig, TTypographyData } from 'types'
 import { ColorPaletteSection } from './ColorPalette/ColorPaletteSection'
 import { ExportSuccessModal } from './ExportSuccessModal'
 import { Onboarding } from './Onboarding'
@@ -26,12 +26,19 @@ export function Dashboard() {
   useEffect(() => {
     const fetchStoredData = async () => {
       const response = await fetch('/api/config')
-      const data = await response.json()
-      if (!data || !data.colorData || data.colorData.length === 0) {
+      const data: TConfig | undefined = await response.json()
+
+      if (
+        !data ||
+        !data.tokens.colorData ||
+        data.tokens.colorData.length === 0
+      ) {
         setShowOnboarding(true)
+        return
       }
-      setColors(data.colorData ?? [])
-      setTypography(data.typography)
+
+      setColors(data.tokens.colorData ?? [])
+      setTypography(data.tokens.typography)
     }
 
     fetchStoredData()

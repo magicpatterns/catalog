@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fs from 'fs'
 import { rootPath, store } from '../../store/store'
+import { TConfig } from 'types'
 
 const readStorageFile = async (): Promise<{ colorData: string[] }> => {
   const data = await fs.promises.readFile(`${rootPath}/store.json`, 'utf8')
@@ -16,13 +17,14 @@ const deleteStorageFile = async () => {
 }
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+  _: NextApiRequest,
+  res: NextApiResponse<TConfig>
 ) {
-  const tokens = store.get('tokens')
+  const config = store.store
 
   // Handle migration from old storage file
   try {
+    const tokens = store.get('tokens')
     const data = await readStorageFile()
     if (
       data.colorData &&
@@ -31,11 +33,11 @@ export default async function handler(
     ) {
       store.set('tokens', data)
       deleteStorageFile()
-      return res.status(200).json(data)
+      return res.status(200).json(config)
     }
   } catch (e) {
     console.log('No migration needed!')
   }
 
-  return res.status(200).json(tokens)
+  return res.status(200).json(config)
 }
