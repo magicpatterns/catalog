@@ -21,7 +21,8 @@ export function ImportInstructions({
   primaryColor,
   onUpdatePage,
   onFinish,
-}: { primaryColor: string
+}: {
+  primaryColor: string
   onUpdatePage: (page: number) => void
   onFinish: () => void
 }) {
