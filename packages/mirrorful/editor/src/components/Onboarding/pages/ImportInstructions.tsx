@@ -154,7 +154,7 @@ export function ImportInstructions({
               <CodePreview
                 language="javascript"
                 textClass="code-snippet"
-                text={`<button\n   style={{ backgroundColor: Tokens.colors.${primaryName}.base}}\n> Click here\n</button>`}
+                text={`<button\n   style={{ backgroundColor: Tokens.colors.${primaryName}.base }}\n> Click here\n</button>`}
               />
             </TabPanel>
             <TabPanel>
