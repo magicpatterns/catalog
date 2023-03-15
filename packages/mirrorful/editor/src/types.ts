@@ -27,7 +27,7 @@ export type TTokens = {
   typography: TTypographyData
 }
 
-export type TExportFileType = 'css' | 'scss' | 'js' | 'ts'
+export type TExportFileType = 'css' | 'scss' | 'js' | 'cjs' | 'ts' | 'json'
 
 export type TConfig = {
   tokens: TTokens

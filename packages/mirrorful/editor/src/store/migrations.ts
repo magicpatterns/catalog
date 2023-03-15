@@ -70,7 +70,14 @@ export const ZeroPointZeroPointThreeMigration = (store: Conf<TConfig>) => {
   store.set('tokens', updatedTokens)
 }
 
-export const defaultFiles: TConfig['files'] = ['css', 'scss', 'js', 'ts']
+export const defaultFiles: TConfig['files'] = [
+  'css',
+  'scss',
+  'js',
+  'cjs',
+  'ts',
+  'json',
+]
 
 export const ZeroPointZeroPointFourMigration = (store: Conf<TConfig>) => {
   store.set('files', defaultFiles)
