@@ -1,8 +1,9 @@
 import { generateDefaultColorShades } from 'components/ColorPalette/utils'
 import { useState } from 'react'
 import { defaultFiles, defaultTypography } from 'store/migrations'
-import { TColorData } from 'types'
+import { TColorData, TExportFileType } from 'types'
 import { OnboardingContainer } from './OnboardingContainer'
+import { ExportSettings } from './pages/ExportSettings'
 import { ImportInstructions } from './pages/ImportInstructions'
 import { NamePrimary } from './pages/NamePrimary'
 import { OtherColors } from './pages/OtherColors'
@@ -18,6 +19,7 @@ export function Onboarding({
   const [primaryColor, setPrimaryColor] = useState<string>('#9F7AEA')
   const [primaryName, setPrimaryName] = useState<string>('')
   const [palette, setPalette] = useState<TColorData[]>([])
+  const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
 
   const [page, setPage] = useState<number>(0)
 
@@ -39,7 +41,7 @@ export function Onboarding({
       method: 'POST',
       body: JSON.stringify({
         tokens: { colorData: colors, typography: defaultTypography },
-        files: defaultFiles,
+        files: fileTypes,
       }),
     })
   }
@@ -79,7 +81,6 @@ export function Onboarding({
               color.variants = generateDefaultColorShades(color.baseColor)
             }
           })
-          handleExport(primaryColor, primaryName, newPalette)
           setPalette(newPalette)
         }}
         primaryColor={primaryColor}
@@ -88,6 +89,18 @@ export function Onboarding({
       />
     )
   } else if (page === 5) {
+    content = (
+      <ExportSettings
+        primaryColor={primaryColor}
+        fileTypes={fileTypes}
+        onUpdateFileTypes={setFileTypes}
+        onExport={() => {
+          handleExport(primaryColor, primaryName, palette)
+        }}
+        onUpdatePage={setPage}
+      />
+    )
+  } else if (page === 6) {
     content = (
       <ImportInstructions
         primaryColor={primaryColor}

@@ -8,7 +8,6 @@ import {
   ModalCloseButton,
   Button,
   CheckboxGroup,
-  SimpleGrid,
   Checkbox,
   Heading,
   VStack,
