@@ -1,3 +1,9 @@
+import { DndContext, closestCenter, type DragEndEvent } from '@dnd-kit/core'
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable'
 import { ColorRow } from './ColorRow'
 import { TColorData } from '../../types'
 import {
