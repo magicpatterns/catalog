@@ -17,6 +17,8 @@ import { EditColorNameModal } from './EditColorNameModal'
 import { useState } from 'react'
 import { EditVariantModal } from './EditVariantModal'
 import { ColorVariantPlaceholder } from './ColorVariantPlaceholder'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 function VariantSquare({
   variant,
@@ -94,6 +96,7 @@ export function ColorRow({
   return (
     <>
       <Box css={{ display: 'flex' }}>
+        <Button>Drag Me</Button>
         <Box css={{ width: 350, paddingRight: '64px' }}>
           <Box>
             <Heading fontWeight="extrabold" fontSize={28}>
