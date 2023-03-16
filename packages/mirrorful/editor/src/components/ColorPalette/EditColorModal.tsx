@@ -16,6 +16,7 @@ import {
   IconButton,
   InputGroup,
 } from '@chakra-ui/react'
+import { v4 as uuidv4 } from 'uuid'
 import { TColorData } from 'types'
 import { useState, useRef } from 'react'
 import { generateDefaultColorShades, handleInvalidColor } from './utils'
@@ -23,6 +24,7 @@ import { ColorPicker } from './ColorPicker'
 import { Color } from '@hello-pangea/color-picker'
 import tinycolor from 'tinycolor2'
 import { FaMagic } from 'react-icons/fa'
+import { randomUUID } from 'crypto'
 
 export function EditColorModal({
   isOpen,
@@ -57,6 +59,7 @@ export function EditColorModal({
     onBaseBlur()
 
     onClose({
+      id: initialColorData?.id ?? uuidv4(),
       name,
       baseColor: base,
       variants: {
