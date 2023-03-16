@@ -34,10 +34,8 @@ export function ColorPaletteSection({
       const { active, over } = event // gives us access to the active card and the one its over
 
       if (over !== null && active.id != over.id) {
-        const activeIndex = colors.findIndex(
-          (color) => color.name === active.id
-        )
-        const overIndex = colors.findIndex((color) => color.name === over.id)
+        const activeIndex = colors.findIndex((color) => color.id === active.id)
+        const overIndex = colors.findIndex((color) => color.id === over.id)
         // arrayMove - allows us to mutate the array
         onUpdateColors(arrayMove(colors, activeIndex, overIndex))
       }
