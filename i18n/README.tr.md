@@ -1,6 +1,6 @@
 <h1 align="center">
-  <img width="300" src="./assets/logo-light-mode.png#gh-light-mode-only" alt="Mirrorful">
-  <img width="300" src="./assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
+  <img width="300" src="../assets/logo-light-mode.png#gh-light-mode-only" alt="Mirrorful">
+  <img width="300" src="../assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
 </h1>
 <p align="center">
   <p align="center">Uygulamanızın temellerini, basit ve açık kaynaklı tasarım altyapısıyla oluşturun.</p>
@@ -33,7 +33,7 @@
   </a>
 </h4>
 
-<img src="./assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
+<img src="../assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
 
 **[Mirrorful](https://mirrorful.com)** basit, açık kaynaklı bir tasarım sistemi altyapısıdır. Projelerinizde renkler ve diğer tasarım elemanlarını oluşturmak için Mirrorful'ü yükleyin. Daha sonra, oluşturduğunuz bu elemanları uygulamanıza aktarın.
 
