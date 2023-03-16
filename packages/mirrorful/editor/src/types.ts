@@ -1,4 +1,5 @@
 export type TColorData = {
+  id: number
   name: string
   baseColor?: string
   variants: {
