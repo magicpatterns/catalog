@@ -1,5 +1,6 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from 'components/ColorPalette/utils'
+import { v4 as uuidv4 } from 'uuid'
 import { useState } from 'react'
 import { defaultTypography } from 'store/migrations'
 import { TColorData } from 'types'
@@ -30,6 +31,7 @@ export function Onboarding({
   ) => {
     const colors: TColorData[] = [
       {
+        id: uuidv4(),
         name: primaryColorName,
         baseColor: primaryColorHex,
         variants: generateDefaultColorShades(primaryColorHex),
