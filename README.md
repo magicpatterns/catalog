@@ -38,6 +38,7 @@
 **Read this in other languages**: <kbd>[<img title="English" alt="English language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="22">](i18n/README.en.md)</kbd>
 <kbd>[<img title="German" alt="German language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/de.svg" width="22">](i18n/README.de.md)</kbd>
 <kbd>[<img title="Swedish" alt="Swedish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/se.svg" width="22">](i18n/README.sv.md)</kbd>
+<kbd>[<img title="Turkish" alt="Turkish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/tr.svg" width="22">](i18n/README.tr.md)</kbd>
 
 **[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
 
@@ -174,6 +175,6 @@ No matter the PR, all the Github avatars of contributors will be added to the Mi
 
 ## 🌎 Translations
 
-Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md) and [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md). Help us translate our documentation and UI to your language!
+Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md), and [Turkish 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.trs.md), among other languages. Help us translate our documentation and UI to your language!
 
 You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).
