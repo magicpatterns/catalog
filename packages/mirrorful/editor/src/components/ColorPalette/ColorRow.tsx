@@ -11,6 +11,7 @@ import {
   Heading,
   Link,
   Checkbox,
+  Flex,
 } from '@chakra-ui/react'
 import { EditColorModal } from './EditColorModal'
 import { EditColorNameModal } from './EditColorNameModal'
@@ -154,8 +155,14 @@ export function ColorRow({
 
   return (
     <>
-      <Box css={{ display: 'flex' }} ref={setNodeRef} style={styles}>
-        <Button {...attributes} {...listeners}>
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        gap="4"
+        ref={setNodeRef}
+        style={styles}
+      >
+        <Button {...attributes} {...listeners} css={{}}>
           Drag Me
         </Button>
         <Box css={{ width: 350, paddingRight: '64px' }}>
@@ -210,7 +217,7 @@ export function ColorRow({
             <ColorVariantPlaceholder onClick={() => onAddVariantModalOpen()} />
           </Box>
         </Box>
-      </Box>
+      </Flex>
       <EditColorNameModal
         isOpen={isColorNameModalOpen}
         onClose={onColorNameModalClose}
