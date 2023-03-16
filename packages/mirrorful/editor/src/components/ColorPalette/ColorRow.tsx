@@ -93,10 +93,22 @@ export function ColorRow({
     onClose: onAddVariantModalClose,
   } = useDisclosure()
 
+  // setNodeRef is needed to know which node is active
+  // transform and transition are needed to style and more around the object
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: colorData.name })
+
+  const styles = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  }
+
   return (
     <>
-      <Box css={{ display: 'flex' }}>
-        <Button>Drag Me</Button>
+      <Box css={{ display: 'flex' }} ref={setNodeRef} style={styles}>
+        <Button {...attributes} {...listeners}>
+          Drag Me
+        </Button>
         <Box css={{ width: 350, paddingRight: '64px' }}>
           <Box>
             <Heading fontWeight="extrabold" fontSize={28}>
