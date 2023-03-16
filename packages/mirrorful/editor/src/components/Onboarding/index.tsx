@@ -1,9 +1,7 @@
-import { Box, Heading, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from 'components/ColorPalette/utils'
 import { useState } from 'react'
-import { defaultTypography } from 'store/migrations'
+import { defaultFiles, defaultTypography } from 'store/migrations'
 import { TColorData } from 'types'
-import { OnboardingCard } from './OnboardingCard'
 import { OnboardingContainer } from './OnboardingContainer'
 import { ImportInstructions } from './pages/ImportInstructions'
 import { NamePrimary } from './pages/NamePrimary'
@@ -41,6 +39,7 @@ export function Onboarding({
       method: 'POST',
       body: JSON.stringify({
         tokens: { colorData: colors, typography: defaultTypography },
+        files: defaultFiles,
       }),
     })
   }

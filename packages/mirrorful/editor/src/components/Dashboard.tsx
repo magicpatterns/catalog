@@ -1,11 +1,19 @@
-import { useDisclosure, Box, Button } from '@chakra-ui/react'
+import {
+  useDisclosure,
+  Box,
+  Button,
+  IconButton,
+  ButtonGroup,
+} from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { TColorData, TConfig, TTypographyData } from 'types'
+import { TColorData, TConfig, TExportFileType, TTypographyData } from 'types'
 import { ColorPaletteSection } from './ColorPalette/ColorPaletteSection'
 import { ExportSuccessModal } from './ExportSuccessModal'
 import { Onboarding } from './Onboarding'
 import posthog from 'posthog-js'
 import { TypographySection } from './Typography/TypographySection'
+import { SettingsIcon } from '@chakra-ui/icons'
+import { ExportSettingsModal } from './ExportSettingsModal'
 
 export function Dashboard() {
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
@@ -16,6 +24,7 @@ export function Dashboard() {
   const [typography, setTypography] = useState<TTypographyData>({
     fontSizes: [],
   })
+  const [fileTypes, setFileTypes] = useState<TExportFileType[]>([])
 
   const {
     isOpen: isExportSuccessModalOpen,
@@ -23,13 +32,19 @@ export function Dashboard() {
     onClose: onExportSuccessModalClose,
   } = useDisclosure()
 
+  const {
+    isOpen: isExportSettingsModalOpen,
+    onOpen: onExportSettingsModalOpen,
+    onClose: onExportSettingsModalClose,
+  } = useDisclosure()
+
   useEffect(() => {
     const fetchStoredData = async () => {
       const response = await fetch('/api/config')
-      const data: TConfig | undefined = await response.json()
+      const data: TConfig | Record<string, never> = await response.json()
 
       if (
-        !data ||
+        !Object.keys(data).length ||
         !data.tokens.colorData ||
         data.tokens.colorData.length === 0
       ) {
@@ -39,6 +54,7 @@ export function Dashboard() {
 
       setColors(data.tokens.colorData ?? [])
       setTypography(data.tokens.typography)
+      setFileTypes(data.files)
     }
 
     fetchStoredData()
@@ -51,6 +67,7 @@ export function Dashboard() {
       method: 'POST',
       body: JSON.stringify({
         tokens: { colorData: colors, typography },
+        files: fileTypes,
       }),
     })
 
@@ -66,6 +83,7 @@ export function Dashboard() {
           typography,
           colorData: data,
         },
+        files: fileTypes,
       }),
     })
   }
@@ -76,6 +94,7 @@ export function Dashboard() {
       method: 'POST',
       body: JSON.stringify({
         tokens: { colorData: colors, typography: data },
+        files: fileTypes,
       }),
     })
   }
@@ -113,9 +132,16 @@ export function Dashboard() {
           <Box>
             <img src="/mirrorful_logo.png" style={{ height: '39px' }} />
           </Box>
-          <Button colorScheme="blue" onClick={handleExport}>
-            Export Config
-          </Button>
+          <ButtonGroup isAttached>
+            <Button colorScheme="blue" onClick={handleExport}>
+              Export Config
+            </Button>
+            <IconButton
+              onClick={onExportSettingsModalOpen}
+              aria-label="Update export settings"
+              icon={<SettingsIcon />}
+            />
+          </ButtonGroup>
           <Box />
         </Box>
         <Box
@@ -148,6 +174,12 @@ export function Dashboard() {
         />
       </Box>
       <Box css={{ marginBottom: '64px' }} />
+      <ExportSettingsModal
+        isOpen={isExportSettingsModalOpen}
+        onClose={onExportSettingsModalClose}
+        fileTypes={fileTypes}
+        onUpdateFileTypes={setFileTypes}
+      />
       <ExportSuccessModal
         primaryName={colors && colors[0] ? colors[0].name : 'primary'}
         isOpen={isExportSuccessModalOpen}
