@@ -48,6 +48,8 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
-    "@types/conf": "^3.0.0"
+    "@types/conf": "^3.0.0",
+    "@types/uuid": "^9.0.1",
+    "uuid": "^9.0.0"
   }
 }
