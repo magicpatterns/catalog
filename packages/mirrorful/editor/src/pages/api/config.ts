@@ -16,11 +16,15 @@ const deleteStorageFile = async () => {
   }
 }
 
+type TInternalConfig = TConfig & {
+  __internal__: Record<string, unknown>
+}
+
 export default async function handler(
   _: NextApiRequest,
   res: NextApiResponse<TConfig>
 ) {
-  const config = store.store
+  const { __internal__, ...config } = store.store as TInternalConfig
 
   // Handle migration from old storage file
   try {
