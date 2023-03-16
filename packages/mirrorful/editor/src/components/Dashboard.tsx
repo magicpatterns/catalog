@@ -50,8 +50,7 @@ export function Dashboard() {
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({
-        colorData: colors,
-        typography,
+        tokens: { colorData: colors, typography },
       }),
     })
 
@@ -63,8 +62,10 @@ export function Dashboard() {
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({
-        typography,
-        colorData: data,
+        tokens: {
+          typography,
+          colorData: data,
+        },
       }),
     })
   }
@@ -74,8 +75,7 @@ export function Dashboard() {
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({
-        colorData: colors,
-        typography: data,
+        tokens: { colorData: colors, typography: data },
       }),
     })
   }

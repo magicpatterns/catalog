@@ -40,8 +40,7 @@ export function Onboarding({
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({
-        colorData: colors,
-        typography: defaultTypography,
+        tokens: { colorData: colors, typography: defaultTypography },
       }),
     })
   }
