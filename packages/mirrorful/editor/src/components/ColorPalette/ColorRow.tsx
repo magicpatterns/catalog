@@ -94,11 +94,10 @@ export function ColorRow({
     onOpen: onAddVariantModalOpen,
     onClose: onAddVariantModalClose,
   } = useDisclosure()
-
   // setNodeRef is needed to know which node is active
   // transform and transition are needed to style and more around the object
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: colorData.name })
+    useSortable({ id: colorData.id })
 
   const styles = {
     transform: CSS.Transform.toString(transform),
