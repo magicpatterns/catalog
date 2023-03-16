@@ -170,6 +170,6 @@ Katkıda bulunanların tüm Github avatarları, PR(Pull Request) ne olursa olsun
 
 ## 🌎 Çeviriler
 
-Mirrorful şu anda İngilizce, [Almanca 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [İsveççe 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md) ve [Türkçe 🇹🇷]() dillerinde kullanılabilir durumda. Dokümantasyon ve arayüzümüzü kendi dilinize çevirmemize yardımcı olun!
+Mirrorful şu anda İngilizce, [Almanca 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [İsveççe 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md) ve [Türkçe 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.tr.md) dillerinde kullanılabilir durumda. Dokümantasyon ve arayüzümüzü kendi dilinize çevirmemize yardımcı olun!
 
 Bu konuyla ilgili tüm bilgileri [burada](https://github.com/Mirrorful/mirrorful/issues/18) bulabilirsiniz.
