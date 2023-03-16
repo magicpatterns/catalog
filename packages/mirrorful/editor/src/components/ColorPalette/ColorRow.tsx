@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { EditColorModal } from './EditColorModal'
 import { EditColorNameModal } from './EditColorNameModal'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { EditVariantModal } from './EditVariantModal'
 import { ColorVariantPlaceholder } from './ColorVariantPlaceholder'
 import { useSortable } from '@dnd-kit/sortable'
@@ -103,6 +103,55 @@ export function ColorRow({
     transition,
   }
 
+  const colorVariants = useMemo(
+    () =>
+      Object.keys(colorData.variants).map((variant) => (
+        <VariantSquare
+          key={variant}
+          variant={{
+            name: variant,
+            color: colorData.variants[variant],
+            isBase: colorData.variants[variant] === colorData.baseColor,
+          }}
+          onUpdateVariant={(newVariant: TColorVariant) => {
+            const updatedVariants = { ...colorData.variants }
+            delete updatedVariants[variant]
+            updatedVariants[newVariant.name] = newVariant.color
+
+            const updatedColorData = {
+              ...colorData,
+              variants: updatedVariants,
+            }
+            if (newVariant.isBase) {
+              updatedColorData.baseColor = newVariant.color
+            } else if (
+              !newVariant.isBase &&
+              updatedColorData.baseColor === newVariant.color
+            ) {
+              delete updatedColorData.baseColor
+            }
+
+            onUpdateColorData(updatedColorData)
+          }}
+          onDeleteVariant={() => {
+            const updatedVariants = { ...colorData.variants }
+            delete updatedVariants[variant]
+
+            const updatedColorData = {
+              ...colorData,
+              variants: updatedVariants,
+            }
+            if (colorData.variants[variant] === colorData.baseColor) {
+              delete updatedColorData.baseColor
+            }
+
+            onUpdateColorData(updatedColorData)
+          }}
+        />
+      )),
+    [colorData.variants]
+  )
+
   return (
     <>
       <Box css={{ display: 'flex' }} ref={setNodeRef} style={styles}>
@@ -157,50 +206,7 @@ export function ColorRow({
             }}
             height={240}
           >
-            {Object.keys(colorData.variants).map((variant) => (
-              <VariantSquare
-                key={variant}
-                variant={{
-                  name: variant,
-                  color: colorData.variants[variant],
-                  isBase: colorData.variants[variant] === colorData.baseColor,
-                }}
-                onUpdateVariant={(newVariant: TColorVariant) => {
-                  const updatedVariants = { ...colorData.variants }
-                  delete updatedVariants[variant]
-                  updatedVariants[newVariant.name] = newVariant.color
-
-                  const updatedColorData = {
-                    ...colorData,
-                    variants: updatedVariants,
-                  }
-                  if (newVariant.isBase) {
-                    updatedColorData.baseColor = newVariant.color
-                  } else if (
-                    !newVariant.isBase &&
-                    updatedColorData.baseColor === newVariant.color
-                  ) {
-                    delete updatedColorData.baseColor
-                  }
-
-                  onUpdateColorData(updatedColorData)
-                }}
-                onDeleteVariant={() => {
-                  const updatedVariants = { ...colorData.variants }
-                  delete updatedVariants[variant]
-
-                  const updatedColorData = {
-                    ...colorData,
-                    variants: updatedVariants,
-                  }
-                  if (colorData.variants[variant] === colorData.baseColor) {
-                    delete updatedColorData.baseColor
-                  }
-
-                  onUpdateColorData(updatedColorData)
-                }}
-              />
-            ))}
+            {colorVariants}
             <ColorVariantPlaceholder onClick={() => onAddVariantModalOpen()} />
           </Box>
         </Box>
