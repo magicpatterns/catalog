@@ -19,7 +19,7 @@
   <a href="https://github.com/">
     <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen" alt="PRs welcome!" />
   </a>
-  <a href="https://github.com/Infisical/infisical/issues">
+  <a href="https://github.com/Mirrorful/mirrorful/issues">
     <img src="https://img.shields.io/github/commit-activity/m/Mirrorful/mirrorful" alt="git commit activity" />
   </a>
   <a href="https://www.npmjs.com/package/mirrorful">
