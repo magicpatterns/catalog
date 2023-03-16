@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import tinycolor from 'tinycolor2'
 import { TColorData } from 'types'
 
@@ -75,6 +76,7 @@ export function generatePalette(
     }
 
     randomizedColors.push({
+      id: uuidv4(),
       name: nameThatColor(modifiedHsl),
       baseColor: tinycolor(modifiedHsl).toHexString(),
       variants: {
