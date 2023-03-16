@@ -1,10 +1,11 @@
 import { useDisclosure, Box, Button } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { TColorData } from 'types'
+import { TColorData, TTypographyData } from 'types'
 import { ColorPaletteSection } from './ColorPalette/ColorPaletteSection'
 import { ExportSuccessModal } from './ExportSuccessModal'
 import { Onboarding } from './Onboarding'
 import posthog from 'posthog-js'
+import { TypographySection } from './Typography/TypographySection'
 
 export function Dashboard() {
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
@@ -12,6 +13,10 @@ export function Dashboard() {
 
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
   const [colors, setColors] = useState<TColorData[]>([])
+  const [typography, setTypography] = useState<TTypographyData>({
+    fontSizes: [],
+  })
+
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
@@ -20,12 +25,13 @@ export function Dashboard() {
 
   useEffect(() => {
     const fetchStoredData = async () => {
-      const response = await fetch('/api/store')
+      const response = await fetch('/api/config')
       const data = await response.json()
       if (!data || !data.colorData || data.colorData.length === 0) {
         setShowOnboarding(true)
       }
       setColors(data.colorData ?? [])
+      setTypography(data.typography)
     }
 
     fetchStoredData()
@@ -38,18 +44,31 @@ export function Dashboard() {
       method: 'POST',
       body: JSON.stringify({
         colorData: colors,
+        typography,
       }),
     })
 
     onExportSuccessModalOpen()
   }
 
-  const handleUpdate = async (data: TColorData[]) => {
+  const handleUpdateColors = async (data: TColorData[]) => {
     setColors(data)
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({
+        typography,
         colorData: data,
+      }),
+    })
+  }
+
+  const handleUpdateTypography = async (data: TTypographyData) => {
+    setTypography(data)
+    await fetch('/api/export', {
+      method: 'POST',
+      body: JSON.stringify({
+        colorData: colors,
+        typography: data,
       }),
     })
   }
@@ -106,9 +125,24 @@ export function Dashboard() {
           base: '80px 48px 16px 48px',
         }}
       >
-        <ColorPaletteSection colors={colors} onUpdateColors={handleUpdate} />
+        <ColorPaletteSection
+          colors={colors}
+          onUpdateColors={handleUpdateColors}
+        />
       </Box>
+      <Box
+        padding={{
+          base: '80px 48px 16px 48px',
+        }}
+      >
+        <TypographySection
+          typography={typography}
+          onUpdateTypography={handleUpdateTypography}
+        />
+      </Box>
+      <Box css={{ marginBottom: '64px' }} />
       <ExportSuccessModal
+        primaryName={colors && colors[0] ? colors[0].name : 'primary'}
         isOpen={isExportSuccessModalOpen}
         onClose={onExportSuccessModalClose}
       />

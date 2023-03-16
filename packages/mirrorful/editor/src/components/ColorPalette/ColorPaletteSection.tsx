@@ -10,6 +10,7 @@ import {
   Divider,
 } from '@chakra-ui/react'
 import { EditColorModal } from './EditColorModal'
+import { AddColorSkeleton } from './AddColorSkeleton'
 
 export function ColorPaletteSection({
   colors,
@@ -22,7 +23,7 @@ export function ColorPaletteSection({
 
   return (
     <Box>
-      <Heading fontSize={36} fontWeight="black">
+      <Heading fontSize={48} fontWeight="black">
         Color Palette
       </Heading>
       <Text
@@ -55,48 +56,18 @@ export function ColorPaletteSection({
 
                 onUpdateColors(newColors)
               }}
-              onSetAsPrimary={() => {
-                const newColors = [...colors]
-
-                const colorIndex = newColors.findIndex(
-                  (ec) => ec.name === color.name
-                )
-
-                newColors.forEach((color) => (color.isPrimary = false))
-                newColors[colorIndex].isPrimary = true
-                onUpdateColors(newColors)
-              }}
-              onSetAsSecondary={() => {
-                const newColors = [...colors]
-
-                const colorIndex = newColors.findIndex(
-                  (ec) => ec.name === color.name
-                )
-
-                newColors.forEach((color) => (color.isSecondary = false))
-                newColors[colorIndex].isSecondary = true
-
-                onUpdateColors(newColors)
-              }}
             />
           ))}
         </Stack>
 
         <Box
           css={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
             padding: '18px 0',
-            marginTop: '32px',
+            marginTop: colors.length > 0 ? '32px' : '0',
           }}
+          onClick={() => onOpen()}
         >
-          <Button
-            onClick={() => onOpen()}
-            css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}
-          >
-            Add New Color
-          </Button>
+          <AddColorSkeleton numberOfMockVariants={4} />
         </Box>
       </Box>
       <EditColorModal
@@ -104,9 +75,32 @@ export function ColorPaletteSection({
         onClose={(colorData?: TColorData) => {
           if (colorData) {
             const newColors = [...colors]
-            if (newColors.find((c) => c.name === colorData.name)) {
-              colorData.name = colorData.name += ' 2'
-            }
+            const existingColorRegex: RegExp = new RegExp(
+              '(' + colorData.name + ')(?: ([0-9]+))?'
+            )
+            let finalName: string = ''
+            let maxNum: number = 0
+
+            newColors.map((col) => {
+              // Do a regex check to find both the color name, and it's number
+              let match: RegExpMatchArray | null =
+                col.name.match(existingColorRegex)
+
+              // If we have a match, construct the (incremented) final color name
+              if (match) {
+                // match[2] represents the number this iteration color has previously been incremented to.  If it's incremented value is bigger than the last iteration, assign it to maxNum
+                maxNum =
+                  parseInt(match[2]) + 1 > maxNum
+                    ? parseInt(match[2]) + 1
+                    : maxNum
+
+                // If we have zero, it means the color name exists, but hasn't yet been incremented, so we assign 2.  Otherwise, assign the max number
+                if (maxNum > 0) finalName = colorData.name + ' ' + maxNum
+                else finalName = colorData.name + ' 2'
+              }
+            })
+            // Lastly, construct the final string and assign it to the colorData.name if it's not blank
+            colorData.name = finalName === '' ? colorData.name : finalName
 
             newColors.push(colorData)
 

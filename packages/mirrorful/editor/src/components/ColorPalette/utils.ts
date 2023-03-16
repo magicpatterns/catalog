@@ -1,4 +1,5 @@
 import tinycolor from 'tinycolor2'
+import { VALID_CSS_COLORS } from './validCssColors'
 
 export const newShade = (hexColor: string, magnitude: number) => {
   hexColor = hexColor.replace(`#`, ``)
@@ -49,5 +50,50 @@ export const generateDefaultColorShades = (primary: string) => {
     900: tinycolor(primary)
       .darken(scaleDiff * 4)
       .toHexString(),
+  }
+}
+
+export const handleInvalidColor = (input: string) => {
+  const sanitizedInput = input.replace(/ /g, '')
+
+  // Check if input is a valid hex code
+  const hexRegex = /^#?([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/
+  if (hexRegex.test(sanitizedInput)) {
+    if (sanitizedInput.startsWith('#')) {
+      return sanitizedInput
+    } else {
+      return `#${sanitizedInput}`
+    }
+  }
+
+  // Check if input is a valid rgb
+  const rgbColorRegex = /rgb\((\d{1,3}),(\d{1,3}),(\d{1,3})\)/
+  if (rgbColorRegex.test(sanitizedInput)) {
+    return sanitizedInput
+  }
+
+  // Check if input is a valid color name
+  const lowerCaseInput = sanitizedInput.toLowerCase()
+  if (VALID_CSS_COLORS.includes(lowerCaseInput)) {
+    return lowerCaseInput
+  }
+
+  // Check if input is a valid subset of a hexcode
+  const validSubsetRegex = /^#?[0-9A-Fa-f]{0,6}$/ // regex to validate if input is a valid subset of a hexcode
+
+  let randomHex: String = ''
+  for (let i: number = 0; i < 6; i++) {
+    randomHex += Math.floor(Math.random() * 16).toString(16) // Generate six random hex digits.
+  }
+
+  if (validSubsetRegex.test(sanitizedInput)) {
+    // check if input is a valid subset of a hexcode
+    if (sanitizedInput.startsWith('#')) {
+      return `${sanitizedInput}${randomHex.slice(sanitizedInput.length - 1)}` // use input as the first part and append random characters as necessary to make a valid hexcode
+    } else {
+      return `#${sanitizedInput}${randomHex.slice(sanitizedInput.length)}` // use input as the first part and append random characters as necessary to make a valid hexcode
+    }
+  } else {
+    return `#${randomHex}` // generate a completely random valid hexcode
   }
 }
