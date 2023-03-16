@@ -27,7 +27,22 @@ export function ColorPaletteSection({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  function handleDragEnd(event: DragEndEvent) {}
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event // gives us access to the active card and the one its over
+
+    if (over !== null && active.id != over.id) {
+      const { active, over } = event // gives us access to the active card and the one its over
+
+      if (over !== null && active.id != over.id) {
+        const activeIndex = colors.findIndex(
+          (color) => color.name === active.id
+        )
+        const overIndex = colors.findIndex((color) => color.name === over.id)
+        // arrayMove - allows us to mutate the array
+        onUpdateColors(arrayMove(colors, activeIndex, overIndex))
+      }
+    }
+  }
   return (
     <Box>
       <Heading fontSize={48} fontWeight="black">
