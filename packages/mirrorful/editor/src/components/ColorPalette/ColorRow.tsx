@@ -12,6 +12,7 @@ import {
   Link,
   Checkbox,
   Flex,
+  Image,
 } from '@chakra-ui/react'
 import { EditColorModal } from './EditColorModal'
 import { EditColorNameModal } from './EditColorNameModal'
@@ -162,8 +163,13 @@ export function ColorRow({
         ref={setNodeRef}
         style={styles}
       >
-        <Button {...attributes} {...listeners} css={{}}>
-          Drag Me
+        <Button {...attributes} {...listeners}>
+          <Image
+            width={5}
+            height={10}
+            src="/Drag/drag-handle-svgrepo-com.svg"
+            alt="Drag Me"
+          />
         </Button>
         <Box css={{ width: 350, paddingRight: '64px' }}>
           <Box>
