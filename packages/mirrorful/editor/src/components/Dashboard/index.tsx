@@ -2,11 +2,12 @@ import { Box, useDisclosure } from '@chakra-ui/react'
 import { Sidebar } from './Sidebar'
 import { useState, useEffect } from 'react'
 import { ColorPaletteSection } from 'components/ColorPalette/ColorPaletteSection'
-import { TColorData, TTypographyData } from 'types'
+import { TColorData, TConfig, TExportFileType, TTypographyData } from 'types'
 import posthog from 'posthog-js'
 import { Onboarding } from 'components/Onboarding'
 import { ExportSuccessModal } from 'components/ExportSuccessModal'
 import { TypographySection } from 'components/Typography/TypographySection'
+import { ExportSettingsModal } from 'components/ExportSettingsModal'
 
 export type TTab = 'colors' | 'typography'
 
@@ -20,6 +21,7 @@ export function Dashboard() {
   const [typography, setTypography] = useState<TTypographyData>({
     fontSizes: [],
   })
+  const [fileTypes, setFileTypes] = useState<TExportFileType[]>([])
 
   const {
     isOpen: isExportSuccessModalOpen,
@@ -27,15 +29,29 @@ export function Dashboard() {
     onClose: onExportSuccessModalClose,
   } = useDisclosure()
 
+  const {
+    isOpen: isExportSettingsModalOpen,
+    onOpen: onExportSettingsModalOpen,
+    onClose: onExportSettingsModalClose,
+  } = useDisclosure()
+
   useEffect(() => {
     const fetchStoredData = async () => {
       const response = await fetch('/api/config')
-      const data = await response.json()
-      if (!data || !data.colorData || data.colorData.length === 0) {
+      const data: TConfig | Record<string, never> = await response.json()
+
+      if (
+        !Object.keys(data).length ||
+        !data.tokens.colorData ||
+        data.tokens.colorData.length === 0
+      ) {
         setShowOnboarding(true)
+        return
       }
-      setColors(data.colorData ?? [])
-      setTypography(data.typography)
+
+      setColors(data.tokens.colorData ?? [])
+      setTypography(data.tokens.typography)
+      setFileTypes(data.files)
     }
 
     fetchStoredData()
@@ -47,8 +63,8 @@ export function Dashboard() {
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({
-        colorData: colors,
-        typography,
+        tokens: { colorData: colors, typography },
+        files: fileTypes,
       }),
     })
 
@@ -60,8 +76,11 @@ export function Dashboard() {
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({
-        typography,
-        colorData: data,
+        tokens: {
+          typography,
+          colorData: data,
+        },
+        files: fileTypes,
       }),
     })
   }
@@ -71,8 +90,8 @@ export function Dashboard() {
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({
-        colorData: colors,
-        typography: data,
+        tokens: { colorData: colors, typography: data },
+        files: fileTypes,
       }),
     })
   }
@@ -94,6 +113,8 @@ export function Dashboard() {
         <Sidebar
           activeTab={tab}
           onSelectTab={(newTab: TTab) => setTab(newTab)}
+          onOpenSettings={() => onExportSettingsModalOpen()}
+          onExport={handleExport}
         />
       </Box>
       <Box
@@ -116,6 +137,12 @@ export function Dashboard() {
         primaryName={colors && colors[0] ? colors[0].name : 'primary'}
         isOpen={isExportSuccessModalOpen}
         onClose={onExportSuccessModalClose}
+      />
+      <ExportSettingsModal
+        isOpen={isExportSettingsModalOpen}
+        onClose={onExportSettingsModalClose}
+        fileTypes={fileTypes}
+        onUpdateFileTypes={setFileTypes}
       />
     </Box>
   )

@@ -9,6 +9,8 @@ import {
   FiBookOpen,
   FiGithub,
   FiBook,
+  FiSettings,
+  FiFolder,
 } from 'react-icons/fi'
 import { TTab } from '.'
 
@@ -91,9 +93,13 @@ function SidebarSection({
 export function Sidebar({
   activeTab,
   onSelectTab,
+  onOpenSettings,
+  onExport,
 }: {
   activeTab: string
   onSelectTab: (tab: TTab) => void
+  onOpenSettings: () => void
+  onExport: () => void
 }) {
   return (
     <Box
@@ -144,29 +150,40 @@ export function Sidebar({
             </Stack>
           </Box>
 
-          <Stack>
-            <SidebarHeader label="Resources" />
-            <SidebarSection
-              label="Documentation"
-              icon={FiBookOpen}
-              onSelect={() =>
-                window.open('https://mirrorful.com/docs', '_blank')
-              }
-            />
-            <SidebarSection
-              label="Github"
-              icon={FiGithub}
-              onSelect={() =>
-                window.open('https://github.com/Mirrorful/mirrorful', '_blank')
-              }
-            />
-            {/* <SidebarSection
-              label="Blog"
-              icon={FiBook}
-              onSelect={() => {
-                window.open('https://mirrorful.com/blog', '_blank')
-              }}
-            /> */}
+          <Stack spacing={24}>
+            <Stack>
+              <SidebarHeader label="Export" />
+              <SidebarSection
+                label="Export Tokens"
+                icon={FiFolder}
+                onSelect={() => onExport()}
+              />
+              <SidebarSection
+                label="Settings"
+                icon={FiSettings}
+                onSelect={() => onOpenSettings()}
+              />
+            </Stack>
+            <Stack>
+              <SidebarHeader label="Resources" />
+              <SidebarSection
+                label="Documentation"
+                icon={FiBookOpen}
+                onSelect={() =>
+                  window.open('https://mirrorful.com/docs', '_blank')
+                }
+              />
+              <SidebarSection
+                label="Github"
+                icon={FiGithub}
+                onSelect={() =>
+                  window.open(
+                    'https://github.com/Mirrorful/mirrorful',
+                    '_blank'
+                  )
+                }
+              />
+            </Stack>
           </Stack>
         </Box>
       </Box>
