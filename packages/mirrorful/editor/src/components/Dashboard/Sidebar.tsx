@@ -160,13 +160,13 @@ export function Sidebar({
                 window.open('https://github.com/Mirrorful/mirrorful', '_blank')
               }
             />
-            <SidebarSection
+            {/* <SidebarSection
               label="Blog"
               icon={FiBook}
               onSelect={() => {
                 window.open('https://mirrorful.com/blog', '_blank')
               }}
-            />
+            /> */}
           </Stack>
         </Box>
       </Box>
