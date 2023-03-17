@@ -3,18 +3,16 @@ import { Box, Stack, Text, Button, useDisclosure } from '@chakra-ui/react'
 import { EditFontSizeModal } from './EditFontSizeModal'
 
 export function calculateMaxFontSizeForPreview(fontSizeData: TFontSizeVariant) {
-  // allow anything up to 6rem
-  if (fontSizeData.unit === 'rem') {
-    return `${Math.min(fontSizeData.value, 6)}rem`
-  }
   // allow anything up to 96px
   if (fontSizeData.unit === 'px') {
     return `${Math.min(fontSizeData.value, 96)}px`
   }
-  // allow anything up to 6em
-  if (fontSizeData.unit === 'em') {
-    return `${Math.min(fontSizeData.value, 6)}em`
+
+  // allow anything up to 6rem || 6em
+  if (fontSizeData.unit === 'rem' || fontSizeData.unit === 'em') {
+    return `${Math.min(fontSizeData.value, 6)}${fontSizeData.unit}`
   }
+
   return '1rem'
 }
 
