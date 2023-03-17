@@ -38,9 +38,7 @@ export function ExportSettingsModal({
         <ModalCloseButton />
         <ModalBody>
           <Flex direction="column" gap={3}>
-            <Heading size="sm" as="label">
-              File Types
-            </Heading>
+            <Heading size="sm">File Types</Heading>
             <CheckboxGroup
               defaultValue={fileTypes}
               onChange={onUpdateFileTypes}

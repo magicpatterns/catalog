@@ -36,15 +36,13 @@ export function ExportSettings({
   return (
     <Box css={{ display: 'flex', height: '100%' }}>
       <Box
-        css={{
-          width: '50%',
-          padding: '12px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
+        width="50%"
+        padding="12px"
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
       >
-        <Box css={{ paddingTop: '32px' }}>
+        <Box paddingTop="32px">
           <Stack spacing={1} direction={'row'}>
             <Text color="gray.500" fontWeight="black" fontSize={18}>
               05
@@ -56,20 +54,19 @@ export function ExportSettings({
               {NUMBER_OF_STEPS_IN_NEW_FLOW}
             </Text>
           </Stack>
-
-          <Heading fontWeight="black" css={{ marginTop: '12px' }} fontSize={36}>
+          <Heading fontWeight="black" marginTop="12px" fontSize={36}>
             Choose your export files.
           </Heading>
           <Text
-            css={{ marginTop: '32px' }}
+            marginTop="32px"
             fontSize={20}
             color="gray.500"
             fontWeight="bold"
           >
-            These are the token file formats that Mirrorful will export.
+            These are the token files that Mirrorful will export.
           </Text>
         </Box>
-        <Box css={{ paddingBottom: '32px' }}>
+        <Box paddingBottom="32px">
           <Button
             bgColor={shades['500']}
             color={tinycolor(primaryColor).isDark() ? 'white' : 'black'}
@@ -79,7 +76,7 @@ export function ExportSettings({
             _active={{
               bgColor: shades['800'],
             }}
-            padding={'8px 36px'}
+            padding="8px 36px"
             size="lg"
             rightIcon={<ArrowForwardIcon />}
             onClick={() => {
@@ -93,13 +90,11 @@ export function ExportSettings({
         </Box>
       </Box>
       <Box
-        css={{
-          width: '50%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '64px',
-        }}
+        width="50%"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        padding="64px"
       >
         <CheckboxGroup defaultValue={fileTypes} onChange={onUpdateFileTypes}>
           <VStack alignItems="flex-start">
