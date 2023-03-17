@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { EditColorModal } from './EditColorModal'
 import { AddColorSkeleton } from './AddColorSkeleton'
+import { ColorDisplay } from './ColorDisplay'
 
 export function ColorPaletteSection({
   colors,
@@ -20,6 +21,8 @@ export function ColorPaletteSection({
   onUpdateColors: (newColors: TColorData[]) => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const color = colors[0]
 
   return (
     <Box>
@@ -34,9 +37,43 @@ export function ColorPaletteSection({
       >
         {`Add and edit the colors in your theme. `}
       </Text>
+      <Divider css={{ borderWidth: '2px', margin: '12px 0', width: '100%' }} />
 
-      <Divider css={{ borderWidth: '2px', margin: '12px 0' }} />
-      <Box css={{ marginTop: '24px' }}>
+      <Box>
+        <Stack direction="column" spacing={12}>
+          {colors.map((color) => (
+            <ColorDisplay
+              key={color.name}
+              colorData={color}
+              onUpdateColorData={(updatedColorData: TColorData) => {
+                const newColors = [...colors]
+                const colorIndex = colors.findIndex(
+                  (ec) => ec.name === color.name
+                )
+                newColors[colorIndex] = updatedColorData
+
+                onUpdateColors(newColors)
+              }}
+              onDeleteColorData={() => {
+                const newColors = colors.filter((c) => c.name !== color.name)
+
+                onUpdateColors(newColors)
+              }}
+            />
+          ))}
+        </Stack>
+        <Box
+          css={{
+            padding: '18px 0',
+            marginTop: colors.length > 0 ? '32px' : '0',
+          }}
+          onClick={() => onOpen()}
+        >
+          <AddColorSkeleton numberOfMockVariants={4} />
+        </Box>
+      </Box>
+
+      {/* <Box css={{ marginTop: '24px' }}>
         <Stack direction="column" alignItems="flex-start" spacing={32}>
           {colors.map((color) => (
             <ColorRow
@@ -69,7 +106,7 @@ export function ColorPaletteSection({
         >
           <AddColorSkeleton numberOfMockVariants={4} />
         </Box>
-      </Box>
+      </Box> */}
       <EditColorModal
         isOpen={isOpen}
         onClose={(colorData?: TColorData) => {
