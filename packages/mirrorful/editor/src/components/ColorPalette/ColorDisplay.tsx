@@ -154,6 +154,10 @@ export function ColorDisplay({
         css={{ alignSelf: 'center', marginRight: '2rem' }}
         width={10}
         height={20}
+        backgroundColor="transparent"
+        _hover={{
+          cursor: 'grab',
+        }}
       >
         <Image
           objectFit={'contain'}
