@@ -2,7 +2,7 @@ import { TFontSizeVariant } from 'types'
 import { Box, Stack, Text, Button, useDisclosure } from '@chakra-ui/react'
 import { EditFontSizeModal } from './EditFontSizeModal'
 
-export function calculateMaxFontSizeForPreview(fontSizeData: TFontSizeVariant) {
+function calculateMaxFontSizeForPreview(fontSizeData: TFontSizeVariant) {
   // allow anything up to 96px
   if (fontSizeData.unit === 'px') {
     return `${Math.min(fontSizeData.value, 96)}px`
