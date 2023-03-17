@@ -1,21 +1,18 @@
-import {
-  useDisclosure,
-  Box,
-  Button,
-  IconButton,
-  ButtonGroup,
-} from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { Box, useDisclosure } from '@chakra-ui/react'
+import { Sidebar } from './Sidebar'
+import { useState, useEffect } from 'react'
+import { ColorPaletteSection } from 'components/ColorPalette/ColorPaletteSection'
 import { TColorData, TConfig, TExportFileType, TTypographyData } from 'types'
-import { ColorPaletteSection } from './ColorPalette/ColorPaletteSection'
-import { ExportSuccessModal } from './ExportSuccessModal'
-import { Onboarding } from './Onboarding'
 import posthog from 'posthog-js'
-import { TypographySection } from './Typography/TypographySection'
-import { SettingsIcon } from '@chakra-ui/icons'
-import { ExportSettingsModal } from './ExportSettingsModal'
+import { Onboarding } from 'components/Onboarding'
+import { ExportSuccessModal } from 'components/ExportSuccessModal'
+import { TypographySection } from 'components/Typography/TypographySection'
+import { ExportSettingsModal } from 'components/ExportSettingsModal'
+
+export type TTab = 'colors' | 'typography'
 
 export function Dashboard() {
+  const [tab, setTab] = useState<'colors' | 'typography'>('colors')
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
     useState<boolean>(false)
 
@@ -111,79 +108,42 @@ export function Dashboard() {
   }
 
   return (
-    <Box>
-      <Box
-        css={{
-          position: 'fixed',
-          width: '100vw',
-          backdropFilter: 'blur(6px)',
-          backgroundColor: 'rgba(255, 255, 255, 0)',
-          zIndex: 5,
-          height: '56px',
-        }}
-      >
-        <Box
-          css={{
-            display: 'flex',
-            padding: '8px 48px',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Box>
-            <img src="/mirrorful_logo.png" style={{ height: '39px' }} />
-          </Box>
-          <ButtonGroup isAttached>
-            <Button colorScheme="blue" onClick={handleExport}>
-              Export Config
-            </Button>
-            <IconButton
-              onClick={onExportSettingsModalOpen}
-              aria-label="Update export settings"
-              icon={<SettingsIcon />}
-            />
-          </ButtonGroup>
-          <Box />
-        </Box>
-        <Box
-          css={{
-            height: '1px',
-            width: '100%',
-            background: 'linear-gradient(to right, #F5F5F5, #3F3F3F, #F5F5F5)',
-          }}
+    <Box css={{ width: '100vw', minHeight: '100vh', display: 'flex' }}>
+      <Box css={{ width: '300px', position: 'fixed' }}>
+        <Sidebar
+          activeTab={tab}
+          onSelectTab={(newTab: TTab) => setTab(newTab)}
+          onOpenSettings={() => onExportSettingsModalOpen()}
+          onExport={handleExport}
         />
       </Box>
-
+      <Box css={{ width: '300px' }} />
       <Box
-        padding={{
-          base: '80px 48px 16px 48px',
-        }}
+        css={{ flexGrow: 1, backgroundColor: 'white', padding: '64px 128px' }}
       >
-        <ColorPaletteSection
-          colors={colors}
-          onUpdateColors={handleUpdateColors}
-        />
+        {tab === 'colors' && (
+          <ColorPaletteSection
+            colors={colors}
+            onUpdateColors={handleUpdateColors}
+          />
+        )}
+        {tab === 'typography' && (
+          <TypographySection
+            typography={typography}
+            onUpdateTypography={handleUpdateTypography}
+          />
+        )}
       </Box>
-      <Box
-        padding={{
-          base: '80px 48px 16px 48px',
-        }}
-      >
-        <TypographySection
-          typography={typography}
-          onUpdateTypography={handleUpdateTypography}
-        />
-      </Box>
-      <Box css={{ marginBottom: '64px' }} />
+      <ExportSuccessModal
+        primaryName={colors && colors[0] ? colors[0].name : 'primary'}
+        isOpen={isExportSuccessModalOpen}
+        onClose={onExportSuccessModalClose}
+      />
       <ExportSettingsModal
         isOpen={isExportSettingsModalOpen}
         onClose={onExportSettingsModalClose}
         fileTypes={fileTypes}
         onUpdateFileTypes={setFileTypes}
-      />
-      <ExportSuccessModal
-        primaryName={colors && colors[0] ? colors[0].name : 'primary'}
-        isOpen={isExportSuccessModalOpen}
-        onClose={onExportSuccessModalClose}
       />
     </Box>
   )

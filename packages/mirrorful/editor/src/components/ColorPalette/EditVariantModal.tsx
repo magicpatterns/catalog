@@ -181,11 +181,7 @@ export function EditVariantModal({
             )}
           </ModalBody>
           <ModalFooter>
-            <Button
-              onClick={handleSave}
-              css={{ marginRight: '12px' }}
-              colorScheme="green"
-            >
+            <Button onClick={handleSave} css={{ marginRight: '12px' }}>
               Save
             </Button>
             {onDeleteVariant && (

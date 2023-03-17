@@ -31,7 +31,7 @@ export function EditFontSizeModal({
   onClose: () => void
   initialFontSizeVariant?: TFontSizeVariant
   onUpdateFontSizeVariant: (newVariant: TFontSizeVariant) => void
-  onDeleteFontSizeVariant: () => void
+  onDeleteFontSizeVariant?: () => void
 }) {
   const {
     isOpen: isAlertDialogOpen,
@@ -132,18 +132,25 @@ export function EditFontSizeModal({
             >
               Save Variant
             </Button>
-            <Button onClick={() => onDeleteAlertDialogOpen()} colorScheme="red">
-              Delete Variant
-            </Button>
+            {onDeleteFontSizeVariant && (
+              <>
+                <Button
+                  onClick={() => onDeleteAlertDialogOpen()}
+                  colorScheme="red"
+                >
+                  Delete Variant
+                </Button>
+                <AlertDialogDelete
+                  tokenName={variant.name}
+                  isOpen={isAlertDialogOpen}
+                  onClose={onDeleteAlertDialogClose}
+                  onDelete={() => onDeleteFontSizeVariant()}
+                />
+              </>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <AlertDialogDelete
-        tokenName={variant.name}
-        isOpen={isAlertDialogOpen}
-        onClose={onDeleteAlertDialogClose}
-        onDelete={() => onDeleteFontSizeVariant()}
-      />
     </>
   )
 }

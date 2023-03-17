@@ -11,11 +11,11 @@ export function TypographySection({
 }) {
   return (
     <Box>
-      <Heading fontSize={36} fontWeight="black">
+      <Heading fontSize={'3rem'} fontWeight="black">
         Typography
       </Heading>
       <Text
-        fontSize={18}
+        fontSize={'1.2rem'}
         fontWeight="medium"
         color="gray.600"
         css={{ marginTop: '12px' }}
@@ -24,6 +24,7 @@ export function TypographySection({
       </Text>
 
       <Divider css={{ borderWidth: '2px', margin: '12px 0' }} />
+      <Box css={{ marginBottom: '48px' }} />
       <FontSizesSection
         fontSizeData={typography.fontSizes}
         onUpdateFontSizeData={(newFontSizeData: TFontSizeVariant[]) => {

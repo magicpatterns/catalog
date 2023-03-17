@@ -96,7 +96,6 @@ export function FontSizesSection({
           const updatedFontSizeData = [...fontSizeData, newVariant]
           onUpdateFontSizeData(updatedFontSizeData)
         }}
-        onDeleteFontSizeVariant={() => {}}
       />
     </Box>
   )
