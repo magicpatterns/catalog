@@ -105,7 +105,8 @@ export function Sidebar({
     <Box
       css={{
         height: '100vh',
-        width: '300px',
+        width: '100%',
+        display: 'flex',
       }}
     >
       <Box
@@ -114,8 +115,7 @@ export function Sidebar({
           flexDirection: 'column',
           padding: '36px 24px',
           height: '100%',
-          width: '300px',
-          position: 'fixed',
+          width: '100%',
           backgroundColor: '#F2F2F2',
         }}
       >

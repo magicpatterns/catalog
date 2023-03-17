@@ -109,7 +109,7 @@ export function Dashboard() {
 
   return (
     <Box css={{ width: '100vw', minHeight: '100vh', display: 'flex' }}>
-      <Box css={{ width: '300px' }}>
+      <Box css={{ width: '300px', position: 'fixed' }}>
         <Sidebar
           activeTab={tab}
           onSelectTab={(newTab: TTab) => setTab(newTab)}
@@ -117,6 +117,7 @@ export function Dashboard() {
           onExport={handleExport}
         />
       </Box>
+      <Box css={{ width: '300px' }} />
       <Box
         css={{ flexGrow: 1, backgroundColor: 'white', padding: '64px 128px' }}
       >

@@ -130,11 +130,10 @@ export function ColorDisplay({
     <Box
       css={{
         display: 'flex',
-        padding: '36px 0',
         borderRadius: 8,
       }}
     >
-      <Box css={{ display: 'flex', flexDirection: 'column', width: '350px' }}>
+      <Box css={{ display: 'flex', flexDirection: 'column', width: '400px' }}>
         <Text css={{ fontWeight: 900, fontSize: '1rem', color: 'gray' }}>
           COLOR NAME
         </Text>

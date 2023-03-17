@@ -22,8 +22,6 @@ export function ColorPaletteSection({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const color = colors[0]
-
   return (
     <Box>
       <Heading fontSize={'3rem'} fontWeight="black">
