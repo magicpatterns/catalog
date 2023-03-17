@@ -6,6 +6,7 @@ import { TColorData, TTypographyData } from 'types'
 import posthog from 'posthog-js'
 import { Onboarding } from 'components/Onboarding'
 import { ExportSuccessModal } from 'components/ExportSuccessModal'
+import { TypographySection } from 'components/Typography/TypographySection'
 
 export type TTab = 'colors' | 'typography'
 
@@ -104,7 +105,12 @@ export function Dashboard() {
             onUpdateColors={handleUpdateColors}
           />
         )}
-        {tab === 'typography' && <Box>Typography</Box>}
+        {tab === 'typography' && (
+          <TypographySection
+            typography={typography}
+            onUpdateTypography={handleUpdateTypography}
+          />
+        )}
       </Box>
       <ExportSuccessModal
         primaryName={colors && colors[0] ? colors[0].name : 'primary'}

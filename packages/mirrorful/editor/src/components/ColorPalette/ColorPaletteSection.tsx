@@ -26,11 +26,11 @@ export function ColorPaletteSection({
 
   return (
     <Box>
-      <Heading fontSize={48} fontWeight="black">
+      <Heading fontSize={'3rem'} fontWeight="black">
         Color Palette
       </Heading>
       <Text
-        fontSize={18}
+        fontSize={'1.2rem'}
         fontWeight="medium"
         color="gray.600"
         css={{ marginTop: '12px' }}

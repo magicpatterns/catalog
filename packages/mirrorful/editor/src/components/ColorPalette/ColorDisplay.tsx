@@ -216,7 +216,7 @@ export function ColorDisplay({
             COLOR VARIANTS
           </Text>
           <Button variant="outline" onClick={onAddVariantModalOpen}>
-            Create New Variant
+            Add New Variant
           </Button>
         </Box>
         <Box css={{ marginTop: '32px' }}>

@@ -1,7 +1,15 @@
-import { Box, Heading, Stack, Text, Icon } from '@chakra-ui/react'
+import { Box, Heading, Stack, Text, Icon, Badge } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
-import { FiGrid, FiUnderline, FiAperture } from 'react-icons/fi'
+import {
+  FiGrid,
+  FiUnderline,
+  FiAperture,
+  FiBookOpen,
+  FiGithub,
+  FiBook,
+} from 'react-icons/fi'
 import { TTab } from '.'
 
 function SidebarHeader({ label }: { label: string }) {
@@ -24,11 +32,13 @@ function SidebarSection({
   icon,
   isActive,
   onSelect,
+  isComingSoon,
 }: {
   label: string
   icon: IconType
   isActive?: boolean
   onSelect?: () => void
+  isComingSoon?: boolean
 }) {
   const [isHovering, setIsHovering] = useState<boolean>(false)
 
@@ -40,13 +50,21 @@ function SidebarSection({
         display: 'flex',
         alignItems: 'center',
         color: isHovering || isActive ? 'black' : 'gray',
-        cursor: 'pointer',
+        cursor: isComingSoon ? 'initial' : 'pointer',
         transition: '200ms',
       }}
-      onMouseOver={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+      onMouseOver={() => {
+        if (!isComingSoon) {
+          setIsHovering(true)
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isComingSoon) {
+          setIsHovering(false)
+        }
+      }}
       onClick={() => {
-        if (onSelect) {
+        if (!isComingSoon && onSelect) {
           onSelect()
         }
       }}
@@ -61,6 +79,11 @@ function SidebarSection({
       >
         {label}
       </Text>
+      {isComingSoon && (
+        <Badge css={{ marginLeft: '12px' }} colorScheme="blue">
+          COMING SOON
+        </Badge>
+      )}
     </Box>
   )
 }
@@ -117,14 +140,33 @@ export function Sidebar({
                 isActive={activeTab === 'typography'}
                 onSelect={() => onSelectTab('typography')}
               />
-              <SidebarSection label="Spacing" icon={FiGrid} />
+              <SidebarSection label="Spacing" icon={FiGrid} isComingSoon />
             </Stack>
           </Box>
 
           <Stack>
             <SidebarHeader label="Resources" />
-            <SidebarSection label="Documentation" icon={FiGrid} />
-            <SidebarSection label="Github" icon={FiGrid} />
+            <SidebarSection
+              label="Documentation"
+              icon={FiBookOpen}
+              onSelect={() =>
+                window.open('https://mirrorful.com/docs', '_blank')
+              }
+            />
+            <SidebarSection
+              label="Github"
+              icon={FiGithub}
+              onSelect={() =>
+                window.open('https://github.com/Mirrorful/mirrorful', '_blank')
+              }
+            />
+            <SidebarSection
+              label="Blog"
+              icon={FiBook}
+              onSelect={() => {
+                window.open('https://mirrorful.com/blog', '_blank')
+              }}
+            />
           </Stack>
         </Box>
       </Box>
