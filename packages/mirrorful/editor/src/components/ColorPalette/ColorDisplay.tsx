@@ -12,6 +12,8 @@ import {
   Icon,
   IconButton,
 } from '@chakra-ui/react'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 import { AlertDialogDelete } from 'components/AlertDialogDelete'
 import { FiMoreVertical } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
@@ -125,6 +127,16 @@ export function ColorDisplay({
     onOpen: onDeleteAlertDialogOpen,
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
+
+  // setNodeRef is needed to know which node is active
+  // transform and transition are needed to style and more around the object
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: colorData.id })
+
+  const styles = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  }
 
   return (
     <Box
