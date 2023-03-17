@@ -20,6 +20,7 @@ import tinycolor from 'tinycolor2'
 import { TColorData, TColorVariant } from 'types'
 import { EditColorNameModal } from './EditColorNameModal'
 import { EditVariantModal } from './EditVariantModal'
+import Image from 'next/image'
 
 function VariantRow({
   variant,
@@ -144,7 +145,17 @@ export function ColorDisplay({
         display: 'flex',
         borderRadius: 8,
       }}
+      ref={setNodeRef}
+      style={styles}
     >
+      <Button {...attributes} {...listeners}>
+        <Image
+          width={5}
+          height={10}
+          src="/Drag/drag-handle-svgrepo-com.svg"
+          alt="Drag Me"
+        />
+      </Button>
       <Box css={{ display: 'flex', flexDirection: 'column', width: '400px' }}>
         <Text css={{ fontWeight: 900, fontSize: '1rem', color: 'gray' }}>
           COLOR NAME
