@@ -1,29 +1,27 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fs from 'fs'
-import { TExportFileType, TTokens } from 'types'
+import { TConfig, TExportFileType } from 'types'
 import { rootPath, store } from 'store/store'
 import { translators } from 'translators'
 
-const generateStorageFile = async ({ colorData, typography }: TTokens) => {
-  store.set('tokens', { colorData, typography })
+const generateStorageFile = async ({ tokens, files }: TConfig) => {
+  store.set('tokens', tokens)
+  store.set('files', files)
 }
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const body = JSON.parse(req.body)
+  const config = JSON.parse(req.body) as TConfig // TODO: Validate request body
 
-  await generateStorageFile({
-    colorData: body.colorData,
-    typography: body.typography,
-  })
+  await generateStorageFile(config)
 
-  for (const fileType in translators) {
+  for (const fileType of config.files) {
     const translator = translators[fileType as TExportFileType]
 
     const fileName = `${rootPath}/theme${translator.extension}`
-    const content = translator.toContent(body)
+    const content = translator.toContent(config.tokens)
 
     fs.writeFileSync(fileName, content)
   }
