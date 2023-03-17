@@ -1,15 +1,7 @@
 .primary-button {
-  background-color: white;
-}
-
-.primary-button:hover {
-  background-color: white;
+  background-color: var(--color-primary);
 }
 
 .secondary-button {
-  background-color: white;
-}
-
-.secondary-button:hover {
-  background-color: white;
+  background-color: var(--color-secondary);
 }

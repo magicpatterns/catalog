@@ -2,6 +2,20 @@ import { TFontSizeVariant } from 'types'
 import { Box, Stack, Text, Button, useDisclosure } from '@chakra-ui/react'
 import { EditFontSizeModal } from './EditFontSizeModal'
 
+function calculateMaxFontSizeForPreview(fontSizeData: TFontSizeVariant) {
+  // allow anything up to 96px
+  if (fontSizeData.unit === 'px') {
+    return `${Math.min(fontSizeData.value, 96)}px`
+  }
+
+  // allow anything up to 6rem || 6em
+  if (fontSizeData.unit === 'rem' || fontSizeData.unit === 'em') {
+    return `${Math.min(fontSizeData.value, 6)}${fontSizeData.unit}`
+  }
+
+  return '1rem'
+}
+
 export function FontSizeRow({
   fontSizeData,
   onUpdateFontSizeVariant,
@@ -44,7 +58,7 @@ export function FontSizeRow({
         </Box>
         <Box
           css={{
-            fontSize: `${fontSizeData.value}${fontSizeData.unit}`,
+            fontSize: calculateMaxFontSizeForPreview(fontSizeData),
             width: 700,
           }}
         >

@@ -1,0 +1,44 @@
+{
+	"tokens": {
+		"colorData": [
+			{
+				"name": "Secondary",
+				"baseColor": "#8b8787",
+				"variants": {
+					"500": "#8b8787"
+				}
+			},
+			{
+				"name": "Primary",
+				"baseColor": "#e30404",
+				"variants": {
+					"500": "#e30404"
+				}
+			}
+		],
+		"typography": {
+			"fontSizes": [
+				{
+					"value": 1,
+					"unit": "rem",
+					"name": "sm"
+				},
+				{
+					"value": 1.2,
+					"unit": "rem",
+					"name": "md"
+				},
+				{
+					"value": 1.4,
+					"unit": "rem",
+					"name": "lg"
+				}
+			]
+		}
+	},
+	"__internal__": {
+		"migrations": {
+			"version": "0.0.3"
+		}
+	}
+}

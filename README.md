@@ -19,7 +19,7 @@
   <a href="https://github.com/">
     <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen" alt="PRs welcome!" />
   </a>
-  <a href="https://github.com/Infisical/infisical/issues">
+  <a href="https://github.com/Mirrorful/mirrorful/issues">
     <img src="https://img.shields.io/github/commit-activity/m/Mirrorful/mirrorful" alt="git commit activity" />
   </a>
   <a href="https://www.npmjs.com/package/mirrorful">
@@ -38,6 +38,7 @@
 **Read this in other languages**: <kbd>[<img title="English" alt="English language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="22">](i18n/README.en.md)</kbd>
 <kbd>[<img title="German" alt="German language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/de.svg" width="22">](i18n/README.de.md)</kbd>
 <kbd>[<img title="Swedish" alt="Swedish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/se.svg" width="22">](i18n/README.sv.md)</kbd>
+<kbd>[<img title="Turkish" alt="Turkish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/tr.svg" width="22">](i18n/README.tr.md)</kbd>
 
 **[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
 
@@ -54,11 +55,11 @@ And more...
 
 ## 🎨 Why should I use Mirrorful?
 
-Design systems are the building blocks of your app, but many projects don't adopt them until it's too late because they are hard to set up correctly. Mirrorful gets you set up for a basic design system in minutes while leaving flexibility down the line for customizations. Its lightweight and dead simple.
+Design systems are the building blocks of your app, but many projects don't adopt them until it's too late because they are hard to set up correctly. Mirrorful gets you set up for a basic design system in minutes while leaving flexibility down the line for customizations. It's lightweight and dead simple.
 
-We're on a mission to help your project be as beautiful as possible. The bar for high quality design is getting higher. We want to help everyone add simple design tokens to new (and existing!) projects.
+We're on a mission to help your project be as beautiful as possible. The bar for high-quality design is getting higher. We want to help everyone add simple design tokens to new (and existing!) projects.
 
-Simple design systems also speed up development — even early-stage projects! One report suggests its 47% faster to build a simple form using a design system. It's useful for engineers, designers, and especially your customers if there isn't a random color for each button in your app.
+Simple design systems also speed up development — even early-stage projects! One report suggests it's 47% faster to build a simple form using a design system. It's useful for engineers, designers, and especially your customers if there isn't a random color for each button in your app.
 
 ## 🚀 Get started
 
@@ -174,6 +175,6 @@ No matter the PR, all the Github avatars of contributors will be added to the Mi
 
 ## 🌎 Translations
 
-Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md) and [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md). Help us translate our documentation and UI to your language!
+Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md), and [Turkish 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.trs.md), among other languages. Help us translate our documentation and UI to your language!
 
 You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).

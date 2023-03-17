@@ -21,6 +21,7 @@ import { EditVariantModal } from './EditVariantModal'
 import { ColorVariantPlaceholder } from './ColorVariantPlaceholder'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import { AlertDialogDelete } from 'components/AlertDialogDelete'
 
 function VariantSquare({
   variant,
@@ -106,7 +107,7 @@ export function ColorRow({
 
   const colorVariants = useMemo(
     () =>
-      Object.keys(colorData.variants).map((variant) => (
+      Object.keys(colorData.variants).sort().map((variant) => (
         <VariantSquare
           key={variant}
           variant={{
@@ -153,6 +154,12 @@ export function ColorRow({
     [colorData.variants]
   )
 
+  const {
+    isOpen: isAlertDialogOpen,
+    onOpen: onDeleteAlertDialogOpen,
+    onClose: onDeleteAlertDialogClose,
+  } = useDisclosure()
+
   return (
     <>
       <Flex
@@ -181,7 +188,9 @@ export function ColorRow({
               Edit Color Name
             </Button>
             <Button onClick={() => onAddVariantModalOpen()}>Add Variant</Button>
-            <Button onClick={() => onDeleteColorData()}>Delete Color</Button>
+            <Button onClick={() => onDeleteAlertDialogOpen()}>
+              Delete Color
+            </Button>
           </Stack>
         </Box>
         <Box css={{ display: 'flex' }}>
@@ -237,9 +246,15 @@ export function ColorRow({
         onUpdateVariant={(newVariant: TColorVariant) => {
           const updatedVariants = { ...colorData.variants }
           updatedVariants[newVariant.name] = newVariant.color
-
+          if (newVariant.isBase) colorData.baseColor = newVariant.color
           onUpdateColorData({ ...colorData, variants: updatedVariants })
         }}
+      />
+      <AlertDialogDelete
+        tokenName={colorData.name}
+        isOpen={isAlertDialogOpen}
+        onClose={onDeleteAlertDialogClose}
+        onDelete={() => onDeleteColorData()}
       />
     </>
   )

@@ -17,6 +17,8 @@ import {
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { TFontSizeVariant } from 'types'
+import { AlertDialogDelete } from 'components/AlertDialogDelete'
+import { useDisclosure } from '@chakra-ui/react'
 
 export function EditFontSizeModal({
   isOpen,
@@ -29,8 +31,14 @@ export function EditFontSizeModal({
   onClose: () => void
   initialFontSizeVariant?: TFontSizeVariant
   onUpdateFontSizeVariant: (newVariant: TFontSizeVariant) => void
-  onDeleteFontSizeVariant: () => void
+  onDeleteFontSizeVariant?: () => void
 }) {
+  const {
+    isOpen: isAlertDialogOpen,
+    onOpen: onDeleteAlertDialogOpen,
+    onClose: onDeleteAlertDialogClose,
+  } = useDisclosure()
+
   const [variant, setVariant] = useState<TFontSizeVariant>(
     initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem' }
   )
@@ -61,73 +69,88 @@ export function EditFontSizeModal({
   }, [isOpen, initialFontSizeVariant])
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Edit Font Size Variant</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody
-          css={{
-            padding: '0px 32px 32px 32px',
-          }}
-        >
-          <Box css={{ display: 'flex', flexDirection: 'column' }}>
-            <FormControl>
-              <FormLabel>Variant Name</FormLabel>
-              <Input
-                value={variant.name}
-                onChange={(e) =>
-                  setVariant({ ...variant, name: e.target.value })
-                }
-              />
-            </FormControl>
-
-            <FormControl css={{ marginTop: '32px' }}>
-              <FormLabel>Variant Value</FormLabel>
-              <Input
-                value={variant.value}
-                onChange={(e) =>
-                  setVariant({ ...variant, value: Number(e.target.value) })
-                }
-                type="number"
-              />
-            </FormControl>
-            <FormControl css={{ marginTop: '32px' }}>
-              <FormLabel>Variant Unit</FormLabel>
-              <Select
-                value={variant.unit}
-                onChange={(event) => {
-                  setVariant({
-                    ...variant,
-                    unit: event.target.value as 'px' | 'rem' | 'em',
-                  })
-                }}
-              >
-                <option value="px">px</option>
-                <option value="rem">rem</option>
-                <option value="em">em</option>
-              </Select>
-            </FormControl>
-          </Box>
-          {error && (
-            <Text color="red.500" css={{ marginTop: 18 }}>
-              {error}
-            </Text>
-          )}
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            onClick={handleSave}
-            css={{ marginRight: '12px' }}
-            colorScheme="green"
+    <>
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Edit Font Size Variant</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody
+            css={{
+              padding: '0px 32px 32px 32px',
+            }}
           >
-            Save Variant
-          </Button>
-          <Button onClick={onDeleteFontSizeVariant} colorScheme="red">
-            Delete Variant
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+            <Box css={{ display: 'flex', flexDirection: 'column' }}>
+              <FormControl>
+                <FormLabel>Variant Name</FormLabel>
+                <Input
+                  value={variant.name}
+                  onChange={(e) =>
+                    setVariant({ ...variant, name: e.target.value })
+                  }
+                />
+              </FormControl>
+
+              <FormControl css={{ marginTop: '32px' }}>
+                <FormLabel>Variant Value</FormLabel>
+                <Input
+                  value={variant.value}
+                  onChange={(e) =>
+                    setVariant({ ...variant, value: Number(e.target.value) })
+                  }
+                  type="number"
+                />
+              </FormControl>
+              <FormControl css={{ marginTop: '32px' }}>
+                <FormLabel>Variant Unit</FormLabel>
+                <Select
+                  value={variant.unit}
+                  onChange={(event) => {
+                    setVariant({
+                      ...variant,
+                      unit: event.target.value as 'px' | 'rem' | 'em',
+                    })
+                  }}
+                >
+                  <option value="px">px</option>
+                  <option value="rem">rem</option>
+                  <option value="em">em</option>
+                </Select>
+              </FormControl>
+            </Box>
+            {error && (
+              <Text color="red.500" css={{ marginTop: 18 }}>
+                {error}
+              </Text>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              onClick={handleSave}
+              css={{ marginRight: '12px' }}
+              colorScheme="green"
+            >
+              Save Variant
+            </Button>
+            {onDeleteFontSizeVariant && (
+              <>
+                <Button
+                  onClick={() => onDeleteAlertDialogOpen()}
+                  colorScheme="red"
+                >
+                  Delete Variant
+                </Button>
+                <AlertDialogDelete
+                  tokenName={variant.name}
+                  isOpen={isAlertDialogOpen}
+                  onClose={onDeleteAlertDialogClose}
+                  onDelete={() => onDeleteFontSizeVariant()}
+                />
+              </>
+            )}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   )
 }

@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { EditColorModal } from './EditColorModal'
 import { AddColorSkeleton } from './AddColorSkeleton'
+import { ColorDisplay } from './ColorDisplay'
 
 export function ColorPaletteSection({
   colors,
@@ -43,32 +44,31 @@ export function ColorPaletteSection({
   }
   return (
     <Box>
-      <Heading fontSize={48} fontWeight="black">
+      <Heading fontSize={'3rem'} fontWeight="black">
         Color Palette
       </Heading>
       <Text
-        fontSize={18}
+        fontSize={'1.2rem'}
         fontWeight="medium"
         color="gray.600"
         css={{ marginTop: '12px' }}
       >
         {`Add and edit the colors in your theme. `}
       </Text>
-
-      <Divider css={{ borderWidth: '2px', margin: '12px 0' }} />
-      <Box css={{ marginTop: '24px' }}>
-        {/* Anything inside of Dndcontext is draggable */}
+      <Divider css={{ borderWidth: '2px', margin: '12px 0', width: '100%' }} />
+      <Box>
+       {/* Anything inside of Dndcontext is draggable */}
         <DndContext
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
         >
-          <Stack direction="column" alignItems="flex-start" spacing={32}>
+          <Stack direction="column" spacing={12}>
             <SortableContext
               items={colors}
               strategy={verticalListSortingStrategy}
-            >
+             >
               {colors.map((color) => (
-                <ColorRow
+                <ColorDisplay
                   key={color.name}
                   colorData={color}
                   onUpdateColorData={(updatedColorData: TColorData) => {
@@ -78,6 +78,41 @@ export function ColorPaletteSection({
                     )
                     newColors[colorIndex] = updatedColorData
 
+                    onUpdateColors(newColors)
+                  }}
+                  onDeleteColorData={() => {
+                    const newColors = colors.filter((c) => c.name !== color.name)
+
+                    onUpdateColors(newColors)
+                  }}
+                />
+              ))}
+             </SortableContext>
+          </Stack>
+        </DndContext>
+        <Box
+          css={{
+            padding: '18px 0',
+            marginTop: colors.length > 0 ? '32px' : '0',
+          }}
+          onClick={() => onOpen()}
+        >
+          <AddColorSkeleton numberOfMockVariants={4} />
+        </Box>
+      </Box>
+
+      {/* <Box css={{ marginTop: '24px' }}>
+        <Stack direction="column" alignItems="flex-start" spacing={32}>
+          {colors.map((color) => (
+            <ColorRow
+              key={color.name}
+              colorData={color}
+              onUpdateColorData={(updatedColorData: TColorData) => {
+                const newColors = [...colors]
+                const colorIndex = colors.findIndex(
+                  (ec) => ec.name === color.name
+                )
+                newColors[colorIndex] = updatedColorData
                     onUpdateColors(newColors)
                   }}
                   onDeleteColorData={() => {
@@ -102,7 +137,7 @@ export function ColorPaletteSection({
         >
           <AddColorSkeleton numberOfMockVariants={4} />
         </Box>
-      </Box>
+      </Box> */}
       <EditColorModal
         isOpen={isOpen}
         onClose={(colorData?: TColorData) => {
