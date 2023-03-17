@@ -148,10 +148,16 @@ export function ColorDisplay({
       ref={setNodeRef}
       style={styles}
     >
-      <Button {...attributes} {...listeners}>
+      <Button
+        {...attributes}
+        {...listeners}
+        css={{ alignSelf: 'center', marginRight: '2rem' }}
+        width={10}
+        height={20}
+      >
         <Image
-          width={5}
-          height={10}
+          objectFit={'contain'}
+          layout="fill"
           src="/Drag/drag-handle-svgrepo-com.svg"
           alt="Drag Me"
         />
