@@ -10,7 +10,7 @@ import {
 import { TFontSizeVariant } from 'types'
 import { EditFontSizeModal } from './EditFontSizeModal'
 import { FontSizeRow } from './FontSizeRow'
-
+import { useState } from 'react'
 export function FontSizesSection({
   fontSizeData,
   onUpdateFontSizeData,
@@ -23,7 +23,7 @@ export function FontSizesSection({
     onOpen: onAddVariantModalOpen,
     onClose: onAddVariantModalClose,
   } = useDisclosure()
-
+  const [isAdding, setIsAdding] = useState<boolean>(true)
   const sortFontSizes = function () {
     const rem: TFontSizeVariant[] = []
     const px: TFontSizeVariant[] = []
@@ -90,6 +90,7 @@ export function FontSizesSection({
         </Button>
       </Stack>
       <EditFontSizeModal
+        isAdding={isAdding}
         isOpen={isAddVariantModalOpen}
         onClose={onAddVariantModalClose}
         onUpdateFontSizeVariant={(newVariant: TFontSizeVariant) => {
