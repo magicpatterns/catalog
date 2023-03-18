@@ -148,7 +148,7 @@ Mirrorful güvenlik konularına çok önem verir. Eğer Mirrorful ile ilgili her
 
 Sık sık yeni özellikler ekleniyor. Güncel kalmak için bu repo'yu favorilere ekleyin (star'layın).
 
-<img width="300" src="./assets/tower.png" alt="Build">
+<img width="300" src="../assets/tower.png" alt="Build">
 
 ## 🛠️ Katkıda bulunmak
 
