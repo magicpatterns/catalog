@@ -23,14 +23,16 @@ import 'highlight.js/styles/atom-one-dark.css'
 import { CodePreview } from './CodePreview'
 
 export function ExportSuccessModal({
+  primaryName,
   isOpen,
   onClose,
 }: {
+  primaryName: string
   isOpen: boolean
   onClose: () => void
 }) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal size="lg" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
@@ -52,13 +54,16 @@ export function ExportSuccessModal({
             <TabList>
               <Tab>CSS / SCSS</Tab>
               <Tab>Javascript / Typescript</Tab>
+              <Tab>Tailwind</Tab>
             </TabList>
 
             <TabPanels>
               <TabPanel>
                 <Text css={{ marginBottom: 8 }}>
                   <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-                  <Code>theme.css</Code>
+                  <Code>theme.css</Code> (actual path may vary. You can
+                  reference the <Code>.mirrorful</Code> folder in the root of
+                  your project)
                 </Text>
                 <CodePreview
                   language="javascript"
@@ -72,13 +77,15 @@ export function ExportSuccessModal({
                 <CodePreview
                   language="css"
                   textClass="code-snippet"
-                  text={`.primary-button {\n    background-color: var(--color-primary);\n}\n\n.primary-button:hover {\n    background-color: var(--color-primary-hover);\n}`}
+                  text={`.${primaryName.toLowerCase()}-button {\n    background-color: var(--color-${primaryName.toLowerCase()});\n}\n\n.${primaryName.toLowerCase()}-button:hover {\n    background-color: var(--color-${primaryName.toLowerCase()}-hover);\n}`}
                 />
               </TabPanel>
               <TabPanel>
                 <Text css={{ marginBottom: 8 }}>
                   <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-                  <Code>Tokens</Code> (actual path may vary)
+                  <Code>Tokens</Code> (actual path may vary. You can reference
+                  the <Code>.mirrorful</Code> folder in the root of your
+                  project)
                 </Text>
 
                 <CodePreview
@@ -94,7 +101,31 @@ export function ExportSuccessModal({
                 <CodePreview
                   language="javascript"
                   textClass="code-snippet"
-                  text={`<button\n   style={{ backgroundColor: Tokens.primary.base}}\n> Click here\n</button>`}
+                  text={`<button\n   style={{ backgroundColor: Tokens.colors.${primaryName.toLowerCase()}.base }}\n> Click here\n</button>`}
+                />
+              </TabPanel>
+              <TabPanel>
+                <Text css={{ marginBottom: 8 }}>
+                  <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
+                  <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code>{' '}
+                  (actual path may vary. You can reference the{' '}
+                  <Code>.mirrorful</Code> folder in the root of your project)
+                </Text>
+
+                <CodePreview
+                  language="javascript"
+                  textClass="code-snippet"
+                  text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
+                />
+
+                <Text css={{ marginTop: 12, marginBottom: 8 }}>
+                  <span style={{ fontWeight: 'bold' }}>2.</span> Extend the
+                  tailwind theme.
+                </Text>
+                <CodePreview
+                  language="javascript"
+                  textClass="code-snippet"
+                  text={`theme: {\n    extend: { colors: Tokens.colors } \n}`}
                 />
               </TabPanel>
             </TabPanels>

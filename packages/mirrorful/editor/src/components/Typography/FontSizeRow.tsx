@@ -2,6 +2,38 @@ import { TFontSizeVariant } from 'types'
 import { Box, Stack, Text, Button, useDisclosure } from '@chakra-ui/react'
 import { EditFontSizeModal } from './EditFontSizeModal'
 
+// max font size in px or em/rem
+const maxFontSizePx = 48
+const maxFontSizeEmRem = maxFontSizePx / 16
+
+// return boolean font size is too large for preview
+function isFontSizeTooLarge(fontSizeData: TFontSizeVariant) {
+  if (fontSizeData.unit === 'px') {
+    return fontSizeData.value > maxFontSizePx
+  }
+
+  if (fontSizeData.unit === 'rem' || fontSizeData.unit === 'em') {
+    return fontSizeData.value > maxFontSizeEmRem
+  }
+
+  return false
+}
+
+// return font size for preview default to 1rem if too large
+function normalizeFontSize(fontSizeData: TFontSizeVariant) {
+  if (fontSizeData.unit === 'px') {
+    return isFontSizeTooLarge(fontSizeData) ? '1rem' : `${fontSizeData.value}px`
+  }
+
+  if (fontSizeData.unit === 'rem' || fontSizeData.unit === 'em') {
+    return isFontSizeTooLarge(fontSizeData)
+      ? '1rem'
+      : `${fontSizeData.value}${fontSizeData.unit}`
+  }
+
+  return '1rem'
+}
+
 export function FontSizeRow({
   fontSizeData,
   onUpdateFontSizeVariant,
@@ -44,11 +76,14 @@ export function FontSizeRow({
         </Box>
         <Box
           css={{
-            fontSize: `${fontSizeData.value}${fontSizeData.unit}`,
+            fontSize: normalizeFontSize(fontSizeData),
+            fontWeight: isFontSizeTooLarge(fontSizeData) ? 'bold' : '',
             width: 700,
           }}
         >
-          Lorem ipsum dolor sit amet.
+          {isFontSizeTooLarge(fontSizeData)
+            ? `Font size ${fontSizeData.value}${fontSizeData.unit} is too large to render.`
+            : `Lorem ipsum dolor sit amet.`}
         </Box>
         <Box css={{ justifySelf: 'flex-end' }}>
           <Button
