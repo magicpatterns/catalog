@@ -148,15 +148,17 @@ export function EditColorModal({
                 }}
               />
             </FormControl>
-            <FormControl>
-              <Checkbox
-                checked={shouldGenerateVariants}
-                onChange={() => setShouldGenerateVariants((prev) => !prev)}
-                defaultChecked={shouldGenerateVariants}
-              >
-                Automatically Generate Variants
-              </Checkbox>
-            </FormControl>
+            {!initialColorData ? (
+              <FormControl>
+                <Checkbox
+                  checked={shouldGenerateVariants}
+                  onChange={() => setShouldGenerateVariants((prev) => !prev)}
+                  defaultChecked={shouldGenerateVariants}
+                >
+                  Automatically Generate Variants
+                </Checkbox>
+              </FormControl>
+            ) : null}
           </Flex>
           <Box flex="1">
             {showBaseColorPicker && (
