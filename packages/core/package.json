@@ -1,0 +1,40 @@
+{
+  "name": "@mirrorful/core",
+  "version": "1.0.2",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
+    "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "lib"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.17",
+    "@chakra-ui/react": "^2.5.2",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@hello-pangea/color-picker": "^3.2.2",
+    "framer-motion": "^10.6.0",
+    "lottie-react": "^2.4.0",
+    "posthog-js": "^1.51.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-highlight": "^0.15.0",
+    "react-icons": "^4.8.0",
+    "tinycolor2": "^1.6.0",
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/tinycolor2": "^1.4.3",
+    "concurrently": "^7.6.0",
+    "prettier": "^2.8.4",
+    "tsc-alias": "^1.8.3"
+  }
+}

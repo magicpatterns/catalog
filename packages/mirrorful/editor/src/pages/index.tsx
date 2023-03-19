@@ -1,4 +1,4 @@
-import { Dashboard } from '@editor/components/Dashboard'
+import { Dashboard } from '@mirrorful/core/lib/components/Dashboard'
 import Head from 'next/head'
 
 export default function Editor() {

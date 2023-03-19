@@ -20,7 +20,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@hello-pangea/color-picker": "^3.2.2",
-    "@mirrorful/editor": "file:../../editor",
+    "@mirrorful/core": "^1.0.2",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-dropdown-menu": "^2.0.2",
