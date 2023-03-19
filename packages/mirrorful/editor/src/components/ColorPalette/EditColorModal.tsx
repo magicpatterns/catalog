@@ -83,7 +83,7 @@ export function EditColorModal({
             gap: 24,
           }}
         >
-          <Flex flexDirection="column" flex="1">
+          <Flex flexDirection="column" flex="1" gap={4}>
             <FormControl>
               <FormLabel>Variable Name</FormLabel>
               <Input
@@ -138,7 +138,9 @@ export function EditColorModal({
                 checked={shouldGenerateVariants}
                 onChange={() => setShouldGenerateVariants((prev) => !prev)}
                 defaultChecked={shouldGenerateVariants}
-              ></Checkbox>
+              >
+                Automatically Generate Variants
+              </Checkbox>
             </FormControl>
           </Flex>
           <Box flex="1">
