@@ -18,6 +18,7 @@ import tinycolor from 'tinycolor2'
 import { TColorData, TColorVariant } from 'types'
 import { EditColorNameModal } from './EditColorNameModal'
 import { EditVariantModal } from './EditVariantModal'
+import { generateDefaultColorShades } from './utils'
 
 function VariantRow({
   variant,
@@ -126,6 +127,20 @@ export function ColorDisplay({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
+  // Generates default shades for a base color...
+  function addDefaultShades(baseColor: string) {
+    console.log('Adding defaults...', baseColor)
+    const newVariants = generateDefaultColorShades(baseColor)
+    Object.keys(newVariants).forEach((variant) => {
+      console.log('Variant', variant)
+      if (!colorData.variants.hasOwnProperty(variant)) {
+        colorData.variants[variant] = newVariants[variant]
+      }
+    })
+    console.log('final cdata', colorData)
+    onUpdateColorData(colorData)
+  }
+
   return (
     <Box
       css={{
@@ -217,6 +232,36 @@ export function ColorDisplay({
           <Button variant="outline" onClick={onAddVariantModalOpen}>
             Add New Variant
           </Button>
+          <Menu>
+            <MenuButton
+              variant="outline"
+              as={IconButton}
+              icon={<Icon as={FiMoreVertical} />}
+              color="black"
+              _hover={{
+                backgroundColor: 'rgba(235, 235, 235, 0.3)',
+              }}
+              _active={{
+                backgroundColor: 'rgba(235, 235, 235, 0.3)',
+              }}
+              size="sm"
+              css={{
+                borderRadius: '50%',
+                border: 'none',
+                marginLeft: '24px',
+              }}
+            />
+            <MenuList>
+              <MenuItem
+                onClick={() => {
+                  addDefaultShades(colorData.baseColor)
+                }}
+              >
+                Add default shades
+              </MenuItem>
+              <MenuItem onClick={() => {}}>Add multiple</MenuItem>
+            </MenuList>
+          </Menu>
         </Box>
         <Box css={{ marginTop: '32px' }}>
           <Stack spacing={'4px'}>
