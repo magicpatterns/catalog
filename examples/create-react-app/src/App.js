@@ -1,5 +1,5 @@
-import brick from './brick.gif'
 import './App.css'
+import './.mirrorful/theme.css'
 
 function App() {
   return (
@@ -12,15 +12,7 @@ function App() {
           fontSize: '60px',
         }}
       >
-        Deliver bricks to your door in 5 minutes!
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <img src={brick} alt="bricks" />
+        Acme Corp, Inc.
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
         <button className="primary-button">Buy now</button>

@@ -24,6 +24,32 @@ export function FontSizesSection({
     onClose: onAddVariantModalClose,
   } = useDisclosure()
 
+  const sortFontSizes = function () {
+    const rem: TFontSizeVariant[] = []
+    const px: TFontSizeVariant[] = []
+    const em: TFontSizeVariant[] = []
+
+    fontSizeData.map((font) => {
+      if (font.unit == 'rem') {
+        rem.push(font)
+      }
+      if (font.unit == 'em') {
+        em.push(font)
+      }
+      if (font.unit == 'px') {
+        px.push(font)
+      }
+    })
+
+    rem.sort((a, b) => a.value - b.value)
+    em.sort((a, b) => a.value - b.value)
+    px.sort((a, b) => a.value - b.value)
+
+    return rem.concat(px, em)
+  }
+
+  fontSizeData = sortFontSizes()
+
   return (
     <Box>
       <Heading fontSize={28} fontWeight="black">
@@ -70,7 +96,6 @@ export function FontSizesSection({
           const updatedFontSizeData = [...fontSizeData, newVariant]
           onUpdateFontSizeData(updatedFontSizeData)
         }}
-        onDeleteFontSizeVariant={() => {}}
       />
     </Box>
   )

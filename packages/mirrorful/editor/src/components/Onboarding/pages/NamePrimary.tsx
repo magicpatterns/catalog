@@ -113,12 +113,12 @@ export function NamePrimary({
           }}
           bgColor={primaryColor}
         />
-        <Text
-          css={{ alignSelf: 'flex-start', marginBottom: '4px' }}
-          fontWeight="bold"
-        >
-          Color Name:
-        </Text>
+            <Text
+              css={{ alignSelf: 'flex-start', marginBottom: '4px' }}
+              fontWeight="bold"
+            >
+              Color Name:
+            </Text>
         <Input
           placeholder="e.g. Blue"
           css={{ width: '100%' }}
