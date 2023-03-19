@@ -38,41 +38,22 @@ export function AddColorSkeleton({
   }
 
   return (
-    <Box css={{ display: 'flex', cursor: 'pointer' }} marginTop={16}>
-      <Box css={{ width: 350 }}>
-        <Button>Add a new color</Button>
-      </Box>
-      {backgroundColorString && (
-        <Box
-          css={{
-            opacity: '0.4',
-            backgroundColor: backgroundColorString,
-            width: 240,
-            height: 240,
-            padding: '24px',
-            borderRadius: 8,
-            color: 'black',
-            border: '1px solid gray',
-          }}
-        >
-          <AddIcon boxSize={6} />
-        </Box>
-      )}
-
+    <Box
+      css={{
+        display: 'flex',
+        borderRadius: 8,
+      }}
+    >
       <Box
         css={{
-          opacity: '0.4',
           display: 'flex',
           flexDirection: 'column',
-          flexWrap: 'wrap',
-          marginLeft: '24px',
-          justifyContent: 'space-between',
+          width: '100%',
         }}
-        height={240}
       >
-        {mockVariants.map((mockVariant) => (
-          <MockVariantSquare key={mockVariant} />
-        ))}
+        <Button fontSize="1rem" fontWeight={600} color="black" height="3rem">
+          Add new color
+        </Button>
       </Box>
     </Box>
   )

@@ -2,15 +2,33 @@ import { TFontSizeVariant } from 'types'
 import { Box, Stack, Text, Button, useDisclosure } from '@chakra-ui/react'
 import { EditFontSizeModal } from './EditFontSizeModal'
 
-function calculateMaxFontSizeForPreview(fontSizeData: TFontSizeVariant) {
-  // allow anything up to 96px
+// max font size in px or em/rem
+const maxFontSizePx = 48
+const maxFontSizeEmRem = maxFontSizePx / 16
+
+// return boolean font size is too large for preview
+function isFontSizeTooLarge(fontSizeData: TFontSizeVariant) {
   if (fontSizeData.unit === 'px') {
-    return `${Math.min(fontSizeData.value, 96)}px`
+    return fontSizeData.value > maxFontSizePx
   }
 
-  // allow anything up to 6rem || 6em
   if (fontSizeData.unit === 'rem' || fontSizeData.unit === 'em') {
-    return `${Math.min(fontSizeData.value, 6)}${fontSizeData.unit}`
+    return fontSizeData.value > maxFontSizeEmRem
+  }
+
+  return false
+}
+
+// return font size for preview default to 1rem if too large
+function normalizeFontSize(fontSizeData: TFontSizeVariant) {
+  if (fontSizeData.unit === 'px') {
+    return isFontSizeTooLarge(fontSizeData) ? '1rem' : `${fontSizeData.value}px`
+  }
+
+  if (fontSizeData.unit === 'rem' || fontSizeData.unit === 'em') {
+    return isFontSizeTooLarge(fontSizeData)
+      ? '1rem'
+      : `${fontSizeData.value}${fontSizeData.unit}`
   }
 
   return '1rem'
@@ -58,11 +76,14 @@ export function FontSizeRow({
         </Box>
         <Box
           css={{
-            fontSize: calculateMaxFontSizeForPreview(fontSizeData),
+            fontSize: normalizeFontSize(fontSizeData),
+            fontWeight: isFontSizeTooLarge(fontSizeData) ? 'bold' : '',
             width: 700,
           }}
         >
-          Lorem ipsum dolor sit amet.
+          {isFontSizeTooLarge(fontSizeData)
+            ? `Font size ${fontSizeData.value}${fontSizeData.unit} is too large to render.`
+            : `Lorem ipsum dolor sit amet.`}
         </Box>
         <Box css={{ justifySelf: 'flex-end' }}>
           <Button
@@ -73,6 +94,7 @@ export function FontSizeRow({
           </Button>
         </Box>
         <EditFontSizeModal
+          isAdding={false}
           isOpen={isEditVariantModalOpen}
           onClose={onEditVariantModalClose}
           initialFontSizeVariant={fontSizeData}
