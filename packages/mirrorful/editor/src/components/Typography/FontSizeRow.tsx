@@ -94,6 +94,7 @@ export function FontSizeRow({
           </Button>
         </Box>
         <EditFontSizeModal
+          isAdding={false}
           isOpen={isEditVariantModalOpen}
           onClose={onEditVariantModalClose}
           initialFontSizeVariant={fontSizeData}
