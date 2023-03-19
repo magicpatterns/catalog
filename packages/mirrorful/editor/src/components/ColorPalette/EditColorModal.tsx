@@ -15,6 +15,7 @@ import {
   InputRightElement,
   IconButton,
   InputGroup,
+  Checkbox,
 } from '@chakra-ui/react'
 import { TColorData } from 'types'
 import { useState, useRef } from 'react'
@@ -40,6 +41,7 @@ export function EditColorModal({
   const presetColors: string[] = []
   const [name, setName] = useState<string>(initialColorData?.name ?? '')
   const [base, setBase] = useState<string>(initialColorData?.baseColor ?? '')
+  const [shouldGenerateVariants, setShouldGenerateVariants] = useState(false)
 
   const [colorPickerColor, setColorPickerColor] = useState<Color>(
     initialColorData?.baseColor ?? '#000000'
@@ -55,13 +57,14 @@ export function EditColorModal({
 
   const handleClose = () => {
     onBaseBlur()
-
     onClose({
       name,
       baseColor: base,
-      variants: {
-        '500': base,
-      },
+      variants: shouldGenerateVariants
+        ? generateDefaultColorShades(base)
+        : {
+            '500': base,
+          },
     })
   }
 
@@ -129,6 +132,13 @@ export function EditColorModal({
                   }
                 }}
               />
+            </FormControl>
+            <FormControl>
+              <Checkbox
+                checked={shouldGenerateVariants}
+                onChange={() => setShouldGenerateVariants((prev) => !prev)}
+                defaultChecked={shouldGenerateVariants}
+              ></Checkbox>
             </FormControl>
           </Flex>
           <Box flex="1">
