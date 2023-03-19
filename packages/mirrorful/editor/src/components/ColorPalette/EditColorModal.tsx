@@ -148,7 +148,7 @@ export function EditColorModal({
                 }}
               />
             </FormControl>
-            {!initialColorData ? (
+            {!initialColorData || base !== initialColorData.baseColor ? (
               <FormControl>
                 <Checkbox
                   checked={shouldGenerateVariants}
