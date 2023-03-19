@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
 import '../main.css'
-// import '@mirrorful/core/lib/assets/atom-one-dark.css'
+import '../atom-one-dark.css'
 import posthog from 'posthog-js'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
