@@ -1,7 +1,6 @@
-import * as Separator from '@radix-ui/react-separator'
 import tinycolor from 'tinycolor2'
 import { generateDefaultColorShades } from './utils'
-import { TColorData, TColorVariant } from 'types'
+import { TColorData, TColorVariant } from '@editor/types'
 import {
   Box,
   Button,
@@ -17,7 +16,7 @@ import { EditColorNameModal } from './EditColorNameModal'
 import { useState } from 'react'
 import { EditVariantModal } from './EditVariantModal'
 import { ColorVariantPlaceholder } from './ColorVariantPlaceholder'
-import { AlertDialogDelete } from 'components/AlertDialogDelete'
+import { AlertDialogDelete } from '@editor/components/AlertDialogDelete'
 
 function VariantSquare({
   variant,

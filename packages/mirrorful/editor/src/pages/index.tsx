@@ -1,4 +1,4 @@
-import { Dashboard } from 'components/Dashboard'
+import { Dashboard } from '@editor/components/Dashboard'
 import Head from 'next/head'
 
 export default function Editor() {

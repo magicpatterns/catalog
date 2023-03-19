@@ -1,4 +1,4 @@
-import { TTokens } from 'types'
+import { TTokens } from '@editor/types'
 import { sanitizeName } from './sanitizeName'
 
 export function createThemeObject({ colorData, typography }: TTokens) {

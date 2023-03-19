@@ -16,10 +16,10 @@ import {
 } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import tinycolor from 'tinycolor2'
-import { TColorVariant } from 'types'
+import { TColorVariant } from '@editor/types'
 import { ColorPicker } from './ColorPicker'
 import { handleInvalidColor } from './utils'
-import { AlertDialogDelete } from 'components/AlertDialogDelete'
+import { AlertDialogDelete } from '@editor/components/AlertDialogDelete'
 import { useDisclosure } from '@chakra-ui/react'
 
 export function EditVariantModal({

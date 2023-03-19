@@ -1,13 +1,17 @@
 import { Box, useDisclosure } from '@chakra-ui/react'
 import { Sidebar } from './Sidebar'
 import { useState, useEffect } from 'react'
-import { ColorPaletteSection } from 'components/ColorPalette/ColorPaletteSection'
-import { TColorData, TConfig, TExportFileType, TTypographyData } from 'types'
-import posthog from 'posthog-js'
-import { Onboarding } from 'components/Onboarding'
-import { ExportSuccessModal } from 'components/ExportSuccessModal'
-import { TypographySection } from 'components/Typography/TypographySection'
-import { ExportSettingsModal } from 'components/ExportSettingsModal'
+import { ColorPaletteSection } from '@editor/components/ColorPalette/ColorPaletteSection'
+import {
+  TColorData,
+  TConfig,
+  TExportFileType,
+  TTypographyData,
+} from '@editor/types'
+import { Onboarding } from '@editor/components/Onboarding'
+import { ExportSuccessModal } from '@editor/components/ExportSuccessModal'
+import { TypographySection } from '@editor/components/Typography/TypographySection'
+import { ExportSettingsModal } from '@editor/components/ExportSettingsModal'
 
 export type TTab = 'colors' | 'typography'
 
@@ -58,8 +62,6 @@ export function Dashboard() {
   }, [showOnboarding])
 
   const handleExport = async () => {
-    posthog.capture('EXPORT_CONFIG')
-
     await fetch('/api/export', {
       method: 'POST',
       body: JSON.stringify({

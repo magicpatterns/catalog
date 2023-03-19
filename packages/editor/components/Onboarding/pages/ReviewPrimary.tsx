@@ -10,7 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
-import { generateDefaultColorShades } from 'components/ColorPalette/utils'
+import { generateDefaultColorShades } from '@editor/components/ColorPalette/utils'
 import { useState } from 'react'
 import tinycolor from 'tinycolor2'
 import {
