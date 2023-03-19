@@ -155,7 +155,7 @@ export function EditColorModal({
                   onChange={() => setShouldGenerateVariants((prev) => !prev)}
                   defaultChecked={shouldGenerateVariants}
                 >
-                  Automatically Generate Variants
+                  Automatically generate variants
                 </Checkbox>
               </FormControl>
             ) : null}
