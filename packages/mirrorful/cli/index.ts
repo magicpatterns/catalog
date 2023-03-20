@@ -8,7 +8,7 @@ import { getPkgManager } from './helpers/get-pkg-manager'
 import { init } from './init'
 
 const handleSigTerm = () => {
-  fetch('http://localhost:3000/api/ending')
+  fetch('http://localhost:5050/api/endingPoll')
   process.exit(0)
 }
 process.on('SIGINT', handleSigTerm)
