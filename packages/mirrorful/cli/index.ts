@@ -7,7 +7,10 @@ import Commander from 'commander'
 import { getPkgManager } from './helpers/get-pkg-manager'
 import { init } from './init'
 
-const handleSigTerm = () => process.exit(0)
+const handleSigTerm = () => {
+  fetch('http://localhost:3000/api/ending')
+  process.exit(0)
+}
 process.on('SIGINT', handleSigTerm)
 process.on('SIGTERM', handleSigTerm)
 
