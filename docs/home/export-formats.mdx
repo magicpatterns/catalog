@@ -3,13 +3,9 @@ title: '💿 Export Formats'
 description: 'After configuring your theme in the editor, you can export it to be used by your app.'
 ---
 
-We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`
+We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`. If you're using tailwind, we also export to common js to work nicely with your tailwind config.
 
-You can then either consume your new tokens through CSS Variables or Javascript constants!
-
-## Using CSS Variables
-
-Example:
+## Example: Using Mirrorful with CSS Variables
 
 ```css
 .primary-button {
@@ -21,9 +17,7 @@ Example:
 }
 ```
 
-## Using Javascript Constants
-
-Example:
+## Example 2: Using Mirrorful with Javascript Constants
 
 ```javascript
 <button backgroundColor={{ Tokens.primary.base }}>Click here</button>
