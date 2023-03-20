@@ -1,3 +1,4 @@
+import { Text } from '@chakra-ui/react'
 import { Dashboard } from '@mirrorful/core/lib/components/Dashboard'
 import Head from 'next/head'
 import { useState, useRef, useEffect } from 'react'
@@ -7,7 +8,7 @@ export default function Editor() {
   const counter = useRef<boolean>(false)
   useEffect(() => {
     function pollForServerEndCheck() {
-      fetch('http://localhost:3000/api/hello', { keepalive: true })
+      fetch('http://localhost:5050/api/longPoll', { keepalive: true })
         .then((res) => res.text())
         .then((res) => {
           if (res === 'exiting') {
@@ -42,7 +43,11 @@ export default function Editor() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Dashboard />
+      {hasShutDown ? (
+        <Text css={{ textAlign: 'center' }}>Server Has Shut Down</Text>
+      ) : (
+        <Dashboard />
+      )}
     </>
   )
 }
