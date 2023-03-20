@@ -14,3 +14,31 @@ No matter the PR, all the Github avatars of contributors will be added to the Mi
 ## Running Mirrorful Locally
 
 Mirrorful runs as a set of packages in a monorepo in order to share common logic across multiple channels.
+
+Mirrorful's core logic lives in `packages/core`. This logic is then consumed in our NPM package, located in `packages/mirrorful`.
+
+First, we will need to build Mirrorful's core library, `@mirrorful/core`. In `packages/core`, run:
+
+```
+// Install packages
+yarn
+
+// Tell Yarn to reference this local build instead of the published package
+yarn link
+
+// Build and hot reload the core library
+yarn build:watch
+```
+
+Now, we can run Mirrorful as a package. In `packages/mirrorful/editor`, run:
+
+```
+// Install packages
+yarn
+
+// Tell Yarn to reference the local build instead of the published package
+yarn link @mirrorful/core
+
+// Run Mirrorful
+yarn dev
+```
