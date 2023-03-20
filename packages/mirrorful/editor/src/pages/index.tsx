@@ -1,5 +1,3 @@
-import { Container, Grid } from '@chakra-ui/layout'
-import { Text } from '@chakra-ui/react'
 import { Dashboard } from '@mirrorful/core/lib/components/Dashboard'
 import ServerEndedMessage from '@mirrorful/core/lib/components/ServerEndedMessage'
 import Head from 'next/head'
