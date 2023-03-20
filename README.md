@@ -159,6 +159,8 @@ There are a lot of new features coming very frequently. Star this repo to stay u
 
 Whether it's big or small, we love contributions. The maintainers of this repo have built open-source projects before and love it. Welcome!
 
+To run Mirrorful locally, check out the [instructions here](https://mirrorful.com/docs/home/contributing)
+
 Not sure where to get started? You can:
 
 - [Book a free, non-pressure pairing sessions with one of our teammates](https://usemotion.com/meet/teddyni/meet?d=15)!
