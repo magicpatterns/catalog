@@ -5,6 +5,7 @@ import {
   TExportFileType,
   defaultFiles,
   defaultTypography,
+  TConfig,
 } from '@core/types'
 import { OnboardingContainer } from './OnboardingContainer'
 import { ExportSettings } from './pages/ExportSettings'
@@ -16,8 +17,10 @@ import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
 
 export function Onboarding({
+  postStoreData,
   onFinishOnboarding,
 }: {
+  postStoreData: (data: TConfig) => Promise<void>
   onFinishOnboarding: () => void
 }) {
   const [primaryColor, setPrimaryColor] = useState<string>('#9F7AEA')
@@ -41,12 +44,9 @@ export function Onboarding({
       ...latestPalette,
     ]
 
-    await fetch('/api/export', {
-      method: 'POST',
-      body: JSON.stringify({
-        tokens: { colorData: colors, typography: defaultTypography },
-        files: fileTypes,
-      }),
+    await postStoreData({
+      tokens: { colorData: colors, typography: defaultTypography },
+      files: fileTypes,
     })
   }
 
