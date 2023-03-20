@@ -81,7 +81,7 @@ npx mirrorful
 
 ## 💿 Export Formats
 
-After configuring your theme in the editor, you can export it to be used by your app.
+After configuring your theme in the editor, you can export it to be used by your app. We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`. If you're using tailwind, we also export to common js to work nicely with your tailwind config.
 
 **Example: Using CSS Variables**
 
