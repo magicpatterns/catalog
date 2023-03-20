@@ -1,11 +1,13 @@
 import Conf from 'conf'
-import { TConfig } from 'types'
+import {
+  TConfig,
+  defaultFiles,
+  defaultTypography,
+} from '@mirrorful/core/lib/types'
 import {
   ZeroPointZeroPointTwoMigration,
   ZeroPointZeroPointThreeMigration,
-  defaultTypography,
   ZeroPointZeroPointFourMigration,
-  defaultFiles,
 } from './migrations'
 
 // Our working directory is 2 levels below node_modules in production, so we go up 3 levels

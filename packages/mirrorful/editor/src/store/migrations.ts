@@ -1,5 +1,11 @@
 import Conf from 'conf'
-import { TColorData, TConfig, TTypographyData } from 'types'
+import {
+  TColorData,
+  TConfig,
+  TTypographyData,
+  defaultTypography,
+  defaultFiles,
+} from '@mirrorful/core/lib/types'
 
 export const ZeroPointZeroPointTwoMigration = (store: Conf<TConfig>) => {
   const tokens = store.get('tokens')
@@ -42,26 +48,6 @@ export const ZeroPointZeroPointTwoMigration = (store: Conf<TConfig>) => {
   store.set('tokens', newTokens)
 }
 
-export const defaultTypography: TTypographyData = {
-  fontSizes: [
-    {
-      value: 1,
-      unit: 'rem',
-      name: 'sm',
-    },
-    {
-      value: 1.2,
-      unit: 'rem',
-      name: 'md',
-    },
-    {
-      value: 1.4,
-      unit: 'rem',
-      name: 'lg',
-    },
-  ],
-}
-
 export const ZeroPointZeroPointThreeMigration = (store: Conf<TConfig>) => {
   const tokens = store.get('tokens')
   const updatedTokens = { ...tokens }
@@ -69,15 +55,6 @@ export const ZeroPointZeroPointThreeMigration = (store: Conf<TConfig>) => {
   updatedTokens.typography = defaultTypography
   store.set('tokens', updatedTokens)
 }
-
-export const defaultFiles: TConfig['files'] = [
-  'css',
-  'scss',
-  'js',
-  'cjs',
-  'ts',
-  'json',
-]
 
 export const ZeroPointZeroPointFourMigration = (store: Conf<TConfig>) => {
   store.set('files', defaultFiles)

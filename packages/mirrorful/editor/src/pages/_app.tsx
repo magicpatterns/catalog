@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
 import '../main.css'
+import '../atom-one-dark.css'
 import posthog from 'posthog-js'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -29,8 +30,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <ChakraProvider>
+    <MirrorfulThemeProvider>
       <Component {...pageProps} />
-    </ChakraProvider>
+    </MirrorfulThemeProvider>
   )
 }

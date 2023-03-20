@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fs from 'fs'
 import { rootPath, store } from '../../store/store'
-import { TConfig } from 'types'
+import { TConfig } from '@mirrorful/core/lib/types'
 
 const readStorageFile = async (): Promise<{ colorData: string[] }> => {
   const data = await fs.promises.readFile(`${rootPath}/store.json`, 'utf8')

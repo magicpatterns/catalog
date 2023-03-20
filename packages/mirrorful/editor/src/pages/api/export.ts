@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fs from 'fs'
-import { TConfig, TExportFileType } from 'types'
-import { rootPath, store } from 'store/store'
-import { translators } from 'translators'
+import { TConfig, TExportFileType } from '@mirrorful/core/lib/types'
+import { rootPath, store } from '../../store/store'
+import { translators } from '@mirrorful/core/lib/translators'
 
 const generateStorageFile = async ({ tokens, files }: TConfig) => {
   store.set('tokens', tokens)
