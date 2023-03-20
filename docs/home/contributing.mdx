@@ -19,26 +19,32 @@ Mirrorful's core logic lives in `packages/core`. This logic is then consumed in 
 
 First, we will need to build Mirrorful's core library, `@mirrorful/core`. In `packages/core`, run:
 
+```bash
+# In `packages/core`
+cd packages/core;
+
+# Install packages
+yarn;
+
+# Tell Yarn to reference this local build instead of the published package
+yarn link;
+
+# Build and hot reload the core library
+yarn build:watch;
 ```
-// Install packages
-yarn
 
-// Tell Yarn to reference this local build instead of the published package
-yarn link
+Now, in a separate terminal window, we can run Mirrorful as a package. In `packages/mirrorful/editor`, run:
 
-// Build and hot reload the core library
-yarn build:watch
-```
+```bash
+# In `packages/mirrorful/editor`
+cd packages/mirrorful/editor;
 
-Now, we can run Mirrorful as a package. In `packages/mirrorful/editor`, run:
+# Install packages
+yarn;
 
-```
-// Install packages
-yarn
+# Tell Yarn to reference the local build instead of the published package
+yarn link @mirrorful/core;
 
-// Tell Yarn to reference the local build instead of the published package
-yarn link @mirrorful/core
-
-// Run Mirrorful
-yarn dev
+# Run Mirrorful
+yarn dev;
 ```

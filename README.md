@@ -3,7 +3,7 @@
   <img width="300" src="./assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
 </h1>
 <p align="center">
-  <p align="center">Create the building blocks of your app with simple, open-source design system infrastructure.</p>
+  <p align="center">Create the building blocks of your app with Mirrorful: a simple, open-source design system framework.</p>
 </p>
 
 <h4 align="center">
@@ -40,7 +40,7 @@
 <kbd>[<img title="Swedish" alt="Swedish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/se.svg" width="22">](i18n/README.sv.md)</kbd>
 <kbd>[<img title="Turkish" alt="Turkish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/tr.svg" width="22">](i18n/README.tr.md)</kbd>
 
-**[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
+**[Mirrorful](https://mirrorful.com)** is a simple, open-source design system framework. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
 
 - **Start new projects with a source of truth**
 - **Visually modify your theme**
@@ -137,7 +137,7 @@ Looking for a specific example? [Request one here!](https://github.com/Mirrorful
 - [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - for live discussion with the community and the Mirrorful team.
 - [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - for help with building and deeper conversations about features.
 - [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - for any bugs and errors you encounter using Mirrorful.
-- [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates. Share your memes!
+- [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates.
 
 ## 🏘 Open-source vs. paid
 

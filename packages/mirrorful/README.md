@@ -2,7 +2,7 @@
   <img width="300" src="./assets/logo-light-mode.png" alt="Mirrorful">
 </h1>
 <p align="center">
-  <p align="center">Create the building blocks of your app with simple, open-source design system infrastructure.</p>
+  <p align="center">Create the building blocks of your app with Mirrorful: a simple, open-source design system framework.</p>
 </p>
 
 <h4 align="center">
@@ -38,7 +38,7 @@
 <kbd>[<img title="German" alt="German language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/de.svg" width="22">](i18n/README.de.md)</kbd>
 <kbd>[<img title="Swedish" alt="Swedish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/se.svg" width="22">](i18n/README.sv.md)</kbd>
 
-**[Mirrorful](https://mirrorful.com)** is simple, open-source design system infrastructure. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
+**[Mirrorful](https://mirrorful.com)** is a simple, open-source design system framework. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
 
 - **Start new projects with a source of truth**
 - **Visually modify your theme**
@@ -83,11 +83,7 @@ npx mirrorful
 
 After configuring your theme in the editor, you can export it to be used by your app.
 
-We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`
-
-**Using CSS Variables**
-
-Example:
+**Example: Using CSS Variables**
 
 ```css
 .primary-button {
@@ -99,9 +95,7 @@ Example:
 }
 ```
 
-**Using Javascript Constants**
-
-Example:
+**Example: Using Javascript Constants**
 
 ```javascript
 <button backgroundColor={{ Tokens.primary.base }}>Click here</button>
@@ -122,12 +116,16 @@ Check out our examples:
 
 Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues)
 
+## 📚 Documentation
+
+Check out our [documentation](https://mirrorful.com/docs) for more information.
+
 ## ❤️ Community & Support
 
 - [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - for live discussion with the community and the Mirrorful team.
 - [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - for help with building and deeper conversations about features.
 - [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - for any bugs and errors you encounter using Mirrorful.
-- [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates. Share your memes!
+- [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates.
 - [Book a free, non-pressure pairing sessions with one of our teammates](https://usemotion.com/meet/teddyni/meet?d=15)!
 
 ## 🪞 Contributors
@@ -135,13 +133,3 @@ Looking for a specific example? [Request one here!](https://github.com/Mirrorful
 <a href="https://github.com/mirrorful/mirrorful/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=mirrorful/mirrorful" />
 </a>
-
-## 🌎 Translations
-
-Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md) and [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md). Help us translate our documentation and UI to your language!
-
-You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).
-
-## 📚 Documentation
-
-Check out our [documentation](https://mirrorful.com/docs) for more information.
