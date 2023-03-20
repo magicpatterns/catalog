@@ -1,3 +1,4 @@
+import { Container, Grid } from '@chakra-ui/layout'
 import { Text } from '@chakra-ui/react'
 import { Dashboard } from '@mirrorful/core/lib/components/Dashboard'
 import Head from 'next/head'
@@ -44,7 +45,21 @@ export default function Editor() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {hasShutDown ? (
-        <Text css={{ textAlign: 'center' }}>Server Has Shut Down</Text>
+        <Grid placeContent={'center'} minHeight="100svh">
+          <Text css={{ textAlign: 'center', fontSize: '5rem' }}>
+            Mirrorful Server Has Been Shut Down!
+          </Text>
+          <Text css={{ textAlign: 'center', fontSize: '2rem', color: 'grey' }}>
+            To start the server again, go to the terminal and type{' '}
+            <Text css={{ textAlign: 'center', color: 'purple' }}>
+              yarn run mirrorful
+            </Text>
+            OR{' '}
+            <Text css={{ textAlign: 'center', color: 'purple' }}>
+              npx mirrorful
+            </Text>
+          </Text>
+        </Grid>
       ) : (
         <Dashboard />
       )}
