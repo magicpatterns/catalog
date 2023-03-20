@@ -1,7 +1,36 @@
 import { Dashboard } from '@mirrorful/core/lib/components/Dashboard'
 import Head from 'next/head'
+import { useState, useRef, useEffect } from 'react'
 
 export default function Editor() {
+  const [hasShutDown, setHasShutDown] = useState(false)
+  const counter = useRef<boolean>(false)
+  useEffect(() => {
+    function pollForServerEndCheck() {
+      fetch('http://localhost:3000/api/hello', { keepalive: true })
+        .then((res) => res.text())
+        .then((res) => {
+          if (res === 'exiting') {
+            setHasShutDown(() => true)
+            counter.current = true
+          }
+        })
+        .catch(() => {
+          if (navigator.onLine) {
+            setHasShutDown(() => true)
+            counter.current = true
+          }
+        })
+        .finally(() => {
+          if (!counter.current) {
+            pollForServerEndCheck()
+          }
+        })
+    }
+    if (!counter.current) {
+      pollForServerEndCheck()
+    }
+  }, [hasShutDown, counter])
   return (
     <>
       <Head>
