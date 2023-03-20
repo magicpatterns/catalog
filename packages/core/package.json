@@ -3,7 +3,10 @@
   "version": "1.0.2",
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
-    "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")"
+    "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
+    "release:patch": "yarn build; npm patch; npm publish;",
+    "release:minor": "yarn build; npm minor; npm publish;",
+    "release:major": "yarn build; npm major; npm publish;"
   },
   "publishConfig": {
     "access": "public"

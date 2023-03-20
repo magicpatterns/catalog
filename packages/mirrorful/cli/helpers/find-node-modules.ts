@@ -9,8 +9,12 @@ export function findNodeModulesMirrorfulPath() {
   let dir = cwd
   while (dir !== path.parse(dir).root) {
     const nodeModulesDir = path.join(dir, 'node_modules/mirrorful')
+    const testNodeModulesDir = path.join(dir, 'node_modules/@mirrorful/test')
     if (fs.existsSync(nodeModulesDir)) {
       return nodeModulesDir
+    }
+    if (fs.existsSync(testNodeModulesDir)) {
+      return testNodeModulesDir
     }
     dir = path.dirname(dir)
   }

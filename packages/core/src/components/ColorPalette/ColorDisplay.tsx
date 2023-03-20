@@ -235,7 +235,7 @@ export function ColorDisplay({
                     color: colorData.variants[variant],
                     isBase:
                       colorData.variants[variant].toUpperCase() ===
-                      colorData.baseColor.toUpperCase(),
+                      colorData.baseColor?.toUpperCase(),
                   }}
                   onUpdateVariant={(newVariant: TColorVariant) => {
                     const updatedVariants = { ...colorData.variants }
