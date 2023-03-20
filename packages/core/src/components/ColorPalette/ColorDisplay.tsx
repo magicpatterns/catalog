@@ -46,20 +46,20 @@ function VariantRow({
         justifyContent: 'space-between',
         padding: '0px 24px',
         borderRadius: 8,
-        border: '1px solid black',
+        border: variant.isBase ? '2px solid black' : '1px solid black',
       }}
     >
       <Text
         fontSize="1rem"
-        fontWeight={600}
+        fontWeight={variant.isBase ? 700 : 600}
         color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
       >
-        {name}
+        {name} {variant.isBase ? ' (Base)' : ''}
       </Text>
       <Box css={{ display: 'flex', alignItems: 'center' }}>
         <Text
           fontSize="1rem"
-          fontWeight={600}
+          fontWeight={variant.isBase ? 700 : 600}
           color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
         >
           {color}
@@ -221,14 +221,21 @@ export function ColorDisplay({
         <Box css={{ marginTop: '32px' }}>
           <Stack spacing={'4px'}>
             {Object.keys(colorData.variants)
-              .sort()
+              .sort((a, b) =>
+                tinycolor(colorData.variants[a]).toHsl().l <
+                tinycolor(colorData.variants[b]).toHsl().l
+                  ? 1
+                  : -1
+              )
               .map((variant) => (
                 <VariantRow
                   key={variant}
                   variant={{
                     name: variant,
                     color: colorData.variants[variant],
-                    isBase: colorData.variants[variant] === colorData.baseColor,
+                    isBase:
+                      colorData.variants[variant].toUpperCase() ===
+                      colorData.baseColor.toUpperCase(),
                   }}
                   onUpdateVariant={(newVariant: TColorVariant) => {
                     const updatedVariants = { ...colorData.variants }

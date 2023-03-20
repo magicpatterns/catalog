@@ -22,12 +22,14 @@ import { useDisclosure } from '@chakra-ui/react'
 
 export function EditFontSizeModal({
   isOpen,
+  isAdding,
   onClose,
   initialFontSizeVariant,
   onUpdateFontSizeVariant,
   onDeleteFontSizeVariant,
 }: {
   isOpen: boolean
+  isAdding: boolean
   onClose: () => void
   initialFontSizeVariant?: TFontSizeVariant
   onUpdateFontSizeVariant: (newVariant: TFontSizeVariant) => void
@@ -73,7 +75,9 @@ export function EditFontSizeModal({
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Edit Font Size Variant</ModalHeader>
+          <ModalHeader>
+            {isAdding ? 'Add' : 'Edit'} Font Size Variant
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody
             css={{

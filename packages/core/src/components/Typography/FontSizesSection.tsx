@@ -10,7 +10,6 @@ import {
 import { TFontSizeVariant } from '@core/types'
 import { EditFontSizeModal } from './EditFontSizeModal'
 import { FontSizeRow } from './FontSizeRow'
-
 export function FontSizesSection({
   fontSizeData,
   onUpdateFontSizeData,
@@ -23,7 +22,6 @@ export function FontSizesSection({
     onOpen: onAddVariantModalOpen,
     onClose: onAddVariantModalClose,
   } = useDisclosure()
-
   const sortFontSizes = function () {
     const rem: TFontSizeVariant[] = []
     const px: TFontSizeVariant[] = []
@@ -90,6 +88,7 @@ export function FontSizesSection({
         </Button>
       </Stack>
       <EditFontSizeModal
+        isAdding={true}
         isOpen={isAddVariantModalOpen}
         onClose={onAddVariantModalClose}
         onUpdateFontSizeVariant={(newVariant: TFontSizeVariant) => {
