@@ -221,12 +221,9 @@ export function ColorDisplay({
         <Box css={{ marginTop: '32px' }}>
           <Stack spacing={'4px'}>
             {Object.keys(colorData.variants)
-              .sort((a, b) =>
-                tinycolor(colorData.variants[a]).toHsl().l <
-                tinycolor(colorData.variants[b]).toHsl().l
-                  ? 1
-                  : -1
-              )
+              .sort((keyA, keyB) => {
+                return Number.parseInt(keyA) - Number.parseInt(keyB)
+              })
               .map((variant) => (
                 <VariantRow
                   key={variant}
