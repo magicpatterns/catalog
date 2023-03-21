@@ -5,6 +5,7 @@ import fs from 'fs'
 // thanks to https://usbrandcolors.com
 // thanks to https://www.colorcombos.com
 // thanks to https://optemization.com/notion-color-guide
+// thanks to https://www.color-hex.com/
 export type IPresets =
   | 'apple'
   | 'discord'
@@ -16,6 +17,7 @@ export type IPresets =
   | 'spotify'
   | 'supabase'
   | 'twitter'
+  | 'vscode'
 
 type props = {
   preset: IPresets
