@@ -12,6 +12,7 @@ export type IPresets =
   | 'facebook'
   | 'linear'
   | 'netflix'
+  | 'notion'
   | 'spotify'
   | 'supabase'
   | 'twitter'
