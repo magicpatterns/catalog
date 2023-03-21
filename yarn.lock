@@ -1073,7 +1073,7 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mirrorful/core@file:packages/core/lib":
+"@mirrorful/core@file:packages/core/src":
   version "0.0.0"
 
 "@next/env@12.3.4":
