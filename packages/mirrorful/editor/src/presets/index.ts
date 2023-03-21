@@ -8,12 +8,12 @@ type props = {
 const URL_TO_JSONS = './src/presets/model'
 
 export default async function getPreset({ preset }: props) {
-  const presetConfig: unknown = await fs.promises.readFile(
+  const presetConfig: string = await fs.promises.readFile(
     `${URL_TO_JSONS}/${preset}.json`,
     { encoding: 'utf-8' }
   )
 
-  return presetConfig as { tokens: TTokens }
+  return JSON.parse(presetConfig) as { tokens: TTokens }
 }
 
 console.log(getPreset({ preset: 'linear' }))
