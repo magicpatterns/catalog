@@ -1,6 +1,7 @@
 import { TTokens } from '@mirrorful/core/lib/types'
 import fs from 'fs'
 
+// thanks to https://webflow.com/blog/brand-color-scheme
 export type IPresets =
   | 'apple'
   | 'discord'
