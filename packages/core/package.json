@@ -2,14 +2,15 @@
   "name": "@mirrorful/core",
   "version": "1.0.3",
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
-    "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
-    "release:patch": "yarn build; npm version patch; npm publish;",
-    "release:minor": "yarn build; npm version minor; npm publish;",
-    "release:major": "yarn build; npm version major; npm publish;"
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && cp package.json lib",
+    "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"cp package.json lib\")",
+    "release:patch": "yarn build && cp package.json lib && npm version patch && npm publish ./lib;",
+    "release:minor": "yarn build && cp package.json lib && npm version minor && npm publish ./lib;",
+    "release:major": "yarn build && cp package.json lib && npm version major && npm publish ./lib;"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "./lib"
   },
   "files": [
     "lib"
