@@ -4,6 +4,7 @@ import fs from 'fs'
 // thanks to https://webflow.com/blog/brand-color-scheme
 // thanks to https://usbrandcolors.com
 // thanks to https://www.colorcombos.com
+// thanks to https://optemization.com/notion-color-guide
 export type IPresets =
   | 'apple'
   | 'discord'
