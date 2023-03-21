@@ -1,0 +1,121 @@
+{
+  "tokens": {
+    "colorData": [
+      {
+        "name": "Twitter Blue",
+        "baseColor": "#1DA1F2",
+        "variants": {
+          "50": "#aeddfa",
+          "100": "#91d1f9",
+          "200": "#74c5f7",
+          "300": "#57b9f5",
+          "400": "#3aadf4",
+          "500": "#1da1f2",
+          "600": "#0d92e3",
+          "700": "#0b7fc6",
+          "800": "#0a6da9",
+          "900": "#085a8c"
+        }
+      },
+      {
+        "name": "Twitter Black",
+        "baseColor": "#14171A",
+        "variants": {
+          "50": "#576370",
+          "100": "#49545f",
+          "200": "#3c454e",
+          "300": "#2f363d",
+          "400": "#21262b",
+          "500": "#14171a",
+          "600": "#070809",
+          "700": "#000000",
+          "800": "#000000",
+          "900": "#000000"
+        }
+      },
+      {
+        "name": "Twitter Dark Gray",
+        "baseColor": "#657786",
+        "variants": {
+          "50": "#b9c3cb",
+          "100": "#a8b4bd",
+          "200": "#97a5b0",
+          "300": "#8595a3",
+          "400": "#748696",
+          "500": "#657786",
+          "600": "#586775",
+          "700": "#4b5863",
+          "800": "#3e4852",
+          "900": "#303940"
+        }
+      },
+      {
+        "name": "Twitter Light Gray",
+        "baseColor": "#AAB8C2",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#f1f4f5",
+          "200": "#dfe5e8",
+          "300": "#ced6dc",
+          "400": "#bcc7cf",
+          "500": "#aab8c2",
+          "600": "#98a9b5",
+          "700": "#869aa8",
+          "800": "#758b9c",
+          "900": "#657c8d"
+        }
+      },
+      {
+        "name": "Twitter Extra Light Gray",
+        "baseColor": "#E1E8ED",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#ffffff",
+          "200": "#ffffff",
+          "300": "#ffffff",
+          "400": "#f4f7f8",
+          "500": "#e1e8ed",
+          "600": "#ced9e2",
+          "700": "#bbcbd6",
+          "800": "#a8bccb",
+          "900": "#94adbf"
+        }
+      },
+      {
+        "name": "Twitter White",
+        "baseColor": "#F5F8FA",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#ffffff",
+          "200": "#ffffff",
+          "300": "#ffffff",
+          "400": "#ffffff",
+          "500": "#f5f8fa",
+          "600": "#e1eaf0",
+          "700": "#ccdbe6",
+          "800": "#b8cddb",
+          "900": "#a3bfd1"
+        }
+      }
+    ],
+    "typography": {
+      "fontSizes": [
+        {
+          "value": 1,
+          "unit": "rem",
+          "name": "sm"
+        },
+        {
+          "value": 1.2,
+          "unit": "rem",
+          "name": "md"
+        },
+        {
+          "value": 1.4,
+          "unit": "rem",
+          "name": "lg"
+        }
+      ]
+    }
+  }
+}
