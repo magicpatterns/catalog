@@ -29,8 +29,6 @@ export async function init({
     process.exit(1)
   }
 
-  await makeDir('.mirrorful')
-
   const port = 5050 // don't hard code this
   // await openBrowser({ url: 'http://localhost', port })
   if (verbose) {

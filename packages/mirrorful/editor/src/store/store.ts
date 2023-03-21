@@ -7,10 +7,21 @@ import {
 } from './migrations'
 
 // Our working directory is 2 levels below node_modules in production, so we go up 3 levels
-export const rootPath =
-  process.env.NODE_ENV === 'development'
-    ? '../.mirrorful'
-    : '../../../.mirrorful'
+const checkForSrc = () => {
+  const prod = process.env.NODE_ENV === 'development'
+  const path = '../../../'
+  if (!prod) {
+    if (`${path}src`) {
+      return `${path}src/.mirrorful`
+    } else {
+      return `${path}.mirrorful`
+    }
+  } else {
+    return '../.mirrorful'
+  }
+}
+
+export const rootPath = checkForSrc()
 
 export const store = new Conf<TConfig>({
   projectName: 'Mirrorful',
