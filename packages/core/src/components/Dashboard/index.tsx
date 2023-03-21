@@ -107,7 +107,7 @@ export function Dashboard({
   }
 
   return (
-    <Box css={{ width: '100vw', minHeight: '100vh', display: 'flex' }}>
+    <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
       <Box css={{ width: '300px', position: 'fixed' }}>
         <Sidebar
           activeTab={tab}
