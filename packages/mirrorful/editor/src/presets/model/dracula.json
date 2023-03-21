@@ -1,0 +1,201 @@
+{
+  "tokens": {
+    "colorData": [
+      {
+        "name": "Dracula background",
+        "baseColor": "#282a36",
+        "variants": {
+          "50": "#696e8e",
+          "100": "#5c617c",
+          "200": "#4f536b",
+          "300": "#424559",
+          "400": "#353848",
+          "500": "#282a36",
+          "600": "#1b1c24",
+          "700": "#0e0f13",
+          "800": "#010101",
+          "900": "#000000"
+        }
+      },
+      {
+        "name": "Dracula Current Line",
+        "baseColor": "#44475a",
+        "variants": {
+          "50": "#8e91a9",
+          "100": "#7c819c",
+          "200": "#6c708e",
+          "300": "#5e637d",
+          "400": "#51556b",
+          "500": "#44475a",
+          "600": "#373949",
+          "700": "#2a2b37",
+          "800": "#1c1e26",
+          "900": "#0f1014"
+        }
+      },
+      {
+        "name": "Dracula Foreground",
+        "baseColor": "#f8f8f2",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#ffffff",
+          "200": "#ffffff",
+          "300": "#ffffff",
+          "400": "#ffffff",
+          "500": "#f8f8f2",
+          "600": "#ededde",
+          "700": "#e3e3ca",
+          "800": "#d8d8b6",
+          "900": "#cdcda2"
+        }
+      },
+      {
+        "name": "Dracula Comment",
+        "baseColor": "#6272a4",
+        "variants": {
+          "50": "#c3c9dc",
+          "100": "#afb8d1",
+          "200": "#9ca6c6",
+          "300": "#8995ba",
+          "400": "#7583af",
+          "500": "#6272a4",
+          "600": "#556492",
+          "700": "#4a577f",
+          "800": "#3e496c",
+          "900": "#333c58"
+        }
+      },
+      {
+        "name": "Dracula Cyan",
+        "baseColor": "#8be9fd",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#ffffff",
+          "200": "#e5faff",
+          "300": "#c7f4fe",
+          "400": "#a9effe",
+          "500": "#8be9fd",
+          "600": "#6de3fc",
+          "700": "#4fdefc",
+          "800": "#31d8fb",
+          "900": "#13d2fb"
+        }
+      },
+      {
+        "name": "Dracula Green",
+        "baseColor": "#50fa7b",
+        "variants": {
+          "50": "#e5feeb",
+          "100": "#c7fdd5",
+          "200": "#a9fdbe",
+          "300": "#8bfca8",
+          "400": "#6efb91",
+          "500": "#50fa7b",
+          "600": "#32f965",
+          "700": "#14f84e",
+          "800": "#07e840",
+          "900": "#06ca37"
+        }
+      },
+      {
+        "name": "Dracula Orange",
+        "baseColor": "#ffb86c",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#fff3e6",
+          "200": "#ffe4c8",
+          "300": "#ffd6a9",
+          "400": "#ffc78b",
+          "500": "#ffb86c",
+          "600": "#ffa94d",
+          "700": "#ff9a2f",
+          "800": "#ff8c10",
+          "900": "#f17c00"
+        }
+      },
+      {
+        "name": "Dracula Pink",
+        "baseColor": "#ff3dab",
+        "variants": {
+          "50": "#ffd6ed",
+          "100": "#ffb7e0",
+          "200": "#ff99d3",
+          "300": "#ff7ac5",
+          "400": "#ff5cb8",
+          "500": "#ff3dab",
+          "600": "#ff1e9e",
+          "700": "#ff0090",
+          "800": "#e0007f",
+          "900": "#c2006e"
+        }
+      },
+      {
+        "name": "Dracula Purple",
+        "baseColor": "#bd93f9",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#ffffff",
+          "200": "#f2eafe",
+          "300": "#e0cdfc",
+          "400": "#cfb0fb",
+          "500": "#bd93f9",
+          "600": "#ab76f7",
+          "700": "#9a59f6",
+          "800": "#883cf4",
+          "900": "#761ff3"
+        }
+      },
+      {
+        "name": "Dracula Red",
+        "baseColor": "#ff5555",
+        "variants": {
+          "50": "#ffeeee",
+          "100": "#ffcfcf",
+          "200": "#ffb1b1",
+          "300": "#ff9292",
+          "400": "#ff7474",
+          "500": "#ff5555",
+          "600": "#ff3636",
+          "700": "#ff1818",
+          "800": "#f80000",
+          "900": "#da0000"
+        }
+      },
+      {
+        "name": "Dracula Yellow",
+        "baseColor": "#f1fa8c",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#ffffff",
+          "200": "#fcfee4",
+          "300": "#f8fdc7",
+          "400": "#f5fba9",
+          "500": "#f1fa8c",
+          "600": "#edf96f",
+          "700": "#eaf751",
+          "800": "#e6f634",
+          "900": "#e3f517"
+        }
+      }
+    ],
+    "typography": {
+      "fontSizes": [
+        {
+          "value": 1,
+          "unit": "rem",
+          "name": "sm"
+        },
+        {
+          "value": 1.2,
+          "unit": "rem",
+          "name": "md"
+        },
+        {
+          "value": 1.4,
+          "unit": "rem",
+          "name": "lg"
+        }
+      ]
+    }
+  }
+}
