@@ -34,5 +34,3 @@ export default async function getPreset({ preset }: props) {
 
   return JSON.parse(presetConfig) as { tokens: TTokens }
 }
-
-console.log(getPreset({ preset: 'linear' }))
