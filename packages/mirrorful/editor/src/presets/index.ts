@@ -2,7 +2,7 @@ import { TTokens } from '@mirrorful/core/lib/types'
 import fs from 'fs'
 
 type props = {
-  preset: 'linear' | 'facebook' | ''
+  preset: 'discord' | 'dracula' | 'facebook' | 'linear' | 'spotify' | 'supabase'
 }
 
 const URL_TO_JSONS = './src/presets/model'
