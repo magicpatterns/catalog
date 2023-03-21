@@ -5,6 +5,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(await getPreset({ preset: 'linear' }))
+  res.write(await getPreset({ preset: 'linear' }))
   res.end()
 }
