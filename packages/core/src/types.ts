@@ -62,3 +62,11 @@ export const defaultFiles: TConfig['files'] = [
   'ts',
   'json',
 ]
+
+export const defaultConfig: TConfig = {
+  tokens: {
+    colorData: [],
+    typography: defaultTypography,
+  },
+  files: defaultFiles,
+}
