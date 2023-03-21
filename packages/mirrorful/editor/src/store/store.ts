@@ -1,9 +1,5 @@
 import Conf from 'conf'
-import {
-  TConfig,
-  defaultFiles,
-  defaultTypography,
-} from '@mirrorful/core/lib/types'
+import { TConfig, defaultFiles, defaultConfig } from '@mirrorful/core/lib/types'
 import {
   ZeroPointZeroPointTwoMigration,
   ZeroPointZeroPointThreeMigration,
@@ -20,13 +16,7 @@ export const store = new Conf<TConfig>({
   projectName: 'Mirrorful',
   projectVersion: '0.0.4',
   cwd: `${rootPath}/store`,
-  defaults: {
-    tokens: {
-      colorData: [],
-      typography: defaultTypography,
-    },
-    files: defaultFiles,
-  },
+  defaults: defaultConfig,
   beforeEachMigration: (store, context) => {
     console.log(
       `[main-config] migrate from ${context.fromVersion} → ${context.toVersion}`

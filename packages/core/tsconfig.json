@@ -13,8 +13,8 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "lib",
-    "composite": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "declaration": true
   },
   "include": ["**/*.ts", "**/*.tsx", "src/**/*.json"],
   "exclude": ["node_modules", "lib", "tsconfig.json"],
