@@ -1,0 +1,105 @@
+{
+  "tokens": {
+    "colorData": [
+      {
+        "name": "Facebook Dark Blue",
+        "baseColor": "#29487D",
+        "variants": {
+          "50": "#6f93d0",
+          "100": "#5881c8",
+          "200": "#4170c1",
+          "300": "#3863ab",
+          "400": "#315594",
+          "500": "#29487d",
+          "600": "#213b66",
+          "700": "#1a2d4f",
+          "800": "#122038",
+          "900": "#0b1321"
+        }
+      },
+      {
+        "name": "Facebook Blue",
+        "baseColor": "#3C5898",
+        "variants": {
+          "50": "#97aad6",
+          "100": "#8198cd",
+          "200": "#6b86c5",
+          "300": "#5574bc",
+          "400": "#4565ae",
+          "500": "#3c5898",
+          "600": "#334b82",
+          "700": "#2b3f6c",
+          "800": "#223256",
+          "900": "#192540"
+        }
+      },
+      {
+        "name": "Facebook Gray Blue",
+        "baseColor": "#9CB2CE",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#eef2f7",
+          "200": "#d9e2ec",
+          "300": "#c5d2e2",
+          "400": "#b0c2d8",
+          "500": "#9cb2ce",
+          "600": "#88a2c4",
+          "700": "#7392ba",
+          "800": "#5f82b0",
+          "900": "#4f73a0"
+        }
+      },
+      {
+        "name": "Facebook White",
+        "baseColor": "#FEFEFE",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#ffffff",
+          "200": "#ffffff",
+          "300": "#ffffff",
+          "400": "#ffffff",
+          "500": "#fefefe",
+          "600": "#efefef",
+          "700": "#dfdfdf",
+          "800": "#d0d0d0",
+          "900": "#c1c1c1"
+        }
+      },
+      {
+        "name": "Facebook Tint Blue",
+        "baseColor": "#D4D8E8",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#ffffff",
+          "200": "#ffffff",
+          "300": "#fcfcfd",
+          "400": "#e8eaf3",
+          "500": "#d4d8e8",
+          "600": "#c0c6dd",
+          "700": "#acb4d3",
+          "800": "#98a2c8",
+          "900": "#8490bd"
+        }
+      }
+    ],
+    "typography": {
+      "fontSizes": [
+        {
+          "value": 1,
+          "unit": "rem",
+          "name": "sm"
+        },
+        {
+          "value": 1.2,
+          "unit": "rem",
+          "name": "md"
+        },
+        {
+          "value": 1.4,
+          "unit": "rem",
+          "name": "lg"
+        }
+      ]
+    }
+  }
+}
