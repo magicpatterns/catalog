@@ -1,4 +1,4 @@
-name: build
+name: Package
 on:
   pull_request:
     branches:
