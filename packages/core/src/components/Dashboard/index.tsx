@@ -15,7 +15,13 @@ import { ExportSettingsModal } from '@core/components/ExportSettingsModal'
 
 export type TTab = 'colors' | 'typography'
 
-export function Dashboard() {
+export function Dashboard({
+  fetchStoreData,
+  postStoreData,
+}: {
+  fetchStoreData: () => Promise<TConfig>
+  postStoreData: (data: TConfig) => Promise<void>
+}) {
   const [tab, setTab] = useState<'colors' | 'typography'>('colors')
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
     useState<boolean>(false)
@@ -41,8 +47,7 @@ export function Dashboard() {
 
   useEffect(() => {
     const fetchStoredData = async () => {
-      const response = await fetch('/api/config')
-      const data: TConfig | Record<string, never> = await response.json()
+      const data = await fetchStoreData()
 
       if (
         !Object.keys(data).length ||
@@ -62,12 +67,9 @@ export function Dashboard() {
   }, [showOnboarding])
 
   const handleExport = async () => {
-    await fetch('/api/export', {
-      method: 'POST',
-      body: JSON.stringify({
-        tokens: { colorData: colors, typography },
-        files: fileTypes,
-      }),
+    await postStoreData({
+      tokens: { colorData: colors, typography },
+      files: fileTypes,
     })
 
     onExportSuccessModalOpen()
@@ -75,32 +77,27 @@ export function Dashboard() {
 
   const handleUpdateColors = async (data: TColorData[]) => {
     setColors(data)
-    await fetch('/api/export', {
-      method: 'POST',
-      body: JSON.stringify({
-        tokens: {
-          typography,
-          colorData: data,
-        },
-        files: fileTypes,
-      }),
+    await postStoreData({
+      tokens: {
+        typography,
+        colorData: data,
+      },
+      files: fileTypes,
     })
   }
 
   const handleUpdateTypography = async (data: TTypographyData) => {
     setTypography(data)
-    await fetch('/api/export', {
-      method: 'POST',
-      body: JSON.stringify({
-        tokens: { colorData: colors, typography: data },
-        files: fileTypes,
-      }),
+    await postStoreData({
+      tokens: { colorData: colors, typography: data },
+      files: fileTypes,
     })
   }
 
   if (!shouldForceSkipOnboarding && showOnboarding) {
     return (
       <Onboarding
+        postStoreData={postStoreData}
         onFinishOnboarding={() => {
           setShowOnboarding(false)
           setShouldForceSkipOnboarding(true)
@@ -110,7 +107,7 @@ export function Dashboard() {
   }
 
   return (
-    <Box css={{ width: '100vw', minHeight: '100vh', display: 'flex' }}>
+    <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
       <Box css={{ width: '300px', position: 'fixed' }}>
         <Sidebar
           activeTab={tab}
