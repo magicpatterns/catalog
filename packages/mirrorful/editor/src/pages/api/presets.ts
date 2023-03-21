@@ -1,11 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import getPreset from '../../presets'
+import getPreset, { type IPresets } from '../../presets'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  res.json(await getPreset({ preset: 'linear' }))
-
-  res.end()
+  const preset = req.query.preset
+  if (typeof preset === 'string') {
+    res.json(await getPreset({ preset: preset as IPresets }))
+    res.end()
+  }
 }
