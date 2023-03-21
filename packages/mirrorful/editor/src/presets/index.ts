@@ -11,6 +11,7 @@ export type IPresets =
   | 'discord'
   | 'dracula'
   | 'facebook'
+  | 'gituhb'
   | 'linear'
   | 'netflix'
   | 'notion'
