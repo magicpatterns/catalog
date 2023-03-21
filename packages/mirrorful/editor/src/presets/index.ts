@@ -3,6 +3,7 @@ import fs from 'fs'
 
 // thanks to https://webflow.com/blog/brand-color-scheme
 // thanks to https://usbrandcolors.com
+// thanks to https://www.colorcombos.com
 export type IPresets =
   | 'apple'
   | 'discord'
