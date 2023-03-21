@@ -18,6 +18,8 @@ import tinycolor from 'tinycolor2'
 import { TColorData, TColorVariant } from '@core/types'
 import { EditColorNameModal } from './EditColorNameModal'
 import { EditVariantModal } from './EditVariantModal'
+import { useMemo } from 'react'
+import React from 'react'
 
 function VariantRow({
   variant,
@@ -126,6 +128,27 @@ export function ColorDisplay({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
+  const sortedColorVariants = useMemo(() => {
+    console.log('rendering')
+    const sortColorArr: Array<[string, string]> = Object.entries(
+      colorData.variants
+    ).sort((a, b) =>
+      tinycolor(a[1]).toHsl().l < tinycolor(b[1]).toHsl().l ? 1 : -1
+    ) // [key, value][]
+
+    const hash: Record<string, boolean> = {}
+    const newColorArr = []
+    // remove duplicate colors
+    for (let i = 0; i < sortColorArr.length; i++) {
+      const color = sortColorArr[i] // [key, value]
+      if (!hash[color[1]]) {
+        hash[color[1]] = true
+        newColorArr.push(color[0])
+      }
+    }
+
+    return newColorArr
+  }, [colorData.variants])
   return (
     <Box
       css={{
@@ -220,56 +243,52 @@ export function ColorDisplay({
         </Box>
         <Box css={{ marginTop: '32px' }}>
           <Stack spacing={'4px'}>
-            {Object.keys(colorData.variants)
-              .sort((keyA, keyB) => {
-                return Number.parseInt(keyA) - Number.parseInt(keyB)
-              })
-              .map((variant) => (
-                <VariantRow
-                  key={variant}
-                  variant={{
-                    name: variant,
-                    color: colorData.variants[variant],
-                    isBase:
-                      colorData.variants[variant].toUpperCase() ===
-                      colorData.baseColor?.toUpperCase(),
-                  }}
-                  onUpdateVariant={(newVariant: TColorVariant) => {
-                    const updatedVariants = { ...colorData.variants }
-                    delete updatedVariants[variant]
-                    updatedVariants[newVariant.name] = newVariant.color
+            {sortedColorVariants.map((variant) => (
+              <VariantRow
+                key={variant}
+                variant={{
+                  name: variant,
+                  color: colorData.variants[variant],
+                  isBase:
+                    colorData.variants[variant].toUpperCase() ===
+                    colorData.baseColor?.toUpperCase(),
+                }}
+                onUpdateVariant={(newVariant: TColorVariant) => {
+                  const updatedVariants = { ...colorData.variants }
+                  delete updatedVariants[variant]
+                  updatedVariants[newVariant.name] = newVariant.color
 
-                    const updatedColorData = {
-                      ...colorData,
-                      variants: updatedVariants,
-                    }
-                    if (newVariant.isBase) {
-                      updatedColorData.baseColor = newVariant.color
-                    } else if (
-                      !newVariant.isBase &&
-                      updatedColorData.baseColor === newVariant.color
-                    ) {
-                      delete updatedColorData.baseColor
-                    }
+                  const updatedColorData = {
+                    ...colorData,
+                    variants: updatedVariants,
+                  }
+                  if (newVariant.isBase) {
+                    updatedColorData.baseColor = newVariant.color
+                  } else if (
+                    !newVariant.isBase &&
+                    updatedColorData.baseColor === newVariant.color
+                  ) {
+                    delete updatedColorData.baseColor
+                  }
 
-                    onUpdateColorData(updatedColorData)
-                  }}
-                  onDeleteVariant={() => {
-                    const updatedVariants = { ...colorData.variants }
-                    delete updatedVariants[variant]
+                  onUpdateColorData(updatedColorData)
+                }}
+                onDeleteVariant={() => {
+                  const updatedVariants = { ...colorData.variants }
+                  delete updatedVariants[variant]
 
-                    const updatedColorData = {
-                      ...colorData,
-                      variants: updatedVariants,
-                    }
-                    if (colorData.variants[variant] === colorData.baseColor) {
-                      delete updatedColorData.baseColor
-                    }
+                  const updatedColorData = {
+                    ...colorData,
+                    variants: updatedVariants,
+                  }
+                  if (colorData.variants[variant] === colorData.baseColor) {
+                    delete updatedColorData.baseColor
+                  }
 
-                    onUpdateColorData(updatedColorData)
-                  }}
-                />
-              ))}
+                  onUpdateColorData(updatedColorData)
+                }}
+              />
+            ))}
           </Stack>
         </Box>
       </Box>
