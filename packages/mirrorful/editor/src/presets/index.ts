@@ -12,6 +12,7 @@ export type IPresets =
   | 'netflix'
   | 'spotify'
   | 'supabase'
+  | 'twitter'
 
 type props = {
   preset: IPresets
