@@ -2,10 +2,12 @@ import { TTokens } from '@mirrorful/core/lib/types'
 import fs from 'fs'
 
 export type IPresets =
+  | 'apple'
   | 'discord'
   | 'dracula'
   | 'facebook'
   | 'linear'
+  | 'netflix'
   | 'spotify'
   | 'supabase'
 
