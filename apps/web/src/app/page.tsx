@@ -1,7 +1,7 @@
 'use client'
 
-import { Dashboard } from '@mirrorful/core/lib/components/Dashboard'
-import { TConfig, defaultConfig } from '@mirrorful/core/lib/types'
+import { Dashboard } from '@mirrorful/core/components/Dashboard'
+import { TConfig, defaultConfig } from '@mirrorful/core/types'
 import { useLocalStorage } from '@web/hooks/useLocalStorage'
 
 export default function Home() {
