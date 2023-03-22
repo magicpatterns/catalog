@@ -1073,26 +1073,6 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mirrorful/core@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-1.0.3.tgz#64a2798a6b2a16566f4bd96574200f464a904cf3"
-  integrity sha512-6R4SEKdnKmyxztxNI4kjJxsKRX7ER0XcYfDQzuTwKefUVRrDB4FyQxQJpkD532kdB4XKptbeOruBwn748FtbtQ==
-  dependencies:
-    "@chakra-ui/icons" "^2.0.17"
-    "@chakra-ui/react" "^2.5.2"
-    "@emotion/react" "^11.10.6"
-    "@emotion/styled" "^11.10.6"
-    "@hello-pangea/color-picker" "^3.2.2"
-    framer-motion "^10.6.0"
-    lottie-react "^2.4.0"
-    posthog-js "^1.51.3"
-    react "^18.2.0"
-    react-dom "^18.2.0"
-    react-highlight "^0.15.0"
-    react-icons "^4.8.0"
-    tinycolor2 "^1.6.0"
-    typescript "^4.9.5"
-    
 "@next/env@12.3.4":
   version "12.3.4"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-12.3.4.tgz#c787837d36fcad75d72ff8df6b57482027d64a47"
@@ -3351,31 +3331,6 @@ minipass@^4.0.2, minipass@^4.2.4:
   version "4.2.5"
   resolved "https://registry.yarnpkg.com/minipass/-/minipass-4.2.5.tgz#9e0e5256f1e3513f8c34691dd68549e85b2c8ceb"
   integrity sha512-+yQl7SX3bIT83Lhb4BVorMAHVuqsskxRdlmO9kTpyukp8vsm2Sn/fUOV9xlnG8/a5JsypJzap21lz/y3FBMJ8Q==
-
-mirrorful@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/mirrorful/-/mirrorful-5.0.0.tgz#b2642765d7e37bb9f5c2a1066bfd7ba368b3a174"
-  integrity sha512-HhFbwtqdqq3ZBk+guPR/BN3ZAJdukls9yxCpYp0sviqousdBM5q/H7F27lpLRy8nqqj7I/BpOxzfu15IaVyUdw==
-  dependencies:
-    "@chakra-ui/icons" "^2.0.17"
-    "@chakra-ui/react" "^2.5.1"
-    "@emotion/react" "^11.10.6"
-    "@emotion/styled" "^11.10.6"
-    "@mirrorful/core" "1.0.3"
-    chalk "^2.4.2"
-    commander "^2.20.0"
-    conf "^10.0.2"
-    cross-spawn "^7.0.3"
-    framer-motion "^9.0.4"
-    fs "^0.0.1-security"
-    next "^12.0.0"
-    open "^8.4.2"
-    path "^0.12.7"
-    posthog-js "^1.50.0"
-    react "18.2.0"
-    react-dom "18.2.0"
-    rimraf "^4.1.2"
-    update-check "^1.5.4"
 
 mri@^1.1.5:
   version "1.2.0"
