@@ -1,0 +1,38 @@
+name: Web - Build, Lint, Test
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build, Lint, Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: install apps/web
+        uses: borales/actions-yarn@v4
+        with:
+          dir: apps/web
+          cmd: install # will run `yarn install` command in apps/web
+
+      - name: build apps/web
+        uses: borales/actions-yarn@v4
+        with:
+          dir: apps/web
+          cmd: build # will run `yarn build` command in apps/web
+
+      - name: lint apps/web
+        uses: borales/actions-yarn@v4
+        with:
+          dir: apps/web
+          cmd: lint # will run `yarn lint` command in apps/web
