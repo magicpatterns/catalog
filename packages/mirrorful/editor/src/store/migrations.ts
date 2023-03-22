@@ -1,16 +1,15 @@
-import Conf from 'conf'
 import {
+  defaultFiles,
+  defaultTypography,
   TColorData,
   TConfig,
-  TTypographyData,
-  defaultTypography,
-  defaultFiles,
 } from '@mirrorful/core/lib/types'
+import Conf from 'conf'
 
 export const ZeroPointZeroPointTwoMigration = (store: Conf<TConfig>) => {
   const tokens = store.get('tokens')
 
-  let newTokens: {
+  const newTokens: {
     colorData: TColorData[]
   } = {
     colorData: [],
