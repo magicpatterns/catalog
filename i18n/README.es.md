@@ -122,7 +122,7 @@ Ejemplo:
 
 Nos esforzamos por ser una librería de componentes agnóstica. Ya sea que uses Material UI, Chakra UI, Tailwind, Ant Design, o incluso una librería interna, Mirrorful te va a enganchar. 
 
-⚠️ `create-react-app` puede que te advierta que estas tratando de importar desde afuera del directorio src. Estamos trabajando en una solución a largo plazo, pero por ahora, te recomendamos hacer una copia del folder .mirrorful en tu directorio src. 
+⚠️ `create-react-app` puede que te advierta que estas tratando de importar desde afuera del directorio `src`. Estamos trabajando en una solución a largo plazo, pero por ahora, te recomendamos hacer una copia del folder `.mirrorful` en tu directorio `src`. 
 
 Revisa nuestros ejemplos:
 
@@ -144,7 +144,7 @@ Revisa nuestros ejemplos:
 
 Este repositorio está completamente bajo la licencia MIT.
 
-Estamos trabajando duro para hacer Mirrorful más extenso. Necesitas cualquier tipo de integraciones o quieres una nueva feature? Siéntete libre de [crear un issue](https://github.com/Mirrorful/mirrorful/issues) o contribuir directamente al repositorio. _(El primer draft de este README fue hecho por un contribuidor!)_
+Estamos trabajando duro para hacer Mirrorful más extenso. Necesitas cualquier tipo de integraciones o quieres una nueva funcion? Siéntete libre de [crear un issue](https://github.com/Mirrorful/mirrorful/issues) o contribuir directamente al repositorio. _(El primer draft de este README fue hecho por un contribuidor!)_
 
 ## 🛡 Seguridad
 
@@ -152,19 +152,19 @@ Mirrorful se toma la seguridad muy en serio. Si tienes cualquier duda sobre Mirr
 
 ## ⭐ Mantente al día
 
-Hay nuevas features que llegarán de manera frecuente. Dale Star a este repo para mantenerte al día. 
+Hay nuevas funciones que llegarán de manera frecuente. Dale Star a este repo para mantenerte al día. 
 
 <img width="300" src="../assets/tower.png" alt="Build">
 
 ## 🛠️ Contribución
 
-Ya sea grande o pequeña, nos encantan las contribuciones. Los maintainers de esta repo han construido proyectos de código abierto anteriormente y les encanta. Bienvenido!
+Ya sea grande o pequeña, nos encantan las contribuciones. Los mantenedores de esta repo han construido proyectos de código abierto anteriormente y les encanta. Bienvenido!
 
-Para correr Mirrorful de mandera local, puedes leer las [instrucciones aqui:](https://mirrorful.com/docs/home/contributing)
+Para correr Mirrorful de mandera local, puedes leer las [instrucciones aqui](https://mirrorful.com/docs/home/contributing)
 
 ¿No sabes por dónde empezar? Puedes:
 
-- [Reservar una sesión gratuita, sin presión de pairing con un miembro de nuestro equipo. ](https://usemotion.com/meet/teddyni/meet?d=15)!
+- [Reservar una sesión gratuita, sin presión de pairing con un miembro de nuestro equipo](https://usemotion.com/meet/teddyni/meet?d=15)!
 
 - Ingresar a nuestro [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) y hacer una cualquier pregunta ahi.
 
