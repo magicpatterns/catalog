@@ -1,9 +1,9 @@
 <h1 align="center">
-  <img width="300" src="./assets/logo-light-mode.png#gh-light-mode-only" alt="Mirrorful">
-  <img width="300" src="./assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
+  <img width="300" src="../assets/logo-light-mode.png#gh-light-mode-only" alt="Mirrorful">
+  <img width="300" src="../assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
 </h1>
 <p align="center">
-  <p align="center">Create the building blocks of your app with Mirrorful: a simple, open-source design system framework.</p>
+  <p align="center">Crea los cimientos de tu aplicación con Mirrorful: un framework de diseño simple y de código abierto.</p>
 </p>
 
 <h4 align="center">
@@ -33,71 +33,72 @@
   </a>
 </h4>
 
-<img src="./assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
+<img src="../assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
 
-**Read this in other languages**: <kbd>[<img title="English" alt="English language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="22">](i18n/README.en.md)</kbd>
+**Lee esto en otros lenguajes**: <kbd>[<img title="English" alt="English language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="22">](i18n/README.en.md)</kbd>
 <kbd>[<img title="German" alt="German language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/de.svg" width="22">](i18n/README.de.md)</kbd>
 <kbd>[<img title="Swedish" alt="Swedish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/se.svg" width="22">](i18n/README.sv.md)</kbd>
 <kbd>[<img title="Turkish" alt="Turkish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/tr.svg" width="22">](i18n/README.tr.md)</kbd>
 
-**[Mirrorful](https://mirrorful.com)** is a simple, open-source design system framework. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
+**[Mirrorful](https://mirrorful.com)** Mirrorful es un framework de diseño simple y de código abierto. Instala Mirrorful para generar colores y otros tokens de diseño para tu proyecto. Después, importa los tokens directamente en tu aplicación. 
 
-- **Start new projects with a source of truth**
-- **Visually modify your theme**
-- **Generate colors**
-- 🔜 **Theme Templates**
-- 🔜 **Lightweight Headless Component Library**
-- 🔜 **Eslint rules**
-- 🔜 **Propagate tokens across projects**
-- 🔜 **Figma integration**
+- **Empieza un nuevo proyecto con una fuente de datos**
+- **Modifica visualmente tu tema**
+- **Genera colores**
+- 🔜 **Plantillas de tema**
+- 🔜 **Libreria ligera de componentes Headless**
+- 🔜 **Reglas de Eslint**
+- 🔜 **Propaga tokens entre proyectos**
+- 🔜 **Integración con Figma**
 
-And more...
+Y más…
 
-## 🎨 Why should I use Mirrorful?
+## 🎨 ¿Por qué deberías de usar Mirrorful?
 
-Design systems are the building blocks of your app, but many projects don't adopt them until it's too late because they are hard to set up correctly. Mirrorful gets you set up for a basic design system in minutes while leaving flexibility down the line for customizations. It's lightweight and dead simple.
+Los sistemas de diseño son los cimientos de tu aplicación, pero muchos proyectos no adoptan un tema hasta que es demasiado tarde, ya que es difícil de implementarlo correctamente. Mirrorful te provee con un sistema de diseño básico en minutos, mientras que te da flexibilidad de customización. Es ligero y súper simple.
 
-We're on a mission to help your project be as beautiful as possible. The bar for high-quality design is getting higher. We want to help everyone add simple design tokens to new (and existing!) projects.
+Tenemos la misión de ayudar a tu proyecto a que sea lo mas lindo posible. El listón de diseño de calidad está cada vez más alto. Queremos ayudarte a añadir tokens de diseño simple a proyectos nuevos (y existentes!)
 
-Simple design systems also speed up development — even early-stage projects! One report suggests it's 47% faster to build a simple form using a design system. It's useful for engineers, designers, and especially your customers if there isn't a random color for each button in your app.
+Además los sistemas de diseño simples te ayudan a acelerar el desarrollo - incluso al principio de tu proyecto! Un reporte sugiere que es 47% más rápido construir un formulario simple con un sistema de diseño. Es útil para los ingenieros, diseñadores, y especialmente para los clientes, si no hay un color diferente para cada botón en tu aplicación.
 
-## 🚀 Get started
+## 🚀 Empieza aquí
 
-Mirrorful is a NPM package intended to be installed as dev dependency.
+Mirrorful es un paquete NPM ideado para ser instalado como una dependencia de desarrollo. 
 
 ```bash
 npm install mirrorful -D
 ```
 
-or
+o
 
 ```bash
 yarn add mirrorful -D
 ```
 
-## ✨ Usage
+## ✨ Uso
 
-The following commands will start a local editor at `localhost:5050`.
+Los siguientes comandos iniciaran un editor local en el `localhost:5050`.
 
 ```
 yarn run mirrorful
 ```
 
-or
+o
 
 ```
 npx mirrorful
 ```
 
-## 💿 Export Formats
+## 💿 Formatos de exportación
 
-After configuring your theme in the editor, you can export it to be used by your app.
+Después de configurar tu editor, puedes exportarlo para usarlo en tu aplicación. 
 
-We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`
+
+Actualmente exportamos los siguientes tipos de archivos: `.js`, `.ts`, `.css`, `.scss`, `.json`
 
 **Using CSS Variables**
 
-Example:
+Ejemplo:
 
 ```css
 .primary-button {
@@ -109,74 +110,74 @@ Example:
 }
 ```
 
-**Using Javascript Constants**
+**Usando constantes de Javascript**
 
-Example:
+Ejemplo:
 
 ```javascript
 <button backgroundColor={{ Tokens.primary.base }}>Click here</button>
 ```
 
-## 🤝 Component Library Agnostic
+## 🤝 Librería de componentes agnóstica 
 
-We strive to be component library agnostic. Whether you're using Material UI, Chakra UI, Tailwind, Ant Design, or even your in-house library, Mirrorful hooks right in.
+Nos esforzamos por ser una librería de componentes agnóstica. Ya sea que uses Material UI, Chakra UI, Tailwind, Ant Design, o incluso una librería interna, Mirrorful te va a enganchar. 
 
-⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory.
+⚠️ `create-react-app` puede que te advierta que estas tratando de importar desde afuera del directorio src. Estamos trabajando en una solución a largo plazo, pero por ahora, te recomendamos hacer una copia del folder .mirrorful en tu directorio src. 
 
-Check out our examples:
+Revisa nuestros ejemplos:
 
 - [Mirrorful 🤝 Tailwind CSS (and Next)](https://github.com/Mirrorful/mirrorful/tree/main/examples/tailwind-next)
 - [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
 - [Mirrorful 🤝 Basic Create React App](https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app)
 - [Mirrorful 🤝 Basic Nuxt 3 App](https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3)
 
-Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues)
+¿Buscas un ejemplo en específico? [¡Pide uno aquí!](https://github.com/Mirrorful/mirrorful/issues)
 
-## ❤️ Community & Support
+## ❤️ Comunidad y soporte
 
-- [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - for live discussion with the community and the Mirrorful team.
-- [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - for help with building and deeper conversations about features.
-- [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - for any bugs and errors you encounter using Mirrorful.
-- [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates.
+- [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - para discutir con la comunidad y el equipo de Mirrorful. 
+- [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - para ayudar a construir y conversaciones sobre funciones más avanzadas
+- [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - GitHub issues - para bugs y errores que encuentres usando Mirrorful.
+- [Twitter](https://twitter.com/mirrorful) -  para mantenerte informado sobre las últimas actualizaciones del producto.
 
-## 🏘 Open-source vs. paid
+## 🏘 Codigo abierto vs pagado
 
-This repo is entirely MIT licensed.
+Este repositorio está completamente bajo la licencia MIT.
 
-We are working hard to make Mirrorful more extensive. Need any integrations or want a new feature? Feel free to [create an issue](https://github.com/Mirrorful/mirrorful/issues) or contribute directly to the repository. _(The first draft of this README was made by a contributor!)_
+Estamos trabajando duro para hacer Mirrorful más extenso. Necesitas cualquier tipo de integraciones o quieres una nueva feature? Siéntete libre de [crear un issue](https://github.com/Mirrorful/mirrorful/issues) o contribuir directamente al repositorio. _(El primer draft de este README fue hecho por un contribuidor!)_
 
-## 🛡 Security
+## 🛡 Seguridad
 
-Mirrorful takes security issues very seriously. If you have any concerns about Mirrorful or believe you have uncovered a vulnerability, please get in touch via the e-mail address [support@mirrorful.io](mailto:support@mirrorful.io). In the message, try to provide a description of the issue and ideally a way of reproducing it. The team will get back to you **immediately**.
+Mirrorful se toma la seguridad muy en serio. Si tienes cualquier duda sobre Mirrorful o crees que has descubierto una vulnerabilidad, por favor comunicate a través de el email [support@mirrorful.io](mailto:support@mirrorful.io). En el mensaje, trata de proveer una descripción del problema e idealmente la forma para reproducirlo. Nuestro equipo se comunicara contigo de forma **inmediata**.
 
-## ⭐ Stay Up to Date
+## ⭐ Mantente al día
 
-There are a lot of new features coming very frequently. Star this repo to stay up to date.
+Hay nuevas features que llegarán de manera frecuente. Dale Star a este repo para mantenerte al día. 
 
-<img width="300" src="./assets/tower.png" alt="Build">
+<img width="300" src="../assets/tower.png" alt="Build">
 
-## 🛠️ Contributing
+## 🛠️ Contribución
 
-Whether it's big or small, we love contributions. The maintainers of this repo have built open-source projects before and love it. Welcome!
+Ya sea grande o pequeña, nos encantan las contribuciones. Los maintainers de esta repo han construido proyectos de código abierto anteriormente y les encanta. Bienvenido!
 
-To run Mirrorful locally, check out the [instructions here](https://mirrorful.com/docs/home/contributing)
+Para correr Mirrorful de mandera local, puedes leer las [instrucciones aqui:](https://mirrorful.com/docs/home/contributing)
 
-Not sure where to get started? You can:
+¿No sabes por dónde empezar? Puedes:
 
-- [Book a free, non-pressure pairing sessions with one of our teammates](https://usemotion.com/meet/teddyni/meet?d=15)!
+- [Reservar una sesión gratuita, sin presión de pairing con un miembro de nuestro equipo. ](https://usemotion.com/meet/teddyni/meet?d=15)!
 
-- Join our [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) and ask us any questions there.
+- Ingresar a nuestro [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) y hacer una cualquier pregunta ahi.
 
-No matter the PR, all the Github avatars of contributors will be added to the Mirrorful README with their permission.
+No importa el PR, todos los avatares de Github de los contribuidores, serán agregados al README de Mirrorful, con su permiso.
 
-## 🪞 Contributors
+## 🪞 Contribuidores
 
 <a href="https://github.com/mirrorful/mirrorful/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=mirrorful/mirrorful" />
 </a>
 
-## 🌎 Translations
+## 🌎 Traducciones
 
-Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md), and [Turkish 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.trs.md), among other languages. Help us translate our documentation and UI to your language!
+Mirrorful está actualmente disponible en inglés, [alemán 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [suizo 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md), y [tuco 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.trs.md), entre otros idiomas. Ayudanos a traducir nuestra documentación y UI a tu idioma!
 
-You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).
+Puedes encontrar toda la información en [este issue](https://github.com/Mirrorful/mirrorful/issues/18).
