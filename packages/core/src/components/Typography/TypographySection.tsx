@@ -1,5 +1,6 @@
-import { Box, Heading, Divider, Text } from '@chakra-ui/react'
+import { Box, Divider, Heading, Text } from '@chakra-ui/react'
 import { TFontSizeVariant, TTypographyData } from '@core/types'
+
 import { FontSizesSection } from './FontSizesSection'
 
 export function TypographySection({

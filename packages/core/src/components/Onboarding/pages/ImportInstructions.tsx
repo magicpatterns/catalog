@@ -1,22 +1,23 @@
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
+  Code,
   Heading,
   Stack,
-  Tabs,
-  TabList,
   Tab,
-  TabPanels,
+  TabList,
   TabPanel,
+  TabPanels,
+  Tabs,
   Text,
-  Code,
 } from '@chakra-ui/react'
-import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import tinycolor from 'tinycolor2'
-import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
-import { getNumberOfStepsInOnboardingFlow } from '../constants'
 import { CodePreview } from '@core/components/CodePreview'
+import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Dashboard'
+import tinycolor from 'tinycolor2'
+
+import { getNumberOfStepsInOnboardingFlow } from '../constants'
 
 export function ImportInstructions({
   primaryColor,

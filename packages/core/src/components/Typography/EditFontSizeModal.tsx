@@ -1,24 +1,23 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
+  Box,
   Button,
   FormControl,
-  Input,
   FormLabel,
-  Box,
-  Checkbox,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Select,
   Text,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
-import { TFontSizeVariant } from '@core/types'
-import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { useDisclosure } from '@chakra-ui/react'
+import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
+import { TFontSizeVariant } from '@core/types'
+import { useEffect, useState } from 'react'
 
 export function EditFontSizeModal({
   isOpen,

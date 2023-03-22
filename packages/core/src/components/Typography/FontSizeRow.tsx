@@ -1,5 +1,6 @@
+import { Box, Button, Stack, Text, useDisclosure } from '@chakra-ui/react'
 import { TFontSizeVariant } from '@core/types'
-import { Box, Stack, Text, Button, useDisclosure } from '@chakra-ui/react'
+
 import { EditFontSizeModal } from './EditFontSizeModal'
 
 // max font size in px or em/rem

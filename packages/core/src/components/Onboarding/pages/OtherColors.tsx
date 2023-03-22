@@ -1,22 +1,13 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Code,
-  Heading,
-  Input,
-  Spinner,
-  Stack,
-  Text,
-} from '@chakra-ui/react'
-import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { useState, useEffect, useCallback } from 'react'
-import tinycolor from 'tinycolor2'
 import { ArrowBackIcon, ArrowForwardIcon, RepeatIcon } from '@chakra-ui/icons'
-import { getNumberOfStepsInOnboardingFlow } from '../constants'
-import { TColorData } from '@core/types'
-import { generatePalette } from '../utils'
+import { Badge, Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
+import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Dashboard'
+import { TColorData } from '@core/types'
+import { useCallback, useEffect, useState } from 'react'
+import tinycolor from 'tinycolor2'
+
+import { getNumberOfStepsInOnboardingFlow } from '../constants'
+import { generatePalette } from '../utils'
 
 export function OtherColors({
   initialPalette,

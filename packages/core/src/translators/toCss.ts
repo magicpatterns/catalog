@@ -1,5 +1,6 @@
 import { TTokens } from '@core/types'
 import { getKeys } from '@core/utils/getKeys'
+
 import { sanitizeName } from './sanitizeName'
 
 export const toCss = ({ colorData, typography }: TTokens): string => {

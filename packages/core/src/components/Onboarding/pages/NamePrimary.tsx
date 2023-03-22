@@ -1,11 +1,11 @@
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Input, Stack, Text } from '@chakra-ui/react'
-import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
+import { TPlatform } from '@core/components/Dashboard'
 import { useState } from 'react'
 import tinycolor from 'tinycolor2'
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
-import { TPlatform } from '@core/components/Dashboard'
 
 export function NamePrimary({
   initialName,

@@ -2,20 +2,21 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
+  Icon,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Stack,
   Text,
   useDisclosure,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Icon,
-  IconButton,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
+import { TColorData, TColorVariant } from '@core/types'
 import { FiMoreVertical } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
-import { TColorData, TColorVariant } from '@core/types'
+
 import { EditColorNameModal } from './EditColorNameModal'
 import { EditVariantModal } from './EditVariantModal'
 

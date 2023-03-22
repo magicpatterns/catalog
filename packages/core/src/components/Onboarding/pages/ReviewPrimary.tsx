@@ -1,4 +1,11 @@
 import {
+  ArrowBackIcon,
+  ArrowForwardIcon,
+  BellIcon,
+  CheckCircleIcon,
+  MoonIcon,
+} from '@chakra-ui/icons'
+import {
   Badge,
   Box,
   Button,
@@ -9,19 +16,11 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { useState } from 'react'
-import tinycolor from 'tinycolor2'
-import {
-  ArrowBackIcon,
-  ArrowForwardIcon,
-  CheckCircleIcon,
-  BellIcon,
-  MoonIcon,
-} from '@chakra-ui/icons'
-import { getNumberOfStepsInOnboardingFlow } from '../constants'
 import { TPlatform } from '@core/components/Dashboard'
+import tinycolor from 'tinycolor2'
+
+import { getNumberOfStepsInOnboardingFlow } from '../constants'
 
 export function ReviewPrimary({
   onUpdatePage,
@@ -32,9 +31,6 @@ export function ReviewPrimary({
   primaryColor: string
   platform: TPlatform
 }) {
-  const [error, setError] = useState<string | null>(null)
-  const [name, setName] = useState<string>('')
-
   const shades = generateDefaultColorShades(primaryColor)
 
   return (

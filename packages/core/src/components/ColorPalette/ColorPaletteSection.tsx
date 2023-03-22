@@ -1,17 +1,16 @@
-import { ColorRow } from './ColorRow'
-import { TColorData } from '../../types'
 import {
-  Button,
   Box,
-  useDisclosure,
-  Stack,
-  Heading,
-  Text,
   Divider,
+  Heading,
+  Stack,
+  Text,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { EditColorModal } from './EditColorModal'
+
+import { TColorData } from '../../types'
 import { AddColorSkeleton } from './AddColorSkeleton'
 import { ColorDisplay } from './ColorDisplay'
+import { EditColorModal } from './EditColorModal'
 
 export function ColorPaletteSection({
   colors,
@@ -75,15 +74,15 @@ export function ColorPaletteSection({
         onClose={(colorData?: TColorData) => {
           if (colorData) {
             const newColors = [...colors]
-            const existingColorRegex: RegExp = new RegExp(
+            const existingColorRegex = new RegExp(
               '(' + colorData.name + ')(?: ([0-9]+))?'
             )
-            let finalName: string = ''
-            let maxNum: number = 0
+            let finalName = ''
+            let maxNum = 0
 
             newColors.map((col) => {
               // Do a regex check to find both the color name, and it's number
-              let match: RegExpMatchArray | null =
+              const match: RegExpMatchArray | null =
                 col.name.match(existingColorRegex)
 
               // If we have a match, construct the (incremented) final color name

@@ -1,16 +1,16 @@
-import { Box, Heading, Stack, Text, Icon, Badge } from '@chakra-ui/react'
+import { Badge, Box, Icon, Stack, Text } from '@chakra-ui/react'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
 import {
-  FiGrid,
-  FiUnderline,
   FiAperture,
   FiBookOpen,
-  FiGithub,
-  FiBook,
-  FiSettings,
   FiFolder,
+  FiGithub,
+  FiGrid,
+  FiSettings,
+  FiUnderline,
 } from 'react-icons/fi'
+
 import { TPlatform, TTab } from '.'
 
 function SidebarHeader({ label }: { label: string }) {
