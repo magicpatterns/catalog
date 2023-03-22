@@ -1,13 +1,16 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
 import { OnboardingCard } from '../OnboardingCard'
 import posthog from 'posthog-js'
+import { TPlatform } from '@core/components/Dashboard'
 
 export function Welcome({
   onUpdatePage,
   onFinishOnboarding,
+  platform,
 }: {
   onUpdatePage: (page: number) => void
   onFinishOnboarding: () => void
+  platform: TPlatform
 }) {
   return (
     <Box>

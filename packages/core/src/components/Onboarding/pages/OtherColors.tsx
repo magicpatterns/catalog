@@ -13,9 +13,10 @@ import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { useState, useEffect, useCallback } from 'react'
 import tinycolor from 'tinycolor2'
 import { ArrowBackIcon, ArrowForwardIcon, RepeatIcon } from '@chakra-ui/icons'
-import { NUMBER_OF_STEPS_IN_NEW_FLOW } from '../constants'
+import { getNumberOfStepsInOnboardingFlow } from '../constants'
 import { TColorData } from '@core/types'
 import { generatePalette } from '../utils'
+import { TPlatform } from '@core/components/Dashboard'
 
 export function OtherColors({
   initialPalette,
@@ -23,12 +24,16 @@ export function OtherColors({
   onUpdatePage,
   primaryColor,
   primaryName,
+  platform,
+  onFinish,
 }: {
   initialPalette: TColorData[]
   onUpdatePalette: (newPalette: TColorData[]) => void
   onUpdatePage: (page: number) => void
   primaryColor: string
   primaryName: string
+  platform: TPlatform
+  onFinish: () => void
 }) {
   const [palette, setPalette] = useState<TColorData[]>(initialPalette)
 
@@ -66,7 +71,7 @@ export function OtherColors({
               of
             </Text>
             <Text color="gray.500" fontWeight="black" fontSize={18}>
-              {NUMBER_OF_STEPS_IN_NEW_FLOW}
+              {getNumberOfStepsInOnboardingFlow(platform)}
             </Text>
           </Stack>
 
@@ -106,10 +111,15 @@ export function OtherColors({
             rightIcon={<ArrowForwardIcon />}
             onClick={() => {
               onUpdatePalette(palette)
-              onUpdatePage(5)
+
+              if (platform === 'web') {
+                onFinish()
+              } else {
+                onUpdatePage(5)
+              }
             }}
           >
-            Next
+            {platform === 'web' ? 'Finish' : 'Next'}
           </Button>
         </Box>
       </Box>
