@@ -8,7 +8,7 @@
 
 <h4 align="center">
   <a href="https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA">Slack</a> |
-  <a href="https://mirrorful.com/">Website</a> |
+  <a href="https://mirrorful.com/">Página web</a> |
   <a href="https://www.npmjs.com/package/mirrorful">NPM Package</a> | <a href="https://www.mirrorful.com/docs/home/intropage">Docs</a>
 </h4>
 
