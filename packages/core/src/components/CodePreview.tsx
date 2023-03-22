@@ -14,7 +14,9 @@ export function CodePreview({
 }) {
   const [tooltip, setTooltip] = useState<string>('Copy')
   return (
-    <div style={{ position: 'relative' }}>
+    <div
+      style={{ position: 'relative', maxHeight: '40vh', overflowY: 'scroll' }}
+    >
       <Highlight language={language} className={textClass}>
         {text}
       </Highlight>
@@ -27,6 +29,7 @@ export function CodePreview({
             right: 0,
             top: 0,
             margin: 7,
+            zIndex: 2,
           }}
           cursor={'pointer'}
           onClick={async () => {

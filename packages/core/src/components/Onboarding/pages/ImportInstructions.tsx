@@ -14,19 +14,22 @@ import {
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import tinycolor from 'tinycolor2'
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
-import { NUMBER_OF_STEPS_IN_NEW_FLOW } from '../constants'
+import { getNumberOfStepsInOnboardingFlow } from '../constants'
 import { CodePreview } from '@core/components/CodePreview'
+import { TPlatform } from '@core/components/Dashboard'
 
 export function ImportInstructions({
   primaryColor,
   primaryName,
   onUpdatePage,
   onFinish,
+  platform,
 }: {
   primaryColor: string
   primaryName: string
   onUpdatePage: (page: number) => void
   onFinish: () => void
+  platform: TPlatform
 }) {
   const shades = generateDefaultColorShades(primaryColor)
 
@@ -44,13 +47,13 @@ export function ImportInstructions({
         <Box css={{ paddingTop: '32px' }}>
           <Stack spacing={1} direction={'row'}>
             <Text color="gray.500" fontWeight="black" fontSize={18}>
-              05
+              06
             </Text>
             <Text color="gray.500" fontWeight="bold" fontSize={18}>
               of
             </Text>
             <Text color="gray.500" fontWeight="black" fontSize={18}>
-              {NUMBER_OF_STEPS_IN_NEW_FLOW}
+              {getNumberOfStepsInOnboardingFlow(platform)}
             </Text>
           </Stack>
 

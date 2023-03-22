@@ -20,14 +20,17 @@ import {
   BellIcon,
   MoonIcon,
 } from '@chakra-ui/icons'
-import { NUMBER_OF_STEPS_IN_NEW_FLOW } from '../constants'
+import { getNumberOfStepsInOnboardingFlow } from '../constants'
+import { TPlatform } from '@core/components/Dashboard'
 
 export function ReviewPrimary({
   onUpdatePage,
   primaryColor,
+  platform,
 }: {
   onUpdatePage: (page: number) => void
   primaryColor: string
+  platform: TPlatform
 }) {
   const [error, setError] = useState<string | null>(null)
   const [name, setName] = useState<string>('')
@@ -54,7 +57,7 @@ export function ReviewPrimary({
               of
             </Text>
             <Text color="gray.500" fontWeight="black" fontSize={18}>
-              {NUMBER_OF_STEPS_IN_NEW_FLOW}
+              {getNumberOfStepsInOnboardingFlow(platform)}
             </Text>
           </Stack>
 

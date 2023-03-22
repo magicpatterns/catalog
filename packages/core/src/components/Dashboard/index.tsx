@@ -13,14 +13,18 @@ import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import { ExportSettingsModal } from '@core/components/ExportSettingsModal'
 
+export type TPlatform = 'package' | 'web'
+
 export type TTab = 'colors' | 'typography'
 
 export function Dashboard({
   fetchStoreData,
   postStoreData,
+  platform = 'package',
 }: {
   fetchStoreData: () => Promise<TConfig>
   postStoreData: (data: TConfig) => Promise<void>
+  platform?: TPlatform
 }) {
   const [tab, setTab] = useState<'colors' | 'typography'>('colors')
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
@@ -102,6 +106,7 @@ export function Dashboard({
           setShowOnboarding(false)
           setShouldForceSkipOnboarding(true)
         }}
+        platform={platform}
       />
     )
   }
@@ -110,6 +115,7 @@ export function Dashboard({
     <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
       <Box css={{ width: '300px', position: 'fixed' }}>
         <Sidebar
+          platform={platform}
           activeTab={tab}
           onSelectTab={(newTab: TTab) => setTab(newTab)}
           onOpenSettings={() => onExportSettingsModalOpen()}
@@ -134,16 +140,20 @@ export function Dashboard({
         )}
       </Box>
       <ExportSuccessModal
+        platform={platform}
         primaryName={colors && colors[0] ? colors[0].name : 'primary'}
         isOpen={isExportSuccessModalOpen}
         onClose={onExportSuccessModalClose}
+        tokens={{ colorData: colors, typography }}
       />
-      <ExportSettingsModal
-        isOpen={isExportSettingsModalOpen}
-        onClose={onExportSettingsModalClose}
-        fileTypes={fileTypes}
-        onUpdateFileTypes={setFileTypes}
-      />
+      {platform === 'package' && (
+        <ExportSettingsModal
+          isOpen={isExportSettingsModalOpen}
+          onClose={onExportSettingsModalClose}
+          fileTypes={fileTypes}
+          onUpdateFileTypes={setFileTypes}
+        />
+      )}
     </Box>
   )
 }

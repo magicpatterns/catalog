@@ -13,15 +13,8 @@ import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { defaultFiles, TExportFileType } from '@core/types'
 import tinycolor from 'tinycolor2'
 import { getExportFileTypeName } from '@core/utils/getExportFileTypeString'
-import { NUMBER_OF_STEPS_IN_NEW_FLOW } from '../constants'
-
-type Props = {
-  primaryColor: string
-  fileTypes: TExportFileType[]
-  onUpdateFileTypes: (next: TExportFileType[]) => void
-  onExport: () => void
-  onUpdatePage: (page: number) => void
-}
+import { getNumberOfStepsInOnboardingFlow } from '../constants'
+import { TPlatform } from '@core/components/Dashboard'
 
 export function ExportSettings({
   primaryColor,
@@ -29,7 +22,15 @@ export function ExportSettings({
   onUpdateFileTypes,
   onExport,
   onUpdatePage,
-}: Props) {
+  platform,
+}: {
+  primaryColor: string
+  fileTypes: TExportFileType[]
+  onUpdateFileTypes: (next: TExportFileType[]) => void
+  onExport: () => void
+  onUpdatePage: (page: number) => void
+  platform: TPlatform
+}) {
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
@@ -50,7 +51,7 @@ export function ExportSettings({
               of
             </Text>
             <Text color="gray.500" fontWeight="black" fontSize={18}>
-              {NUMBER_OF_STEPS_IN_NEW_FLOW}
+              {getNumberOfStepsInOnboardingFlow(platform)}
             </Text>
           </Stack>
           <Heading fontWeight="black" marginTop="12px" fontSize={36}>

@@ -11,7 +11,7 @@ import {
   FiSettings,
   FiFolder,
 } from 'react-icons/fi'
-import { TTab } from '.'
+import { TPlatform, TTab } from '.'
 
 function SidebarHeader({ label }: { label: string }) {
   return (
@@ -90,11 +90,13 @@ function SidebarSection({
 }
 
 export function Sidebar({
+  platform,
   activeTab,
   onSelectTab,
   onOpenSettings,
   onExport,
 }: {
+  platform: TPlatform
   activeTab: string
   onSelectTab: (tab: TTab) => void
   onOpenSettings: () => void
@@ -127,7 +129,7 @@ export function Sidebar({
             flexDirection: 'column',
             justifyContent: 'space-between',
             height: '100%',
-            marginTop: '50%',
+            marginTop: '20%',
           }}
         >
           <Box>
@@ -157,11 +159,13 @@ export function Sidebar({
                 icon={FiFolder}
                 onSelect={() => onExport()}
               />
-              <SidebarSection
-                label="Settings"
-                icon={FiSettings}
-                onSelect={() => onOpenSettings()}
-              />
+              {platform === 'package' && (
+                <SidebarSection
+                  label="Settings"
+                  icon={FiSettings}
+                  onSelect={() => onOpenSettings()}
+                />
+              )}
             </Stack>
             <Stack>
               <SidebarHeader label="Resources" />
