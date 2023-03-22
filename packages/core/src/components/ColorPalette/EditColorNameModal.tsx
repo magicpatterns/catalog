@@ -1,23 +1,19 @@
+import { InfoIcon } from '@chakra-ui/icons'
 import {
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
-  FormControl,
-  Input,
-  FormLabel,
-  Box,
-  Flex,
-  InputRightElement,
-  IconButton,
-  InputGroup,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Tooltip,
 } from '@chakra-ui/react'
-import { InfoIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
 
 export function EditColorNameModal({

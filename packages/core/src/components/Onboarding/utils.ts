@@ -1,5 +1,5 @@
-import tinycolor from 'tinycolor2'
 import { TColorData } from '@core/types'
+import tinycolor from 'tinycolor2'
 
 // https://chir.ag/projects/ntc/ntc.js was the source of these...
 const colorNames = [
@@ -1577,9 +1577,9 @@ const nameThatColor = ({ h, l, s }: { h: number; l: number; s: number }) => {
   const color = colorObject.toRgb()
 
   // Placeholder vars
-  let cl: number = -1
-  let df: number = -1
-  let count: number = 0
+  let cl = -1
+  let df = -1
+  let count = 0
 
   // Loop through the list of names to find the closest match
   colorNames.forEach((c) => {
@@ -1587,9 +1587,9 @@ const nameThatColor = ({ h, l, s }: { h: number; l: number; s: number }) => {
     if ('#' + c[0] === colorObject.toHexString().toUpperCase()) return c[1]
 
     // Convert the string portions to actual numbers
-    let targetRed = Number('0x' + c[0].substr(0, 2))
-    let targetGreen = Number('0x' + c[0].substr(2, 2))
-    let targetBlue = Number('0x' + c[0].substr(4, 2))
+    const targetRed = Number('0x' + c[0].substr(0, 2))
+    const targetGreen = Number('0x' + c[0].substr(2, 2))
+    const targetBlue = Number('0x' + c[0].substr(4, 2))
 
     // Using tinyRBG for consistency between color definitions
 
@@ -1624,26 +1624,26 @@ const nameThatColor = ({ h, l, s }: { h: number; l: number; s: number }) => {
   return colorNames[cl][1]
 }
 
-const shuffleArray = (array: any[]) => {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1))
-    var temp = array[i]
+const shuffleArray = (array: unknown[]) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    const temp = array[i]
     array[i] = array[j]
     array[j] = temp
   }
 }
 
-const normalizeHue = (hue: number): number => {
-  if (hue >= 360) {
-    return hue - 360
-  }
+// const normalizeHue = (hue: number): number => {
+//   if (hue >= 360) {
+//     return hue - 360
+//   }
 
-  if (hue < 0) {
-    return 360 + hue
-  }
+//   if (hue < 0) {
+//     return 360 + hue
+//   }
 
-  return hue
-}
+//   return hue
+// }
 
 export function generatePalette(
   color: string,
@@ -1655,7 +1655,7 @@ export function generatePalette(
 
   const randomizedColors: TColorData[] = []
 
-  colors.forEach((c, index) => {
+  colors.forEach((c) => {
     const hslColor = tinycolor(c).toHsl()
 
     const modifiedHsl = {

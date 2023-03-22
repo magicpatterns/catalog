@@ -1,29 +1,27 @@
+import { InfoIcon } from '@chakra-ui/icons'
 import {
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
-  FormControl,
-  Input,
-  FormLabel,
-  Box,
-  Flex,
-  InputRightElement,
-  IconButton,
-  InputGroup,
-  Checkbox,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Tooltip,
 } from '@chakra-ui/react'
-import { InfoIcon } from '@chakra-ui/icons'
 import { TColorData } from '@core/types'
-import { useState, useRef } from 'react'
-import { generateDefaultColorShades, handleInvalidColor } from './utils'
-import { ColorPicker } from './ColorPicker'
 import { Color } from '@hello-pangea/color-picker'
+import { useRef, useState } from 'react'
+
+import { ColorPicker } from './ColorPicker'
+import { generateDefaultColorShades, handleInvalidColor } from './utils'
 
 const INITIAL_COLOR_PICKER_COLOR = '#000000'
 
@@ -106,7 +104,7 @@ export function EditColorModal({
                 size="md"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                onFocus={(e) => {
+                onFocus={() => {
                   setShowBaseColorPicker(true)
                 }}
                 onKeyPress={(event) => {

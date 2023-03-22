@@ -1,22 +1,19 @@
-import tinycolor from 'tinycolor2'
-import { generateDefaultColorShades } from './utils'
-import { TColorData, TColorVariant } from '@core/types'
 import {
   Box,
   Button,
+  Heading,
+  Link,
   Stack,
   Text,
   useDisclosure,
-  Heading,
-  Link,
-  Checkbox,
 } from '@chakra-ui/react'
-import { EditColorModal } from './EditColorModal'
-import { EditColorNameModal } from './EditColorNameModal'
-import { useState } from 'react'
-import { EditVariantModal } from './EditVariantModal'
-import { ColorVariantPlaceholder } from './ColorVariantPlaceholder'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
+import { TColorData, TColorVariant } from '@core/types'
+import tinycolor from 'tinycolor2'
+
+import { ColorVariantPlaceholder } from './ColorVariantPlaceholder'
+import { EditColorNameModal } from './EditColorNameModal'
+import { EditVariantModal } from './EditVariantModal'
 
 function VariantSquare({
   variant,
@@ -27,7 +24,6 @@ function VariantSquare({
   onUpdateVariant: (newVariant: TColorVariant) => void
   onDeleteVariant: () => void
 }) {
-  const [isHovering, setIsHovering] = useState<boolean>(false)
   const {
     isOpen: isEditVariantModalOpen,
     onOpen: onEditVariantModalOpen,
@@ -49,8 +45,6 @@ function VariantSquare({
         border: '1px solid gray',
         position: 'relative',
       }}
-      onMouseOver={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
     >
       <Text fontSize={14} fontWeight="black">
         {name.toUpperCase()}

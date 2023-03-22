@@ -1,12 +1,14 @@
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { useState } from 'react'
 import {
-  TColorData,
-  TExportFileType,
   defaultFiles,
   defaultTypography,
+  TColorData,
   TConfig,
+  TExportFileType,
 } from '@core/types'
+import { useState } from 'react'
+
+import { TPlatform } from '../Dashboard'
 import { OnboardingContainer } from './OnboardingContainer'
 import { ExportSettings } from './pages/ExportSettings'
 import { ImportInstructions } from './pages/ImportInstructions'
@@ -19,9 +21,11 @@ import { Welcome } from './pages/Welcome'
 export function Onboarding({
   postStoreData,
   onFinishOnboarding,
+  platform,
 }: {
   postStoreData: (data: TConfig) => Promise<void>
   onFinishOnboarding: () => void
+  platform: TPlatform
 }) {
   const [primaryColor, setPrimaryColor] = useState<string>('#9F7AEA')
   const [primaryName, setPrimaryName] = useState<string>('')
@@ -51,7 +55,11 @@ export function Onboarding({
   }
 
   let content = (
-    <Welcome onFinishOnboarding={onFinishOnboarding} onUpdatePage={setPage} />
+    <Welcome
+      onFinishOnboarding={onFinishOnboarding}
+      onUpdatePage={setPage}
+      platform={platform}
+    />
   )
 
   if (page === 1) {
@@ -60,6 +68,7 @@ export function Onboarding({
         initialPrimary={primaryColor}
         onUpdatePage={setPage}
         onUpdatePrimaryColor={(newColor: string) => setPrimaryColor(newColor)}
+        platform={platform}
       />
     )
   } else if (page === 2) {
@@ -69,11 +78,16 @@ export function Onboarding({
         onUpdatePage={setPage}
         primaryColor={primaryColor}
         onUpdatePrimaryName={(newName: string) => setPrimaryName(newName)}
+        platform={platform}
       />
     )
   } else if (page === 3) {
     content = (
-      <ReviewPrimary primaryColor={primaryColor} onUpdatePage={setPage} />
+      <ReviewPrimary
+        primaryColor={primaryColor}
+        onUpdatePage={setPage}
+        platform={platform}
+      />
     )
   } else if (page === 4) {
     content = (
@@ -86,10 +100,18 @@ export function Onboarding({
             }
           })
           setPalette(newPalette)
+
+          if (platform === 'web') {
+            handleExport(primaryColor, primaryName, newPalette)
+          }
         }}
         primaryColor={primaryColor}
         primaryName={primaryName}
         onUpdatePage={setPage}
+        platform={platform}
+        onFinish={() => {
+          onFinishOnboarding()
+        }}
       />
     )
   } else if (page === 5) {
@@ -102,6 +124,7 @@ export function Onboarding({
           handleExport(primaryColor, primaryName, palette)
         }}
         onUpdatePage={setPage}
+        platform={platform}
       />
     )
   } else if (page === 6) {
@@ -111,6 +134,7 @@ export function Onboarding({
         primaryName={primaryName}
         onUpdatePage={setPage}
         onFinish={onFinishOnboarding}
+        platform={platform}
       />
     )
   }

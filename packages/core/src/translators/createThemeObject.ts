@@ -1,4 +1,5 @@
 import { TTokens } from '@core/types'
+
 import { sanitizeName } from './sanitizeName'
 
 export function createThemeObject({ colorData, typography }: TTokens) {

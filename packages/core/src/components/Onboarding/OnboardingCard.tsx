@@ -1,8 +1,9 @@
 import { Box, Text } from '@chakra-ui/react'
 import { useLottie } from 'lottie-react'
-import UiData from './lottie/mock_ui.json'
-import SystemData from './lottie/design_system.json'
 import { useState } from 'react'
+
+import SystemData from './lottie/design_system.json'
+import UiData from './lottie/mock_ui.json'
 
 export function OnboardingCard({
   title,

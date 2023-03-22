@@ -1,5 +1,6 @@
+import { Box, Button, Stack, Text, useDisclosure } from '@chakra-ui/react'
 import { TFontSizeVariant } from '@core/types'
-import { Box, Stack, Text, Button, useDisclosure } from '@chakra-ui/react'
+
 import { EditFontSizeModal } from './EditFontSizeModal'
 
 // max font size in px or em/rem
@@ -50,7 +51,7 @@ export function FontSizeRow({
   } = useDisclosure()
 
   return (
-    <Box>
+    <Box css={{ width: '60vw' }}>
       <Stack
         css={{ alignItems: 'center', width: '100%' }}
         spacing={8}
@@ -78,7 +79,7 @@ export function FontSizeRow({
           css={{
             fontSize: normalizeFontSize(fontSizeData),
             fontWeight: isFontSizeTooLarge(fontSizeData) ? 'bold' : '',
-            width: 700,
+            width: '100%',
           }}
         >
           {isFontSizeTooLarge(fontSizeData)
