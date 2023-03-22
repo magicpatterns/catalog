@@ -106,6 +106,7 @@ export function Dashboard({
           setShowOnboarding(false)
           setShouldForceSkipOnboarding(true)
         }}
+        platform={platform}
       />
     )
   }
