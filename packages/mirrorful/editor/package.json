@@ -12,7 +12,8 @@
     "build": "next build",
     "next-start": "../node_modules/.bin/next start",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint --ext .ts,.tsx src",
+    "lint:fix": "eslint --fix --ext .ts,.tsx src"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.17",
