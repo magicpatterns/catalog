@@ -117,7 +117,7 @@ function PackageModalBody({ primaryName }: { primaryName: string }) {
         <Link
           isExternal
           color="blue.500"
-          href="https://github.com/Mirrorful/mirrorful"
+          href="https://mirrorful.com/docs/home/export-formats"
         >
           documentation here.
         </Link>
@@ -137,7 +137,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
         <Link
           isExternal
           color="blue.500"
-          href="https://github.com/Mirrorful/mirrorful"
+          href="https://mirrorful.com/docs/home/export-formats"
         >
           documentation here.
         </Link>
