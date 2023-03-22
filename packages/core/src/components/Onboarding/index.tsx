@@ -1,12 +1,14 @@
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { useState } from 'react'
 import {
-  TColorData,
-  TExportFileType,
   defaultFiles,
   defaultTypography,
+  TColorData,
   TConfig,
+  TExportFileType,
 } from '@core/types'
+import { useState } from 'react'
+
+import { TPlatform } from '../Dashboard'
 import { OnboardingContainer } from './OnboardingContainer'
 import { ExportSettings } from './pages/ExportSettings'
 import { ImportInstructions } from './pages/ImportInstructions'
@@ -15,7 +17,6 @@ import { OtherColors } from './pages/OtherColors'
 import { PickPrimary } from './pages/PickPrimary'
 import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
-import { TPlatform } from '../Dashboard'
 
 export function Onboarding({
   postStoreData,

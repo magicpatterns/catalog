@@ -1,17 +1,17 @@
 import {
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  Flex,
+  Heading,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
-  CheckboxGroup,
-  Checkbox,
-  Heading,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   VStack,
-  Flex,
 } from '@chakra-ui/react'
 // import { defaultFiles } from 'store/migrations'
 import { TExportFileType } from '@core/types'

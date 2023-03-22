@@ -1,17 +1,18 @@
-import { Box, useDisclosure, ChakraProvider } from '@chakra-ui/react'
-import { Sidebar } from './Sidebar'
-import { useState, useEffect } from 'react'
+import { Box, useDisclosure } from '@chakra-ui/react'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
+import { ExportSettingsModal } from '@core/components/ExportSettingsModal'
+import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
+import { Onboarding } from '@core/components/Onboarding'
+import { TypographySection } from '@core/components/Typography/TypographySection'
 import {
   TColorData,
   TConfig,
   TExportFileType,
   TTypographyData,
 } from '@core/types'
-import { Onboarding } from '@core/components/Onboarding'
-import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
-import { TypographySection } from '@core/components/Typography/TypographySection'
-import { ExportSettingsModal } from '@core/components/ExportSettingsModal'
+import { useEffect, useState } from 'react'
+
+import { Sidebar } from './Sidebar'
 
 export type TPlatform = 'package' | 'web'
 

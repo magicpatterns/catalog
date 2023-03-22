@@ -1,13 +1,6 @@
-import {
-  Box,
-  Heading,
-  Text,
-  Divider,
-  Stack,
-  Button,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { Box, Button, Heading, Stack, useDisclosure } from '@chakra-ui/react'
 import { TFontSizeVariant } from '@core/types'
+
 import { EditFontSizeModal } from './EditFontSizeModal'
 import { FontSizeRow } from './FontSizeRow'
 export function FontSizesSection({

@@ -1,20 +1,21 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import {
   Box,
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  Heading,
   Stack,
   Text,
-  Heading,
-  Button,
-  CheckboxGroup,
   VStack,
-  Checkbox,
 } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { defaultFiles, TExportFileType } from '@core/types'
-import tinycolor from 'tinycolor2'
-import { getExportFileTypeName } from '@core/utils/getExportFileTypeString'
-import { getNumberOfStepsInOnboardingFlow } from '../constants'
 import { TPlatform } from '@core/components/Dashboard'
+import { defaultFiles, TExportFileType } from '@core/types'
+import { getExportFileTypeName } from '@core/utils/getExportFileTypeString'
+import tinycolor from 'tinycolor2'
+
+import { getNumberOfStepsInOnboardingFlow } from '../constants'
 
 export function ExportSettings({
   primaryColor,

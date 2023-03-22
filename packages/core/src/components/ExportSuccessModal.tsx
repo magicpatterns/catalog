@@ -1,22 +1,22 @@
 import {
+  Box,
+  Button,
+  Code,
+  Icon,
+  Link,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Text,
-  Button,
-  Box,
-  Icon,
-  Code,
-  Tabs,
-  TabList,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Tab,
-  TabPanels,
+  TabList,
   TabPanel,
-  Link,
+  TabPanels,
+  Tabs,
+  Text,
 } from '@chakra-ui/react'
 import { toCjs } from '@core/translators/toCjs'
 import { toCss } from '@core/translators/toCss'
@@ -25,6 +25,7 @@ import { toJson } from '@core/translators/toJson'
 import { toScss } from '@core/translators/toScss'
 import { TTokens } from '@core/types'
 import { FiCheckCircle } from 'react-icons/fi'
+
 import { CodePreview } from './CodePreview'
 import { TPlatform } from './Dashboard'
 
