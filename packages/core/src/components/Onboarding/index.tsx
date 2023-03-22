@@ -104,7 +104,10 @@ export function Onboarding({
         primaryName={primaryName}
         onUpdatePage={setPage}
         platform={platform}
-        onFinish={onFinishOnboarding}
+        onFinish={() => {
+          handleExport(primaryColor, primaryName, palette)
+          onFinishOnboarding()
+        }}
       />
     )
   } else if (page === 5) {
