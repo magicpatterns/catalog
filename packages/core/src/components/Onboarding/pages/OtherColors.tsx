@@ -113,7 +113,10 @@ export function OtherColors({
               onUpdatePalette(palette)
 
               if (platform === 'web') {
-                onFinish()
+                // HACK(teddy): This is a hack to make sure that values are updated into the store on web.
+                setTimeout(() => {
+                  onFinish()
+                }, 500)
               } else {
                 onUpdatePage(5)
               }
