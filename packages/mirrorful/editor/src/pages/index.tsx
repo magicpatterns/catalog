@@ -19,7 +19,7 @@ export default function Editor() {
         })
         .catch(() => {
           if (navigator.onLine) {
-            setHasShutDown(() => true)
+            setHasShutDown(true)
             counter.current = true
           }
         })
