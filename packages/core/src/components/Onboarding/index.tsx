@@ -99,13 +99,16 @@ export function Onboarding({
             }
           })
           setPalette(newPalette)
+
+          if (platform === 'web') {
+            handleExport(primaryColor, primaryName, newPalette)
+          }
         }}
         primaryColor={primaryColor}
         primaryName={primaryName}
         onUpdatePage={setPage}
         platform={platform}
         onFinish={() => {
-          handleExport(primaryColor, primaryName, palette)
           onFinishOnboarding()
         }}
       />
