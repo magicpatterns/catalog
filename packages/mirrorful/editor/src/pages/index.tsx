@@ -2,37 +2,36 @@ import { Dashboard } from '@mirrorful/core/lib/components/Dashboard'
 import ServerEndedMessage from '@mirrorful/core/lib/components/ServerEndedMessage'
 import { TConfig } from '@mirrorful/core/lib/types'
 import Head from 'next/head'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Editor() {
   const [hasShutDown, setHasShutDown] = useState(false)
-  const counter = useRef<boolean>(false)
+  const PORT = 5050
+  const URL = 'http://localhost'
   useEffect(() => {
     function pollForServerEndCheck() {
-      fetch('http://localhost:5050/api/longPoll', { keepalive: true })
+      fetch(`${URL}:${PORT}/api/longPoll`, { keepalive: true })
         .then((res) => res.text())
         .then((res) => {
           if (res === 'exiting') {
             setHasShutDown(true)
-            counter.current = true
           }
         })
         .catch(() => {
           if (navigator.onLine) {
             setHasShutDown(true)
-            counter.current = true
           }
         })
         .finally(() => {
-          if (!counter.current) {
+          if (!hasShutDown) {
             pollForServerEndCheck()
           }
         })
     }
-    if (!counter.current) {
+    if (!hasShutDown) {
       pollForServerEndCheck()
     }
-  }, [hasShutDown, counter])
+  }, [hasShutDown])
   return (
     <>
       <Head>
@@ -44,8 +43,9 @@ export default function Editor() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {
-        hasShutDown ? <ServerEndedMessage /> :
+      {hasShutDown ? (
+        <ServerEndedMessage />
+      ) : (
         <Dashboard
           fetchStoreData={async () => {
             const response = await fetch('/api/config')
@@ -60,7 +60,7 @@ export default function Editor() {
             })
           }}
         />
-       }
+      )}
     </>
   )
 }
