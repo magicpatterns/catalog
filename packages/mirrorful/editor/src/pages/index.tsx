@@ -2,10 +2,11 @@ import { Dashboard } from '@mirrorful/core/lib/components/Dashboard'
 import ServerEndedMessage from '@mirrorful/core/lib/components/ServerEndedMessage'
 import { TConfig } from '@mirrorful/core/lib/types'
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export default function Editor() {
   const [hasShutDown, setHasShutDown] = useState(false)
+  const isShuttingDown = useRef<boolean>(false) // need this to keep it from rerendering
   const PORT = 5050
   const URL = 'http://localhost'
   useEffect(() => {
@@ -15,20 +16,22 @@ export default function Editor() {
         .then((res) => {
           if (res === 'exiting') {
             setHasShutDown(true)
+            isShuttingDown.current = true
           }
         })
         .catch(() => {
           if (navigator.onLine) {
             setHasShutDown(true)
+            isShuttingDown.current = true
           }
         })
         .finally(() => {
-          if (!hasShutDown) {
+          if (!isShuttingDown.current) {
             pollForServerEndCheck()
           }
         })
     }
-    if (!hasShutDown) {
+    if (!isShuttingDown.current) {
       pollForServerEndCheck()
     }
   }, [hasShutDown])
