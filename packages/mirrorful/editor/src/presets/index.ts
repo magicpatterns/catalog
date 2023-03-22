@@ -6,6 +6,7 @@ import fs from 'fs'
 // thanks to https://www.colorcombos.com
 // thanks to https://optemization.com/notion-color-guide
 // thanks to https://www.color-hex.com/
+// thanks to https://inkbotdesign.com/stunning-colour-palettes/
 export type IPresets =
   | 'apple'
   | 'discord'
