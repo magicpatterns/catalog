@@ -1,5 +1,5 @@
-import { Box, Center, Text, Button, Flex } from '@chakra-ui/react'
 import { AddIcon } from '@chakra-ui/icons'
+import { Button, Flex, Text } from '@chakra-ui/react'
 
 export function ColorVariantPlaceholder({ onClick }: { onClick: () => void }) {
   return (

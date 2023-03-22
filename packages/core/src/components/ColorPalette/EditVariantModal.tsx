@@ -1,26 +1,26 @@
 import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
-  FormControl,
-  Input,
-  FormLabel,
-  Box,
-  Checkbox,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Text,
 } from '@chakra-ui/react'
-import { useState, useEffect } from 'react'
-import tinycolor from 'tinycolor2'
+import { useDisclosure } from '@chakra-ui/react'
+import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TColorVariant } from '@core/types'
+import { useEffect, useState } from 'react'
+
 import { ColorPicker } from './ColorPicker'
 import { handleInvalidColor } from './utils'
-import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { useDisclosure } from '@chakra-ui/react'
 
 export function EditVariantModal({
   isOpen,
@@ -162,7 +162,7 @@ export function EditVariantModal({
                 }}
               >
                 <ColorPicker
-                  onChange={(colorPickerColor, event) => {
+                  onChange={(colorPickerColor) => {
                     setVariant({ ...variant, color: colorPickerColor.hex })
                   }}
                   colorPickerColor={variant.color}

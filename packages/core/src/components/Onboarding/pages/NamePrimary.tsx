@@ -1,21 +1,24 @@
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Input, Stack, Text } from '@chakra-ui/react'
-import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
+import { TPlatform } from '@core/components/Dashboard'
 import { useState } from 'react'
 import tinycolor from 'tinycolor2'
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-import { NUMBER_OF_STEPS_IN_NEW_FLOW } from '../constants'
+
+import { getNumberOfStepsInOnboardingFlow } from '../constants'
 
 export function NamePrimary({
   initialName,
   onUpdatePage,
   primaryColor,
   onUpdatePrimaryName,
+  platform,
 }: {
   initialName: string
   onUpdatePage: (page: number) => void
   primaryColor: string
   onUpdatePrimaryName: (newName: string) => void
+  platform: TPlatform
 }) {
   const [error, setError] = useState<string | null>(null)
   const [name, setName] = useState<string>(initialName)
@@ -42,7 +45,7 @@ export function NamePrimary({
               of
             </Text>
             <Text color="gray.500" fontWeight="black" fontSize={18}>
-              {NUMBER_OF_STEPS_IN_NEW_FLOW}
+              {getNumberOfStepsInOnboardingFlow(platform)}
             </Text>
           </Stack>
 

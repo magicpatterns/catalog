@@ -6,7 +6,9 @@
     "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"cp package.json lib\")",
     "release:patch": "yarn build && cp package.json lib && npm version patch && npm publish ./lib;",
     "release:minor": "yarn build && cp package.json lib && npm version minor && npm publish ./lib;",
-    "release:major": "yarn build && cp package.json lib && npm version major && npm publish ./lib;"
+    "release:major": "yarn build && cp package.json lib && npm version major && npm publish ./lib;",
+    "lint": "eslint --ext .ts,.tsx src",
+    "lint:fix": "eslint --fix --ext .ts,.tsx src"
   },
   "publishConfig": {
     "access": "public",
@@ -33,11 +35,18 @@
     "typescript": "^4.9.5"
   },
   "devDependencies": {
+    "@mirrorful/eslint-config": "file:../eslint-config",
     "@types/node": "^18.15.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/tinycolor2": "^1.4.3",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
     "concurrently": "^7.6.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.4",
     "tsc-alias": "^1.8.3"
   }

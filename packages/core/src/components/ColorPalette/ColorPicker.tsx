@@ -1,6 +1,5 @@
-import React from 'react'
-import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
 import { Box } from '@chakra-ui/react'
+import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
 
 export function ColorPicker({
   colorPickerColor,
@@ -9,7 +8,10 @@ export function ColorPicker({
 }: {
   presetColors: string[]
   colorPickerColor: Color
-  onChange: (colorPickerColor: ColorResult, event: any) => void
+  onChange: (
+    colorPickerColor: ColorResult,
+    event: React.MouseEvent<Element, MouseEvent> | undefined
+  ) => void
 }) {
   return (
     <Box

@@ -1,6 +1,8 @@
 import tinycolor from 'tinycolor2'
+
 import { VALID_CSS_COLORS } from './validCssColors'
 
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 export const newShade = (hexColor: string, magnitude: number) => {
   hexColor = hexColor.replace(`#`, ``)
   if (hexColor.length === 6) {
@@ -19,12 +21,11 @@ export const newShade = (hexColor: string, magnitude: number) => {
     return hexColor
   }
 }
+/* eslint-enable @typescript-eslint/no-unused-expressions */
 
 const scaleDiff = 6
 
 export const generateDefaultColorShades = (primary: string) => {
-  const tc = tinycolor(primary)
-
   return {
     50: tinycolor(primary)
       .lighten(scaleDiff * 5)
@@ -81,8 +82,8 @@ export const handleInvalidColor = (input: string) => {
   // Check if input is a valid subset of a hexcode
   const validSubsetRegex = /^#?[0-9A-Fa-f]{0,6}$/ // regex to validate if input is a valid subset of a hexcode
 
-  let randomHex: String = ''
-  for (let i: number = 0; i < 6; i++) {
+  let randomHex = ''
+  for (let i = 0; i < 6; i++) {
     randomHex += Math.floor(Math.random() * 16).toString(16) // Generate six random hex digits.
   }
 

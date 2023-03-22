@@ -12,11 +12,7 @@
       "version": "detect"
     }
   },
-  "extends": [
-    "@mirrorful/eslint-config",
-    "plugin:react/recommended",
-    "next/core-web-vitals"
-  ],
+  "extends": ["@mirrorful/eslint-config", "plugin:react/recommended"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/display-name": "off",
