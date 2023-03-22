@@ -13,7 +13,7 @@ export default function Editor() {
         .then((res) => res.text())
         .then((res) => {
           if (res === 'exiting') {
-            setHasShutDown(() => true)
+            setHasShutDown(true)
             counter.current = true
           }
         })
