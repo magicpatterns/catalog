@@ -12,6 +12,7 @@ export default function Home() {
 
   return (
     <Dashboard
+      platform="web"
       fetchStoreData={async () => {
         return data
       }}
