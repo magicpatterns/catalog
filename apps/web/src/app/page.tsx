@@ -1,7 +1,7 @@
 'use client'
 
 import { Dashboard } from '@mirrorful/core/components/Dashboard'
-import { TConfig, defaultConfig } from '@mirrorful/core/types'
+import { defaultConfig, TConfig } from '@mirrorful/core/types'
 import { useLocalStorage } from '@web/hooks/useLocalStorage'
 import Head from 'next/head'
 
