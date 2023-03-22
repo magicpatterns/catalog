@@ -96,7 +96,7 @@ Después de configurar tu editor, puedes exportarlo para usarlo en tu aplicació
 
 Actualmente exportamos los siguientes tipos de archivos: `.js`, `.ts`, `.css`, `.scss`, `.json`
 
-**Using CSS Variables**
+**Usando variables de CSS**
 
 Ejemplo:
 
