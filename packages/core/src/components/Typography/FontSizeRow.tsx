@@ -78,7 +78,7 @@ export function FontSizeRow({
           css={{
             fontSize: normalizeFontSize(fontSizeData),
             fontWeight: isFontSizeTooLarge(fontSizeData) ? 'bold' : '',
-            width: 700,
+            width: '100%',
           }}
         >
           {isFontSizeTooLarge(fontSizeData)
