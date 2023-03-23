@@ -1,6 +1,7 @@
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import {
   defaultFiles,
+  defaultShadows,
   defaultTypography,
   TColorData,
   TConfig,
@@ -49,7 +50,11 @@ export function Onboarding({
     ]
 
     await postStoreData({
-      tokens: { colorData: colors, typography: defaultTypography },
+      tokens: {
+        colorData: colors,
+        typography: defaultTypography,
+        shadows: defaultShadows,
+      },
       files: fileTypes,
     })
   }

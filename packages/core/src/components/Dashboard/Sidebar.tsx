@@ -7,7 +7,9 @@ import {
   FiFolder,
   FiGithub,
   FiGrid,
+  FiLayers,
   FiSettings,
+  FiTarget,
   FiUnderline,
 } from 'react-icons/fi'
 
@@ -133,7 +135,7 @@ export function Sidebar({
           }}
         >
           <Box>
-            <SidebarHeader label="Tokens" />
+            <SidebarHeader label="Primatives" />
             <Stack spacing={'24px'} css={{ marginTop: '24px' }}>
               <SidebarSection
                 label="Colors"
@@ -146,6 +148,12 @@ export function Sidebar({
                 icon={FiUnderline}
                 isActive={activeTab === 'typography'}
                 onSelect={() => onSelectTab('typography')}
+              />
+              <SidebarSection
+                label="Shadows"
+                icon={FiLayers}
+                isActive={activeTab === 'shadows'}
+                onSelect={() => onSelectTab('shadows')}
               />
               <SidebarSection label="Spacing" icon={FiGrid} isComingSoon />
             </Stack>
