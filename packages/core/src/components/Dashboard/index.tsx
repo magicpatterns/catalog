@@ -5,18 +5,21 @@ import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
 import { Onboarding } from '@core/components/Onboarding'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import {
+  defaultShadows,
   TColorData,
   TConfig,
   TExportFileType,
+  TShadowData,
   TTypographyData,
 } from '@core/types'
 import { useEffect, useState } from 'react'
 
+import { ShadowsSection } from '../Shadows/ShadowsSection'
 import { Sidebar } from './Sidebar'
 
 export type TPlatform = 'package' | 'web'
 
-export type TTab = 'colors' | 'typography'
+export type TTab = 'colors' | 'typography' | 'shadows'
 
 export function Dashboard({
   fetchStoreData,
@@ -27,7 +30,7 @@ export function Dashboard({
   postStoreData: (data: TConfig) => Promise<void>
   platform?: TPlatform
 }) {
-  const [tab, setTab] = useState<'colors' | 'typography'>('colors')
+  const [tab, setTab] = useState<TTab>('colors')
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
     useState<boolean>(false)
 
@@ -36,6 +39,7 @@ export function Dashboard({
   const [typography, setTypography] = useState<TTypographyData>({
     fontSizes: [],
   })
+  const [shadows, setShadows] = useState<TShadowData[]>([])
   const [fileTypes, setFileTypes] = useState<TExportFileType[]>([])
 
   const {
@@ -65,6 +69,7 @@ export function Dashboard({
 
       setColors(data.tokens.colorData ?? [])
       setTypography(data.tokens.typography)
+      setShadows(data.tokens.shadows ?? defaultShadows)
       setFileTypes(data.files)
     }
 
@@ -73,7 +78,7 @@ export function Dashboard({
 
   const handleExport = async () => {
     await postStoreData({
-      tokens: { colorData: colors, typography },
+      tokens: { colorData: colors, typography, shadows },
       files: fileTypes,
     })
 
@@ -86,6 +91,7 @@ export function Dashboard({
       tokens: {
         typography,
         colorData: data,
+        shadows,
       },
       files: fileTypes,
     })
@@ -94,7 +100,15 @@ export function Dashboard({
   const handleUpdateTypography = async (data: TTypographyData) => {
     setTypography(data)
     await postStoreData({
-      tokens: { colorData: colors, typography: data },
+      tokens: { colorData: colors, typography: data, shadows },
+      files: fileTypes,
+    })
+  }
+
+  const handleUpdateShadows = async (data: TShadowData[]) => {
+    setShadows(data)
+    await postStoreData({
+      tokens: { colorData: colors, typography, shadows: data },
       files: fileTypes,
     })
   }
@@ -139,13 +153,19 @@ export function Dashboard({
             onUpdateTypography={handleUpdateTypography}
           />
         )}
+        {tab === 'shadows' && (
+          <ShadowsSection
+            shadows={shadows}
+            onUpdateShadowData={handleUpdateShadows}
+          />
+        )}
       </Box>
       <ExportSuccessModal
         platform={platform}
         primaryName={colors && colors[0] ? colors[0].name : 'primary'}
         isOpen={isExportSuccessModalOpen}
         onClose={onExportSuccessModalClose}
-        tokens={{ colorData: colors, typography }}
+        tokens={{ colorData: colors, typography, shadows }}
       />
       {platform === 'package' && (
         <ExportSettingsModal
