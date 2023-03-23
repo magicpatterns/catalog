@@ -27,7 +27,7 @@ export function Dashboard({
   postStoreData: (data: TConfig) => Promise<void>
   platform?: TPlatform
 }) {
-  const [tab, setTab] = useState<'colors' | 'typography'>('colors')
+  const [tab, setTab] = useState<TTab>('colors')
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
     useState<boolean>(false)
 
@@ -124,9 +124,7 @@ export function Dashboard({
         />
       </Box>
       <Box css={{ minWidth: '300px' }} />
-      <Box
-        css={{ flexGrow: 1, backgroundColor: 'white', padding: '64px 128px' }}
-      >
+      <Box css={{ backgroundColor: 'white', padding: '64px 128px' }}>
         {tab === 'colors' && (
           <ColorPaletteSection
             colors={colors}
