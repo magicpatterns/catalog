@@ -1279,6 +1279,9 @@
     tinycolor2 "^1.6.0"
     typescript "^4.9.5"
 
+"@mirrorful/eslint-config@file:../../eslint-config":
+  version "1.0.0"
+
 "@next/env@13.2.4":
   version "13.2.4"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-13.2.4.tgz#8b763700262b2445140a44a8c8d088cef676dbae"
