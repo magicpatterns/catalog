@@ -135,7 +135,7 @@ export function Sidebar({
           }}
         >
           <Box>
-            <SidebarHeader label="Primatives" />
+            <SidebarHeader label="Primitives" />
             <Stack spacing={'24px'} css={{ marginTop: '24px' }}>
               <SidebarSection
                 label="Colors"
