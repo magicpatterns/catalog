@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img width="300" src="./assets/logo-light-mode.png" alt="Mirrorful">
+  <img width="300" src="../assets/logo-light-mode.png" alt="Mirrorful">
 </h1>
 <p align="center">
   <p align="center">Create the building blocks of your app with Mirrorful: a simple, open-source design system framework.</p>
