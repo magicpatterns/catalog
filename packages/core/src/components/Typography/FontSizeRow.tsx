@@ -51,7 +51,7 @@ export function FontSizeRow({
   } = useDisclosure()
 
   return (
-    <Box css={{ width: '60vw' }}>
+    <Box>
       <Stack
         css={{ alignItems: 'center', width: '100%' }}
         spacing={8}

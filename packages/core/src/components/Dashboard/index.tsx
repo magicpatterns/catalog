@@ -114,7 +114,7 @@ export function Dashboard({
 
   return (
     <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
-      <Box>
+      <Box css={{ width: '300px', position: 'fixed' }}>
         <Sidebar
           platform={platform}
           activeTab={tab}
@@ -123,7 +123,7 @@ export function Dashboard({
           onExport={handleExport}
         />
       </Box>
-      <Box />
+      <Box css={{ width: '300px' }} />
       <Box
         css={{ flexGrow: 1, backgroundColor: 'white', padding: '64px 128px' }}
       >
