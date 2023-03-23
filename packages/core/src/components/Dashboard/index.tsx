@@ -123,7 +123,7 @@ export function Dashboard({
           onExport={handleExport}
         />
       </Box>
-      <Box css={{ width: '300px' }} />
+      <Box css={{ minWidth: '300px' }} />
       <Box
         css={{ flexGrow: 1, backgroundColor: 'white', padding: '64px 128px' }}
       >
