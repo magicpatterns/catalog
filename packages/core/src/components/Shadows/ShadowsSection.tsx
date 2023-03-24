@@ -114,7 +114,7 @@ export function ShadowsSection({
 
   return (
     <Box>
-      <Heading fontSize={'3rem'} fontWeight="black">
+      <Heading fontSize={'2.5rem'} fontWeight="black">
         Shadows
       </Heading>
       <Text
