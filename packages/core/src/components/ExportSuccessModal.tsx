@@ -18,6 +18,7 @@ import {
   Tabs,
   Text,
 } from '@chakra-ui/react'
+import { sanitizeName } from '@core/translators/sanitizeName'
 import { toCjs } from '@core/translators/toCjs'
 import { toCss } from '@core/translators/toCss'
 import { toJs } from '@core/translators/toJs'
@@ -61,7 +62,15 @@ function PackageModalBody({ primaryName }: { primaryName: string }) {
             <CodePreview
               language="css"
               textClass="code-snippet"
-              text={`.${primaryName.toLowerCase()}-button {\n    background-color: var(--color-${primaryName.toLowerCase()});\n}\n\n.${primaryName.toLowerCase()}-button:hover {\n    background-color: var(--color-${primaryName.toLowerCase()}-hover);\n}`}
+              text={`.${sanitizeName(
+                primaryName
+              )}-button {\n    background-color: var(--color-${sanitizeName(
+                primaryName
+              )});\n}\n\n.${sanitizeName(
+                primaryName
+              )}-button:hover {\n    background-color: var(--color-${sanitizeName(
+                primaryName
+              )}-300);\n}`}
             />
           </TabPanel>
           <TabPanel>
@@ -84,7 +93,9 @@ function PackageModalBody({ primaryName }: { primaryName: string }) {
             <CodePreview
               language="javascript"
               textClass="code-snippet"
-              text={`<button\n   style={{ backgroundColor: Tokens.colors.${primaryName.toLowerCase()}.base }}\n> Click here\n</button>`}
+              text={`<button\n   style={{ backgroundColor: Tokens.colors.${sanitizeName(
+                primaryName
+              )}.base }}\n> Click here\n</button>`}
             />
           </TabPanel>
           <TabPanel>
