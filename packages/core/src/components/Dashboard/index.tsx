@@ -139,7 +139,12 @@ export function Dashboard({
       </Box>
       <Box css={{ minWidth: '300px' }} />
       <Box
-        css={{ backgroundColor: 'white', padding: '64px 128px', flexGrow: 1 }}
+        css={{ backgroundColor: 'white', flexGrow: 1 }}
+        padding={{
+          base: '24px 48px',
+          md: '36px 72px',
+          lg: '48px 96px',
+        }}
       >
         {tab === 'colors' && (
           <ColorPaletteSection

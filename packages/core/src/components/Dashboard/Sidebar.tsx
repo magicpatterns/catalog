@@ -1,4 +1,5 @@
 import { Badge, Box, Icon, Stack, Text } from '@chakra-ui/react'
+import { VERSION } from '@core/utils/constants'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
 import {
@@ -197,22 +198,32 @@ export function Sidebar({
             )}
           </SidebarSection>
 
-          <SidebarSection header={<SidebarHeader label="Resources" />}>
-            <SidebarLink
-              label="Documentation"
-              icon={FiBookOpen}
-              onSelect={() =>
-                window.open('https://mirrorful.com/docs', '_blank')
-              }
-            />
-            <SidebarLink
-              label="Github"
-              icon={FiGithub}
-              onSelect={() =>
-                window.open('https://github.com/Mirrorful/mirrorful', '_blank')
-              }
-            />
-          </SidebarSection>
+          <Box>
+            <SidebarSection header={<SidebarHeader label="Resources" />}>
+              <SidebarLink
+                label="Documentation"
+                icon={FiBookOpen}
+                onSelect={() =>
+                  window.open('https://mirrorful.com/docs', '_blank')
+                }
+              />
+              <SidebarLink
+                label="Github"
+                icon={FiGithub}
+                onSelect={() =>
+                  window.open(
+                    'https://github.com/Mirrorful/mirrorful',
+                    '_blank'
+                  )
+                }
+              />
+            </SidebarSection>
+            <Box css={{ marginTop: '32px' }}>
+              <Text fontWeight="bold" color="gray.400">
+                {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
+              </Text>
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Box>
