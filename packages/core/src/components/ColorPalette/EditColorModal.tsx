@@ -58,20 +58,17 @@ export function EditColorModal({
   }
 
   const handleClose = () => {
-
     // Check for blank / missing color name
 
     if (!name) {
       setError('Please enter a variable name.')
       return
     }
-
-    // Check for blank / missing color 
+    // Check for blank / missing color
     if (!base) {
       setError('Please enter a base color.')
       return
     }
-
     onBaseBlur()
     onClose({
       name,
@@ -122,7 +119,7 @@ export function EditColorModal({
                 value={name}
                 onChange={(e) => {
                   setName(e.target.value)
-                  if(error)  setError(null)
+                  if (error) setError(null)
                 }}
                 onFocus={() => {
                   setShowBaseColorPicker(true)
@@ -133,15 +130,15 @@ export function EditColorModal({
                   }
                 }}
               />
-               {error && !name && (
-              <Text
-                css={{ alignSelf: 'flex-start', marginTop: '8px' }}
-                color="red.400"
-                fontWeight="medium"
-              >
-                {error}
-              </Text>
-            )}
+              {error && !name && (
+                <Text
+                  css={{ alignSelf: 'flex-start', marginTop: '8px' }}
+                  color="red.400"
+                  fontWeight="medium"
+                >
+                  {error}
+                </Text>
+              )}
             </FormControl>
             <FormControl>
               <FormLabel>
@@ -162,7 +159,7 @@ export function EditColorModal({
                 onChange={(e) => {
                   setColorPickerColor(e.target.value)
                   setBase(e.target.value)
-                  if(error)  setError(null)
+                  if (error) setError(null)
                 }}
                 onBlur={onBaseBlur}
                 onFocus={(e) => {
@@ -175,15 +172,15 @@ export function EditColorModal({
                   }
                 }}
               />
-               {(error && name)&& (
-              <Text
-                css={{ alignSelf: 'flex-start', marginTop: '8px' }}
-                color="red.400"
-                fontWeight="medium"
-              >
-                {error}
-              </Text>
-            )}
+              {error && name && (
+                <Text
+                  css={{ alignSelf: 'flex-start', marginTop: '8px' }}
+                  color="red.400"
+                  fontWeight="medium"
+                >
+                  {error}
+                </Text>
+              )}
             </FormControl>
             {!initialColorData || base !== initialColorData.baseColor ? (
               <FormControl>

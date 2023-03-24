@@ -9,7 +9,6 @@ import {
   FiGrid,
   FiLayers,
   FiSettings,
-  FiTarget,
   FiUnderline,
 } from 'react-icons/fi'
 
