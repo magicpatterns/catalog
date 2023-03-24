@@ -1,6 +1,6 @@
 {
   "name": "@mirrorful/core",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && cp package.json lib",
     "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"cp package.json lib\")",

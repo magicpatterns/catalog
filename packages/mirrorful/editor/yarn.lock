@@ -1259,10 +1259,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@mirrorful/core@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-1.0.3.tgz#64a2798a6b2a16566f4bd96574200f464a904cf3"
-  integrity sha512-6R4SEKdnKmyxztxNI4kjJxsKRX7ER0XcYfDQzuTwKefUVRrDB4FyQxQJpkD532kdB4XKptbeOruBwn748FtbtQ==
+"@mirrorful/core@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-1.0.4.tgz#ca878fa2fe86d9b0cc12565539aad37884c1d90e"
+  integrity sha512-1ll4fqaxllqPvbSEPquOjQLPFSnmxeot/uTQuNQek5TLuechGhuw4C4KVwG+sjO83BHqGhLgfY81gHQUNbeVVQ==
   dependencies:
     "@chakra-ui/icons" "^2.0.17"
     "@chakra-ui/react" "^2.5.2"
