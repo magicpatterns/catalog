@@ -12,7 +12,7 @@ export function TypographySection({
 }) {
   return (
     <Box>
-      <Heading fontSize={'3rem'} fontWeight="black">
+      <Heading fontSize={'2.5rem'} fontWeight="black">
         Typography
       </Heading>
       <Text
