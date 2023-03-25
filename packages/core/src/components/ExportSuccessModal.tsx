@@ -331,13 +331,13 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
 
 export function ExportSuccessModal({
   platform,
-  primaryName,
+  // primaryName,
   isOpen,
   onClose,
   tokens,
 }: {
   platform: TPlatform
-  primaryName: string
+  // primaryName: string
   isOpen: boolean
   onClose: () => void
   tokens: TTokens
