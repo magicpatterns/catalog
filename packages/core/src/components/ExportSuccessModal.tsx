@@ -171,7 +171,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
           color="blue.500"
           href="https://mirrorful.com/docs/home/examples"
         >
-          examples here.
+          example projects here.
         </Link>
       </Text>
       <Box css={{ marginTop: '16px' }}>
