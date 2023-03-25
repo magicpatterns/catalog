@@ -2,7 +2,7 @@ import { Dashboard } from '@mirrorful/core/lib/components/Dashboard'
 import ServerEndedMessage from '@mirrorful/core/lib/components/ServerEndedMessage'
 import { TConfig } from '@mirrorful/core/lib/types'
 import Head from 'next/head'
-import { useState, useRef, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Editor() {
   const [hasShutDown, setHasShutDown] = useState(false)
