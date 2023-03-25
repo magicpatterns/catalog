@@ -16,7 +16,10 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TShadowData } from '@core/types'
-import { useEffect, useState } from 'react'
+import { ColorResult } from '@hello-pangea/color-picker'
+import { MouseEvent, useEffect, useState } from 'react'
+
+import { ColorPicker } from './ColorPicker'
 
 export function EditShadowModal({
   isOpen,
@@ -90,6 +93,16 @@ export function EditShadowModal({
                   }
                 />
               </FormControl>
+              <ColorPicker
+                presetColors={[]}
+                colorPickerColor={''}
+                onChange={function (
+                  colorPickerColor: ColorResult,
+                  event: MouseEvent<Element, MouseEvent> | undefined
+                ): void {
+                  throw new Error('Function not implemented.')
+                }}
+              />
 
               <FormControl css={{ marginTop: '32px' }}>
                 <FormLabel>Variant Value</FormLabel>
