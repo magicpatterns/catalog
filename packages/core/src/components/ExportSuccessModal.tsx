@@ -187,8 +187,8 @@ function ColorsTab({ tabs, primaryName }: props) {
     </TabPanel>
   )
 }
-
-function TypographyTab({ tabs, primaryName }: props) {
+type typographyProps = { tabs: string[]; primaryName: string }
+function TypographyTab({ tabs, primaryName }: typographyProps) {
   return (
     <TabPanel>
       <Tabs>
@@ -219,13 +219,13 @@ function TypographyTab({ tabs, primaryName }: props) {
               textClass="code-snippet"
               text={`.${sanitizeName(
                 primaryName
-              )}-button {\n    background-color: var(--color-${sanitizeName(
+              )}-button {\n    font-size: var(--font-size-${sanitizeName(
                 primaryName
               )});\n}\n\n.${sanitizeName(
                 primaryName
-              )}-button:hover {\n    background-color: var(--color-${sanitizeName(
+              )}-button:hover {\n    font-size: var(--font-size-${sanitizeName(
                 primaryName
-              )}-300);\n}`}
+              )});\n}`}
             />
           </TabPanel>
           <TabPanel>
@@ -248,9 +248,9 @@ function TypographyTab({ tabs, primaryName }: props) {
             <CodePreview
               language="javascript"
               textClass="code-snippet"
-              text={`<button\n   style={{ backgroundColor: Tokens.colors.${sanitizeName(
+              text={`<button\n   style={{ fontSize: Tokens.fontSizes.${sanitizeName(
                 primaryName
-              )}.base }}\n> Click here\n</button>`}
+              )} }}\n> Click here\n</button>`}
             />
           </TabPanel>
           <TabPanel>
@@ -274,7 +274,7 @@ function TypographyTab({ tabs, primaryName }: props) {
             <CodePreview
               language="javascript"
               textClass="code-snippet"
-              text={`theme: {\n    extend: { colors: Tokens.colors } \n}`}
+              text={`theme: {\n    extend: { fontSize: Tokens.fontSizes } \n}`}
             />
           </TabPanel>
         </TabPanels>
