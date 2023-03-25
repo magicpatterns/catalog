@@ -350,7 +350,7 @@ function ShadowTab({ tabs, primaryName }: shadowProps) {
             <CodePreview
               language="javascript"
               textClass="code-snippet"
-              text={`<button\n   style={{ fontSize: Tokens.shadows.${sanitizeName(
+              text={`<button\n   style={{ boxShadow: Tokens.shadows.${sanitizeName(
                 primaryName
               )} }}\n> Click here\n</button>`}
             />
