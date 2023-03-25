@@ -321,11 +321,11 @@ function ShadowTab({ tabs, primaryName }: shadowProps) {
               textClass="code-snippet"
               text={`.${sanitizeName(
                 primaryName
-              )}-button {\n    font-size: var(--font-size-${sanitizeName(
+              )}-button {\n    box-shadow: var(--shadows-${sanitizeName(
                 primaryName
               )});\n}\n\n.${sanitizeName(
                 primaryName
-              )}-button:hover {\n    font-size: var(--font-size-${sanitizeName(
+              )}-button:hover {\n    box-shadow: var(--shadows-${sanitizeName(
                 primaryName
               )});\n}`}
             />
@@ -350,7 +350,7 @@ function ShadowTab({ tabs, primaryName }: shadowProps) {
             <CodePreview
               language="javascript"
               textClass="code-snippet"
-              text={`<button\n   style={{ fontSize: Tokens.fontSizes.${sanitizeName(
+              text={`<button\n   style={{ fontSize: Tokens.shadows.${sanitizeName(
                 primaryName
               )} }}\n> Click here\n</button>`}
             />
@@ -376,7 +376,7 @@ function ShadowTab({ tabs, primaryName }: shadowProps) {
             <CodePreview
               language="javascript"
               textClass="code-snippet"
-              text={`theme: {\n    extend: { fontSize: Tokens.fontSizes } \n}`}
+              text={`theme: {\n    extend: { dropShadow: Tokens.shadows } \n}`}
             />
           </TabPanel>
         </TabPanels>
