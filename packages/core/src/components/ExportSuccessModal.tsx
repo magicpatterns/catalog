@@ -55,6 +55,12 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
                 ? tokens.colorData[0].name
                 : 'primary'
             }
+            cssName="color"
+            cssPropertyName="background-color"
+            javascriptName="colors"
+            javascriptPropertyName="backgroundColor"
+            tailwindName="colors"
+            tailwindPropertyName="colors"
           />
           <TypographyTab
             tabs={innerTabs}
@@ -109,101 +115,8 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
   )
 }
 
-type props = { tabs: string[]; primaryName: string }
-
-function ColorsTab({ tabs, primaryName }: props) {
-  return (
-    <TabPanel>
-      <Tabs>
-        <TabList>
-          {tabs.map((tab) => {
-            return <Tab>{tab}</Tab>
-          })}
-        </TabList>
-
-        <TabPanels>
-          <TabPanel>
-            <Text css={{ marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-              <Code>theme.css</Code> (actual path may vary. You can reference
-              the <Code>.mirrorful</Code> folder in the root of your project)
-            </Text>
-            <CodePreview
-              language="javascript"
-              textClass="code-snippet"
-              text={`import './.mirrorful/theme.css'`}
-            />
-            <Text css={{ marginTop: 12, marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>2.</span> Your CSS Variables
-              can now be accessed anywhere in your app!
-            </Text>
-            <CodePreview
-              language="css"
-              textClass="code-snippet"
-              text={`.${sanitizeName(
-                primaryName
-              )}-button {\n    background-color: var(--color-${sanitizeName(
-                primaryName
-              )});\n}\n\n.${sanitizeName(
-                primaryName
-              )}-button:hover {\n    background-color: var(--color-${sanitizeName(
-                primaryName
-              )}-300);\n}`}
-            />
-          </TabPanel>
-          <TabPanel>
-            <Text css={{ marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-              <Code>Tokens</Code> (actual path may vary. You can reference the{' '}
-              <Code>.mirrorful</Code> folder in the root of your project)
-            </Text>
-
-            <CodePreview
-              language="javascript"
-              textClass="code-snippet"
-              text={`import { Tokens } from './.mirrorful/theme'`}
-            />
-
-            <Text css={{ marginTop: 12, marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>2.</span> Use your tokens
-              anywhere as constants!
-            </Text>
-            <CodePreview
-              language="javascript"
-              textClass="code-snippet"
-              text={`<button\n   style={{ backgroundColor: Tokens.colors.${sanitizeName(
-                primaryName
-              )}.base }}\n> Click here\n</button>`}
-            />
-          </TabPanel>
-          <TabPanel>
-            <Text css={{ marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-              <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code>{' '}
-              (actual path may vary. You can reference the{' '}
-              <Code>.mirrorful</Code> folder in the root of your project)
-            </Text>
-
-            <CodePreview
-              language="javascript"
-              textClass="code-snippet"
-              text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
-            />
-
-            <Text css={{ marginTop: 12, marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>2.</span> Extend the tailwind
-              theme.
-            </Text>
-            <CodePreview
-              language="javascript"
-              textClass="code-snippet"
-              text={`theme: {\n    extend: { colors: Tokens.colors } \n}`}
-            />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </TabPanel>
-  )
+function ColorsTab(props: displayTabsProps) {
+  return <DisplayTabs {...props}></DisplayTabs>
 }
 
 function TypographyTab(props: displayTabsProps) {
