@@ -64,7 +64,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
                 : 'sm'
             }
           />
-          <TypographyTab
+          <ShadowTab
             tabs={innerTabs}
             primaryName={
               tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
