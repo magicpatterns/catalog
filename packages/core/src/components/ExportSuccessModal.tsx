@@ -30,7 +30,7 @@ import { FiCheckCircle } from 'react-icons/fi'
 import { CodePreview } from './CodePreview'
 import { TPlatform } from './Dashboard'
 
-function PackageModalBody({ primaryName }: { primaryName: string }) {
+function PackageModalBody({ tokens }: { tokens: TTokens }) {
   const outerTabs = ['Colors', 'Typography', 'Shadows']
   const innerTabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
   return (
@@ -48,7 +48,14 @@ function PackageModalBody({ primaryName }: { primaryName: string }) {
           <Tab>Shadows</Tab> */}
         </TabList>
         <TabPanels>
-          <ColorsTab tabs={innerTabs} primaryName={primaryName} />
+          <ColorsTab
+            tabs={innerTabs}
+            primaryName={
+              tokens && tokens.colorData[0]
+                ? tokens.colorData[0].name
+                : 'primary'
+            }
+          />
         </TabPanels>
       </Tabs>
 
@@ -291,9 +298,7 @@ export function ExportSuccessModal({
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {platform === 'package' && (
-            <PackageModalBody primaryName={primaryName} />
-          )}
+          {platform === 'package' && <PackageModalBody tokens={tokens} />}
           {platform === 'web' && <WebModalBody tokens={tokens} />}
         </ModalBody>
 
