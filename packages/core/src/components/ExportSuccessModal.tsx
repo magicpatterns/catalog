@@ -64,6 +64,12 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
                 : 'sm'
             }
           />
+          <TypographyTab
+            tabs={innerTabs}
+            primaryName={
+              tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
+            }
+          />
         </TabPanels>
       </Tabs>
 
@@ -189,6 +195,102 @@ function ColorsTab({ tabs, primaryName }: props) {
 }
 type typographyProps = { tabs: string[]; primaryName: string }
 function TypographyTab({ tabs, primaryName }: typographyProps) {
+  return (
+    <TabPanel>
+      <Tabs>
+        <TabList>
+          {tabs.map((tab) => {
+            return <Tab>{tab}</Tab>
+          })}
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <Text css={{ marginBottom: 8 }}>
+              <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
+              <Code>theme.css</Code> (actual path may vary. You can reference
+              the <Code>.mirrorful</Code> folder in the root of your project)
+            </Text>
+            <CodePreview
+              language="javascript"
+              textClass="code-snippet"
+              text={`import './.mirrorful/theme.css'`}
+            />
+            <Text css={{ marginTop: 12, marginBottom: 8 }}>
+              <span style={{ fontWeight: 'bold' }}>2.</span> Your CSS Variables
+              can now be accessed anywhere in your app!
+            </Text>
+            <CodePreview
+              language="css"
+              textClass="code-snippet"
+              text={`.${sanitizeName(
+                primaryName
+              )}-button {\n    font-size: var(--font-size-${sanitizeName(
+                primaryName
+              )});\n}\n\n.${sanitizeName(
+                primaryName
+              )}-button:hover {\n    font-size: var(--font-size-${sanitizeName(
+                primaryName
+              )});\n}`}
+            />
+          </TabPanel>
+          <TabPanel>
+            <Text css={{ marginBottom: 8 }}>
+              <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
+              <Code>Tokens</Code> (actual path may vary. You can reference the{' '}
+              <Code>.mirrorful</Code> folder in the root of your project)
+            </Text>
+
+            <CodePreview
+              language="javascript"
+              textClass="code-snippet"
+              text={`import { Tokens } from './.mirrorful/theme'`}
+            />
+
+            <Text css={{ marginTop: 12, marginBottom: 8 }}>
+              <span style={{ fontWeight: 'bold' }}>2.</span> Use your tokens
+              anywhere as constants!
+            </Text>
+            <CodePreview
+              language="javascript"
+              textClass="code-snippet"
+              text={`<button\n   style={{ fontSize: Tokens.fontSizes.${sanitizeName(
+                primaryName
+              )} }}\n> Click here\n</button>`}
+            />
+          </TabPanel>
+          <TabPanel>
+            <Text css={{ marginBottom: 8 }}>
+              <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
+              <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code>{' '}
+              (actual path may vary. You can reference the{' '}
+              <Code>.mirrorful</Code> folder in the root of your project)
+            </Text>
+
+            <CodePreview
+              language="javascript"
+              textClass="code-snippet"
+              text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
+            />
+
+            <Text css={{ marginTop: 12, marginBottom: 8 }}>
+              <span style={{ fontWeight: 'bold' }}>2.</span> Extend the tailwind
+              theme.
+            </Text>
+            <CodePreview
+              language="javascript"
+              textClass="code-snippet"
+              text={`theme: {\n    extend: { fontSize: Tokens.fontSizes } \n}`}
+            />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </TabPanel>
+  )
+}
+
+type shadowProps = { tabs: string[]; primaryName: string }
+function ShadowTab({ tabs, primaryName }: shadowProps) {
   return (
     <TabPanel>
       <Tabs>
