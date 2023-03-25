@@ -81,7 +81,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             primaryName={
               tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
             }
-            cssName="shadows"
+            cssName="box-shadow"
             cssPropertyName="box-shadow"
             javascriptName="boxShadows"
             javascriptPropertyName="boxShadow"
