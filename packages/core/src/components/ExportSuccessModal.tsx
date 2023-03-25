@@ -83,9 +83,9 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             }
             cssName="shadows"
             cssPropertyName="box-shadow"
-            javascriptName="shadows"
+            javascriptName="boxShadows"
             javascriptPropertyName="boxShadow"
-            tailwindName="shadows"
+            tailwindName="boxShadows"
             tailwindPropertyName="dropShadow"
           />
         </TabPanels>
