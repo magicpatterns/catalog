@@ -69,6 +69,12 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             primaryName={
               tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
             }
+            cssName="shadows"
+            cssPropertyName="box-shadow"
+            javascriptName="shadows"
+            javascriptPropertyName="boxShadow"
+            tailwindName="shadows"
+            tailwindPropertyName="dropShadow"
           />
         </TabPanels>
       </Tabs>
@@ -289,8 +295,29 @@ function TypographyTab({ tabs, primaryName }: typographyProps) {
   )
 }
 
-type shadowProps = { tabs: string[]; primaryName: string }
-function ShadowTab({ tabs, primaryName }: shadowProps) {
+function ShadowTab(props: displayTabsProps) {
+  return <DisplayTabs {...props}></DisplayTabs>
+}
+type displayTabsProps = {
+  tabs: string[]
+  primaryName: string
+  cssPropertyName: string
+  cssName: string
+  javascriptPropertyName: string
+  javascriptName: string
+  tailwindPropertyName: string
+  tailwindName: string
+}
+function DisplayTabs({
+  tabs,
+  primaryName,
+  cssPropertyName,
+  cssName,
+  javascriptPropertyName,
+  javascriptName,
+  tailwindPropertyName,
+  tailwindName,
+}: displayTabsProps) {
   return (
     <TabPanel>
       <Tabs>
@@ -321,11 +348,11 @@ function ShadowTab({ tabs, primaryName }: shadowProps) {
               textClass="code-snippet"
               text={`.${sanitizeName(
                 primaryName
-              )}-button {\n    box-shadow: var(--shadows-${sanitizeName(
+              )}-button {\n    ${cssPropertyName}: var(--${cssName}-${sanitizeName(
                 primaryName
               )});\n}\n\n.${sanitizeName(
                 primaryName
-              )}-button:hover {\n    box-shadow: var(--shadows-${sanitizeName(
+              )}-button:hover {\n    ${cssPropertyName}: var(--${cssName}-${sanitizeName(
                 primaryName
               )});\n}`}
             />
@@ -350,7 +377,7 @@ function ShadowTab({ tabs, primaryName }: shadowProps) {
             <CodePreview
               language="javascript"
               textClass="code-snippet"
-              text={`<button\n   style={{ boxShadow: Tokens.shadows.${sanitizeName(
+              text={`<button\n   style={{ ${javascriptPropertyName}: Tokens.${javascriptName}.${sanitizeName(
                 primaryName
               )} }}\n> Click here\n</button>`}
             />
@@ -376,7 +403,7 @@ function ShadowTab({ tabs, primaryName }: shadowProps) {
             <CodePreview
               language="javascript"
               textClass="code-snippet"
-              text={`theme: {\n    extend: { dropShadow: Tokens.shadows } \n}`}
+              text={`theme: {\n    extend: { ${tailwindPropertyName}: Tokens.${tailwindName} } \n}`}
             />
           </TabPanel>
         </TabPanels>
