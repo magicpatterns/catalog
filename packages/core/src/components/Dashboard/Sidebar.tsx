@@ -36,38 +36,42 @@ function SidebarLink({
   isActive,
   onSelect,
   isComingSoon,
+  isDisabled,
 }: {
   label: string
   icon: IconType
   isActive?: boolean
   onSelect?: () => void
   isComingSoon?: boolean
+  isDisabled?: boolean
 }) {
   const [isHovering, setIsHovering] = useState<boolean>(false)
 
   const fontSize = '1.2rem'
+
+  const isActiveState = !isDisabled && (isHovering || isActive)
 
   return (
     <Box
       css={{
         display: 'flex',
         alignItems: 'center',
-        color: isHovering || isActive ? 'black' : 'gray',
+        color: isActiveState ? 'black' : 'gray',
         cursor: isComingSoon ? 'initial' : 'pointer',
         transition: '200ms',
       }}
       onMouseOver={() => {
-        if (!isComingSoon) {
+        if (!isComingSoon || isDisabled) {
           setIsHovering(true)
         }
       }}
       onMouseLeave={() => {
-        if (!isComingSoon) {
+        if (!isComingSoon || isDisabled) {
           setIsHovering(false)
         }
       }}
       onClick={() => {
-        if (!isComingSoon && onSelect) {
+        if (!isComingSoon && !isDisabled && onSelect) {
           onSelect()
         }
       }}
@@ -114,12 +118,14 @@ export function Sidebar({
   onSelectTab,
   onOpenSettings,
   onExport,
+  isDisabled,
 }: {
   platform: TPlatform
   activeTab: string
   onSelectTab: (tab: TTab) => void
   onOpenSettings: () => void
   onExport: () => void
+  isDisabled?: boolean
 }) {
   return (
     <Box
@@ -158,6 +164,7 @@ export function Sidebar({
               icon={FiAperture}
               isActive={activeTab === 'colors'}
               onSelect={() => onSelectTab('colors')}
+              isDisabled={isDisabled}
             />
 
             <SidebarLink
@@ -166,6 +173,7 @@ export function Sidebar({
               icon={FiUnderline}
               isActive={activeTab === 'typography'}
               onSelect={() => onSelectTab('typography')}
+              isDisabled={isDisabled}
             />
 
             <SidebarLink
@@ -174,12 +182,14 @@ export function Sidebar({
               icon={FiLayers}
               isActive={activeTab === 'shadows'}
               onSelect={() => onSelectTab('shadows')}
+              isDisabled={isDisabled}
             />
             <SidebarLink
               key="sidebar-spacing"
               label="Spacing"
               icon={FiGrid}
               isComingSoon
+              isDisabled={isDisabled}
             />
           </SidebarSection>
 
@@ -194,6 +204,7 @@ export function Sidebar({
                 label="Settings"
                 icon={FiSettings}
                 onSelect={() => onOpenSettings()}
+                isDisabled={isDisabled}
               />
             )}
           </SidebarSection>
