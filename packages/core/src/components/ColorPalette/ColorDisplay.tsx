@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TColorData, TColorVariant } from '@core/types'
+import { motion } from 'framer-motion'
 import { FiMoreVertical } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
@@ -104,10 +105,12 @@ export function ColorDisplay({
   colorData,
   onUpdateColorData,
   onDeleteColorData,
+  animationDelayAddition,
 }: {
   colorData: TColorData
   onUpdateColorData: (colorData: TColorData) => void
   onDeleteColorData: () => void
+  animationDelayAddition: number
 }) {
   const {
     isOpen: isColorNameModalOpen,
@@ -228,51 +231,62 @@ export function ColorDisplay({
                   ? 1
                   : -1
               )
-              .map((variant) => (
-                <VariantRow
+              .map((variant, index) => (
+                <motion.div
                   key={variant}
-                  variant={{
-                    name: variant,
-                    color: colorData.variants[variant],
-                    isBase:
-                      colorData.variants[variant].toUpperCase() ===
-                      colorData.baseColor?.toUpperCase(),
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
                   }}
-                  onUpdateVariant={(newVariant: TColorVariant) => {
-                    const updatedVariants = { ...colorData.variants }
-                    delete updatedVariants[variant]
-                    updatedVariants[newVariant.name] = newVariant.color
-
-                    const updatedColorData = {
-                      ...colorData,
-                      variants: updatedVariants,
-                    }
-                    if (newVariant.isBase) {
-                      updatedColorData.baseColor = newVariant.color
-                    } else if (
-                      !newVariant.isBase &&
-                      updatedColorData.baseColor === newVariant.color
-                    ) {
-                      delete updatedColorData.baseColor
-                    }
-
-                    onUpdateColorData(updatedColorData)
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.08 * index + animationDelayAddition,
                   }}
-                  onDeleteVariant={() => {
-                    const updatedVariants = { ...colorData.variants }
-                    delete updatedVariants[variant]
+                >
+                  <VariantRow
+                    variant={{
+                      name: variant,
+                      color: colorData.variants[variant],
+                      isBase:
+                        colorData.variants[variant].toUpperCase() ===
+                        colorData.baseColor?.toUpperCase(),
+                    }}
+                    onUpdateVariant={(newVariant: TColorVariant) => {
+                      const updatedVariants = { ...colorData.variants }
+                      delete updatedVariants[variant]
+                      updatedVariants[newVariant.name] = newVariant.color
 
-                    const updatedColorData = {
-                      ...colorData,
-                      variants: updatedVariants,
-                    }
-                    if (colorData.variants[variant] === colorData.baseColor) {
-                      delete updatedColorData.baseColor
-                    }
+                      const updatedColorData = {
+                        ...colorData,
+                        variants: updatedVariants,
+                      }
+                      if (newVariant.isBase) {
+                        updatedColorData.baseColor = newVariant.color
+                      } else if (
+                        !newVariant.isBase &&
+                        updatedColorData.baseColor === newVariant.color
+                      ) {
+                        delete updatedColorData.baseColor
+                      }
 
-                    onUpdateColorData(updatedColorData)
-                  }}
-                />
+                      onUpdateColorData(updatedColorData)
+                    }}
+                    onDeleteVariant={() => {
+                      const updatedVariants = { ...colorData.variants }
+                      delete updatedVariants[variant]
+
+                      const updatedColorData = {
+                        ...colorData,
+                        variants: updatedVariants,
+                      }
+                      if (colorData.variants[variant] === colorData.baseColor) {
+                        delete updatedColorData.baseColor
+                      }
+
+                      onUpdateColorData(updatedColorData)
+                    }}
+                  />
+                </motion.div>
               ))}
           </Stack>
         </Box>
