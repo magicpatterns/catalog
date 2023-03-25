@@ -59,9 +59,9 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           <TypographyTab
             tabs={innerTabs}
             primaryName={
-              tokens && tokens.colorData[0]
-                ? tokens.colorData[0].name
-                : 'primary'
+              tokens && tokens.typography.fontSizes[0]
+                ? tokens.typography.fontSizes[0].name
+                : 'sm'
             }
           />
         </TabPanels>
