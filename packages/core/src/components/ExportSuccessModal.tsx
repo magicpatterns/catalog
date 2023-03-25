@@ -31,6 +31,8 @@ import { CodePreview } from './CodePreview'
 import { TPlatform } from './Dashboard'
 
 function PackageModalBody({ primaryName }: { primaryName: string }) {
+  const outerTabs = ['Colors', 'Typography', 'Shadows']
+  const innerTabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
   return (
     <>
       <Text css={{ marginBottom: '24px' }}>
@@ -38,9 +40,52 @@ function PackageModalBody({ primaryName }: { primaryName: string }) {
       </Text>
       <Tabs>
         <TabList>
-          <Tab>CSS / SCSS</Tab>
-          <Tab>Javascript / Typescript</Tab>
-          <Tab>Tailwind</Tab>
+          {outerTabs.map((tab) => {
+            return <Tab>{tab}</Tab>
+          })}
+          {/* <Tab>Colors</Tab>
+          <Tab>Typography</Tab>
+          <Tab>Shadows</Tab> */}
+        </TabList>
+        <TabPanels>
+          <ColorsTab tabs={innerTabs} primaryName={primaryName} />
+        </TabPanels>
+      </Tabs>
+
+      <Text css={{ marginTop: '12px' }}>
+        To learn more about how to import these generated files, visit our{' '}
+        <Link
+          isExternal
+          color="blue.500"
+          href="https://mirrorful.com/docs/home/export-formats"
+        >
+          documentation here.
+        </Link>
+      </Text>
+      <Text css={{ marginTop: '8px' }}>
+        For examples, check out our{' '}
+        <Link
+          isExternal
+          color="blue.500"
+          href="https://mirrorful.com/docs/home/examples"
+        >
+          examples here.
+        </Link>
+      </Text>
+    </>
+  )
+}
+
+type props = { tabs: string[]; primaryName: string }
+
+function ColorsTab({ tabs, primaryName }: props) {
+  return (
+    <TabPanel>
+      <Tabs>
+        <TabList>
+          {tabs.map((tab) => {
+            return <Tab>{tab}</Tab>
+          })}
         </TabList>
 
         <TabPanels>
@@ -124,27 +169,7 @@ function PackageModalBody({ primaryName }: { primaryName: string }) {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Text css={{ marginTop: '12px' }}>
-        To learn more about how to import these generated files, visit our{' '}
-        <Link
-          isExternal
-          color="blue.500"
-          href="https://mirrorful.com/docs/home/export-formats"
-        >
-          documentation here.
-        </Link>
-      </Text>
-      <Text css={{ marginTop: '8px' }}>
-        For examples, check out our{' '}
-        <Link
-          isExternal
-          color="blue.500"
-          href="https://mirrorful.com/docs/home/examples"
-        >
-          examples here.
-        </Link>
-      </Text>
-    </>
+    </TabPanel>
   )
 }
 
