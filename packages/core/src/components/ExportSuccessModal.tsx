@@ -74,7 +74,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             javascriptName="fontSizes"
             javascriptPropertyName="fontSize"
             tailwindName="fontSizes"
-            tailwindPropertyName="fontSizes"
+            tailwindPropertyName="fontSize"
           />
           <ShadowTab
             tabs={innerTabs}
