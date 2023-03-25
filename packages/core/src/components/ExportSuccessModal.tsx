@@ -41,7 +41,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
       <Tabs>
         <TabList>
           {outerTabs.map((tab) => {
-            return <Tab>{tab}</Tab>
+            return <Tab key={tab}>{tab}</Tab>
           })}
           {/* <Tab>Colors</Tab>
           <Tab>Typography</Tab>
@@ -151,7 +151,7 @@ function DisplayTabs({
       <Tabs>
         <TabList>
           {tabs.map((tab) => {
-            return <Tab>{tab}</Tab>
+            return <Tab key={cssName + tab}>{tab}</Tab>
           })}
         </TabList>
 
