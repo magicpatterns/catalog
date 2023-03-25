@@ -134,6 +134,16 @@ function PackageModalBody({ primaryName }: { primaryName: string }) {
           documentation here.
         </Link>
       </Text>
+      <Text css={{ marginTop: '8px' }}>
+        For examples, check out our{' '}
+        <Link
+          isExternal
+          color="blue.500"
+          href="https://mirrorful.com/docs/home/examples"
+        >
+          examples here.
+        </Link>
+      </Text>
     </>
   )
 }
@@ -152,6 +162,16 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
           href="https://mirrorful.com/docs/home/export-formats"
         >
           documentation here.
+        </Link>
+      </Text>
+      <Text css={{ marginTop: '8px' }}>
+        For examples, check out our{' '}
+        <Link
+          isExternal
+          color="blue.500"
+          href="https://mirrorful.com/docs/home/examples"
+        >
+          example projects here.
         </Link>
       </Text>
       <Box css={{ marginTop: '16px' }}>
