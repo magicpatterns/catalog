@@ -2,8 +2,12 @@
   "name": "@mirrorful/core",
   "version": "1.0.6",
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && cp package.json lib",
-    "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"cp package.json lib\")",
+    "build": "run-script-os",
+    "build:win32": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && xcopy /Y package.json lib",
+    "build:default": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && cp package.json lib",
+    "build:watch": "run-script-os",
+    "build:watch:win32": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"xcopy /Y package.json lib\")",
+    "build:watch:default": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"cp package.json lib\")",
     "release:patch": "yarn build && cp package.json lib && npm version patch && npm publish ./lib;",
     "release:minor": "yarn build && cp package.json lib && npm version minor && npm publish ./lib;",
     "release:major": "yarn build && cp package.json lib && npm version major && npm publish ./lib;",
@@ -50,6 +54,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.4",
+    "run-script-os": "^1.1.6",
     "tsc-alias": "^1.8.3"
   }
 }

@@ -17,7 +17,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --build",
-    "local": "ts-node-esm removeFileOrDirectory.ts -D ./dist && tsc --build && cross-env NODE_ENV=development node ./dist/cli/index.js",
+    "local": "run-script-os",
+    "local:win32": "rmdir /Q /S dist && tsc --build && cross-env NODE_ENV=development node ./dist/cli/index.js",
+    "local:default": "rm -rf ./dist && tsc --build && cross-env NODE_ENV=development node ./dist/cli/index.js",
     "prepub": "rm -rf ./dist; npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..;",
     "release:patch": "rm -rf ./dist; npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm publish;",
     "release:minor": "rm -rf ./dist; npm version minor; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm publish;",
@@ -67,10 +69,11 @@
     "cross-env": "^7.0.3",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
-    "ts-node": "^10.9.1",
     "husky": "^8.0.3",
     "prettier": "^2.8.4",
     "pretty-quick": "^3.1.3",
+    "run-script-os": "^1.1.6",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },
   "engines": {
