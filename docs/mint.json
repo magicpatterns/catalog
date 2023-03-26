@@ -45,6 +45,14 @@
         "home/security",
         "home/contributing"
       ]
+    },
+    {
+      "group": "Export Formats",
+      "pages": [
+        "home/export-formats/colors",
+        "home/export-formats/font-sizes",
+        "home/export-formats/shadows"
+      ]
     }
   ],
   "footerSocials": {
