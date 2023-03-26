@@ -122,7 +122,7 @@ type TokenTabProps = {
   cssName: string
   javascriptPropertyName: 'backgroundColor' | 'boxShadow' | 'fontSize'
   javascriptName: string
-  tailwindPropertyName: string
+  tailwindPropertyName: 'colors' | 'dropShadow' | 'fontSize'
   tailwindName: string
 }
 function TokenTab({
