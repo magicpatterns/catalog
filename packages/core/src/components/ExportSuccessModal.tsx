@@ -118,7 +118,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
 type TokenTabProps = {
   tabs: string[]
   primaryName: string
-  cssPropertyName: string
+  cssPropertyName: 'background-color' | 'box-shadow' | 'font-size'
   cssName: string
   javascriptPropertyName: string
   javascriptName: string
