@@ -48,7 +48,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           <Tab>Shadows</Tab> */}
         </TabList>
         <TabPanels>
-          <ColorsTab
+          <TokenTab
             tabs={innerTabs}
             primaryName={
               tokens && tokens.colorData[0]
@@ -62,7 +62,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             tailwindName="colors"
             tailwindPropertyName="colors"
           />
-          <TypographyTab
+          <TokenTab
             tabs={innerTabs}
             primaryName={
               tokens && tokens.typography.fontSizes[0]
@@ -76,7 +76,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             tailwindName="fontSizes"
             tailwindPropertyName="fontSize"
           />
-          <ShadowTab
+          <TokenTab
             tabs={innerTabs}
             primaryName={
               tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
@@ -115,18 +115,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
   )
 }
 
-function ColorsTab(props: displayTabsProps) {
-  return <DisplayTabs {...props}></DisplayTabs>
-}
-
-function TypographyTab(props: displayTabsProps) {
-  return <DisplayTabs {...props}></DisplayTabs>
-}
-
-function ShadowTab(props: displayTabsProps) {
-  return <DisplayTabs {...props}></DisplayTabs>
-}
-type displayTabsProps = {
+type TokenTabProps = {
   tabs: string[]
   primaryName: string
   cssPropertyName: string
@@ -136,7 +125,7 @@ type displayTabsProps = {
   tailwindPropertyName: string
   tailwindName: string
 }
-function DisplayTabs({
+function TokenTab({
   tabs,
   primaryName,
   cssPropertyName,
@@ -145,7 +134,7 @@ function DisplayTabs({
   javascriptName,
   tailwindPropertyName,
   tailwindName,
-}: displayTabsProps) {
+}: TokenTabProps) {
   return (
     <TabPanel>
       <Tabs>
