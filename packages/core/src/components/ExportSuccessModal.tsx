@@ -115,16 +115,37 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
   )
 }
 
-type TokenTabProps = {
-  tabs: string[]
-  primaryName: string
-  cssPropertyName: 'background-color' | 'box-shadow' | 'font-size'
-  cssName: 'color' | 'box-shadow' | 'font-size'
-  javascriptPropertyName: 'backgroundColor' | 'boxShadow' | 'fontSize'
-  javascriptName: 'colors' | 'boxShadows' | 'fontSizes'
-  tailwindPropertyName: 'colors' | 'dropShadow' | 'fontSize'
-  tailwindName: 'colors' | 'boxShadows' | 'fontSizes'
-}
+type TokenTabProps =
+  | {
+      tabs: string[]
+      primaryName: string
+      cssPropertyName: 'background-color'
+      cssName: 'color'
+      javascriptPropertyName: 'backgroundColor'
+      javascriptName: 'colors'
+      tailwindPropertyName: 'colors'
+      tailwindName: 'colors'
+    }
+  | {
+      tabs: string[]
+      primaryName: string
+      cssPropertyName: 'box-shadow'
+      cssName: 'box-shadow'
+      javascriptPropertyName: 'boxShadow'
+      javascriptName: 'boxShadows'
+      tailwindPropertyName: 'dropShadow'
+      tailwindName: 'boxShadows'
+    }
+  | {
+      tabs: string[]
+      primaryName: string
+      cssPropertyName: 'font-size'
+      cssName: 'font-size'
+      javascriptPropertyName: 'fontSize'
+      javascriptName: 'fontSizes'
+      tailwindPropertyName: 'fontSize'
+      tailwindName: 'fontSizes'
+    }
 function TokenTab({
   tabs,
   primaryName,
