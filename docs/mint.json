@@ -37,21 +37,21 @@
         "home/intropage",
         "home/why",
         "home/get-started",
-        "home/export-formats",
+        {
+          "group": "Export Formats",
+          "pages": [
+            "home/export-formats/introduction",
+            "home/export-formats/colors",
+            "home/export-formats/font-sizes",
+            "home/export-formats/shadows"
+          ]
+        },
         "home/examples",
         "home/component-library",
         "home/community-support",
         "home/open-source-vs-paid",
         "home/security",
         "home/contributing"
-      ]
-    },
-    {
-      "group": "Export Formats",
-      "pages": [
-        "home/export-formats/colors",
-        "home/export-formats/font-sizes",
-        "home/export-formats/shadows"
       ]
     }
   ],
