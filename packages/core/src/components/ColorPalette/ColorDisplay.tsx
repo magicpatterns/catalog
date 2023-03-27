@@ -2,6 +2,7 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
+  Flex,
   Icon,
   IconButton,
   Menu,
@@ -83,7 +84,12 @@ function VariantRow({
         css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
       >
         {hasCopiedHexCode ? (
-          <Text css={{ marginRight: '5px' }}>Copied -&gt;</Text>
+          <Text
+            fontSize="1rem"
+            css={{ marginRight: '5px', fontWeight: 'bold' }}
+          >
+            Copied &rarr;
+          </Text>
         ) : null}
         <Text
           fontSize="1rem"
