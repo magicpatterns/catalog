@@ -15,6 +15,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TColorData, TColorVariant } from '@core/types'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { FiMoreVertical } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
@@ -30,6 +31,7 @@ function VariantRow({
   onUpdateVariant: (newVariant: TColorVariant) => void
   onDeleteVariant: () => void
 }) {
+  const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
   const { name, color } = variant
 
   const {
@@ -65,7 +67,10 @@ function VariantRow({
       >
         {name} {variant.isBase ? ' (Base)' : ''}
       </Text>
-      <Box css={{ display: 'flex', alignItems: 'center' }}>
+      <Box
+        css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
+      >
+        {hasCopiedHexCode ? <Text>Copied</Text> : null}
         <Text
           fontSize="1rem"
           fontWeight={variant.isBase ? 700 : 600}
@@ -110,6 +115,7 @@ function VariantRow({
   )
   function handleCopyColor(colorHex: string) {
     navigator.clipboard.writeText(colorHex)
+    setHasCopiedHexCode(true)
   }
 }
 
