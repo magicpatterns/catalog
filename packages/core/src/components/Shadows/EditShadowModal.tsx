@@ -48,7 +48,8 @@ export function EditShadowModal({
 
   const [error, setError] = useState<string | null>(null)
 
-  console.log(rgbaValue)
+  const presetColor = `rgba(${rgbaValue?.r}, ${rgbaValue?.g}, ${rgbaValue?.b}, ${rgbaValue?.a})`
+  //console.log('presetColor', presetColor)
 
   const handleSave = () => {
     setError(null)
@@ -109,7 +110,7 @@ export function EditShadowModal({
               <ColorPicker
                 variant={variant}
                 setVariant={setVariant}
-                presetColors={rgbaValue}
+                presetColor={presetColor}
               />
 
               <Box

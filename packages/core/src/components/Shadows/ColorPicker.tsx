@@ -14,11 +14,18 @@ import {
 import { RgbColor, SketchPicker } from '@hello-pangea/color-picker'
 import { useEffect, useState } from 'react'
 
-import { BoxDemo } from './BoxDemo'
-import { Sliders } from './Sliders'
-
-export function ColorPicker({ variant, setVariant, presetColors }) {
-  const [color, setColor] = useState('rgba(49, 240, 196, 1)')
+export function ColorPicker({
+  variant,
+  setVariant,
+  presetColor,
+}: {
+  variant: any
+  setVariant: any
+  presetColor: any
+}) {
+  const [color, setColor] = useState(
+    presetColor ? presetColor : 'rgba(1, 1, 1, 0.4'
+  )
 
   const [hOffset, sethOffset] = useState(5)
   const [vOffset, setVOffset] = useState(5)
@@ -27,23 +34,16 @@ export function ColorPicker({ variant, setVariant, presetColors }) {
 
   const codeResult = ` ${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color}`
 
-  // const handleChange = (color: RgbColor) => {
-  //   const rgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
-  //   let nextColor = ''
-  //   nextColor = rgba
-  //   setColor(rgba)
-  //   console.log('dkd' + codeResult)
-  //   setVariant({
-  //     ...variant,
-  //     value: `${hOffset}px ${vOffset}px ${blur}px ${spread}px ${nextColor}`,
-  //   })
-  // }
+  const handleColor = (color: RgbColor) => {
+    const rgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+    setColor(rgba)
+  }
 
   useEffect(() => {
     setVariant({ ...variant, value: codeResult })
   }, [codeResult, color, vOffset])
 
-  console.log('colorPicker' + presetColors)
+  console.log('colorPicker' + presetColor)
   return (
     <Box
       sx={{
@@ -57,8 +57,8 @@ export function ColorPicker({ variant, setVariant, presetColors }) {
       <Flex justifyContent={'space-between'} mt="1em">
         <SketchPicker
           width="45%"
-          color={presetColors}
-          onChange={(e) => handleChange(e.rgb)}
+          color={presetColor}
+          onChange={(e) => handleColor(e.rgb)}
         />
         <Box
           width="50%"

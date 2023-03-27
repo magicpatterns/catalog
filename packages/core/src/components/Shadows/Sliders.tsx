@@ -8,7 +8,6 @@ import {
   SliderTrack,
   Text,
 } from '@chakra-ui/react'
-
 import { useState } from 'react'
 
 export function Sliders() {
@@ -46,9 +45,9 @@ export function Sliders() {
       </Slider>
       <Text>Vertical Offset</Text>
       <Slider
-        aria-label="slider-"
+        aria-label="slider-horizontal-offset"
         defaultValue={10}
-        onChangeEnd={(val) => console.log(val)}
+        onChangeEnd={(val) => setVOfset(val)}
       >
         <SliderTrack>
           <SliderFilledTrack />
