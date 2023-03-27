@@ -87,6 +87,8 @@ function VariantRow({
           <Text
             fontSize="1rem"
             css={{ marginRight: '5px', fontWeight: 'bold' }}
+            color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+            _groupHover={{ color: variant.color, fontWeight: 'bold' }}
           >
             Copied &rarr;
           </Text>
