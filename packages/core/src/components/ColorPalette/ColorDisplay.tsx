@@ -15,7 +15,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TColorData, TColorVariant } from '@core/types'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiMoreVertical } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
@@ -39,6 +39,18 @@ function VariantRow({
     onOpen: onEditVariantModalOpen,
     onClose: onEditVariantModalClose,
   } = useDisclosure()
+
+  useEffect(() => {
+    let copiedTimeout: NodeJS.Timeout
+
+    if (hasCopiedHexCode) {
+      copiedTimeout = setTimeout(() => {
+        setHasCopiedHexCode(false)
+      }, 2500)
+    }
+
+    return () => clearTimeout(copiedTimeout)
+  }, [hasCopiedHexCode])
 
   return (
     <Box
