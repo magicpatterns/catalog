@@ -5,6 +5,7 @@ import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
 import { Onboarding } from '@core/components/Onboarding'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import {
+  defaultFiles,
   defaultShadows,
   TColorData,
   TConfig,
@@ -17,11 +18,12 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { ShadowsSection } from '../Shadows/ShadowsSection'
+import { ThemeManager } from '../ThemeManager'
 import { Sidebar } from './Sidebar'
 
 export type TPlatform = 'package' | 'web'
 
-export type TTab = 'colors' | 'typography' | 'shadows'
+export type TTab = 'colors' | 'typography' | 'shadows' | 'theme_manager'
 
 export function Dashboard({
   fetchStoreData,
@@ -43,7 +45,7 @@ export function Dashboard({
     fontSizes: [],
   })
   const [shadows, setShadows] = useState<TShadowData[]>([])
-  const [fileTypes, setFileTypes] = useState<TExportFileType[]>([])
+  const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
 
   const {
     isOpen: isExportSuccessModalOpen,
@@ -193,6 +195,7 @@ export function Dashboard({
                   onUpdateShadowData={handleUpdateShadows}
                 />
               )}
+              {tab === 'theme_manager' && <ThemeManager />}
             </>
           )}
         </AnimatePresence>
