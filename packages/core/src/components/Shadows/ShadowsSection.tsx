@@ -26,6 +26,18 @@ export function ShadowRow({
     onClose: onEditVariantModalClose,
   } = useDisclosure()
 
+  function getRgba(str: string) {
+    const rgbaRegex = /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/
+    const match = str.match(rgbaRegex)
+    if (match) {
+      const [, r, g, b, a] = match
+      return { r: Number(r), g: Number(g), b: Number(b), a: Number(a) }
+    }
+    return null // Return null if no match is found
+  }
+
+  const rgbaValue = getRgba(shadowData.value)
+
   return (
     <Box css={{ width: '60vw' }}>
       <Stack
@@ -92,6 +104,7 @@ export function ShadowRow({
             initialShadowVariant={shadowData}
             onUpdateShadowVariant={onUpdateShadowVariant}
             onDeleteShadowVariant={onDeleteShadowVariant}
+            rgbaValue={rgbaValue}
           />
         </Box>
       </Stack>
