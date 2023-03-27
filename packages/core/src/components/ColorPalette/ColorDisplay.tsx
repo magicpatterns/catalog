@@ -70,7 +70,9 @@ function VariantRow({
       <Box
         css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
       >
-        {hasCopiedHexCode ? <Text>Copied</Text> : null}
+        {hasCopiedHexCode ? (
+          <Text css={{ marginRight: '5px' }}>Copied -&gt;</Text>
+        ) : null}
         <Text
           fontSize="1rem"
           fontWeight={variant.isBase ? 700 : 600}
