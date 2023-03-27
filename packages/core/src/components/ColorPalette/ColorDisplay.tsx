@@ -64,6 +64,7 @@ function VariantRow({
         padding: '0px 24px',
         borderRadius: 8,
         border: variant.isBase ? '2px solid black' : '1px solid black',
+        position: 'relative',
       }}
       role="group"
       _hover={{
@@ -72,6 +73,26 @@ function VariantRow({
       }}
       onClick={() => handleCopyColor(color)}
     >
+      {hasCopiedHexCode ? (
+        <Text
+          fontSize="1rem"
+          css={{
+            marginRight: '5px',
+            fontWeight: 'bold',
+            position: 'absolute',
+            right: '100%',
+            zIndex: '100',
+            paddingBlock: '5px',
+            paddingInline: '10px',
+            outline: '1px solid black',
+            borderRadius: 8,
+            backgroundColor: variant.color,
+          }}
+          color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+        >
+          Copied
+        </Text>
+      ) : null}
       <Text
         fontSize="1rem"
         fontWeight={variant.isBase ? 700 : 600}
@@ -83,16 +104,6 @@ function VariantRow({
       <Box
         css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
       >
-        {hasCopiedHexCode ? (
-          <Text
-            fontSize="1rem"
-            css={{ marginRight: '5px', fontWeight: 'bold' }}
-            color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
-            _groupHover={{ color: variant.color, fontWeight: 'bold' }}
-          >
-            Copied &rarr;
-          </Text>
-        ) : null}
         <Text
           fontSize="1rem"
           fontWeight={variant.isBase ? 700 : 600}
