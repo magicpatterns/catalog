@@ -16,11 +16,9 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TShadowData } from '@core/types'
-import { ColorResult } from '@hello-pangea/color-picker'
-import { MouseEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ColorPicker } from './ColorPicker'
-import { Sliders } from './Sliders'
 
 export function EditShadowModal({
   isOpen,
@@ -28,13 +26,21 @@ export function EditShadowModal({
   initialShadowVariant,
   onUpdateShadowVariant,
   onDeleteShadowVariant,
-  rgbaValue,
+  initialRgbaValue,
+  initialValues,
 }: {
   isOpen: boolean
   onClose: () => void
   initialShadowVariant?: TShadowData
   onUpdateShadowVariant: (newVariant: TShadowData) => void
   onDeleteShadowVariant?: () => void
+  initialRgbaValue?: { r: number; g: number; b: number; a: number }
+  initialValues?: {
+    hOffset: number
+    vOffset: number
+    blur: number
+    spread: number
+  }
 }) {
   const {
     isOpen: isAlertDialogOpen,
@@ -48,8 +54,10 @@ export function EditShadowModal({
 
   const [error, setError] = useState<string | null>(null)
 
-  const presetColor = `rgba(${rgbaValue?.r}, ${rgbaValue?.g}, ${rgbaValue?.b}, ${rgbaValue?.a})`
-  //console.log('presetColor', presetColor)
+  const presetColor = initialRgbaValue
+    ? // eslint-disable-next-line react/prop-types
+      `rgba(${initialRgbaValue?.r}, ${initialRgbaValue?.g}, ${initialRgbaValue?.b}, ${initialRgbaValue?.a})`
+    : 'rgba(1, 1, 1, 0.4)'
 
   const handleSave = () => {
     setError(null)
@@ -111,6 +119,7 @@ export function EditShadowModal({
                 variant={variant}
                 setVariant={setVariant}
                 presetColor={presetColor}
+                initialValues={initialValues}
               />
 
               <Box

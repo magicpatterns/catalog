@@ -1,12 +1,8 @@
 import {
   Box,
   Flex,
-  FormControl,
-  FormLabel,
-  Input,
   Slider,
   SliderFilledTrack,
-  SliderMark,
   SliderThumb,
   SliderTrack,
   Text,
@@ -18,19 +14,30 @@ export function ColorPicker({
   variant,
   setVariant,
   presetColor,
+  initialValues,
 }: {
-  variant: any
+  variant: object
   setVariant: any
-  presetColor: any
+  presetColor: string
+  initialValues: any
 }) {
   const [color, setColor] = useState(
-    presetColor ? presetColor : 'rgba(1, 1, 1, 0.4'
+    presetColor ? presetColor : 'rgba(1, 1, 1, 0.4)'
   )
 
-  const [hOffset, sethOffset] = useState(5)
-  const [vOffset, setVOffset] = useState(5)
-  const [blur, setBlur] = useState(10)
-  const [spread, setSpread] = useState(0)
+  initialValues = initialValues
+    ? initialValues
+    : {
+        hOffset: 0,
+        vOffset: 0,
+        blur: 0,
+        spread: 0,
+      }
+
+  const [hOffset, sethOffset] = useState(initialValues.hOffset)
+  const [vOffset, setVOffset] = useState(initialValues.vOffset)
+  const [blur, setBlur] = useState(initialValues.blur)
+  const [spread, setSpread] = useState(initialValues.spread)
 
   const codeResult = ` ${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color}`
 
@@ -41,9 +48,8 @@ export function ColorPicker({
 
   useEffect(() => {
     setVariant({ ...variant, value: codeResult })
-  }, [codeResult, color, vOffset])
+  }, [codeResult, color, vOffset, hOffset, blur, spread])
 
-  console.log('colorPicker' + presetColor)
   return (
     <Box
       sx={{
@@ -121,7 +127,7 @@ export function ColorPicker({
               <SliderThumb />
             </Slider>
             <Text>Preview</Text>
-            <div
+            <Box
               style={{
                 boxShadow: codeResult,
                 width: '100%',
@@ -129,7 +135,7 @@ export function ColorPicker({
                 backgroundColor: '#F3F3F3',
                 borderRadius: '5px',
               }}
-            ></div>
+            ></Box>
           </Box>
         </Box>
       </Flex>
