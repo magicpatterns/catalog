@@ -18,7 +18,7 @@ import { BoxDemo } from './BoxDemo'
 import { Sliders } from './Sliders'
 
 export function ColorPicker({ variant, setVariant, presetColors }) {
-  const [color, setColor] = useState('rgba(49, 240, 196, 1'))
+  const [color, setColor] = useState('rgba(49, 240, 196, 1)')
 
   const [hOffset, sethOffset] = useState(5)
   const [vOffset, setVOffset] = useState(5)
