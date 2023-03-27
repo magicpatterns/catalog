@@ -5,6 +5,7 @@ import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
 import { Onboarding } from '@core/components/Onboarding'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import {
+  defaultFiles,
   defaultShadows,
   TColorData,
   TConfig,
@@ -44,7 +45,7 @@ export function Dashboard({
     fontSizes: [],
   })
   const [shadows, setShadows] = useState<TShadowData[]>([])
-  const [fileTypes, setFileTypes] = useState<TExportFileType[]>([])
+  const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
 
   const {
     isOpen: isExportSuccessModalOpen,
