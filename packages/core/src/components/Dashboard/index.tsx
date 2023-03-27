@@ -17,11 +17,12 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { ShadowsSection } from '../Shadows/ShadowsSection'
+import { ThemeManager } from '../ThemeManager'
 import { Sidebar } from './Sidebar'
 
 export type TPlatform = 'package' | 'web'
 
-export type TTab = 'colors' | 'typography' | 'shadows'
+export type TTab = 'colors' | 'typography' | 'shadows' | 'theme_manager'
 
 export function Dashboard({
   fetchStoreData,
@@ -193,6 +194,7 @@ export function Dashboard({
                   onUpdateShadowData={handleUpdateShadows}
                 />
               )}
+              {tab === 'theme_manager' && <ThemeManager />}
             </>
           )}
         </AnimatePresence>
