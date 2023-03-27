@@ -50,11 +50,18 @@ function VariantRow({
         borderRadius: 8,
         border: variant.isBase ? '2px solid black' : '1px solid black',
       }}
+      role="group"
+      _hover={{
+        cursor: 'pointer',
+        backgroundColor: tinycolor(variant.color).isDark() ? 'white' : 'black',
+      }}
+      onClick={() => handleCopyColor(color)}
     >
       <Text
         fontSize="1rem"
         fontWeight={variant.isBase ? 700 : 600}
         color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+        _groupHover={{ color: variant.color, fontWeight: 'bold' }}
       >
         {name} {variant.isBase ? ' (Base)' : ''}
       </Text>
@@ -63,6 +70,7 @@ function VariantRow({
           fontSize="1rem"
           fontWeight={variant.isBase ? 700 : 600}
           color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+          _groupHover={{ color: variant.color, fontWeight: 'bold' }}
         >
           {color}
         </Text>
@@ -72,6 +80,7 @@ function VariantRow({
             as={IconButton}
             icon={<Icon as={FiMoreVertical} />}
             color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+            _groupHover={{ color: variant.color, fontWeight: 'bold' }}
             _hover={{
               backgroundColor: 'rgba(235, 235, 235, 0.3)',
             }}
@@ -99,6 +108,9 @@ function VariantRow({
       />
     </Box>
   )
+  function handleCopyColor(colorHex: string) {
+    navigator.clipboard.writeText(colorHex)
+  }
 }
 
 export function ColorDisplay({
