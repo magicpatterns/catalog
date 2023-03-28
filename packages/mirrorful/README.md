@@ -32,7 +32,7 @@
   </a>
 </h4>
 
-<img src="../../assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
+<img src="./assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
 
 **Read this in other languages**: <kbd>[<img title="English" alt="English language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="22">](i18n/README.en.md)</kbd>
 <kbd>[<img title="German" alt="German language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/de.svg" width="22">](i18n/README.de.md)</kbd>
