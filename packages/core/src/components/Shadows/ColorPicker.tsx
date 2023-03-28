@@ -36,8 +36,6 @@ export function ColorPicker({
     presetColor ? presetColor : 'rgba(1, 1, 1, 0.4)'
   )
 
-  console.log(variant)
-
   initialValues = initialValues
     ? initialValues
     : {
@@ -54,8 +52,6 @@ export function ColorPicker({
 
   const codeResult = ` ${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color}`
 
-  console.log('jhej' + initialValues)
-
   const handleColor = (color: RgbColor) => {
     const rgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
     setColor(rgba)
@@ -65,7 +61,6 @@ export function ColorPicker({
     setVariant({
       ...variant,
       value: codeResult,
-      name: '',
     })
   }, [codeResult, color, vOffset, hOffset, blur, spread])
 
