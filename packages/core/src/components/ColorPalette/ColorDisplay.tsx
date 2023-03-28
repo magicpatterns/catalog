@@ -88,6 +88,10 @@ function VariantRow({
             fontWeight={variant.isBase ? 700 : 600}
             color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
             _hover={{ fontWeight: 'bold', cursor: 'pointer' }}
+            onClick={() => {
+              navigator.clipboard.writeText(color)
+              setHasCopiedHexCode(true)
+            }}
           >
             {color}
           </Text>
