@@ -66,16 +66,11 @@ function VariantRow({
         border: variant.isBase ? '2px solid black' : '1px solid black',
       }}
       role="group"
-      _hover={{
-        cursor: 'pointer',
-        backgroundColor: tinycolor(variant.color).isDark() ? 'white' : 'black',
-      }}
     >
       <Text
         fontSize="1rem"
         fontWeight={variant.isBase ? 700 : 600}
         color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
-        _groupHover={{ color: variant.color, fontWeight: 'bold' }}
       >
         {name} {variant.isBase ? ' (Base)' : ''}
       </Text>
@@ -92,7 +87,6 @@ function VariantRow({
             fontSize="1rem"
             fontWeight={variant.isBase ? 700 : 600}
             color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
-            _groupHover={{ color: variant.color, fontWeight: 'bold' }}
           >
             {color}
           </Text>
