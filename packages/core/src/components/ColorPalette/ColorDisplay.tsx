@@ -2,7 +2,6 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
-  Flex,
   Icon,
   IconButton,
   Menu,
