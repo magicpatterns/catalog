@@ -87,6 +87,7 @@ function VariantRow({
             fontSize="1rem"
             fontWeight={variant.isBase ? 700 : 600}
             color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+            _hover={{ fontWeight: 'bold', cursor: 'pointer' }}
           >
             {color}
           </Text>
@@ -97,7 +98,6 @@ function VariantRow({
             as={IconButton}
             icon={<Icon as={FiMoreVertical} />}
             color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
-            _groupHover={{ color: variant.color, fontWeight: 'bold' }}
             _hover={{
               backgroundColor: 'rgba(235, 235, 235, 0.3)',
             }}
