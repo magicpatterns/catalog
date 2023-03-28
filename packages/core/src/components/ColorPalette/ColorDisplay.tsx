@@ -70,7 +70,10 @@ function VariantRow({
         cursor: 'pointer',
         backgroundColor: tinycolor(variant.color).isDark() ? 'white' : 'black',
       }}
-      onClick={() => handleCopyColor(color)}
+      onClick={() => {
+        navigator.clipboard.writeText(color)
+        setHasCopiedHexCode(true)
+      }}
     >
       {hasCopiedHexCode ? (
         <Text
@@ -145,10 +148,6 @@ function VariantRow({
       />
     </Box>
   )
-  function handleCopyColor(colorHex: string) {
-    navigator.clipboard.writeText(colorHex)
-    setHasCopiedHexCode(true)
-  }
 }
 
 export function ColorDisplay({
