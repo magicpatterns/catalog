@@ -54,45 +54,39 @@ function VariantRow({
   }, [hasCopiedHexCode])
 
   return (
-    <Tooltip
-      label="Copied Hex to Clipboard"
-      hasArrow
-      isDisabled={!hasCopiedHexCode}
-      isOpen={hasCopiedHexCode}
+    <Box
+      css={{
+        height: '3rem',
+        backgroundColor: variant.color,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0px 24px',
+        borderRadius: 8,
+        border: variant.isBase ? '2px solid black' : '1px solid black',
+      }}
+      role="group"
+      _hover={{
+        cursor: 'pointer',
+        backgroundColor: tinycolor(variant.color).isDark() ? 'white' : 'black',
+      }}
     >
-      <Box
-        css={{
-          height: '3rem',
-          backgroundColor: variant.color,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0px 24px',
-          borderRadius: 8,
-          border: variant.isBase ? '2px solid black' : '1px solid black',
-        }}
-        role="group"
-        _hover={{
-          cursor: 'pointer',
-          backgroundColor: tinycolor(variant.color).isDark()
-            ? 'white'
-            : 'black',
-        }}
-        onClick={() => {
-          navigator.clipboard.writeText(color)
-          setHasCopiedHexCode(true)
-        }}
+      <Text
+        fontSize="1rem"
+        fontWeight={variant.isBase ? 700 : 600}
+        color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+        _groupHover={{ color: variant.color, fontWeight: 'bold' }}
       >
-        <Text
-          fontSize="1rem"
-          fontWeight={variant.isBase ? 700 : 600}
-          color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
-          _groupHover={{ color: variant.color, fontWeight: 'bold' }}
-        >
-          {name} {variant.isBase ? ' (Base)' : ''}
-        </Text>
-        <Box
-          css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
+        {name} {variant.isBase ? ' (Base)' : ''}
+      </Text>
+      <Box
+        css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
+      >
+        <Tooltip
+          label="Copied Hex to Clipboard"
+          hasArrow
+          isDisabled={!hasCopiedHexCode}
+          isOpen={hasCopiedHexCode}
         >
           <Text
             fontSize="1rem"
@@ -102,40 +96,40 @@ function VariantRow({
           >
             {color}
           </Text>
-          <Menu>
-            <MenuButton
-              variant="outline"
-              as={IconButton}
-              icon={<Icon as={FiMoreVertical} />}
-              color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
-              _groupHover={{ color: variant.color, fontWeight: 'bold' }}
-              _hover={{
-                backgroundColor: 'rgba(235, 235, 235, 0.3)',
-              }}
-              _active={{
-                backgroundColor: 'rgba(235, 235, 235, 0.3)',
-              }}
-              size="sm"
-              css={{
-                borderRadius: '50%',
-                border: 'none',
-                marginLeft: '24px',
-              }}
-            />
-            <MenuList>
-              <MenuItem onClick={() => onEditVariantModalOpen()}>Edit</MenuItem>
-              <MenuItem onClick={() => onDeleteVariant()}>Delete</MenuItem>
-            </MenuList>
-          </Menu>
-        </Box>
-        <EditVariantModal
-          isOpen={isEditVariantModalOpen}
-          onClose={onEditVariantModalClose}
-          initialVariant={variant}
-          onUpdateVariant={onUpdateVariant}
-        />
+        </Tooltip>
+        <Menu>
+          <MenuButton
+            variant="outline"
+            as={IconButton}
+            icon={<Icon as={FiMoreVertical} />}
+            color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+            _groupHover={{ color: variant.color, fontWeight: 'bold' }}
+            _hover={{
+              backgroundColor: 'rgba(235, 235, 235, 0.3)',
+            }}
+            _active={{
+              backgroundColor: 'rgba(235, 235, 235, 0.3)',
+            }}
+            size="sm"
+            css={{
+              borderRadius: '50%',
+              border: 'none',
+              marginLeft: '24px',
+            }}
+          />
+          <MenuList>
+            <MenuItem onClick={() => onEditVariantModalOpen()}>Edit</MenuItem>
+            <MenuItem onClick={() => onDeleteVariant()}>Delete</MenuItem>
+          </MenuList>
+        </Menu>
       </Box>
-    </Tooltip>
+      <EditVariantModal
+        isOpen={isEditVariantModalOpen}
+        onClose={onEditVariantModalClose}
+        initialVariant={variant}
+        onUpdateVariant={onUpdateVariant}
+      />
+    </Box>
   )
 }
 
