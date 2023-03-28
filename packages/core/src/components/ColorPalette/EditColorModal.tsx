@@ -14,6 +14,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   Tooltip,
 } from '@chakra-ui/react'
 import { TColorData } from '@core/types'
@@ -42,6 +43,8 @@ export function EditColorModal({
   const [base, setBase] = useState<string>(initialColorData?.baseColor ?? '')
   const [shouldGenerateVariants, setShouldGenerateVariants] = useState(false)
 
+  const [error, setError] = useState<string | null>(null)
+
   const [colorPickerColor, setColorPickerColor] = useState<Color>(
     initialColorData?.baseColor ?? INITIAL_COLOR_PICKER_COLOR
   )
@@ -55,6 +58,17 @@ export function EditColorModal({
   }
 
   const handleClose = () => {
+    // Check for blank / missing color name
+
+    if (!name) {
+      setError('Please enter a variable name.')
+      return
+    }
+    // Check for blank / missing color
+    if (!base) {
+      setError('Please enter a base color.')
+      return
+    }
     onBaseBlur()
     onClose({
       name,
@@ -103,7 +117,10 @@ export function EditColorModal({
                 placeholder="e.g. Pepsi Blue"
                 size="md"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value)
+                  if (error) setError(null)
+                }}
                 onFocus={() => {
                   setShowBaseColorPicker(true)
                 }}
@@ -113,8 +130,17 @@ export function EditColorModal({
                   }
                 }}
               />
+              {error && !name && (
+                <Text
+                  css={{ alignSelf: 'flex-start', marginTop: '8px' }}
+                  color="red.400"
+                  fontWeight="medium"
+                >
+                  {error}
+                </Text>
+              )}
             </FormControl>
-            <FormControl css={{ marginTop: 16 }}>
+            <FormControl>
               <FormLabel>
                 <Box css={{ display: 'flex', alignItems: 'center' }}>
                   Base Color{' '}
@@ -133,6 +159,7 @@ export function EditColorModal({
                 onChange={(e) => {
                   setColorPickerColor(e.target.value)
                   setBase(e.target.value)
+                  if (error) setError(null)
                 }}
                 onBlur={onBaseBlur}
                 onFocus={(e) => {
@@ -145,6 +172,15 @@ export function EditColorModal({
                   }
                 }}
               />
+              {error && name && (
+                <Text
+                  css={{ alignSelf: 'flex-start', marginTop: '8px' }}
+                  color="red.400"
+                  fontWeight="medium"
+                >
+                  {error}
+                </Text>
+              )}
             </FormControl>
             {!initialColorData || base !== initialColorData.baseColor ? (
               <FormControl>

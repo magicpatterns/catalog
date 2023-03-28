@@ -1,10 +1,11 @@
-import { Box, useDisclosure } from '@chakra-ui/react'
+import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
 import { ExportSettingsModal } from '@core/components/ExportSettingsModal'
 import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
 import { Onboarding } from '@core/components/Onboarding'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import {
+  defaultFiles,
   defaultShadows,
   TColorData,
   TConfig,
@@ -12,14 +13,17 @@ import {
   TShadowData,
   TTypographyData,
 } from '@core/types'
+import { AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import { ShadowsSection } from '../Shadows/ShadowsSection'
+import { ThemeManager } from '../ThemeManager'
 import { Sidebar } from './Sidebar'
 
 export type TPlatform = 'package' | 'web'
 
-export type TTab = 'colors' | 'typography' | 'shadows'
+export type TTab = 'colors' | 'typography' | 'shadows' | 'theme_manager'
 
 export function Dashboard({
   fetchStoreData,
@@ -30,6 +34,7 @@ export function Dashboard({
   postStoreData: (data: TConfig) => Promise<void>
   platform?: TPlatform
 }) {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tab, setTab] = useState<TTab>('colors')
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
     useState<boolean>(false)
@@ -40,7 +45,7 @@ export function Dashboard({
     fontSizes: [],
   })
   const [shadows, setShadows] = useState<TShadowData[]>([])
-  const [fileTypes, setFileTypes] = useState<TExportFileType[]>([])
+  const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
 
   const {
     isOpen: isExportSuccessModalOpen,
@@ -56,21 +61,29 @@ export function Dashboard({
 
   useEffect(() => {
     const fetchStoredData = async () => {
-      const data = await fetchStoreData()
+      try {
+        const data = await fetchStoreData()
 
-      if (
-        !Object.keys(data).length ||
-        !data.tokens.colorData ||
-        data.tokens.colorData.length === 0
-      ) {
-        setShowOnboarding(true)
-        return
+        if (
+          !Object.keys(data).length ||
+          !data.tokens.colorData ||
+          data.tokens.colorData.length === 0
+        ) {
+          setIsLoading(false)
+          setShowOnboarding(true)
+          return
+        }
+
+        setColors(data.tokens.colorData ?? [])
+        setTypography(data.tokens.typography)
+        setShadows(data.tokens.shadows ?? defaultShadows)
+        setFileTypes(data.files)
+        setIsLoading(false)
+      } catch (e) {
+        // TODO: Handle error
+      } finally {
+        setIsLoading(false)
       }
-
-      setColors(data.tokens.colorData ?? [])
-      setTypography(data.tokens.typography)
-      setShadows(data.tokens.shadows ?? defaultShadows)
-      setFileTypes(data.files)
     }
 
     fetchStoredData()
@@ -135,28 +148,57 @@ export function Dashboard({
           onSelectTab={(newTab: TTab) => setTab(newTab)}
           onOpenSettings={() => onExportSettingsModalOpen()}
           onExport={handleExport}
+          isDisabled={isLoading}
         />
       </Box>
       <Box css={{ minWidth: '300px' }} />
-      <Box css={{ backgroundColor: 'white', padding: '64px 128px' }}>
-        {tab === 'colors' && (
-          <ColorPaletteSection
-            colors={colors}
-            onUpdateColors={handleUpdateColors}
-          />
-        )}
-        {tab === 'typography' && (
-          <TypographySection
-            typography={typography}
-            onUpdateTypography={handleUpdateTypography}
-          />
-        )}
-        {tab === 'shadows' && (
-          <ShadowsSection
-            shadows={shadows}
-            onUpdateShadowData={handleUpdateShadows}
-          />
-        )}
+      <Box
+        css={{ backgroundColor: 'white', flexGrow: 1 }}
+        padding={{
+          base: '24px 48px',
+          md: '36px 72px',
+          lg: '48px 96px',
+        }}
+      >
+        <AnimatePresence>
+          {isLoading ? (
+            <motion.div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%',
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Spinner size="xl" color="blue.500" borderWidth="3px" />
+            </motion.div>
+          ) : (
+            <>
+              {tab === 'colors' && (
+                <ColorPaletteSection
+                  colors={colors}
+                  onUpdateColors={handleUpdateColors}
+                />
+              )}
+              {tab === 'typography' && (
+                <TypographySection
+                  typography={typography}
+                  onUpdateTypography={handleUpdateTypography}
+                />
+              )}
+              {tab === 'shadows' && (
+                <ShadowsSection
+                  shadows={shadows}
+                  onUpdateShadowData={handleUpdateShadows}
+                />
+              )}
+              {tab === 'theme_manager' && <ThemeManager />}
+            </>
+          )}
+        </AnimatePresence>
       </Box>
       <ExportSuccessModal
         platform={platform}

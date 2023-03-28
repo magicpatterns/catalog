@@ -1073,6 +1073,26 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@mirrorful/core@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-1.0.5.tgz#089c111e00b5d0ef21b4845dc350a4d932410d22"
+  integrity sha512-HZDmoPPokRIf46A6U+T8GXvacJ/gjWHaOnsvSNS4YyxJf/DT+FtYRottcXNtOO01ciO1AZcV24PuKgiCbJNCRA==
+  dependencies:
+    "@chakra-ui/icons" "^2.0.17"
+    "@chakra-ui/react" "^2.5.2"
+    "@emotion/react" "^11.10.6"
+    "@emotion/styled" "^11.10.6"
+    "@hello-pangea/color-picker" "^3.2.2"
+    framer-motion "^10.6.0"
+    lottie-react "^2.4.0"
+    posthog-js "^1.51.3"
+    react "^18.2.0"
+    react-dom "^18.2.0"
+    react-highlight "^0.15.0"
+    react-icons "^4.8.0"
+    tinycolor2 "^1.6.0"
+    typescript "^4.9.5"
+
 "@mirrorful/eslint-config@file:packages/eslint-config":
   version "1.0.0"
 
@@ -1330,6 +1350,13 @@
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
+
+"@types/json5@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@types/json5/-/json5-2.2.0.tgz#afff29abf9182a7d4a7e39105ca051f11c603d13"
+  integrity sha512-NrVug5woqbvNZ0WX+Gv4R+L4TGddtmFek2u8RtccAgFZWtS9QXF2xCXY22/M4nzkaKF0q9Fc6M/5rxLDhfwc/A==
+  dependencies:
+    json5 "*"
 
 "@types/lodash.mergewith@4.6.7":
   version "4.6.7"
@@ -3294,6 +3321,11 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==
 
+json5@*, json5@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
+  integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
+
 json5@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.2.tgz#63d98d60f21b313b77c4d6da18bfa69d80e1d593"
@@ -4084,6 +4116,11 @@ run-parallel@^1.1.9:
   integrity sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==
   dependencies:
     queue-microtask "^1.2.2"
+
+run-script-os@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/run-script-os/-/run-script-os-1.1.6.tgz#8b0177fb1b54c99a670f95c7fdc54f18b9c72347"
+  integrity sha512-ql6P2LzhBTTDfzKts+Qo4H94VUKpxKDFz6QxxwaUZN0mwvi7L3lpOI7BqPCq7lgDh3XLl0dpeXwfcVIitlrYrw==
 
 rxjs@^7.0.0:
   version "7.8.0"
