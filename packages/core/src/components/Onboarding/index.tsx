@@ -16,6 +16,7 @@ import { ImportInstructions } from './pages/ImportInstructions'
 import { NamePrimary } from './pages/NamePrimary'
 import { OtherColors } from './pages/OtherColors'
 import { PickPrimary } from './pages/PickPrimary'
+import { Referral } from './pages/Referral'
 import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
 
@@ -114,9 +115,6 @@ export function Onboarding({
         primaryName={primaryName}
         onUpdatePage={setPage}
         platform={platform}
-        onFinish={() => {
-          onFinishOnboarding()
-        }}
       />
     )
   } else if (page === 5) {
@@ -138,7 +136,16 @@ export function Onboarding({
         primaryColor={primaryColor}
         primaryName={primaryName}
         onUpdatePage={setPage}
-        onFinish={onFinishOnboarding}
+        platform={platform}
+      />
+    )
+  } else if (page === 7) {
+    content = (
+      <Referral
+        primaryColor={primaryColor}
+        onFinish={() => {
+          onFinishOnboarding()
+        }}
         platform={platform}
       />
     )
