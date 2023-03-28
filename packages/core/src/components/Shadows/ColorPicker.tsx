@@ -17,9 +17,10 @@ export function ColorPicker({
   initialValues,
 }: {
   variant: object
-  setVariant: any
+  setVariant: Function
+  void: void
   presetColor: string
-  initialValues: any
+  initialValues: object | any
 }) {
   const [color, setColor] = useState(
     presetColor ? presetColor : 'rgba(1, 1, 1, 0.4)'
@@ -80,7 +81,7 @@ export function ColorPicker({
             <Text>Horizontal Offset</Text>
             <Slider
               aria-label="slider-horizontal offset"
-              min={-20}
+              min={-25}
               max={25}
               defaultValue={hOffset}
               onChangeEnd={(val) => sethOffset(val)}
