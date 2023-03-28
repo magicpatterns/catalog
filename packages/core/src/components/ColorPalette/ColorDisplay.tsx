@@ -10,6 +10,7 @@ import {
   MenuList,
   Stack,
   Text,
+  Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
@@ -46,36 +47,44 @@ function VariantRow({
     if (hasCopiedHexCode) {
       copiedTimeout = setTimeout(() => {
         setHasCopiedHexCode(false)
-      }, 2500)
+      }, 1500)
     }
 
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedHexCode])
 
   return (
-    <Box
-      css={{
-        height: '3rem',
-        backgroundColor: variant.color,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0px 24px',
-        borderRadius: 8,
-        border: variant.isBase ? '2px solid black' : '1px solid black',
-        position: 'relative',
-      }}
-      role="group"
-      _hover={{
-        cursor: 'pointer',
-        backgroundColor: tinycolor(variant.color).isDark() ? 'white' : 'black',
-      }}
-      onClick={() => {
-        navigator.clipboard.writeText(color)
-        setHasCopiedHexCode(true)
-      }}
+    <Tooltip
+      label="Copied Hex to Clipboard"
+      hasArrow
+      isDisabled={!hasCopiedHexCode}
+      isOpen={hasCopiedHexCode}
     >
-      {hasCopiedHexCode ? (
+      <Box
+        css={{
+          height: '3rem',
+          backgroundColor: variant.color,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0px 24px',
+          borderRadius: 8,
+          border: variant.isBase ? '2px solid black' : '1px solid black',
+          position: 'relative',
+        }}
+        role="group"
+        _hover={{
+          cursor: 'pointer',
+          backgroundColor: tinycolor(variant.color).isDark()
+            ? 'white'
+            : 'black',
+        }}
+        onClick={() => {
+          navigator.clipboard.writeText(color)
+          setHasCopiedHexCode(true)
+        }}
+      >
+        {/* {hasCopiedHexCode ? (
         <Text
           fontSize="1rem"
           css={{
@@ -94,59 +103,60 @@ function VariantRow({
         >
           Copied
         </Text>
-      ) : null}
-      <Text
-        fontSize="1rem"
-        fontWeight={variant.isBase ? 700 : 600}
-        color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
-        _groupHover={{ color: variant.color, fontWeight: 'bold' }}
-      >
-        {name} {variant.isBase ? ' (Base)' : ''}
-      </Text>
-      <Box
-        css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
-      >
+      ) : null} */}
         <Text
           fontSize="1rem"
           fontWeight={variant.isBase ? 700 : 600}
           color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
           _groupHover={{ color: variant.color, fontWeight: 'bold' }}
         >
-          {color}
+          {name} {variant.isBase ? ' (Base)' : ''}
         </Text>
-        <Menu>
-          <MenuButton
-            variant="outline"
-            as={IconButton}
-            icon={<Icon as={FiMoreVertical} />}
+        <Box
+          css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
+        >
+          <Text
+            fontSize="1rem"
+            fontWeight={variant.isBase ? 700 : 600}
             color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
             _groupHover={{ color: variant.color, fontWeight: 'bold' }}
-            _hover={{
-              backgroundColor: 'rgba(235, 235, 235, 0.3)',
-            }}
-            _active={{
-              backgroundColor: 'rgba(235, 235, 235, 0.3)',
-            }}
-            size="sm"
-            css={{
-              borderRadius: '50%',
-              border: 'none',
-              marginLeft: '24px',
-            }}
-          />
-          <MenuList>
-            <MenuItem onClick={() => onEditVariantModalOpen()}>Edit</MenuItem>
-            <MenuItem onClick={() => onDeleteVariant()}>Delete</MenuItem>
-          </MenuList>
-        </Menu>
+          >
+            {color}
+          </Text>
+          <Menu>
+            <MenuButton
+              variant="outline"
+              as={IconButton}
+              icon={<Icon as={FiMoreVertical} />}
+              color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+              _groupHover={{ color: variant.color, fontWeight: 'bold' }}
+              _hover={{
+                backgroundColor: 'rgba(235, 235, 235, 0.3)',
+              }}
+              _active={{
+                backgroundColor: 'rgba(235, 235, 235, 0.3)',
+              }}
+              size="sm"
+              css={{
+                borderRadius: '50%',
+                border: 'none',
+                marginLeft: '24px',
+              }}
+            />
+            <MenuList>
+              <MenuItem onClick={() => onEditVariantModalOpen()}>Edit</MenuItem>
+              <MenuItem onClick={() => onDeleteVariant()}>Delete</MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
+        <EditVariantModal
+          isOpen={isEditVariantModalOpen}
+          onClose={onEditVariantModalClose}
+          initialVariant={variant}
+          onUpdateVariant={onUpdateVariant}
+        />
       </Box>
-      <EditVariantModal
-        isOpen={isEditVariantModalOpen}
-        onClose={onEditVariantModalClose}
-        initialVariant={variant}
-        onUpdateVariant={onUpdateVariant}
-      />
-    </Box>
+    </Tooltip>
   )
 }
 
