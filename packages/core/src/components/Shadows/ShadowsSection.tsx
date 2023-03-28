@@ -19,8 +19,6 @@ export function ShadowRow({
   shadowData: TShadowData
   onUpdateShadowVariant: (newVariant: TShadowData) => void
   onDeleteShadowVariant: () => void
-  initialRgbaValue?: object
-  initialValues?: object
 }) {
   const {
     isOpen: isEditVariantModalOpen,

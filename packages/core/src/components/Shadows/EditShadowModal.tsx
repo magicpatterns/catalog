@@ -35,12 +35,14 @@ export function EditShadowModal({
   onUpdateShadowVariant: (newVariant: TShadowData) => void
   onDeleteShadowVariant?: () => void
   initialRgbaValue?: { r: number; g: number; b: number; a: number }
-  initialValues?: {
-    hOffset: number
-    vOffset: number
-    blur: number
-    spread: number
-  }
+  initialValues?:
+    | {
+        hOffset: number
+        vOffset: number
+        blur: number
+        spread: number
+      }
+    | undefined
 }) {
   const {
     isOpen: isAlertDialogOpen,
@@ -48,9 +50,10 @@ export function EditShadowModal({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [variant, setVariant] = useState<TShadowData>(
-    initialShadowVariant ?? { name: '', value: '' }
-  )
+  const [variant, setVariant]: [
+    TShadowData,
+    React.Dispatch<React.SetStateAction<TShadowData>>
+  ] = useState<TShadowData>(initialShadowVariant ?? { name: '', value: '' })
 
   const [error, setError] = useState<string | null>(null)
 

@@ -7,8 +7,9 @@ import {
   SliderTrack,
   Text,
 } from '@chakra-ui/react'
+import { TShadowData } from '@core/types'
 import { RgbColor, SketchPicker } from '@hello-pangea/color-picker'
-import { useEffect, useState } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 
 export function ColorPicker({
   variant,
@@ -16,15 +17,26 @@ export function ColorPicker({
   presetColor,
   initialValues,
 }: {
-  variant: object
-  setVariant: Function
-  void: void
+  setVariant: any
+  variant: {
+    name: string
+    value: string
+  }
   presetColor: string
-  initialValues: object | any
+  initialValues:
+    | {
+        hOffset: number
+        vOffset: number
+        blur: number
+        spread: number
+      }
+    | undefined
 }) {
   const [color, setColor] = useState(
     presetColor ? presetColor : 'rgba(1, 1, 1, 0.4)'
   )
+
+  console.log(variant)
 
   initialValues = initialValues
     ? initialValues
@@ -42,13 +54,19 @@ export function ColorPicker({
 
   const codeResult = ` ${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color}`
 
+  console.log('jhej' + initialValues)
+
   const handleColor = (color: RgbColor) => {
     const rgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
     setColor(rgba)
   }
 
   useEffect(() => {
-    setVariant({ ...variant, value: codeResult })
+    setVariant({
+      ...variant,
+      value: codeResult,
+      name: '',
+    })
   }, [codeResult, color, vOffset, hOffset, blur, spread])
 
   return (
