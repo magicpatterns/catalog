@@ -16,7 +16,6 @@ export function OtherColors({
   primaryColor,
   primaryName,
   platform,
-  onFinish,
 }: {
   initialPalette: TColorData[]
   onUpdatePalette: (newPalette: TColorData[]) => void
@@ -24,7 +23,6 @@ export function OtherColors({
   primaryColor: string
   primaryName: string
   platform: TPlatform
-  onFinish: () => void
 }) {
   const [palette, setPalette] = useState<TColorData[]>(initialPalette)
 
@@ -104,13 +102,13 @@ export function OtherColors({
               onUpdatePalette(palette)
 
               if (platform === 'web') {
-                onFinish()
+                onUpdatePage(7)
               } else {
                 onUpdatePage(5)
               }
             }}
           >
-            {platform === 'web' ? 'Finish' : 'Next'}
+            Next
           </Button>
         </Box>
       </Box>

@@ -240,7 +240,7 @@ export function ColorDisplay({
                   }}
                   transition={{
                     duration: 0.5,
-                    delay: 0.08 * index + animationDelayAddition,
+                    delay: 0.08 * index,
                   }}
                 >
                   <VariantRow

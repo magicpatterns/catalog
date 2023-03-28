@@ -23,13 +23,11 @@ export function ImportInstructions({
   primaryColor,
   primaryName,
   onUpdatePage,
-  onFinish,
   platform,
 }: {
   primaryColor: string
   primaryName: string
   onUpdatePage: (page: number) => void
-  onFinish: () => void
   platform: TPlatform
 }) {
   const shades = generateDefaultColorShades(primaryColor)
@@ -74,7 +72,7 @@ export function ImportInstructions({
           <Button
             size="lg"
             onClick={() => {
-              onUpdatePage(4)
+              onUpdatePage(5)
             }}
             css={{ marginRight: '16px' }}
           >
@@ -93,7 +91,7 @@ export function ImportInstructions({
             size="lg"
             rightIcon={<ArrowForwardIcon />}
             onClick={() => {
-              onFinish()
+              onUpdatePage(7)
             }}
           >
             Finish
