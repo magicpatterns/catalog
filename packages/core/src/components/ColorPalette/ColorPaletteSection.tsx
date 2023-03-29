@@ -6,6 +6,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
 
 import { TColorData } from '../../types'
 import { AddColorSkeleton } from './AddColorSkeleton'
@@ -22,8 +23,8 @@ export function ColorPaletteSection({
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    <Box>
-      <Heading fontSize={'3rem'} fontWeight="black">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <Heading fontSize={'2.5rem'} fontWeight="black">
         Color Palette
       </Heading>
       <Text
@@ -38,25 +39,37 @@ export function ColorPaletteSection({
 
       <Box>
         <Stack direction="column" spacing={12}>
-          {colors.map((color) => (
-            <ColorDisplay
+          {colors.map((color, index) => (
+            <motion.div
               key={color.name}
-              colorData={color}
-              onUpdateColorData={(updatedColorData: TColorData) => {
-                const newColors = [...colors]
-                const colorIndex = colors.findIndex(
-                  (ec) => ec.name === color.name
-                )
-                newColors[colorIndex] = updatedColorData
-
-                onUpdateColors(newColors)
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
               }}
-              onDeleteColorData={() => {
-                const newColors = colors.filter((c) => c.name !== color.name)
-
-                onUpdateColors(newColors)
+              transition={{
+                duration: 0.5,
+                delay: 0.1 * index,
               }}
-            />
+            >
+              <ColorDisplay
+                colorData={color}
+                onUpdateColorData={(updatedColorData: TColorData) => {
+                  const newColors = [...colors]
+                  const colorIndex = colors.findIndex(
+                    (ec) => ec.name === color.name
+                  )
+                  newColors[colorIndex] = updatedColorData
+
+                  onUpdateColors(newColors)
+                }}
+                onDeleteColorData={() => {
+                  const newColors = colors.filter((c) => c.name !== color.name)
+
+                  onUpdateColors(newColors)
+                }}
+                animationDelayAddition={0.3 * index}
+              />
+            </motion.div>
           ))}
         </Stack>
         <Box
@@ -108,6 +121,6 @@ export function ColorPaletteSection({
           onClose()
         }}
       />
-    </Box>
+    </motion.div>
   )
 }

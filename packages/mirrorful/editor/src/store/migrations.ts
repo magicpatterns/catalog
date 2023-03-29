@@ -58,3 +58,11 @@ export const ZeroPointZeroPointThreeMigration = (store: Conf<TConfig>) => {
 export const ZeroPointZeroPointFourMigration = (store: Conf<TConfig>) => {
   store.set('files', defaultFiles)
 }
+
+export const ZeroPointZeroFiveMigration = (store: Conf<TConfig>) => {
+  const tokens = store.get('tokens')
+  const updatedTokens = { ...tokens }
+
+  updatedTokens.typography = defaultTypography
+  store.set('tokens', updatedTokens)
+}

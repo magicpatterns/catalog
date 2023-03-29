@@ -2,6 +2,7 @@ import { defaultConfig, TConfig } from '@mirrorful/core/lib/types'
 import Conf from 'conf'
 
 import {
+  ZeroPointZeroFiveMigration,
   ZeroPointZeroPointFourMigration,
   ZeroPointZeroPointThreeMigration,
   ZeroPointZeroPointTwoMigration,
@@ -15,7 +16,7 @@ export const rootPath =
 
 export const store = new Conf<TConfig>({
   projectName: 'Mirrorful',
-  projectVersion: '0.0.4',
+  projectVersion: '0.0.5',
   cwd: `${rootPath}/store`,
   defaults: defaultConfig,
   beforeEachMigration: (store, context) => {
@@ -27,5 +28,6 @@ export const store = new Conf<TConfig>({
     '0.0.2': ZeroPointZeroPointTwoMigration,
     '0.0.3': ZeroPointZeroPointThreeMigration,
     '0.0.4': ZeroPointZeroPointFourMigration,
+    '0.0.5': ZeroPointZeroFiveMigration,
   },
 })

@@ -13,7 +13,6 @@ import {
   ModalOverlay,
   VStack,
 } from '@chakra-ui/react'
-// import { defaultFiles } from 'store/migrations'
 import { TExportFileType } from '@core/types'
 import { getExportFileTypeName } from '@core/utils/getExportFileTypeString'
 

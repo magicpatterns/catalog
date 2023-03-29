@@ -1,9 +1,13 @@
 {
   "name": "@mirrorful/core",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "scripts": {
-    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && cp package.json lib",
-    "build:watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"cp package.json lib\")",
+    "build": "run-script-os",
+    "build:win32": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && xcopy /Y package.json lib",
+    "build:default": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && cp package.json lib",
+    "build:watch": "run-script-os",
+    "build:watch:win32": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"xcopy /Y package.json lib\")",
+    "build:watch:default": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"cp package.json lib\")",
     "release:patch": "yarn build && cp package.json lib && npm version patch && npm publish ./lib;",
     "release:minor": "yarn build && cp package.json lib && npm version minor && npm publish ./lib;",
     "release:major": "yarn build && cp package.json lib && npm version major && npm publish ./lib;",
@@ -25,6 +29,7 @@
     "@emotion/styled": "^11.10.6",
     "@hello-pangea/color-picker": "^3.2.2",
     "framer-motion": "^10.6.0",
+    "json5": "^2.2.3",
     "lottie-react": "^2.4.0",
     "posthog-js": "^1.51.3",
     "react": "^18.2.0",
@@ -36,6 +41,7 @@
   },
   "devDependencies": {
     "@mirrorful/eslint-config": "file:../eslint-config",
+    "@types/json5": "^2.2.0",
     "@types/node": "^18.15.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
@@ -48,6 +54,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.4",
+    "run-script-os": "^1.1.6",
     "tsc-alias": "^1.8.3"
   }
 }

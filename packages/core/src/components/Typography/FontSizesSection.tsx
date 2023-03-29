@@ -3,6 +3,7 @@ import { TFontSizeVariant } from '@core/types'
 
 import { EditFontSizeModal } from './EditFontSizeModal'
 import { FontSizeRow } from './FontSizeRow'
+
 export function FontSizesSection({
   fontSizeData,
   onUpdateFontSizeData,

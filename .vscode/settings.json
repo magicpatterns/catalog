@@ -5,7 +5,10 @@
     "**/.git": true,
     "**/node_modules": true,
     "**/.next": true,
-    "**/vendor": true
+    "**/vendor": true,
+    "**/lib": true,
+    "**/.mirrorful": true,
+    "**/dist": true
   },
   "cSpell.words": ["Mirrorful"],
   "editor.codeActionsOnSave": {

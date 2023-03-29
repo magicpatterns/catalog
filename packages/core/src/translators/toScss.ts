@@ -4,7 +4,7 @@ import { getKeys } from '@core/utils/getKeys'
 import { sanitizeName } from './sanitizeName'
 import { toCss } from './toCss'
 
-export const toScss = ({ colorData, typography }: TTokens): string => {
+export const toScss = ({ colorData, typography, shadows }: TTokens): string => {
   const content: string[] = []
 
   colorData.forEach((color) => {
@@ -31,7 +31,11 @@ export const toScss = ({ colorData, typography }: TTokens): string => {
     )
   })
 
-  content.push('', toCss({ colorData, typography }))
+  shadows.forEach((shadow) => {
+    content.push(`$font-size-${sanitizeName(shadow.name)}: ${shadow.value};`)
+  })
+
+  content.push('', toCss({ colorData, typography, shadows }))
 
   return content.join('\n')
 }

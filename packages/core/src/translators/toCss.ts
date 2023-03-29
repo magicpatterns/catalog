@@ -3,7 +3,7 @@ import { getKeys } from '@core/utils/getKeys'
 
 import { sanitizeName } from './sanitizeName'
 
-export const toCss = ({ colorData, typography }: TTokens): string => {
+export const toCss = ({ colorData, typography, shadows }: TTokens): string => {
   const content = [':root {']
 
   colorData.forEach((color) => {
@@ -27,6 +27,12 @@ export const toCss = ({ colorData, typography }: TTokens): string => {
       `  --font-size-${sanitizeName(fontSize.name)}: ${fontSize.value}${
         fontSize.unit
       };`
+    )
+  })
+
+  shadows.forEach((shadow) => {
+    content.push(
+      `  --box-shadow-${sanitizeName(shadow.name)}: ${shadow.value};`
     )
   })
 
