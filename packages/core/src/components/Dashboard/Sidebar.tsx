@@ -12,7 +12,6 @@ import {
   FiSettings,
   FiUnderline,
 } from 'react-icons/fi'
-import { TbColorSwatch } from 'react-icons/tb'
 
 import { TPlatform, TTab } from '.'
 
