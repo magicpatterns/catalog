@@ -36,7 +36,7 @@ import { CodePreview } from './CodePreview'
 import { TPlatform } from './Dashboard'
 
 function PackageModalBody({ tokens }: { tokens: TTokens }) {
-  const outerTabs = ['Colors', 'Typography', 'Shadows']
+  const exportTypes = ['Colors', 'Typography', 'Shadows']
   const innerTabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
   return (
     <>
@@ -48,15 +48,15 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           Export Types
         </MenuButton>
         <MenuList>
-          {outerTabs.map((tab) => {
-            return <MenuItem key={tab}>{tab}</MenuItem>
+          {exportTypes.map((exportType) => {
+            return <MenuItem key={exportType}>{exportType}</MenuItem>
           })}
         </MenuList>
       </Menu>
       <Tabs>
         <TabList>
-          {outerTabs.map((tab) => {
-            return <Tab key={tab}>{tab}</Tab>
+          {exportTypes.map((exportType) => {
+            return <Tab key={exportType}>{exportType}</Tab>
           })}
           {/* <Tab>Colors</Tab>
           <Tab>Typography</Tab>
