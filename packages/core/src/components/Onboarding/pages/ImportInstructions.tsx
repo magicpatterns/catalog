@@ -94,7 +94,7 @@ export function ImportInstructions({
               onUpdatePage(7)
             }}
           >
-            Finish
+            Next
           </Button>
         </Box>
       </Box>
