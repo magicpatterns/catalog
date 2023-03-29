@@ -75,58 +75,53 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           </MenuOptionGroup>
         </MenuList>
       </Menu>
-      <Tabs>
+      {/* <Tabs>
         <TabList>
           {exportTypes.map((exportType) => {
             return <Tab key={exportType}>{exportType}</Tab>
           })}
-          {/* <Tab>Colors</Tab>
-          <Tab>Typography</Tab>
-          <Tab>Shadows</Tab> */}
         </TabList>
-        <TabPanels>
-          <TokenTab
-            tabs={innerTabs}
-            primaryName={
-              tokens && tokens.colorData[0]
-                ? tokens.colorData[0].name
-                : 'primary'
-            }
-            cssName="color"
-            cssPropertyName="background-color"
-            javascriptName="colors"
-            javascriptPropertyName="backgroundColor"
-            tailwindName="colors"
-            tailwindPropertyName="colors"
-          />
-          <TokenTab
-            tabs={innerTabs}
-            primaryName={
-              tokens && tokens.typography.fontSizes[0]
-                ? tokens.typography.fontSizes[0].name
-                : 'sm'
-            }
-            cssName="font-size"
-            cssPropertyName="font-size"
-            javascriptName="fontSizes"
-            javascriptPropertyName="fontSize"
-            tailwindName="fontSizes"
-            tailwindPropertyName="fontSize"
-          />
-          <TokenTab
-            tabs={innerTabs}
-            primaryName={
-              tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
-            }
-            cssName="box-shadow"
-            cssPropertyName="box-shadow"
-            javascriptName="boxShadows"
-            javascriptPropertyName="boxShadow"
-            tailwindName="boxShadows"
-            tailwindPropertyName="dropShadow"
-          />
-        </TabPanels>
-      </Tabs>
+        <TabPanels> */}
+      <TokenTab
+        tabs={innerTabs}
+        primaryName={
+          tokens && tokens.colorData[0] ? tokens.colorData[0].name : 'primary'
+        }
+        cssName="color"
+        cssPropertyName="background-color"
+        javascriptName="colors"
+        javascriptPropertyName="backgroundColor"
+        tailwindName="colors"
+        tailwindPropertyName="colors"
+      />
+      <TokenTab
+        tabs={innerTabs}
+        primaryName={
+          tokens && tokens.typography.fontSizes[0]
+            ? tokens.typography.fontSizes[0].name
+            : 'sm'
+        }
+        cssName="font-size"
+        cssPropertyName="font-size"
+        javascriptName="fontSizes"
+        javascriptPropertyName="fontSize"
+        tailwindName="fontSizes"
+        tailwindPropertyName="fontSize"
+      />
+      <TokenTab
+        tabs={innerTabs}
+        primaryName={
+          tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
+        }
+        cssName="box-shadow"
+        cssPropertyName="box-shadow"
+        javascriptName="boxShadows"
+        javascriptPropertyName="boxShadow"
+        tailwindName="boxShadows"
+        tailwindPropertyName="dropShadow"
+      />
+      {/* </TabPanels>
+      </Tabs> */}
 
       <Text css={{ marginTop: '12px' }}>
         To learn more about how to import these generated files, visit our{' '}
