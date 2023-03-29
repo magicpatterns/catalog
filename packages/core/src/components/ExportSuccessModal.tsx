@@ -7,8 +7,9 @@ import {
   Link,
   Menu,
   MenuButton,
-  MenuItem,
+  MenuItemOption,
   MenuList,
+  MenuOptionGroup,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -48,9 +49,22 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           Export Types
         </MenuButton>
         <MenuList>
-          {exportTypes.map((exportType) => {
-            return <MenuItem key={exportType}>{exportType}</MenuItem>
-          })}
+          <MenuOptionGroup
+            defaultValue="colors"
+            title="export_types"
+            type="radio"
+          >
+            {exportTypes.map((exportType) => {
+              return (
+                <MenuItemOption
+                  key={exportType}
+                  value={exportType.toLowerCase()}
+                >
+                  {exportType}
+                </MenuItemOption>
+              )
+            })}
+          </MenuOptionGroup>
         </MenuList>
       </Menu>
       <Tabs>
