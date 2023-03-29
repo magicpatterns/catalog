@@ -75,13 +75,6 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           </MenuOptionGroup>
         </MenuList>
       </Menu>
-      {/* <Tabs>
-        <TabList>
-          {exportTypes.map((exportType) => {
-            return <Tab key={exportType}>{exportType}</Tab>
-          })}
-        </TabList>
-        <TabPanels> */}
       <Tabs>
         <TabPanels>
           {exportType === 'colors' ? (
@@ -132,8 +125,6 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           ) : null}
         </TabPanels>
       </Tabs>
-      {/* </TabPanels>
-      </Tabs> */}
 
       <Text css={{ marginTop: '12px' }}>
         To learn more about how to import these generated files, visit our{' '}
