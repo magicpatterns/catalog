@@ -10,11 +10,13 @@ import {
   MenuList,
   Stack,
   Text,
+  Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TColorData, TColorVariant } from '@core/types'
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { FiMoreVertical } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
@@ -30,6 +32,7 @@ function VariantRow({
   onUpdateVariant: (newVariant: TColorVariant) => void
   onDeleteVariant: () => void
 }) {
+  const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
   const { name, color } = variant
 
   const {
@@ -37,6 +40,18 @@ function VariantRow({
     onOpen: onEditVariantModalOpen,
     onClose: onEditVariantModalClose,
   } = useDisclosure()
+
+  useEffect(() => {
+    let copiedTimeout: NodeJS.Timeout
+
+    if (hasCopiedHexCode) {
+      copiedTimeout = setTimeout(() => {
+        setHasCopiedHexCode(false)
+      }, 1500)
+    }
+
+    return () => clearTimeout(copiedTimeout)
+  }, [hasCopiedHexCode])
 
   return (
     <Box
@@ -50,6 +65,7 @@ function VariantRow({
         borderRadius: 8,
         border: variant.isBase ? '2px solid black' : '1px solid black',
       }}
+      role="group"
     >
       <Text
         fontSize="1rem"
@@ -58,14 +74,28 @@ function VariantRow({
       >
         {name} {variant.isBase ? ' (Base)' : ''}
       </Text>
-      <Box css={{ display: 'flex', alignItems: 'center' }}>
-        <Text
-          fontSize="1rem"
-          fontWeight={variant.isBase ? 700 : 600}
-          color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+      <Box
+        css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
+      >
+        <Tooltip
+          label="Copied Hex to Clipboard"
+          hasArrow
+          isDisabled={!hasCopiedHexCode}
+          isOpen={hasCopiedHexCode}
         >
-          {color}
-        </Text>
+          <Text
+            fontSize="1rem"
+            fontWeight={variant.isBase ? 700 : 600}
+            color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+            _hover={{ fontWeight: 'bold', cursor: 'pointer' }}
+            onClick={() => {
+              navigator.clipboard.writeText(color)
+              setHasCopiedHexCode(true)
+            }}
+          >
+            {color}
+          </Text>
+        </Tooltip>
         <Menu>
           <MenuButton
             variant="outline"
