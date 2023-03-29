@@ -42,11 +42,9 @@ type exports = 'Colors' | 'Typography' | 'Shadows'
 
 function PackageModalBody({ tokens }: { tokens: TTokens }) {
   const [exportType, setExportType] = useState<exports>('Colors')
-  const innerTabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
   const exportTabComponent: Record<exports, React.ReactNode> = {
     Colors: (
       <TokenTab
-        tabs={innerTabs}
         primaryName={
           tokens && tokens.colorData[0] ? tokens.colorData[0].name : 'primary'
         }
@@ -60,7 +58,6 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
     ),
     Typography: (
       <TokenTab
-        tabs={innerTabs}
         primaryName={
           tokens && tokens.typography.fontSizes[0]
             ? tokens.typography.fontSizes[0].name
@@ -76,7 +73,6 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
     ),
     Shadows: (
       <TokenTab
-        tabs={innerTabs}
         primaryName={
           tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
         }
@@ -148,7 +144,6 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
 
 type TokenTabProps =
   | {
-      tabs: string[]
       primaryName: string
       cssPropertyName: 'background-color'
       cssName: 'color'
@@ -158,7 +153,6 @@ type TokenTabProps =
       tailwindName: 'colors'
     }
   | {
-      tabs: string[]
       primaryName: string
       cssPropertyName: 'box-shadow'
       cssName: 'box-shadow'
@@ -168,7 +162,6 @@ type TokenTabProps =
       tailwindName: 'boxShadows'
     }
   | {
-      tabs: string[]
       primaryName: string
       cssPropertyName: 'font-size'
       cssName: 'font-size'
@@ -178,7 +171,6 @@ type TokenTabProps =
       tailwindName: 'fontSizes'
     }
 function TokenTab({
-  tabs,
   primaryName,
   cssPropertyName,
   cssName,
@@ -187,6 +179,7 @@ function TokenTab({
   tailwindPropertyName,
   tailwindName,
 }: TokenTabProps) {
+  const tabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
   return (
     <TabPanel>
       <Tabs>
