@@ -42,7 +42,6 @@ type exports = 'Colors' | 'Typography' | 'Shadows'
 
 function PackageModalBody({ tokens }: { tokens: TTokens }) {
   const [exportType, setExportType] = useState<exports>('Colors')
-  const exportTypes = ['Colors', 'Typography', 'Shadows']
   const innerTabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
   const exportTabComponent: Record<exports, React.ReactNode> = {
     Colors: (
@@ -101,7 +100,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           setExportType(e.target.value as exports)
         }}
       >
-        {exportTypes.map((exportType) => {
+        {Object.keys(exportTabComponent).map((exportType) => {
           return (
             <option key={exportType} value={exportType}>
               {exportType}
@@ -123,7 +122,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
               }
             }}
           >
-            {exportTypes.map((exportType) => {
+            {Object.keys(exportTabComponent).map((exportType) => {
               return (
                 <MenuItemOption key={exportType} value={exportType}>
                   {exportType}
