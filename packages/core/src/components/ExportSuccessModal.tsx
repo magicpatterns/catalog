@@ -1,9 +1,14 @@
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
   Code,
   Icon,
   Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -38,6 +43,16 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
       <Text css={{ marginBottom: '24px' }}>
         Your tokens can now be imported by your app.
       </Text>
+      <Menu>
+        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+          Export Types
+        </MenuButton>
+        <MenuList>
+          {outerTabs.map((tab) => {
+            return <MenuItem key={tab}>{tab}</MenuItem>
+          })}
+        </MenuList>
+      </Menu>
       <Tabs>
         <TabList>
           {outerTabs.map((tab) => {
