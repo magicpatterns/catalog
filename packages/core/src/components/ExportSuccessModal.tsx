@@ -38,14 +38,14 @@ import { FiCheckCircle } from 'react-icons/fi'
 import { CodePreview } from './CodePreview'
 import { TPlatform } from './Dashboard'
 
-type exports = 'colors' | 'typography' | 'shadows'
+type exports = 'Colors' | 'Typography' | 'Shadows'
 
 function PackageModalBody({ tokens }: { tokens: TTokens }) {
-  const [exportType, setExportType] = useState<exports>('colors')
+  const [exportType, setExportType] = useState<exports>('Colors')
   const exportTypes = ['Colors', 'Typography', 'Shadows']
   const innerTabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
   const exportTabComponent: Record<exports, React.ReactNode> = {
-    colors: (
+    Colors: (
       <TokenTab
         tabs={innerTabs}
         primaryName={
@@ -59,7 +59,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         tailwindPropertyName="colors"
       />
     ),
-    typography: (
+    Typography: (
       <TokenTab
         tabs={innerTabs}
         primaryName={
@@ -75,7 +75,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         tailwindPropertyName="fontSize"
       />
     ),
-    shadows: (
+    Shadows: (
       <TokenTab
         tabs={innerTabs}
         primaryName={
@@ -103,7 +103,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
       >
         {exportTypes.map((exportType) => {
           return (
-            <option key={exportType} value={exportType.toLowerCase()}>
+            <option key={exportType} value={exportType}>
               {exportType}
             </option>
           )
@@ -125,10 +125,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           >
             {exportTypes.map((exportType) => {
               return (
-                <MenuItemOption
-                  key={exportType}
-                  value={exportType.toLowerCase()}
-                >
+                <MenuItemOption key={exportType} value={exportType}>
                   {exportType}
                 </MenuItemOption>
               )
