@@ -88,7 +88,6 @@ function VariantRow({
             fontWeight={variant.isBase ? 700 : 600}
             color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
             _hover={{
-              fontWeight: 'bold',
               cursor: 'pointer',
               backgroundColor: tinycolor(variant.color).isDark()
                 ? 'white'
