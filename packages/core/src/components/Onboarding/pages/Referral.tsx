@@ -33,6 +33,7 @@ export function Referral({
   const [isFriendChecked, setIsFriendChecked] = useState<boolean>(false)
   const [isGithubChecked, setIsGithubChecked] = useState<boolean>(false)
   const [isOtherChecked, setIsOtherChecked] = useState<boolean>(false)
+  const [isHackerNewsChecked, setIsHackerNewsChecked] = useState<boolean>(false)
 
   const shades = generateDefaultColorShades(primaryColor)
 
@@ -127,6 +128,10 @@ export function Referral({
                 posthog.capture('onboarding-referral-youtube')
               }
 
+              if (isHackerNewsChecked) {
+                posthog.capture('onboarding-referral-hackernews')
+              }
+
               onFinish()
             }}
           >
@@ -173,7 +178,7 @@ export function Referral({
             isChecked={isBlogChecked}
             onChange={(e) => setIsBlogChecked(e.target.checked)}
           >
-            Blog
+            Mirrorful Blog
           </Checkbox>
           <Checkbox
             isChecked={isTikTokChecked}
@@ -186,6 +191,12 @@ export function Referral({
             onChange={(e) => setIsGithubChecked(e.target.checked)}
           >
             Github
+          </Checkbox>
+          <Checkbox
+            isChecked={isHackerNewsChecked}
+            onChange={(e) => setIsHackerNewsChecked(e.target.checked)}
+          >
+            HackerNews
           </Checkbox>
           <Checkbox
             isChecked={isFriendChecked}
