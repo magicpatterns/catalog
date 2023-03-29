@@ -179,7 +179,94 @@ function TokenTab({
   tailwindPropertyName,
   tailwindName,
 }: TokenTabProps) {
-  const tabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
+  const tabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind'] as const
+  type tokenTabs = (typeof tabs)[number]
+  const tabComponents: Record<tokenTabs, React.ReactNode> = {
+    'CSS / SCSS': (
+      <TabPanel key="css/scss">
+        <Text css={{ marginBottom: 8 }}>
+          <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
+          <Code>theme.css</Code> (actual path may vary. You can reference the{' '}
+          <Code>.mirrorful</Code> folder in the root of your project)
+        </Text>
+        <CodePreview
+          language="javascript"
+          textClass="code-snippet"
+          text={`import './.mirrorful/theme.css'`}
+        />
+        <Text css={{ marginTop: 12, marginBottom: 8 }}>
+          <span style={{ fontWeight: 'bold' }}>2.</span> Your CSS Variables can
+          now be accessed anywhere in your app!
+        </Text>
+        <CodePreview
+          language="css"
+          textClass="code-snippet"
+          text={`.${sanitizeName(
+            primaryName
+          )}-button {\n    ${cssPropertyName}: var(--${cssName}-${sanitizeName(
+            primaryName
+          )});\n}\n\n.${sanitizeName(
+            primaryName
+          )}-button:hover {\n    ${cssPropertyName}: var(--${cssName}-${sanitizeName(
+            primaryName
+          )});\n}`}
+        />
+      </TabPanel>
+    ),
+    'Javascript / Typescript': (
+      <TabPanel key="javascript/typescript">
+        <Text css={{ marginBottom: 8 }}>
+          <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
+          <Code>Tokens</Code> (actual path may vary. You can reference the{' '}
+          <Code>.mirrorful</Code> folder in the root of your project)
+        </Text>
+
+        <CodePreview
+          language="javascript"
+          textClass="code-snippet"
+          text={`import { Tokens } from './.mirrorful/theme'`}
+        />
+
+        <Text css={{ marginTop: 12, marginBottom: 8 }}>
+          <span style={{ fontWeight: 'bold' }}>2.</span> Use your tokens
+          anywhere as constants!
+        </Text>
+        <CodePreview
+          language="javascript"
+          textClass="code-snippet"
+          text={`<button\n   style={{ ${javascriptPropertyName}: Tokens.${javascriptName}.${sanitizeName(
+            primaryName
+          )} }}\n> Click here\n</button>`}
+        />
+      </TabPanel>
+    ),
+    Tailwind: (
+      <TabPanel key="tailwind">
+        <Text css={{ marginBottom: 8 }}>
+          <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
+          <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code> (actual
+          path may vary. You can reference the <Code>.mirrorful</Code> folder in
+          the root of your project)
+        </Text>
+
+        <CodePreview
+          language="javascript"
+          textClass="code-snippet"
+          text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
+        />
+
+        <Text css={{ marginTop: 12, marginBottom: 8 }}>
+          <span style={{ fontWeight: 'bold' }}>2.</span> Extend the tailwind
+          theme.
+        </Text>
+        <CodePreview
+          language="javascript"
+          textClass="code-snippet"
+          text={`theme: {\n    extend: { ${tailwindPropertyName}: Tokens.${tailwindName} } \n}`}
+        />
+      </TabPanel>
+    ),
+  }
   return (
     <TabPanel>
       <Tabs>
@@ -190,84 +277,9 @@ function TokenTab({
         </TabList>
 
         <TabPanels>
-          <TabPanel>
-            <Text css={{ marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-              <Code>theme.css</Code> (actual path may vary. You can reference
-              the <Code>.mirrorful</Code> folder in the root of your project)
-            </Text>
-            <CodePreview
-              language="javascript"
-              textClass="code-snippet"
-              text={`import './.mirrorful/theme.css'`}
-            />
-            <Text css={{ marginTop: 12, marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>2.</span> Your CSS Variables
-              can now be accessed anywhere in your app!
-            </Text>
-            <CodePreview
-              language="css"
-              textClass="code-snippet"
-              text={`.${sanitizeName(
-                primaryName
-              )}-button {\n    ${cssPropertyName}: var(--${cssName}-${sanitizeName(
-                primaryName
-              )});\n}\n\n.${sanitizeName(
-                primaryName
-              )}-button:hover {\n    ${cssPropertyName}: var(--${cssName}-${sanitizeName(
-                primaryName
-              )});\n}`}
-            />
-          </TabPanel>
-          <TabPanel>
-            <Text css={{ marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-              <Code>Tokens</Code> (actual path may vary. You can reference the{' '}
-              <Code>.mirrorful</Code> folder in the root of your project)
-            </Text>
-
-            <CodePreview
-              language="javascript"
-              textClass="code-snippet"
-              text={`import { Tokens } from './.mirrorful/theme'`}
-            />
-
-            <Text css={{ marginTop: 12, marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>2.</span> Use your tokens
-              anywhere as constants!
-            </Text>
-            <CodePreview
-              language="javascript"
-              textClass="code-snippet"
-              text={`<button\n   style={{ ${javascriptPropertyName}: Tokens.${javascriptName}.${sanitizeName(
-                primaryName
-              )} }}\n> Click here\n</button>`}
-            />
-          </TabPanel>
-          <TabPanel>
-            <Text css={{ marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-              <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code>{' '}
-              (actual path may vary. You can reference the{' '}
-              <Code>.mirrorful</Code> folder in the root of your project)
-            </Text>
-
-            <CodePreview
-              language="javascript"
-              textClass="code-snippet"
-              text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
-            />
-
-            <Text css={{ marginTop: 12, marginBottom: 8 }}>
-              <span style={{ fontWeight: 'bold' }}>2.</span> Extend the tailwind
-              theme.
-            </Text>
-            <CodePreview
-              language="javascript"
-              textClass="code-snippet"
-              text={`theme: {\n    extend: { ${tailwindPropertyName}: Tokens.${tailwindName} } \n}`}
-            />
-          </TabPanel>
+          {Object.keys(tabComponents).map(
+            (tab) => tabComponents[tab as tokenTabs]
+          )}
         </TabPanels>
       </Tabs>
     </TabPanel>
