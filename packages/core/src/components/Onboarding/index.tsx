@@ -34,7 +34,7 @@ export function Onboarding({
   const [palette, setPalette] = useState<TColorData[]>([])
   const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
 
-  const [page, setPage] = useState<number>(0)
+  const [page, setPage] = useState<number>(platform === 'web' ? 1 : 0)
 
   const handleExport = async (
     primaryColorHex: string,
@@ -60,13 +60,25 @@ export function Onboarding({
     })
   }
 
-  let content = (
-    <Welcome
-      onFinishOnboarding={onFinishOnboarding}
-      onUpdatePage={setPage}
-      platform={platform}
-    />
-  )
+  let content
+  if (platform === 'package') {
+    content = (
+      <Welcome
+        onFinishOnboarding={onFinishOnboarding}
+        onUpdatePage={setPage}
+        platform={platform}
+      />
+    )
+  } else {
+    content = (
+      <PickPrimary
+        initialPrimary={primaryColor}
+        onUpdatePage={setPage}
+        onUpdatePrimaryColor={(newColor: string) => setPrimaryColor(newColor)}
+        platform={platform}
+      />
+    )
+  }
 
   if (page === 1) {
     content = (
