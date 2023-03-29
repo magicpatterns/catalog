@@ -37,10 +37,10 @@ import { FiCheckCircle } from 'react-icons/fi'
 import { CodePreview } from './CodePreview'
 import { TPlatform } from './Dashboard'
 
+type exports = 'colors' | 'typography' | 'shadows'
+
 function PackageModalBody({ tokens }: { tokens: TTokens }) {
-  const [exportType, setExportType] = useState<
-    'colors' | 'typography' | 'shadows'
-  >('colors')
+  const [exportType, setExportType] = useState<exports>('colors')
   const exportTypes = ['Colors', 'Typography', 'Shadows']
   const innerTabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
   return (
@@ -54,9 +54,13 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         </MenuButton>
         <MenuList>
           <MenuOptionGroup
-            defaultValue="colors"
-            title="export_types"
+            defaultValue={exportType}
             type="radio"
+            onChange={(e) => {
+              if (typeof e === 'string') {
+                setExportType(e as exports)
+              }
+            }}
           >
             {exportTypes.map((exportType) => {
               return (
