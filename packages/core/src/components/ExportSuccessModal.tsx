@@ -94,20 +94,6 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
       <Text css={{ marginBottom: '24px' }}>
         Your tokens can now be imported by your app.
       </Text>
-      <Select
-        defaultValue={exportType}
-        onChange={(e) => {
-          setExportType(e.target.value as exports)
-        }}
-      >
-        {Object.keys(exportTabComponent).map((exportType) => {
-          return (
-            <option key={exportType} value={exportType}>
-              {exportType}
-            </option>
-          )
-        })}
-      </Select>
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
           Choose Export Type
