@@ -20,9 +20,8 @@ function SidebarHeader({ label }: { label: string }) {
     <Text
       css={{
         fontWeight: 900,
-        fontSize: '1rem',
+        fontSize: '0.9rem',
         color: 'gray',
-        marginBottom: '10px',
       }}
     >
       {label.toUpperCase()}
@@ -47,7 +46,7 @@ function SidebarLink({
 }) {
   const [isHovering, setIsHovering] = useState<boolean>(false)
 
-  const fontSize = '1.2rem'
+  const fontSize = '1rem'
 
   const isActiveState = !isDisabled && (isHovering || isActive)
 
@@ -105,7 +104,7 @@ export function SidebarSection({
   return (
     <Box>
       {header}
-      <Stack spacing={'12px'} marginTop={'16px'}>
+      <Stack spacing={'12px'} marginTop={'12px'}>
         {children}
       </Stack>
     </Box>
@@ -193,6 +192,14 @@ export function Sidebar({
             />
           </SidebarSection>
 
+          {/* <SidebarSection header={<SidebarHeader label="Themes" />}>
+            <SidebarLink
+              label="Theme Manager"
+              icon={TbColorSwatch}
+              onSelect={() => onSelectTab('theme_manager')}
+            />
+          </SidebarSection> */}
+
           <SidebarSection header={<SidebarHeader label="Export" />}>
             <SidebarLink
               label="Export Tokens"
@@ -230,7 +237,7 @@ export function Sidebar({
               />
             </SidebarSection>
             <Box css={{ marginTop: '32px' }}>
-              <Text fontWeight="bold" color="gray.400">
+              <Text fontWeight="bold" color="gray.400" fontSize={'0.8rem'}>
                 {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
               </Text>
             </Box>

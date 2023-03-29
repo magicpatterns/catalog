@@ -18,18 +18,31 @@ import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TShadowData } from '@core/types'
 import { useEffect, useState } from 'react'
 
+import { ShadowColorPicker } from './ShadowColorPicker'
+
 export function EditShadowModal({
   isOpen,
   onClose,
   initialShadowVariant,
   onUpdateShadowVariant,
   onDeleteShadowVariant,
+  initialRgbaValue,
+  initialValues,
 }: {
   isOpen: boolean
   onClose: () => void
   initialShadowVariant?: TShadowData
   onUpdateShadowVariant: (newVariant: TShadowData) => void
   onDeleteShadowVariant?: () => void
+  initialRgbaValue?: { r: number; g: number; b: number; a: number }
+  initialValues?:
+    | {
+        hOffset: number
+        vOffset: number
+        blur: number
+        spread: number
+      }
+    | undefined
 }) {
   const {
     isOpen: isAlertDialogOpen,
@@ -37,11 +50,17 @@ export function EditShadowModal({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [variant, setVariant] = useState<TShadowData>(
-    initialShadowVariant ?? { name: '', value: '' }
-  )
+  const [variant, setVariant]: [
+    TShadowData,
+    React.Dispatch<React.SetStateAction<TShadowData>>
+  ] = useState<TShadowData>(initialShadowVariant ?? { name: '', value: '' })
 
   const [error, setError] = useState<string | null>(null)
+
+  const presetColor = initialRgbaValue
+    ? // eslint-disable-next-line react/prop-types
+      `rgba(${initialRgbaValue?.r}, ${initialRgbaValue?.g}, ${initialRgbaValue?.b}, ${initialRgbaValue?.a})`
+    : 'rgba(1, 1, 1, 0.4)'
 
   const handleSave = () => {
     setError(null)
@@ -90,7 +109,6 @@ export function EditShadowModal({
                   }
                 />
               </FormControl>
-
               <FormControl css={{ marginTop: '32px' }}>
                 <FormLabel>Variant Value</FormLabel>
                 <Input
@@ -100,6 +118,13 @@ export function EditShadowModal({
                   }
                 />
               </FormControl>
+              <ShadowColorPicker
+                variant={variant}
+                setVariant={setVariant}
+                presetColor={presetColor}
+                initialValues={initialValues}
+              />
+
               <Box
                 css={{
                   marginTop: '16px',
@@ -107,26 +132,7 @@ export function EditShadowModal({
                   display: 'flex',
                   justifyContent: 'center',
                 }}
-              >
-                <Box
-                  css={{
-                    marginTop: '16px',
-                    width: '100px',
-                    height: '50px',
-                    backgroundColor: '#F3F3F3',
-                    border: '1px solid #D3D3D3',
-                    boxShadow: variant.value,
-                    padding: '24px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Text color="gray.500" fontWeight="bold">
-                    PREVIEW
-                  </Text>
-                </Box>
-              </Box>
+              ></Box>
             </Box>
             {error && (
               <Text color="red.500" css={{ marginTop: 18 }}>
