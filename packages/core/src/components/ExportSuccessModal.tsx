@@ -31,12 +31,16 @@ import { toJs } from '@core/translators/toJs'
 import { toJson } from '@core/translators/toJson'
 import { toScss } from '@core/translators/toScss'
 import { TTokens } from '@core/types'
+import { useState } from 'react'
 import { FiCheckCircle } from 'react-icons/fi'
 
 import { CodePreview } from './CodePreview'
 import { TPlatform } from './Dashboard'
 
 function PackageModalBody({ tokens }: { tokens: TTokens }) {
+  const [exportType, setExportType] = useState<
+    'colors' | 'typography' | 'shadows'
+  >('colors')
   const exportTypes = ['Colors', 'Typography', 'Shadows']
   const innerTabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
   return (
