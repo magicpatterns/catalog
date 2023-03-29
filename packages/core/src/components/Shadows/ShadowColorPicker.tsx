@@ -9,15 +9,15 @@ import {
 } from '@chakra-ui/react'
 import { TShadowData } from '@core/types'
 import { RgbColor, SketchPicker } from '@hello-pangea/color-picker'
-import React, { Dispatch, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-export function ColorPicker({
+export function ShadowColorPicker({
   variant,
   setVariant,
   presetColor,
   initialValues,
 }: {
-  setVariant: any
+  setVariant: React.Dispatch<React.SetStateAction<TShadowData>>
   variant: {
     name: string
     value: string

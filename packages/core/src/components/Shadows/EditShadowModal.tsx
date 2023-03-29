@@ -18,7 +18,7 @@ import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TShadowData } from '@core/types'
 import { useEffect, useState } from 'react'
 
-import { ColorPicker } from './ColorPicker'
+import { ShadowColorPicker } from './ShadowColorPicker'
 
 export function EditShadowModal({
   isOpen,
@@ -118,7 +118,7 @@ export function EditShadowModal({
                   }
                 />
               </FormControl>
-              <ColorPicker
+              <ShadowColorPicker
                 variant={variant}
                 setVariant={setVariant}
                 presetColor={presetColor}

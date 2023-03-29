@@ -25,6 +25,7 @@ export default async function handler(
   _: NextApiRequest,
   res: NextApiResponse<TConfig>
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { __internal__, ...config } = store.store as TInternalConfig
 
   // Handle migration from old storage file

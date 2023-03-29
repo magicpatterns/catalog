@@ -1073,10 +1073,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mirrorful/core@1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-1.0.5.tgz#089c111e00b5d0ef21b4845dc350a4d932410d22"
-  integrity sha512-HZDmoPPokRIf46A6U+T8GXvacJ/gjWHaOnsvSNS4YyxJf/DT+FtYRottcXNtOO01ciO1AZcV24PuKgiCbJNCRA==
+"@mirrorful/core@1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-1.0.6.tgz#0285061d62844095ee0c2dca3c25726bacd059a5"
+  integrity sha512-nn9Kgf4BY4xj2qpR7dp4n/kVuQAB93BNGG1R4u5gfj1v9s3hIHImu80Zh1pn1Msc3iu+1Iy4mUzHwoRfzD4v0Q==
   dependencies:
     "@chakra-ui/icons" "^2.0.17"
     "@chakra-ui/react" "^2.5.2"
@@ -1084,6 +1084,7 @@
     "@emotion/styled" "^11.10.6"
     "@hello-pangea/color-picker" "^3.2.2"
     framer-motion "^10.6.0"
+    json5 "^2.2.3"
     lottie-react "^2.4.0"
     posthog-js "^1.51.3"
     react "^18.2.0"
