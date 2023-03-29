@@ -15,7 +15,12 @@ export function ShadowColorPicker({
   variant,
   setVariant,
   presetColor,
-  initialValues,
+  initialValues = {
+    hOffset: 0,
+    vOffset: 0,
+    blur: 0,
+    spread: 0,
+  },
 }: {
   setVariant: React.Dispatch<React.SetStateAction<TShadowData>>
   variant: {
@@ -23,7 +28,7 @@ export function ShadowColorPicker({
     value: string
   }
   presetColor: string
-  initialValues:
+  initialValues?:
     | {
         hOffset: number
         vOffset: number
@@ -35,15 +40,6 @@ export function ShadowColorPicker({
   const [color, setColor] = useState(
     presetColor ? presetColor : 'rgba(1, 1, 1, 0.4)'
   )
-
-  initialValues = initialValues
-    ? initialValues
-    : {
-        hOffset: 0,
-        vOffset: 0,
-        blur: 0,
-        spread: 0,
-      }
 
   const [hOffset, sethOffset] = useState(initialValues.hOffset)
   const [vOffset, setVOffset] = useState(initialValues.vOffset)
