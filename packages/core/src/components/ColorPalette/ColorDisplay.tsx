@@ -93,7 +93,7 @@ function VariantRow({
                 ? 'white'
                 : 'black',
               color: color,
-              borderRadius: 13,
+              borderRadius: 8,
               paddingInline: 2,
             }}
             onClick={() => {
