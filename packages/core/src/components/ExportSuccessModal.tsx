@@ -44,6 +44,52 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
   const [exportType, setExportType] = useState<exports>('colors')
   const exportTypes = ['Colors', 'Typography', 'Shadows']
   const innerTabs = ['CSS / SCSS', 'Javascript / Typescript', 'Tailwind']
+  const exportTabComponent: Record<exports, React.ReactNode> = {
+    colors: (
+      <TokenTab
+        tabs={innerTabs}
+        primaryName={
+          tokens && tokens.colorData[0] ? tokens.colorData[0].name : 'primary'
+        }
+        cssName="color"
+        cssPropertyName="background-color"
+        javascriptName="colors"
+        javascriptPropertyName="backgroundColor"
+        tailwindName="colors"
+        tailwindPropertyName="colors"
+      />
+    ),
+    typography: (
+      <TokenTab
+        tabs={innerTabs}
+        primaryName={
+          tokens && tokens.typography.fontSizes[0]
+            ? tokens.typography.fontSizes[0].name
+            : 'sm'
+        }
+        cssName="font-size"
+        cssPropertyName="font-size"
+        javascriptName="fontSizes"
+        javascriptPropertyName="fontSize"
+        tailwindName="fontSizes"
+        tailwindPropertyName="fontSize"
+      />
+    ),
+    shadows: (
+      <TokenTab
+        tabs={innerTabs}
+        primaryName={
+          tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
+        }
+        cssName="box-shadow"
+        cssPropertyName="box-shadow"
+        javascriptName="boxShadows"
+        javascriptPropertyName="boxShadow"
+        tailwindName="boxShadows"
+        tailwindPropertyName="dropShadow"
+      />
+    ),
+  }
   return (
     <>
       <Text css={{ marginBottom: '24px' }}>
@@ -91,54 +137,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         </MenuList>
       </Menu>
       <Tabs>
-        <TabPanels>
-          {exportType === 'colors' ? (
-            <TokenTab
-              tabs={innerTabs}
-              primaryName={
-                tokens && tokens.colorData[0]
-                  ? tokens.colorData[0].name
-                  : 'primary'
-              }
-              cssName="color"
-              cssPropertyName="background-color"
-              javascriptName="colors"
-              javascriptPropertyName="backgroundColor"
-              tailwindName="colors"
-              tailwindPropertyName="colors"
-            />
-          ) : null}
-          {exportType === 'typography' ? (
-            <TokenTab
-              tabs={innerTabs}
-              primaryName={
-                tokens && tokens.typography.fontSizes[0]
-                  ? tokens.typography.fontSizes[0].name
-                  : 'sm'
-              }
-              cssName="font-size"
-              cssPropertyName="font-size"
-              javascriptName="fontSizes"
-              javascriptPropertyName="fontSize"
-              tailwindName="fontSizes"
-              tailwindPropertyName="fontSize"
-            />
-          ) : null}
-          {exportType === 'shadows' ? (
-            <TokenTab
-              tabs={innerTabs}
-              primaryName={
-                tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
-              }
-              cssName="box-shadow"
-              cssPropertyName="box-shadow"
-              javascriptName="boxShadows"
-              javascriptPropertyName="boxShadow"
-              tailwindName="boxShadows"
-              tailwindPropertyName="dropShadow"
-            />
-          ) : null}
-        </TabPanels>
+        <TabPanels>{exportTabComponent[exportType]}</TabPanels>
       </Tabs>
 
       <Text css={{ marginTop: '12px' }}>
