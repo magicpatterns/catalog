@@ -149,22 +149,25 @@ export function Dashboard({
         </Button>
       ) : null}
       <Box css={{ width: '300px', position: 'fixed' }}>
-        <Sidebar
-          platform={platform}
-          activeTab={tab}
-          onSelectTab={(newTab: TTab) => setTab(newTab)}
-          onOpenSettings={() => onExportSettingsModalOpen()}
-          onExport={handleExport}
-          isDisabled={isLoading}
-          setIsSidebarOpen={setIsSidebarOpen}
-        />
+        {isSidebarOpen ? (
+          <Sidebar
+            platform={platform}
+            activeTab={tab}
+            onSelectTab={(newTab: TTab) => setTab(newTab)}
+            onOpenSettings={() => onExportSettingsModalOpen()}
+            onExport={handleExport}
+            isDisabled={isLoading}
+            setIsSidebarOpen={setIsSidebarOpen}
+          />
+        ) : null}
       </Box>
-
-      <Box
-        css={{
-          minWidth: '300px',
-        }}
-      />
+      {isSidebarOpen ? (
+        <Box
+          css={{
+            minWidth: '300px',
+          }}
+        />
+      ) : null}
       <Box
         css={{ backgroundColor: 'white', flexGrow: 1 }}
         padding={{
