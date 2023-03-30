@@ -6,7 +6,7 @@ import {
 import { StateCreator } from 'zustand'
 
 export interface TypographySlice extends TTypographyData {
-  setFontSizes: (newState: TFontSizeVariant[]) => void
+  setTypography: (newState: TFontSizeVariant[]) => void
 }
 export const createTypographySlice: StateCreator<
   TypographySlice,
@@ -15,5 +15,5 @@ export const createTypographySlice: StateCreator<
   TypographySlice
 > = (set) => ({
   fontSizes: [],
-  setFontSizes: (newState) => set((state) => ({ fontSizes: newState })),
+  setTypography: (newState) => set((state) => ({ fontSizes: newState })),
 })
