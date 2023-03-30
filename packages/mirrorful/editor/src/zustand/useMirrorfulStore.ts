@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { createTypographySlice, TypographySlice } from './useTypographyStore'
+import { createTypographySlice, TypographySlice } from './typographySlice'
 
 const useMirrorfulStore = create<TypographySlice>()((...state) => ({
   ...createTypographySlice(...state),
