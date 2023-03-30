@@ -5,9 +5,11 @@ import {
   Heading,
   Stack,
   Text,
+  Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
 import { TShadowData } from '@core/types'
+import { useEffect, useState } from 'react'
 
 import { EditShadowModal } from './EditShadowModal'
 
@@ -25,6 +27,20 @@ export function ShadowRow({
     onOpen: onEditVariantModalOpen,
     onClose: onEditVariantModalClose,
   } = useDisclosure()
+
+  const [hasCopiedShadowValue, setHasCopiedShadowValue] = useState(false)
+
+  useEffect(() => {
+    let copiedTimeout: NodeJS.Timeout
+
+    if (hasCopiedShadowValue) {
+      copiedTimeout = setTimeout(() => {
+        setHasCopiedShadowValue(false)
+      }, 1500)
+    }
+
+    return () => clearTimeout(copiedTimeout)
+  }, [hasCopiedShadowValue])
 
   function getRgba(str: string) {
     const rgbaRegex = /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/
@@ -82,17 +98,35 @@ export function ShadowRow({
             <Text css={{ fontWeight: 'bold' }}>{shadowData.name}</Text>
           </Box>
           <Box>
-            <Text
-              css={{
-                fontWeight: 'bold',
-                flexGrow: 1,
-                fontSize: '1rem',
-                marginLeft: '12px',
-              }}
-              fontSize={18}
+            <Tooltip
+              label="Copied Shadow to Clipboard"
+              hasArrow
+              isDisabled={!hasCopiedShadowValue}
+              isOpen={hasCopiedShadowValue}
             >
-              {shadowData.value}
-            </Text>
+              <Text
+                css={{
+                  fontWeight: 'bold',
+                  flexGrow: 1,
+                  fontSize: '1rem',
+                  marginLeft: '12px',
+                }}
+                _hover={{
+                  cursor: 'pointer',
+                  backgroundColor: 'black',
+                  color: 'white',
+                  borderRadius: 8,
+                  paddingInline: 2,
+                }}
+                fontSize={18}
+                onClick={() => {
+                  navigator.clipboard.writeText(shadowData.value)
+                  setHasCopiedShadowValue(true)
+                }}
+              >
+                {shadowData.value}
+              </Text>
+            </Tooltip>
           </Box>
         </Box>
 
