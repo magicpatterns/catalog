@@ -1,4 +1,5 @@
-import { Badge, Box, Icon, Stack, Text } from '@chakra-ui/react'
+import { CloseIcon } from '@chakra-ui/icons'
+import { Badge, Box, Button, Icon, Stack, Text } from '@chakra-ui/react'
 import { VERSION } from '@core/utils/constants'
 import { Dispatch, useState } from 'react'
 import { IconType } from 'react-icons'
@@ -146,8 +147,11 @@ export function Sidebar({
           backgroundColor: '#F2F2F2',
         }}
       >
-        <Box>
+        <Box css={{ display: 'flex', justifyContent: 'space-between' }}>
           <img src="/mirrorful_logo.png" style={{ width: '150px' }} />
+          <Button>
+            <CloseIcon />
+          </Button>
         </Box>
         <Box
           css={{
