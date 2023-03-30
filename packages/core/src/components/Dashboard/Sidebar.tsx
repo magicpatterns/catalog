@@ -149,7 +149,7 @@ export function Sidebar({
       >
         <Box css={{ display: 'flex', justifyContent: 'space-between' }}>
           <img src="/mirrorful_logo.png" style={{ width: '150px' }} />
-          <Button>
+          <Button onClick={() => setIsSidebarOpen(false)}>
             <CloseIcon />
           </Button>
         </Box>
