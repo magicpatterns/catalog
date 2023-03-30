@@ -1,6 +1,6 @@
 import { Badge, Box, Icon, Stack, Text } from '@chakra-ui/react'
 import { VERSION } from '@core/utils/constants'
-import { useState } from 'react'
+import { Dispatch, useState } from 'react'
 import { IconType } from 'react-icons'
 import {
   FiAperture,
@@ -118,6 +118,7 @@ export function Sidebar({
   onOpenSettings,
   onExport,
   isDisabled,
+  setIsSidebarOpen,
 }: {
   platform: TPlatform
   activeTab: string
@@ -125,6 +126,7 @@ export function Sidebar({
   onOpenSettings: () => void
   onExport: () => void
   isDisabled?: boolean
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   return (
     <Box
