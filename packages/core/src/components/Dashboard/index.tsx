@@ -144,7 +144,10 @@ export function Dashboard({
   return (
     <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
       {!isSidebarOpen ? (
-        <Button onClick={() => setIsSidebarOpen(true)}>
+        <Button
+          onClick={() => setIsSidebarOpen(true)}
+          css={{ position: 'fixed', top: '5px', left: '5px' }}
+        >
           <HamburgerIcon />
         </Button>
       ) : null}
