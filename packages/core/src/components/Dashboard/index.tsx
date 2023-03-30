@@ -1,4 +1,11 @@
-import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
+import { HamburgerIcon } from '@chakra-ui/icons'
+import {
+  Box,
+  Button,
+  IconButton,
+  Spinner,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
 import { ExportSettingsModal } from '@core/components/ExportSettingsModal'
 import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
@@ -16,6 +23,7 @@ import {
 import { AnimatePresence } from 'framer-motion'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { transform } from 'typescript'
 
 import { ShadowsSection } from '../Shadows/ShadowsSection'
 import { ThemeManager } from '../ThemeManager'
@@ -161,6 +169,11 @@ export function Dashboard({
           lg: '48px 96px',
         }}
       >
+        {!isSidebarOpen ? (
+          <Button>
+            <HamburgerIcon />
+          </Button>
+        ) : null}
         <AnimatePresence>
           {isLoading ? (
             <motion.div
