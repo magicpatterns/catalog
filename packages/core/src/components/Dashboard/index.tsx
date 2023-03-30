@@ -151,6 +151,11 @@ export function Dashboard({
 
   return (
     <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
+      {!isSidebarOpen ? (
+        <Button>
+          <HamburgerIcon />
+        </Button>
+      ) : null}
       <Slide direction="left" in={isSidebarOpen}>
         <Box css={{ width: '300px', position: 'fixed' }}>
           <Sidebar
@@ -173,11 +178,6 @@ export function Dashboard({
           lg: '48px 96px',
         }}
       >
-        {!isSidebarOpen ? (
-          <Button>
-            <HamburgerIcon />
-          </Button>
-        ) : null}
         <AnimatePresence>
           {isLoading ? (
             <motion.div
