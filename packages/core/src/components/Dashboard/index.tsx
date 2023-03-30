@@ -34,6 +34,7 @@ export function Dashboard({
   postStoreData: (data: TConfig) => Promise<void>
   platform?: TPlatform
 }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tab, setTab] = useState<TTab>('colors')
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
