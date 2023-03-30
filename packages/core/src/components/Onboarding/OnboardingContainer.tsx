@@ -1,8 +1,10 @@
 import { Box } from '@chakra-ui/react'
 
 export function OnboardingContainer({
+  primaryColor,
   children,
 }: {
+  primaryColor: string
   children: React.ReactNode
 }) {
   return (
@@ -13,9 +15,35 @@ export function OnboardingContainer({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'lightgray',
       }}
     >
+      <Box
+        css={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          height: '100%',
+          width: '100%',
+          // background: `linear-gradient(120deg, ${primaryColor}, transparent), url(http://api.thumbr.it/whitenoise-361x370.png?background=4ea6caff&noise=626262&density=100&opacity=65)`,
+          zIndex: -2,
+          // background: `linear-gradient(120deg, ${primaryColor}, transparent))`,
+          background: primaryColor,
+          backgroundImage: `url('/noise.png')`,
+        }}
+      />
+      <Box
+        css={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          height: '100%',
+          width: '100%',
+          zIndex: -1,
+          background:
+            'linear-gradient(145deg, transparent, lightgray 70%, lightgray)',
+        }}
+      />
+
       <Box
         css={{
           backgroundColor: 'white',
