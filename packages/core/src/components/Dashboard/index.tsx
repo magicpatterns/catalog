@@ -158,6 +158,7 @@ export function Dashboard({
           onOpenSettings={() => onExportSettingsModalOpen()}
           onExport={handleExport}
           isDisabled={isLoading}
+          setIsSidebarOpen={setIsSidebarOpen}
         />
       </Box>
       {isSidebarOpen ? <Box css={{ minWidth: '300px' }} /> : null}
