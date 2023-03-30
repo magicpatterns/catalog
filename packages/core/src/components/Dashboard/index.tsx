@@ -1,4 +1,5 @@
-import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
+import { HamburgerIcon } from '@chakra-ui/icons'
+import { Box, Button, Spinner, useDisclosure } from '@chakra-ui/react'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
 import { ExportSettingsModal } from '@core/components/ExportSettingsModal'
 import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
@@ -34,6 +35,7 @@ export function Dashboard({
   postStoreData: (data: TConfig) => Promise<void>
   platform?: TPlatform
 }) {
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tab, setTab] = useState<TTab>('colors')
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
@@ -141,7 +143,12 @@ export function Dashboard({
 
   return (
     <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
-      <Box css={{ width: '300px', position: 'fixed' }}>
+      <motion.div
+        animate={{
+          width: isSidebarCollapsed ? '50px' : '300px',
+          position: 'fixed',
+        }}
+      >
         <Sidebar
           platform={platform}
           activeTab={tab}
@@ -149,9 +156,15 @@ export function Dashboard({
           onOpenSettings={() => onExportSettingsModalOpen()}
           onExport={handleExport}
           isDisabled={isLoading}
+          isCollapsed={isSidebarCollapsed}
+          onToggleCollapsed={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         />
-      </Box>
-      <Box css={{ minWidth: '300px' }} />
+      </motion.div>
+      <motion.div
+        animate={{
+          minWidth: isSidebarCollapsed ? ' 150px' : '300px',
+        }}
+      />
       <Box
         css={{ backgroundColor: 'white', flexGrow: 1 }}
         padding={{
