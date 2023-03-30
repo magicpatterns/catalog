@@ -61,6 +61,7 @@ type props = { children: React.ReactNode }
 export function Layout({ children }: props) {
   const platform = 'package'
   const [tab, setTab] = useState<TTab>('colors')
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const { colors, typography, shadows, fileTypes } = useMirrorfulStore(
     (state) => state
   )
@@ -94,6 +95,8 @@ export function Layout({ children }: props) {
           onOpenSettings={() => onExportSettingsModalOpen()}
           onExport={handleExport}
           isDisabled={false}
+          isCollapsed={isSidebarCollapsed}
+          onToggleCollapsed={() => setIsSidebarCollapsed((prev) => !prev)}
         />
       </Box>
       <Box css={{ minWidth: '300px' }} />
