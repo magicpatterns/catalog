@@ -35,7 +35,7 @@ export function Dashboard({
   postStoreData: (data: TConfig) => Promise<void>
   platform?: TPlatform
 }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [tab, setTab] = useState<TTab>('colors')
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
@@ -143,34 +143,28 @@ export function Dashboard({
 
   return (
     <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
-      {!isSidebarOpen ? (
-        <Button
-          onClick={() => setIsSidebarOpen(true)}
-          css={{ position: 'fixed', top: '5px', left: '5px' }}
-        >
-          <HamburgerIcon />
-        </Button>
-      ) : null}
-      <Box css={{ width: '300px', position: 'fixed' }}>
-        {isSidebarOpen ? (
-          <Sidebar
-            platform={platform}
-            activeTab={tab}
-            onSelectTab={(newTab: TTab) => setTab(newTab)}
-            onOpenSettings={() => onExportSettingsModalOpen()}
-            onExport={handleExport}
-            isDisabled={isLoading}
-            setIsSidebarOpen={setIsSidebarOpen}
-          />
-        ) : null}
-      </Box>
-      {isSidebarOpen ? (
-        <Box
-          css={{
-            minWidth: '300px',
-          }}
+      <motion.div
+        animate={{
+          width: isSidebarCollapsed ? '50px' : '300px',
+          position: 'fixed',
+        }}
+      >
+        <Sidebar
+          platform={platform}
+          activeTab={tab}
+          onSelectTab={(newTab: TTab) => setTab(newTab)}
+          onOpenSettings={() => onExportSettingsModalOpen()}
+          onExport={handleExport}
+          isDisabled={isLoading}
+          isCollapsed={isSidebarCollapsed}
+          onToggleCollapsed={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         />
-      ) : null}
+      </motion.div>
+      <motion.div
+        animate={{
+          minWidth: isSidebarCollapsed ? ' 150px' : '300px',
+        }}
+      />
       <Box
         css={{ backgroundColor: 'white', flexGrow: 1 }}
         padding={{
