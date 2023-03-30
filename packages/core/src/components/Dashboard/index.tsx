@@ -152,7 +152,7 @@ export function Dashboard({
           isDisabled={isLoading}
         />
       </Box>
-      <Box css={{ minWidth: '300px' }} />
+      {isSidebarOpen ? <Box css={{ minWidth: '300px' }} /> : null}
       <Box
         css={{ backgroundColor: 'white', flexGrow: 1 }}
         padding={{
