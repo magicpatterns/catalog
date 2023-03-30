@@ -1,12 +1,5 @@
 import { HamburgerIcon } from '@chakra-ui/icons'
-import {
-  Box,
-  Button,
-  IconButton,
-  Slide,
-  Spinner,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { Box, Button, Spinner, useDisclosure } from '@chakra-ui/react'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
 import { ExportSettingsModal } from '@core/components/ExportSettingsModal'
 import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
@@ -24,7 +17,6 @@ import {
 import { AnimatePresence } from 'framer-motion'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { transform } from 'typescript'
 
 import { ShadowsSection } from '../Shadows/ShadowsSection'
 import { ThemeManager } from '../ThemeManager'
@@ -156,30 +148,23 @@ export function Dashboard({
           <HamburgerIcon />
         </Button>
       ) : null}
-      <motion.div
-        hidden={!isSidebarOpen}
-        initial={true}
-        animate={{ translateX: !isSidebarOpen ? '100%' : '0%' }}
-        transition={{ ease: 'easeIn', duration: 0.2 }}
-      >
-        <Box css={{ width: '300px', position: 'fixed' }}>
-          <Sidebar
-            platform={platform}
-            activeTab={tab}
-            onSelectTab={(newTab: TTab) => setTab(newTab)}
-            onOpenSettings={() => onExportSettingsModalOpen()}
-            onExport={handleExport}
-            isDisabled={isLoading}
-            setIsSidebarOpen={setIsSidebarOpen}
-          />
-        </Box>
-
-        <Box
-          css={{
-            minWidth: `${isSidebarOpen ? '300px' : '0px'}`,
-          }}
+      <Box css={{ width: '300px', position: 'fixed' }}>
+        <Sidebar
+          platform={platform}
+          activeTab={tab}
+          onSelectTab={(newTab: TTab) => setTab(newTab)}
+          onOpenSettings={() => onExportSettingsModalOpen()}
+          onExport={handleExport}
+          isDisabled={isLoading}
+          setIsSidebarOpen={setIsSidebarOpen}
         />
-      </motion.div>
+      </Box>
+
+      <Box
+        css={{
+          minWidth: '300px',
+        }}
+      />
       <Box
         css={{ backgroundColor: 'white', flexGrow: 1 }}
         padding={{
