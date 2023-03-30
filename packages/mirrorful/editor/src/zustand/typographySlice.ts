@@ -5,8 +5,9 @@ import {
 } from '@mirrorful/core/lib/types'
 import { StateCreator } from 'zustand'
 
-export interface TypographySlice extends TTypographyData {
-  setTypography: (newState: TFontSizeVariant[]) => void
+export interface TypographySlice {
+  typography: TTypographyData
+  setTypography: (newState: TTypographyData) => void
 }
 export const createTypographySlice: StateCreator<
   TypographySlice,
@@ -14,6 +15,6 @@ export const createTypographySlice: StateCreator<
   [],
   TypographySlice
 > = (set) => ({
-  fontSizes: [],
-  setTypography: (newState) => set((state) => ({ fontSizes: newState })),
+  typography: { fontSizes: [] },
+  setTypography: (newState) => set((state) => ({ typography: newState })),
 })
