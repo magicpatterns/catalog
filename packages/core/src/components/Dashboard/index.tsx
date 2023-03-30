@@ -156,7 +156,7 @@ export function Dashboard({
           <HamburgerIcon />
         </Button>
       ) : null}
-      <Slide direction="left" in={isSidebarOpen}>
+      <motion.div>
         <Box css={{ width: '300px', position: 'fixed' }}>
           <Sidebar
             platform={platform}
@@ -168,8 +168,13 @@ export function Dashboard({
             setIsSidebarOpen={setIsSidebarOpen}
           />
         </Box>
-      </Slide>
-      {isSidebarOpen ? <Box css={{ minWidth: '300px' }} /> : null}
+
+        <Box
+          css={{
+            minWidth: `${isSidebarOpen ? '300px' : '0px'}`,
+          }}
+        />
+      </motion.div>
       <Box
         css={{ backgroundColor: 'white', flexGrow: 1 }}
         padding={{
