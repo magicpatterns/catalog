@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   IconButton,
+  Slide,
   Spinner,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -150,17 +151,19 @@ export function Dashboard({
 
   return (
     <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
-      <Box css={{ width: '300px', position: 'fixed' }}>
-        <Sidebar
-          platform={platform}
-          activeTab={tab}
-          onSelectTab={(newTab: TTab) => setTab(newTab)}
-          onOpenSettings={() => onExportSettingsModalOpen()}
-          onExport={handleExport}
-          isDisabled={isLoading}
-          setIsSidebarOpen={setIsSidebarOpen}
-        />
-      </Box>
+      <Slide direction="left" in={isSidebarOpen}>
+        <Box css={{ width: '300px', position: 'fixed' }}>
+          <Sidebar
+            platform={platform}
+            activeTab={tab}
+            onSelectTab={(newTab: TTab) => setTab(newTab)}
+            onOpenSettings={() => onExportSettingsModalOpen()}
+            onExport={handleExport}
+            isDisabled={isLoading}
+            setIsSidebarOpen={setIsSidebarOpen}
+          />
+        </Box>
+      </Slide>
       {isSidebarOpen ? <Box css={{ minWidth: '300px' }} /> : null}
       <Box
         css={{ backgroundColor: 'white', flexGrow: 1 }}
