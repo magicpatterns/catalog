@@ -156,7 +156,7 @@ export function Dashboard({
           <HamburgerIcon />
         </Button>
       ) : null}
-      <motion.div>
+      <motion.div hidden={!isSidebarOpen} initial={true}>
         <Box css={{ width: '300px', position: 'fixed' }}>
           <Sidebar
             platform={platform}
