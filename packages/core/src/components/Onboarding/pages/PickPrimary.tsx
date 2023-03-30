@@ -9,18 +9,16 @@ import tinycolor from 'tinycolor2'
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
 
 export function PickPrimary({
-  initialPrimary,
+  primaryColor,
   onUpdatePage,
   onUpdatePrimaryColor,
   platform,
 }: {
-  initialPrimary: string
+  primaryColor: string
   onUpdatePage: (page: number) => void
   onUpdatePrimaryColor: (newColor: string) => void
   platform: TPlatform
 }) {
-  const [primaryColor, setPrimaryColor] = useState<string>(initialPrimary)
-
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
@@ -94,7 +92,7 @@ export function PickPrimary({
           width="100%"
           color={primaryColor}
           onChange={(color: ColorResult) => {
-            setPrimaryColor(color.hex)
+            onUpdatePrimaryColor(color.hex)
           }}
         />
       </Box>
