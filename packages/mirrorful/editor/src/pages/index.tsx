@@ -1,14 +1,28 @@
 import { Box, typography, useDisclosure } from '@chakra-ui/react'
 import { Dashboard, TTab } from '@mirrorful/core/lib/components/Dashboard'
-import { TConfig } from '@mirrorful/core/lib/types'
+import { TColorData, TConfig } from '@mirrorful/core/lib/types'
 import Head from 'next/head'
 import { platform } from 'os'
 import { useState } from 'react'
 import postStoreData from 'src/utils/postStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 import { Sidebar } from '@mirrorful/core/src/components/Dashboard/Sidebar'
+import { ColorPaletteSection } from '@mirrorful/core/lib/components/ColorPalette/ColorPaletteSection'
 
 export default function Editor() {
+  const { colors, typography, shadows, fileTypes, setColors } =
+    useMirrorfulStore((state) => state)
+  const handleUpdateColors = async (data: TColorData[]) => {
+    setColors(data)
+    await postStoreData({
+      tokens: {
+        typography,
+        colorData: data,
+        shadows,
+      },
+      files: fileTypes,
+    })
+  }
   return (
     <>
       <Head>
@@ -20,7 +34,13 @@ export default function Editor() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Dashboard
+      <Layout>
+        <ColorPaletteSection
+          colors={colors}
+          onUpdateColors={handleUpdateColors}
+        ></ColorPaletteSection>
+      </Layout>
+      {/* <Dashboard
         fetchStoreData={async () => {
           const response = await fetch('/api/config')
           const data: TConfig = await response.json()
@@ -33,13 +53,13 @@ export default function Editor() {
             body: JSON.stringify(data),
           })
         }}
-      />
+      /> */}
     </>
   )
 }
 
 type props = { children: React.ReactNode }
-function Layout({ children }: props) {
+export function Layout({ children }: props) {
   const platform = 'package'
   const [tab, setTab] = useState<TTab>('colors')
   const { colors, typography, shadows, fileTypes } = useMirrorfulStore(
