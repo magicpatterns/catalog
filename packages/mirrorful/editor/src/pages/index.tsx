@@ -7,6 +7,7 @@ import postStoreData from 'src/utils/postStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 import { Sidebar } from '@mirrorful/core/lib/components/Dashboard/Sidebar'
 import { ColorPaletteSection } from '@mirrorful/core/lib/components/ColorPalette/ColorPaletteSection'
+import { useRouter } from 'next/router'
 
 export default function Editor() {
   const { colors, typography, shadows, fileTypes, setColors } =
@@ -61,6 +62,7 @@ type props = { children: React.ReactNode }
 export function Layout({ children }: props) {
   const platform = 'package'
   const [tab, setTab] = useState<TTab>('colors')
+  const router = useRouter()
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const { colors, typography, shadows, fileTypes } = useMirrorfulStore(
     (state) => state
@@ -91,7 +93,7 @@ export function Layout({ children }: props) {
         <Sidebar
           platform={platform}
           activeTab={tab}
-          onSelectTab={(newTab: TTab) => setTab(newTab)}
+          onSelectTab={(newTab: TTab) => router.push(newTab)}
           onOpenSettings={() => onExportSettingsModalOpen()}
           onExport={handleExport}
           isCollapsed={isSidebarCollapsed}
