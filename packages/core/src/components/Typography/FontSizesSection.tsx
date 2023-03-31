@@ -17,11 +17,10 @@ export function FontSizesSection({
     onClose: onAddVariantModalClose,
   } = useDisclosure()
 
-  fontSizeData.sort((a, b) => {
-    if(a.unit === b.unit) return a.value - b.value;
-    const fontUnits = ['rem', 'em', 'px'];
-    return fontUnits.indexOf(a.unit) - fontUnits.indexOf(b.unit);
-
+  fontSizeData.sort((fontOne, fontTwo) => {
+    if (fontOne.unit === fontTwo.unit) return fontOne.value - fontTwo.value
+    const fontUnits = ['rem', 'em', 'px']
+    return fontUnits.indexOf(fontOne.unit) - fontUnits.indexOf(fontTwo.unit)
   })
 
   return (
@@ -33,7 +32,7 @@ export function FontSizesSection({
         {fontSizeData.map((fontSizeVariant, index) => {
           return (
             <FontSizeRow
-              key={`${index}-${fontSizeVariant.name}`} 
+              key={`${index}-${fontSizeVariant.name}`}
               fontSizeData={fontSizeVariant}
               onUpdateFontSizeVariant={(
                 updatedFontSizeData: TFontSizeVariant

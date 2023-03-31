@@ -1,3 +1,17 @@
 {
-"isGitignoreExtActive": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/vendor": true,
+    "**/lib": true,
+    "**/.mirrorful": true,
+    "**/dist": true
+  },
+  "cSpell.words": ["Mirrorful"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
