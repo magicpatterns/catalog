@@ -52,7 +52,7 @@ export function AddColorSkeleton({
         }}
       >
         <Button fontSize="1rem" fontWeight={600} color="black" height="3rem">
-          Add new color
+          Add New Color
         </Button>
       </Box>
     </Box>

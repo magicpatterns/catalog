@@ -63,7 +63,7 @@ function VariantRow({
         justifyContent: 'space-between',
         padding: '0px 24px',
         borderRadius: 8,
-        border: variant.isBase ? '2px solid black' : '1px solid black',
+        border: '1px solid black',
       }}
       role="group"
     >
@@ -143,12 +143,10 @@ export function ColorDisplay({
   colorData,
   onUpdateColorData,
   onDeleteColorData,
-  animationDelayAddition,
 }: {
   colorData: TColorData
   onUpdateColorData: (colorData: TColorData) => void
   onDeleteColorData: () => void
-  animationDelayAddition: number
 }) {
   const {
     isOpen: isColorNameModalOpen,
