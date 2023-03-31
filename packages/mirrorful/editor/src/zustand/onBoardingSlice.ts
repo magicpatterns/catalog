@@ -6,7 +6,7 @@ export interface onBoardingSlice {
   setShowOnBoarding: (newState: boolean) => void
   setShouldForceSkipOnboarding: (newState: boolean) => void
 }
-export const createonBoardingSlice: StateCreator<
+export const createOnBoardingSlice: StateCreator<
   onBoardingSlice,
   [],
   [],
