@@ -1,6 +1,7 @@
 import '../main.css'
 import '../atom-one-dark.css'
 
+import SplashScreen from '@mirrorful/core/lib/components/SplashScreen'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
 import { defaultShadows } from '@mirrorful/core/lib/types'
 import type { AppProps } from 'next/app'
@@ -9,7 +10,6 @@ import posthog from 'posthog-js'
 import { useEffect, useState } from 'react'
 import fetchStoreData from 'src/utils/fetchStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
-import SplashScreen from '@mirrorful/core/lib/components/SplashScreen'
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready
