@@ -1,5 +1,5 @@
 import { Box, useDisclosure } from '@chakra-ui/react'
-import { Dashboard, TTab } from '@mirrorful/core/lib/components/Dashboard'
+import { TTab } from '@mirrorful/core/lib/components/Dashboard'
 import { TColorData } from '@mirrorful/core/lib/types'
 import Head from 'next/head'
 import { useState } from 'react'
