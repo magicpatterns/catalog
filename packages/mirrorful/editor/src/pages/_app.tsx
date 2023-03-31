@@ -30,42 +30,44 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     setShadows,
     setFileTypes,
     setShowOnBoarding,
+    shouldForceSkipOnboarding,
+    showOnBoarding,
   } = useMirrorfulStore((state) => state)
   // to fetch data
 
-  useEffect(() => {
-    let timeout: NodeJS.Timeout
-    const fetchStoredData = async () => {
-      try {
-        const data = await fetchStoreData()
+  let timeout: NodeJS.Timeout
+  const fetchStoredData = async () => {
+    try {
+      const data = await fetchStoreData()
 
-        if (
-          !Object.keys(data).length ||
-          !data.tokens.colorData ||
-          data.tokens.colorData.length === 0
-        ) {
-          timeout = setTimeout(() => {
-            setIsLoading(false)
-          }, 500)
-          setShowOnBoarding(true)
-          return
-        }
-
-        setColors(data.tokens.colorData ?? [])
-        setTypography(data.tokens.typography)
-        setShadows(data.tokens.shadows ?? defaultShadows)
-        setFileTypes(data.files)
+      if (
+        !Object.keys(data).length ||
+        !data.tokens.colorData ||
+        data.tokens.colorData.length === 0
+      ) {
         timeout = setTimeout(() => {
           setIsLoading(false)
         }, 500)
-      } catch (e) {
-        // TODO: Handle error
-      } finally {
-        timeout = setTimeout(() => {
-          setIsLoading(false)
-        }, 500)
+        setShowOnBoarding(true)
+        return
       }
+
+      setColors(data.tokens.colorData ?? [])
+      setTypography(data.tokens.typography)
+      setShadows(data.tokens.shadows ?? defaultShadows)
+      setFileTypes(data.files)
+      timeout = setTimeout(() => {
+        setIsLoading(false)
+      }, 500)
+    } catch (e) {
+      // TODO: Handle error
+    } finally {
+      timeout = setTimeout(() => {
+        setIsLoading(false)
+      }, 500)
     }
+  }
+  useEffect(() => {
     // on initial load
     fetchStoredData()
 
@@ -88,6 +90,12 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     router.prefetch('/typography')
     router.prefetch('/shadows')
   }, [router])
+
+  useEffect(() => {
+    if (!showOnBoarding && shouldForceSkipOnboarding) {
+      fetchStoredData()
+    }
+  }, [shouldForceSkipOnboarding, showOnBoarding])
 
   return (
     <MirrorfulThemeProvider>
