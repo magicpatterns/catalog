@@ -18,10 +18,8 @@ export function FontSizesSection({
   } = useDisclosure()
 
   fontSizeData.sort((a, b) => {
-    if(a.unit === 'rem' && b.unit !== 'rem') return -1
-    if(a.unit === 'em' && b.unit === 'px') return -1;
-    if(a.unit === 'px' && b.unit !== 'px') return 1;
-    return a.value - b.value;
+    if(a.unit === b.unit) return a.value - b.value
+    else return a.unit < b.unit ? 1 : (a.unit > b.unit ?  -1 : 0)
   })
 
   return (
@@ -30,10 +28,10 @@ export function FontSizesSection({
         Font Sizes
       </Heading>
       <Stack css={{ marginTop: '24px' }} spacing={12}>
-        {fontSizeData.map((fontSizeVariant, index) => {
+        {fontSizeData.map((fontSizeVariant) => {
           return (
             <FontSizeRow
-              key={`${index}-${fontSizeVariant.name}`} 
+              key={fontSizeVariant.name}
               fontSizeData={fontSizeVariant}
               onUpdateFontSizeVariant={(
                 updatedFontSizeData: TFontSizeVariant
