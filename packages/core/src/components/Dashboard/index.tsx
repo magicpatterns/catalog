@@ -149,7 +149,7 @@ export function Dashboard({
           position: 'fixed',
         }}
       >
-        {/* <Sidebar
+        <Sidebar
           platform={platform}
           activeTab={tab}
           onSelectTab={(newTab: TTab) => setTab(newTab)}
@@ -158,7 +158,7 @@ export function Dashboard({
           isDisabled={isLoading}
           isCollapsed={isSidebarCollapsed}
           onToggleCollapsed={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-        /> */}
+        />
       </motion.div>
       <motion.div
         animate={{
