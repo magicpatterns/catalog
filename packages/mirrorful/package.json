@@ -1,6 +1,6 @@
 {
   "name": "mirrorful",
-  "version": "5.0.3",
+  "version": "5.0.6",
   "description": "Simple, open-source design system infrastructure.",
   "keywords": [
     "mirrorful",
@@ -43,7 +43,7 @@
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@mirrorful/core": "1.0.5",
+    "@mirrorful/core": "1.0.9",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "conf": "^10.0.2",

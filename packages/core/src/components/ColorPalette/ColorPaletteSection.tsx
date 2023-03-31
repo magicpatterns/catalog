@@ -48,7 +48,7 @@ export function ColorPaletteSection({
               }}
               transition={{
                 duration: 0.5,
-                delay: 0.3 * index,
+                delay: 0.1 * index,
               }}
             >
               <ColorDisplay
