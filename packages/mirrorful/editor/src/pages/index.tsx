@@ -1,11 +1,11 @@
 import { Box, useDisclosure } from '@chakra-ui/react'
-import { TTab } from '@mirrorful/core/lib/components/Dashboard'
+import { Dashboard, TTab } from '@mirrorful/core/lib/components/Dashboard'
 import { TColorData } from '@mirrorful/core/lib/types'
 import Head from 'next/head'
 import { useState } from 'react'
 import postStoreData from 'src/utils/postStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
-import { Sidebar } from '@mirrorful/core/src/components/Dashboard/Sidebar'
+import { Sidebar } from '@mirrorful/core/lib/components/Dashboard/Sidebar'
 import { ColorPaletteSection } from '@mirrorful/core/lib/components/ColorPalette/ColorPaletteSection'
 
 export default function Editor() {
@@ -94,7 +94,6 @@ export function Layout({ children }: props) {
           onSelectTab={(newTab: TTab) => setTab(newTab)}
           onOpenSettings={() => onExportSettingsModalOpen()}
           onExport={handleExport}
-          isDisabled={false}
           isCollapsed={isSidebarCollapsed}
           onToggleCollapsed={() => setIsSidebarCollapsed((prev) => !prev)}
         />
