@@ -14,22 +14,9 @@ import fetchStoreData from 'src/utils/fetchStoreData'
 import postStoreData from 'src/utils/postStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
-export default function Editor() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
-    useState<boolean>(false)
-  const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
-  const router = useRouter()
-  const {
-    colors,
-    typography,
-    shadows,
-    fileTypes,
-    setColors,
-    setTypography,
-    setShadows,
-    setFileTypes,
-  } = useMirrorfulStore((state) => state)
+export default function Editor({ isLoading }: { isLoading: boolean }) {
+  const { colors, typography, shadows, fileTypes, setColors } =
+    useMirrorfulStore((state) => state)
 
   const handleUpdateColors = async (data: TColorData[]) => {
     setColors(data)
@@ -43,44 +30,6 @@ export default function Editor() {
     })
   }
 
-  // to fetch data
-  const fetchStoredData = async () => {
-    try {
-      const data = await fetchStoreData()
-
-      if (
-        !Object.keys(data).length ||
-        !data.tokens.colorData ||
-        data.tokens.colorData.length === 0
-      ) {
-        setIsLoading(false)
-        setShowOnboarding(true)
-        return
-      }
-
-      setColors(data.tokens.colorData ?? [])
-      setTypography(data.tokens.typography)
-      setShadows(data.tokens.shadows ?? defaultShadows)
-      setFileTypes(data.files)
-      setIsLoading(false)
-    } catch (e) {
-      // TODO: Handle error
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    // on initial load
-    fetchStoredData()
-  }, [])
-
-  useEffect(() => {
-    // after show on boarding is finished
-    if (!showOnboarding && shouldForceSkipOnboarding) {
-      fetchStoredData()
-    }
-  }, [showOnboarding, shouldForceSkipOnboarding])
   return (
     <>
       <Head>
@@ -92,23 +41,12 @@ export default function Editor() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {!shouldForceSkipOnboarding && showOnboarding ? (
-        <Onboarding
-          postStoreData={postStoreData}
-          onFinishOnboarding={() => {
-            setShowOnboarding(false)
-            setShouldForceSkipOnboarding(true)
-          }}
-          platform={'package'}
-        />
-      ) : (
-        <Layout isLoading={isLoading}>
-          <ColorPaletteSection
-            colors={colors}
-            onUpdateColors={handleUpdateColors}
-          ></ColorPaletteSection>
-        </Layout>
-      )}
+      <Layout isLoading={isLoading}>
+        <ColorPaletteSection
+          colors={colors}
+          onUpdateColors={handleUpdateColors}
+        ></ColorPaletteSection>
+      </Layout>
       {/* <Dashboard
         fetchStoreData={async () => {
           const response = await fetch('/api/config')
@@ -137,8 +75,17 @@ export function Layout({ children, isLoading = false }: props) {
       : (router.pathname.replace('/', '') as TTab)
   )
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
-  const { colors, typography, shadows, fileTypes, setFileTypes } =
-    useMirrorfulStore((state) => state)
+  const {
+    colors,
+    typography,
+    shadows,
+    fileTypes,
+    setFileTypes,
+    setShouldForceSkipOnboarding,
+    setShowOnBoarding,
+    shouldForceSkipOnboarding,
+    showOnBoarding,
+  } = useMirrorfulStore((state) => state)
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
@@ -158,6 +105,25 @@ export function Layout({ children, isLoading = false }: props) {
     })
 
     onExportSuccessModalOpen()
+  }
+
+  useEffect(() => {
+    if (!showOnBoarding && shouldForceSkipOnboarding) {
+      router.reload()
+    }
+  }, [shouldForceSkipOnboarding, showOnBoarding])
+
+  if (!shouldForceSkipOnboarding && showOnBoarding) {
+    return (
+      <Onboarding
+        postStoreData={postStoreData}
+        onFinishOnboarding={() => {
+          setShowOnBoarding(false)
+          setShouldForceSkipOnboarding(true)
+        }}
+        platform={'package'}
+      />
+    )
   }
 
   return (
