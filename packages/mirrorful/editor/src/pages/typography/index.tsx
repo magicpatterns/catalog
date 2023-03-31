@@ -4,7 +4,7 @@ import React from 'react'
 import postStoreData from 'src/utils/postStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
-import { Layout } from '..'
+import { Layout } from '../../components/Layout'
 function Typography() {
   const { typography, colors, shadows, setTypography, fileTypes } =
     useMirrorfulStore((state) => state)
