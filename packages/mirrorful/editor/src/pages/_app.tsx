@@ -9,6 +9,9 @@ import { useEffect, useState } from 'react'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 import fetchStoreData from 'src/utils/fetchStoreData'
 import { defaultShadows } from '@mirrorful/core/lib/types'
+import { Box, Spinner } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready
@@ -32,33 +35,33 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     setShowOnBoarding,
   } = useMirrorfulStore((state) => state)
   // to fetch data
-  const fetchStoredData = async () => {
-    try {
-      const data = await fetchStoreData()
-
-      if (
-        !Object.keys(data).length ||
-        !data.tokens.colorData ||
-        data.tokens.colorData.length === 0
-      ) {
-        setIsLoading(false)
-        setShowOnBoarding(true)
-        return
-      }
-
-      setColors(data.tokens.colorData ?? [])
-      setTypography(data.tokens.typography)
-      setShadows(data.tokens.shadows ?? defaultShadows)
-      setFileTypes(data.files)
-      setIsLoading(false)
-    } catch (e) {
-      // TODO: Handle error
-    } finally {
-      setIsLoading(false)
-    }
-  }
 
   useEffect(() => {
+    const fetchStoredData = async () => {
+      try {
+        const data = await fetchStoreData()
+
+        if (
+          !Object.keys(data).length ||
+          !data.tokens.colorData ||
+          data.tokens.colorData.length === 0
+        ) {
+          setIsLoading(false)
+          setShowOnBoarding(true)
+          return
+        }
+
+        setColors(data.tokens.colorData ?? [])
+        setTypography(data.tokens.typography)
+        setShadows(data.tokens.shadows ?? defaultShadows)
+        setFileTypes(data.files)
+        setIsLoading(false)
+      } catch (e) {
+        // TODO: Handle error
+      } finally {
+        setIsLoading(false)
+      }
+    }
     // on initial load
     fetchStoredData()
   }, [])
@@ -82,7 +85,42 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <MirrorfulThemeProvider>
-      <Component {...pageProps} isLoading={isLoading} />
+      {isLoading && router.pathname === '/' ? (
+        <SplashScreen></SplashScreen>
+      ) : (
+        <Component {...pageProps} isLoading={isLoading} />
+      )}
     </MirrorfulThemeProvider>
   )
+  function SplashScreen() {
+    return (
+      <Box
+        css={{
+          display: 'flex',
+          minHeight: '100dvh',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 0.75,
+            ease: 'easeIn',
+            repeat: Infinity,
+            repeatDelay: 0.25,
+          }}
+        >
+          <Image
+            width={50}
+            height={50}
+            src="/simple_logo.png"
+            alt="Mirrorful"
+          />
+        </motion.div>
+      </Box>
+    )
+  }
 }
