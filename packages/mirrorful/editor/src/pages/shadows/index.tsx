@@ -3,6 +3,7 @@ import { ShadowsSection } from '@mirrorful/core/lib/components/Shadows/ShadowsSe
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 import { TShadowData } from '@mirrorful/core/lib/types'
 import postStoreData from 'src/utils/postStoreData'
+import { Layout } from '..'
 
 function Shadows() {
   const { typography, colors, shadows, setShadows, fileTypes } =
@@ -15,10 +16,12 @@ function Shadows() {
     })
   }
   return (
-    <ShadowsSection
-      onUpdateShadowData={handleUpdateShadows}
-      shadows={shadows}
-    ></ShadowsSection>
+    <Layout>
+      <ShadowsSection
+        onUpdateShadowData={handleUpdateShadows}
+        shadows={shadows}
+      ></ShadowsSection>
+    </Layout>
   )
 }
 
