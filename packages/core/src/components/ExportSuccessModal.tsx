@@ -88,11 +88,12 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
   return (
     <>
       <Text css={{ marginBottom: '24px' }}>
-        Your tokens can now be imported by your app.
+        All of your tokens can now be imported by your app. Open up your code
+        editor to use them!
       </Text>
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-          Choose Export Type
+          Previewing: {exportType}
         </MenuButton>
         <MenuList>
           <MenuOptionGroup
@@ -184,10 +185,15 @@ function TokenTab({
   const tabComponents: Record<tokenTabs, React.ReactNode> = {
     'CSS / SCSS': (
       <TabPanel key="css/scss">
-        <Text css={{ marginBottom: 8 }}>
+        <Text css={{ marginBottom: 4 }}>
           <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-          <Code>theme.css</Code> (actual path may vary. You can reference the{' '}
-          <Code>.mirrorful</Code> folder in the root of your project)
+          <Code>theme.css</Code> in your <Code>App.tsx</Code> or{' '}
+          <Code>index.tsx</Code> file.
+        </Text>
+        <Text fontSize={'sm'} css={{ marginBottom: 8 }}>
+          Actual path may vary. You can reference the{' '}
+          <Code fontSize="xs">.mirrorful</Code> folder in the root of your
+          project.
         </Text>
         <CodePreview
           language="javascript"
@@ -215,10 +221,14 @@ function TokenTab({
     ),
     'Javascript / Typescript': (
       <TabPanel key="javascript/typescript">
-        <Text css={{ marginBottom: 8 }}>
+        <Text css={{ marginBottom: 4 }}>
           <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-          <Code>Tokens</Code> (actual path may vary. You can reference the{' '}
-          <Code>.mirrorful</Code> folder in the root of your project)
+          <Code>Tokens</Code> anywhere in your app.
+        </Text>
+        <Text fontSize="sm" css={{ marginBottom: 8 }}>
+          Actual path may vary. Reference the{' '}
+          <Code fontSize={'xs'}>.mirrorful</Code> folder in the root of your
+          project.
         </Text>
 
         <CodePreview
@@ -242,11 +252,15 @@ function TokenTab({
     ),
     Tailwind: (
       <TabPanel key="tailwind">
-        <Text css={{ marginBottom: 8 }}>
+        <Text css={{ marginBottom: 4 }}>
           <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-          <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code> (actual
-          path may vary. You can reference the <Code>.mirrorful</Code> folder in
-          the root of your project)
+          <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code>{' '}
+        </Text>
+
+        <Text fontSize="sm" css={{ marginBottom: 8 }}>
+          Actual path may vary. Reference the{' '}
+          <Code fontSize="xs">.mirrorful</Code> folder in the root of your
+          project.
         </Text>
 
         <CodePreview
