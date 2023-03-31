@@ -15,6 +15,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 export default function Editor() {
   const [isLoading, setIsLoading] = useState(true)
+  const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
+    useState<boolean>(false)
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
   const {
     colors,
     typography,
@@ -47,7 +50,7 @@ export default function Editor() {
         data.tokens.colorData.length === 0
       ) {
         setIsLoading(false)
-        //  setShowOnboarding(true)
+        setShowOnboarding(true)
         return
       }
       setColors(data.tokens.colorData ?? [])
