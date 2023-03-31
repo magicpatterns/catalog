@@ -1,7 +1,7 @@
 import '../main.css'
 import '../atom-one-dark.css'
 
-import { Box, Spinner } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
 import { defaultShadows } from '@mirrorful/core/lib/types'
 import { motion } from 'framer-motion'
