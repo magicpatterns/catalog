@@ -19,6 +19,7 @@ export default function Editor() {
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
     useState<boolean>(false)
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
+  const router = useRouter()
   const {
     colors,
     typography,
@@ -42,9 +43,11 @@ export default function Editor() {
     })
   }
 
-  useEffect(() => {
-    const fetchStoredData = async () => {
+  // to fetch data
+  const fetchStoredData = async () => {
+    try {
       const data = await fetchStoreData()
+
       if (
         !Object.keys(data).length ||
         !data.tokens.colorData ||
@@ -54,14 +57,30 @@ export default function Editor() {
         setShowOnboarding(true)
         return
       }
+
       setColors(data.tokens.colorData ?? [])
       setTypography(data.tokens.typography)
       setShadows(data.tokens.shadows ?? defaultShadows)
       setFileTypes(data.files)
       setIsLoading(false)
+    } catch (e) {
+      // TODO: Handle error
+    } finally {
+      setIsLoading(false)
     }
+  }
+
+  useEffect(() => {
+    // on initial load
     fetchStoredData()
   }, [])
+
+  useEffect(() => {
+    // after show on boarding is finished
+    if (!showOnboarding && shouldForceSkipOnboarding) {
+      fetchStoredData()
+    }
+  }, [showOnboarding, shouldForceSkipOnboarding])
   return (
     <>
       <Head>
