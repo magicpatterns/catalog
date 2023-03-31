@@ -35,15 +35,15 @@ function SidebarHeader({ label }: { label: string }) {
 function SidebarLink({
   label,
   icon,
-  // isActive,
-  // onSelect,
+  isActive,
+  onSelect,
   isComingSoon,
   isDisabled,
   isCollapsed,
 }: {
   label: string
   icon: IconType
-  // isActive?: boolean
+  isActive?: boolean
   onSelect?: () => void
   isComingSoon?: boolean
   isDisabled?: boolean
@@ -126,8 +126,8 @@ export function SidebarSection({
 
 export function Sidebar({
   platform,
-  // activeTab,
-  // onSelectTab,
+  activeTab,
+  onSelectTab,
   onOpenSettings,
   onExport,
   isDisabled,
@@ -135,8 +135,8 @@ export function Sidebar({
   onToggleCollapsed,
 }: {
   platform: TPlatform
-  // activeTab: string
-  // onSelectTab: (tab: TTab) => void
+  activeTab: string
+  onSelectTab: (tab: TTab) => void
   onOpenSettings: () => void
   onExport: () => void
   isDisabled?: boolean
@@ -232,8 +232,8 @@ export function Sidebar({
               key="sidebar-colors"
               label="Colors"
               icon={MdOutlineColorLens}
-              // isActive={activeTab === '/'}
-              // onSelect={() => onSelectTab('colors')}
+              isActive={activeTab === ''}
+              onSelect={() => onSelectTab('colors')}
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
@@ -242,8 +242,8 @@ export function Sidebar({
               key="sidebar-typography"
               label="Typography"
               icon={FiUnderline}
-              // isActive={activeTab === '/typography'}
-              // onSelect={() => onSelectTab('typography')}
+              isActive={activeTab === '/typography'}
+              onSelect={() => onSelectTab('typography')}
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
@@ -252,8 +252,8 @@ export function Sidebar({
               key="sidebar-shadows"
               label="Shadows"
               icon={FiLayers}
-              // isActive={activeTab === '/shadows'}
-              // onSelect={() => onSelectTab('shadows')}
+              isActive={activeTab === '/shadows'}
+              onSelect={() => onSelectTab('shadows')}
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
