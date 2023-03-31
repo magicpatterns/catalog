@@ -36,6 +36,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   // to fetch data
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout
     const fetchStoredData = async () => {
       try {
         const data = await fetchStoreData()
@@ -45,7 +46,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           !data.tokens.colorData ||
           data.tokens.colorData.length === 0
         ) {
-          setIsLoading(false)
+          timeout = setTimeout(() => {
+            setIsLoading(false)
+          }, 500)
           setShowOnBoarding(true)
           return
         }
@@ -54,15 +57,21 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         setTypography(data.tokens.typography)
         setShadows(data.tokens.shadows ?? defaultShadows)
         setFileTypes(data.files)
-        setIsLoading(false)
+        timeout = setTimeout(() => {
+          setIsLoading(false)
+        }, 500)
       } catch (e) {
         // TODO: Handle error
       } finally {
-        setIsLoading(false)
+        timeout = setTimeout(() => {
+          setIsLoading(false)
+        }, 500)
       }
     }
     // on initial load
     fetchStoredData()
+
+    return () => clearTimeout(timeout)
   }, [])
 
   useEffect(() => {
@@ -104,9 +113,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <motion.div
           animate={{
             rotate: [0, 360],
+            scale: [0.5, 1.5],
           }}
           transition={{
-            duration: 0.75,
+            duration: 0.5,
             ease: 'easeIn',
             repeat: Infinity,
             repeatDelay: 0.25,
