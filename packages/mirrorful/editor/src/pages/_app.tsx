@@ -45,9 +45,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         !data.tokens.colorData ||
         data.tokens.colorData.length === 0
       ) {
-        timeout = setTimeout(() => {
-          setIsLoading(false)
-        }, 500)
         setShowOnBoarding(true)
         return
       }
@@ -56,9 +53,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       setTypography(data.tokens.typography)
       setShadows(data.tokens.shadows ?? defaultShadows)
       setFileTypes(data.files)
-      timeout = setTimeout(() => {
-        setIsLoading(false)
-      }, 500)
     } catch (e) {
       // TODO: Handle error
     } finally {
