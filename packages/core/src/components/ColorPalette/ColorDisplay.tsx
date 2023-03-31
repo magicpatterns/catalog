@@ -63,7 +63,7 @@ function VariantRow({
         justifyContent: 'space-between',
         padding: '0px 24px',
         borderRadius: 8,
-        border: variant.isBase ? '2px solid black' : '1px solid black',
+        border: '1px solid black',
       }}
       role="group"
     >

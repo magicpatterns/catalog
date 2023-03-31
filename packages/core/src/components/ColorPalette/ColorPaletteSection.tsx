@@ -22,7 +22,9 @@ export function ColorPaletteSection({
   onUpdateColors: (newColors: TColorData[]) => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
+  const totalVariants = colors.reduce((acc, color) => {
+    return acc + Object.keys(color.variants).length
+  }, 0)
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Heading fontSize={'2.5rem'} fontWeight="black">
@@ -37,7 +39,7 @@ export function ColorPaletteSection({
         >
           {`Add and edit the colors in your theme. `}
         </Text>
-        {colors.length >= 5 && (
+        {totalVariants > 5 && (
           <>
             <Button width="160px" variant="outline" onClick={() => onOpen()}>
               Add New Color
