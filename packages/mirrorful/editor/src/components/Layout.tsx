@@ -52,12 +52,6 @@ export function Layout({ children, isLoading = false }: props) {
     onExportSuccessModalOpen()
   }
 
-  useEffect(() => {
-    if (!showOnBoarding && shouldForceSkipOnboarding) {
-      router.reload()
-    }
-  }, [shouldForceSkipOnboarding, showOnBoarding])
-
   if (!shouldForceSkipOnboarding && showOnBoarding) {
     return (
       <Onboarding
