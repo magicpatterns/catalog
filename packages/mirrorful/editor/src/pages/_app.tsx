@@ -31,6 +31,12 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    router.prefetch('/')
+    router.prefetch('/typography')
+    router.prefetch('/shadows')
+  }, [router])
+
   return (
     <MirrorfulThemeProvider>
       <Component {...pageProps} />
