@@ -12,5 +12,5 @@ export const createColorsSlice: StateCreator<
   ColorsSlice
 > = (set) => ({
   colors: [],
-  setColors: (newState) => set((state) => ({ colors: newState })),
+  setColors: (newState) => set(() => ({ colors: newState })),
 })
