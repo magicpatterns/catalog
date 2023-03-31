@@ -1,8 +1,8 @@
-import { Box, useDisclosure } from '@chakra-ui/react'
+import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
 import { TTab } from '@mirrorful/core/lib/components/Dashboard'
-import { TColorData } from '@mirrorful/core/lib/types'
+import { defaultShadows, TColorData } from '@mirrorful/core/lib/types'
 import Head from 'next/head'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import postStoreData from 'src/utils/postStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 import { Sidebar } from '@mirrorful/core/lib/components/Dashboard/Sidebar'
@@ -10,10 +10,22 @@ import { ExportSuccessModal } from '@mirrorful/core/lib/components/ExportSuccess
 import { ExportSettingsModal } from '@mirrorful/core/lib/components/ExportSettingsModal'
 import { ColorPaletteSection } from '@mirrorful/core/lib/components/ColorPalette/ColorPaletteSection'
 import { useRouter } from 'next/router'
+import fetchStoreData from 'src/utils/fetchStoreData'
+import { AnimatePresence, motion } from 'framer-motion'
 
 export default function Editor() {
-  const { colors, typography, shadows, fileTypes, setColors } =
-    useMirrorfulStore((state) => state)
+  const [isLoading, setIsLoading] = useState(true)
+  const {
+    colors,
+    typography,
+    shadows,
+    fileTypes,
+    setColors,
+    setTypography,
+    setShadows,
+    setFileTypes,
+  } = useMirrorfulStore((state) => state)
+
   const handleUpdateColors = async (data: TColorData[]) => {
     setColors(data)
     await postStoreData({
@@ -25,6 +37,26 @@ export default function Editor() {
       files: fileTypes,
     })
   }
+
+  useEffect(() => {
+    const fetchStoredData = async () => {
+      const data = await fetchStoreData()
+      if (
+        !Object.keys(data).length ||
+        !data.tokens.colorData ||
+        data.tokens.colorData.length === 0
+      ) {
+        //  setIsLoading(false)
+        //  setShowOnboarding(true)
+        return
+      }
+      setColors(data.tokens.colorData ?? [])
+      setTypography(data.tokens.typography)
+      setShadows(data.tokens.shadows ?? defaultShadows)
+      setFileTypes(data.files)
+    }
+    fetchStoredData()
+  }, [])
   return (
     <>
       <Head>
@@ -36,7 +68,7 @@ export default function Editor() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      <Layout isLoading={isLoading}>
         <ColorPaletteSection
           colors={colors}
           onUpdateColors={handleUpdateColors}
@@ -60,8 +92,8 @@ export default function Editor() {
   )
 }
 
-type props = { children: React.ReactNode }
-export function Layout({ children }: props) {
+type props = { children: React.ReactNode; isLoading?: boolean }
+export function Layout({ children, isLoading = false }: props) {
   const platform = 'package'
   const router = useRouter()
   const [tab, setTab] = useState<TTab>(
@@ -95,7 +127,12 @@ export function Layout({ children }: props) {
 
   return (
     <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
-      <Box css={{ width: '300px', position: 'fixed' }}>
+      <motion.div
+        animate={{
+          width: isSidebarCollapsed ? '50px' : '300px',
+          position: 'fixed',
+        }}
+      >
         <Sidebar
           platform={platform}
           activeTab={tab}
@@ -105,8 +142,12 @@ export function Layout({ children }: props) {
           isCollapsed={isSidebarCollapsed}
           onToggleCollapsed={() => setIsSidebarCollapsed((prev) => !prev)}
         />
-      </Box>
-      <Box css={{ minWidth: '300px' }} />
+      </motion.div>
+      <motion.div
+        animate={{
+          minWidth: isSidebarCollapsed ? ' 150px' : '300px',
+        }}
+      />
       <Box
         css={{ backgroundColor: 'white', flexGrow: 1 }}
         padding={{
@@ -115,7 +156,25 @@ export function Layout({ children }: props) {
           lg: '48px 96px',
         }}
       >
-        {children}
+        <AnimatePresence>
+          {isLoading ? (
+            <motion.div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%',
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Spinner size="xl" color="blue.500" borderWidth="3px" />
+            </motion.div>
+          ) : (
+            <>{children}</>
+          )}
+        </AnimatePresence>
       </Box>
       <ExportSuccessModal
         platform={platform}
