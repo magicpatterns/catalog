@@ -72,7 +72,7 @@ export function Onboarding({
   } else {
     content = (
       <PickPrimary
-        initialPrimary={primaryColor}
+        primaryColor={primaryColor}
         onUpdatePage={setPage}
         onUpdatePrimaryColor={(newColor: string) => setPrimaryColor(newColor)}
         platform={platform}
@@ -83,7 +83,7 @@ export function Onboarding({
   if (page === 1) {
     content = (
       <PickPrimary
-        initialPrimary={primaryColor}
+        primaryColor={primaryColor}
         onUpdatePage={setPage}
         onUpdatePrimaryColor={(newColor: string) => setPrimaryColor(newColor)}
         platform={platform}
@@ -163,5 +163,9 @@ export function Onboarding({
     )
   }
 
-  return <OnboardingContainer>{content}</OnboardingContainer>
+  return (
+    <OnboardingContainer primaryColor={primaryColor}>
+      {content}
+    </OnboardingContainer>
+  )
 }
