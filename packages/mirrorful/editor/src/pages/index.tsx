@@ -63,8 +63,12 @@ export default function Editor() {
 type props = { children: React.ReactNode }
 export function Layout({ children }: props) {
   const platform = 'package'
-  // const [tab, setTab] = useState<TTab>('colors')
   const router = useRouter()
+  const [tab, setTab] = useState<TTab>(
+    router.pathname === '/'
+      ? 'colors'
+      : (router.pathname.replace('/', '') as TTab)
+  )
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const { colors, typography, shadows, fileTypes, setFileTypes } =
     useMirrorfulStore((state) => state)
@@ -88,13 +92,14 @@ export function Layout({ children }: props) {
 
     onExportSuccessModalOpen()
   }
+
   return (
     <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
       <Box css={{ width: '300px', position: 'fixed' }}>
         <Sidebar
           platform={platform}
-          // activeTab={router.pathname}
-          // onSelectTab={(newTab: TTab) => router.push(newTab)}
+          activeTab={tab}
+          onSelectTab={(newTab: TTab) => router.push(newTab)}
           onOpenSettings={() => onExportSettingsModalOpen()}
           onExport={handleExport}
           isCollapsed={isSidebarCollapsed}
