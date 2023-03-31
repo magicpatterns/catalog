@@ -17,6 +17,7 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TFontSizeVariant } from '@core/types'
+import { fontWeights, fontUnits } from './TypographyConstants'
 import { useEffect, useState } from 'react'
 
 export function EditFontSizeModal({
@@ -41,7 +42,7 @@ export function EditFontSizeModal({
   } = useDisclosure()
 
   const [variant, setVariant] = useState<TFontSizeVariant>(
-    initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem' }
+    initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem', fontWeight: 400}
   )
 
   const [error, setError] = useState<string | null>(null)
@@ -64,7 +65,7 @@ export function EditFontSizeModal({
 
   useEffect(() => {
     if (!isOpen) {
-      setVariant(initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem' })
+      setVariant(initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem', fontWeight: 400 })
       setError(null)
     }
   }, [isOpen, initialFontSizeVariant])
@@ -115,9 +116,29 @@ export function EditFontSizeModal({
                     })
                   }}
                 >
-                  <option value="px">px</option>
-                  <option value="rem">rem</option>
-                  <option value="em">em</option>
+                  {
+                    fontUnits.map((unit) => {
+                      return <option value={unit}>{unit}</option>
+                    })
+                  }
+                </Select>
+              </FormControl>
+              <FormControl css={{ marginTop: '32px' }}>
+                <FormLabel>Font Weight</FormLabel>
+                <Select
+                  value={variant.fontWeight}
+                  onChange={(event) => {
+                    setVariant({
+                      ...variant,
+                      fontWeight : Number(event.target.value),
+                    })
+                  }}
+                >
+                  {
+                    fontWeights.map((weight) => {
+                      return <option value={weight.value}>{weight.name}</option>
+                    })
+                  }
                 </Select>
               </FormControl>
             </Box>

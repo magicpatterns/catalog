@@ -16,6 +16,8 @@ export type TFontSizeVariant = {
   name: string
   value: number
   unit: 'px' | 'rem' | 'em'
+  fontWeight: number
+
 }
 
 export type TTypographyData = {
@@ -46,16 +48,19 @@ export const defaultTypography: TTypographyData = {
       value: 1,
       unit: 'rem',
       name: 'sm',
+      fontWeight: 400,
     },
     {
       value: 1.2,
       unit: 'rem',
       name: 'md',
+      fontWeight: 400,
     },
     {
       value: 1.4,
       unit: 'rem',
       name: 'lg',
+      fontWeight: 400,
     },
   ],
 }

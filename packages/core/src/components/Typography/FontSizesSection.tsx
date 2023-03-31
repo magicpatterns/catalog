@@ -3,6 +3,7 @@ import { TFontSizeVariant } from '@core/types'
 
 import { EditFontSizeModal } from './EditFontSizeModal'
 import { FontSizeRow } from './FontSizeRow'
+import { fontUnits } from './TypographyConstants'
 
 export function FontSizesSection({
   fontSizeData,
@@ -19,7 +20,6 @@ export function FontSizesSection({
 
   fontSizeData.sort((a, b) => {
     if(a.unit === b.unit) return a.value - b.value;
-    const fontUnits = ['rem', 'em', 'px'];
     return fontUnits.indexOf(a.unit) - fontUnits.indexOf(b.unit);
 
   })
