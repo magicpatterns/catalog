@@ -68,7 +68,9 @@ export function FontSizeRow({
             alignItems: 'center',
           }}
         >
-          <Text css={{ fontWeight: 'bold' }}>{fontSizeData.name}</Text>
+          <Text css={{ fontWeight: 'bold' }} noOfLines={1}>
+            {fontSizeData.name}
+          </Text>
         </Box>
         <Box>
           <Text css={{ fontWeight: 'bold', width: 100 }} fontSize={18}>

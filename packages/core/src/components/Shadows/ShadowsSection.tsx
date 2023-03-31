@@ -93,7 +93,9 @@ export function ShadowRow({
               alignItems: 'center',
             }}
           >
-            <Text css={{ fontWeight: 'bold' }}>{shadowData.name}</Text>
+            <Text css={{ fontWeight: 'bold' }} noOfLines={1}>
+              {shadowData.name}
+            </Text>
           </Box>
           <Box>
             <Tooltip
