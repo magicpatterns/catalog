@@ -66,7 +66,8 @@ export function ReviewPrimary({
             color="gray.500"
             fontWeight="bold"
           >
-            {`Here's a quick little preview of what your primary color looks like in action.`}
+            {`Here's a quick little preview of what your primary color looks like in action.`}<br />
+            You can customize each component later.
           </Text>
         </Box>
         <Box css={{ paddingBottom: '32px' }}>
