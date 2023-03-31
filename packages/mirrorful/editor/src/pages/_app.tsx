@@ -6,9 +6,6 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
 import { useEffect } from 'react'
-import fetchStoreData from 'src/utils/fetchStoreData'
-import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
-import { defaultShadows } from '@mirrorful/core/lib/types'
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready
@@ -22,8 +19,7 @@ if (typeof window !== 'undefined') {
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const { setColors, setTypography, setShadows, setFileTypes } =
-    useMirrorfulStore((state) => state)
+
   useEffect(() => {
     // Track page views
     const handleRouteChange = () => posthog.capture('$pageview')
@@ -33,26 +29,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    const fetchStoredData = async () => {
-      const data = await fetchStoreData()
-      if (
-        !Object.keys(data).length ||
-        !data.tokens.colorData ||
-        data.tokens.colorData.length === 0
-      ) {
-        //  setIsLoading(false)
-        //  setShowOnboarding(true)
-        return
-      }
-      setColors(data.tokens.colorData ?? [])
-      setTypography(data.tokens.typography)
-      setShadows(data.tokens.shadows ?? defaultShadows)
-      setFileTypes(data.files)
-    }
-    fetchStoredData()
   }, [])
 
   return (
