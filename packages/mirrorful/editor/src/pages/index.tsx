@@ -46,7 +46,7 @@ export default function Editor() {
         !data.tokens.colorData ||
         data.tokens.colorData.length === 0
       ) {
-        //  setIsLoading(false)
+        setIsLoading(false)
         //  setShowOnboarding(true)
         return
       }
@@ -54,6 +54,7 @@ export default function Editor() {
       setTypography(data.tokens.typography)
       setShadows(data.tokens.shadows ?? defaultShadows)
       setFileTypes(data.files)
+      setIsLoading(false)
     }
     fetchStoredData()
   }, [])
