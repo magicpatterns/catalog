@@ -79,7 +79,6 @@ export function ColorPaletteSection({
 
                   onUpdateColors(newColors)
                 }}
-                animationDelayAddition={0.3 * index}
               />
             </motion.div>
           ))}
