@@ -1,17 +1,17 @@
 import '../main.css'
 import '../atom-one-dark.css'
 
+import { Box, Spinner } from '@chakra-ui/react'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
+import { defaultShadows } from '@mirrorful/core/lib/types'
+import { motion } from 'framer-motion'
 import type { AppProps } from 'next/app'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
 import { useEffect, useState } from 'react'
-import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 import fetchStoreData from 'src/utils/fetchStoreData'
-import { defaultShadows } from '@mirrorful/core/lib/types'
-import { Box, Spinner } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready
