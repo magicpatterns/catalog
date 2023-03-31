@@ -1,9 +1,4 @@
-import {
-  TExportFileType,
-  TFontSizeVariant,
-  TShadowData,
-  TTypographyData,
-} from '@mirrorful/core/lib/types'
+import { TShadowData } from '@mirrorful/core/lib/types'
 import { StateCreator } from 'zustand'
 
 export interface ShadowsSlice {
@@ -17,5 +12,5 @@ export const createShadowsSlice: StateCreator<
   ShadowsSlice
 > = (set) => ({
   shadows: [],
-  setShadows: (newState) => set((state) => ({ shadows: newState })),
+  setShadows: (newState) => set(() => ({ shadows: newState })),
 })
