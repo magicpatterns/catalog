@@ -66,9 +66,19 @@ export function FontSizeRow({
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
           }}
         >
-          <Text css={{ fontWeight: 'bold' }}>{fontSizeData.name}</Text>
+          <Text
+            css={{
+              fontWeight: 'bold',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {fontSizeData.name}
+          </Text>
         </Box>
         <Box>
           <Text css={{ fontWeight: 'bold', width: 100 }} fontSize={18}>

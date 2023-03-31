@@ -91,9 +91,19 @@ export function ShadowRow({
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
             }}
           >
-            <Text css={{ fontWeight: 'bold' }}>{shadowData.name}</Text>
+            <Text
+              css={{
+                fontWeight: 'bold',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {shadowData.name}
+            </Text>
           </Box>
           <Box>
             <Tooltip
