@@ -6,6 +6,8 @@ import { useState } from 'react'
 import postStoreData from 'src/utils/postStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 import { Sidebar } from '@mirrorful/core/lib/components/Dashboard/Sidebar'
+import { ExportSuccessModal } from '@mirrorful/core/lib/components/ExportSuccessModal'
+import { ExportSettingsModal } from '@mirrorful/core/lib/components/ExportSettingsModal'
 import { ColorPaletteSection } from '@mirrorful/core/lib/components/ColorPalette/ColorPaletteSection'
 import { useRouter } from 'next/router'
 
@@ -64,9 +66,8 @@ export function Layout({ children }: props) {
   const [tab, setTab] = useState<TTab>('colors')
   const router = useRouter()
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
-  const { colors, typography, shadows, fileTypes } = useMirrorfulStore(
-    (state) => state
-  )
+  const { colors, typography, shadows, fileTypes, setFileTypes } =
+    useMirrorfulStore((state) => state)
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
@@ -111,6 +112,21 @@ export function Layout({ children }: props) {
       >
         {children}
       </Box>
+      <ExportSuccessModal
+        platform={platform}
+        primaryName={colors && colors[0] ? colors[0].name : 'primary'}
+        isOpen={isExportSuccessModalOpen}
+        onClose={onExportSuccessModalClose}
+        tokens={{ colorData: colors, typography, shadows }}
+      />
+      {platform === 'package' && (
+        <ExportSettingsModal
+          isOpen={isExportSettingsModalOpen}
+          onClose={onExportSettingsModalClose}
+          fileTypes={fileTypes}
+          onUpdateFileTypes={setFileTypes}
+        />
+      )}
     </Box>
   )
 }
