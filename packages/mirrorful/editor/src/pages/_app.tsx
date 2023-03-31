@@ -5,7 +5,10 @@ import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProv
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
+import fetchStoreData from 'src/utils/fetchStoreData'
+import { defaultShadows } from '@mirrorful/core/lib/types'
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready
@@ -18,7 +21,47 @@ if (typeof window !== 'undefined') {
 }
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
+  const {
+    setColors,
+    setTypography,
+    setShadows,
+    setFileTypes,
+    setShouldForceSkipOnboarding,
+    setShowOnBoarding,
+  } = useMirrorfulStore((state) => state)
+  // to fetch data
+  const fetchStoredData = async () => {
+    try {
+      const data = await fetchStoreData()
+
+      if (
+        !Object.keys(data).length ||
+        !data.tokens.colorData ||
+        data.tokens.colorData.length === 0
+      ) {
+        setIsLoading(false)
+        setShowOnBoarding(true)
+        return
+      }
+
+      setColors(data.tokens.colorData ?? [])
+      setTypography(data.tokens.typography)
+      setShadows(data.tokens.shadows ?? defaultShadows)
+      setFileTypes(data.files)
+      setIsLoading(false)
+    } catch (e) {
+      // TODO: Handle error
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    // on initial load
+    fetchStoredData()
+  }, [])
 
   useEffect(() => {
     // Track page views
@@ -39,7 +82,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <MirrorfulThemeProvider>
-      <Component {...pageProps} />
+      <Component {...pageProps} isLoading={isLoading} />
     </MirrorfulThemeProvider>
   )
 }
