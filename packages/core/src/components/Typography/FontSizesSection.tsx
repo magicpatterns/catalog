@@ -16,31 +16,12 @@ export function FontSizesSection({
     onOpen: onAddVariantModalOpen,
     onClose: onAddVariantModalClose,
   } = useDisclosure()
-  const sortFontSizes = function () {
-    const rem: TFontSizeVariant[] = []
-    const px: TFontSizeVariant[] = []
-    const em: TFontSizeVariant[] = []
 
-    fontSizeData.map((font) => {
-      if (font.unit == 'rem') {
-        rem.push(font)
-      }
-      if (font.unit == 'em') {
-        em.push(font)
-      }
-      if (font.unit == 'px') {
-        px.push(font)
-      }
-    })
-
-    rem.sort((a, b) => a.value - b.value)
-    em.sort((a, b) => a.value - b.value)
-    px.sort((a, b) => a.value - b.value)
-
-    return rem.concat(px, em)
-  }
-
-  fontSizeData = sortFontSizes()
+  fontSizeData.sort((fontOne, fontTwo) => {
+    if (fontOne.unit === fontTwo.unit) return fontOne.value - fontTwo.value
+    const fontUnits = ['rem', 'em', 'px']
+    return fontUnits.indexOf(fontOne.unit) - fontUnits.indexOf(fontTwo.unit)
+  })
 
   return (
     <Box>
@@ -48,10 +29,10 @@ export function FontSizesSection({
         Font Sizes
       </Heading>
       <Stack css={{ marginTop: '24px' }} spacing={12}>
-        {fontSizeData.map((fontSizeVariant) => {
+        {fontSizeData.map((fontSizeVariant, index) => {
           return (
             <FontSizeRow
-              key={fontSizeVariant.name}
+              key={`${index}-${fontSizeVariant.name}`}
               fontSizeData={fontSizeVariant}
               onUpdateFontSizeVariant={(
                 updatedFontSizeData: TFontSizeVariant
