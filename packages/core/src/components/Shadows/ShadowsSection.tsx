@@ -32,13 +32,11 @@ export function ShadowRow({
 
   useEffect(() => {
     let copiedTimeout: NodeJS.Timeout
-
     if (hasCopiedShadowValue) {
       copiedTimeout = setTimeout(() => {
         setHasCopiedShadowValue(false)
       }, 1500)
     }
-
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedShadowValue])
 
@@ -107,7 +105,7 @@ export function ShadowRow({
               <Text
                 css={{
                   fontWeight: 'bold',
-                  flexGrow: 1,
+                  paddingInline: 2,
                   fontSize: '1rem',
                   marginLeft: '12px',
                 }}
@@ -116,7 +114,6 @@ export function ShadowRow({
                   backgroundColor: 'black',
                   color: 'white',
                   borderRadius: 8,
-                  paddingInline: 2,
                 }}
                 fontSize={18}
                 onClick={() => {
