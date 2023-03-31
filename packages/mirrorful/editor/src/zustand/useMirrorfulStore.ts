@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import { ColorsSlice, createColorsSlice } from './colorsSlice'
 import { createFileTypesSlice, FileTypesSlice } from './fileTypesSlice'
 import { createShadowsSlice, ShadowsSlice } from './shadowsSlice'

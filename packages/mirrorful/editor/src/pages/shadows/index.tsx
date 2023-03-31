@@ -1,8 +1,9 @@
-import React from 'react'
 import { ShadowsSection } from '@mirrorful/core/lib/components/Shadows/ShadowsSection'
-import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 import { TShadowData } from '@mirrorful/core/lib/types'
+import React from 'react'
 import postStoreData from 'src/utils/postStoreData'
+import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
+
 import { Layout } from '..'
 
 function Shadows() {

@@ -1,8 +1,9 @@
-import React from 'react'
 import { TypographySection } from '@mirrorful/core/lib/components/Typography/TypographySection'
-import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 import { TTypographyData } from '@mirrorful/core/lib/types'
+import React from 'react'
 import postStoreData from 'src/utils/postStoreData'
+import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
+
 import { Layout } from '..'
 function Typography() {
   const { typography, colors, shadows, setTypography, fileTypes } =
