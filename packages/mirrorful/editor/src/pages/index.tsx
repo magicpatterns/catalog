@@ -63,7 +63,7 @@ export default function Editor() {
 type props = { children: React.ReactNode }
 export function Layout({ children }: props) {
   const platform = 'package'
-  const [tab, setTab] = useState<TTab>('colors')
+  // const [tab, setTab] = useState<TTab>('colors')
   const router = useRouter()
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const { colors, typography, shadows, fileTypes, setFileTypes } =
@@ -93,8 +93,8 @@ export function Layout({ children }: props) {
       <Box css={{ width: '300px', position: 'fixed' }}>
         <Sidebar
           platform={platform}
-          activeTab={tab}
-          onSelectTab={(newTab: TTab) => router.push(newTab)}
+          // activeTab={router.pathname}
+          // onSelectTab={(newTab: TTab) => router.push(newTab)}
           onOpenSettings={() => onExportSettingsModalOpen()}
           onExport={handleExport}
           isCollapsed={isSidebarCollapsed}
