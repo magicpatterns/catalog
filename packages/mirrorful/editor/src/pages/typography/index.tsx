@@ -3,6 +3,7 @@ import { TypographySection } from '@mirrorful/core/lib/components/Typography/Typ
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 import { TTypographyData } from '@mirrorful/core/lib/types'
 import postStoreData from 'src/utils/postStoreData'
+import { Layout } from '..'
 function Typography() {
   const { typography, colors, shadows, setTypography, fileTypes } =
     useMirrorfulStore((state) => state)
@@ -14,10 +15,12 @@ function Typography() {
     })
   }
   return (
-    <TypographySection
-      typography={{ fontSizes: typography.fontSizes }}
-      onUpdateTypography={handleUpdateTypography}
-    ></TypographySection>
+    <Layout>
+      <TypographySection
+        typography={{ fontSizes: typography.fontSizes }}
+        onUpdateTypography={handleUpdateTypography}
+      ></TypographySection>
+    </Layout>
   )
 }
 
