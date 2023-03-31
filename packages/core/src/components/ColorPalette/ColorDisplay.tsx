@@ -143,12 +143,10 @@ export function ColorDisplay({
   colorData,
   onUpdateColorData,
   onDeleteColorData,
-  animationDelayAddition,
 }: {
   colorData: TColorData
   onUpdateColorData: (colorData: TColorData) => void
   onDeleteColorData: () => void
-  animationDelayAddition: number
 }) {
   const {
     isOpen: isColorNameModalOpen,
