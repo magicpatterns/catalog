@@ -1,8 +1,4 @@
-import {
-  TExportFileType,
-  TFontSizeVariant,
-  TTypographyData,
-} from '@mirrorful/core/lib/types'
+import { TExportFileType } from '@mirrorful/core/lib/types'
 import { StateCreator } from 'zustand'
 
 export interface FileTypesSlice {
@@ -16,5 +12,5 @@ export const createFileTypesSlice: StateCreator<
   FileTypesSlice
 > = (set) => ({
   fileTypes: [],
-  setFileTypes: (newState) => set((state) => ({ fileTypes: newState })),
+  setFileTypes: (newState) => set(() => ({ fileTypes: newState })),
 })
