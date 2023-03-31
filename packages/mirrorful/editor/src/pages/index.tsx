@@ -12,6 +12,7 @@ import { ColorPaletteSection } from '@mirrorful/core/lib/components/ColorPalette
 import { useRouter } from 'next/router'
 import fetchStoreData from 'src/utils/fetchStoreData'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Onboarding } from '@mirrorful/core/lib/components/Onboarding'
 
 export default function Editor() {
   const [isLoading, setIsLoading] = useState(true)
@@ -72,12 +73,23 @@ export default function Editor() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout isLoading={isLoading}>
-        <ColorPaletteSection
-          colors={colors}
-          onUpdateColors={handleUpdateColors}
-        ></ColorPaletteSection>
-      </Layout>
+      {!shouldForceSkipOnboarding && showOnboarding ? (
+        <Onboarding
+          postStoreData={postStoreData}
+          onFinishOnboarding={() => {
+            setShowOnboarding(false)
+            setShouldForceSkipOnboarding(true)
+          }}
+          platform={'package'}
+        />
+      ) : (
+        <Layout isLoading={isLoading}>
+          <ColorPaletteSection
+            colors={colors}
+            onUpdateColors={handleUpdateColors}
+          ></ColorPaletteSection>
+        </Layout>
+      )}
       {/* <Dashboard
         fetchStoreData={async () => {
           const response = await fetch('/api/config')
