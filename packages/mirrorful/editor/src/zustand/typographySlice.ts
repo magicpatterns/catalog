@@ -1,8 +1,4 @@
-import {
-  TExportFileType,
-  TFontSizeVariant,
-  TTypographyData,
-} from '@mirrorful/core/lib/types'
+import { TTypographyData } from '@mirrorful/core/lib/types'
 import { StateCreator } from 'zustand'
 
 export interface TypographySlice {
