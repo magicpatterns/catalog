@@ -31,7 +31,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     setTypography,
     setShadows,
     setFileTypes,
-    setShouldForceSkipOnboarding,
     setShowOnBoarding,
   } = useMirrorfulStore((state) => state)
   // to fetch data
