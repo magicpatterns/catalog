@@ -1,5 +1,4 @@
-import { HamburgerIcon } from '@chakra-ui/icons'
-import { Box, Button, Spinner, useDisclosure } from '@chakra-ui/react'
+import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
 import { ExportSettingsModal } from '@core/components/ExportSettingsModal'
 import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
