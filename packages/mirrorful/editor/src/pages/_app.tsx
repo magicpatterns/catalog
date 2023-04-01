@@ -4,11 +4,11 @@ import '../atom-one-dark.css'
 import SplashScreen from '@mirrorful/core/lib/components/SplashScreen'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
 import { defaultShadows } from '@mirrorful/core/lib/types'
+import fetchStoreData from '@mirrorful/core/lib/utils/fetchStoreData'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import fetchStoreData from 'src/utils/fetchStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
 if (typeof window !== 'undefined') {

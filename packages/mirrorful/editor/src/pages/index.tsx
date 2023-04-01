@@ -1,8 +1,8 @@
 import { ColorPaletteSection } from '@mirrorful/core/lib/components/ColorPalette/ColorPaletteSection'
 import { TColorData } from '@mirrorful/core/lib/types'
+import postStoreData from '@mirrorful/core/lib/utils/postStoreData'
 import Head from 'next/head'
 import { Layout } from 'src/components/Layout'
-import postStoreData from 'src/utils/postStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
 export default function Editor({ isLoading }: { isLoading: boolean }) {
