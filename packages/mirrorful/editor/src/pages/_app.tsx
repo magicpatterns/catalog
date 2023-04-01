@@ -7,7 +7,7 @@ import { defaultShadows } from '@mirrorful/core/lib/types'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import fetchStoreData from 'src/utils/fetchStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
@@ -36,7 +36,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   // to fetch data
 
   let timeout: NodeJS.Timeout
-  const fetchStoredData = async () => {
+  const fetchStoredData = useCallback(async () => {
     try {
       const data = await fetchStoreData()
 
@@ -60,13 +60,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         setIsLoading(false)
       }, 500)
     }
-  }
+  }, [])
   useEffect(() => {
     // on initial load
     fetchStoredData()
 
     return () => clearTimeout(timeout)
-  }, [])
+  }, [fetchStoredData])
 
   useEffect(() => {
     // Track page views
@@ -89,7 +89,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     if (!showOnBoarding && shouldForceSkipOnboarding) {
       fetchStoredData()
     }
-  }, [shouldForceSkipOnboarding, showOnBoarding])
+  }, [fetchStoredData, shouldForceSkipOnboarding, showOnBoarding])
 
   return (
     <MirrorfulThemeProvider>
