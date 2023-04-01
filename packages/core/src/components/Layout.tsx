@@ -28,9 +28,7 @@ export function Layout({
   const router = useRouter()
   // TODO replace TTab with accordance to the pathname
   const currentTab =
-    router.pathname === '/'
-      ? 'colors'
-      : (router.pathname.replace('/', '') as TTab)
+    router.pathname === '/' ? '/colors' : (router.pathname as TTab)
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const {
