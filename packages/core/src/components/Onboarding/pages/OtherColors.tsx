@@ -115,6 +115,7 @@ export function OtherColors({
       <Box
         css={{
           width: '50%',
+          marginLeft: '10px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
