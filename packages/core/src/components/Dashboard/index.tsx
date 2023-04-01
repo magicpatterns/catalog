@@ -1,5 +1,4 @@
-import { HamburgerIcon } from '@chakra-ui/icons'
-import { Box, Button, Spinner, useDisclosure } from '@chakra-ui/react'
+import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
 import { ExportSettingsModal } from '@core/components/ExportSettingsModal'
 import { ExportSuccessModal } from '@core/components/ExportSuccessModal'
@@ -215,7 +214,6 @@ export function Dashboard({
       </Box>
       <ExportSuccessModal
         platform={platform}
-        primaryName={colors && colors[0] ? colors[0].name : 'primary'}
         isOpen={isExportSuccessModalOpen}
         onClose={onExportSuccessModalClose}
         tokens={{ colorData: colors, typography, shadows }}
