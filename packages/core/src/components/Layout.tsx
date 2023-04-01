@@ -1,5 +1,6 @@
 import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
 import { AnimatePresence, motion } from 'framer-motion'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -77,70 +78,81 @@ export function Layout({
   }
 
   return (
-    <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
-      <motion.div
-        animate={{
-          width: isSidebarCollapsed ? '50px' : '300px',
-          position: 'fixed',
-        }}
-      >
-        <Sidebar
+    <>
+      <Head>
+        <title>Mirrorful Editor</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta
+          name="description"
+          content="Local editor for your design system"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
+        <motion.div
+          animate={{
+            width: isSidebarCollapsed ? '50px' : '300px',
+            position: 'fixed',
+          }}
+        >
+          <Sidebar
+            platform={platform}
+            activeTab={currentTab}
+            onSelectTab={(newTab: TTab) => router.push(newTab)}
+            onOpenSettings={() => onExportSettingsModalOpen()}
+            onExport={handleExport}
+            isCollapsed={isSidebarCollapsed}
+            onToggleCollapsed={() => setIsSidebarCollapsed((prev) => !prev)}
+          />
+        </motion.div>
+        <motion.div
+          animate={{
+            minWidth: isSidebarCollapsed ? ' 100px' : '350px',
+          }}
+        />
+        <Box
+          css={{ backgroundColor: 'white', flexGrow: 1 }}
+          padding={{
+            base: '24px 48px',
+            md: '36px 72px',
+            lg: '48px 96px',
+          }}
+        >
+          <AnimatePresence>
+            {isLoading ? (
+              <motion.div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <Spinner size="xl" color="blue.500" borderWidth="3px" />
+              </motion.div>
+            ) : (
+              <>{children}</>
+            )}
+          </AnimatePresence>
+        </Box>
+        <ExportSuccessModal
           platform={platform}
-          activeTab={currentTab}
-          onSelectTab={(newTab: TTab) => router.push(newTab)}
-          onOpenSettings={() => onExportSettingsModalOpen()}
-          onExport={handleExport}
-          isCollapsed={isSidebarCollapsed}
-          onToggleCollapsed={() => setIsSidebarCollapsed((prev) => !prev)}
+          isOpen={isExportSuccessModalOpen}
+          onClose={onExportSuccessModalClose}
+          tokens={{ colorData: colors, typography, shadows }}
         />
-      </motion.div>
-      <motion.div
-        animate={{
-          minWidth: isSidebarCollapsed ? ' 100px' : '350px',
-        }}
-      />
-      <Box
-        css={{ backgroundColor: 'white', flexGrow: 1 }}
-        padding={{
-          base: '24px 48px',
-          md: '36px 72px',
-          lg: '48px 96px',
-        }}
-      >
-        <AnimatePresence>
-          {isLoading ? (
-            <motion.div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100%',
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <Spinner size="xl" color="blue.500" borderWidth="3px" />
-            </motion.div>
-          ) : (
-            <>{children}</>
-          )}
-        </AnimatePresence>
+        {platform === 'package' && (
+          <ExportSettingsModal
+            isOpen={isExportSettingsModalOpen}
+            onClose={onExportSettingsModalClose}
+            fileTypes={fileTypes}
+            onUpdateFileTypes={setFileTypes}
+          />
+        )}
       </Box>
-      <ExportSuccessModal
-        platform={platform}
-        isOpen={isExportSuccessModalOpen}
-        onClose={onExportSuccessModalClose}
-        tokens={{ colorData: colors, typography, shadows }}
-      />
-      {platform === 'package' && (
-        <ExportSettingsModal
-          isOpen={isExportSettingsModalOpen}
-          onClose={onExportSettingsModalClose}
-          fileTypes={fileTypes}
-          onUpdateFileTypes={setFileTypes}
-        />
-      )}
-    </Box>
+    </>
   )
 }
