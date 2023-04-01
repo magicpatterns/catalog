@@ -20,7 +20,7 @@ function Typography() {
       <TypographySection
         typography={{ fontSizes: typography.fontSizes }}
         onUpdateTypography={handleUpdateTypography}
-      ></TypographySection>
+      />
     </Layout>
   )
 }
