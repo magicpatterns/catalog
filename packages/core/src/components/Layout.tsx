@@ -11,9 +11,20 @@ import { Onboarding } from '../components/Onboarding'
 import useMirrorfulStore, { MirrorfulState } from '../store/useMirrorfulStore'
 import postStoreData from '../utils/postStoreData'
 
-type props = { children: React.ReactNode; isLoading?: boolean }
-export function Layout({ children, isLoading = false }: props) {
-  const platform = 'package'
+export type TPlatform = 'package' | 'web'
+
+// export type TTab = '/' | 'typography' | 'shadows' | 'theme_manager'
+
+type props = {
+  children: React.ReactNode
+  isLoading?: boolean
+  platform?: TPlatform
+}
+export function Layout({
+  children,
+  isLoading = false,
+  platform = 'package',
+}: props) {
   const router = useRouter()
   const currentTab =
     router.pathname === '/'
