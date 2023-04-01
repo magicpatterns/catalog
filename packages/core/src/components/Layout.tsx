@@ -73,7 +73,7 @@ export function Layout({
           setShowOnBoarding(false)
           setShouldForceSkipOnboarding(true)
         }}
-        platform={'package'}
+        platform={platform}
       />
     )
   }
