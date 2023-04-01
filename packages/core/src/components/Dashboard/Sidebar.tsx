@@ -232,7 +232,7 @@ export function Sidebar({
               key="sidebar-colors"
               label="Colors"
               icon={MdOutlineColorLens}
-              isActive={activeTab === ''}
+              isActive={activeTab === '/colors'}
               onSelect={() => onSelectTab('colors')}
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
