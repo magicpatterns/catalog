@@ -20,6 +20,7 @@ export function FontSizesSection({
 
   fontSizeData.sort((a, b) => {
     if(a.unit === b.unit) return a.value - b.value;
+    const fontUnits = ['rem', 'em', 'px'];
     return fontUnits.indexOf(a.unit) - fontUnits.indexOf(b.unit);
 
   })
@@ -33,7 +34,7 @@ export function FontSizesSection({
         {fontSizeData.map((fontSizeVariant, index) => {
           return (
             <FontSizeRow
-              key={`${index}-${fontSizeVariant.name}`} 
+              key={`${index}-${fontSizeVariant.name}`}
               fontSizeData={fontSizeVariant}
               onUpdateFontSizeVariant={(
                 updatedFontSizeData: TFontSizeVariant
