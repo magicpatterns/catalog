@@ -19,7 +19,7 @@ import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TFontSizeVariant } from '@core/types'
 import { useEffect, useState } from 'react'
 
-import { fontWeights, fontUnits } from './TypographyConstants'
+import { fontUnits, fontWeights } from './TypographyConstants'
 
 export function EditFontSizeModal({
   isOpen,
