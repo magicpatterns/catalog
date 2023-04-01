@@ -7,7 +7,7 @@ import { defaultShadows } from '@mirrorful/core/lib/types'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import fetchStoreData from 'src/utils/fetchStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
@@ -35,7 +35,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   } = useMirrorfulStore((state) => state)
   // to fetch data
 
-  let timeout: NodeJS.Timeout
+  const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
     try {
       const data = await fetchStoreData()
@@ -56,16 +56,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     } catch (e) {
       // TODO: Handle error
     } finally {
-      timeout = setTimeout(() => {
+      timeout.current = setTimeout(() => {
         setIsLoading(false)
       }, 500)
     }
-  }, [])
+  }, [setColors, setFileTypes, setShadows, setShowOnBoarding, setTypography])
   useEffect(() => {
     // on initial load
     fetchStoredData()
-
-    return () => clearTimeout(timeout)
   }, [fetchStoredData])
 
   useEffect(() => {
