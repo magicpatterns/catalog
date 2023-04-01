@@ -60,7 +60,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     } finally {
       timeout.current = setTimeout(() => {
         setIsLoading(false)
-      }, 500)
+      }, 1250)
     }
   }, [setColors, setFileTypes, setShadows, setShowOnBoarding, setTypography])
   useEffect(() => {
@@ -92,12 +92,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, [fetchStoredData, shouldForceSkipOnboarding, showOnBoarding])
 
   return (
+    // <MirrorfulThemeProvider>
+    //   {isLoading ? (
+    //     <SplashScreen></SplashScreen>
+    //   ) : (
+    //     <Component {...pageProps} isLoading={isLoading} />
+    //   )}
+    // </MirrorfulThemeProvider>
     <MirrorfulThemeProvider>
-      {isLoading ? (
-        <SplashScreen></SplashScreen>
-      ) : (
-        <Component {...pageProps} isLoading={isLoading} />
-      )}
+      {isLoading && <SplashScreen></SplashScreen>}
+      <Component {...pageProps} />
     </MirrorfulThemeProvider>
   )
 }
