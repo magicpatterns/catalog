@@ -38,7 +38,7 @@
         "home/why",
         "home/get-started",
         {
-          "group": "Export Formats",
+          "group": "💿 Export Formats",
           "pages": [
             "home/export-formats/introduction",
             "home/export-formats/colors",

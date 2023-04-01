@@ -5,11 +5,6 @@ description: 'After configuring your theme in the editor, you can export shadows
 
 We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`. If you're using tailwind, we also export to common js to work nicely with your tailwind config.
 
-## From Web
-
-If you are using Mirrorful's web editor, you will need to create the imported files yourself. You can do this by simply creating a file of your desired format (i.e. `.js`, `.css`, etc) and then copying
-the generated code into the file.
-
 ## Using CSS
 
 ```css
@@ -19,7 +14,7 @@ the generated code into the file.
 ```
 
 ```javascript
-<button style={{ boxShadow: 'var(--box-shadows-sm)'}}>
+<button style={{ boxShadow: 'var(--box-shadows-sm)' }}>
 ```
 
 ## Using SCSS
@@ -27,7 +22,7 @@ the generated code into the file.
 ```scss
 /* Exact path will depend on your file structure */
 import './.mirrorful/theme.scss';
-
+/* You can use the variables anywhere */
 .primary-button {
   box-shadow: $box-shadows-sm;
 }
