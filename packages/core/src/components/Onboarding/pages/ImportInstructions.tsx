@@ -33,10 +33,9 @@ export function ImportInstructions({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%', flexGrow: 1 }}>
       <Box
         css={{
-          width: '40%',
           padding: '12px',
           display: 'flex',
           flexDirection: 'column',
@@ -100,7 +99,7 @@ export function ImportInstructions({
       </Box>
       <Box
         css={{
-          width: '60%',
+          marginLeft: '10px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
