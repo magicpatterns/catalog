@@ -1,5 +1,6 @@
-import { Box, Image } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 export default function SplashScreen() {
   return (
