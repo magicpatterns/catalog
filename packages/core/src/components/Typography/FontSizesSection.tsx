@@ -18,10 +18,9 @@ export function FontSizesSection({
     onClose: onAddVariantModalClose,
   } = useDisclosure()
 
-  fontSizeData.sort((a, b) => {
-    if(a.unit === b.unit) return a.value - b.value;
-    const fontUnits = ['rem', 'em', 'px'];
-    return fontUnits.indexOf(a.unit) - fontUnits.indexOf(b.unit);
+  fontSizeData.sort((fontOne, fontTwo) => {
+    if(fontOne.unit === fontTwo.unit) return fontOne.value - fontTwo.value;
+    return fontUnits.indexOf(fontOne.unit) - fontUnits.indexOf(fontTwo.unit);
 
   })
 
