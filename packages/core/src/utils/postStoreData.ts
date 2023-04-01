@@ -1,4 +1,4 @@
-import { TConfig } from '@mirrorful/core/lib/types'
+import { TConfig } from '../types'
 
 export default async function postStoreData(data: TConfig) {
   await fetch('/api/export', {
