@@ -36,7 +36,7 @@ export default function Editor({ isLoading }: { isLoading: boolean }) {
         <ColorPaletteSection
           colors={colors}
           onUpdateColors={handleUpdateColors}
-        ></ColorPaletteSection>
+        />
       </Layout>
       {/* <Dashboard
         fetchStoreData={async () => {
