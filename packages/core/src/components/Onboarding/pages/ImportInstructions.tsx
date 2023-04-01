@@ -117,8 +117,9 @@ export function ImportInstructions({
             <TabPanel>
               <Text css={{ marginBottom: 8 }}>
                 <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-                <Code>theme.css</Code> (actual path may vary. You can reference
-                the <Code>.mirrorful</Code> folder in the root of your project)
+                <Code>theme.css</Code> in your App.tsx or index.tsx file. Actual
+                path may vary. You can reference the <Code>.mirrorful</Code>{' '}
+                folder in the root of your project.
               </Text>
               <CodePreview
                 language="javascript"
@@ -136,10 +137,14 @@ export function ImportInstructions({
               />
             </TabPanel>
             <TabPanel>
-              <Text css={{ marginBottom: 8 }}>
+              <Text css={{ marginBottom: 4 }}>
                 <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-                <Code>Tokens</Code> (actual path may vary. You can reference the{' '}
-                <Code>.mirrorful</Code> folder in the root of your project)
+                <Code>Tokens</Code> anywhere in your app.
+              </Text>
+              <Text fontSize="sm" css={{ marginBottom: 8 }}>
+                Actual path may vary. Reference the{' '}
+                <Code fontSize={'xs'}>.mirrorful</Code> folder in the root of
+                your project.
               </Text>
 
               <CodePreview
@@ -159,11 +164,15 @@ export function ImportInstructions({
               />
             </TabPanel>
             <TabPanel>
-              <Text css={{ marginBottom: 8 }}>
+              <Text css={{ marginBottom: 4 }}>
                 <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
                 <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code>{' '}
-                (actual path may vary. You can reference the{' '}
-                <Code>.mirrorful</Code> folder in the root of your project)
+              </Text>
+
+              <Text fontSize="sm" css={{ marginBottom: 8 }}>
+                Actual path may vary. Reference the{' '}
+                <Code fontSize="xs">.mirrorful</Code> folder in the root of your
+                project.
               </Text>
 
               <CodePreview

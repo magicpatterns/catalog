@@ -1,0 +1,50 @@
+---
+title: '🎨 Colors'
+description: 'After configuring your theme in the editor, you can export colors to be used by your app.'
+---
+
+We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`. If you're using tailwind, we also export to common js to work nicely with your tailwind config.
+
+## Using CSS
+
+```css
+.primary-button {
+  background-color: var(--color-primary);
+}
+```
+
+```javascript
+<button style={{ backgroundColor: 'var(--color-primary)'}}>
+```
+
+## Using SCSS
+
+```scss
+/* Exact path will depend on your file structure */
+import './.mirrorful/theme.scss' 
+/* You can use the variables anywhere */
+.primary-button {
+  background-color: $color-primary;
+}
+```
+
+## Using Javascript / Typescript
+
+```javascript
+/* Exact path will depend on your file structure */
+import { Tokens } from './mirrorful.js'
+
+<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
+```
+
+## Tailwind
+
+```javascript
+const mirrorful = require('./.mirrorful/theme_cjs.js')
+
+theme: {
+  extend: {
+    colors: Tokens.colors
+  }
+}
+```

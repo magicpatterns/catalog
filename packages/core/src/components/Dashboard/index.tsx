@@ -214,7 +214,6 @@ export function Dashboard({
       </Box>
       <ExportSuccessModal
         platform={platform}
-        primaryName={colors && colors[0] ? colors[0].name : 'primary'}
         isOpen={isExportSuccessModalOpen}
         onClose={onExportSuccessModalClose}
         tokens={{ colorData: colors, typography, shadows }}
