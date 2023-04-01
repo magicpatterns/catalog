@@ -1,13 +1,5 @@
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-import {
-  Box,
-  Button,
-  Checkbox,
-  Heading,
-  Input,
-  Stack,
-  Text,
-} from '@chakra-ui/react'
+import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { Box, Button, Checkbox, Heading, Stack, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Dashboard'
 import { posthog } from 'posthog-js'
