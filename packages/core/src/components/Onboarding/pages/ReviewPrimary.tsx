@@ -67,6 +67,9 @@ export function ReviewPrimary({
             fontWeight="bold"
           >
             {`Here's a quick little preview of what your primary color looks like in action.`}
+            <br />
+            <br />
+            This is only a preview, you can always change it later.
           </Text>
         </Box>
         <Box css={{ paddingBottom: '32px' }}>

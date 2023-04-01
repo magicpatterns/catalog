@@ -21,7 +21,6 @@ export function FontSizesSection({
   fontSizeData.sort((fontOne, fontTwo) => {
     if(fontOne.unit === fontTwo.unit) return fontOne.value - fontTwo.value;
     return fontUnits.indexOf(fontOne.unit) - fontUnits.indexOf(fontTwo.unit);
-
   })
 
   return (
