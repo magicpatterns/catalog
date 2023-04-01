@@ -6,7 +6,7 @@ import { ExportSuccessModal } from '@mirrorful/core/lib/components/ExportSuccess
 import { Onboarding } from '@mirrorful/core/lib/components/Onboarding'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import postStoreData from 'src/utils/postStoreData'
 import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
@@ -14,11 +14,11 @@ type props = { children: React.ReactNode; isLoading?: boolean }
 export function Layout({ children, isLoading = false }: props) {
   const platform = 'package'
   const router = useRouter()
-  const [tab, setTab] = useState<TTab>(
+  const currentTab =
     router.pathname === '/'
       ? 'colors'
       : (router.pathname.replace('/', '') as TTab)
-  )
+
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const {
     colors,
@@ -75,7 +75,7 @@ export function Layout({ children, isLoading = false }: props) {
       >
         <Sidebar
           platform={platform}
-          activeTab={tab}
+          activeTab={currentTab}
           onSelectTab={(newTab: TTab) => router.push(newTab)}
           onOpenSettings={() => onExportSettingsModalOpen()}
           onExport={handleExport}
