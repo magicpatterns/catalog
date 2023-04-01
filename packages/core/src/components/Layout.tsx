@@ -26,6 +26,7 @@ export function Layout({
   platform = 'package',
 }: props) {
   const router = useRouter()
+  // TODO replace TTab with accordance to the pathname
   const currentTab =
     router.pathname === '/'
       ? 'colors'
