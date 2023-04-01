@@ -1,3 +1,4 @@
+import { Layout } from '@mirrorful/core/lib/components/Layout'
 import { ShadowsSection } from '@mirrorful/core/lib/components/Shadows/ShadowsSection'
 import useMirrorfulStore, {
   MirrorfulState,
@@ -5,8 +6,6 @@ import useMirrorfulStore, {
 import { TShadowData } from '@mirrorful/core/lib/types'
 import postStoreData from '@mirrorful/core/lib/utils/postStoreData'
 import React from 'react'
-
-import { Layout } from '../../components/Layout'
 
 function Shadows() {
   const { typography, colors, shadows, setShadows, fileTypes } =
