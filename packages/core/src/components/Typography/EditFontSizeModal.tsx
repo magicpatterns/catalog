@@ -42,7 +42,12 @@ export function EditFontSizeModal({
   } = useDisclosure()
 
   const [variant, setVariant] = useState<TFontSizeVariant>(
-    initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem', fontWeight: 400}
+    initialFontSizeVariant ?? {
+      name: '',
+      value: 1,
+      unit: 'rem',
+      fontWeight: 400,
+    }
   )
 
   const [error, setError] = useState<string | null>(null)
@@ -65,7 +70,14 @@ export function EditFontSizeModal({
 
   useEffect(() => {
     if (!isOpen) {
-      setVariant(initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem', fontWeight: 400 })
+      setVariant(
+        initialFontSizeVariant ?? {
+          name: '',
+          value: 1,
+          unit: 'rem',
+          fontWeight: 400,
+        }
+      )
       setError(null)
     }
   }, [isOpen, initialFontSizeVariant])
@@ -116,11 +128,13 @@ export function EditFontSizeModal({
                     })
                   }}
                 >
-                  {
-                    fontUnits.map((unit) => {
-                      return <option value={unit}>{unit}</option>
-                    })
-                  }
+                  {fontUnits.map((unit) => {
+                    return (
+                      <option key={unit} value={unit}>
+                        {unit}
+                      </option>
+                    )
+                  })}
                 </Select>
               </FormControl>
               <FormControl css={{ marginTop: '32px' }}>
@@ -130,15 +144,17 @@ export function EditFontSizeModal({
                   onChange={(event) => {
                     setVariant({
                       ...variant,
-                      fontWeight : Number(event.target.value),
+                      fontWeight: Number(event.target.value),
                     })
                   }}
                 >
-                  {
-                    fontWeights.map((weight) => {
-                      return <option value={weight.value}>{weight.name}</option>
-                    })
-                  }
+                  {fontWeights.map((weight) => {
+                    return (
+                      <option key={weight.value} value={weight.value}>
+                        {weight.name}
+                      </option>
+                    )
+                  })}
                 </Select>
               </FormControl>
             </Box>

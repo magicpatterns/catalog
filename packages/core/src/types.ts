@@ -17,7 +17,6 @@ export type TFontSizeVariant = {
   value: number
   unit: 'px' | 'rem' | 'em'
   fontWeight: number
-
 }
 
 export type TTypographyData = {
