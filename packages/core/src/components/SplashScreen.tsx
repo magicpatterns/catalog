@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 export default function SplashScreen() {
@@ -9,21 +9,24 @@ export default function SplashScreen() {
         minHeight: '100dvh',
         justifyContent: 'center',
         alignItems: 'center',
+        position: 'fixed',
+        inset: '0',
+        zIndex: '100',
+        backgroundColor: 'white',
       }}
     >
       <motion.div
         animate={{
           rotate: [0, 360],
-          scale: [0.5, 1.5],
+          scale: [0, 1.5, 0],
         }}
         transition={{
-          duration: 0.5,
+          duration: 0.75,
           ease: 'easeIn',
           repeat: Infinity,
-          repeatDelay: 0.25,
         }}
       >
-        <img width={50} height={50} src="/simple_logo.png" alt="Mirrorful" />
+        <Image width={50} height={50} src="/simple_logo.png" alt="Mirrorful" />
       </motion.div>
     </Box>
   )
