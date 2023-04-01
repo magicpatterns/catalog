@@ -1,27 +1,12 @@
-import { ColorPaletteSection } from '@mirrorful/core/lib/components/ColorPalette/ColorPaletteSection'
-import { Layout } from '@mirrorful/core/lib/components/Layout'
-import useMirrorfulStore, {
-  MirrorfulState,
-} from '@mirrorful/core/lib/store/useMirrorfulStore'
-import { TColorData } from '@mirrorful/core/lib/types'
-import postStoreData from '@mirrorful/core/lib/utils/postStoreData'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
-export default function Editor({ isLoading }: { isLoading: boolean }) {
-  const { colors, typography, shadows, fileTypes, setColors } =
-    useMirrorfulStore((state: MirrorfulState) => state)
-
-  const handleUpdateColors = async (data: TColorData[]) => {
-    setColors(data)
-    await postStoreData({
-      tokens: {
-        typography,
-        colorData: data,
-        shadows,
-      },
-      files: fileTypes,
-    })
-  }
+export default function Editor() {
+  const router = useRouter()
+  useEffect(() => {
+    router.replace('/colors')
+  }, [router])
 
   return (
     <>
@@ -34,12 +19,6 @@ export default function Editor({ isLoading }: { isLoading: boolean }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout isLoading={isLoading}>
-        <ColorPaletteSection
-          colors={colors}
-          onUpdateColors={handleUpdateColors}
-        />
-      </Layout>
     </>
   )
 }
