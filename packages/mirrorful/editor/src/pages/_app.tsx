@@ -80,7 +80,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   useEffect(() => {
-    router.prefetch('/')
+    router.prefetch('/colors')
     router.prefetch('/typography')
     router.prefetch('/shadows')
   }, [router])
@@ -93,7 +93,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <MirrorfulThemeProvider>
-      {isLoading && router.pathname === '/' ? (
+      {isLoading ? (
         <SplashScreen></SplashScreen>
       ) : (
         <Component {...pageProps} isLoading={isLoading} />
