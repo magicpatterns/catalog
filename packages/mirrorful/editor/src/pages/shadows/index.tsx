@@ -1,14 +1,16 @@
 import { ShadowsSection } from '@mirrorful/core/lib/components/Shadows/ShadowsSection'
+import useMirrorfulStore, {
+  MirrorfulState,
+} from '@mirrorful/core/lib/store/useMirrorfulStore'
 import { TShadowData } from '@mirrorful/core/lib/types'
 import postStoreData from '@mirrorful/core/lib/utils/postStoreData'
 import React from 'react'
-import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
 import { Layout } from '../../components/Layout'
 
 function Shadows() {
   const { typography, colors, shadows, setShadows, fileTypes } =
-    useMirrorfulStore((state) => state)
+    useMirrorfulStore((state: MirrorfulState) => state)
   const handleUpdateShadows = async (data: TShadowData[]) => {
     setShadows(data)
     await postStoreData({

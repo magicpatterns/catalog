@@ -1,13 +1,15 @@
 import { ColorPaletteSection } from '@mirrorful/core/lib/components/ColorPalette/ColorPaletteSection'
+import useMirrorfulStore, {
+  MirrorfulState,
+} from '@mirrorful/core/lib/store/useMirrorfulStore'
 import { TColorData } from '@mirrorful/core/lib/types'
 import postStoreData from '@mirrorful/core/lib/utils/postStoreData'
 import Head from 'next/head'
 import { Layout } from 'src/components/Layout'
-import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
 export default function Editor({ isLoading }: { isLoading: boolean }) {
   const { colors, typography, shadows, fileTypes, setColors } =
-    useMirrorfulStore((state) => state)
+    useMirrorfulStore((state: MirrorfulState) => state)
 
   const handleUpdateColors = async (data: TColorData[]) => {
     setColors(data)

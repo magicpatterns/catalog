@@ -4,11 +4,13 @@ import { Sidebar } from '@mirrorful/core/lib/components/Dashboard/Sidebar'
 import { ExportSettingsModal } from '@mirrorful/core/lib/components/ExportSettingsModal'
 import { ExportSuccessModal } from '@mirrorful/core/lib/components/ExportSuccessModal'
 import { Onboarding } from '@mirrorful/core/lib/components/Onboarding'
+import useMirrorfulStore, {
+  MirrorfulState,
+} from '@mirrorful/core/lib/store/useMirrorfulStore'
 import postStoreData from '@mirrorful/core/lib/utils/postStoreData'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
 type props = { children: React.ReactNode; isLoading?: boolean }
 export function Layout({ children, isLoading = false }: props) {
@@ -30,7 +32,7 @@ export function Layout({ children, isLoading = false }: props) {
     setShowOnBoarding,
     shouldForceSkipOnboarding,
     showOnBoarding,
-  } = useMirrorfulStore((state) => state)
+  } = useMirrorfulStore((state: MirrorfulState) => state)
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,

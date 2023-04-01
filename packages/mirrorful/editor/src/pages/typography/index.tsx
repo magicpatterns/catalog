@@ -1,13 +1,15 @@
 import { TypographySection } from '@mirrorful/core/lib/components/Typography/TypographySection'
+import useMirrorfulStore, {
+  MirrorfulState,
+} from '@mirrorful/core/lib/store/useMirrorfulStore'
 import { TTypographyData } from '@mirrorful/core/lib/types'
 import postStoreData from '@mirrorful/core/lib/utils/postStoreData'
 import React from 'react'
-import useMirrorfulStore from 'src/zustand/useMirrorfulStore'
 
 import { Layout } from '../../components/Layout'
 function Typography() {
   const { typography, colors, shadows, setTypography, fileTypes } =
-    useMirrorfulStore((state) => state)
+    useMirrorfulStore((state: MirrorfulState) => state)
   const handleUpdateTypography = async (data: TTypographyData) => {
     setTypography(data)
     await postStoreData({
