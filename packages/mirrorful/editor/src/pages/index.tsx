@@ -38,20 +38,6 @@ export default function Editor({ isLoading }: { isLoading: boolean }) {
           onUpdateColors={handleUpdateColors}
         />
       </Layout>
-      {/* <Dashboard
-        fetchStoreData={async () => {
-          const response = await fetch('/api/config')
-          const data: TConfig = await response.json()
-
-          return data
-        }}
-        postStoreData={async (data) => {
-          await fetch('/api/export', {
-            method: 'POST',
-            body: JSON.stringify(data),
-          })
-        }}
-      /> */}
     </>
   )
 }
