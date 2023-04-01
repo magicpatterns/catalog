@@ -86,7 +86,7 @@ export function Layout({ children, isLoading = false }: props) {
       </motion.div>
       <motion.div
         animate={{
-          minWidth: isSidebarCollapsed ? ' 150px' : '300px',
+          minWidth: isSidebarCollapsed ? ' 100px' : '350px',
         }}
       />
       <Box
