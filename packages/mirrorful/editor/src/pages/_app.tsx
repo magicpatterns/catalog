@@ -98,13 +98,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, [fetchStoredData, shouldForceSkipOnboarding, showOnBoarding])
 
   return (
-    // <MirrorfulThemeProvider>
-    //   {isLoading ? (
-    //     <SplashScreen></SplashScreen>
-    //   ) : (
-    //     <Component {...pageProps} isLoading={isLoading} />
-    //   )}
-    // </MirrorfulThemeProvider>
     <MirrorfulThemeProvider>
       {isLoading && <SplashScreen></SplashScreen>}
       {!shouldForceSkipOnboarding && showOnBoarding ? (
