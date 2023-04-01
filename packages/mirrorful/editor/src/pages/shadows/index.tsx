@@ -21,7 +21,7 @@ function Shadows() {
       <ShadowsSection
         onUpdateShadowData={handleUpdateShadows}
         shadows={shadows}
-      ></ShadowsSection>
+      />
     </Layout>
   )
 }
