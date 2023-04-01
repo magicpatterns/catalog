@@ -1,6 +1,7 @@
 import '../main.css'
 import '../atom-one-dark.css'
 
+import { Onboarding } from '@mirrorful/core/lib/components/Onboarding'
 import SplashScreen from '@mirrorful/core/lib/components/SplashScreen'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
 import useMirrorfulStore, {
@@ -8,6 +9,7 @@ import useMirrorfulStore, {
 } from '@mirrorful/core/lib/store/useMirrorfulStore'
 import { defaultShadows } from '@mirrorful/core/lib/types'
 import fetchStoreData from '@mirrorful/core/lib/utils/fetchStoreData'
+import postStoreData from '@mirrorful/core/lib/utils/postStoreData'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
@@ -25,15 +27,19 @@ if (typeof window !== 'undefined') {
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(true)
+  const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
+    useState(false)
+  const [showOnBoarding, setShowOnBoarding] = useState(false)
   const router = useRouter()
+
   const {
     setColors,
     setTypography,
     setShadows,
     setFileTypes,
-    setShowOnBoarding,
-    shouldForceSkipOnboarding,
-    showOnBoarding,
+    // setShowOnBoarding,
+    // shouldForceSkipOnboarding,
+    // showOnBoarding,
   } = useMirrorfulStore((state: MirrorfulState) => state)
   // to fetch data
 
@@ -101,6 +107,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     // </MirrorfulThemeProvider>
     <MirrorfulThemeProvider>
       {isLoading && <SplashScreen></SplashScreen>}
+      {!shouldForceSkipOnboarding && showOnBoarding ? (
+        <Onboarding
+          postStoreData={postStoreData}
+          onFinishOnboarding={() => {
+            setShowOnBoarding(false)
+            setShouldForceSkipOnboarding(true)
+          }}
+          platform={'package'}
+        />
+      ) : null}
       <Component {...pageProps} />
     </MirrorfulThemeProvider>
   )
