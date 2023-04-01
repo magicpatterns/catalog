@@ -17,7 +17,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   Tab,
   TabList,
   TabPanel,
