@@ -8,7 +8,6 @@ import { TTab } from '../components/Dashboard'
 import { Sidebar } from '../components/Dashboard/Sidebar'
 import { ExportSettingsModal } from '../components/ExportSettingsModal'
 import { ExportSuccessModal } from '../components/ExportSuccessModal'
-import { Onboarding } from '../components/Onboarding'
 import useMirrorfulStore, { MirrorfulState } from '../store/useMirrorfulStore'
 import postStoreData from '../utils/postStoreData'
 
@@ -32,17 +31,8 @@ export function Layout({
     router.pathname === '/' ? '/colors' : (router.pathname as TTab)
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
-  const {
-    colors,
-    typography,
-    shadows,
-    fileTypes,
-    setFileTypes,
-    setShouldForceSkipOnboarding,
-    setShowOnBoarding,
-    shouldForceSkipOnboarding,
-    showOnBoarding,
-  } = useMirrorfulStore((state: MirrorfulState) => state)
+  const { colors, typography, shadows, fileTypes, setFileTypes } =
+    useMirrorfulStore((state: MirrorfulState) => state)
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
@@ -62,19 +52,6 @@ export function Layout({
     })
 
     onExportSuccessModalOpen()
-  }
-
-  if (!shouldForceSkipOnboarding && showOnBoarding) {
-    return (
-      <Onboarding
-        postStoreData={postStoreData}
-        onFinishOnboarding={() => {
-          setShowOnBoarding(false)
-          setShouldForceSkipOnboarding(true)
-        }}
-        platform={platform}
-      />
-    )
   }
 
   return (
