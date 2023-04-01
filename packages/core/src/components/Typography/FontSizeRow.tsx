@@ -80,7 +80,9 @@ export function FontSizeRow({
         <Box
           css={{
             fontSize: normalizeFontSize(fontSizeData),
-            fontWeight: isFontSizeTooLarge(fontSizeData) ? 'bold' : fontSizeData.fontWeight,
+            fontWeight: isFontSizeTooLarge(fontSizeData)
+              ? 'bold'
+              : fontSizeData.fontWeight,
             width: '100%',
           }}
         >

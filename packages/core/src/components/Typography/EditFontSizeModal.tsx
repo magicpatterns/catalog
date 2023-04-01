@@ -17,8 +17,8 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TFontSizeVariant } from '@core/types'
-import { fontWeights, fontUnits } from './TypographyConstants'
 import { useEffect, useState } from 'react'
+import { fontWeights, fontUnits } from './TypographyConstants'
 
 export function EditFontSizeModal({
   isOpen,
