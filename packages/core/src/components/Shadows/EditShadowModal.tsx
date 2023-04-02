@@ -113,6 +113,7 @@ export function EditShadowModal({
         b: colors[2],
         a: colors[3],
       })
+      setError(null)
     } else {
       setError('Invalid color')
     }
