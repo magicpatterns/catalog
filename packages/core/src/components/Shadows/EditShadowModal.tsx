@@ -18,6 +18,7 @@ import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TShadowData } from '@core/types'
 import { RgbColor } from '@hello-pangea/color-picker'
 import { useEffect, useMemo, useState } from 'react'
+
 import { ShadowColorPicker } from './ShadowColorPicker'
 
 export function EditShadowModal({
