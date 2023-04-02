@@ -16,7 +16,8 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TShadowData } from '@core/types'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
+import { RgbColor } from '@hello-pangea/color-picker'
 
 import { ShadowColorPicker } from './ShadowColorPicker'
 
@@ -78,6 +79,33 @@ export function EditShadowModal({
     onClose()
   }
 
+  const [color, setColor] = useState(presetColor)
+
+  const [hOffset, sethOffset] = useState(initialValues?.hOffset ?? 0)
+  const [vOffset, setVOffset] = useState(initialValues?.vOffset ?? 0)
+  const [blur, setBlur] = useState(initialValues?.blur ?? 0)
+  const [spread, setSpread] = useState(initialValues?.spread ?? 0)
+
+  const codeResult = useMemo(() => {
+    return `${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color}`
+  }, [hOffset, vOffset, blur, spread, color])
+
+  const handleColor = (color: RgbColor) => {
+    const rgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+    setColor(rgba)
+  }
+
+  const formatColor = (input: string) => {
+    console.log(input)
+  }
+
+  useEffect(() => {
+    setVariant({
+      ...variant,
+      value: codeResult,
+    })
+  }, [codeResult])
+
   useEffect(() => {
     if (!isOpen) {
       setVariant(initialShadowVariant ?? { name: '', value: '' })
@@ -101,7 +129,9 @@ export function EditShadowModal({
           >
             <Box css={{ display: 'flex', flexDirection: 'column' }}>
               <FormControl>
-                <FormLabel>Variant Name</FormLabel>
+                <FormLabel css={{ fontSize: '0.75rem' }}>
+                  Variant name
+                </FormLabel>
                 <Input
                   value={variant.name}
                   onChange={(e) =>
@@ -109,20 +139,56 @@ export function EditShadowModal({
                   }
                 />
               </FormControl>
-              <FormControl css={{ marginTop: '32px' }}>
-                <FormLabel>Variant Value</FormLabel>
-                <Input
-                  value={variant.value}
-                  onChange={(e) =>
-                    setVariant({ ...variant, value: e.target.value })
-                  }
-                />
+              <FormControl>
+                <Box css={{ display: 'flex', marginTop: '1rem' }}>
+                  <Box css={{ width: '100%' }}>
+                    <FormLabel css={{ fontSize: '0.75rem' }}>
+                      Horizontal
+                    </FormLabel>
+                    <Input
+                      value={hOffset}
+                      onChange={(e) => sethOffset(Number(e.target.value))}
+                    />
+                  </Box>
+                  <Box css={{ width: '100%' }}>
+                    <FormLabel css={{ fontSize: '0.75rem' }}>
+                      Vertical
+                    </FormLabel>
+                    <Input
+                      value={vOffset}
+                      onChange={(e) => setVOffset(Number(e.target.value))}
+                    />
+                  </Box>
+                </Box>
+                <Box css={{ display: 'flex', marginTop: '1rem' }}>
+                  <Box css={{ width: '100%' }}>
+                    <FormLabel css={{ fontSize: '0.75rem' }}>Blur</FormLabel>
+                    <Input
+                      value={blur}
+                      onChange={(e) => setBlur(Number(e.target.value))}
+                    />
+                  </Box>
+                  <Box css={{ width: '100%' }}>
+                    <FormLabel css={{ fontSize: '0.75rem' }}>Spread</FormLabel>
+                    <Input
+                      value={spread}
+                      onChange={(e) => setSpread(Number(e.target.value))}
+                    />
+                  </Box>
+                </Box>
               </FormControl>
               <ShadowColorPicker
-                variant={variant}
-                setVariant={setVariant}
+                blur={blur}
+                spread={spread}
+                hOffset={hOffset}
+                vOffset={vOffset}
+                setBlur={setBlur}
+                setSpread={setSpread}
+                sethOffset={sethOffset}
+                setVOffset={setVOffset}
+                codeResult={codeResult}
+                handleColor={handleColor}
                 presetColor={presetColor}
-                initialValues={initialValues}
               />
 
               <Box
