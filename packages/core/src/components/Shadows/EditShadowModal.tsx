@@ -18,7 +18,6 @@ import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TShadowData } from '@core/types'
 import { RgbColor } from '@hello-pangea/color-picker'
 import { useEffect, useMemo, useState } from 'react'
-
 import { ShadowColorPicker } from './ShadowColorPicker'
 
 export function EditShadowModal({
@@ -80,7 +79,7 @@ export function EditShadowModal({
   }
 
   const [color, setColor] = useState(presetColor)
-
+  const [inputColor, setInputColor] = useState(presetColor)
   const [hOffset, sethOffset] = useState(initialValues?.hOffset ?? 0)
   const [vOffset, setVOffset] = useState(initialValues?.vOffset ?? 0)
   const [blur, setBlur] = useState(initialValues?.blur ?? 0)
@@ -93,6 +92,30 @@ export function EditShadowModal({
   const handleColor = (color: RgbColor) => {
     const rgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
     setColor(rgba)
+  }
+
+  const formatColor = (input: string) => {
+    if (
+      /^rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*(,\s*(0\.\d+|\d+(\.\d+)?))?\s*\)$/i.test(
+        input
+      )
+    ) {
+      const colors = input
+        .split('rgba')[1]
+        .replace('(', '')
+        .replace(')', '')
+        .split(',')
+        .map((value) => Number(value))
+      handleColor({
+        r: colors[0],
+        g: colors[1],
+        b: colors[2],
+        a: colors[3],
+      })
+    } else {
+      setError('Invalid color')
+    }
+    setInputColor(input)
   }
 
   useEffect(() => {
@@ -172,6 +195,13 @@ export function EditShadowModal({
                     />
                   </Box>
                 </Box>
+                <Box css={{ marginTop: '1rem' }}>
+                  <FormLabel css={{ fontSize: '0.75rem' }}>RGBA</FormLabel>
+                  <Input
+                    value={inputColor}
+                    onChange={(e) => formatColor(e.target.value)}
+                  />
+                </Box>
               </FormControl>
               <ShadowColorPicker
                 blur={blur}
@@ -184,7 +214,7 @@ export function EditShadowModal({
                 setVOffset={setVOffset}
                 codeResult={codeResult}
                 handleColor={handleColor}
-                presetColor={presetColor}
+                color={color}
               />
 
               <Box

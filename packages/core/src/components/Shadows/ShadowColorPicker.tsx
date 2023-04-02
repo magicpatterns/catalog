@@ -21,7 +21,7 @@ export function ShadowColorPicker({
   setVOffset,
   codeResult,
   handleColor,
-  presetColor,
+  color,
 }: {
   blur: number
   spread: number
@@ -33,7 +33,7 @@ export function ShadowColorPicker({
   setVOffset: Dispatch<SetStateAction<number>>
   codeResult: string
   handleColor: (rgb: RgbColor) => void
-  presetColor: string
+  color: string
 }) {
   return (
     <Box
@@ -48,7 +48,7 @@ export function ShadowColorPicker({
       <Flex justifyContent={'space-between'} mt="1em">
         <SketchPicker
           width="45%"
-          color={presetColor}
+          color={color}
           onChange={(e) => handleColor(e.rgb)}
         />
         <Box
