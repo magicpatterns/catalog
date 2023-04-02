@@ -12,12 +12,12 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TShadowData } from '@core/types'
-import { useEffect, useState, useMemo } from 'react'
 import { RgbColor } from '@hello-pangea/color-picker'
+import { useEffect, useMemo, useState } from 'react'
 
 import { ShadowColorPicker } from './ShadowColorPicker'
 
@@ -93,10 +93,6 @@ export function EditShadowModal({
   const handleColor = (color: RgbColor) => {
     const rgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
     setColor(rgba)
-  }
-
-  const formatColor = (input: string) => {
-    console.log(input)
   }
 
   useEffect(() => {
