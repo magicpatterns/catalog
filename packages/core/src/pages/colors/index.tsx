@@ -1,10 +1,9 @@
-import { Layout } from 'src/components/Layout'
-
-import { ColorPaletteSection } from '../../components/ColorPalette/ColorPaletteSection'
+import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
+import { Layout } from '@core/components/Layout'
 import useMirrorfulStore, {
   MirrorfulState,
-} from '../../store/useMirrorfulStore'
-import { TColorData, TConfig } from '../../types'
+} from '@core/store/useMirrorfulStore'
+import { TColorData, TConfig } from '@core/types'
 
 export default function Colors({
   postStoreData,
