@@ -36,8 +36,6 @@ import Colors from '@mirrorful/core/lib/pages/colors'
 import React from 'react'
 import postStoreData from 'src/utils/postStoreData'
 
-function ColorsPage() {
+export default function ColorsPage() {
   return <Colors postStoreData={postStoreData} />
 }
-
-export default ColorsPage
