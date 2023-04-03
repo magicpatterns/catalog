@@ -36,7 +36,7 @@ import { TTokens } from '@core/types'
 import { useState } from 'react'
 import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
-import { SiTailwindcss } from 'react-icons/si'
+import { SiChakraui, SiTailwindcss } from 'react-icons/si'
 import { TbBrandNextjs } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
@@ -200,6 +200,24 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         >
           <SiTailwindcss size={35} />
           <Heading fontSize={'xl'}>Tailwind</Heading>
+        </Link>
+        <Link
+          href={
+            'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui'
+          }
+          target={'_blank'}
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            maxWidth: '150px',
+            gap: '4px',
+            borderRadius: 8,
+            padding: 2,
+          }}
+          _hover={{ outline: '1px solid black' }}
+        >
+          <SiChakraui size={35} />
+          <Heading fontSize={'xl'}>Chakra UI</Heading>
         </Link>
       </Flex>
     </>
