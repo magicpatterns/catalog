@@ -1,5 +1,4 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
-import { ReactIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -19,7 +18,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   Tab,
   TabList,
   TabPanel,
@@ -35,6 +33,7 @@ import { toJson } from '@core/translators/toJson'
 import { toScss } from '@core/translators/toScss'
 import { TTokens } from '@core/types'
 import { useState } from 'react'
+import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
 
 import { CodePreview } from './CodePreview'
@@ -143,7 +142,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         For more specific examples check below.
       </Text>
       <Flex>
-        <ReactIcon />
+        <FaReact size={50} fill={'#61DBFB'} />
       </Flex>
     </>
   )
