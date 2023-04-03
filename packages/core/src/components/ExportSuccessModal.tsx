@@ -143,7 +143,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         </Link>{' '}
         For more specific examples check below.
       </Text>
-      <Flex css={{ marginTop: '5px' }}>
+      <Flex css={{ marginTop: '5px', gap: '4px' }}>
         <Link
           href={
             'https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app'
@@ -161,7 +161,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         >
           <FaReact size={35} fill={'#61DBFB'} />
           <Heading fontSize={'xl'}>React</Heading>
-          <Text>Example for Create-React-App</Text>
+          <Text>Create-React-App</Text>
         </Link>
         <Link
           href={
@@ -180,7 +180,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         >
           <TbBrandNextjs size={35} />
           <Heading fontSize={'xl'}>Next JS</Heading>
-          <Text>Example for a Next JS App</Text>
+          <Text>Next JS App</Text>
         </Link>
       </Flex>
     </>
