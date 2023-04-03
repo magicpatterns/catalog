@@ -1,10 +1,9 @@
-import { Layout } from 'src/components/Layout'
-
-import { TypographySection } from '../../components/Typography/TypographySection'
+import { Layout } from '@core/components/Layout'
+import { TypographySection } from '@core/components/Typography/TypographySection'
 import useMirrorfulStore, {
   MirrorfulState,
-} from '../../store/useMirrorfulStore'
-import { TConfig, TTypographyData } from '../../types'
+} from '@core/store/useMirrorfulStore'
+import { TConfig, TTypographyData } from '@core/types'
 export default function Typography({
   postStoreData,
 }: {

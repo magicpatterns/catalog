@@ -1,11 +1,10 @@
-import React from 'react'
-import { Layout } from 'src/components/Layout'
-
-import { ShadowsSection } from '../../components/Shadows/ShadowsSection'
+import { Layout } from '@core/components/Layout'
+import { ShadowsSection } from '@core/components/Shadows/ShadowsSection'
 import useMirrorfulStore, {
   MirrorfulState,
-} from '../../store/useMirrorfulStore'
-import { TConfig, TShadowData } from '../../types'
+} from '@core/store/useMirrorfulStore'
+import { TConfig, TShadowData } from '@core/types'
+import React from 'react'
 
 export default function Shadows({
   postStoreData,
