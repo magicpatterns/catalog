@@ -28,12 +28,10 @@
 
 // export default Typography
 
-import Typography from '@mirrorful/core/lib/pages/typography'
+import TypographyPage from '@mirrorful/core/lib/pages/typography'
 import React from 'react'
 import postStoreData from 'src/utils/postStoreData'
 
-function TypographyPage() {
-  return <Typography postStoreData={postStoreData} />
+export default function Typography() {
+  return <TypographyPage postStoreData={postStoreData} />
 }
-
-export default TypographyPage
