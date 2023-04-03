@@ -196,7 +196,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           }}
           _hover={{ outline: '1px solid black' }}
         >
-          <SiTailwindcss size={35} />
+          <SiTailwindcss size={35} fill="#38BDF8" />
           <Heading fontSize={'xl'}>Tailwind</Heading>
         </Link>
         <Link
