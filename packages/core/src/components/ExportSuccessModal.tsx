@@ -214,7 +214,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           }}
           _hover={{ outline: '1px solid black' }}
         >
-          <SiChakraui size={35} />
+          <SiChakraui size={35} fill="#2ABFB3" />
           <Heading fontSize={'xl'}>Chakra UI</Heading>
         </Link>
         <Link
