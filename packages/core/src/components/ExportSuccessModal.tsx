@@ -144,7 +144,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         </Link>{' '}
         For more specific examples check below.
       </Text>
-      <Flex css={{ marginTop: '5px', gap: '4px' }}>
+      <Flex css={{ marginTop: '5px' }} gap={8}>
         <Link
           href={
             'https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app'
@@ -161,7 +161,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           _hover={{ outline: '1px solid black' }}
         >
           <FaReact size={35} fill={'#61DBFB'} />
-          <Heading fontSize={'xl'}>React</Heading>
+          <Text fontSize={'xl'}>React</Text>
         </Link>
         <Link
           href={
@@ -179,7 +179,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           _hover={{ outline: '1px solid black' }}
         >
           <TbBrandNextjs size={35} />
-          <Heading fontSize={'xl'}>Next JS</Heading>
+          <Text fontSize={'xl'}>Next JS</Text>
         </Link>
         <Link
           href={
@@ -197,7 +197,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           _hover={{ outline: '1px solid black' }}
         >
           <SiTailwindcss size={35} fill="#38BDF8" />
-          <Heading fontSize={'xl'}>Tailwind</Heading>
+          <Text fontSize={'xl'}>Tailwind</Text>
         </Link>
         <Link
           href={
@@ -215,7 +215,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           _hover={{ outline: '1px solid black' }}
         >
           <SiChakraui size={35} fill="#2ABFB3" />
-          <Heading fontSize={'xl'}>Chakra UI</Heading>
+          <Text fontSize={'xl'}>Chakra UI</Text>
         </Link>
         <Link
           href={
@@ -233,7 +233,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           _hover={{ outline: '1px solid black' }}
         >
           <TbBrandNuxt size={35} color="#00DC82" />
-          <Heading fontSize={'xl'}>Nuxt 3</Heading>
+          <Text fontSize={'xl'}>Nuxt 3</Text>
         </Link>
       </Flex>
     </>
