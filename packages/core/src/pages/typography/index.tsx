@@ -1,4 +1,3 @@
-import React from 'react'
 import { Layout } from 'src/components/Layout'
 
 import { TypographySection } from '../../components/Typography/TypographySection'
@@ -6,7 +5,7 @@ import useMirrorfulStore, {
   MirrorfulState,
 } from '../../store/useMirrorfulStore'
 import { TConfig, TTypographyData } from '../../types'
-function Typography({
+export default function Typography({
   postStoreData,
 }: {
   postStoreData: (data: TConfig) => Promise<void>
@@ -29,5 +28,3 @@ function Typography({
     </Layout>
   )
 }
-
-export default Typography

@@ -7,7 +7,7 @@ import useMirrorfulStore, {
 } from '../../store/useMirrorfulStore'
 import { TConfig, TShadowData } from '../../types'
 
-function Shadows({
+export default function Shadows({
   postStoreData,
 }: {
   postStoreData: (data: TConfig) => Promise<void>
@@ -30,5 +30,3 @@ function Shadows({
     </Layout>
   )
 }
-
-export default Shadows
