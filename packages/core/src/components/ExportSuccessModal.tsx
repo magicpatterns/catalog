@@ -154,7 +154,9 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             maxWidth: '150px',
             gap: '4px',
             borderRadius: 8,
+            padding: 2,
           }}
+          _hover={{ outline: '1px solid black' }}
         >
           <FaReact size={35} fill={'#61DBFB'} />
           <Heading fontSize={'xl'}>{'React'}</Heading>
