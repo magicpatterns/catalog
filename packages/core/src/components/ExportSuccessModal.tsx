@@ -182,6 +182,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             borderRadius: 8,
             padding: 2,
           }}
+          role="group"
           _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
           <TbBrandNextjs size={35} />
@@ -205,6 +206,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             borderRadius: 8,
             padding: 2,
           }}
+          role="group"
           _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
           <SiTailwindcss size={35} fill="#38BDF8" />
@@ -228,6 +230,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             borderRadius: 8,
             padding: 2,
           }}
+          role="group"
           _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
           <SiChakraui size={35} fill="#2ABFB3" />
@@ -251,6 +254,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             borderRadius: 8,
             padding: 2,
           }}
+          role="group"
           _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
           <TbBrandNuxt size={35} color="#00DC82" />
