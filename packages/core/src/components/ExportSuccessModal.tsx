@@ -144,122 +144,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         </Link>{' '}
         For more specific examples check below.
       </Text>
-      <Flex css={{ marginTop: '8px' }} gap={8} flexWrap="wrap">
-        <Link
-          href={
-            'https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app'
-          }
-          target={'_blank'}
-          css={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            minWidth: '175px',
-            alignItems: 'center',
-            borderRadius: 8,
-            padding: 1,
-          }}
-          role="group"
-          _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
-        >
-          <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <FaReact size={35} fill={'#61DBFB'} />
-            <Text fontSize={'xl'}>React</Text>
-          </Box>
-          <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
-        </Link>
-        <Link
-          href={
-            'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui'
-          }
-          target={'_blank'}
-          css={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            minWidth: '175px',
-            alignItems: 'center',
-            gap: '4px',
-            borderRadius: 8,
-            padding: 2,
-          }}
-          role="group"
-          _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
-        >
-          <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <TbBrandNextjs size={35} />
-            <Text fontSize={'xl'}>Next JS</Text>
-          </Box>
-          <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
-        </Link>
-        <Link
-          href={
-            'https://github.com/Mirrorful/mirrorful/tree/main/examples/tailwind-next'
-          }
-          target={'_blank'}
-          css={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            minWidth: '175px',
-            alignItems: 'center',
-            gap: '4px',
-            borderRadius: 8,
-            padding: 2,
-          }}
-          role="group"
-          _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
-        >
-          <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <SiTailwindcss size={35} fill="#38BDF8" />
-            <Text fontSize={'xl'}>Tailwind</Text>
-          </Box>
-          <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
-        </Link>
-        <Link
-          href={
-            'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui'
-          }
-          target={'_blank'}
-          css={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            minWidth: '175px',
-            alignItems: 'center',
-            gap: '4px',
-            borderRadius: 8,
-            padding: 2,
-          }}
-          role="group"
-          _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
-        >
-          <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <SiChakraui size={35} fill="#2ABFB3" />
-            <Text fontSize={'xl'}>Chakra UI</Text>
-          </Box>
-          <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
-        </Link>
-        <Link
-          href={
-            'https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3'
-          }
-          target={'_blank'}
-          css={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            minWidth: '175px',
-            alignItems: 'center',
-            gap: '4px',
-            borderRadius: 8,
-            padding: 2,
-          }}
-          role="group"
-          _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
-        >
-          <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <TbBrandNuxt size={35} color="#00DC82" />
-            <Text fontSize={'xl'}>Nuxt 3</Text>
-          </Box>
-          <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
-        </Link>
-      </Flex>
+      <ExternalExamples />
     </>
   )
 }
@@ -445,8 +330,10 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
           href="https://mirrorful.com/docs/home/examples"
         >
           example projects here.
-        </Link>
+        </Link>{' '}
+        For more specific examples check the links below.
       </Text>
+      <ExternalExamples />
       <Box css={{ marginTop: '16px' }}>
         <Tabs>
           <TabList>
@@ -507,6 +394,127 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
         </Tabs>
       </Box>
     </>
+  )
+}
+
+function ExternalExamples() {
+  return (
+    <Flex css={{ marginTop: '8px' }} gap={8} flexWrap="wrap">
+      <Link
+        href={
+          'https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app'
+        }
+        target={'_blank'}
+        css={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          minWidth: '175px',
+          alignItems: 'center',
+          borderRadius: 8,
+          padding: 1,
+        }}
+        role="group"
+        _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
+      >
+        <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <FaReact size={35} fill={'#61DBFB'} />
+          <Text fontSize={'xl'}>React</Text>
+        </Box>
+        <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
+      </Link>
+      <Link
+        href={
+          'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui'
+        }
+        target={'_blank'}
+        css={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          minWidth: '175px',
+          alignItems: 'center',
+          gap: '4px',
+          borderRadius: 8,
+          padding: 2,
+        }}
+        role="group"
+        _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
+      >
+        <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <TbBrandNextjs size={35} />
+          <Text fontSize={'xl'}>Next JS</Text>
+        </Box>
+        <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
+      </Link>
+      <Link
+        href={
+          'https://github.com/Mirrorful/mirrorful/tree/main/examples/tailwind-next'
+        }
+        target={'_blank'}
+        css={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          minWidth: '175px',
+          alignItems: 'center',
+          gap: '4px',
+          borderRadius: 8,
+          padding: 2,
+        }}
+        role="group"
+        _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
+      >
+        <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <SiTailwindcss size={35} fill="#38BDF8" />
+          <Text fontSize={'xl'}>Tailwind</Text>
+        </Box>
+        <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
+      </Link>
+      <Link
+        href={
+          'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui'
+        }
+        target={'_blank'}
+        css={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          minWidth: '175px',
+          alignItems: 'center',
+          gap: '4px',
+          borderRadius: 8,
+          padding: 2,
+        }}
+        role="group"
+        _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
+      >
+        <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <SiChakraui size={35} fill="#2ABFB3" />
+          <Text fontSize={'xl'}>Chakra UI</Text>
+        </Box>
+        <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
+      </Link>
+      <Link
+        href={
+          'https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3'
+        }
+        target={'_blank'}
+        css={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          minWidth: '175px',
+          alignItems: 'center',
+          gap: '4px',
+          borderRadius: 8,
+          padding: 2,
+        }}
+        role="group"
+        _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
+      >
+        <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <TbBrandNuxt size={35} color="#00DC82" />
+          <Text fontSize={'xl'}>Nuxt 3</Text>
+        </Box>
+        <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
+      </Link>
+    </Flex>
   )
 }
 
