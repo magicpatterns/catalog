@@ -165,7 +165,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         </Link>
         <Link
           href={
-            'https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app'
+            'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui'
           }
           target={'_blank'}
           css={{
