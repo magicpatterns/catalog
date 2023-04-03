@@ -4,6 +4,7 @@ import {
   Button,
   Code,
   Flex,
+  Heading,
   Icon,
   Link,
   Menu,
@@ -150,11 +151,14 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           css={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            fontWeight: 'bold',
+            maxWidth: '150px',
+            gap: '4px',
+            borderRadius: 8,
           }}
         >
-          <FaReact size={50} fill={'#61DBFB'} /> {'React'}
+          <FaReact size={35} fill={'#61DBFB'} />
+          <Heading fontSize={'xl'}>{'React'}</Heading>
+          <Text>Example for Create-React-App</Text>
         </Link>
       </Flex>
     </>
