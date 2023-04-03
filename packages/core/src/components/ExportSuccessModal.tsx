@@ -36,6 +36,7 @@ import { TTokens } from '@core/types'
 import { useState } from 'react'
 import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
+import { SiTailwindcss } from 'react-icons/si'
 import { TbBrandNextjs } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
@@ -181,6 +182,24 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           <TbBrandNextjs size={35} />
           <Heading fontSize={'xl'}>Next JS</Heading>
           <Text>Next JS App</Text>
+        </Link>
+        <Link
+          href={
+            'https://github.com/Mirrorful/mirrorful/tree/main/examples/tailwind-next'
+          }
+          target={'_blank'}
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            maxWidth: '150px',
+            gap: '4px',
+            borderRadius: 8,
+            padding: 2,
+          }}
+          _hover={{ outline: '1px solid black' }}
+        >
+          <SiTailwindcss size={35} />
+          <Heading fontSize={'xl'}>Tailwind</Heading>
         </Link>
       </Flex>
     </>
