@@ -182,7 +182,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             borderRadius: 8,
             padding: 2,
           }}
-          _hover={{ outline: '1px solid black' }}
+          _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
           <TbBrandNextjs size={35} />
           <Text fontSize={'xl'}>Next JS</Text>
@@ -205,7 +205,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             borderRadius: 8,
             padding: 2,
           }}
-          _hover={{ outline: '1px solid black' }}
+          _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
           <SiTailwindcss size={35} fill="#38BDF8" />
           <Text fontSize={'xl'}>Tailwind</Text>
@@ -228,7 +228,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             borderRadius: 8,
             padding: 2,
           }}
-          _hover={{ outline: '1px solid black' }}
+          _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
           <SiChakraui size={35} fill="#2ABFB3" />
           <Text fontSize={'xl'}>Chakra UI</Text>
@@ -251,7 +251,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             borderRadius: 8,
             padding: 2,
           }}
-          _hover={{ outline: '1px solid black' }}
+          _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
           <TbBrandNuxt size={35} color="#00DC82" />
           <Text fontSize={'xl'}>Nuxt 3</Text>
