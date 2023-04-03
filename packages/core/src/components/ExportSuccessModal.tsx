@@ -152,7 +152,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
-            maxWidth: '150px',
+            minWidth: '175px',
             alignItems: 'center',
             gap: 8,
             borderRadius: 8,
@@ -176,7 +176,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
-            maxWidth: '150px',
+            minWidth: '175px',
             alignItems: 'center',
             gap: '4px',
             borderRadius: 8,
@@ -200,7 +200,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
-            minWidth: '150px',
+            minWidth: '175px',
             alignItems: 'center',
             gap: '4px',
             borderRadius: 8,
@@ -224,7 +224,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
-            maxWidth: '150px',
+            minWidth: '175px',
             alignItems: 'center',
             gap: '4px',
             borderRadius: 8,
@@ -248,7 +248,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
-            maxWidth: '150px',
+            minWidth: '175px',
             alignItems: 'center',
             gap: '4px',
             borderRadius: 8,
