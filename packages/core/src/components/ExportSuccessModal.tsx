@@ -36,6 +36,7 @@ import { TTokens } from '@core/types'
 import { useState } from 'react'
 import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
+import { TbBrandNextjs } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
 import { TPlatform } from './Dashboard'
@@ -159,8 +160,27 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           _hover={{ outline: '1px solid black' }}
         >
           <FaReact size={35} fill={'#61DBFB'} />
-          <Heading fontSize={'xl'}>{'React'}</Heading>
+          <Heading fontSize={'xl'}>React</Heading>
           <Text>Example for Create-React-App</Text>
+        </Link>
+        <Link
+          href={
+            'https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app'
+          }
+          target={'_blank'}
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            maxWidth: '150px',
+            gap: '4px',
+            borderRadius: 8,
+            padding: 2,
+          }}
+          _hover={{ outline: '1px solid black' }}
+        >
+          <TbBrandNextjs size={35} />
+          <Heading fontSize={'xl'}>Next JS</Heading>
+          <Text>Example for a Next JS App</Text>
         </Link>
       </Flex>
     </>
