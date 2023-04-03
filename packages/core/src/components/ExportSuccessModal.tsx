@@ -144,7 +144,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         </Link>{' '}
         For more specific examples check below.
       </Text>
-      <Flex css={{ marginTop: '5px' }} gap={8}>
+      <Flex css={{ marginTop: '5px' }} gap={8} flexWrap="wrap">
         <Link
           href={
             'https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app'
