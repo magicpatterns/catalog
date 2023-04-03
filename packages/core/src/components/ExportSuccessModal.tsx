@@ -37,7 +37,7 @@ import { useState } from 'react'
 import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
 import { SiChakraui, SiTailwindcss } from 'react-icons/si'
-import { TbBrandNextjs } from 'react-icons/tb'
+import { TbBrandNextjs, TbBrandNuxt } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
 import { TPlatform } from './Dashboard'
@@ -218,6 +218,24 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         >
           <SiChakraui size={35} />
           <Heading fontSize={'xl'}>Chakra UI</Heading>
+        </Link>
+        <Link
+          href={
+            'https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3'
+          }
+          target={'_blank'}
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            maxWidth: '150px',
+            gap: '4px',
+            borderRadius: 8,
+            padding: 2,
+          }}
+          _hover={{ outline: '1px solid black' }}
+        >
+          <TbBrandNuxt size={35} />
+          <Heading fontSize={'xl'}>Nuxt 3</Heading>
         </Link>
       </Flex>
     </>
