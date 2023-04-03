@@ -232,7 +232,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           }}
           _hover={{ outline: '1px solid black' }}
         >
-          <TbBrandNuxt size={35} />
+          <TbBrandNuxt size={35} color="#00DC82" />
           <Heading fontSize={'xl'}>Nuxt 3</Heading>
         </Link>
       </Flex>
