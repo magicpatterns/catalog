@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, ExternalLinkIcon, LinkIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -152,16 +152,20 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
-            flexDirection: 'column',
             maxWidth: '150px',
-            gap: '4px',
+            alignItems: 'center',
+            gap: 8,
             borderRadius: 8,
             padding: 2,
           }}
-          _hover={{ outline: '1px solid black' }}
+          role="group"
+          _hover={{ textDecoration: 'none' }}
         >
           <FaReact size={35} fill={'#61DBFB'} />
-          <Text fontSize={'xl'}>React</Text>
+          <Text fontSize={'xl'} _groupHover={{ fontWeight: 'bold' }}>
+            React
+          </Text>
+          <ExternalLinkIcon />
         </Link>
         <Link
           href={
