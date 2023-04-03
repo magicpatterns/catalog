@@ -156,16 +156,18 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
             alignItems: 'center',
             gap: 8,
             borderRadius: 8,
-            padding: 2,
+            padding: 1,
           }}
           role="group"
-          _hover={{ textDecoration: 'none' }}
+          _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
           <FaReact size={35} fill={'#61DBFB'} />
-          <Text fontSize={'xl'} _groupHover={{ fontWeight: 'bold' }}>
-            React
-          </Text>
-          <ExternalLinkIcon />
+          <Text fontSize={'xl'}>React</Text>
+          <ExternalLinkIcon
+            marginLeft={4}
+            color="gray"
+            _groupHover={{ color: 'black' }}
+          />
         </Link>
         <Link
           href={
