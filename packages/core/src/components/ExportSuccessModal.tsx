@@ -162,7 +162,6 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         >
           <FaReact size={35} fill={'#61DBFB'} />
           <Heading fontSize={'xl'}>React</Heading>
-          <Text>Create-React-App</Text>
         </Link>
         <Link
           href={
@@ -181,7 +180,6 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         >
           <TbBrandNextjs size={35} />
           <Heading fontSize={'xl'}>Next JS</Heading>
-          <Text>Next JS App</Text>
         </Link>
         <Link
           href={
