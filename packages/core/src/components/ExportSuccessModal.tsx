@@ -152,22 +152,20 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
+            justifyContent: 'space-between',
             minWidth: '175px',
             alignItems: 'center',
-            gap: 8,
             borderRadius: 8,
             padding: 1,
           }}
           role="group"
           _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
-          <FaReact size={35} fill={'#61DBFB'} />
-          <Text fontSize={'xl'}>React</Text>
-          <ExternalLinkIcon
-            marginLeft={4}
-            color="gray"
-            _groupHover={{ color: 'black' }}
-          />
+          <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <FaReact size={35} fill={'#61DBFB'} />
+            <Text fontSize={'xl'}>React</Text>
+          </Box>
+          <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
         </Link>
         <Link
           href={
@@ -176,6 +174,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
+            justifyContent: 'space-between',
             minWidth: '175px',
             alignItems: 'center',
             gap: '4px',
@@ -185,13 +184,11 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           role="group"
           _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
-          <TbBrandNextjs size={35} />
-          <Text fontSize={'xl'}>Next JS</Text>
-          <ExternalLinkIcon
-            marginLeft={4}
-            color="gray"
-            _groupHover={{ color: 'black' }}
-          />
+          <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <TbBrandNextjs size={35} />
+            <Text fontSize={'xl'}>Next JS</Text>
+          </Box>
+          <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
         </Link>
         <Link
           href={
@@ -200,6 +197,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
+            justifyContent: 'space-between',
             minWidth: '175px',
             alignItems: 'center',
             gap: '4px',
@@ -209,13 +207,11 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           role="group"
           _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
-          <SiTailwindcss size={35} fill="#38BDF8" />
-          <Text fontSize={'xl'}>Tailwind</Text>
-          <ExternalLinkIcon
-            marginLeft={4}
-            color="gray"
-            _groupHover={{ color: 'black' }}
-          />
+          <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <SiTailwindcss size={35} fill="#38BDF8" />
+            <Text fontSize={'xl'}>Tailwind</Text>
+          </Box>
+          <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
         </Link>
         <Link
           href={
@@ -224,6 +220,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
+            justifyContent: 'space-between',
             minWidth: '175px',
             alignItems: 'center',
             gap: '4px',
@@ -233,13 +230,11 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           role="group"
           _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
-          <SiChakraui size={35} fill="#2ABFB3" />
-          <Text fontSize={'xl'}>Chakra UI</Text>
-          <ExternalLinkIcon
-            marginLeft={4}
-            color="gray"
-            _groupHover={{ color: 'black' }}
-          />
+          <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <SiChakraui size={35} fill="#2ABFB3" />
+            <Text fontSize={'xl'}>Chakra UI</Text>
+          </Box>
+          <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
         </Link>
         <Link
           href={
@@ -248,6 +243,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           target={'_blank'}
           css={{
             display: 'flex',
+            justifyContent: 'space-between',
             minWidth: '175px',
             alignItems: 'center',
             gap: '4px',
@@ -257,13 +253,11 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           role="group"
           _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
         >
-          <TbBrandNuxt size={35} color="#00DC82" />
-          <Text fontSize={'xl'}>Nuxt 3</Text>
-          <ExternalLinkIcon
-            marginLeft={4}
-            color="gray"
-            _groupHover={{ color: 'black' }}
-          />
+          <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <TbBrandNuxt size={35} color="#00DC82" />
+            <Text fontSize={'xl'}>Nuxt 3</Text>
+          </Box>
+          <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
         </Link>
       </Flex>
     </>
