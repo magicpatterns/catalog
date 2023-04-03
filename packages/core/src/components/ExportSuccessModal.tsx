@@ -1,8 +1,10 @@
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ReactIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
   Code,
+  Flex,
   Icon,
   Link,
   Menu,
@@ -137,8 +139,12 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           href="https://mirrorful.com/docs/home/examples"
         >
           examples here.
-        </Link>
+        </Link>{' '}
+        For more specific examples check below.
       </Text>
+      <Flex>
+        <ReactIcon />
+      </Flex>
     </>
   )
 }
