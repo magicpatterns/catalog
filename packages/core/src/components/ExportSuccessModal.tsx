@@ -141,8 +141,21 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         </Link>{' '}
         For more specific examples check below.
       </Text>
-      <Flex>
-        <FaReact size={50} fill={'#61DBFB'} />
+      <Flex css={{ marginTop: '5px' }}>
+        <Link
+          href={
+            'https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app'
+          }
+          target={'_blank'}
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            fontWeight: 'bold',
+          }}
+        >
+          <FaReact size={50} fill={'#61DBFB'} /> {'React'}
+        </Link>
       </Flex>
     </>
   )
