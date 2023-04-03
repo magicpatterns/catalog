@@ -5,7 +5,7 @@ import useMirrorfulStore, {
 } from '@core/store/useMirrorfulStore'
 import { TColorData, TConfig } from '@core/types'
 
-export default function Colors({
+export default function ColorsPage({
   postStoreData,
 }: {
   postStoreData: (data: TConfig) => Promise<void>

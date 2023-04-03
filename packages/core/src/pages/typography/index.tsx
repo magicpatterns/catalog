@@ -4,7 +4,7 @@ import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
 import { TConfig, TTypographyData } from '@core/types'
-export default function Typography({
+export default function TypographyPage({
   postStoreData,
 }: {
   postStoreData: (data: TConfig) => Promise<void>

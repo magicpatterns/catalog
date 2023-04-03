@@ -6,7 +6,7 @@ import useMirrorfulStore, {
 import { TConfig, TShadowData } from '@core/types'
 import React from 'react'
 
-export default function Shadows({
+export default function ShadowsPage({
   postStoreData,
 }: {
   postStoreData: (data: TConfig) => Promise<void>
