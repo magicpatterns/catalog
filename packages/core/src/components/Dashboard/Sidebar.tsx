@@ -15,7 +15,7 @@ import {
 } from 'react-icons/fi'
 import { MdOutlineColorLens } from 'react-icons/md'
 
-import { TPlatform, TTab } from '.'
+import { TPlatform, TTab } from '../Layout'
 
 function SidebarHeader({ label }: { label: string }) {
   return (
@@ -233,7 +233,7 @@ export function Sidebar({
               label="Colors"
               icon={MdOutlineColorLens}
               isActive={activeTab === '/colors'}
-              onSelect={() => onSelectTab('colors')}
+              onSelect={() => onSelectTab('/colors')}
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
@@ -243,7 +243,7 @@ export function Sidebar({
               label="Typography"
               icon={FiUnderline}
               isActive={activeTab === '/typography'}
-              onSelect={() => onSelectTab('typography')}
+              onSelect={() => onSelectTab('/typography')}
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
@@ -253,7 +253,7 @@ export function Sidebar({
               label="Shadows"
               icon={FiLayers}
               isActive={activeTab === '/shadows'}
-              onSelect={() => onSelectTab('shadows')}
+              onSelect={() => onSelectTab('/shadows')}
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
