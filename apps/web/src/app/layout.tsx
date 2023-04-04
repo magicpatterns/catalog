@@ -25,15 +25,8 @@ export default function RootLayout({
   const [showOnBoarding, setShowOnBoarding] = useState(false)
   const router = useRouter()
 
-  const {
-    setColors,
-    setTypography,
-    setShadows,
-    setFileTypes,
-    // setShowOnBoarding,
-    // shouldForceSkipOnboarding,
-    // showOnBoarding,
-  } = useMirrorfulStore((state: MirrorfulState) => state)
+  const { setColors, setTypography, setShadows, setFileTypes } =
+    useMirrorfulStore((state: MirrorfulState) => state)
 
   const [data, setData] = useLocalStorage<TConfig>(
     'mirrorfulConfigData',
@@ -41,7 +34,6 @@ export default function RootLayout({
   )
 
   // to fetch data
-
   const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
     try {
