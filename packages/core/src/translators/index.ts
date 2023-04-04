@@ -4,6 +4,7 @@ import { toJs } from './toJs'
 import { toJson } from './toJson'
 import { toScss } from './toScss'
 import { TranslatorMap } from './types'
+import { toTs } from './toTs'
 
 export const translators: TranslatorMap = {
   css: {
@@ -23,7 +24,7 @@ export const translators: TranslatorMap = {
     extension: '_cjs.js',
   },
   ts: {
-    toContent: toJs,
+    toContent: toTs,
     extension: '.ts',
   },
   json: {
