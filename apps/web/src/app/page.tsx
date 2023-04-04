@@ -1,5 +1,5 @@
 'use client'
-import { DashboardWrapper } from '@web/components/DashboardWrapper'
+
 import Head from 'next/head'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
