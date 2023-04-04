@@ -94,7 +94,6 @@ export function ImportInstructions({
               onUpdatePage(7)
             }}
             type="submit"
-            autoFocus
           >
             Next
           </Button>
