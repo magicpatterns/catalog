@@ -109,7 +109,6 @@ export function OtherColors({
               }
             }}
             type="submit"
-            autoFocus
           >
             Next
           </Button>
