@@ -1,6 +1,5 @@
 'use client'
 import ShadowsPage from '@core/pages/shadows'
-import LayoutWrapper from '@web/components/LayoutWrapper'
 import usePostStoreData from '@web/hooks/usePostStoreData'
 import React from 'react'
 
