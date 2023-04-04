@@ -5,7 +5,7 @@ import LayoutWrapper from '@web/components/LayoutWrapper'
 import { useLocalStorage } from '@web/hooks/useLocalStorage'
 import React from 'react'
 
-function Shadows() {
+export default function Shadows() {
   const [, setData] = useLocalStorage<TConfig>(
     'mirrorfulConfigData',
     defaultConfig
@@ -20,5 +20,3 @@ function Shadows() {
     </LayoutWrapper>
   )
 }
-
-export default Shadows

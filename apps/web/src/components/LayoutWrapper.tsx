@@ -3,7 +3,11 @@ import { defaultConfig, TConfig } from '@core/types'
 import { useLocalStorage } from '@web/hooks/useLocalStorage'
 import React from 'react'
 
-function LayoutWrapper({ children }: { children: React.ReactNode }) {
+export default function LayoutWrapper({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const [, setData] = useLocalStorage<TConfig>(
     'mirrorfulConfigData',
     defaultConfig
@@ -19,5 +23,3 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
     </Layout>
   )
 }
-
-export default LayoutWrapper

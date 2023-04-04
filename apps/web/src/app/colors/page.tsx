@@ -5,7 +5,7 @@ import LayoutWrapper from '@web/components/LayoutWrapper'
 import { useLocalStorage } from '@web/hooks/useLocalStorage'
 import React from 'react'
 
-function Colors() {
+export default function Colors() {
   const [, setData] = useLocalStorage<TConfig>(
     'mirrorfulConfigData',
     defaultConfig
@@ -20,5 +20,3 @@ function Colors() {
     </LayoutWrapper>
   )
 }
-
-export default Colors
