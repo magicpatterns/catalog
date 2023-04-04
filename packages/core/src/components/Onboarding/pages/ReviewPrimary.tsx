@@ -99,7 +99,6 @@ export function ReviewPrimary({
               onUpdatePage(4)
             }}
             type="submit"
-            autoFocus
           >
             Next
           </Button>
