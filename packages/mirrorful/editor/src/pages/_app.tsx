@@ -14,6 +14,7 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import LayoutWrapper from 'src/components/LayoutWrapper'
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready
@@ -104,7 +105,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           platform={'package'}
         />
       ) : (
-        <Component {...pageProps} />
+        <LayoutWrapper>
+          <Component {...pageProps} />
+        </LayoutWrapper>
       )}
     </MirrorfulThemeProvider>
   )
