@@ -14,8 +14,18 @@ import LayoutWrapper from '@web/components/LayoutWrapper'
 import useFetchStoreData from '@web/hooks/useFetchStoreData'
 import usePostStoreData from '@web/hooks/usePostStoreData'
 import { useRouter } from 'next/navigation'
+import posthog from 'posthog-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+if (typeof window !== 'undefined') {
+  // This ensures that as long as we are client-side, posthog is always ready
+  posthog.init('phc_Fi1SAV5Xhkmrf5VwIweTTmZDNnUIWmXkvXr7naLsNVV', {
+    api_host: 'https://app.posthog.com',
+    loaded: (posthog) => {
+      if (process.env.NODE_ENV === 'development') posthog.opt_out_capturing()
+    },
+  })
+}
 export default function RootLayout({
   children,
 }: {
