@@ -2,7 +2,7 @@ import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
 import { TConfig } from '@core/types'
 import { AnimatePresence, motion } from 'framer-motion'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { TTab } from '../components/Dashboard'
@@ -29,9 +29,9 @@ export function Layout({
   postStoreData,
 }: props) {
   const router = useRouter()
+  const pathname = usePathname()
   // TODO replace TTab with accordance to the pathname
-  const currentTab =
-    router.pathname === '/' ? '/colors' : (router.pathname as TTab)
+  const currentTab = pathname === '/' ? '/colors' : (pathname as TTab)
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const { colors, typography, shadows, fileTypes, setFileTypes } =
