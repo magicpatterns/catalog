@@ -4,9 +4,5 @@ import LayoutWrapper from 'src/components/LayoutWrapper'
 import postStoreData from 'src/utils/postStoreData'
 
 export default function Shadows() {
-  return (
-    <LayoutWrapper>
-      <ShadowsPage postStoreData={postStoreData} />
-    </LayoutWrapper>
-  )
+  return <ShadowsPage postStoreData={postStoreData} />
 }

@@ -4,9 +4,5 @@ import LayoutWrapper from 'src/components/LayoutWrapper'
 import postStoreData from 'src/utils/postStoreData'
 
 export default function Typography() {
-  return (
-    <LayoutWrapper>
-      <TypographyPage postStoreData={postStoreData} />
-    </LayoutWrapper>
-  )
+  return <TypographyPage postStoreData={postStoreData} />
 }

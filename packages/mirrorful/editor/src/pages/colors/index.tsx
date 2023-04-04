@@ -4,9 +4,5 @@ import LayoutWrapper from 'src/components/LayoutWrapper'
 import postStoreData from 'src/utils/postStoreData'
 
 export default function Colors() {
-  return (
-    <LayoutWrapper>
-      <ColorsPage postStoreData={postStoreData} />
-    </LayoutWrapper>
-  )
+  return <ColorsPage postStoreData={postStoreData} />
 }
