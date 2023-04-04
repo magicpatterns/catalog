@@ -6,9 +6,5 @@ import React from 'react'
 
 export default function Typography() {
   const [postStoreData] = usePostStoreData()
-  return (
-    <LayoutWrapper>
-      <TypographyPage postStoreData={postStoreData} />
-    </LayoutWrapper>
-  )
+  return <TypographyPage postStoreData={postStoreData} />
 }

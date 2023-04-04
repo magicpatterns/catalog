@@ -6,9 +6,5 @@ import React from 'react'
 
 export default function Colors() {
   const [postStoreData] = usePostStoreData()
-  return (
-    <LayoutWrapper>
-      <ColorsPage postStoreData={postStoreData} />
-    </LayoutWrapper>
-  )
+  return <ColorsPage postStoreData={postStoreData} />
 }

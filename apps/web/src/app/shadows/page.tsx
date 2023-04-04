@@ -6,9 +6,5 @@ import React from 'react'
 
 export default function Shadows() {
   const [postStoreData] = usePostStoreData()
-  return (
-    <LayoutWrapper>
-      <ShadowsPage postStoreData={postStoreData} />
-    </LayoutWrapper>
-  )
+  return <ShadowsPage postStoreData={postStoreData} />
 }
