@@ -5,10 +5,10 @@ import Head from 'next/head'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { Sidebar } from '../components/Dashboard/Sidebar'
 import { ExportSettingsModal } from '../components/ExportSettingsModal'
 import { ExportSuccessModal } from '../components/ExportSuccessModal'
 import useMirrorfulStore, { MirrorfulState } from '../store/useMirrorfulStore'
+import { Sidebar } from './Sidebar/Sidebar'
 
 export type TPlatform = 'package' | 'web'
 
