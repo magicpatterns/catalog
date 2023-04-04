@@ -3,8 +3,8 @@ import { toCss } from './toCss'
 import { toJs } from './toJs'
 import { toJson } from './toJson'
 import { toScss } from './toScss'
-import { TranslatorMap } from './types'
 import { toTs } from './toTs'
+import { TranslatorMap } from './types'
 
 export const translators: TranslatorMap = {
   css: {
