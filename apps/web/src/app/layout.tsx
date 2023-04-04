@@ -56,7 +56,7 @@ export default function RootLayout({
         setIsLoading(false)
       }, 1250)
     }
-  }, [setColors, setFileTypes, setShadows, setTypography])
+  }, [fetchStoreData, setColors, setFileTypes, setShadows, setTypography])
   useEffect(() => {
     // on initial load
     fetchStoredData()
