@@ -75,7 +75,6 @@ export function PickPrimary({
               onUpdatePage(2)
             }}
             type="submit"
-            autoFocus
           >
             Next
           </Button>
