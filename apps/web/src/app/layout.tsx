@@ -42,6 +42,12 @@ export default function RootLayout({
 
   const [fetchStoreData] = useFetchStoreData()
   const [postStoreData] = usePostStoreData()
+
+  useEffect(() => {
+    if (!showOnBoarding && shouldForceSkipOnboarding) {
+      window.location.reload()
+    }
+  }, [shouldForceSkipOnboarding, showOnBoarding])
   // to fetch data
   const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
@@ -87,11 +93,6 @@ export default function RootLayout({
     router.prefetch('/shadows')
   }, [router])
 
-  useEffect(() => {
-    if (!showOnBoarding && shouldForceSkipOnboarding) {
-      fetchStoredData()
-    }
-  }, [fetchStoredData, shouldForceSkipOnboarding, showOnBoarding])
   return (
     <html lang="en">
       <body>
