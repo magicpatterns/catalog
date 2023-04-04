@@ -86,9 +86,7 @@ export function EditShadowModal({
   const [blur, setBlur] = useState(initialValues?.blur ?? 0)
   const [spread, setSpread] = useState(initialValues?.spread ?? 0)
 
-  const codeResult = useMemo(() => {
-    return `${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color}`
-  }, [hOffset, vOffset, blur, spread, color])
+  const codeResult = `${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color}`
 
   const handleColor = (color: RgbColor) => {
     const rgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
