@@ -22,7 +22,7 @@ type props = {
   platform?: TPlatform
   postStoreData: (data: TConfig) => Promise<void>
 }
-export function Layout({
+export default function Layout({
   children,
   isLoading = false,
   platform = 'package',
