@@ -127,7 +127,6 @@ export function Referral({
               onFinish()
             }}
             type="submit"
-            autoFocus
           >
             Finish
           </Button>
