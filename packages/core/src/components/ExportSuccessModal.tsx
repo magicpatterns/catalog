@@ -17,7 +17,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   Tab,
   TabList,
   TabPanel,
@@ -170,6 +169,15 @@ type TokenTabProps =
       javascriptName: 'fontSizes'
       tailwindPropertyName: 'fontSize'
       tailwindName: 'fontSizes'
+    }
+  | {
+      primaryName: string
+      cssPropertyName: 'font-weight'
+      cssName: 'font-weight'
+      javascriptPropertyName: 'fontWeight'
+      javascriptName: 'fontWeights'
+      tailwindPropertyName: 'fontWeight'
+      tailwindName: 'fontWeights'
     }
 function TokenTab({
   primaryName,

@@ -1,7 +1,12 @@
 import { Box, Divider, Heading, Text } from '@chakra-ui/react'
-import { TFontSizeVariant, TTypographyData } from '@core/types'
+import {
+  TFontSizeVariant,
+  TFontWeightVariant,
+  TTypographyData,
+} from '@core/types'
 
-import { FontSizesSection } from './FontSizesSection'
+import { FontSizesSection } from './FontSize/FontSizesSection'
+import { FontWeightSection } from './FontWeight/FontWeightSection'
 
 export function TypographySection({
   typography,
@@ -28,10 +33,25 @@ export function TypographySection({
       <Box css={{ marginBottom: '48px' }} />
       <FontSizesSection
         fontSizeData={typography.fontSizes}
-        onUpdateFontSizeData={(newFontSizeData: TFontSizeVariant[]) => {
+        onUpdateFontPropertyData={(
+          newFontSizeData: TFontSizeVariant[] | TFontWeightVariant[]
+        ) => {
           onUpdateTypography({
             ...typography,
-            fontSizes: newFontSizeData,
+            fontSizes: newFontSizeData as TFontSizeVariant[],
+          })
+        }}
+      />
+      <br />
+      <br />
+      <FontWeightSection
+        fontWeightData={typography.fontWeights}
+        onUpdateFontPropertyData={(
+          newFontWeightData: TFontSizeVariant[] | TFontWeightVariant[]
+        ) => {
+          onUpdateTypography({
+            ...typography,
+            fontWeights: newFontWeightData as TFontWeightVariant[],
           })
         }}
       />
