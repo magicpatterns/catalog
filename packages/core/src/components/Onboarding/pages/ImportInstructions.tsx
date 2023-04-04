@@ -33,7 +33,7 @@ export function ImportInstructions({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%', flexGrow: 1 }}>
+    <Box css={{ display: 'flex', height: '100%', flexGrow: 1 }} as="form">
       <Box
         css={{
           padding: '12px',
@@ -89,9 +89,12 @@ export function ImportInstructions({
             padding={'8px 36px'}
             size="lg"
             rightIcon={<ArrowForwardIcon />}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               onUpdatePage(7)
             }}
+            type="submit"
+            autoFocus
           >
             Next
           </Button>

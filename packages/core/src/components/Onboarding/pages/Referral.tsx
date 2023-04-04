@@ -30,7 +30,7 @@ export function Referral({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%' }} as="form">
       <Box
         css={{
           width: '50%',
@@ -126,6 +126,8 @@ export function Referral({
 
               onFinish()
             }}
+            type="submit"
+            autoFocus
           >
             Finish
           </Button>

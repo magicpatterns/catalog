@@ -26,7 +26,7 @@ export function NamePrimary({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%' }} as="form">
       <Box
         css={{
           width: '50%',
@@ -84,7 +84,8 @@ export function NamePrimary({
             padding={'8px 36px'}
             size="lg"
             rightIcon={<ArrowForwardIcon />}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               if (!name) {
                 setError('Please enter a name for your color.')
                 return
@@ -93,6 +94,8 @@ export function NamePrimary({
               onUpdatePrimaryName(name)
               onUpdatePage(3)
             }}
+            type="submit"
+            autoFocus
           >
             Next
           </Button>

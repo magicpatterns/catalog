@@ -34,7 +34,7 @@ export function ReviewPrimary({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%' }} as="form">
       <Box
         css={{
           width: '50%',
@@ -94,9 +94,12 @@ export function ReviewPrimary({
             padding={'8px 36px'}
             size="lg"
             rightIcon={<ArrowForwardIcon />}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               onUpdatePage(4)
             }}
+            type="submit"
+            autoFocus
           >
             Next
           </Button>
