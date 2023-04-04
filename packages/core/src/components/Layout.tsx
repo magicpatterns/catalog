@@ -28,8 +28,6 @@ export default function Layout({
 }: props) {
   const router = useRouter()
   const pathname = usePathname()
-  // TODO replace TTab with accordance to the pathname
-  const currentTab = pathname === '/' ? '/colors' : (pathname as TTab)
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const { colors, typography, shadows, fileTypes, setFileTypes } =
@@ -75,7 +73,7 @@ export default function Layout({
         >
           <Sidebar
             platform={platform}
-            activeTab={currentTab}
+            activeTab={pathname}
             onSelectTab={(newTab: TTab) => router.push(newTab)}
             onOpenSettings={() => onExportSettingsModalOpen()}
             onExport={handleExport}
