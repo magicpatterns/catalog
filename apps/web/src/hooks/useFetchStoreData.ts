@@ -1,5 +1,4 @@
 import { defaultConfig, TConfig } from '@core/types'
-import React from 'react'
 
 import { useLocalStorage } from './useLocalStorage'
 
