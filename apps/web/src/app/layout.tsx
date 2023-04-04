@@ -56,11 +56,11 @@ export default function RootLayout({
         setIsLoading(false)
       }, 1250)
     }
-  }, [fetchStoreData, setColors, setFileTypes, setShadows, setTypography])
+  }, [setColors, setFileTypes, setShadows, setTypography])
   useEffect(() => {
     // on initial load
     fetchStoredData()
-  }, [fetchStoredData])
+  }, [])
 
   useEffect(() => {
     router.prefetch('/colors')
