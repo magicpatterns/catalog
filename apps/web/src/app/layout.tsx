@@ -9,7 +9,7 @@ import SplashScreen from '@core/components/SplashScreen'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { defaultShadows } from '@core/types'
+import { defaultShadows, TConfig } from '@core/types'
 import LayoutWrapper from '@web/components/LayoutWrapper'
 import useFetchStoreData from '@web/hooks/useFetchStoreData'
 import usePostStoreData from '@web/hooks/usePostStoreData'
@@ -77,22 +77,17 @@ export default function RootLayout({
     setShadows,
     setTypography,
   ])
+
   useEffect(() => {
-    if (!showOnBoarding && shouldForceSkipOnboarding) {
-      window.location.reload()
-    }
-  }, [shouldForceSkipOnboarding, showOnBoarding])
+    // on initial load
+    fetchStoredData()
+  }, [])
 
   useEffect(() => {
     router.prefetch('/colors')
     router.prefetch('/typography')
     router.prefetch('/shadows')
   }, [router])
-
-  useEffect(() => {
-    // on initial load
-    fetchStoredData()
-  }, [])
   return (
     <html lang="en">
       <body>
@@ -101,7 +96,7 @@ export default function RootLayout({
             {isLoading && <SplashScreen></SplashScreen>}
             {!shouldForceSkipOnboarding && showOnBoarding ? (
               <Onboarding
-                postStoreData={postStoreData}
+                postStoreData={handleOnboardingSubmit}
                 onFinishOnboarding={() => {
                   setShowOnBoarding(false)
                   setShouldForceSkipOnboarding(true)
@@ -116,4 +111,11 @@ export default function RootLayout({
       </body>
     </html>
   )
+  async function handleOnboardingSubmit(data: TConfig) {
+    postStoreData(data)
+    setColors(data.tokens.colorData)
+    setFileTypes(data.files)
+    setShadows(data.tokens.shadows)
+    setTypography(data.tokens.typography)
+  }
 }
