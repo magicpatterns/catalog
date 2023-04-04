@@ -5,16 +5,14 @@ import Head from 'next/head'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { TTab } from '../components/Dashboard'
 import { Sidebar } from '../components/Dashboard/Sidebar'
 import { ExportSettingsModal } from '../components/ExportSettingsModal'
 import { ExportSuccessModal } from '../components/ExportSuccessModal'
 import useMirrorfulStore, { MirrorfulState } from '../store/useMirrorfulStore'
-// import postStoreData from '../utils/postStoreData'
 
 export type TPlatform = 'package' | 'web'
 
-// export type TTab = '/' | 'typography' | 'shadows' | 'theme_manager'
+export type TTab = '/colors' | '/typography' | '/shadows' | '/theme_manager'
 
 type props = {
   children: React.ReactNode
