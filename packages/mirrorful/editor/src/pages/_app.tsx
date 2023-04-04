@@ -39,6 +39,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
     try {
+      setIsLoading(true)
       const data = await fetchStoreData()
 
       if (
@@ -102,8 +103,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           }}
           platform={'package'}
         />
-      ) : null}
-      <Component {...pageProps} />
+      ) : (
+        <Component {...pageProps} />
+      )}
     </MirrorfulThemeProvider>
   )
 }
