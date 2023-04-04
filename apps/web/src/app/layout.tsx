@@ -34,8 +34,9 @@ export default function RootLayout({
   // to fetch data
   const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
-    const data = await fetchStoreData()
     try {
+      setIsLoading(true)
+      const data = await fetchStoreData()
       if (
         !Object.keys(data).length ||
         !data.tokens.colorData ||
@@ -56,11 +57,18 @@ export default function RootLayout({
         setIsLoading(false)
       }, 1250)
     }
-  }, [setColors, setFileTypes, setShadows, setTypography])
+  }, [
+    fetchStoreData,
+    setColors,
+    setFileTypes,
+    setShowOnBoarding,
+    setShadows,
+    setTypography,
+  ])
   useEffect(() => {
     // on initial load
     fetchStoredData()
-  }, [])
+  }, [fetchStoredData])
 
   useEffect(() => {
     router.prefetch('/colors')
@@ -88,8 +96,9 @@ export default function RootLayout({
                 }}
                 platform={'web'}
               />
-            ) : null}
-            {children}
+            ) : (
+              children
+            )}
           </ChakraProvider>
         </CacheProvider>
       </body>
