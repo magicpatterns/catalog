@@ -6,7 +6,7 @@ import { useLocalStorage } from '@web/hooks/useLocalStorage'
 import React from 'react'
 
 function Shadows() {
-  const [data, setData] = useLocalStorage<TConfig>(
+  const [, setData] = useLocalStorage<TConfig>(
     'mirrorfulConfigData',
     defaultConfig
   )
