@@ -10,6 +10,7 @@ import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
 import { defaultConfig, defaultShadows, TConfig } from '@core/types'
+import useFetchStoreData from '@web/hooks/useFetchStoreData'
 import { useLocalStorage } from '@web/hooks/useLocalStorage'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -28,14 +29,12 @@ export default function RootLayout({
   const { setColors, setTypography, setShadows, setFileTypes } =
     useMirrorfulStore((state: MirrorfulState) => state)
 
-  const [data, setData] = useLocalStorage<TConfig>(
-    'mirrorfulConfigData',
-    defaultConfig
-  )
+  const [fetchStoreData] = useFetchStoreData()
 
   // to fetch data
   const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
+    const data = fetchStoreData()
     try {
       if (
         !Object.keys(data).length ||
@@ -57,7 +56,7 @@ export default function RootLayout({
         setIsLoading(false)
       }, 1250)
     }
-  }, [data, setColors, setFileTypes, setShadows, setTypography])
+  }, [setColors, setFileTypes, setShadows, setTypography])
   useEffect(() => {
     // on initial load
     fetchStoredData()
