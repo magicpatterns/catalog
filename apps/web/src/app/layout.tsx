@@ -34,7 +34,7 @@ export default function RootLayout({
   // to fetch data
   const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
-    const data = fetchStoreData()
+    const data = await fetchStoreData()
     try {
       if (
         !Object.keys(data).length ||
