@@ -2,10 +2,13 @@
 import { DashboardWrapper } from '@web/components/DashboardWrapper'
 import Head from 'next/head'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function Home() {
   const router = useRouter()
-  router.replace('/colors')
+  useEffect(() => {
+    router.replace('/colors')
+  }, [router])
 
   return (
     <Head>
