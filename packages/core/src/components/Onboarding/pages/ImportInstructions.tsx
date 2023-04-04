@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { CodePreview } from '@core/components/CodePreview'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { TPlatform } from '@core/components/Dashboard'
+import { TPlatform } from '@core/components/Layout'
 import tinycolor from 'tinycolor2'
 
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
