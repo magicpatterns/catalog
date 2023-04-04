@@ -9,9 +9,8 @@ import SplashScreen from '@core/components/SplashScreen'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { defaultConfig, defaultShadows, TConfig } from '@core/types'
+import { defaultShadows } from '@core/types'
 import useFetchStoreData from '@web/hooks/useFetchStoreData'
-import { useLocalStorage } from '@web/hooks/useLocalStorage'
 import usePostStoreData from '@web/hooks/usePostStoreData'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
