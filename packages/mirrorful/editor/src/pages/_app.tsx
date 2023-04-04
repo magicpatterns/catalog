@@ -32,17 +32,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const [showOnBoarding, setShowOnBoarding] = useState(false)
   const router = useRouter()
 
-  const {
-    setColors,
-    setTypography,
-    setShadows,
-    setFileTypes,
-    // setShowOnBoarding,
-    // shouldForceSkipOnboarding,
-    // showOnBoarding,
-  } = useMirrorfulStore((state: MirrorfulState) => state)
-  // to fetch data
+  const { setColors, setTypography, setShadows, setFileTypes } =
+    useMirrorfulStore((state: MirrorfulState) => state)
 
+  // to fetch data
   const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
     try {
