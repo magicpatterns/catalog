@@ -7,59 +7,34 @@ import {
   SliderTrack,
   Text,
 } from '@chakra-ui/react'
-import { TShadowData } from '@core/types'
 import { RgbColor, SketchPicker } from '@hello-pangea/color-picker'
-import React, { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 export function ShadowColorPicker({
-  variant,
-  setVariant,
-  presetColor,
-  initialValues = {
-    hOffset: 0,
-    vOffset: 0,
-    blur: 0,
-    spread: 0,
-  },
+  blur,
+  spread,
+  hOffset,
+  vOffset,
+  setBlur,
+  setSpread,
+  sethOffset,
+  setVOffset,
+  codeResult,
+  handleColor,
+  color,
 }: {
-  setVariant: React.Dispatch<React.SetStateAction<TShadowData>>
-  variant: {
-    name: string
-    value: string
-  }
-  presetColor: string
-  initialValues?:
-    | {
-        hOffset: number
-        vOffset: number
-        blur: number
-        spread: number
-      }
-    | undefined
+  blur: number
+  spread: number
+  hOffset: number
+  vOffset: number
+  setBlur: Dispatch<SetStateAction<number>>
+  setSpread: Dispatch<SetStateAction<number>>
+  sethOffset: Dispatch<SetStateAction<number>>
+  setVOffset: Dispatch<SetStateAction<number>>
+  codeResult: string
+  handleColor: (rgb: RgbColor) => void
+  color: string
 }) {
-  const [color, setColor] = useState(
-    presetColor ? presetColor : 'rgba(1, 1, 1, 0.4)'
-  )
-
-  const [hOffset, sethOffset] = useState(initialValues.hOffset)
-  const [vOffset, setVOffset] = useState(initialValues.vOffset)
-  const [blur, setBlur] = useState(initialValues.blur)
-  const [spread, setSpread] = useState(initialValues.spread)
-
-  const codeResult = ` ${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color}`
-
-  const handleColor = (color: RgbColor) => {
-    const rgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
-    setColor(rgba)
-  }
-
-  useEffect(() => {
-    setVariant({
-      ...variant,
-      value: codeResult,
-    })
-  }, [codeResult, color, vOffset, hOffset, blur, spread])
-
   return (
     <Box
       sx={{
@@ -73,7 +48,7 @@ export function ShadowColorPicker({
       <Flex justifyContent={'space-between'} mt="1em">
         <SketchPicker
           width="45%"
-          color={presetColor}
+          color={color}
           onChange={(e) => handleColor(e.rgb)}
         />
         <Box
@@ -93,7 +68,7 @@ export function ShadowColorPicker({
               min={-25}
               max={25}
               defaultValue={hOffset}
-              onChangeEnd={(val) => sethOffset(val)}
+              onChange={(val) => sethOffset(val)}
             >
               <SliderTrack>
                 <SliderFilledTrack />
@@ -106,7 +81,7 @@ export function ShadowColorPicker({
               min={-25}
               max={25}
               defaultValue={vOffset}
-              onChangeEnd={(val) => setVOffset(val)}
+              onChange={(val) => setVOffset(val)}
             >
               <SliderTrack>
                 <SliderFilledTrack />
@@ -117,7 +92,7 @@ export function ShadowColorPicker({
             <Slider
               aria-label="slider-blur"
               defaultValue={blur}
-              onChangeEnd={(val) => setBlur(val)}
+              onChange={(val) => setBlur(val)}
             >
               <SliderTrack>
                 <SliderFilledTrack />
@@ -128,7 +103,7 @@ export function ShadowColorPicker({
             <Slider
               aria-label="slider-Spread"
               defaultValue={spread}
-              onChangeEnd={(val) => setSpread(val)}
+              onChange={(val) => setSpread(val)}
               size="lg"
             >
               <SliderTrack>

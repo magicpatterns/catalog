@@ -35,7 +35,7 @@ export function ExportSettings({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%' }} as="form">
       <Box
         width="50%"
         padding="12px"
@@ -80,11 +80,13 @@ export function ExportSettings({
             padding="8px 36px"
             size="lg"
             rightIcon={<ArrowForwardIcon />}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               onExport()
               onUpdatePage(6)
             }}
             isDisabled={!fileTypes.length}
+            type="submit"
           >
             Next
           </Button>

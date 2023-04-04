@@ -41,7 +41,7 @@ export function OtherColors({
   }, [palette, handleGeneratePalette])
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%' }} as="form">
       <Box
         css={{
           width: '50%',
@@ -98,7 +98,8 @@ export function OtherColors({
             padding={'8px 36px'}
             size="lg"
             rightIcon={<ArrowForwardIcon />}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               onUpdatePalette(palette)
 
               if (platform === 'web') {
@@ -107,6 +108,7 @@ export function OtherColors({
                 onUpdatePage(5)
               }
             }}
+            type="submit"
           >
             Next
           </Button>
