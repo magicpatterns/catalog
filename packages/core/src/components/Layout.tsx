@@ -1,4 +1,5 @@
 import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
+import { TConfig } from '@core/types'
 import { AnimatePresence, motion } from 'framer-motion'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -9,7 +10,7 @@ import { Sidebar } from '../components/Dashboard/Sidebar'
 import { ExportSettingsModal } from '../components/ExportSettingsModal'
 import { ExportSuccessModal } from '../components/ExportSuccessModal'
 import useMirrorfulStore, { MirrorfulState } from '../store/useMirrorfulStore'
-import postStoreData from '../utils/postStoreData'
+// import postStoreData from '../utils/postStoreData'
 
 export type TPlatform = 'package' | 'web'
 
@@ -19,11 +20,13 @@ type props = {
   children: React.ReactNode
   isLoading?: boolean
   platform?: TPlatform
+  postStoreData: (data: TConfig) => Promise<void>
 }
 export function Layout({
   children,
   isLoading = false,
   platform = 'package',
+  postStoreData,
 }: props) {
   const router = useRouter()
   // TODO replace TTab with accordance to the pathname
