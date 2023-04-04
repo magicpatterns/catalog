@@ -1,6 +1,5 @@
 import Layout from '@core/components/Layout'
-import { defaultConfig, TConfig } from '@core/types'
-import { useLocalStorage } from '@web/hooks/useLocalStorage'
+import usePostStoreData from '@web/hooks/usePostStoreData'
 import React from 'react'
 
 export default function LayoutWrapper({
@@ -8,17 +7,9 @@ export default function LayoutWrapper({
 }: {
   children: React.ReactNode
 }) {
-  const [, setData] = useLocalStorage<TConfig>(
-    'mirrorfulConfigData',
-    defaultConfig
-  )
+  const [postStoreData] = usePostStoreData()
   return (
-    <Layout
-      postStoreData={async (newData: TConfig) => {
-        setData(newData)
-      }}
-      platform="web"
-    >
+    <Layout postStoreData={postStoreData} platform="web">
       {children}
     </Layout>
   )
