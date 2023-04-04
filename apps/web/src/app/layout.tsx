@@ -43,11 +43,6 @@ export default function RootLayout({
   const [fetchStoreData] = useFetchStoreData()
   const [postStoreData] = usePostStoreData()
 
-  useEffect(() => {
-    if (!showOnBoarding && shouldForceSkipOnboarding) {
-      window.location.reload()
-    }
-  }, [shouldForceSkipOnboarding, showOnBoarding])
   // to fetch data
   const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
@@ -83,9 +78,10 @@ export default function RootLayout({
     setTypography,
   ])
   useEffect(() => {
-    // on initial load
-    fetchStoredData()
-  }, [])
+    if (!showOnBoarding && shouldForceSkipOnboarding) {
+      window.location.reload()
+    }
+  }, [shouldForceSkipOnboarding, showOnBoarding])
 
   useEffect(() => {
     router.prefetch('/colors')
@@ -93,6 +89,10 @@ export default function RootLayout({
     router.prefetch('/shadows')
   }, [router])
 
+  useEffect(() => {
+    // on initial load
+    fetchStoredData()
+  }, [])
   return (
     <html lang="en">
       <body>
