@@ -12,6 +12,7 @@ import useMirrorfulStore, {
 import { defaultConfig, defaultShadows, TConfig } from '@core/types'
 import useFetchStoreData from '@web/hooks/useFetchStoreData'
 import { useLocalStorage } from '@web/hooks/useLocalStorage'
+import usePostStoreData from '@web/hooks/usePostStoreData'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -30,7 +31,7 @@ export default function RootLayout({
     useMirrorfulStore((state: MirrorfulState) => state)
 
   const [fetchStoreData] = useFetchStoreData()
-
+  const [postStoreData] = usePostStoreData()
   // to fetch data
   const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
@@ -80,11 +81,8 @@ export default function RootLayout({
           <ChakraProvider>
             {isLoading && <SplashScreen></SplashScreen>}
             {!shouldForceSkipOnboarding && showOnBoarding ? (
-              // TODO extract postStoreData and fetchStoreData into hooks
               <Onboarding
-                postStoreData={async (newData: TConfig) => {
-                  setData(newData)
-                }}
+                postStoreData={postStoreData}
                 onFinishOnboarding={() => {
                   setShowOnBoarding(false)
                   setShouldForceSkipOnboarding(true)
