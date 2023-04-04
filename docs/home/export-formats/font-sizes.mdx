@@ -6,17 +6,19 @@ description: 'After configuring your theme in the editor, you can export font si
 We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`. If you're using tailwind, we also export to common js to work nicely with your tailwind config.
 
 <CodeGroup>
+<CodeGroup>
 
-```css CSS
-.headings {
+````css CSS
+```css CSS .headings {
   font-size: var(--font-size-lg);
 }
-```
+````
 
 ```javascript
 <button style={{ fontSize: 'var(--font-size-sm)' }}>
 ```
 
+````scss SCSS
 ```scss SCSS
 /* Exact path will depend on your file structure */
 import './.mirrorful/theme.scss';
@@ -24,15 +26,17 @@ import './.mirrorful/theme.scss';
 .primary-button {
   font-size: $font-size-sm;
 }
-```
+````
 
+````javascript Javascript / Typescript
 ```javascript Javascript / Typescript
 /* Exact path will depend on your file structure */
 import { Tokens } from './mirrorful.js'
 
 <button fontSize={{ Tokens.fontSizes.sm }}>Click here</button>
-```
+````
 
+````javascript Tailwind
 ```javascript Tailwind
 const mirrorful = require('./.mirrorful/theme_cjs.js')
 
@@ -41,5 +45,6 @@ theme: {
     fontSize: Tokens.fontSizes
   }
 }
-```
+````
+
 </CodeGroup>

@@ -18,8 +18,14 @@ export type TFontSizeVariant = {
   unit: 'px' | 'rem' | 'em'
 }
 
+export type TFontWeightVariant = {
+  name: string
+  weight: number
+}
+
 export type TTypographyData = {
   fontSizes: TFontSizeVariant[]
+  fontWeights: TFontWeightVariant[]
 }
 
 export type TShadowData = {
@@ -56,6 +62,12 @@ export const defaultTypography: TTypographyData = {
       value: 1.4,
       unit: 'rem',
       name: 'lg',
+    },
+  ],
+  fontWeights: [
+    {
+      name: 'bold',
+      weight: 700,
     },
   ],
 }

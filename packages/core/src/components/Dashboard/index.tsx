@@ -7,6 +7,7 @@ import { TypographySection } from '@core/components/Typography/TypographySection
 import {
   defaultFiles,
   defaultShadows,
+  defaultTypography,
   TColorData,
   TConfig,
   TExportFileType,
@@ -44,6 +45,7 @@ export function Dashboard({
   const [colors, setColors] = useState<TColorData[]>([])
   const [typography, setTypography] = useState<TTypographyData>({
     fontSizes: [],
+    fontWeights: [],
   })
   const [shadows, setShadows] = useState<TShadowData[]>([])
   const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
@@ -76,7 +78,7 @@ export function Dashboard({
         }
 
         setColors(data.tokens.colorData ?? [])
-        setTypography(data.tokens.typography)
+        setTypography(defaultTypography)
         setShadows(data.tokens.shadows ?? defaultShadows)
         setFileTypes(data.files)
         setIsLoading(false)
