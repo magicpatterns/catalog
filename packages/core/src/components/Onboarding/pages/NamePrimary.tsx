@@ -95,7 +95,6 @@ export function NamePrimary({
               onUpdatePage(3)
             }}
             type="submit"
-            autoFocus
           >
             Next
           </Button>
