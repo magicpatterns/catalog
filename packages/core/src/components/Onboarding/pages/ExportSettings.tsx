@@ -87,7 +87,6 @@ export function ExportSettings({
             }}
             isDisabled={!fileTypes.length}
             type="submit"
-            autoFocus
           >
             Next
           </Button>
