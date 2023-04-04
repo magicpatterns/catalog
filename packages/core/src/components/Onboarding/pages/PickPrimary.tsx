@@ -21,7 +21,7 @@ export function PickPrimary({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%' }} as="form">
       <Box
         css={{
           width: '50%',
@@ -69,10 +69,12 @@ export function PickPrimary({
             padding={'8px 36px'}
             size="lg"
             rightIcon={<ArrowForwardIcon />}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               onUpdatePrimaryColor(primaryColor)
               onUpdatePage(2)
             }}
+            type="submit"
           >
             Next
           </Button>
