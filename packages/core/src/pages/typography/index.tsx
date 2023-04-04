@@ -1,4 +1,4 @@
-import { Layout } from '@core/components/Layout'
+// import { Layout } from '@core/components/Layout'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import useMirrorfulStore, {
   MirrorfulState,
@@ -19,11 +19,11 @@ export default function TypographyPage({
     })
   }
   return (
-    <Layout>
-      <TypographySection
-        typography={{ fontSizes: typography.fontSizes }}
-        onUpdateTypography={handleUpdateTypography}
-      />
-    </Layout>
+    // <Layout>
+    <TypographySection
+      typography={{ fontSizes: typography.fontSizes }}
+      onUpdateTypography={handleUpdateTypography}
+    />
+    // </Layout>
   )
 }

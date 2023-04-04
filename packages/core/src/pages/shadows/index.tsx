@@ -1,4 +1,4 @@
-import { Layout } from '@core/components/Layout'
+// import { Layout } from '@core/components/Layout'
 import { ShadowsSection } from '@core/components/Shadows/ShadowsSection'
 import useMirrorfulStore, {
   MirrorfulState,
@@ -21,11 +21,11 @@ export default function ShadowsPage({
     })
   }
   return (
-    <Layout>
-      <ShadowsSection
-        onUpdateShadowData={handleUpdateShadows}
-        shadows={shadows}
-      />
-    </Layout>
+    // <Layout>
+    <ShadowsSection
+      onUpdateShadowData={handleUpdateShadows}
+      shadows={shadows}
+    />
+    // </Layout>
   )
 }

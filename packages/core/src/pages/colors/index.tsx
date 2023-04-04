@@ -1,5 +1,5 @@
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
-import { Layout } from '@core/components/Layout'
+// import { Layout } from '@core/components/Layout'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
@@ -26,11 +26,8 @@ export default function ColorsPage({
   }
 
   return (
-    <Layout>
-      <ColorPaletteSection
-        colors={colors}
-        onUpdateColors={handleUpdateColors}
-      />
-    </Layout>
+    // <Layout>
+    <ColorPaletteSection colors={colors} onUpdateColors={handleUpdateColors} />
+    // </Layout>
   )
 }
