@@ -10,6 +10,7 @@ import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
 import { defaultShadows } from '@core/types'
+import LayoutWrapper from '@web/components/LayoutWrapper'
 import useFetchStoreData from '@web/hooks/useFetchStoreData'
 import usePostStoreData from '@web/hooks/usePostStoreData'
 import { useRouter } from 'next/navigation'
@@ -97,7 +98,7 @@ export default function RootLayout({
                 platform={'web'}
               />
             ) : (
-              children
+              <LayoutWrapper>{children}</LayoutWrapper>
             )}
           </ChakraProvider>
         </CacheProvider>
