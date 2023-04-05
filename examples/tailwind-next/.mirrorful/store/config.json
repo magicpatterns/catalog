@@ -86,9 +86,17 @@
 			]
 		}
 	},
+	"files": [
+		"css",
+		"scss",
+		"js",
+		"cjs",
+		"ts",
+		"json"
+	],
 	"__internal__": {
 		"migrations": {
-			"version": "0.0.3"
+			"version": "0.0.5"
 		}
 	}
 }

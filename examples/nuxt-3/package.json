@@ -16,7 +16,7 @@
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "autoprefixer": "^10.4.13",
-    "mirrorful": "^3.0.15",
+    "mirrorful": "^5.0.7",
     "nuxt": "^3.2.3",
     "postcss": "^8.4.21",
     "sass": "^1.58.3",

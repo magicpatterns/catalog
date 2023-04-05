@@ -55,7 +55,7 @@
 				{
 					"value": 1,
 					"unit": "rem",
-					"name": "small"
+					"name": "sm"
 				},
 				{
 					"value": 1.2,
@@ -70,9 +70,17 @@
 			]
 		}
 	},
+	"files": [
+		"css",
+		"scss",
+		"js",
+		"cjs",
+		"ts",
+		"json"
+	],
 	"__internal__": {
 		"migrations": {
-			"version": "0.0.3"
+			"version": "0.0.5"
 		}
 	}
 }

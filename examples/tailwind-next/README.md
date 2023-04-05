@@ -7,6 +7,10 @@ It followed the directions [here](https://tailwindcss.com/docs/guides/nextjs).
 ## Run the development server:
 
 ```bash
+npm i
+```
+
+```bash
 npm run dev
 ```
 
@@ -15,3 +19,5 @@ npm run dev
 ```bash
 npx mirrorful
 ```
+
+This will open a browser window with the Mirrorful at localhost:5050.

@@ -13,6 +13,7 @@ module.exports = {
   theme: {
     extend: {
       colors: mirrorful.Tokens.colors,
+      fontSize: mirrorful.Tokens.fontSizes
     },
   },
   plugins: [],
