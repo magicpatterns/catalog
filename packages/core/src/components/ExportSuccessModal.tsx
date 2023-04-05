@@ -443,6 +443,7 @@ function ExternalExamples() {
       {externalExamples.map((example) => {
         return (
           <Link
+            key={example.name}
             href={example.link}
             target={'_blank'}
             css={{
