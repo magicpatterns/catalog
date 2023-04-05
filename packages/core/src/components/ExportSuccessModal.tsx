@@ -483,7 +483,13 @@ export function ExportSuccessModal({
   tokens: TTokens
 }) {
   return (
-    <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
+    <Modal
+      size="3xl"
+      isOpen={isOpen}
+      onClose={onClose}
+      isCentered={true}
+      closeOnEsc={true}
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
