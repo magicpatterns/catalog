@@ -1,8 +1,9 @@
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
   Code,
+  Flex,
   Icon,
   Link,
   Menu,
@@ -17,7 +18,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   Tab,
   TabList,
   TabPanel,
@@ -34,7 +34,11 @@ import { toJson } from '@core/translators/toJson'
 import { toScss } from '@core/translators/toScss'
 import { TTokens } from '@core/types'
 import { useState } from 'react'
+import { IconType } from 'react-icons'
+import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
+import { SiChakraui, SiNuxtdotjs, SiTailwindcss } from 'react-icons/si'
+import { TbBrandNextjs } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
 
@@ -126,19 +130,21 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           color="blue.500"
           href="https://mirrorful.com/docs/home/export-formats"
         >
-          documentation here.
+          documentation
         </Link>
+        .
       </Text>
       <Text css={{ marginTop: '8px' }}>
-        For examples, check out our{' '}
+        Check out our{' '}
         <Link
           isExternal
           color="blue.500"
           href="https://mirrorful.com/docs/home/examples"
         >
-          examples here.
-        </Link>
+          examples:
+        </Link>{' '}
       </Text>
+      <ExternalExamples />
     </>
   )
 }
@@ -306,26 +312,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
       <Text css={{ marginBottom: '8px', fontSize: '1rem' }}>
         {`Copy and paste these snippets directly into your project.`}
       </Text>
-      <Text css={{ marginTop: '8px' }}>
-        To learn more about how to import these generated files, visit our{' '}
-        <Link
-          isExternal
-          color="blue.500"
-          href="https://mirrorful.com/docs/home/export-formats"
-        >
-          documentation here.
-        </Link>
-      </Text>
-      <Text css={{ marginTop: '8px' }}>
-        For examples, check out our{' '}
-        <Link
-          isExternal
-          color="blue.500"
-          href="https://mirrorful.com/docs/home/examples"
-        >
-          example projects here.
-        </Link>
-      </Text>
+
       <Box css={{ marginTop: '16px' }}>
         <Tabs>
           <TabList>
@@ -384,8 +371,102 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
             </TabPanel>
           </TabPanels>
         </Tabs>
+        <Text css={{ marginTop: '8px' }}>
+          To learn more about how to import these generated files, visit our{' '}
+          <Link
+            isExternal
+            color="blue.500"
+            href="https://mirrorful.com/docs/home/export-formats"
+          >
+            documentation
+          </Link>
+          .
+        </Text>
+        <Text css={{ marginTop: '8px' }}>
+          Check out our{' '}
+          <Link
+            isExternal
+            color="blue.500"
+            href="https://mirrorful.com/docs/home/examples"
+          >
+            examples:
+          </Link>
+        </Text>
+        <ExternalExamples />
       </Box>
     </>
+  )
+}
+
+function ExternalExamples() {
+  type externalExamplesNames =
+    | 'React'
+    | 'Next JS'
+    | 'Tailwind CSS'
+    | 'Chakra UI'
+    | 'Nuxt 3'
+
+  const EXAMPLES_ICON_SIZE = 20
+  const externalExamples: {
+    name: externalExamplesNames
+    link: string
+    icon: React.ReactElement<IconType>
+  }[] = [
+    {
+      name: 'React',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app',
+      icon: <FaReact size={EXAMPLES_ICON_SIZE} fill={'#61DBFB'} />,
+    },
+    {
+      name: 'Next JS',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui',
+      icon: <TbBrandNextjs size={EXAMPLES_ICON_SIZE} />,
+    },
+    {
+      name: 'Tailwind CSS',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/tailwind-next',
+      icon: <SiTailwindcss size={EXAMPLES_ICON_SIZE} fill="#38BDF8" />,
+    },
+    {
+      name: 'Chakra UI',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui',
+      icon: <SiChakraui size={EXAMPLES_ICON_SIZE} fill="#2ABFB3" />,
+    },
+    {
+      name: 'Nuxt 3',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3',
+      icon: <SiNuxtdotjs size={EXAMPLES_ICON_SIZE} color="#00DC82" />,
+    },
+  ]
+  return (
+    <Flex css={{ marginTop: '16px' }} gap={4} flexWrap="wrap">
+      {externalExamples.map((example) => {
+        return (
+          <Link
+            key={example.name}
+            href={example.link}
+            target={'_blank'}
+            css={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderRadius: 8,
+            }}
+            px="3"
+            pt="1"
+            pb="1"
+            role="group"
+            _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
+          >
+            <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              {example.icon}
+              <Text fontSize={'md'}>{example.name}</Text>
+            </Box>
+            {/* <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} /> */}
+          </Link>
+        )
+      })}
+    </Flex>
   )
 }
 
@@ -403,7 +484,13 @@ export function ExportSuccessModal({
   tokens: TTokens
 }) {
   return (
-    <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
+    <Modal
+      size="3xl"
+      isOpen={isOpen}
+      onClose={onClose}
+      isCentered={true}
+      closeOnEsc={true}
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
