@@ -440,7 +440,7 @@ function ExternalExamples() {
     },
   ]
   return (
-    <Flex css={{ marginTop: '8px' }} gap={8} flexWrap="wrap">
+    <Flex css={{ marginTop: '16px' }} gap={8} flexWrap="wrap">
       {externalExamples.map((example) => {
         return (
           <Link
