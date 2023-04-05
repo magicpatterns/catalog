@@ -144,7 +144,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         >
           examples here.
         </Link>{' '}
-        For more specific examples check below.
+        Check out specific examples:
       </Text>
       <ExternalExamples />
     </>
@@ -332,8 +332,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
           href="https://mirrorful.com/docs/home/examples"
         >
           example projects here.
-        </Link>{' '}
-        For more specific examples check the links below.
+        </Link>
       </Text>
       <Box css={{ marginTop: '16px' }}>
         <Tabs>
@@ -393,6 +392,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
             </TabPanel>
           </TabPanels>
         </Tabs>
+        <Text css={{ marginTop: '8px' }}>Check out specific examples:</Text>
         <ExternalExamples />
       </Box>
     </>
