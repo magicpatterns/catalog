@@ -1,7 +1,7 @@
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Input, Stack, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { TPlatform } from '@core/components/Dashboard'
+import { TPlatform } from '@core/components/Layout'
 import { useState } from 'react'
 import tinycolor from 'tinycolor2'
 

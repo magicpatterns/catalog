@@ -9,7 +9,7 @@ import {
 } from '@core/types'
 import { useState } from 'react'
 
-import { TPlatform } from '../Dashboard'
+import { TPlatform } from '../Layout'
 import { OnboardingContainer } from './OnboardingContainer'
 import { ExportSettings } from './pages/ExportSettings'
 import { ImportInstructions } from './pages/ImportInstructions'
