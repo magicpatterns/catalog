@@ -25,6 +25,7 @@ import {
   TabPanels,
   Tabs,
   Text,
+  TypographyProps,
 } from '@chakra-ui/react'
 import { sanitizeName } from '@core/translators/sanitizeName'
 import { toCjs } from '@core/translators/toCjs'
@@ -405,6 +406,9 @@ function ExternalExamples() {
     | 'Tailwind CSS'
     | 'Chakra UI'
     | 'Nuxt 3'
+
+  const EXAMPLES_ICON_SIZE = 25
+  const EXAMPLES_FONT_SIZE: TypographyProps['fontSize'] = 'lg'
   const externalExamples: {
     name: externalExamplesNames
     link: string
@@ -413,27 +417,27 @@ function ExternalExamples() {
     {
       name: 'React',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app',
-      icon: <FaReact size={35} fill={'#61DBFB'} />,
+      icon: <FaReact size={EXAMPLES_ICON_SIZE} fill={'#61DBFB'} />,
     },
     {
       name: 'Next JS',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui',
-      icon: <TbBrandNextjs size={35} />,
+      icon: <TbBrandNextjs size={EXAMPLES_ICON_SIZE} />,
     },
     {
       name: 'Tailwind CSS',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/tailwind-next',
-      icon: <SiTailwindcss size={35} fill="#38BDF8" />,
+      icon: <SiTailwindcss size={EXAMPLES_ICON_SIZE} fill="#38BDF8" />,
     },
     {
       name: 'Chakra UI',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui',
-      icon: <SiChakraui size={35} fill="#2ABFB3" />,
+      icon: <SiChakraui size={EXAMPLES_ICON_SIZE} fill="#2ABFB3" />,
     },
     {
       name: 'Nuxt 3',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3',
-      icon: <SiNuxtdotjs size={35} color="#00DC82" />,
+      icon: <SiNuxtdotjs size={EXAMPLES_ICON_SIZE} color="#00DC82" />,
     },
   ]
   return (
@@ -456,7 +460,7 @@ function ExternalExamples() {
           >
             <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               {example.icon}
-              <Text fontSize={'xl'}>{example.name}</Text>
+              <Text fontSize={EXAMPLES_FONT_SIZE}>{example.name}</Text>
             </Box>
             <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
           </Link>
