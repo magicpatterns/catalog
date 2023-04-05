@@ -408,7 +408,6 @@ function ExternalExamples() {
     | 'Nuxt 3'
 
   const EXAMPLES_ICON_SIZE = 25
-  const EXAMPLES_FONT_SIZE: TypographyProps['fontSize'] = 'lg'
   const externalExamples: {
     name: externalExamplesNames
     link: string
@@ -460,7 +459,7 @@ function ExternalExamples() {
           >
             <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               {example.icon}
-              <Text fontSize={EXAMPLES_FONT_SIZE}>{example.name}</Text>
+              <Text fontSize={'lg'}>{example.name}</Text>
             </Box>
             <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
           </Link>
