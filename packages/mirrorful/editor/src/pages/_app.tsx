@@ -10,7 +10,7 @@ import useMirrorfulStore, {
 } from '@mirrorful/core/lib/store/useMirrorfulStore'
 import { defaultShadows } from '@mirrorful/core/lib/types'
 import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
+import { usePathname, useRouter } from 'next/navigation'
 import posthog from 'posthog-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { LayoutWrapper } from 'src/components/LayoutWrapper'
@@ -34,6 +34,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     useState(false)
   const [showOnBoarding, setShowOnBoarding] = useState(false)
   const router = useRouter()
+  const pathname = usePathname()
+  const oldPathname = useRef<string>('')
 
   const { setColors, setTypography, setShadows, setFileTypes } =
     useMirrorfulStore((state: MirrorfulState) => state)
@@ -66,6 +68,12 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       }, 1250)
     }
   }, [setColors, setFileTypes, setShadows, setShowOnBoarding, setTypography])
+
+  useEffect(() => {
+    // only initial render assign pathname
+    oldPathname.current = pathname
+  }, [])
+
   useEffect(() => {
     // on initial load
     fetchStoredData()
@@ -73,14 +81,21 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     // Track page views
-    const handleRouteChange = () => posthog.capture('$pageview')
-    router.events.on('routeChangeComplete', handleRouteChange)
-
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
+    if (oldPathname.current !== pathname) {
+      oldPathname.current = pathname
+      posthog.capture('$pageview')
     }
+    // const handleRouteChange = () => {
+    //   posthog.capture('$pageview')
+    // }
+
+    // router.events.on('routeChangeComplete', handleRouteChange)
+
+    // return () => {
+    //   router.events.off('routeChangeComplete', handleRouteChange)
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [pathname])
 
   useEffect(() => {
     router.prefetch('/colors')
