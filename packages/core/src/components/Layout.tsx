@@ -66,7 +66,7 @@ export default function Layout({
       <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
         <motion.div
           animate={{
-            width: isSidebarCollapsed ? '50px' : '300px',
+            width: isSidebarCollapsed ? '50px' : '250px',
             position: 'fixed',
           }}
         >
@@ -82,7 +82,7 @@ export default function Layout({
         </motion.div>
         <motion.div
           animate={{
-            minWidth: isSidebarCollapsed ? ' 100px' : '350px',
+            minWidth: isSidebarCollapsed ? ' 100px' : '250px',
           }}
         />
         <Box
