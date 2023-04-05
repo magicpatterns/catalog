@@ -1,5 +1,5 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
-import { TPlatform } from '@core/components/Dashboard'
+import { TPlatform } from '@core/components/Layout'
 import posthog from 'posthog-js'
 
 import { OnboardingCard } from '../OnboardingCard'

@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { TPlatform } from '@core/components/Dashboard'
+import { TPlatform } from '@core/components/Layout'
 import { defaultFiles, TExportFileType } from '@core/types'
 import { getExportFileTypeName } from '@core/utils/getExportFileTypeString'
 import tinycolor from 'tinycolor2'

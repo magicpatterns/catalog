@@ -13,7 +13,7 @@ We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, 
 }
 ```
 
-```javascript 
+```javascript
 <button style={{ boxShadow: 'var(--box-shadows-sm)' }}>
 ```
 
@@ -38,8 +38,9 @@ const mirrorful = require('./.mirrorful/theme_cjs.js')
 
 theme: {
   extend: {
-    dropShadow: Tokens.boxShadows
+    dropShadow: mirrorful.Tokens.boxShadows
   }
 }
 ```
+
 </CodeGroup>

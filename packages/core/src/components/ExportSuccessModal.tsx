@@ -25,6 +25,7 @@ import {
   Tabs,
   Text,
 } from '@chakra-ui/react'
+import { TPlatform } from '@core/components/Layout'
 import { sanitizeName } from '@core/translators/sanitizeName'
 import { toCjs } from '@core/translators/toCjs'
 import { toCss } from '@core/translators/toCss'
@@ -40,7 +41,6 @@ import { SiChakraui, SiNuxtdotjs, SiTailwindcss } from 'react-icons/si'
 import { TbBrandNextjs } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
-import { TPlatform } from './Dashboard'
 
 type exports = 'Colors' | 'Typography' | 'Shadows'
 
