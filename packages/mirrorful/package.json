@@ -50,7 +50,7 @@
     "cross-spawn": "^7.0.3",
     "framer-motion": "^9.0.4",
     "fs": "^0.0.1-security",
-    "next": "^12.0.0",
+    "next": "^13.2.4",
     "open": "^8.4.2",
     "path": "^0.12.7",
     "posthog-js": "^1.50.0",
