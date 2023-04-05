@@ -1,4 +1,3 @@
-// import { Layout } from '@core/components/Layout'
 import { ShadowsSection } from '@core/components/Shadows/ShadowsSection'
 import useMirrorfulStore, {
   MirrorfulState,
@@ -6,7 +5,7 @@ import useMirrorfulStore, {
 import { TConfig, TShadowData } from '@core/types'
 import React from 'react'
 
-export default function ShadowsPage({
+export function ShadowsPage({
   postStoreData,
 }: {
   postStoreData: (data: TConfig) => Promise<void>
@@ -21,11 +20,9 @@ export default function ShadowsPage({
     })
   }
   return (
-    // <Layout>
     <ShadowsSection
       onUpdateShadowData={handleUpdateShadows}
       shadows={shadows}
     />
-    // </Layout>
   )
 }

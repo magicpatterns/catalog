@@ -18,12 +18,11 @@ export default function SplashScreen() {
     >
       <motion.div
         animate={{
-          rotate: [0, 360],
-          scale: [0, 1.5, 0],
+          scale: [0.9, 1.1, 0.9],
         }}
         transition={{
-          duration: 0.75,
-          ease: 'easeIn',
+          duration: 1.5,
+          ease: 'easeInOut',
           repeat: Infinity,
         }}
       >

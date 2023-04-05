@@ -1,6 +1,7 @@
 import '../main.css'
 import '../atom-one-dark.css'
 
+import { ChakraProvider } from '@chakra-ui/react'
 import { Onboarding } from '@mirrorful/core/lib/components/Onboarding'
 import SplashScreen from '@mirrorful/core/lib/components/SplashScreen'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
@@ -8,13 +9,14 @@ import useMirrorfulStore, {
   MirrorfulState,
 } from '@mirrorful/core/lib/store/useMirrorfulStore'
 import { defaultShadows } from '@mirrorful/core/lib/types'
-import fetchStoreData from '@mirrorful/core/lib/utils/fetchStoreData'
-import postStoreData from '@mirrorful/core/lib/utils/postStoreData'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import LayoutWrapper from 'src/components/LayoutWrapper'
+import { LayoutWrapper } from 'src/components/LayoutWrapper'
+
+import { fetchStoreData } from '../utils/fetchStoreData'
+import { postStoreData } from '../utils/postStoreData'
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready
@@ -94,7 +96,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <MirrorfulThemeProvider>
-      {isLoading && <SplashScreen></SplashScreen>}
+      {isLoading && <SplashScreen />}
       {!shouldForceSkipOnboarding && showOnBoarding ? (
         <Onboarding
           postStoreData={postStoreData}

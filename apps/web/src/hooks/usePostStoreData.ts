@@ -2,7 +2,7 @@ import { defaultConfig, TConfig } from '@core/types'
 
 import { useLocalStorage } from './useLocalStorage'
 
-export default function usePostStoreData() {
+export function usePostStoreData() {
   const [, setData] = useLocalStorage<TConfig>(
     'mirrorfulConfigData',
     defaultConfig

@@ -14,18 +14,17 @@ export type TPlatform = 'package' | 'web'
 
 export type TTab = '/colors' | '/typography' | '/shadows' | '/theme_manager'
 
-type props = {
-  children: React.ReactNode
-  isLoading?: boolean
-  platform?: TPlatform
-  postStoreData: (data: TConfig) => Promise<void>
-}
 export default function Layout({
   children,
   isLoading = false,
   platform = 'package',
   postStoreData,
-}: props) {
+}: {
+  children: React.ReactNode
+  isLoading?: boolean
+  platform?: TPlatform
+  postStoreData: (data: TConfig) => Promise<void>
+}) {
   const router = useRouter()
   const pathname = usePathname()
 
