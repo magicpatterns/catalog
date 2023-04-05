@@ -333,7 +333,6 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
         </Link>{' '}
         For more specific examples check the links below.
       </Text>
-      <ExternalExamples />
       <Box css={{ marginTop: '16px' }}>
         <Tabs>
           <TabList>
@@ -392,6 +391,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
             </TabPanel>
           </TabPanels>
         </Tabs>
+        <ExternalExamples />
       </Box>
     </>
   )
