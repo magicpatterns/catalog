@@ -144,8 +144,8 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
         >
           examples here.
         </Link>{' '}
-        Check out specific examples:
       </Text>
+      <Text css={{ marginTop: '8px' }}>Check out specific examples:</Text>
       <ExternalExamples />
     </>
   )
@@ -314,26 +314,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
       <Text css={{ marginBottom: '8px', fontSize: '1rem' }}>
         {`Copy and paste these snippets directly into your project.`}
       </Text>
-      <Text css={{ marginTop: '8px' }}>
-        To learn more about how to import these generated files, visit our{' '}
-        <Link
-          isExternal
-          color="blue.500"
-          href="https://mirrorful.com/docs/home/export-formats"
-        >
-          documentation here.
-        </Link>
-      </Text>
-      <Text css={{ marginTop: '8px' }}>
-        For examples, check out our{' '}
-        <Link
-          isExternal
-          color="blue.500"
-          href="https://mirrorful.com/docs/home/examples"
-        >
-          example projects here.
-        </Link>
-      </Text>
+
       <Box css={{ marginTop: '16px' }}>
         <Tabs>
           <TabList>
@@ -392,6 +373,26 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
             </TabPanel>
           </TabPanels>
         </Tabs>
+        <Text css={{ marginTop: '8px' }}>
+          To learn more about how to import these generated files, visit our{' '}
+          <Link
+            isExternal
+            color="blue.500"
+            href="https://mirrorful.com/docs/home/export-formats"
+          >
+            documentation here.
+          </Link>
+        </Text>
+        <Text css={{ marginTop: '8px' }}>
+          For examples, check out our{' '}
+          <Link
+            isExternal
+            color="blue.500"
+            href="https://mirrorful.com/docs/home/examples"
+          >
+            example projects here.
+          </Link>
+        </Text>
         <Text css={{ marginTop: '8px' }}>Check out specific examples:</Text>
         <ExternalExamples />
       </Box>
