@@ -17,9 +17,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --build",
-    "local": "run-script-os",
-    "local:win32": "(if exist dist rmdir /Q /S dist) && tsc --build && cross-env NODE_ENV=development node ./dist/cli/index.js",
-    "local:default": "rm -rf ./dist && tsc --build && cross-env NODE_ENV=development node ./dist/cli/index.js",
     "prepub": "rm -rf ./dist; npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..;",
     "release:patch": "rm -rf ./dist; npm version patch; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm publish;",
     "release:minor": "rm -rf ./dist; npm version minor; tsc --build; cd editor; yarn build; cd .next; rm -rf cache; cd ../..; npm publish;",
