@@ -1,10 +1,9 @@
-import { ChevronDownIcon, ExternalLinkIcon, LinkIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
   Code,
   Flex,
-  Heading,
   Icon,
   Link,
   Menu,
@@ -25,7 +24,6 @@ import {
   TabPanels,
   Tabs,
   Text,
-  TypographyProps,
 } from '@chakra-ui/react'
 import { sanitizeName } from '@core/translators/sanitizeName'
 import { toCjs } from '@core/translators/toCjs'
@@ -39,7 +37,7 @@ import { IconType } from 'react-icons'
 import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
 import { SiChakraui, SiNuxtdotjs, SiTailwindcss } from 'react-icons/si'
-import { TbBrandNextjs, TbBrandNuxt } from 'react-icons/tb'
+import { TbBrandNextjs } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
 import { TPlatform } from './Dashboard'
