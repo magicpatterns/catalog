@@ -1,10 +1,10 @@
-// import { Layout } from '@core/components/Layout'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
 import { TConfig, TTypographyData } from '@core/types'
-export default function TypographyPage({
+
+export function TypographyPage({
   postStoreData,
 }: {
   postStoreData: (data: TConfig) => Promise<void>
@@ -19,11 +19,9 @@ export default function TypographyPage({
     })
   }
   return (
-    // <Layout>
     <TypographySection
       typography={{ fontSizes: typography.fontSizes }}
       onUpdateTypography={handleUpdateTypography}
     />
-    // </Layout>
   )
 }

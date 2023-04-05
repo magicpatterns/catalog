@@ -3,16 +3,16 @@ import './globals.css'
 import './atom-one-dark.css'
 
 import { CacheProvider } from '@chakra-ui/next-js'
-import { ChakraProvider } from '@chakra-ui/react'
 import { Onboarding } from '@core/components/Onboarding'
 import SplashScreen from '@core/components/SplashScreen'
+import { MirrorfulThemeProvider } from '@core/components/ThemeProvider'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
 import { defaultShadows, TConfig } from '@core/types'
-import LayoutWrapper from '@web/components/LayoutWrapper'
-import useFetchStoreData from '@web/hooks/useFetchStoreData'
-import usePostStoreData from '@web/hooks/usePostStoreData'
+import { LayoutWrapper } from '@web/components/LayoutWrapper'
+import { useFetchStoreData } from '@web/hooks/useFetchStoreData'
+import { usePostStoreData } from '@web/hooks/usePostStoreData'
 import { useRouter } from 'next/navigation'
 import posthog from 'posthog-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -26,6 +26,7 @@ if (typeof window !== 'undefined') {
     },
   })
 }
+
 export default function RootLayout({
   children,
 }: {
@@ -88,11 +89,20 @@ export default function RootLayout({
     router.prefetch('/typography')
     router.prefetch('/shadows')
   }, [router])
+
+  const handleOnboardingSubmit = async (data: TConfig) => {
+    postStoreData(data)
+    setColors(data.tokens.colorData)
+    setFileTypes(data.files)
+    setShadows(data.tokens.shadows)
+    setTypography(data.tokens.typography)
+  }
+
   return (
     <html lang="en">
       <body>
         <CacheProvider>
-          <ChakraProvider>
+          <MirrorfulThemeProvider>
             {isLoading && <SplashScreen></SplashScreen>}
             {!shouldForceSkipOnboarding && showOnBoarding ? (
               <Onboarding
@@ -106,16 +116,9 @@ export default function RootLayout({
             ) : (
               <LayoutWrapper>{children}</LayoutWrapper>
             )}
-          </ChakraProvider>
+          </MirrorfulThemeProvider>
         </CacheProvider>
       </body>
     </html>
   )
-  async function handleOnboardingSubmit(data: TConfig) {
-    postStoreData(data)
-    setColors(data.tokens.colorData)
-    setFileTypes(data.files)
-    setShadows(data.tokens.shadows)
-    setTypography(data.tokens.typography)
-  }
 }

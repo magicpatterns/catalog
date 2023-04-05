@@ -1,11 +1,10 @@
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
-// import { Layout } from '@core/components/Layout'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
 import { TColorData, TConfig } from '@core/types'
 
-export default function ColorsPage({
+export function ColorsPage({
   postStoreData,
 }: {
   postStoreData: (data: TConfig) => Promise<void>
@@ -26,8 +25,6 @@ export default function ColorsPage({
   }
 
   return (
-    // <Layout>
     <ColorPaletteSection colors={colors} onUpdateColors={handleUpdateColors} />
-    // </Layout>
   )
 }

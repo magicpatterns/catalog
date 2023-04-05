@@ -1,6 +1,6 @@
 'use client'
-import TypographyPage from '@core/pages/typography'
-import usePostStoreData from '@web/hooks/usePostStoreData'
+import { TypographyPage } from '@core/pages/TypographyPage'
+import { usePostStoreData } from '@web/hooks/usePostStoreData'
 import React from 'react'
 
 export default function Typography() {
