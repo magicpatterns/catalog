@@ -130,20 +130,20 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
           color="blue.500"
           href="https://mirrorful.com/docs/home/export-formats"
         >
-          documentation here.
+          documentation
         </Link>
+        .
       </Text>
       <Text css={{ marginTop: '8px' }}>
-        For examples, check out our{' '}
+        Check out our{' '}
         <Link
           isExternal
           color="blue.500"
           href="https://mirrorful.com/docs/home/examples"
         >
-          examples here.
+          examples:
         </Link>{' '}
       </Text>
-      <Text css={{ marginTop: '8px' }}>Check out specific examples:</Text>
       <ExternalExamples />
     </>
   )
@@ -378,20 +378,20 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
             color="blue.500"
             href="https://mirrorful.com/docs/home/export-formats"
           >
-            documentation here.
+            documentation
           </Link>
+          .
         </Text>
         <Text css={{ marginTop: '8px' }}>
-          For examples, check out our{' '}
+          Check out our{' '}
           <Link
             isExternal
             color="blue.500"
             href="https://mirrorful.com/docs/home/examples"
           >
-            example projects here.
+            examples:
           </Link>
         </Text>
-        <Text css={{ marginTop: '8px' }}>Check out specific examples:</Text>
         <ExternalExamples />
       </Box>
     </>
@@ -406,7 +406,7 @@ function ExternalExamples() {
     | 'Chakra UI'
     | 'Nuxt 3'
 
-  const EXAMPLES_ICON_SIZE = 25
+  const EXAMPLES_ICON_SIZE = 20
   const externalExamples: {
     name: externalExamplesNames
     link: string
@@ -439,7 +439,7 @@ function ExternalExamples() {
     },
   ]
   return (
-    <Flex css={{ marginTop: '16px' }} gap={8} flexWrap="wrap">
+    <Flex css={{ marginTop: '16px' }} gap={4} flexWrap="wrap">
       {externalExamples.map((example) => {
         return (
           <Link
@@ -449,19 +449,20 @@ function ExternalExamples() {
             css={{
               display: 'flex',
               justifyContent: 'space-between',
-              minWidth: '175px',
               alignItems: 'center',
               borderRadius: 8,
-              padding: 1,
             }}
+            px="3"
+            pt="1"
+            pb="1"
             role="group"
             _hover={{ textDecoration: 'none', outline: '1px solid #c3cedb' }}
           >
             <Box css={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               {example.icon}
-              <Text fontSize={'lg'}>{example.name}</Text>
+              <Text fontSize={'md'}>{example.name}</Text>
             </Box>
-            <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} />
+            {/* <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} /> */}
           </Link>
         )
       })}
