@@ -20,7 +20,10 @@ export function TypographyPage({
   }
   return (
     <TypographySection
-      typography={{ fontSizes: typography.fontSizes }}
+      typography={{
+        fontSizes: typography.fontSizes,
+        fontWeights: typography.fontWeights,
+      }}
       onUpdateTypography={handleUpdateTypography}
     />
   )
