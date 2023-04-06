@@ -7,7 +7,7 @@ import {
   TConfig,
   TExportFileType,
 } from '@core/types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { TPlatform } from '../Layout'
 import { OnboardingContainer } from './OnboardingContainer'
@@ -19,6 +19,7 @@ import { PickPrimary } from './pages/PickPrimary'
 import { Referral } from './pages/Referral'
 import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
+var namer = require('color-namer')
 
 export function Onboarding({
   postStoreData,
@@ -35,6 +36,14 @@ export function Onboarding({
   const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
 
   const [page, setPage] = useState<number>(platform === 'web' ? 1 : 0)
+
+  let names = namer(primaryColor)
+
+  useEffect(() => {
+     names = namer(primaryColor)
+    setPrimaryName(names.html[0].name)
+
+  }, [primaryColor])
 
   const handleExport = async (
     primaryColorHex: string,
