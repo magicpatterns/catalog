@@ -35,7 +35,7 @@ export function EditShadowModal({
   initialShadowVariant?: TShadowData
   onUpdateShadowVariant: (newVariant: TShadowData) => void
   onDeleteShadowVariant?: () => void
-  initialRgbaValue?: { r: number; g: number; b: number; a: number }
+  initialRgbaValue?: [{ r: number; g: number; b: number; a: number }]
   initialValues?:
     | {
         hOffset: number
@@ -58,9 +58,15 @@ export function EditShadowModal({
 
   const [error, setError] = useState<string | null>(null)
 
+  console.log('initialRgbaValue ' + initialRgbaValue?.map((i) => i.a))
+
   const presetColor = initialRgbaValue
     ? // eslint-disable-next-line react/prop-types
-      `rgba(${initialRgbaValue?.r}, ${initialRgbaValue?.g}, ${initialRgbaValue?.b}, ${initialRgbaValue?.a})`
+      `rgba(${initialRgbaValue?.map((i) => i.r)}, ${initialRgbaValue?.map(
+        (i) => i.g
+      )}, ${initialRgbaValue?.map((i) => i.b)}, ${initialRgbaValue?.map(
+        (i) => i.a
+      )})`
     : 'rgba(1, 1, 1, 0.4)'
 
   const handleSave = () => {
@@ -85,6 +91,10 @@ export function EditShadowModal({
   const [vOffset, setVOffset] = useState(initialValues?.vOffset ?? 0)
   const [blur, setBlur] = useState(initialValues?.blur ?? 0)
   const [spread, setSpread] = useState(initialValues?.spread ?? 0)
+
+  const [initialButton, setInitialButton] = useState(0)
+
+  console.log(initialButton)
 
   const codeResult = `${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color}`
 
@@ -147,6 +157,31 @@ export function EditShadowModal({
             }}
           >
             <Box css={{ display: 'flex', flexDirection: 'column' }}>
+              {initialRgbaValue?.map((i, index) => (
+                <div key={index} style={{}}>
+                  <Button
+                    style={{
+                      backgroundColor: initialButton === index ? 'red' : '',
+                    }}
+                    onClick={() => setInitialButton(index)}
+                  >
+                    hello
+                  </Button>
+                </div>
+              ))}
+              {initialRgbaValue?.map((i, index) => (
+                <>
+                  <div style={{}}>
+                    {initialButton == index && (
+                      <div>
+                        <Input value={`${i.r}, ${i.g}, ${i.b}, ${i.a}`} />
+                        <div>kddlsflsdf</div>
+                        <div>kdsfdlke233</div>
+                      </div>
+                    )}
+                  </div>
+                </>
+              ))}
               <FormControl>
                 <FormLabel css={{ fontSize: '0.75rem' }}>
                   Variant name
@@ -195,8 +230,10 @@ export function EditShadowModal({
                     />
                   </Box>
                 </Box>
+
                 <Box css={{ marginTop: '1rem' }}>
                   <FormLabel css={{ fontSize: '0.75rem' }}>RGBA</FormLabel>
+
                   <Input
                     value={inputColor}
                     onChange={(e) => formatColor(e.target.value)}
