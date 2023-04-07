@@ -1,7 +1,6 @@
 import fs from 'fs'
 import { readFile, writeFile } from 'fs/promises'
 import path from 'path'
-import { store } from 'src/store/store'
 
 export async function addToTailwindConfig() {
   const rootPath =
@@ -75,13 +74,15 @@ export async function addToTailwindConfig() {
       tailwindFileArr.splice(extendIndex, 0, tailwindInserts['dropShadow'])
       extendIndex++
     }
+    // TODO find where mirrorful is located
     const mirrorfulImport =
       "const mirrorful = require('./.mirrorful/theme_cjs.js')\n"
     await writeFile(
-      path.join(__dirname, '../../../../tailwind.config.js'),
+      path.join(__dirname, rootPath),
       mirrorfulImport + tailwindFileArr.join('\n'),
       'utf-8'
     )
+    // TODO update add to tailwind config
   } catch (error) {
     console.error(error)
   }
