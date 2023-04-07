@@ -1,5 +1,4 @@
 import { TTokens } from '@core/types'
-import { getKeys } from '@core/utils/getKeys'
 import JSON5 from 'json5'
 
 export const toTailwind = ({
