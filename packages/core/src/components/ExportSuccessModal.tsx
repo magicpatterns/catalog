@@ -32,6 +32,7 @@ import { toCss } from '@core/translators/toCss'
 import { toJs } from '@core/translators/toJs'
 import { toJson } from '@core/translators/toJson'
 import { toScss } from '@core/translators/toScss'
+import { toTailwind } from '@core/translators/toTailwind'
 import { TTokens } from '@core/types'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
@@ -321,6 +322,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
             <Tab>Javascript / Typescript</Tab>
             <Tab>JSON</Tab>
             <Tab>CJS</Tab>
+            <Tab>TailwindCSS</Tab>
           </TabList>
 
           <TabPanels>
@@ -365,6 +367,15 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
                 language="javascript"
                 textClass="code-snippet"
                 text={`/* For example, copy into mirrorful.cjs */\n\n${toCjs(
+                  tokens
+                )}`}
+              />
+            </TabPanel>
+            <TabPanel>
+              <CodePreview
+                language="javascript"
+                textClass="code-snippet"
+                text={`/* For example, copy into tailwind.config.js */\n\n${toTailwind(
                   tokens
                 )}`}
               />
