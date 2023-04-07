@@ -81,7 +81,9 @@ export function Onboarding({
       <PickPrimary
         primaryColor={primaryColor}
         onUpdatePage={setPage}
-        onUpdatePrimaryColor={(newColor: string) => updatePrimaryColor(newColor)}
+        onUpdatePrimaryColor={(newColor: string) =>
+          updatePrimaryColor(newColor)
+        }
         platform={platform}
       />
     )
@@ -92,7 +94,9 @@ export function Onboarding({
       <PickPrimary
         primaryColor={primaryColor}
         onUpdatePage={setPage}
-        onUpdatePrimaryColor={(newColor: string) => updatePrimaryColor(newColor)}
+        onUpdatePrimaryColor={(newColor: string) =>
+          updatePrimaryColor(newColor)
+        }
         platform={platform}
       />
     )
