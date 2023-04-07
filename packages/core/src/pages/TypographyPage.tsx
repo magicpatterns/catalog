@@ -23,6 +23,7 @@ export function TypographyPage({
       typography={{
         fontSizes: typography.fontSizes,
         fontWeights: typography.fontWeights,
+        lineHeights: typography.lineHeights,
       }}
       onUpdateTypography={handleUpdateTypography}
     />

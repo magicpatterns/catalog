@@ -12,6 +12,6 @@ export const createTypographySlice: StateCreator<
   [],
   TypographySlice
 > = (set) => ({
-  typography: { fontSizes: [], fontWeights: [] },
+  typography: { fontSizes: [], fontWeights: [], lineHeights: [] },
   setTypography: (newState) => set(() => ({ typography: newState })),
 })

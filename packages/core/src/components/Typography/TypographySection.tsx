@@ -2,11 +2,13 @@ import { Box, Divider, Heading, Text } from '@chakra-ui/react'
 import {
   TFontSizeVariant,
   TFontWeightVariant,
+  TLineHeightVariant,
   TTypographyData,
 } from '@core/types'
 
 import { FontSizesSection } from './FontSize/FontSizesSection'
 import { FontWeightSection } from './FontWeight/FontWeightSection'
+import { LineHeightSection } from './LineHeight/LineHeightSection'
 
 export function TypographySection({
   typography,
@@ -34,7 +36,10 @@ export function TypographySection({
       <FontSizesSection
         fontSizeData={typography.fontSizes}
         onUpdateFontPropertyData={(
-          newFontSizeData: TFontSizeVariant[] | TFontWeightVariant[]
+          newFontSizeData:
+            | TFontSizeVariant[]
+            | TFontWeightVariant[]
+            | TLineHeightVariant[]
         ) => {
           onUpdateTypography({
             ...typography,
@@ -47,11 +52,30 @@ export function TypographySection({
       <FontWeightSection
         fontWeightData={typography.fontWeights}
         onUpdateFontPropertyData={(
-          newFontWeightData: TFontSizeVariant[] | TFontWeightVariant[]
+          newFontWeightData:
+            | TFontSizeVariant[]
+            | TFontWeightVariant[]
+            | TLineHeightVariant[]
         ) => {
           onUpdateTypography({
             ...typography,
             fontWeights: newFontWeightData as TFontWeightVariant[],
+          })
+        }}
+      />
+      <br />
+      <br />
+      <LineHeightSection
+        lineHeightData={typography.lineHeights}
+        onUpdateFontPropertyData={(
+          newLineHeightData:
+            | TFontSizeVariant[]
+            | TFontWeightVariant[]
+            | TLineHeightVariant[]
+        ) => {
+          onUpdateTypography({
+            ...typography,
+            lineHeights: newLineHeightData as TLineHeightVariant[],
           })
         }}
       />

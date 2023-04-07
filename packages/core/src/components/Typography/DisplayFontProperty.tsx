@@ -1,9 +1,14 @@
 import { Button, Heading, Stack, useDisclosure } from '@chakra-ui/react'
-import { TFontSizeVariant, TFontWeightVariant } from '@core/types'
+import {
+  TFontSizeVariant,
+  TFontWeightVariant,
+  TLineHeightVariant,
+} from '@core/types'
 
 import { FontPropertyRow } from './FontPropertyRow'
 import { EditFontSizeModal } from './FontSize/EditFontSizeModal'
 import { EditFontWeightModal } from './FontWeight/EditFontWeightModal'
+import { EditLineHeightModal } from './LineHeight/EditLineHeightModal'
 
 export const DisplayFontProperty = ({
   headingText,
@@ -14,10 +19,16 @@ export const DisplayFontProperty = ({
 }: {
   headingText: string
   buttonText: string
-  fontProperty: 'fontSize' | 'fontWeight'
-  fontPropertyData: TFontSizeVariant[] | TFontWeightVariant[]
+  fontProperty: 'fontSize' | 'fontWeight' | 'lineHeight'
+  fontPropertyData:
+    | TFontSizeVariant[]
+    | TFontWeightVariant[]
+    | TLineHeightVariant[]
   onUpdateFontPropertyData: (
-    newFontSizeData: TFontSizeVariant[] | TFontWeightVariant[]
+    newFontSizeData:
+      | TFontSizeVariant[]
+      | TFontWeightVariant[]
+      | TLineHeightVariant[]
   ) => void
 }) => {
   const {
@@ -42,6 +53,7 @@ export const DisplayFontProperty = ({
                 const newFontPropertyData = [...fontPropertyData] as
                   | TFontSizeVariant[]
                   | TFontWeightVariant[]
+                  | TLineHeightVariant[]
                 const fontPropertyIndex = fontPropertyData.findIndex(
                   (ec) => ec.name === fontPropertyVariant.name
                 )
@@ -98,6 +110,23 @@ export const DisplayFontProperty = ({
                   ]
                   onUpdateFontPropertyData(
                     updatedFontWeightData as TFontWeightVariant[]
+                  )
+                }}
+              />
+            )
+          case 'lineHeight':
+            return (
+              <EditLineHeightModal
+                isAdding={true}
+                isOpen={isAddVariantModalOpen}
+                onClose={onAddVariantModalClose}
+                onUpdateLineHeightVariant={(newVariant: TLineHeightVariant) => {
+                  const updatedLineHeightData = [
+                    ...fontPropertyData,
+                    newVariant,
+                  ]
+                  onUpdateFontPropertyData(
+                    updatedLineHeightData as TLineHeightVariant[]
                   )
                 }}
               />

@@ -1,5 +1,9 @@
 import { Box } from '@chakra-ui/react'
-import { TFontSizeVariant, TFontWeightVariant } from '@core/types'
+import {
+  TFontSizeVariant,
+  TFontWeightVariant,
+  TLineHeightVariant,
+} from '@core/types'
 
 import { DisplayFontProperty } from '../DisplayFontProperty'
 import { fontUnits } from '../TypographyConstants'
@@ -10,7 +14,10 @@ export function FontSizesSection({
 }: {
   fontSizeData: TFontSizeVariant[]
   onUpdateFontPropertyData: (
-    newFontSizeData: TFontSizeVariant[] | TFontWeightVariant[]
+    newFontSizeData:
+      | TFontSizeVariant[]
+      | TFontWeightVariant[]
+      | TLineHeightVariant[]
   ) => void
 }) {
   const headingText = 'Font Sizes'

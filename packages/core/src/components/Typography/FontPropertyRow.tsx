@@ -1,10 +1,16 @@
 import { Box, Button, Stack, Text, useDisclosure } from '@chakra-ui/react'
-import { TFontSizeVariant, TFontWeightVariant } from '@core/types'
+import {
+  TFontSizeVariant,
+  TFontWeightVariant,
+  TLineHeightVariant,
+} from '@core/types'
 
 import { EditFontSizeModal } from './FontSize/EditFontSizeModal'
 import { FontSizeData } from './FontSize/FontSizeData'
 import { EditFontWeightModal } from './FontWeight/EditFontWeightModal'
 import { FontWeightData } from './FontWeight/FontWeightData'
+import { EditLineHeightModal } from './LineHeight/EditLineHeightModal'
+import { LineHeightData } from './LineHeight/LineHeightData'
 
 export function FontPropertyRow({
   fontProperty,
@@ -12,10 +18,10 @@ export function FontPropertyRow({
   onUpdateFontPropertyVariant,
   onDeleteFontPropertyVariant,
 }: {
-  fontProperty: 'fontSize' | 'fontWeight'
-  fontPropertyData: TFontSizeVariant | TFontWeightVariant
+  fontProperty: 'fontSize' | 'fontWeight' | 'lineHeight'
+  fontPropertyData: TFontSizeVariant | TFontWeightVariant | TLineHeightVariant
   onUpdateFontPropertyVariant: (
-    newVariant: TFontSizeVariant | TFontWeightVariant
+    newVariant: TFontSizeVariant | TFontWeightVariant | TLineHeightVariant
   ) => void
   onDeleteFontPropertyVariant: () => void
 }) {
@@ -68,6 +74,12 @@ export function FontPropertyRow({
                   fontWeightData={fontPropertyData as TFontWeightVariant}
                 />
               )
+            case 'lineHeight':
+              return (
+                <LineHeightData
+                  lineHeightData={fontPropertyData as TLineHeightVariant}
+                />
+              )
           }
         })()}
         <Box css={{ justifySelf: 'flex-end' }}>
@@ -102,6 +114,19 @@ export function FontPropertyRow({
                   }
                   onUpdateFontWeightVariant={onUpdateFontPropertyVariant}
                   onDeleteFontWeightVariant={onDeleteFontPropertyVariant}
+                />
+              )
+            case 'lineHeight':
+              return (
+                <EditLineHeightModal
+                  isAdding={false}
+                  isOpen={isEditVariantModalOpen}
+                  onClose={onEditVariantModalClose}
+                  initialLineHeightVariant={
+                    fontPropertyData as TLineHeightVariant
+                  }
+                  onUpdateLineHeightVariant={onUpdateFontPropertyVariant}
+                  onDeleteLineHeightVariant={onDeleteFontPropertyVariant}
                 />
               )
           }
