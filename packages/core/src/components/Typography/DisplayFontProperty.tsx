@@ -81,58 +81,43 @@ export const DisplayFontProperty = ({
           {buttonText}
         </Button>
       </Stack>
-      {(() => {
-        switch (fontProperty) {
-          case 'fontSize':
-            return (
-              <EditFontSizeModal
-                isAdding={true}
-                isOpen={isAddVariantModalOpen}
-                onClose={onAddVariantModalClose}
-                onUpdateFontSizeVariant={(newVariant: TFontSizeVariant) => {
-                  const updatedFontSizeData = [...fontPropertyData, newVariant]
-                  onUpdateFontPropertyData(
-                    updatedFontSizeData as TFontSizeVariant[]
-                  )
-                }}
-              />
+      {fontProperty === 'fontSize' && (
+        <EditFontSizeModal
+          isAdding={true}
+          isOpen={isAddVariantModalOpen}
+          onClose={onAddVariantModalClose}
+          onUpdateFontSizeVariant={(newVariant: TFontSizeVariant) => {
+            const updatedFontSizeData = [...fontPropertyData, newVariant]
+            onUpdateFontPropertyData(updatedFontSizeData as TFontSizeVariant[])
+          }}
+        />
+      )}
+      {fontProperty === 'fontWeight' && (
+        <EditFontWeightModal
+          isAdding={true}
+          isOpen={isAddVariantModalOpen}
+          onClose={onAddVariantModalClose}
+          onUpdateFontWeightVariant={(newVariant: TFontWeightVariant) => {
+            const updatedFontWeightData = [...fontPropertyData, newVariant]
+            onUpdateFontPropertyData(
+              updatedFontWeightData as TFontWeightVariant[]
             )
-          case 'fontWeight':
-            return (
-              <EditFontWeightModal
-                isAdding={true}
-                isOpen={isAddVariantModalOpen}
-                onClose={onAddVariantModalClose}
-                onUpdateFontWeightVariant={(newVariant: TFontWeightVariant) => {
-                  const updatedFontWeightData = [
-                    ...fontPropertyData,
-                    newVariant,
-                  ]
-                  onUpdateFontPropertyData(
-                    updatedFontWeightData as TFontWeightVariant[]
-                  )
-                }}
-              />
+          }}
+        />
+      )}
+      {fontProperty === 'lineHeight' && (
+        <EditLineHeightModal
+          isAdding={true}
+          isOpen={isAddVariantModalOpen}
+          onClose={onAddVariantModalClose}
+          onUpdateLineHeightVariant={(newVariant: TLineHeightVariant) => {
+            const updatedLineHeightData = [...fontPropertyData, newVariant]
+            onUpdateFontPropertyData(
+              updatedLineHeightData as TLineHeightVariant[]
             )
-          case 'lineHeight':
-            return (
-              <EditLineHeightModal
-                isAdding={true}
-                isOpen={isAddVariantModalOpen}
-                onClose={onAddVariantModalClose}
-                onUpdateLineHeightVariant={(newVariant: TLineHeightVariant) => {
-                  const updatedLineHeightData = [
-                    ...fontPropertyData,
-                    newVariant,
-                  ]
-                  onUpdateFontPropertyData(
-                    updatedLineHeightData as TLineHeightVariant[]
-                  )
-                }}
-              />
-            )
-        }
-      })()}
+          }}
+        />
+      )}
     </>
   )
 }

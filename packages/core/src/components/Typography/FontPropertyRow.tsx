@@ -6,9 +6,9 @@ import {
 } from '@core/types'
 
 import { EditFontSizeModal } from './FontSize/EditFontSizeModal'
-import { FontSizeData } from './FontSize/FontSizeData'
+import { FontSizeRow } from './FontSize/FontSizeRow'
 import { EditFontWeightModal } from './FontWeight/EditFontWeightModal'
-import { FontWeightData } from './FontWeight/FontWeightData'
+import { FontWeightRow } from './FontWeight/FontWeightRow'
 import { EditLineHeightModal } from './LineHeight/EditLineHeightModal'
 import { LineHeightData } from './LineHeight/LineHeightData'
 
@@ -60,28 +60,19 @@ export function FontPropertyRow({
             {fontPropertyData.name}
           </Text>
         </Box>
-        {(() => {
-          switch (fontProperty) {
-            case 'fontSize':
-              return (
-                <FontSizeData
-                  fontSizeData={fontPropertyData as TFontSizeVariant}
-                />
-              )
-            case 'fontWeight':
-              return (
-                <FontWeightData
-                  fontWeightData={fontPropertyData as TFontWeightVariant}
-                />
-              )
-            case 'lineHeight':
-              return (
-                <LineHeightData
-                  lineHeightData={fontPropertyData as TLineHeightVariant}
-                />
-              )
-          }
-        })()}
+        {fontProperty === 'fontSize' && (
+          <FontSizeRow fontSizeData={fontPropertyData as TFontSizeVariant} />
+        )}
+        {fontProperty === 'fontWeight' && (
+          <FontWeightRow
+            fontWeightData={fontPropertyData as TFontWeightVariant}
+          />
+        )}
+        {fontProperty === 'lineHeight' && (
+          <LineHeightData
+            lineHeightData={fontPropertyData as TLineHeightVariant}
+          />
+        )}
         <Box css={{ justifySelf: 'flex-end' }}>
           <Button
             css={{ marginRight: 16 }}
@@ -90,47 +81,36 @@ export function FontPropertyRow({
             Edit Variant
           </Button>
         </Box>
-        {(() => {
-          switch (fontProperty) {
-            case 'fontSize':
-              return (
-                <EditFontSizeModal
-                  isAdding={false}
-                  isOpen={isEditVariantModalOpen}
-                  onClose={onEditVariantModalClose}
-                  initialFontSizeVariant={fontPropertyData as TFontSizeVariant}
-                  onUpdateFontSizeVariant={onUpdateFontPropertyVariant}
-                  onDeleteFontSizeVariant={onDeleteFontPropertyVariant}
-                />
-              )
-            case 'fontWeight':
-              return (
-                <EditFontWeightModal
-                  isAdding={false}
-                  isOpen={isEditVariantModalOpen}
-                  onClose={onEditVariantModalClose}
-                  initialFontWeightVariant={
-                    fontPropertyData as TFontWeightVariant
-                  }
-                  onUpdateFontWeightVariant={onUpdateFontPropertyVariant}
-                  onDeleteFontWeightVariant={onDeleteFontPropertyVariant}
-                />
-              )
-            case 'lineHeight':
-              return (
-                <EditLineHeightModal
-                  isAdding={false}
-                  isOpen={isEditVariantModalOpen}
-                  onClose={onEditVariantModalClose}
-                  initialLineHeightVariant={
-                    fontPropertyData as TLineHeightVariant
-                  }
-                  onUpdateLineHeightVariant={onUpdateFontPropertyVariant}
-                  onDeleteLineHeightVariant={onDeleteFontPropertyVariant}
-                />
-              )
-          }
-        })()}
+        {fontProperty === 'fontSize' && (
+          <EditFontSizeModal
+            isAdding={false}
+            isOpen={isEditVariantModalOpen}
+            onClose={onEditVariantModalClose}
+            initialFontSizeVariant={fontPropertyData as TFontSizeVariant}
+            onUpdateFontSizeVariant={onUpdateFontPropertyVariant}
+            onDeleteFontSizeVariant={onDeleteFontPropertyVariant}
+          />
+        )}
+        {fontProperty === 'fontWeight' && (
+          <EditFontWeightModal
+            isAdding={false}
+            isOpen={isEditVariantModalOpen}
+            onClose={onEditVariantModalClose}
+            initialFontWeightVariant={fontPropertyData as TFontWeightVariant}
+            onUpdateFontWeightVariant={onUpdateFontPropertyVariant}
+            onDeleteFontWeightVariant={onDeleteFontPropertyVariant}
+          />
+        )}
+        {fontProperty === 'lineHeight' && (
+          <EditLineHeightModal
+            isAdding={false}
+            isOpen={isEditVariantModalOpen}
+            onClose={onEditVariantModalClose}
+            initialLineHeightVariant={fontPropertyData as TLineHeightVariant}
+            onUpdateLineHeightVariant={onUpdateFontPropertyVariant}
+            onDeleteLineHeightVariant={onDeleteFontPropertyVariant}
+          />
+        )}
       </Stack>
     </Box>
   )

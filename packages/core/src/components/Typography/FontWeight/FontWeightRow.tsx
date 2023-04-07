@@ -1,7 +1,7 @@
 import { Box, Text } from '@chakra-ui/react'
 import { TFontWeightVariant } from '@core/types'
 
-export function FontWeightData({
+export function FontWeightRow({
   fontWeightData,
 }: {
   fontWeightData: TFontWeightVariant
@@ -15,7 +15,7 @@ export function FontWeightData({
       </Box>
       <Box
         css={{
-          fontSize: '2rem',
+          fontSize: '1rem',
           fontWeight: fontWeightData.weight,
           width: '100%',
         }}

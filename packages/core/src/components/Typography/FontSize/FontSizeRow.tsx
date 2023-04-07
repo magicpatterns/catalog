@@ -33,7 +33,7 @@ function normalizeFontSize(fontSizeData: TFontSizeVariant) {
   return '1rem'
 }
 
-export function FontSizeData({
+export function FontSizeRow({
   fontSizeData,
 }: {
   fontSizeData: TFontSizeVariant
