@@ -110,3 +110,41 @@ export const defaultConfig: TConfig = {
   },
   files: defaultFiles,
 }
+
+// NEXT GENERATION DATA MODEL
+// Migrating to standardized reference: https://design-tokens.github.io/
+
+// The top level object for everything
+export type MirrorfulStore = {
+  primatives: TPrimatives
+  themes: TTheme[]
+  files: TExportFileType[]
+}
+
+// Top level object for storing primatives
+export type TPrimatives = {
+  colors: TTokenGroup
+}
+
+// Top level object for storing the themes
+export type ThemeStore = {
+  themes: TTheme[]
+}
+
+// Each theme, e.g. "Dark Theme"
+export type TTheme = {
+  name: string
+  tokens: TTokenGroup
+}
+
+// The basic unit for constructing a JSON shape
+export type TTokenGroup = {
+  [key: string]: TTokenGroup | TToken
+}
+
+export type TToken = {
+  id: string
+  value: string
+  type: 'color' | 'typography'
+  ref?: string // means that this token itself is a reference to another token
+}
