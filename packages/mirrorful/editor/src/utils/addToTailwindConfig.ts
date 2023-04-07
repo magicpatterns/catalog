@@ -10,7 +10,8 @@ export async function addToTailwindConfig() {
       : '../../../tailwind.config.js'
 
   const IS_TAILWIND_BEING_USED = fs.existsSync(rootPath)
-  if (!IS_TAILWIND_BEING_USED) return
+  const SHOULD_UPDATE_TAILWIND_CONFIG = await shouldUpdateTailwindConfig()
+  if (!IS_TAILWIND_BEING_USED && !SHOULD_UPDATE_TAILWIND_CONFIG) return
 
   const tokenInserts = {
     colors: '\t\t\t\t...mirrorful.Tokens.colors,',
@@ -25,7 +26,6 @@ export async function addToTailwindConfig() {
   }
 
   try {
-    // const SHOULD_UPDATE_TAILWIND_CONFIG = await hasTailwindBeenUpdated();
     let tailwindFile = await readFile(path.join(__dirname, rootPath), 'utf8')
     const hasColors = tailwindFile.match(/colors:(\s|^\s)(\{|\n)/)
     const hasFontSizes = tailwindFile.match(/fontSize:(\s|^\s)(\{|\n)/)
