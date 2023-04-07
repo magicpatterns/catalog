@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { readFile, writeFile } from 'fs/promises'
 import path from 'path'
+import { store } from 'src/store/store'
 
 export async function addToTailwindConfig() {
   const rootPath =
@@ -84,4 +85,25 @@ export async function addToTailwindConfig() {
   } catch (error) {
     console.error(error)
   }
+}
+
+async function shouldUpdateTailwindConfig() {
+  type jsonFile = {
+    lastAdded: string
+    hasAddedToTailwind: boolean
+  }
+  const jsonFile = await readFile('./model/addedToTailwindConfig.json', 'utf-8')
+  const updatedTailwindConfig: jsonFile = JSON.parse(jsonFile)
+
+  const MS_TO_DAYS = 1000 * 60 * 60 * 24
+  return (
+    updatedTailwindConfig.lastAdded.length > 0 &&
+    Math.abs(
+      ((new Date(updatedTailwindConfig.lastAdded).getTime() -
+        new Date().getTime()) /
+        MS_TO_DAYS) %
+        7
+    ) >= 10 &&
+    !updatedTailwindConfig.hasAddedToTailwind
+  )
 }
