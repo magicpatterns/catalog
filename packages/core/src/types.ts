@@ -85,15 +85,14 @@ export const defaultTypography: TTypographyData = {
       unit: 'number',
     },
     {
-      name: 'tight',
-      value: 80,
-      unit: 'percent',
+      name: 'shorter',
+      value: 1,
+      unit: 'number',
     },
     {
-      name: 'loose',
-      value: 3,
-      unit: 'length',
-      lengthUnit: 'rem',
+      name: 'taller',
+      value: 2,
+      unit: 'number',
     },
   ],
 }
