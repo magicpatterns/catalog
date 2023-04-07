@@ -7,7 +7,8 @@ import {
   TConfig,
   TExportFileType,
 } from '@core/types'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import namer from 'color-namer'
 
 import { TPlatform } from '../Layout'
 import { OnboardingContainer } from './OnboardingContainer'
@@ -19,7 +20,6 @@ import { PickPrimary } from './pages/PickPrimary'
 import { Referral } from './pages/Referral'
 import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
-const namer = require('color-namer')
 
 export function Onboarding({
   postStoreData,
@@ -37,10 +37,11 @@ export function Onboarding({
 
   const [page, setPage] = useState<number>(platform === 'web' ? 1 : 0)
 
-  useEffect(() => {
-    const names = namer(primaryColor)
+  const updatePrimaryColor = (newColor: string) => {
+    setPrimaryColor(newColor)
+    const names = namer(newColor)
     setPrimaryName(names?.html[0]?.name)
-  }, [primaryColor])
+  }
 
   const handleExport = async (
     primaryColorHex: string,
@@ -80,7 +81,7 @@ export function Onboarding({
       <PickPrimary
         primaryColor={primaryColor}
         onUpdatePage={setPage}
-        onUpdatePrimaryColor={(newColor: string) => setPrimaryColor(newColor)}
+        onUpdatePrimaryColor={(newColor: string) => updatePrimaryColor(newColor)}
         platform={platform}
       />
     )
@@ -91,7 +92,7 @@ export function Onboarding({
       <PickPrimary
         primaryColor={primaryColor}
         onUpdatePage={setPage}
-        onUpdatePrimaryColor={(newColor: string) => setPrimaryColor(newColor)}
+        onUpdatePrimaryColor={(newColor: string) => updatePrimaryColor(newColor)}
         platform={platform}
       />
     )
