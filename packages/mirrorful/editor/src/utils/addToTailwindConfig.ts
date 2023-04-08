@@ -3,6 +3,7 @@ import { readdir, readFile, writeFile } from 'fs/promises'
 import path from 'path'
 
 type TTokens = 'colors' | 'fontSizes' | 'boxShadows'
+type TailwindNames = 'colors' | 'fontSize' | 'dropShadow'
 const tokens: TTokens[] = ['colors', 'fontSizes', 'boxShadows']
 
 export async function addToTailwindConfig() {
@@ -11,13 +12,13 @@ export async function addToTailwindConfig() {
   const IS_TAILWIND_BEING_USED = fs.existsSync(rootPath)
   if (!IS_TAILWIND_BEING_USED) return
 
-  const tokenInserts = {
+  const tokenInserts: Record<TailwindNames, string> = {
     colors: '\t\t\t\t...mirrorful.Tokens.colors,',
     fontSize: '\t\t\t\t...mirrorful.Tokens.fontSizes,',
     dropShadow: '\t\t\t\t...mirrorful.Tokens.boxShadows,',
   }
 
-  const tailwindInserts = {
+  const tailwindInserts: Record<TailwindNames, string> = {
     colors: `\t\t\tcolors: {\n${tokenInserts['colors']}\n\t\t\t},`,
     fontSize: `\t\t\tfontSize: {\n${tokenInserts['fontSize']}\n\t\t\t},`,
     dropShadow: `\t\t\tdropShadow: {\n${tokenInserts['dropShadow']}\n\t\t\t},`,
