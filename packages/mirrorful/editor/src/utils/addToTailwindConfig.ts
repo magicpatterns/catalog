@@ -23,10 +23,11 @@ export async function addToTailwindConfig() {
     dropShadow: `\t\t\tdropShadow: {\n${tokenInserts['dropShadow']}\n\t\t\t},`,
   }
 
-  const SHOULD_NOT_UPDATE_TAILWIND_CONFIG = await shouldUpdateTailwindConfig({
-    keys: tokens,
-    path: rootPath,
-  })
+  const [SHOULD_NOT_UPDATE_TAILWIND_CONFIG, tokensUpdateArr] =
+    await shouldUpdateTailwindConfig({
+      keys: tokens,
+      path: rootPath,
+    })
 
   if (SHOULD_NOT_UPDATE_TAILWIND_CONFIG) return
 
@@ -61,28 +62,34 @@ export async function addToTailwindConfig() {
       ? tailwindFileArr.findIndex((t) => t.includes('dropShadow:')) + 1
       : -1
 
-    if (hasColors) {
-      tailwindFileArr.splice(colorsIndex, 0, tokenInserts['colors'])
-      fontSizeIndex++
-      dropShadowIndex++
-    } else {
-      tailwindFileArr.splice(extendIndex, 0, tailwindInserts['colors'])
-      extendIndex++
+    if (!tokensUpdateArr['colors']) {
+      if (hasColors) {
+        tailwindFileArr.splice(colorsIndex, 0, tokenInserts['colors'])
+        fontSizeIndex++
+        dropShadowIndex++
+      } else {
+        tailwindFileArr.splice(extendIndex, 0, tailwindInserts['colors'])
+        extendIndex++
+      }
     }
 
-    if (hasFontSizes) {
-      tailwindFileArr.splice(fontSizeIndex, 0, tokenInserts['fontSize'])
-      dropShadowIndex++
-    } else {
-      tailwindFileArr.splice(extendIndex, 0, tailwindInserts['fontSize'])
-      extendIndex++
+    if (!tokensUpdateArr['fontSizes']) {
+      if (hasFontSizes) {
+        tailwindFileArr.splice(fontSizeIndex, 0, tokenInserts['fontSize'])
+        dropShadowIndex++
+      } else {
+        tailwindFileArr.splice(extendIndex, 0, tailwindInserts['fontSize'])
+        extendIndex++
+      }
     }
 
-    if (hasDropShadow) {
-      tailwindFileArr.splice(dropShadowIndex, 0, tokenInserts['dropShadow'])
-    } else {
-      tailwindFileArr.splice(extendIndex, 0, tailwindInserts['dropShadow'])
-      extendIndex++
+    if (!tokensUpdateArr['boxShadows']) {
+      if (hasDropShadow) {
+        tailwindFileArr.splice(dropShadowIndex, 0, tokenInserts['dropShadow'])
+      } else {
+        tailwindFileArr.splice(extendIndex, 0, tailwindInserts['dropShadow'])
+        extendIndex++
+      }
     }
     // TODO find where mirrorful is located
     let mirrorfulImport = ''
