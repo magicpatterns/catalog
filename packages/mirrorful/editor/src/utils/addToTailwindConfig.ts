@@ -9,9 +9,6 @@ const tokens: TTokens[] = ['colors', 'fontSizes', 'boxShadows']
 export async function addToTailwindConfig() {
   const rootPath = process.cwd() + '/tailwind.config.js'
 
-  const IS_TAILWIND_BEING_USED = fs.existsSync(rootPath)
-  if (!IS_TAILWIND_BEING_USED) return
-
   const tokenInserts: Record<TailwindNames, string> = {
     colors: '\t\t\t\t...mirrorful.Tokens.colors,',
     fontSize: '\t\t\t\t...mirrorful.Tokens.fontSizes,',
@@ -23,6 +20,9 @@ export async function addToTailwindConfig() {
     fontSize: `\t\t\tfontSize: {\n${tokenInserts['fontSize']}\n\t\t\t},`,
     dropShadow: `\t\t\tdropShadow: {\n${tokenInserts['dropShadow']}\n\t\t\t},`,
   }
+
+  const IS_TAILWIND_BEING_USED = fs.existsSync(rootPath)
+  if (!IS_TAILWIND_BEING_USED) return
 
   const [SHOULD_NOT_UPDATE_TAILWIND_CONFIG, tokensUpdateArr] =
     await shouldUpdateTailwindConfig({
