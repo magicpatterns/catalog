@@ -102,6 +102,22 @@ export const defaultConfig: TConfig = {
 // NEXT GENERATION DATA MODEL
 // Migrating to standardized reference: https://design-tokens.github.io/
 
+export const defaultColors: TTokenGroup = {
+  purple: {
+    DEFAULT: {
+      id: '123456',
+      value: '#6B46C1',
+      type: 'color',
+    },
+  },
+}
+
+// export const defaultConfigV2: MirrorfulStore = {
+//   primatives: {
+//     // colors:
+//   },
+// }
+
 // The top level object for everything
 export type MirrorfulStore = {
   primatives: TPrimatives

@@ -3,8 +3,11 @@ import {
   defaultTypography,
   TColorData,
   TConfig,
+  MirrorfulStore,
+  TTokenGroup,
 } from '@mirrorful/core/lib/types'
 import Conf from 'conf'
+import { uuid } from 'uuidv4'
 
 export const ZeroPointZeroPointTwoMigration = (store: Conf<TConfig>) => {
   const tokens = store.get('tokens')
@@ -65,4 +68,32 @@ export const ZeroPointZeroFiveMigration = (store: Conf<TConfig>) => {
 
   updatedTokens.typography = defaultTypography
   store.set('tokens', updatedTokens)
+}
+
+export const ZeroPointZeroSixMigration = (store: Conf<TConfig>) => {
+  const tokens = store.get('tokens')
+
+  const colors: TTokenGroup = {}
+
+  tokens.colorData.forEach((color) => {
+    const currentColor: TTokenGroup = {}
+
+    Object.keys(color.variants).forEach((variantName) => {
+      currentColor[variantName] = {
+        id: uuid(),
+        value: color.variants[variantName],
+        type: 'color',
+      }
+    })
+
+    colors[color.name] = currentColor
+  })
+
+  store.delete('tokens')
+
+  const newStore: MirrorfulStore = {
+    primatives: {
+      colors,
+    },
+  }
 }

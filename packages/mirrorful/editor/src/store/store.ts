@@ -6,6 +6,7 @@ import {
   ZeroPointZeroPointFourMigration,
   ZeroPointZeroPointThreeMigration,
   ZeroPointZeroPointTwoMigration,
+  ZeroPointZeroSixMigration,
 } from './migrations'
 
 // Our working directory is 2 levels below node_modules in production, so we go up 3 levels
@@ -16,7 +17,7 @@ export const rootPath =
 
 export const store = new Conf<TConfig>({
   projectName: 'Mirrorful',
-  projectVersion: '0.0.5',
+  projectVersion: '0.0.6',
   cwd: `${rootPath}/store`,
   defaults: defaultConfig,
   beforeEachMigration: (store, context) => {
@@ -29,5 +30,6 @@ export const store = new Conf<TConfig>({
     '0.0.3': ZeroPointZeroPointThreeMigration,
     '0.0.4': ZeroPointZeroPointFourMigration,
     '0.0.5': ZeroPointZeroFiveMigration,
+    '0.0.6': ZeroPointZeroSixMigration,
   },
 })
