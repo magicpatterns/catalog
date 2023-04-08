@@ -47,38 +47,23 @@ export async function addToTailwindConfig() {
 
     const tailwindFileArr = tailwindFile.split('\n')
 
-    let { colorsIndex, fontSizeIndex, dropShadowIndex, extendIndex } =
+    const { colorsIndex, fontSizeIndex, dropShadowIndex, extendIndex } =
       getExtendThemeIndex(tailwindFileArr)
 
-    if (!tokensUpdateArr['colors']) {
-      if (hasColors) {
-        tailwindFileArr.splice(colorsIndex, 0, tokenInserts['colors'])
-        fontSizeIndex++
-        dropShadowIndex++
-      } else {
-        tailwindFileArr.splice(extendIndex, 0, tailwindInserts['colors'])
-        extendIndex++
-      }
-    }
+    updateTailwindFileArr({
+      tokensUpdateArr,
+      hasColors,
+      tailwindFileArr,
+      colorsIndex,
+      tokenInserts,
+      fontSizeIndex,
+      dropShadowIndex,
+      extendIndex,
+      tailwindInserts,
+      hasFontSizes,
+      hasDropShadow,
+    })
 
-    if (!tokensUpdateArr['fontSizes']) {
-      if (hasFontSizes) {
-        tailwindFileArr.splice(fontSizeIndex, 0, tokenInserts['fontSize'])
-        dropShadowIndex++
-      } else {
-        tailwindFileArr.splice(extendIndex, 0, tailwindInserts['fontSize'])
-        extendIndex++
-      }
-    }
-
-    if (!tokensUpdateArr['boxShadows']) {
-      if (hasDropShadow) {
-        tailwindFileArr.splice(dropShadowIndex, 0, tokenInserts['dropShadow'])
-      } else {
-        tailwindFileArr.splice(extendIndex, 0, tailwindInserts['dropShadow'])
-        extendIndex++
-      }
-    }
     let mirrorfulImport = ''
     if (!tailwindFile.includes('.mirrorful/theme_cjs.js')) {
       mirrorfulImport = `const mirrorful = require('${mirrorfulFolderPath}/theme_cjs.js')\n`
@@ -92,6 +77,62 @@ export async function addToTailwindConfig() {
     console.error(error)
   }
 }
+function updateTailwindFileArr({
+  tokensUpdateArr,
+  hasColors,
+  tailwindFileArr,
+  colorsIndex,
+  tokenInserts,
+  fontSizeIndex,
+  dropShadowIndex,
+  extendIndex,
+  tailwindInserts,
+  hasFontSizes,
+  hasDropShadow,
+}: {
+  tokensUpdateArr: Record<TTokens, boolean>
+  hasColors: RegExpMatchArray | null
+  tailwindFileArr: string[]
+  colorsIndex: number
+  tokenInserts: { colors: string; fontSize: string; dropShadow: string }
+  fontSizeIndex: number
+  dropShadowIndex: number
+  extendIndex: number
+  tailwindInserts: { colors: string; fontSize: string; dropShadow: string }
+  hasFontSizes: RegExpMatchArray | null
+  hasDropShadow: RegExpMatchArray | null
+}) {
+  if (!tokensUpdateArr['colors']) {
+    if (hasColors) {
+      tailwindFileArr.splice(colorsIndex, 0, tokenInserts['colors'])
+      fontSizeIndex++
+      dropShadowIndex++
+    } else {
+      tailwindFileArr.splice(extendIndex, 0, tailwindInserts['colors'])
+      extendIndex++
+    }
+  }
+
+  if (!tokensUpdateArr['fontSizes']) {
+    if (hasFontSizes) {
+      tailwindFileArr.splice(fontSizeIndex, 0, tokenInserts['fontSize'])
+      dropShadowIndex++
+    } else {
+      tailwindFileArr.splice(extendIndex, 0, tailwindInserts['fontSize'])
+      extendIndex++
+    }
+  }
+
+  if (!tokensUpdateArr['boxShadows']) {
+    if (hasDropShadow) {
+      tailwindFileArr.splice(dropShadowIndex, 0, tokenInserts['dropShadow'])
+    } else {
+      tailwindFileArr.splice(extendIndex, 0, tailwindInserts['dropShadow'])
+      extendIndex++
+    }
+  }
+}
+
 function getExtendThemeIndex(tailwindFileArr: string[]) {
   let extendIndex = -1,
     colorsIndex = -1,
