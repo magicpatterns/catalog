@@ -38,12 +38,11 @@ export async function addToTailwindConfig() {
   if (mirrorfulFolderPath.length < 0) return
 
   try {
-    let tailwindFile = await readFile(rootPath, 'utf8')
-    const { hasColors, hasFontSizes, hasDropShadow } =
-      doesContainExtendThemes(tailwindFile)
-
     // opening up extends brackets
-    tailwindFile = tailwindFile.replace(/{}/g, '{\n}')
+    const tailwindFile = (await readFile(rootPath, 'utf8')).replace(
+      /{}/g,
+      '{\n}'
+    )
 
     const tailwindFileArr = tailwindFile.split('\n')
 
