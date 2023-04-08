@@ -9,7 +9,6 @@ export async function addToTailwindConfig() {
   const rootPath = process.cwd() + '/tailwind.config.js'
 
   const IS_TAILWIND_BEING_USED = fs.existsSync(rootPath)
-  // TODO check if tokens exist in tailwind;
   if (!IS_TAILWIND_BEING_USED) return
   const tokenInserts = {
     colors: '\t\t\t\t...mirrorful.Tokens.colors,',
@@ -91,7 +90,6 @@ export async function addToTailwindConfig() {
         extendIndex++
       }
     }
-    // TODO find where mirrorful is located
     let mirrorfulImport = ''
     if (!tailwindFile.includes('.mirrorful/theme_cjs.js')) {
       mirrorfulImport = `const mirrorful = require('${mirrorfulFolderPath}/theme_cjs.js')\n`
