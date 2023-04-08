@@ -32,11 +32,11 @@ export async function addToTailwindConfig() {
 
   if (!SHOULD_UPDATE_TAILWIND_CONFIG) return
 
+  const mirrorfulFolderPath = await getFolderPath({
+    folderName: '.mirrorful',
+  })
+  if (mirrorfulFolderPath.length < 0) return
   try {
-    const mirrorfulFolderPath = await getFolderPath({
-      folderName: '.mirrorful',
-    })
-
     let tailwindFile = await readFile(path.join(__dirname, rootPath), 'utf8')
     const hasColors = tailwindFile.match(/colors:(\s|^\s)(\{|\n)/)
     const hasFontSizes = tailwindFile.match(/fontSize:(\s|^\s)(\{|\n)/)
@@ -167,7 +167,7 @@ async function getFolderPath({ folderName }: { folderName: string }) {
   }
 
   if (finalPath.length < 0) {
-    throw Error(`Could not find the ${folderName} folder!`)
+    return ''
   }
 
   return './' + finalPath
