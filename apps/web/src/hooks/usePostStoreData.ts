@@ -4,7 +4,7 @@ import { useLocalStorage } from './useLocalStorage'
 
 export function usePostStoreData() {
   const [, setData] = useLocalStorage<TConfig>(
-    'mirrorfulConfigData',
+    'mirrorfulConfigDataV2',
     defaultConfig
   )
 
