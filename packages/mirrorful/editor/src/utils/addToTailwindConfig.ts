@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { readFile, writeFile } from 'fs/promises'
+import { readdir, readFile, writeFile } from 'fs/promises'
 import path from 'path'
 
 const tokens = ['colors', 'fontSizes', 'boxShadows']
@@ -33,6 +33,10 @@ export async function addToTailwindConfig() {
   if (!SHOULD_UPDATE_TAILWIND_CONFIG) return
 
   try {
+    const mirrorfulFolderPath = await getFolderPath({
+      folderName: '.mirrorful',
+    })
+
     let tailwindFile = await readFile(path.join(__dirname, rootPath), 'utf8')
     const hasColors = tailwindFile.match(/colors:(\s|^\s)(\{|\n)/)
     const hasFontSizes = tailwindFile.match(/fontSize:(\s|^\s)(\{|\n)/)
@@ -117,4 +121,53 @@ async function shouldUpdateTailwindConfig({
   }
 
   return booleanArr.every((a) => a)
+}
+
+const skipDirs = [
+  'node_modules',
+  '.next',
+  '.git',
+  '.pnp',
+  'coverage',
+  'out',
+  'build',
+  'lib',
+  '.vercel',
+]
+async function getFolderPath({ folderName }: { folderName: string }) {
+  const rootDir = process.cwd()
+  let finalPath = ''
+  const queue = [...(await readdir(rootDir))]
+  const visited = []
+
+  while (queue.length > 0) {
+    const folder = queue.shift()
+    // if the next folder is empty quit
+    if (folder === undefined) break
+    // skip over the folders that most likely do not contain the folder
+    if (skipDirs.includes(folder)) {
+      visited.push(folder)
+      continue
+    }
+
+    // if the path is a folder then check for the name
+    if (fs.lstatSync(folder).isDirectory()) {
+      if (folder.includes(folderName)) {
+        finalPath = folder
+        break
+      }
+      visited.push(folder)
+      queue.push(
+        ...(await readdir(path.join(rootDir, folder))).map(
+          (path) => `${folder}/${path}`
+        )
+      )
+    }
+  }
+
+  if (finalPath.length < 0) {
+    throw Error(`Could not find the ${folderName} folder!`)
+  }
+
+  return './' + finalPath
 }
