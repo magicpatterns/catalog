@@ -5,10 +5,7 @@ import path from 'path'
 const tokens = ['colors', 'fontSizes', 'boxShadows']
 
 export async function addToTailwindConfig() {
-  const rootPath =
-    process.env.NODE_ENV === 'development'
-      ? '../tailwind.config.js'
-      : '../../../tailwind.config.js'
+  const rootPath = process.cwd() + '/tailwind.config.js'
 
   const IS_TAILWIND_BEING_USED = fs.existsSync(rootPath)
   // TODO check if tokens exist in tailwind;
@@ -27,7 +24,7 @@ export async function addToTailwindConfig() {
 
   const SHOULD_UPDATE_TAILWIND_CONFIG = await shouldUpdateTailwindConfig({
     keys: tokens,
-    path: path.join(__dirname, rootPath),
+    path: rootPath,
   })
 
   if (!SHOULD_UPDATE_TAILWIND_CONFIG) return
@@ -37,7 +34,7 @@ export async function addToTailwindConfig() {
   })
   if (mirrorfulFolderPath.length < 0) return
   try {
-    let tailwindFile = await readFile(path.join(__dirname, rootPath), 'utf8')
+    let tailwindFile = await readFile(rootPath, 'utf8')
     const hasColors = tailwindFile.match(/colors:(\s|^\s)(\{|\n)/)
     const hasFontSizes = tailwindFile.match(/fontSize:(\s|^\s)(\{|\n)/)
     const hasFontWeights = tailwindFile.match(/fontWeight:(\s|^\s)(\{|\n)/)
@@ -92,7 +89,7 @@ export async function addToTailwindConfig() {
       mirrorfulImport = `const mirrorful = require('${mirrorfulFolderPath}/theme_cjs.js')\n`
     }
     await writeFile(
-      path.join(__dirname, rootPath),
+      rootPath,
       mirrorfulImport + tailwindFileArr.join('\n'),
       'utf-8'
     )
