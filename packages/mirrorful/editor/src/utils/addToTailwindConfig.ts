@@ -47,23 +47,8 @@ export async function addToTailwindConfig() {
 
     const tailwindFileArr = tailwindFile.split('\n')
 
-    let extendIndex = -1,
-      colorsIndex = -1,
-      fontSizeIndex = -1,
-      dropShadowIndex = -1
-
-    for (let i = 0; i < tailwindFileArr.length; i++) {
-      const line = tailwindFileArr[i]
-      if (line.includes('extend:')) {
-        extendIndex = i + 1
-      } else if (line.includes('colors:')) {
-        colorsIndex = i + 1
-      } else if (line.includes('fontSize:')) {
-        fontSizeIndex = i + 1
-      } else if (line.includes('dropShadow:')) {
-        dropShadowIndex = i + 1
-      }
-    }
+    let { colorsIndex, fontSizeIndex, dropShadowIndex, extendIndex } =
+      getExtendThemeIndex(tailwindFileArr)
 
     if (!tokensUpdateArr['colors']) {
       if (hasColors) {
@@ -107,6 +92,27 @@ export async function addToTailwindConfig() {
     console.error(error)
   }
 }
+function getExtendThemeIndex(tailwindFileArr: string[]) {
+  let extendIndex = -1,
+    colorsIndex = -1,
+    fontSizeIndex = -1,
+    dropShadowIndex = -1
+
+  for (let i = 0; i < tailwindFileArr.length; i++) {
+    const line = tailwindFileArr[i]
+    if (line.includes('extend:')) {
+      extendIndex = i + 1
+    } else if (line.includes('colors:')) {
+      colorsIndex = i + 1
+    } else if (line.includes('fontSize:')) {
+      fontSizeIndex = i + 1
+    } else if (line.includes('dropShadow:')) {
+      dropShadowIndex = i + 1
+    }
+  }
+  return { colorsIndex, fontSizeIndex, dropShadowIndex, extendIndex }
+}
+
 function doesContainExtendThemes(tailwindFile: string) {
   const hasColors = tailwindFile.match(/colors:(\s|^\s)(\{|\n)/)
   const hasFontSizes = tailwindFile.match(/fontSize:(\s|^\s)(\{|\n)/)
