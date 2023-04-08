@@ -118,6 +118,15 @@ export const ZeroPointZeroSixMigration = (store: Conf<TConfig>) => {
     }
   })
 
+  const shadows: TTokenGroup = {}
+  tokens.shadows.forEach((variant) => {
+    shadows[variant.name] = {
+      id: uuid(),
+      value: variant.value,
+      type: 'boxShadow',
+    }
+  })
+
   const primitives: TPrimitives = {
     colors,
     typography: {
@@ -125,6 +134,7 @@ export const ZeroPointZeroSixMigration = (store: Conf<TConfig>) => {
       fontWeights,
       lineHeights,
     },
+    shadows,
   }
 
   store.set('primitives', primitives)

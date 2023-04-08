@@ -1,3 +1,5 @@
+import { uuid } from 'uuidv4'
+
 export type TColorData = {
   name: string
   baseColor?: string
@@ -139,14 +141,107 @@ export const defaultConfig: TConfig = {
 // NEXT GENERATION DATA MODEL
 // Migrating to standardized reference: https://design-tokens.github.io/
 
-export const defaultColors: TTokenGroup = {
+export const defaultColorsV2: TTokenGroup = {
   purple: {
     DEFAULT: {
-      id: '123456',
+      id: uuid(),
       value: '#6B46C1',
       type: 'color',
     },
   },
+}
+
+export const defaultFontSizesV2: TTokenGroup = {
+  sm: {
+    id: uuid(),
+    value: '1rem',
+    type: 'fontSize',
+  },
+  md: {
+    id: uuid(),
+    value: '1.2rem',
+    type: 'fontSize',
+  },
+  lg: {
+    id: uuid(),
+    value: '1.4rem',
+    type: 'fontSize',
+  },
+}
+
+export const defaultFontWeightsV2: TTokenGroup = {
+  light: {
+    id: uuid(),
+    value: 200,
+    type: 'fontWeight',
+  },
+  normal: {
+    id: uuid(),
+    value: 400,
+    type: 'fontWeight',
+  },
+  bold: {
+    id: uuid(),
+    value: 700,
+    type: 'fontWeight',
+  },
+}
+
+export const defaultLineHeightsV2: TTokenGroup = {
+  short: {
+    id: uuid(),
+    value: 1,
+    type: 'lineHeight',
+  },
+  normal: {
+    id: uuid(),
+    value: 1.5,
+    type: 'lineHeight',
+  },
+  tall: {
+    id: uuid(),
+    value: 2,
+    type: 'lineHeight',
+  },
+}
+
+export const defaultShadowsV2: TTokenGroup = {
+  sm: {
+    id: uuid(),
+    value: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    type: 'boxShadow',
+  },
+  md: {
+    id: uuid(),
+    value: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+    type: 'boxShadow',
+  },
+  lg: {
+    id: uuid(),
+    value:
+      '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    type: 'boxShadow',
+  },
+  'dark-lg': {
+    id: uuid(),
+    value:
+      '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+    type: 'boxShadow',
+  },
+}
+
+export const defaultConfigV2: MirrorfulStore = {
+  primitives: {
+    colors: defaultColorsV2,
+    typography: {
+      fontSizes: defaultFontSizesV2,
+      fontWeights: defaultFontWeightsV2,
+      lineHeights: defaultLineHeightsV2,
+    },
+    shadows: defaultShadowsV2,
+  },
+  themes: [],
+  files: defaultFiles,
 }
 
 // The top level object for everything
@@ -164,6 +259,7 @@ export type TPrimitives = {
     fontWeights: TTokenGroup
     lineHeights: TTokenGroup
   }
+  shadows: TTokenGroup
 }
 
 // Top level object for storing the themes
@@ -185,6 +281,6 @@ export type TTokenGroup = {
 export type TToken = {
   id: string
   value: string | number
-  type: 'color' | 'fontSize' | 'fontWeight' | 'lineHeight'
+  type: 'color' | 'fontSize' | 'fontWeight' | 'lineHeight' | 'boxShadow'
   ref?: string // means that this token itself is a reference to another token
 }
