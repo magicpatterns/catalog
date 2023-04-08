@@ -160,6 +160,12 @@ const skipDirs = [
   'lib',
   '.vercel',
 ]
+
+/**
+ *
+ * @param folderName Take in the folder name that needs to be found
+ * @returns Either an empty string or a folder path
+ */
 async function getFolderPath({ folderName }: { folderName: string }) {
   const rootDir = process.cwd()
   let finalPath = ''
