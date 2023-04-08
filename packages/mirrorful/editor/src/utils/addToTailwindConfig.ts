@@ -87,14 +87,15 @@ export async function addToTailwindConfig() {
       extendIndex++
     }
     // TODO find where mirrorful is located
-    const mirrorfulImport =
-      "const mirrorful = require('./.mirrorful/theme_cjs.js')\n"
+    let mirrorfulImport = ''
+    if (!tailwindFile.includes('.mirrorful/theme_cjs.js')) {
+      mirrorfulImport = `const mirrorful = require('${mirrorfulFolderPath}/theme_cjs.js')\n`
+    }
     await writeFile(
       path.join(__dirname, rootPath),
       mirrorfulImport + tailwindFileArr.join('\n'),
       'utf-8'
     )
-    // TODO update add to tailwind config
   } catch (error) {
     console.error(error)
   }
