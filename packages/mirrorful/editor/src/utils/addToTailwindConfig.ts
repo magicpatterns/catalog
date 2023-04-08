@@ -107,18 +107,23 @@ async function shouldUpdateTailwindConfig({
   keys,
   path,
 }: {
-  keys: string[]
+  keys: Array<TTokens>
   path: string
 }) {
   const tailwindFile = await readFile(path, 'utf-8')
-  const booleanArr = []
+  console.log(tailwindFile)
+  const booleanArr: Record<TTokens, boolean> = {
+    colors: false,
+    boxShadows: false,
+    fontSizes: false,
+    fontWeight: false,
+  }
 
   for (let i = 0; i < keys.length; i++) {
     const regex = `Tokens.${keys[i]}`
-    booleanArr.push(tailwindFile.includes(regex))
+    booleanArr[keys[i]] = tailwindFile.includes(regex)
   }
-
-  return booleanArr.every((a) => a)
+  return [Object.values(booleanArr).every((a) => a), booleanArr] as const
 }
 
 const skipDirs = [
