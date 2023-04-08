@@ -26,7 +26,7 @@ export async function addToTailwindConfig() {
   }
 
   const SHOULD_UPDATE_TAILWIND_CONFIG = await shouldUpdateTailwindConfig({
-    keys: Object.keys(tokenInserts),
+    keys: tokens,
     path: path.join(__dirname, rootPath),
   })
 
