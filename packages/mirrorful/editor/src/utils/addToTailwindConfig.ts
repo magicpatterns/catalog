@@ -45,22 +45,22 @@ export async function addToTailwindConfig() {
     tailwindFile = tailwindFile.replace(/{}/g, '{\n}')
 
     const tailwindFileArr = tailwindFile.split('\n')
-
-    let extendIndex =
-      tailwindFileArr.findIndex((t) => t.includes('extend:')) + 1
-    const colorsIndex = hasColors
-      ? tailwindFileArr.findIndex((t) => t.includes('colors:')) + 1
-      : -1
-    let fontSizeIndex = hasFontSizes
-      ? tailwindFileArr.findIndex((t) => t.includes('fontSize:')) + 1
-      : -1
-    const fontWeightIndex = hasFontWeights
-      ? tailwindFileArr.findIndex((t) => t.includes('fontWeight:')) + 1
-      : -1
-    let dropShadowIndex = hasDropShadow
-      ? tailwindFileArr.findIndex((t) => t.includes('dropShadow:')) + 1
-      : -1
-
+    let extendIndex = -1,
+      colorsIndex = -1,
+      fontSizeIndex = -1,
+      dropShadowIndex = -1
+    for (let i = 0; i < tailwindFileArr.length; i++) {
+      const line = tailwindFileArr[i]
+      if (line.includes('extend:')) {
+        extendIndex = i + 1
+      } else if (line.includes('colors:')) {
+        colorsIndex = i + 1
+      } else if (line.includes('fontSize:')) {
+        fontSizeIndex = i + 1
+      } else if (line.includes('dropShadow:')) {
+        dropShadowIndex = i + 1
+      }
+    }
     if (!tokensUpdateArr['colors']) {
       if (hasColors) {
         tailwindFileArr.splice(colorsIndex, 0, tokenInserts['colors'])
