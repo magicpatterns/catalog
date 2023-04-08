@@ -167,7 +167,7 @@ async function shouldUpdateTailwindConfig({
   path: string
 }) {
   const tailwindFile = await readFile(path, 'utf-8')
-  console.log(tailwindFile)
+
   const booleanArr: Record<TTokens, boolean> = {
     colors: false,
     boxShadows: false,
