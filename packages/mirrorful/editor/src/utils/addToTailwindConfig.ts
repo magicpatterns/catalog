@@ -22,12 +22,12 @@ export async function addToTailwindConfig() {
     dropShadow: `\t\t\tdropShadow: {\n${tokenInserts['dropShadow']}\n\t\t\t},`,
   }
 
-  const SHOULD_UPDATE_TAILWIND_CONFIG = await shouldUpdateTailwindConfig({
+  const SHOULD_NOT_UPDATE_TAILWIND_CONFIG = await shouldUpdateTailwindConfig({
     keys: tokens,
     path: rootPath,
   })
 
-  if (!SHOULD_UPDATE_TAILWIND_CONFIG) return
+  if (SHOULD_NOT_UPDATE_TAILWIND_CONFIG) return
 
   const mirrorfulFolderPath = await getFolderPath({
     folderName: '.mirrorful',
