@@ -3,9 +3,8 @@ import {
   defaultTypography,
   TColorData,
   TConfig,
-  MirrorfulStore,
+  TPrimitives,
   TTokenGroup,
-  TPrimatives,
 } from '@mirrorful/core/lib/types'
 import Conf from 'conf'
 import { uuid } from 'uuidv4'
@@ -119,7 +118,7 @@ export const ZeroPointZeroSixMigration = (store: Conf<TConfig>) => {
     }
   })
 
-  const primatives: TPrimatives = {
+  const primitives: TPrimitives = {
     colors,
     typography: {
       fontSizes,
@@ -128,6 +127,6 @@ export const ZeroPointZeroSixMigration = (store: Conf<TConfig>) => {
     },
   }
 
-  store.set('primatives', primatives)
+  store.set('primitives', primitives)
   store.delete('tokens')
 }

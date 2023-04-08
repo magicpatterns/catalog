@@ -149,21 +149,15 @@ export const defaultColors: TTokenGroup = {
   },
 }
 
-// export const defaultConfigV2: MirrorfulStore = {
-//   primatives: {
-//     // colors:
-//   },
-// }
-
 // The top level object for everything
 export type MirrorfulStore = {
-  primatives: TPrimatives
+  primitives: TPrimitives
   themes: TTheme[]
   files: TExportFileType[]
 }
 
-// Top level object for storing primatives
-export type TPrimatives = {
+// Top level object for storing primitives
+export type TPrimitives = {
   colors: TTokenGroup
   typography: {
     fontSizes: TTokenGroup
