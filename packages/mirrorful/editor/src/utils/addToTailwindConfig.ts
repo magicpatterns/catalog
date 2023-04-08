@@ -2,7 +2,8 @@ import fs from 'fs'
 import { readdir, readFile, writeFile } from 'fs/promises'
 import path from 'path'
 
-const tokens = ['colors', 'fontSizes', 'boxShadows']
+type TTokens = 'colors' | 'fontSizes' | 'boxShadows'
+const tokens: TTokens[] = ['colors', 'fontSizes', 'boxShadows']
 
 export async function addToTailwindConfig() {
   const rootPath = process.cwd() + '/tailwind.config.js'
@@ -116,7 +117,6 @@ async function shouldUpdateTailwindConfig({
     colors: false,
     boxShadows: false,
     fontSizes: false,
-    fontWeight: false,
   }
 
   for (let i = 0; i < keys.length; i++) {
