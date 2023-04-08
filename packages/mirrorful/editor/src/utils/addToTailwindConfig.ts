@@ -2,6 +2,8 @@ import fs from 'fs'
 import { readFile, writeFile } from 'fs/promises'
 import path from 'path'
 
+const tokens = ['colors', 'fontSizes', 'boxShadows']
+
 export async function addToTailwindConfig() {
   const rootPath =
     process.env.NODE_ENV === 'development'
@@ -107,12 +109,12 @@ async function shouldUpdateTailwindConfig({
   path: string
 }) {
   const tailwindFile = await readFile(path, 'utf-8')
-  let allTrue = 1
+  const booleanArr = []
 
   for (let i = 0; i < keys.length; i++) {
     const regex = `Tokens.${keys[i]}`
-    allTrue *= tailwindFile.includes(regex) ? 1 : 0
+    booleanArr.push(tailwindFile.includes(regex))
   }
 
-  return allTrue === 1 ? true : false
+  return booleanArr.every((a) => a)
 }
