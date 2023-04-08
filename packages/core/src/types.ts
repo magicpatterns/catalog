@@ -165,6 +165,11 @@ export type MirrorfulStore = {
 // Top level object for storing primatives
 export type TPrimatives = {
   colors: TTokenGroup
+  typography: {
+    fontSizes: TTokenGroup
+    fontWeights: TTokenGroup
+    lineHeights: TTokenGroup
+  }
 }
 
 // Top level object for storing the themes
@@ -185,7 +190,7 @@ export type TTokenGroup = {
 
 export type TToken = {
   id: string
-  value: string
-  type: 'color' | 'typography'
+  value: string | number
+  type: 'color' | 'fontSize' | 'fontWeight' | 'lineHeight'
   ref?: string // means that this token itself is a reference to another token
 }

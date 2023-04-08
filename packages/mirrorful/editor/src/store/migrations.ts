@@ -5,6 +5,7 @@ import {
   TConfig,
   MirrorfulStore,
   TTokenGroup,
+  TPrimatives,
 } from '@mirrorful/core/lib/types'
 import Conf from 'conf'
 import { uuid } from 'uuidv4'
@@ -89,11 +90,44 @@ export const ZeroPointZeroSixMigration = (store: Conf<TConfig>) => {
     colors[color.name] = currentColor
   })
 
-  store.delete('tokens')
+  const fontSizes: TTokenGroup = {}
 
-  const newStore: MirrorfulStore = {
-    primatives: {
-      colors,
+  tokens.typography.fontSizes.forEach((variant) => {
+    fontSizes[variant.name] = {
+      id: uuid(),
+      value: `${variant.value}${variant.unit}`,
+      type: 'fontSize',
+    }
+  })
+
+  const fontWeights: TTokenGroup = {}
+
+  tokens.typography.fontWeights.forEach((variant) => {
+    fontWeights[variant.name] = {
+      id: uuid(),
+      value: variant.weight,
+      type: 'fontWeight',
+    }
+  })
+
+  const lineHeights: TTokenGroup = {}
+  tokens.typography.lineHeights.forEach((variant) => {
+    lineHeights[variant.name] = {
+      id: uuid(),
+      value: `${variant.value}`,
+      type: 'fontWeight',
+    }
+  })
+
+  const primatives: TPrimatives = {
+    colors,
+    typography: {
+      fontSizes,
+      fontWeights,
+      lineHeights,
     },
   }
+
+  store.set('primatives', primatives)
+  store.delete('tokens')
 }
