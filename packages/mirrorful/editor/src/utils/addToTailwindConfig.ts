@@ -47,21 +47,13 @@ export async function addToTailwindConfig() {
 
     const tailwindFileArr = tailwindFile.split('\n')
 
-    const { colorsIndex, fontSizeIndex, dropShadowIndex, extendIndex } =
-      getExtendThemeIndex(tailwindFileArr)
-
     updateTailwindFileArr({
       tokensUpdateArr,
-      hasColors,
       tailwindFileArr,
-      colorsIndex,
       tokenInserts,
-      fontSizeIndex,
-      dropShadowIndex,
-      extendIndex,
+      ...getExtendThemeIndex(tailwindFileArr),
       tailwindInserts,
-      hasFontSizes,
-      hasDropShadow,
+      tailwindContainsThemes: doesContainExtendThemes(tailwindFile),
     })
 
     let mirrorfulImport = ''
@@ -79,31 +71,31 @@ export async function addToTailwindConfig() {
 }
 function updateTailwindFileArr({
   tokensUpdateArr,
-  hasColors,
-  tailwindFileArr,
+  tailwindContainsThemes,
   colorsIndex,
-  tokenInserts,
   fontSizeIndex,
   dropShadowIndex,
   extendIndex,
+  tailwindFileArr,
+  tokenInserts,
   tailwindInserts,
-  hasFontSizes,
-  hasDropShadow,
 }: {
   tokensUpdateArr: Record<TTokens, boolean>
-  hasColors: RegExpMatchArray | null
-  tailwindFileArr: string[]
   colorsIndex: number
-  tokenInserts: { colors: string; fontSize: string; dropShadow: string }
   fontSizeIndex: number
   dropShadowIndex: number
   extendIndex: number
+  tailwindContainsThemes: {
+    hasColors: RegExpMatchArray | null
+    hasFontSizes: RegExpMatchArray | null
+    hasDropShadow: RegExpMatchArray | null
+  }
+  tailwindFileArr: string[]
+  tokenInserts: { colors: string; fontSize: string; dropShadow: string }
   tailwindInserts: { colors: string; fontSize: string; dropShadow: string }
-  hasFontSizes: RegExpMatchArray | null
-  hasDropShadow: RegExpMatchArray | null
 }) {
   if (!tokensUpdateArr['colors']) {
-    if (hasColors) {
+    if (tailwindContainsThemes.hasColors) {
       tailwindFileArr.splice(colorsIndex, 0, tokenInserts['colors'])
       fontSizeIndex++
       dropShadowIndex++
@@ -114,7 +106,7 @@ function updateTailwindFileArr({
   }
 
   if (!tokensUpdateArr['fontSizes']) {
-    if (hasFontSizes) {
+    if (tailwindContainsThemes.hasFontSizes) {
       tailwindFileArr.splice(fontSizeIndex, 0, tokenInserts['fontSize'])
       dropShadowIndex++
     } else {
@@ -124,7 +116,7 @@ function updateTailwindFileArr({
   }
 
   if (!tokensUpdateArr['boxShadows']) {
-    if (hasDropShadow) {
+    if (tailwindContainsThemes.hasDropShadow) {
       tailwindFileArr.splice(dropShadowIndex, 0, tokenInserts['dropShadow'])
     } else {
       tailwindFileArr.splice(extendIndex, 0, tailwindInserts['dropShadow'])
