@@ -11,28 +11,27 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   Text,
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { TFontSizeVariant } from '@core/types'
+import { TFontWeightVariant } from '@core/types'
 import { useEffect, useState } from 'react'
 
-export function EditFontSizeModal({
+export function EditFontWeightModal({
   isOpen,
   isAdding,
   onClose,
-  initialFontSizeVariant,
-  onUpdateFontSizeVariant,
-  onDeleteFontSizeVariant,
+  initialFontWeightVariant,
+  onUpdateFontWeightVariant,
+  onDeleteFontWeightVariant,
 }: {
   isOpen: boolean
   isAdding: boolean
   onClose: () => void
-  initialFontSizeVariant?: TFontSizeVariant
-  onUpdateFontSizeVariant: (newVariant: TFontSizeVariant) => void
-  onDeleteFontSizeVariant?: () => void
+  initialFontWeightVariant?: TFontWeightVariant
+  onUpdateFontWeightVariant: (newVariant: TFontWeightVariant) => void
+  onDeleteFontWeightVariant?: () => void
 }) {
   const {
     isOpen: isAlertDialogOpen,
@@ -40,8 +39,11 @@ export function EditFontSizeModal({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [variant, setVariant] = useState<TFontSizeVariant>(
-    initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem' }
+  const [variant, setVariant] = useState<TFontWeightVariant>(
+    initialFontWeightVariant ?? {
+      name: '',
+      weight: 400,
+    }
   )
 
   const [error, setError] = useState<string | null>(null)
@@ -53,21 +55,31 @@ export function EditFontSizeModal({
       return
     }
 
-    if (variant.value !== 0 && !variant.value) {
+    if (variant.weight !== 0 && !variant.weight) {
       setError('Please fill out all fields.')
       return
     }
 
-    onUpdateFontSizeVariant(variant)
+    if (variant.weight < 1 || variant.weight > 1000) {
+      setError('Font weight must be between 1 and 1000.')
+      return
+    }
+
+    onUpdateFontWeightVariant(variant)
     onClose()
   }
 
   useEffect(() => {
     if (!isOpen) {
-      setVariant(initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem' })
+      setVariant(
+        initialFontWeightVariant ?? {
+          name: '',
+          weight: 400,
+        }
+      )
       setError(null)
     }
-  }, [isOpen, initialFontSizeVariant])
+  }, [isOpen, initialFontWeightVariant])
 
   return (
     <>
@@ -75,7 +87,7 @@ export function EditFontSizeModal({
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            {isAdding ? 'Add' : 'Edit'} Font Size Variant
+            {isAdding ? 'Add' : 'Edit'} Font Weight Variant
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody
@@ -95,30 +107,14 @@ export function EditFontSizeModal({
               </FormControl>
 
               <FormControl css={{ marginTop: '32px' }}>
-                <FormLabel>Variant Value</FormLabel>
+                <FormLabel>Variant Weight</FormLabel>
                 <Input
-                  value={variant.value}
+                  value={variant.weight}
                   onChange={(e) =>
-                    setVariant({ ...variant, value: Number(e.target.value) })
+                    setVariant({ ...variant, weight: Number(e.target.value) })
                   }
                   type="number"
                 />
-              </FormControl>
-              <FormControl css={{ marginTop: '32px' }}>
-                <FormLabel>Variant Unit</FormLabel>
-                <Select
-                  value={variant.unit}
-                  onChange={(event) => {
-                    setVariant({
-                      ...variant,
-                      unit: event.target.value as 'px' | 'rem' | 'em',
-                    })
-                  }}
-                >
-                  <option value="px">px</option>
-                  <option value="rem">rem</option>
-                  <option value="em">em</option>
-                </Select>
               </FormControl>
             </Box>
             {error && (
@@ -135,7 +131,7 @@ export function EditFontSizeModal({
             >
               Save Variant
             </Button>
-            {onDeleteFontSizeVariant && (
+            {onDeleteFontWeightVariant && (
               <>
                 <Button
                   onClick={() => onDeleteAlertDialogOpen()}
@@ -147,7 +143,7 @@ export function EditFontSizeModal({
                   tokenName={variant.name}
                   isOpen={isAlertDialogOpen}
                   onClose={onDeleteAlertDialogClose}
-                  onDelete={() => onDeleteFontSizeVariant()}
+                  onDelete={() => onDeleteFontWeightVariant()}
                 />
               </>
             )}
