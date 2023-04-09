@@ -229,6 +229,7 @@ async function shouldUpdateTailwindConfig({
     boxShadows: false,
     fontSizes: false,
     fontWeights: false,
+    lineHeights: false,
   }
 
   for (let i = 0; i < keys.length; i++) {
