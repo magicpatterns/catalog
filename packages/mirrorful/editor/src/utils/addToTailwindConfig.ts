@@ -28,17 +28,6 @@ export async function addToTailwindConfig() {
         `\t\t\tdropShadow: {\n${tailwindInserts.dropShadow.exists}\n\t\t\t},`,
     },
   }
-  // const tokenInserts: Record<TailwindNames, string> = {
-  //   colors: '\t\t\t\t...mirrorful.Tokens.colors,',
-  //   fontSize: '\t\t\t\t...mirrorful.Tokens.fontSizes,',
-  //   dropShadow: '\t\t\t\t...mirrorful.Tokens.boxShadows,',
-  // }
-
-  // const tailwindInserts: Record<TailwindNames, string> = {
-  //   colors: `\t\t\tcolors: {\n${tokenInserts['colors']}\n\t\t\t},`,
-  //   fontSize: `\t\t\tfontSize: {\n${tokenInserts['fontSize']}\n\t\t\t},`,
-  //   dropShadow: `\t\t\tdropShadow: {\n${tokenInserts['dropShadow']}\n\t\t\t},`,
-  // }
 
   const IS_TAILWIND_BEING_USED = fs.existsSync(rootPath)
   if (!IS_TAILWIND_BEING_USED) return
