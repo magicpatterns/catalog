@@ -1,6 +1,7 @@
 import { TTokens } from '@core/types'
 import { getKeys } from '@core/utils/getKeys'
 
+import { getlineHeight } from './getLineHeight'
 import { sanitizeName } from './sanitizeName'
 
 export const toCss = ({ colorData, typography, shadows }: TTokens): string => {
@@ -27,6 +28,20 @@ export const toCss = ({ colorData, typography, shadows }: TTokens): string => {
       `  --font-size-${sanitizeName(fontSize.name)}: ${fontSize.value}${
         fontSize.unit
       };`
+    )
+  })
+
+  typography.fontWeights.forEach((fontWeight) => {
+    content.push(
+      `  --font-weight-${sanitizeName(fontWeight.name)}: ${fontWeight.weight};`
+    )
+  })
+
+  typography.lineHeights.forEach((lineHeight) => {
+    content.push(
+      `  --line-height-${sanitizeName(lineHeight.name)}: ${getlineHeight(
+        lineHeight
+      )};`
     )
   })
 

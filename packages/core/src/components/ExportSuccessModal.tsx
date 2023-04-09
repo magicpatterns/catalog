@@ -186,6 +186,15 @@ type TokenTabProps =
       tailwindPropertyName: 'fontWeight'
       tailwindName: 'fontWeights'
     }
+  | {
+      primaryName: string
+      cssPropertyName: 'line-height'
+      cssName: 'line-height'
+      javascriptPropertyName: 'lineHeight'
+      javascriptName: 'lineHeights'
+      tailwindPropertyName: 'lineHeight'
+      tailwindName: 'lineHeights'
+    }
 function TokenTab({
   primaryName,
   cssPropertyName,

@@ -8,9 +8,11 @@ export const toTs = (tokens: TTokens): string => {
   return `
   export type Colors = keyof typeof Tokens.colors
   export type FontSize = keyof typeof Tokens.fontSizes
+  export type FontWeight = keyof typeof Tokens.fontWeights
+  export type LineHeight = keyof typeof Tokens.lineHeights
   export type Shadows = keyof typeof Tokens.boxShadows
 
-  export type Token = Colors | FontSize | Shadows
+  export type Token = Colors | FontSize | FontWeight | LineHeight |  Shadows
 
   export const Tokens = ${JSON5.stringify(theme, { space: 2 })}
   `
