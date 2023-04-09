@@ -101,12 +101,8 @@ export async function addToTailwindConfig() {
     // checks are made to add to the array
     if (!tokensUpdateArr['colors']) {
       if (hasColors) {
-        tailwindFileArr.splice(colorsIndex, 0, tailwindInserts.colors.exists)
+        tailwindFileArr[colorsIndex] += tailwindInserts.colors.exists
         // increase the other indexes
-        fontSizeIndex++
-        dropShadowIndex++
-        fontWeightIndex++
-        lineHeightIndex++
       } else {
         tailwindFileArr.splice(
           extendIndex,
@@ -119,14 +115,7 @@ export async function addToTailwindConfig() {
 
     if (!tokensUpdateArr['fontSizes']) {
       if (hasFontSizes) {
-        tailwindFileArr.splice(
-          fontSizeIndex,
-          0,
-          tailwindInserts.fontSize.exists
-        )
-        dropShadowIndex++
-        fontWeightIndex++
-        lineHeightIndex++
+        tailwindFileArr[fontSizeIndex] += tailwindInserts.fontSize.exists
       } else {
         tailwindFileArr.splice(
           extendIndex,
@@ -139,13 +128,7 @@ export async function addToTailwindConfig() {
 
     if (!tokensUpdateArr['boxShadows']) {
       if (hasDropShadow) {
-        tailwindFileArr.splice(
-          dropShadowIndex,
-          0,
-          tailwindInserts.dropShadow.exists
-        )
-        fontWeightIndex++
-        lineHeightIndex++
+        tailwindFileArr[dropShadowIndex] += tailwindInserts.dropShadow.exists
       } else {
         tailwindFileArr.splice(
           extendIndex,
@@ -158,12 +141,7 @@ export async function addToTailwindConfig() {
 
     if (!tokensUpdateArr['fontWeights']) {
       if (hasFontWeights) {
-        tailwindFileArr.splice(
-          fontWeightIndex,
-          0,
-          tailwindInserts.fontWeight.exists
-        )
-        lineHeightIndex++
+        tailwindFileArr[fontWeightIndex] += tailwindInserts.fontWeight.exists
       } else {
         tailwindFileArr.splice(
           extendIndex,
@@ -176,11 +154,7 @@ export async function addToTailwindConfig() {
 
     if (!tokensUpdateArr['lineHeights']) {
       if (hasLineHeight) {
-        tailwindFileArr.splice(
-          lineHeightIndex,
-          0,
-          tailwindInserts.lineHeight.exists
-        )
+        tailwindFileArr[lineHeightIndex] += tailwindInserts.lineHeight.exists
       } else {
         tailwindFileArr.splice(
           extendIndex,
