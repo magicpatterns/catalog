@@ -2,9 +2,9 @@ import fs from 'fs'
 import { readdir, readFile, writeFile } from 'fs/promises'
 import path from 'path'
 
-type TTokens = 'colors' | 'fontSizes' | 'boxShadows' | 'fontWeight'
+type TTokens = 'colors' | 'fontSizes' | 'boxShadows' | 'fontWeights'
 type TailwindNames = 'colors' | 'fontSize' | 'dropShadow' | 'fontWeight'
-const tokens: TTokens[] = ['colors', 'fontSizes', 'boxShadows', 'fontWeight']
+const tokens: TTokens[] = ['colors', 'fontSizes', 'boxShadows', 'fontWeights']
 
 export async function addToTailwindConfig() {
   const rootPath = process.cwd() + '/tailwind.config.js'
@@ -26,6 +26,11 @@ export async function addToTailwindConfig() {
       exists: '\t\t\t\t...mirrorful.Tokens.boxShadows,',
       notExist: () =>
         `\t\t\tdropShadow: {\n${tailwindInserts.dropShadow.exists}\n\t\t\t},`,
+    },
+    fontWeight: {
+      exists: '\t\t\t\t...mirrorful.Tokens.fontWeights,',
+      notExist: () =>
+        `\t\t\tfontWeight: {\n${tailwindInserts.fontWeight.exists}\n\t\t\t},`,
     },
   }
 
@@ -148,7 +153,7 @@ function doesContainExtendThemes(tailwindFile: string) {
   const hasFontSizes = tailwindFile.match(/fontSize:(\s|^\s)(\{|\n)/)
   const hasFontWeights = tailwindFile.match(/fontWeight:(\s|^\s)(\{|\n)/)
   const hasDropShadow = tailwindFile.match(/dropShadow:(\s|^\s)(\{|\n)/)
-  return { hasColors, hasFontSizes, hasDropShadow }
+  return { hasColors, hasFontSizes, hasDropShadow, hasFontWeights }
 }
 
 /**
@@ -170,6 +175,7 @@ async function shouldUpdateTailwindConfig({
     colors: false,
     boxShadows: false,
     fontSizes: false,
+    fontWeights: false,
   }
 
   for (let i = 0; i < keys.length; i++) {
