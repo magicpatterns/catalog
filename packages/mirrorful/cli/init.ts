@@ -7,6 +7,7 @@ import spawn from 'cross-spawn'
 import { findNodeModulesMirrorfulPath } from './helpers/find-node-modules'
 import fs from 'fs'
 import openBrowser from './helpers/openBrowser'
+import { addToTailwindConfig } from '../utils/addToTailwindConfig'
 
 export async function init({
   appPath,
@@ -86,7 +87,7 @@ export async function init({
     })
 
     await openBrowser({ url: 'http://localhost', port })
-
+    addToTailwindConfig()
     if (output.stderr) {
       console.log(
         chalk.red(
