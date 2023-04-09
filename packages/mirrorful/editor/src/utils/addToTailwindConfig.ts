@@ -8,18 +8,37 @@ const tokens: TTokens[] = ['colors', 'fontSizes', 'boxShadows']
 
 export async function addToTailwindConfig() {
   const rootPath = process.cwd() + '/tailwind.config.js'
-
-  const tokenInserts: Record<TailwindNames, string> = {
-    colors: '\t\t\t\t...mirrorful.Tokens.colors,',
-    fontSize: '\t\t\t\t...mirrorful.Tokens.fontSizes,',
-    dropShadow: '\t\t\t\t...mirrorful.Tokens.boxShadows,',
+  const tailwindInserts: Record<
+    TailwindNames,
+    { exists: string; notExist: () => string }
+  > = {
+    colors: {
+      exists: '\t\t\t\t...mirrorful.Tokens.colors,',
+      notExist: () =>
+        `\t\t\tcolors: {\n${tailwindInserts.colors.exists}\n\t\t\t},`,
+    },
+    dropShadow: {
+      exists: '\t\t\t\t...mirrorful.Tokens.fontSizes,',
+      notExist: () =>
+        `\t\t\tfontSize: {\n${tailwindInserts.fontSize.exists}\n\t\t\t},`,
+    },
+    fontSize: {
+      exists: '\t\t\t\t...mirrorful.Tokens.boxShadows,',
+      notExist: () =>
+        `\t\t\tdropShadow: {\n${tailwindInserts.dropShadow.exists}\n\t\t\t},`,
+    },
   }
+  // const tokenInserts: Record<TailwindNames, string> = {
+  //   colors: '\t\t\t\t...mirrorful.Tokens.colors,',
+  //   fontSize: '\t\t\t\t...mirrorful.Tokens.fontSizes,',
+  //   dropShadow: '\t\t\t\t...mirrorful.Tokens.boxShadows,',
+  // }
 
-  const tailwindInserts: Record<TailwindNames, string> = {
-    colors: `\t\t\tcolors: {\n${tokenInserts['colors']}\n\t\t\t},`,
-    fontSize: `\t\t\tfontSize: {\n${tokenInserts['fontSize']}\n\t\t\t},`,
-    dropShadow: `\t\t\tdropShadow: {\n${tokenInserts['dropShadow']}\n\t\t\t},`,
-  }
+  // const tailwindInserts: Record<TailwindNames, string> = {
+  //   colors: `\t\t\tcolors: {\n${tokenInserts['colors']}\n\t\t\t},`,
+  //   fontSize: `\t\t\tfontSize: {\n${tokenInserts['fontSize']}\n\t\t\t},`,
+  //   dropShadow: `\t\t\tdropShadow: {\n${tokenInserts['dropShadow']}\n\t\t\t},`,
+  // }
 
   const IS_TAILWIND_BEING_USED = fs.existsSync(rootPath)
   if (!IS_TAILWIND_BEING_USED) return
@@ -46,15 +65,59 @@ export async function addToTailwindConfig() {
     )
 
     const tailwindFileArr = tailwindFile.split('\n')
+    let { colorsIndex, dropShadowIndex, extendIndex, fontSizeIndex } =
+      getExtendThemeIndex(tailwindFileArr)
+    const { hasColors, hasDropShadow, hasFontSizes } =
+      doesContainExtendThemes(tailwindFile)
+    if (!tokensUpdateArr['colors']) {
+      if (hasColors) {
+        tailwindFileArr.splice(colorsIndex, 0, tailwindInserts.colors.exists)
+        fontSizeIndex++
+        dropShadowIndex++
+      } else {
+        tailwindFileArr.splice(
+          extendIndex,
+          0,
+          tailwindInserts.colors.notExist()
+        )
+        extendIndex++
+      }
+    }
 
-    updateTailwindFileArr({
-      tokensUpdateArr,
-      tailwindFileArr,
-      tokenInserts,
-      ...getExtendThemeIndex(tailwindFileArr),
-      tailwindInserts,
-      tailwindContainsThemes: doesContainExtendThemes(tailwindFile),
-    })
+    if (!tokensUpdateArr['fontSizes']) {
+      if (hasFontSizes) {
+        tailwindFileArr.splice(
+          fontSizeIndex,
+          0,
+          tailwindInserts.fontSize.exists
+        )
+        dropShadowIndex++
+      } else {
+        tailwindFileArr.splice(
+          extendIndex,
+          0,
+          tailwindInserts.fontSize.notExist()
+        )
+        extendIndex++
+      }
+    }
+
+    if (!tokensUpdateArr['boxShadows']) {
+      if (hasDropShadow) {
+        tailwindFileArr.splice(
+          dropShadowIndex,
+          0,
+          tailwindInserts.dropShadow.exists
+        )
+      } else {
+        tailwindFileArr.splice(
+          extendIndex,
+          0,
+          tailwindInserts.dropShadow.notExist()
+        )
+        extendIndex++
+      }
+    }
 
     let mirrorfulImport = ''
     if (!tailwindFile.includes('.mirrorful/theme_cjs.js')) {
@@ -67,61 +130,6 @@ export async function addToTailwindConfig() {
     )
   } catch (error) {
     console.error(error)
-  }
-}
-function updateTailwindFileArr({
-  tokensUpdateArr,
-  tailwindContainsThemes,
-  colorsIndex,
-  fontSizeIndex,
-  dropShadowIndex,
-  extendIndex,
-  tailwindFileArr,
-  tokenInserts,
-  tailwindInserts,
-}: {
-  tokensUpdateArr: Record<TTokens, boolean>
-  colorsIndex: number
-  fontSizeIndex: number
-  dropShadowIndex: number
-  extendIndex: number
-  tailwindContainsThemes: {
-    hasColors: RegExpMatchArray | null
-    hasFontSizes: RegExpMatchArray | null
-    hasDropShadow: RegExpMatchArray | null
-  }
-  tailwindFileArr: string[]
-  tokenInserts: { colors: string; fontSize: string; dropShadow: string }
-  tailwindInserts: { colors: string; fontSize: string; dropShadow: string }
-}) {
-  if (!tokensUpdateArr['colors']) {
-    if (tailwindContainsThemes.hasColors) {
-      tailwindFileArr.splice(colorsIndex, 0, tokenInserts['colors'])
-      fontSizeIndex++
-      dropShadowIndex++
-    } else {
-      tailwindFileArr.splice(extendIndex, 0, tailwindInserts['colors'])
-      extendIndex++
-    }
-  }
-
-  if (!tokensUpdateArr['fontSizes']) {
-    if (tailwindContainsThemes.hasFontSizes) {
-      tailwindFileArr.splice(fontSizeIndex, 0, tokenInserts['fontSize'])
-      dropShadowIndex++
-    } else {
-      tailwindFileArr.splice(extendIndex, 0, tailwindInserts['fontSize'])
-      extendIndex++
-    }
-  }
-
-  if (!tokensUpdateArr['boxShadows']) {
-    if (tailwindContainsThemes.hasDropShadow) {
-      tailwindFileArr.splice(dropShadowIndex, 0, tokenInserts['dropShadow'])
-    } else {
-      tailwindFileArr.splice(extendIndex, 0, tailwindInserts['dropShadow'])
-      extendIndex++
-    }
   }
 }
 
