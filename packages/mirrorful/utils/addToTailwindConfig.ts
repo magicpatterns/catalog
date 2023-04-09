@@ -59,9 +59,14 @@ export async function addToTailwindConfig() {
     )
 
     const tailwindFileArr = tailwindFile.split('\n')
-    let { colorsIndex, dropShadowIndex, extendIndex, fontSizeIndex } =
-      getExtendThemeIndex(tailwindFileArr)
-    const { hasColors, hasDropShadow, hasFontSizes } =
+    let {
+      colorsIndex,
+      dropShadowIndex,
+      extendIndex,
+      fontSizeIndex,
+      fontWeightIndex,
+    } = getExtendThemeIndex(tailwindFileArr)
+    const { hasColors, hasDropShadow, hasFontSizes, hasFontWeights } =
       doesContainExtendThemes(tailwindFile)
     if (!tokensUpdateArr['colors']) {
       if (hasColors) {
@@ -103,11 +108,29 @@ export async function addToTailwindConfig() {
           0,
           tailwindInserts.dropShadow.exists
         )
+        fontWeightIndex++
       } else {
         tailwindFileArr.splice(
           extendIndex,
           0,
           tailwindInserts.dropShadow.notExist()
+        )
+        extendIndex++
+      }
+    }
+
+    if (!tokensUpdateArr['fontWeights']) {
+      if (hasFontWeights) {
+        tailwindFileArr.splice(
+          fontWeightIndex,
+          0,
+          tailwindInserts.fontWeight.exists
+        )
+      } else {
+        tailwindFileArr.splice(
+          extendIndex,
+          0,
+          tailwindInserts.fontWeight.notExist()
         )
         extendIndex++
       }
