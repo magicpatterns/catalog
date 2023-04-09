@@ -131,6 +131,7 @@ function getExtendThemeIndex(tailwindFileArr: string[]) {
   let extendIndex = -1,
     colorsIndex = -1,
     fontSizeIndex = -1,
+    fontWeightIndex = -1,
     dropShadowIndex = -1
 
   for (let i = 0; i < tailwindFileArr.length; i++) {
@@ -143,9 +144,17 @@ function getExtendThemeIndex(tailwindFileArr: string[]) {
       fontSizeIndex = i + 1
     } else if (line.includes('dropShadow:')) {
       dropShadowIndex = i + 1
+    } else if (line.includes('fontWeight:')) {
+      fontWeightIndex = i + 1
     }
   }
-  return { colorsIndex, fontSizeIndex, dropShadowIndex, extendIndex }
+  return {
+    colorsIndex,
+    fontSizeIndex,
+    dropShadowIndex,
+    extendIndex,
+    fontWeightIndex,
+  }
 }
 
 function doesContainExtendThemes(tailwindFile: string) {
