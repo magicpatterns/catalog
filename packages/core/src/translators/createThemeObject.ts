@@ -1,5 +1,6 @@
 import { TTokens } from '@core/types'
 
+import { getlineHeight } from './getLineHeight'
 import { sanitizeName } from './sanitizeName'
 
 export function createThemeObject({ colorData, typography, shadows }: TTokens) {
@@ -10,6 +11,8 @@ export function createThemeObject({ colorData, typography, shadows }: TTokens) {
 
   const colorObj = new Map<string, { [key: string]: string }>()
   const fontSizeObj = new Map<string, string>()
+  const fontWeightObj = new Map<string, string>()
+  const lineHeightObj = new Map<string, string>()
 
   colorData.forEach((color) => {
     colorObj.set(sanitizeName(color.name), {
@@ -18,12 +21,28 @@ export function createThemeObject({ colorData, typography, shadows }: TTokens) {
     })
   })
 
-  typography.fontSizes.forEach((color) => {
-    fontSizeObj.set(sanitizeName(color.name), `${color.value}${color.unit}`)
+  typography.fontSizes.forEach((fontSize) => {
+    fontSizeObj.set(
+      sanitizeName(fontSize.name),
+      `${fontSize.value}${fontSize.unit}`
+    )
+  })
+
+  typography.fontWeights.forEach((fontWeight) => {
+    fontWeightObj.set(sanitizeName(fontWeight.name), `${fontWeight.weight}`)
+  })
+
+  typography.lineHeights.forEach((lineHeight) => {
+    lineHeightObj.set(
+      sanitizeName(lineHeight.name),
+      `${getlineHeight(lineHeight)}`
+    )
   })
 
   themeObj.set('colors', Object.fromEntries(colorObj))
   themeObj.set('fontSizes', Object.fromEntries(fontSizeObj))
+  themeObj.set('fontWeights', Object.fromEntries(fontWeightObj))
+  themeObj.set('lineHeights', Object.fromEntries(lineHeightObj))
 
   const shadowsObj = new Map<string, string>()
 
@@ -31,7 +50,7 @@ export function createThemeObject({ colorData, typography, shadows }: TTokens) {
     shadowsObj.set(sanitizeName(shadow.name), shadow.value)
   })
 
-  themeObj.set('boxShadows', Object.fromEntries(fontSizeObj))
+  themeObj.set('boxShadows', Object.fromEntries(shadowsObj))
 
   const rawJsonObject = Object.fromEntries(themeObj)
 
