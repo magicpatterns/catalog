@@ -98,11 +98,14 @@ export async function addToTailwindConfig() {
       hasLineHeight,
     } = doesContainExtendThemes(tailwindFile)
 
+    // checks are made to add to the array
     if (!tokensUpdateArr['colors']) {
       if (hasColors) {
         tailwindFileArr.splice(colorsIndex, 0, tailwindInserts.colors.exists)
         fontSizeIndex++
         dropShadowIndex++
+        fontWeightIndex++
+        lineHeightIndex++
       } else {
         tailwindFileArr.splice(
           extendIndex,
@@ -121,6 +124,8 @@ export async function addToTailwindConfig() {
           tailwindInserts.fontSize.exists
         )
         dropShadowIndex++
+        fontWeightIndex++
+        lineHeightIndex++
       } else {
         tailwindFileArr.splice(
           extendIndex,
@@ -139,6 +144,7 @@ export async function addToTailwindConfig() {
           tailwindInserts.dropShadow.exists
         )
         fontWeightIndex++
+        lineHeightIndex++
       } else {
         tailwindFileArr.splice(
           extendIndex,
