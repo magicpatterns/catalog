@@ -51,7 +51,7 @@ export async function addToTailwindConfig() {
     lineHeight: {
       exists: '\n\t\t\t\t...mirrorful.Tokens.lineHeights,',
       notExist: () =>
-        `\t\t\tlineHeights: {\n${tailwindInserts.lineHeight.exists}\n\t\t\t},`,
+        `\t\t\tlineHeight: {\n${tailwindInserts.lineHeight.exists}\n\t\t\t},`,
     },
   }
 
