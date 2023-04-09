@@ -1,4 +1,4 @@
-import { defaultConfig, TConfig } from '@mirrorful/core/lib/types'
+import { defaultConfigV2, MirrorfulStore } from '@mirrorful/core/lib/types'
 import Conf from 'conf'
 
 import {
@@ -15,11 +15,11 @@ export const rootPath =
     ? '../.mirrorful'
     : '../../../.mirrorful'
 
-export const store = new Conf<TConfig>({
+export const store = new Conf<MirrorfulStore>({
   projectName: 'Mirrorful',
   projectVersion: '0.0.6',
   cwd: `${rootPath}/store`,
-  defaults: defaultConfig,
+  defaults: defaultConfigV2,
   beforeEachMigration: (store, context) => {
     console.log(
       `[main-config] migrate from ${context.fromVersion} → ${context.toVersion}`

@@ -9,7 +9,7 @@ import {
 import Conf from 'conf'
 import { uuid } from 'uuidv4'
 
-export const ZeroPointZeroPointTwoMigration = (store: Conf<TConfig>) => {
+export const ZeroPointZeroPointTwoMigration = (store: Conf<any>) => {
   const tokens = store.get('tokens')
 
   const newTokens: {
@@ -50,7 +50,7 @@ export const ZeroPointZeroPointTwoMigration = (store: Conf<TConfig>) => {
   store.set('tokens', newTokens)
 }
 
-export const ZeroPointZeroPointThreeMigration = (store: Conf<TConfig>) => {
+export const ZeroPointZeroPointThreeMigration = (store: Conf<any>) => {
   const tokens = store.get('tokens')
   const updatedTokens = { ...tokens }
 
@@ -58,11 +58,11 @@ export const ZeroPointZeroPointThreeMigration = (store: Conf<TConfig>) => {
   store.set('tokens', updatedTokens)
 }
 
-export const ZeroPointZeroPointFourMigration = (store: Conf<TConfig>) => {
+export const ZeroPointZeroPointFourMigration = (store: Conf<any>) => {
   store.set('files', defaultFiles)
 }
 
-export const ZeroPointZeroFiveMigration = (store: Conf<TConfig>) => {
+export const ZeroPointZeroFiveMigration = (store: Conf<any>) => {
   const tokens = store.get('tokens')
   const updatedTokens = { ...tokens }
 
@@ -70,7 +70,9 @@ export const ZeroPointZeroFiveMigration = (store: Conf<TConfig>) => {
   store.set('tokens', updatedTokens)
 }
 
-export const ZeroPointZeroSixMigration = (store: Conf<TConfig>) => {
+export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
+  const store = anyStore as Conf<TConfig>
+
   const tokens = store.get('tokens')
 
   const colors: TTokenGroup = {}
