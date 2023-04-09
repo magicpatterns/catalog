@@ -176,7 +176,8 @@ function getExtendThemeIndex(tailwindFileArr: string[]) {
     colorsIndex = -1,
     fontSizeIndex = -1,
     fontWeightIndex = -1,
-    dropShadowIndex = -1
+    dropShadowIndex = -1,
+    lineHeightIndex = -1
 
   for (let i = 0; i < tailwindFileArr.length; i++) {
     const line = tailwindFileArr[i]
@@ -190,6 +191,8 @@ function getExtendThemeIndex(tailwindFileArr: string[]) {
       dropShadowIndex = i + 1
     } else if (line.includes('fontWeight:')) {
       fontWeightIndex = i + 1
+    } else if (line.includes('lineHeight:')) {
+      lineHeightIndex = i + 1
     }
   }
   return {
@@ -198,6 +201,7 @@ function getExtendThemeIndex(tailwindFileArr: string[]) {
     dropShadowIndex,
     extendIndex,
     fontWeightIndex,
+    lineHeightIndex,
   }
 }
 
