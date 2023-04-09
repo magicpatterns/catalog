@@ -2,9 +2,25 @@ import fs from 'fs'
 import { readdir, readFile, writeFile } from 'fs/promises'
 import path from 'path'
 
-type TTokens = 'colors' | 'fontSizes' | 'boxShadows' | 'fontWeights'
-type TailwindNames = 'colors' | 'fontSize' | 'dropShadow' | 'fontWeight'
-const tokens: TTokens[] = ['colors', 'fontSizes', 'boxShadows', 'fontWeights']
+type TTokens =
+  | 'colors'
+  | 'fontSizes'
+  | 'boxShadows'
+  | 'fontWeights'
+  | 'lineHeights'
+type TailwindNames =
+  | 'colors'
+  | 'fontSize'
+  | 'dropShadow'
+  | 'fontWeight'
+  | 'lineHeight'
+const tokens: TTokens[] = [
+  'colors',
+  'fontSizes',
+  'boxShadows',
+  'fontWeights',
+  'lineHeights',
+]
 
 export async function addToTailwindConfig() {
   const rootPath = process.cwd() + '/tailwind.config.js'
