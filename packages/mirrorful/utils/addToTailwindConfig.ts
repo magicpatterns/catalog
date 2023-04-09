@@ -48,6 +48,11 @@ export async function addToTailwindConfig() {
       notExist: () =>
         `\t\t\tfontWeight: {\n${tailwindInserts.fontWeight.exists}\n\t\t\t},`,
     },
+    lineHeight: {
+      exists: '\t\t\t\t...mirrorful.Tokens.lineHeights,',
+      notExist: () =>
+        `\t\t\tlineHeights: {\n${tailwindInserts.lineHeight.exists}\n\t\t\t},`,
+    },
   }
 
   const IS_TAILWIND_BEING_USED = fs.existsSync(rootPath)
