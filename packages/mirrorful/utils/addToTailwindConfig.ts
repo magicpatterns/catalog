@@ -86,9 +86,15 @@ export async function addToTailwindConfig() {
       extendIndex,
       fontSizeIndex,
       fontWeightIndex,
+      lineHeightIndex,
     } = getExtendThemeIndex(tailwindFileArr)
-    const { hasColors, hasDropShadow, hasFontSizes, hasFontWeights } =
-      doesContainExtendThemes(tailwindFile)
+    const {
+      hasColors,
+      hasDropShadow,
+      hasFontSizes,
+      hasFontWeights,
+      hasLineHeight,
+    } = doesContainExtendThemes(tailwindFile)
     if (!tokensUpdateArr['colors']) {
       if (hasColors) {
         tailwindFileArr.splice(colorsIndex, 0, tailwindInserts.colors.exists)
@@ -147,11 +153,29 @@ export async function addToTailwindConfig() {
           0,
           tailwindInserts.fontWeight.exists
         )
+        lineHeightIndex++
       } else {
         tailwindFileArr.splice(
           extendIndex,
           0,
           tailwindInserts.fontWeight.notExist()
+        )
+        extendIndex++
+      }
+    }
+
+    if (!tokensUpdateArr['lineHeights']) {
+      if (hasLineHeight) {
+        tailwindFileArr.splice(
+          lineHeightIndex,
+          0,
+          tailwindInserts.lineHeight.exists
+        )
+      } else {
+        tailwindFileArr.splice(
+          extendIndex,
+          0,
+          tailwindInserts.lineHeight.notExist()
         )
         extendIndex++
       }
