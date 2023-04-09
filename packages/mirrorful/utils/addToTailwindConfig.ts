@@ -206,7 +206,14 @@ function doesContainExtendThemes(tailwindFile: string) {
   const hasFontSizes = tailwindFile.match(/fontSize:(\s|^\s)(\{|\n)/)
   const hasFontWeights = tailwindFile.match(/fontWeight:(\s|^\s)(\{|\n)/)
   const hasDropShadow = tailwindFile.match(/dropShadow:(\s|^\s)(\{|\n)/)
-  return { hasColors, hasFontSizes, hasDropShadow, hasFontWeights }
+  const hasLineHeight = tailwindFile.match(/lineHeight:(\s|^\s)(\{|\n)/)
+  return {
+    hasColors,
+    hasFontSizes,
+    hasDropShadow,
+    hasFontWeights,
+    hasLineHeight,
+  }
 }
 
 /**
