@@ -144,7 +144,7 @@ export const defaultConfig: TConfig = {
 export const defaultColorsV2: TTokenGroup = {
   purple: {
     DEFAULT: {
-      id: uuid(),
+      id: 'default-purple-id',
       value: '#6B46C1',
       type: 'color',
     },
@@ -153,17 +153,17 @@ export const defaultColorsV2: TTokenGroup = {
 
 export const defaultFontSizesV2: TTokenGroup = {
   sm: {
-    id: uuid(),
+    id: 'default-font-size-sm-id',
     value: '1rem',
     type: 'fontSize',
   },
   md: {
-    id: uuid(),
+    id: 'default-font-size-md-id',
     value: '1.2rem',
     type: 'fontSize',
   },
   lg: {
-    id: uuid(),
+    id: 'default-font-size-lg-id',
     value: '1.4rem',
     type: 'fontSize',
   },
@@ -171,17 +171,17 @@ export const defaultFontSizesV2: TTokenGroup = {
 
 export const defaultFontWeightsV2: TTokenGroup = {
   light: {
-    id: uuid(),
+    id: 'default-font-weight-light-id',
     value: 200,
     type: 'fontWeight',
   },
   normal: {
-    id: uuid(),
+    id: 'default-font-weight-normal-id',
     value: 400,
     type: 'fontWeight',
   },
   bold: {
-    id: uuid(),
+    id: 'default-font-weight-bold-id',
     value: 700,
     type: 'fontWeight',
   },
@@ -189,17 +189,17 @@ export const defaultFontWeightsV2: TTokenGroup = {
 
 export const defaultLineHeightsV2: TTokenGroup = {
   short: {
-    id: uuid(),
+    id: 'default-line-height-short-id',
     value: 1,
     type: 'lineHeight',
   },
   normal: {
-    id: uuid(),
+    id: 'default-line-height-normal-id',
     value: 1.5,
     type: 'lineHeight',
   },
   tall: {
-    id: uuid(),
+    id: 'default-line-height-tall-id',
     value: 2,
     type: 'lineHeight',
   },
@@ -207,23 +207,23 @@ export const defaultLineHeightsV2: TTokenGroup = {
 
 export const defaultShadowsV2: TTokenGroup = {
   sm: {
-    id: uuid(),
+    id: 'default-shadow-sm-id',
     value: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
     type: 'boxShadow',
   },
   md: {
-    id: uuid(),
+    id: 'default-shadow-md-id',
     value: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
     type: 'boxShadow',
   },
   lg: {
-    id: uuid(),
+    id: 'default-shadow-lg-id',
     value:
       '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
     type: 'boxShadow',
   },
   'dark-lg': {
-    id: uuid(),
+    id: 'default-shadow-dark-lg-id',
     value:
       '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
     type: 'boxShadow',
