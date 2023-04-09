@@ -169,7 +169,7 @@ export async function addToTailwindConfig() {
     if (!tailwindFile.includes('.mirrorful/theme_cjs.js')) {
       mirrorfulImport = `const mirrorful = require('${
         mirrorfulFolderPath === './' ? '..' : mirrorfulFolderPath
-      }/.mirrorful//theme_cjs.js')\n`
+      }/.mirrorful/theme_cjs.js')\n`
     }
     await writeFile(
       rootPath,
