@@ -29,27 +29,27 @@ export async function addToTailwindConfig() {
     { exists: string; notExist: () => string }
   > = {
     colors: {
-      exists: '\t\t\t\t...mirrorful.Tokens.colors,',
+      exists: '\n\t\t\t\t...mirrorful.Tokens.colors,',
       notExist: () =>
         `\t\t\tcolors: {\n${tailwindInserts.colors.exists}\n\t\t\t},`,
     },
     dropShadow: {
-      exists: '\t\t\t\t...mirrorful.Tokens.fontSizes,',
+      exists: '\n\t\t\t\t...mirrorful.Tokens.fontSizes,',
       notExist: () =>
         `\t\t\tfontSize: {\n${tailwindInserts.fontSize.exists}\n\t\t\t},`,
     },
     fontSize: {
-      exists: '\t\t\t\t...mirrorful.Tokens.boxShadows,',
+      exists: '\n\t\t\t\t...mirrorful.Tokens.boxShadows,',
       notExist: () =>
         `\t\t\tdropShadow: {\n${tailwindInserts.dropShadow.exists}\n\t\t\t},`,
     },
     fontWeight: {
-      exists: '\t\t\t\t...mirrorful.Tokens.fontWeights,',
+      exists: '\n\t\t\t\t...mirrorful.Tokens.fontWeights,',
       notExist: () =>
         `\t\t\tfontWeight: {\n${tailwindInserts.fontWeight.exists}\n\t\t\t},`,
     },
     lineHeight: {
-      exists: '\t\t\t\t...mirrorful.Tokens.lineHeights,',
+      exists: '\n\t\t\t\t...mirrorful.Tokens.lineHeights,',
       notExist: () =>
         `\t\t\tlineHeights: {\n${tailwindInserts.lineHeight.exists}\n\t\t\t},`,
     },
@@ -102,6 +102,7 @@ export async function addToTailwindConfig() {
     if (!tokensUpdateArr['colors']) {
       if (hasColors) {
         tailwindFileArr.splice(colorsIndex, 0, tailwindInserts.colors.exists)
+        // increase the other indexes
         fontSizeIndex++
         dropShadowIndex++
         fontWeightIndex++
@@ -217,15 +218,15 @@ function getExtendThemeIndex(tailwindFileArr: string[]) {
     if (line.includes('extend:')) {
       extendIndex = i + 1
     } else if (line.includes('colors:')) {
-      colorsIndex = i + 1
+      colorsIndex = i
     } else if (line.includes('fontSize:')) {
-      fontSizeIndex = i + 1
+      fontSizeIndex = i
     } else if (line.includes('dropShadow:')) {
-      dropShadowIndex = i + 1
+      dropShadowIndex = i
     } else if (line.includes('fontWeight:')) {
-      fontWeightIndex = i + 1
+      fontWeightIndex = i
     } else if (line.includes('lineHeight:')) {
-      lineHeightIndex = i + 1
+      lineHeightIndex = i
     }
   }
   return {
