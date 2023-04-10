@@ -1,5 +1,5 @@
 import { TColorData } from '@core/types'
-import tinycolor from 'tinycolor2'
+import tinycolor, { Instance } from 'tinycolor2'
 
 // https://chir.ag/projects/ntc/ntc.js was the source of these...
 const colorNames = [
@@ -1571,7 +1571,15 @@ const colorNames = [
   ['FFFFFF', 'White'],
 ]
 
-const nameThatColor = ({ h, l, s }: { h: number; l: number; s: number }) => {
+export const nameThatColor = ({
+  h,
+  l,
+  s,
+}: {
+  h: number
+  l: number
+  s: number
+}) => {
   // Get RGB values
   const colorObject = new tinycolor({ h: h, s: s, l: l })
   const color = colorObject.toRgb()
@@ -1633,23 +1641,24 @@ const shuffleArray = (array: unknown[]) => {
   }
 }
 
-// const normalizeHue = (hue: number): number => {
-//   if (hue >= 360) {
-//     return hue - 360
-//   }
-
-//   if (hue < 0) {
-//     return 360 + hue
-//   }
-
-//   return hue
-// }
-
 export function generatePalette(
   color: string,
   primaryName: string
 ): TColorData[] {
-  const colors = tinycolor(color).tetrad()
+  let colors: Array<Instance> = []
+
+  // If it's black or white, there are no true complements, so we randomize
+  // https://github.com/bgrins/TinyColor/issues/38
+  if (
+    tinycolor(color).getLuminance() < 0.1 ||
+    tinycolor(color).getLuminance() > 0.9
+  ) {
+    const randomColor = tinycolor.random()
+    colors = [tinycolor(color), ...tinycolor(randomColor).triad()]
+  } else {
+    colors = tinycolor(color).tetrad()
+  }
+
   colors.shift()
   shuffleArray(colors)
 
@@ -1663,11 +1672,13 @@ export function generatePalette(
       h: hslColor.h + Math.random() * 50 - 25,
     }
 
+    const hex = tinycolor(modifiedHsl).toHexString()
+
     randomizedColors.push({
       name: nameThatColor(modifiedHsl),
-      baseColor: tinycolor(modifiedHsl).toHexString(),
+      baseColor: hex,
       variants: {
-        '500': tinycolor(modifiedHsl).toHexString(),
+        '500': hex,
       },
     })
   })

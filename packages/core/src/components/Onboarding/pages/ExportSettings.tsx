@@ -1,4 +1,4 @@
-import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -68,6 +68,15 @@ export function ExportSettings({
           </Text>
         </Box>
         <Box paddingBottom="32px">
+          <Button
+            size="lg"
+            onClick={() => {
+              onUpdatePage(4)
+            }}
+            css={{ marginRight: '16px' }}
+          >
+            <ArrowBackIcon />
+          </Button>
           <Button
             bgColor={shades['500']}
             color={tinycolor(primaryColor).isDark() ? 'white' : 'black'}

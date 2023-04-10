@@ -5,6 +5,8 @@ node_modules
 lib
 /.pnp
 .pnp.js
+.idea
+
 /packages/mirrorful/node_modules
 
 # testing
