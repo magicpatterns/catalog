@@ -16,7 +16,7 @@
     "resolveJsonModule": true,
     "declaration": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "src/**/*.json", "../../typings/color-namer/color-namer.d.ts"],
+  "include": ["**/*.ts", "**/*.tsx", "src/**/*.json"],
   "exclude": ["node_modules", "lib", "tsconfig.json"],
   "tsc-alias": {
     "verbose": true

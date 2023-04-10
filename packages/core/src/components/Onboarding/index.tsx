@@ -7,8 +7,8 @@ import {
   TConfig,
   TExportFileType,
 } from '@core/types'
-import namer from 'color-namer'
 import { useState } from 'react'
+import tinycolor from 'tinycolor2'
 
 import { TPlatform } from '../Layout'
 import { OnboardingContainer } from './OnboardingContainer'
@@ -20,6 +20,7 @@ import { PickPrimary } from './pages/PickPrimary'
 import { Referral } from './pages/Referral'
 import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
+import { nameThatColor } from './utils'
 
 export function Onboarding({
   postStoreData,
@@ -41,11 +42,9 @@ export function Onboarding({
     // set the color in state
     setPrimaryColor(newColor)
 
-    // Each list is an array of colors, sorted by their perceptual similarity to the given color:
-    const names: { html: [{ name: string }] } = namer(newColor)
-    const name = names.html[0].name
-    const capitalized = name.charAt(0).toUpperCase() + name.slice(1)
-    setPrimaryName(capitalized)
+    const hslColor = tinycolor(newColor).toHsl()
+    const name = nameThatColor(hslColor)
+    setPrimaryName(name)
   }
 
   const handleExport = async (

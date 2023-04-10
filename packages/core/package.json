@@ -28,7 +28,6 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@hello-pangea/color-picker": "^3.2.2",
-    "color-namer": "^1.4.0",
     "eslint-plugin-react": "^7.32.2",
     "framer-motion": "^10.6.0",
     "json5": "^2.2.3",
