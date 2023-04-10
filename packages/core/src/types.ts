@@ -36,17 +36,17 @@ export const defaultFontSizesV2: TTokenGroup = {
 export const defaultFontWeightsV2: TTokenGroup = {
   light: {
     id: 'default-font-weight-light-id',
-    value: 200,
+    value: '200',
     type: 'fontWeight',
   },
   normal: {
     id: 'default-font-weight-normal-id',
-    value: 400,
+    value: '400',
     type: 'fontWeight',
   },
   bold: {
     id: 'default-font-weight-bold-id',
-    value: 700,
+    value: '700',
     type: 'fontWeight',
   },
 }
@@ -54,17 +54,17 @@ export const defaultFontWeightsV2: TTokenGroup = {
 export const defaultLineHeightsV2: TTokenGroup = {
   short: {
     id: 'default-line-height-short-id',
-    value: 1,
+    value: '1',
     type: 'lineHeight',
   },
   normal: {
     id: 'default-line-height-normal-id',
-    value: 1.5,
+    value: '1.5',
     type: 'lineHeight',
   },
   tall: {
     id: 'default-line-height-tall-id',
-    value: 2,
+    value: '2',
     type: 'lineHeight',
   },
 }
@@ -148,7 +148,7 @@ export type TTokenGroup = {
 
 export type TToken = {
   id: string
-  value: string | number
+  value: string
   type: 'color' | 'fontSize' | 'fontWeight' | 'lineHeight' | 'boxShadow'
   ref?: string // means that this token itself is a reference to another token
 }
@@ -161,4 +161,14 @@ export const assertTokenGroup = (
 
 export const assertToken = (token: TTokenGroup | TToken): token is TToken => {
   return typeof token.id === 'string'
+}
+
+export type TNamedToken = {
+  name: string
+  token: TToken
+}
+
+export type TNamedTokenGroup = {
+  name: string
+  group: TTokenGroup
 }

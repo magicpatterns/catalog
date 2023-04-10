@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { TToken, TTokenGroup } from '../../types'
+import { TNamedTokenGroup, TToken, TTokenGroup } from '../../types'
 import { AddColorSkeleton } from './AddColorSkeleton'
 import { ColorDisplay } from './ColorDisplay'
 import { EditColorModal } from './EditColorModal'
@@ -104,11 +104,11 @@ export function ColorPaletteSection({
       </Box>
       <EditColorModal
         isOpen={isOpen}
-        onClose={(newColor?: { name: string; data: TTokenGroup }) => {
+        onClose={(newColor?: TNamedTokenGroup) => {
           if (newColor) {
             const newColors = { ...colors }
 
-            newColors[newColor.name] = newColor.data
+            newColors[newColor.name] = newColor.group
 
             onUpdateColors(newColors)
           }

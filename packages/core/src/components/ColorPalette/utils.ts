@@ -96,27 +96,27 @@ export const defaultColorShadesToTokens = (shades: {
     },
     500: {
       id: uuidv4(),
-      value: shades[200],
+      value: shades[500],
       type: 'color',
     },
     600: {
       id: uuidv4(),
-      value: shades[200],
+      value: shades[600],
       type: 'color',
     },
     700: {
       id: uuidv4(),
-      value: shades[200],
+      value: shades[700],
       type: 'color',
     },
     800: {
       id: uuidv4(),
-      value: shades[200],
+      value: shades[800],
       type: 'color',
     },
     900: {
       id: uuidv4(),
-      value: shades[200],
+      value: shades[900],
       type: 'color',
     },
   }

@@ -106,6 +106,14 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
       }
     })
 
+    if (color.baseColor) {
+      currentColor.base = {
+        id: uuid(),
+        value: color.baseColor,
+        type: 'color',
+      }
+    }
+
     colors[color.name] = currentColor
   })
 

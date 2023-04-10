@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { assertToken, TToken, TTokenGroup } from '@core/types'
+import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { FiMoreVertical } from 'react-icons/fi'
@@ -23,18 +23,13 @@ import tinycolor from 'tinycolor2'
 import { EditColorNameModal } from './EditColorNameModal'
 import { EditVariantModal } from './EditVariantModal'
 
-type TColorVariant = {
-  name: string
-  token: TToken
-}
-
 function VariantRow({
   variant,
   onUpdateVariant,
   onDeleteVariant,
 }: {
-  variant: TColorVariant
-  onUpdateVariant: (newVariant: TColorVariant) => void
+  variant: TNamedToken
+  onUpdateVariant: (newVariant: TNamedToken) => void
   onDeleteVariant: () => void
 }) {
   const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
@@ -77,7 +72,7 @@ function VariantRow({
       <Text
         fontSize="1rem"
         // fontWeight={variant.isBase ? 700 : 600}
-        color={color}
+        color={tinycolor(color).isDark() ? 'white' : 'black'}
       >
         {/* {name} {variant.isBase ? ' (Base)' : ''} */}
         {name}
@@ -274,9 +269,7 @@ export function ColorDisplay({
                 name: key,
                 token: colorData[key],
               }))
-              .filter((value): value is TColorVariant =>
-                assertToken(value.token)
-              )
+              .filter((value): value is TNamedToken => assertToken(value.token))
               .sort((a, b) =>
                 tinycolor(`${a.token.value}`).toHsl().l <
                 tinycolor(`${b.token.value}`).toHsl().l
@@ -297,7 +290,7 @@ export function ColorDisplay({
                 >
                   <VariantRow
                     variant={variant}
-                    onUpdateVariant={(newVariant: TColorVariant) => {
+                    onUpdateVariant={(newVariant: TNamedToken) => {
                       const updatedColorData = { ...colorData }
                       delete updatedColorData[variant.name]
                       updatedColorData[newVariant.name] = newVariant.token
@@ -327,7 +320,7 @@ export function ColorDisplay({
       <EditVariantModal
         isOpen={isAddVariantModalOpen}
         onClose={onAddVariantModalClose}
-        onUpdateVariant={(newVariant: TColorVariant) => {
+        onUpdateVariant={(newVariant: TNamedToken) => {
           const updatedColorData = { ...colorData }
           updatedColorData[newVariant.name] = newVariant.token
 

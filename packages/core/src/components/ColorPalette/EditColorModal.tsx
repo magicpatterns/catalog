@@ -17,12 +17,17 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react'
-import { TColorData } from '@core/types'
+import { assertToken, TNamedToken, TNamedTokenGroup } from '@core/types'
 import { Color } from '@hello-pangea/color-picker'
 import { useRef, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 import { ColorPicker } from './ColorPicker'
-import { generateDefaultColorShades, handleInvalidColor } from './utils'
+import {
+  defaultColorShadesToTokens,
+  generateDefaultColorShades,
+  handleInvalidColor,
+} from './utils'
 
 const INITIAL_COLOR_PICKER_COLOR = '#000000'
 
@@ -32,21 +37,25 @@ export function EditColorModal({
   initialColorData,
 }: {
   isOpen: boolean
-  onClose: (newColorData?: TColorData) => void
-  initialColorData?: TColorData
+  onClose: (newColor?: TNamedTokenGroup) => void
+  initialColorData?: TNamedTokenGroup
 }) {
   const baseRef = useRef<HTMLInputElement | null>(null)
   const hoverRef = useRef<HTMLInputElement | null>(null)
 
+  const initialBaseValue = initialColorData?.group.base ?? {}
+
   const presetColors: string[] = []
   const [name, setName] = useState<string>(initialColorData?.name ?? '')
-  const [base, setBase] = useState<string>(initialColorData?.baseColor ?? '')
+  const [base, setBase] = useState<string>(
+    assertToken(initialBaseValue) ? initialBaseValue.value : ''
+  )
   const [shouldGenerateVariants, setShouldGenerateVariants] = useState(false)
 
   const [error, setError] = useState<string | null>(null)
 
   const [colorPickerColor, setColorPickerColor] = useState<Color>(
-    initialColorData?.baseColor ?? INITIAL_COLOR_PICKER_COLOR
+    `${initialColorData?.group.base?.value}` ?? INITIAL_COLOR_PICKER_COLOR
   )
 
   const [showBaseColorPicker, setShowBaseColorPicker] = useState<boolean>(true)
@@ -72,12 +81,14 @@ export function EditColorModal({
     onBaseBlur()
     onClose({
       name,
-      baseColor: base,
-      variants: shouldGenerateVariants
-        ? generateDefaultColorShades(base)
-        : {
-            '500': base,
-          },
+      group: {
+        base: {
+          id: uuidv4(),
+          value: base,
+          type: 'color',
+        },
+        ...defaultColorShadesToTokens(generateDefaultColorShades(base)),
+      },
     })
 
     setName('')
@@ -182,7 +193,8 @@ export function EditColorModal({
                 </Text>
               )}
             </FormControl>
-            {!initialColorData || base !== initialColorData.baseColor ? (
+            {!initialColorData ||
+            base !== initialColorData.group?.base.value ? (
               <FormControl>
                 <Checkbox
                   checked={shouldGenerateVariants}
