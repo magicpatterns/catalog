@@ -7,6 +7,7 @@ import {
   TConfig,
   TExportFileType,
 } from '@core/types'
+import namer from 'color-namer'
 import { useState } from 'react'
 
 import { TPlatform } from '../Layout'
@@ -19,8 +20,6 @@ import { PickPrimary } from './pages/PickPrimary'
 import { Referral } from './pages/Referral'
 import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
-
-const namer = require('color-namer')
 
 export function Onboarding({
   postStoreData,
@@ -39,9 +38,14 @@ export function Onboarding({
   const [page, setPage] = useState<number>(platform === 'web' ? 1 : 0)
 
   const updatePrimaryColor = (newColor: string) => {
+    // set the color in state
     setPrimaryColor(newColor)
-    const names = namer(newColor)
-    setPrimaryName(names?.html[0]?.name)
+
+    // Each list is an array of colors, sorted by their perceptual similarity to the given color:
+    const names: { html: [{ name: string }] } = namer(newColor)
+    const name = names.html[0].name
+    const capitalized = name.charAt(0).toUpperCase() + name.slice(1)
+    setPrimaryName(capitalized)
   }
 
   const handleExport = async (
