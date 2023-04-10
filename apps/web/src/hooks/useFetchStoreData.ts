@@ -4,7 +4,7 @@ import { useLocalStorage } from './useLocalStorage'
 
 export function useFetchStoreData() {
   const [data] = useLocalStorage<TMirrorfulStore>(
-    'mirrorfulConfigData',
+    'mirrorfulConfigDataV3',
     defaultConfigV2
   )
 
