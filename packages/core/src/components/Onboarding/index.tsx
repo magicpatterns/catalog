@@ -8,7 +8,6 @@ import {
   TExportFileType,
 } from '@core/types'
 import { useState } from 'react'
-import namer from 'color-namer'
 
 import { TPlatform } from '../Layout'
 import { OnboardingContainer } from './OnboardingContainer'
@@ -20,6 +19,8 @@ import { PickPrimary } from './pages/PickPrimary'
 import { Referral } from './pages/Referral'
 import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
+
+const namer = require('color-namer')
 
 export function Onboarding({
   postStoreData,
