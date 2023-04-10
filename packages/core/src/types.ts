@@ -18,8 +18,22 @@ export type TFontSizeVariant = {
   unit: 'px' | 'rem' | 'em'
 }
 
+export type TFontWeightVariant = {
+  name: string
+  weight: number
+}
+
+export type TLineHeightVariant = {
+  name: string
+  value: number
+  unit: 'number' | 'length' | 'percent'
+  lengthUnit?: 'px' | 'rem' | 'em'
+}
+
 export type TTypographyData = {
   fontSizes: TFontSizeVariant[]
+  fontWeights: TFontWeightVariant[]
+  lineHeights: TLineHeightVariant[]
 }
 
 export type TShadowData = {
@@ -56,6 +70,29 @@ export const defaultTypography: TTypographyData = {
       value: 1.4,
       unit: 'rem',
       name: 'lg',
+    },
+  ],
+  fontWeights: [
+    {
+      name: 'bold',
+      weight: 700,
+    },
+  ],
+  lineHeights: [
+    {
+      name: 'normal',
+      value: 1.5,
+      unit: 'number',
+    },
+    {
+      name: 'shorter',
+      value: 1,
+      unit: 'number',
+    },
+    {
+      name: 'taller',
+      value: 2,
+      unit: 'number',
     },
   ],
 }

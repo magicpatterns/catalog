@@ -7,6 +7,8 @@ lib
 .pnp.js
 .idea
 
+/packages/mirrorful/node_modules
+
 # testing
 /coverage
 

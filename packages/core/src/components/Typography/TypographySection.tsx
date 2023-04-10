@@ -1,7 +1,14 @@
 import { Box, Divider, Heading, Text } from '@chakra-ui/react'
-import { TFontSizeVariant, TTypographyData } from '@core/types'
+import {
+  TFontSizeVariant,
+  TFontWeightVariant,
+  TLineHeightVariant,
+  TTypographyData,
+} from '@core/types'
 
-import { FontSizesSection } from './FontSizesSection'
+import { FontSizesSection } from './FontSize/FontSizesSection'
+import { FontWeightSection } from './FontWeight/FontWeightSection'
+import { LineHeightSection } from './LineHeight/LineHeightSection'
 
 export function TypographySection({
   typography,
@@ -28,10 +35,47 @@ export function TypographySection({
       <Box css={{ marginBottom: '48px' }} />
       <FontSizesSection
         fontSizeData={typography.fontSizes}
-        onUpdateFontSizeData={(newFontSizeData: TFontSizeVariant[]) => {
+        onUpdateFontPropertyData={(
+          newFontSizeData:
+            | TFontSizeVariant[]
+            | TFontWeightVariant[]
+            | TLineHeightVariant[]
+        ) => {
           onUpdateTypography({
             ...typography,
-            fontSizes: newFontSizeData,
+            fontSizes: newFontSizeData as TFontSizeVariant[],
+          })
+        }}
+      />
+      <br />
+      <br />
+      <FontWeightSection
+        fontWeightData={typography.fontWeights}
+        onUpdateFontPropertyData={(
+          newFontWeightData:
+            | TFontSizeVariant[]
+            | TFontWeightVariant[]
+            | TLineHeightVariant[]
+        ) => {
+          onUpdateTypography({
+            ...typography,
+            fontWeights: newFontWeightData as TFontWeightVariant[],
+          })
+        }}
+      />
+      <br />
+      <br />
+      <LineHeightSection
+        lineHeightData={typography.lineHeights}
+        onUpdateFontPropertyData={(
+          newLineHeightData:
+            | TFontSizeVariant[]
+            | TFontWeightVariant[]
+            | TLineHeightVariant[]
+        ) => {
+          onUpdateTypography({
+            ...typography,
+            lineHeights: newLineHeightData as TLineHeightVariant[],
           })
         }}
       />
