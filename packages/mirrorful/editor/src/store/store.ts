@@ -1,4 +1,4 @@
-import { defaultConfigV2, MirrorfulStore } from '@mirrorful/core/lib/types'
+import { defaultConfigV2, TMirrorfulStore } from '@mirrorful/core/lib/types'
 import Conf from 'conf'
 
 import {
@@ -15,7 +15,7 @@ export const rootPath =
     ? '../.mirrorful'
     : '../../../.mirrorful'
 
-export const store = new Conf<MirrorfulStore>({
+export const store = new Conf<TMirrorfulStore>({
   projectName: 'Mirrorful',
   projectVersion: '0.0.6',
   cwd: `${rootPath}/store`,
