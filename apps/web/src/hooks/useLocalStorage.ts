@@ -1,6 +1,8 @@
 'use client'
 import { useState } from 'react'
 
+export const LOCAL_STORAGE_KEY = 'mirrorfulConfigDataV3'
+
 // Copied from https://usehooks.com/useLocalStorage/
 export function useLocalStorage<T>(key: string, initialValue: T) {
   // State to store our value
