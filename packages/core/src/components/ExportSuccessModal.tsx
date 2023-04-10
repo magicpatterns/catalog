@@ -213,7 +213,6 @@ function TokenTab({
         </Text>
         <CodePreview
           language="javascript"
-          textClass="code-snippet"
           text={`import './.mirrorful/theme.css'`}
         />
         <Text css={{ marginTop: 12, marginBottom: 8 }}>
@@ -222,7 +221,6 @@ function TokenTab({
         </Text>
         <CodePreview
           language="css"
-          textClass="code-snippet"
           text={`.${sanitizeName(
             primaryName
           )}-button {\n    ${cssPropertyName}: var(--${cssName}-${sanitizeName(
@@ -248,8 +246,7 @@ function TokenTab({
         </Text>
 
         <CodePreview
-          language="javascript"
-          textClass="code-snippet"
+          language="jsx"
           text={`import { Tokens } from './.mirrorful/theme'`}
         />
 
@@ -258,8 +255,7 @@ function TokenTab({
           anywhere as constants!
         </Text>
         <CodePreview
-          language="javascript"
-          textClass="code-snippet"
+          language="jsx"
           text={`<button\n   style={{ ${javascriptPropertyName}: Tokens.${javascriptName}.${sanitizeName(
             primaryName
           )} }}\n> Click here\n</button>`}
@@ -281,7 +277,6 @@ function TokenTab({
 
         <CodePreview
           language="javascript"
-          textClass="code-snippet"
           text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
         />
 
@@ -291,7 +286,6 @@ function TokenTab({
         </Text>
         <CodePreview
           language="javascript"
-          textClass="code-snippet"
           text={`theme: {\n    extend: { ${tailwindPropertyName}: Tokens.${tailwindName} } \n}`}
         />
       </TabPanel>
@@ -328,18 +322,17 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
           <TabList>
             <Tab>CSS</Tab>
             <Tab>SCSS</Tab>
-            <Tab>Javascript / Typescript</Tab>
+            <Tab>JS / Typescript</Tab>
             <Tab>JSON</Tab>
-            <Tab>CJS</Tab>
-            <Tab>TailwindCSS</Tab>
+            <Tab>Tailwind</Tab>
+            <Tab>Common JS</Tab>
           </TabList>
 
           <TabPanels>
             <TabPanel>
               <CodePreview
                 language="css"
-                textClass="code-snippet"
-                text={`/* For example, copy into mirrorful.css */\n\n${toCss(
+                text={`/* For example, create a mirrorful.css file \n and use it throughout your project */\n\n${toCss(
                   tokens
                 )}`}
               />
@@ -347,44 +340,39 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
             <TabPanel>
               <CodePreview
                 language="scss"
-                textClass="code-snippet"
-                text={`/* For example, copy into mirrorful.scss */\n\n${toScss(
+                text={`/* For example, create a mirrorful.scss file \n and use it throughout your project */\n\n${toScss(
                   tokens
                 )}`}
               />
             </TabPanel>
             <TabPanel>
               <CodePreview
-                language="javascript"
-                textClass="code-snippet"
-                text={`/* For example, copy into mirrorful.js */\n\n${toJs(
+                language="js"
+                text={`/* For example, create a mirrorful.js file \n and use it throughout your project */ \n\n${toJs(
                   tokens
                 )}`}
               />
             </TabPanel>
             <TabPanel>
               <CodePreview
-                language="javascript"
-                textClass="code-snippet"
-                text={`/* For example, copy into mirrorful.json */\n\n${toJson(
+                language="json"
+                text={`/* For example, create a mirrorful.json file \n and use it throughout your project */\n\n${toJson(
                   tokens
                 )}`}
               />
             </TabPanel>
             <TabPanel>
               <CodePreview
-                language="javascript"
-                textClass="code-snippet"
-                text={`/* For example, copy into mirrorful.cjs */\n\n${toCjs(
+                language="js"
+                text={`/* Copy into the theme section of your tailwind.config.js\n Read more here: https://tailwindcss.com/docs/theme */\n\n${toTailwind(
                   tokens
                 )}`}
               />
             </TabPanel>
             <TabPanel>
               <CodePreview
-                language="javascript"
-                textClass="code-snippet"
-                text={`/* For example, copy into tailwind.config.js */\n\n${toTailwind(
+                language="js"
+                text={`/* For example, create a mirrorful.cjs file \n and use it throughout your project. */ \n\n${toCjs(
                   tokens
                 )}`}
               />
@@ -392,7 +380,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
           </TabPanels>
         </Tabs>
         <Text css={{ marginTop: '8px' }}>
-          To learn more about how to import these generated files, visit our{' '}
+          To learn more about how to use these generated files, visit our{' '}
           <Link
             isExternal
             color="blue.500"

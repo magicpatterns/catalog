@@ -37,5 +37,5 @@ export const toTailwind = ({
   }
 
   const tailwindTheme = { theme }
-  return `module.exports = ${JSON5.stringify(tailwindTheme, { space: 2 })}`
+  return `${JSON5.stringify(tailwindTheme, { space: 2 })}`
 }
