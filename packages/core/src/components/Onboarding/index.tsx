@@ -8,6 +8,7 @@ import {
   TExportFileType,
 } from '@core/types'
 import { useState } from 'react'
+import tinycolor from 'tinycolor2'
 
 import { TPlatform } from '../Layout'
 import { OnboardingContainer } from './OnboardingContainer'
@@ -19,6 +20,7 @@ import { PickPrimary } from './pages/PickPrimary'
 import { Referral } from './pages/Referral'
 import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
+import { nameThatColor } from './utils'
 
 export function Onboarding({
   postStoreData,
@@ -35,6 +37,15 @@ export function Onboarding({
   const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
 
   const [page, setPage] = useState<number>(platform === 'web' ? 1 : 0)
+
+  const updatePrimaryColor = (newColor: string) => {
+    // set the color in state
+    setPrimaryColor(newColor)
+
+    const hslColor = tinycolor(newColor).toHsl()
+    const name = nameThatColor(hslColor)
+    setPrimaryName(name)
+  }
 
   const handleExport = async (
     primaryColorHex: string,
@@ -74,7 +85,9 @@ export function Onboarding({
       <PickPrimary
         primaryColor={primaryColor}
         onUpdatePage={setPage}
-        onUpdatePrimaryColor={(newColor: string) => setPrimaryColor(newColor)}
+        onUpdatePrimaryColor={(newColor: string) =>
+          updatePrimaryColor(newColor)
+        }
         platform={platform}
       />
     )
@@ -85,7 +98,9 @@ export function Onboarding({
       <PickPrimary
         primaryColor={primaryColor}
         onUpdatePage={setPage}
-        onUpdatePrimaryColor={(newColor: string) => setPrimaryColor(newColor)}
+        onUpdatePrimaryColor={(newColor: string) =>
+          updatePrimaryColor(newColor)
+        }
         platform={platform}
       />
     )
