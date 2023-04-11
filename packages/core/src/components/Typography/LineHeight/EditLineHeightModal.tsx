@@ -46,7 +46,9 @@ export function EditLineHeightModal({
     initialLineHeightVariant?.name ?? ''
   )
   const [variantValue, setVariantValue] = useState<number>(
-    Number(initialLineHeightVariant?.token.value) ?? 0
+    initialLineHeightVariant?.token
+      ? parseUnit(initialLineHeightVariant.token.value).rawValue
+      : 0
   )
 
   const [id, setId] = useState<string>(
@@ -96,7 +98,11 @@ export function EditLineHeightModal({
   useEffect(() => {
     if (!isOpen) {
       setVariantName(initialLineHeightVariant?.name ?? '')
-      setVariantValue(Number(initialLineHeightVariant?.token.value) ?? 0)
+      setVariantValue(
+        initialLineHeightVariant?.token
+          ? parseUnit(initialLineHeightVariant.token.value).rawValue
+          : 0
+      )
       setVariantUnit(
         initialLineHeightVariant?.token
           ? parseUnit(initialLineHeightVariant.token.value).unit
