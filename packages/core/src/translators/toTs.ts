@@ -4,7 +4,7 @@ import JSON5 from 'json5'
 import { createThemeObject } from './createThemeObject'
 
 export const toTs = (primitives: TPrimitives): string => {
-  const theme = createThemeObject(primitives)
+  const theme = createThemeObject({ primitives })
   return `
   export type Colors = keyof typeof Tokens.colors
   export type FontSize = keyof typeof Tokens.fontSizes

@@ -3,10 +3,13 @@ import { assertToken, assertTokenGroup, TPrimitives } from '@core/types'
 import { sanitizeName } from './sanitizeName'
 
 export function createThemeObject({
-  colors,
-  typography,
-  shadows,
-}: TPrimitives) {
+  primitives,
+  isTailwind,
+}: {
+  primitives: TPrimitives
+  isTailwind?: boolean
+}) {
+  const { colors, typography, shadows } = primitives
   const themeObj = new Map<
     string,
     { [key: string]: string | { [key: string]: string } }
@@ -18,7 +21,11 @@ export function createThemeObject({
     const currentColorObj = new Map<string, string>()
     if (assertTokenGroup(color)) {
       Object.keys(color).forEach((variantName) => {
-        currentColorObj.set(variantName, `${color[variantName].value}`)
+        if (variantName === 'base' && isTailwind) {
+          currentColorObj.set('DEFAULT', `${color[variantName].value}`)
+        } else {
+          currentColorObj.set(variantName, `${color[variantName].value}`)
+        }
       })
     }
     colorObj.set(sanitizeName(colorName), Object.fromEntries(currentColorObj))

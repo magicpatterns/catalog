@@ -172,6 +172,13 @@ export function ColorDisplay({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
+  let baseColor = null
+  if (colorData.DEFAULT && assertToken(colorData.DEFAULT)) {
+    baseColor = colorData.DEFAULT.value
+  } else if (colorData.base && assertToken(colorData.base)) {
+    baseColor = colorData.base.value
+  }
+
   return (
     <Box
       css={{
@@ -194,27 +201,32 @@ export function ColorDisplay({
         >
           BASE VALUE
         </Text>
-        {colorData.base && assertToken(colorData.base) && (
+        {baseColor && (
           <>
             <Box
-              css={{ display: 'flex', alignItems: 'center', marginTop: '8px' }}
+              css={{
+                display: 'flex',
+                alignItems: 'center',
+                marginTop: '8px',
+              }}
             >
               <Box
                 css={{
                   width: '1.8rem',
                   height: '1.8rem',
-                  backgroundColor: colorData.base.value,
+                  backgroundColor: baseColor,
                   marginRight: '16px',
                   borderRadius: 8,
                   border: '1px solid black',
                 }}
               />
               <Text css={{ fontWeight: 600, fontSize: '1.5rem' }}>
-                {colorData.base.value}
+                {baseColor}
               </Text>
             </Box>
           </>
         )}
+
         <Stack
           marginTop={'32px'}
           spacing={'16px'}
