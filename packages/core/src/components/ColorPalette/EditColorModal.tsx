@@ -17,7 +17,7 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react'
-import { assertToken, TNamedTokenGroup } from '@core/types'
+import { assertToken, TNamedTokenGroup, TTokenGroup } from '@core/types'
 import { Color } from '@hello-pangea/color-picker'
 import { useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
@@ -79,6 +79,13 @@ export function EditColorModal({
       return
     }
     onBaseBlur()
+    let additionalVariants: TTokenGroup = {}
+    if (shouldGenerateVariants) {
+      additionalVariants = defaultColorShadesToTokens(
+        generateDefaultColorShades(base)
+      )
+    }
+
     onClose({
       name,
       group: {
@@ -87,7 +94,7 @@ export function EditColorModal({
           value: base,
           type: 'color',
         },
-        ...defaultColorShadesToTokens(generateDefaultColorShades(base)),
+        ...additionalVariants,
       },
     })
 
