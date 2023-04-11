@@ -79,6 +79,7 @@ export default function Layout({
       },
       files: fileTypes,
     })
+    onDeleteAlertDialogClose()
   }
 
   return (

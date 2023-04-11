@@ -270,7 +270,7 @@ export function Sidebar({
             />
             <SidebarLink
               key="sidebar-delete"
-              label="Wipe Data"
+              label="Delete Tokens"
               icon={FiTrash2}
               onSelect={() => onDelete()}
               isCollapsed={isCollapsed}
