@@ -70,15 +70,16 @@ export default function Layout({
 
   const onDeleteData = async () => {
     onDeleteAlertDialogClose()
-    setColors([])
-    setShadows([])
-    setTypography({ fontSizes: [], fontWeights: [], lineHeights: [] })
+    setColors({})
+    setTypography({ fontSizes: {}, fontWeights: {}, lineHeights: {} })
+    setShadows({})
     await postStoreData({
-      tokens: {
-        colorData: [],
-        typography: { fontSizes: [], fontWeights: [], lineHeights: [] },
-        shadows: [],
+      primitives: {
+        colors: {},
+        typography: { fontSizes: {}, fontWeights: {}, lineHeights: {} },
+        shadows: {},
       },
+      themes: [],
       files: fileTypes,
     })
   }
@@ -152,10 +153,10 @@ export default function Layout({
           primitives={{ colors, typography, shadows }}
         />
         <AlertDialogDelete
-          tokenName={'data'}
           isOpen={isAlertDialogOpen}
           onClose={onDeleteAlertDialogClose}
           onDelete={() => onDeleteData()}
+          deleteAllTokens={true}
         />
         {platform === 'package' && (
           <ExportSettingsModal

@@ -13,14 +13,21 @@ export function AlertDialogDelete({
   tokenName,
   isOpen,
   onClose,
+  deleteAllTokens,
   onDelete,
 }: {
-  tokenName: string
+  tokenName?: string
   isOpen: boolean
+  deleteAllTokens?: boolean
   onClose: () => void
   onDelete: () => void
 }) {
   const cancelRef = React.useRef(null)
+
+  const dialogMessage = deleteAllTokens
+    ? `Are you sure you want to delete all data? You can't undo this action.`
+    : `Are you sure you want to delete {"${tokenName}"}? You can't
+  undo this action.`
 
   return (
     <AlertDialog
@@ -34,10 +41,7 @@ export function AlertDialogDelete({
             Are you sure?
           </AlertDialogHeader>
 
-          <AlertDialogBody>
-            Are you sure you want to delete {`"${tokenName}"`}? You {`can't`}{' '}
-            undo this action.
-          </AlertDialogBody>
+          <AlertDialogBody>{dialogMessage}</AlertDialogBody>
 
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
