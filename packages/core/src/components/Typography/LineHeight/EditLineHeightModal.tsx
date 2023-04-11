@@ -16,10 +16,10 @@ import {
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { TLineHeightVariant } from '@core/types'
+import { TNamedToken, TUnits, Units } from '@core/types'
+import { parseUnit } from '@core/utils/parseUnit'
 import { useEffect, useState } from 'react'
-
-import { fontUnits, lineHeightUnits } from '../TypographyConstants'
+import { v4 as uuidv4 } from 'uuid'
 
 export function EditLineHeightModal({
   isOpen,
@@ -32,8 +32,8 @@ export function EditLineHeightModal({
   isOpen: boolean
   isAdding: boolean
   onClose: () => void
-  initialLineHeightVariant?: TLineHeightVariant
-  onUpdateLineHeightVariant: (newVariant: TLineHeightVariant) => void
+  initialLineHeightVariant?: TNamedToken
+  onUpdateLineHeightVariant: (newVariant: TNamedToken) => void
   onDeleteLineHeightVariant?: () => void
 }) {
   const {
@@ -42,48 +42,73 @@ export function EditLineHeightModal({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [variant, setVariant] = useState<TLineHeightVariant>(
-    initialLineHeightVariant ?? {
-      name: '',
-      value: 1.2,
-      unit: 'number',
-      lengthUnit: 'rem',
-    }
+  const [variantName, setVariantName] = useState<string>(
+    initialLineHeightVariant?.name ?? ''
+  )
+  const [variantValue, setVariantValue] = useState<number>(
+    initialLineHeightVariant?.token
+      ? parseUnit(initialLineHeightVariant.token.value).rawValue
+      : 0
+  )
+
+  const [id, setId] = useState<string>(
+    initialLineHeightVariant?.token.id ?? uuidv4()
+  )
+  const [variantUnit, setVariantUnit] = useState<TUnits>(
+    initialLineHeightVariant?.token
+      ? parseUnit(initialLineHeightVariant.token.value).unit
+      : ('px' as const)
   )
 
   const [error, setError] = useState<string | null>(null)
 
   const handleSave = () => {
     setError(null)
-    if (variant.name === '') {
+    if (variantName === '') {
       setError('Please fill out all fields.')
       return
     }
 
-    if (variant.value !== 0 && !variant.value) {
+    if (variantValue !== 0 && !variantValue) {
       setError('Please fill out all fields.')
       return
     }
 
-    if (variant.value < 0) {
+    if (variantValue < 0) {
       setError('Minimum value of line height can be 0.')
       return
     }
 
-    onUpdateLineHeightVariant(variant)
+    let newValue = `${variantValue}`
+    if (variantUnit !== 'number') {
+      newValue = `${variantValue}${variantUnit}`
+    }
+
+    onUpdateLineHeightVariant({
+      name: variantName,
+      token: {
+        id,
+        value: newValue,
+        type: 'lineHeight',
+      },
+    })
     onClose()
   }
 
   useEffect(() => {
     if (!isOpen) {
-      setVariant(
-        initialLineHeightVariant ?? {
-          name: '',
-          value: 1.2,
-          unit: 'number',
-          lengthUnit: 'rem',
-        }
+      setVariantName(initialLineHeightVariant?.name ?? '')
+      setVariantValue(
+        initialLineHeightVariant?.token
+          ? parseUnit(initialLineHeightVariant.token.value).rawValue
+          : 0
       )
+      setVariantUnit(
+        initialLineHeightVariant?.token
+          ? parseUnit(initialLineHeightVariant.token.value).unit
+          : ('px' as const)
+      )
+      setId(initialLineHeightVariant?.token.id ?? uuidv4())
       setError(null)
     }
   }, [isOpen, initialLineHeightVariant])
@@ -106,38 +131,28 @@ export function EditLineHeightModal({
               <FormControl>
                 <FormLabel>Variant Name</FormLabel>
                 <Input
-                  value={variant.name}
-                  onChange={(e) =>
-                    setVariant({ ...variant, name: e.target.value })
-                  }
+                  value={variantName}
+                  onChange={(e) => setVariantName(e.target.value)}
                 />
               </FormControl>
 
               <FormControl css={{ marginTop: '32px' }}>
                 <FormLabel>Variant Value</FormLabel>
                 <Input
-                  value={variant.value}
-                  onChange={(e) =>
-                    setVariant({ ...variant, value: Number(e.target.value) })
-                  }
+                  value={variantValue}
+                  onChange={(e) => setVariantValue(Number(e.target.value))}
                   type="number"
                 />
               </FormControl>
               <FormControl css={{ marginTop: '32px' }}>
                 <FormLabel>Variant Unit</FormLabel>
                 <Select
-                  value={variant.unit}
+                  value={variantUnit}
                   onChange={(event) => {
-                    setVariant({
-                      ...variant,
-                      unit: event.target.value as
-                        | 'number'
-                        | 'length'
-                        | 'percent',
-                    })
+                    setVariantUnit(event.target.value as TUnits)
                   }}
                 >
-                  {lineHeightUnits.map((unit, index) => {
+                  {Units.map((unit, index) => {
                     return (
                       <option key={index} value={unit}>
                         {unit}
@@ -146,28 +161,6 @@ export function EditLineHeightModal({
                   })}
                 </Select>
               </FormControl>
-              {variant.unit === 'length' ? (
-                <FormControl css={{ marginTop: '32px' }}>
-                  <FormLabel>Length Unit</FormLabel>
-                  <Select
-                    value={variant.lengthUnit}
-                    onChange={(event) => {
-                      setVariant({
-                        ...variant,
-                        lengthUnit: event.target.value as 'px' | 'rem' | 'em',
-                      })
-                    }}
-                  >
-                    {fontUnits.map((unit, index) => {
-                      return (
-                        <option key={index} value={unit}>
-                          {unit}
-                        </option>
-                      )
-                    })}
-                  </Select>
-                </FormControl>
-              ) : null}
             </Box>
             {error && (
               <Text color="red.500" css={{ marginTop: 18 }}>
@@ -192,7 +185,7 @@ export function EditLineHeightModal({
                   Delete Variant
                 </Button>
                 <AlertDialogDelete
-                  tokenName={variant.name}
+                  tokenName={variantName}
                   isOpen={isAlertDialogOpen}
                   onClose={onDeleteAlertDialogClose}
                   onDelete={() => onDeleteLineHeightVariant()}

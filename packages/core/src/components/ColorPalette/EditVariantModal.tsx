@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Checkbox,
   FormControl,
   FormLabel,
   Input,
@@ -16,8 +15,9 @@ import {
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { TColorVariant } from '@core/types'
+import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 import { ColorPicker } from './ColorPicker'
 import { handleInvalidColor } from './utils'
@@ -31,8 +31,8 @@ export function EditVariantModal({
 }: {
   isOpen: boolean
   onClose: () => void
-  initialVariant?: TColorVariant
-  onUpdateVariant: (newVariant: TColorVariant) => void
+  initialVariant?: TNamedToken
+  onUpdateVariant: (newVariant: TNamedToken) => void
   onDeleteVariant?: () => void
 }) {
   const {
@@ -41,14 +41,17 @@ export function EditVariantModal({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [variant, setVariant] = useState<TColorVariant>(
-    initialVariant ?? { name: '', color: '', isBase: false }
+  const [variant, setVariant] = useState<TNamedToken>(
+    initialVariant ?? {
+      name: '',
+      token: { id: uuidv4(), value: '', type: 'color' },
+    }
   )
   const [error, setError] = useState<string | null>(null)
 
   const handleSave = () => {
     // Save the submitted color value
-    const oldColor: string = variant.color
+    const oldColor = `${variant.token.value}`
 
     // Check for blank name
     if (!variant.name) {
@@ -57,17 +60,16 @@ export function EditVariantModal({
     }
 
     // Check for blank / missing color
-    if (!variant.color) {
+    if (!variant.token.value) {
       setError('Please enter a color.')
       return
     }
 
     // If color is invalid, handleInvalidColor will reassign a value to the variant.color
-    variant.color = handleInvalidColor(variant.color)
+    const newColor = handleInvalidColor(oldColor)
     // If there's a reassignment, they'll no longer match, so we can alert the user...
-    if (variant.color !== oldColor) {
+    if (newColor !== oldColor) {
       setError('This is not a valid color')
-      variant.color = oldColor
       return
     }
     // Remove error so it doesn't persist...
@@ -78,7 +80,12 @@ export function EditVariantModal({
 
   useEffect(() => {
     if (!isOpen) {
-      setVariant(initialVariant ?? { name: '', color: '', isBase: false })
+      setVariant(
+        initialVariant ?? {
+          name: '',
+          token: { id: uuidv4(), value: '', type: 'color' },
+        }
+      )
       setError(null)
     }
   }, [isOpen, initialVariant])
@@ -128,20 +135,27 @@ export function EditVariantModal({
                           width: '14px',
                           marginLeft: '8px',
                         }}
-                        bgColor={variant.color}
+                        bgColor={`${variant.token.value}`}
                         border={'1px solid black'}
                       />
                     </Box>
                   </FormLabel>
                   <Input
                     placeholder="e.g. #FFFFFF"
-                    value={variant.color}
+                    value={variant.token.value}
                     onChange={(e) =>
-                      setVariant({ ...variant, color: e.target.value })
+                      setVariant({
+                        name: variant.name,
+                        token: {
+                          id: variant.token.id,
+                          value: e.target.value,
+                          type: 'color',
+                        },
+                      })
                     }
                   />
                 </FormControl>
-                <FormControl css={{ marginTop: '32px' }}>
+                {/* <FormControl css={{ marginTop: '32px' }}>
                   <Checkbox
                     checked={variant.isBase}
                     onChange={(event) => {
@@ -151,7 +165,7 @@ export function EditVariantModal({
                   >
                     Set as Base (i.e. default) variant for this color
                   </Checkbox>
-                </FormControl>
+                </FormControl> */}
               </Box>
               <Box
                 css={{
@@ -163,9 +177,16 @@ export function EditVariantModal({
               >
                 <ColorPicker
                   onChange={(colorPickerColor) => {
-                    setVariant({ ...variant, color: colorPickerColor.hex })
+                    setVariant({
+                      name: variant.name,
+                      token: {
+                        id: variant.token.id,
+                        value: colorPickerColor.hex,
+                        type: 'color',
+                      },
+                    })
                   }}
-                  colorPickerColor={variant.color}
+                  colorPickerColor={`${variant.token.value}`}
                   presetColors={[]}
                 />
               </Box>

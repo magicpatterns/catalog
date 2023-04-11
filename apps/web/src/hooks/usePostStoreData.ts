@@ -1,14 +1,14 @@
-import { defaultConfig, TConfig } from '@core/types'
+import { defaultConfigV2, TMirrorfulStore } from '@core/types'
 
-import { useLocalStorage } from './useLocalStorage'
+import { LOCAL_STORAGE_KEY, useLocalStorage } from './useLocalStorage'
 
 export function usePostStoreData() {
-  const [, setData] = useLocalStorage<TConfig>(
-    'mirrorfulConfigDataV2',
-    defaultConfig
+  const [, setData] = useLocalStorage<TMirrorfulStore>(
+    LOCAL_STORAGE_KEY,
+    defaultConfigV2
   )
 
-  const postStoreData = async (newData: TConfig) => {
+  const postStoreData = async (newData: TMirrorfulStore) => {
     setData(newData)
   }
 

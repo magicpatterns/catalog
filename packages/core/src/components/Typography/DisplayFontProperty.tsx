@@ -1,14 +1,22 @@
 import { Button, Heading, Stack, useDisclosure } from '@chakra-ui/react'
-import {
-  TFontSizeVariant,
-  TFontWeightVariant,
-  TLineHeightVariant,
-} from '@core/types'
+import { assertToken, TNamedToken, TTokenGroup } from '@core/types'
+import { parseUnit } from '@core/utils/parseUnit'
 
 import { FontPropertyRow } from './FontPropertyRow'
 import { EditFontSizeModal } from './FontSize/EditFontSizeModal'
 import { EditFontWeightModal } from './FontWeight/EditFontWeightModal'
 import { EditLineHeightModal } from './LineHeight/EditLineHeightModal'
+
+const compareFontProperties = (a: TNamedToken, b: TNamedToken) => {
+  const { rawValue: aRawValue, unit: aUnit } = parseUnit(a.token.value)
+  const { rawValue: bRawValue, unit: bUnit } = parseUnit(b.token.value)
+
+  if (aUnit !== bUnit) {
+    return aUnit.localeCompare(bUnit)
+  } else {
+    return aRawValue - bRawValue
+  }
+}
 
 export const DisplayFontProperty = ({
   headingText,
@@ -20,16 +28,8 @@ export const DisplayFontProperty = ({
   headingText: string
   buttonText: string
   fontProperty: 'fontSize' | 'fontWeight' | 'lineHeight'
-  fontPropertyData:
-    | TFontSizeVariant[]
-    | TFontWeightVariant[]
-    | TLineHeightVariant[]
-  onUpdateFontPropertyData: (
-    newFontSizeData:
-      | TFontSizeVariant[]
-      | TFontWeightVariant[]
-      | TLineHeightVariant[]
-  ) => void
+  fontPropertyData: TTokenGroup
+  onUpdateFontPropertyData: (newFontData: TTokenGroup) => void
 }) => {
   const {
     isOpen: isAddVariantModalOpen,
@@ -43,37 +43,37 @@ export const DisplayFontProperty = ({
         {headingText}
       </Heading>
       <Stack css={{ marginTop: '24px' }} spacing={12}>
-        {fontPropertyData.map((fontPropertyVariant, index) => {
-          return (
+        {Object.keys(fontPropertyData)
+          .map((key) => ({
+            name: key,
+            token: fontPropertyData[key],
+          }))
+          .filter((value): value is TNamedToken => assertToken(value.token))
+          .sort(compareFontProperties)
+          .map((data) => (
             <FontPropertyRow
-              key={`${index}-${fontPropertyVariant.name}`}
+              key={`${fontProperty}-${data.name}`}
               fontProperty={fontProperty}
-              fontPropertyData={fontPropertyVariant}
+              fontPropertyData={data}
               onUpdateFontPropertyVariant={(updatedFontPropertyData) => {
-                const newFontPropertyData = [...fontPropertyData] as
-                  | TFontSizeVariant[]
-                  | TFontWeightVariant[]
-                  | TLineHeightVariant[]
-                const fontPropertyIndex = fontPropertyData.findIndex(
-                  (ec) => ec.name === fontPropertyVariant.name
-                )
-                newFontPropertyData[fontPropertyIndex] = updatedFontPropertyData
+                const newFontPropertyData = { ...fontPropertyData }
+
+                if (data.name !== updatedFontPropertyData.name) {
+                  delete newFontPropertyData[data.name]
+                }
+
+                newFontPropertyData[updatedFontPropertyData.name] =
+                  updatedFontPropertyData.token
 
                 onUpdateFontPropertyData(newFontPropertyData)
               }}
               onDeleteFontPropertyVariant={() => {
-                for (let i = 0; i < fontPropertyData.length; i++) {
-                  if (fontPropertyData[i].name === fontPropertyVariant.name) {
-                    fontPropertyData.splice(i, 1)
-                    break
-                  }
-                }
-
-                onUpdateFontPropertyData(fontPropertyData)
+                const newFontPropertyData = { ...fontPropertyData }
+                delete newFontPropertyData[data.name]
+                onUpdateFontPropertyData(newFontPropertyData)
               }}
             />
-          )
-        })}
+          ))}
         <Button
           css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}
           onClick={() => onAddVariantModalOpen()}
@@ -86,9 +86,11 @@ export const DisplayFontProperty = ({
           isAdding={true}
           isOpen={isAddVariantModalOpen}
           onClose={onAddVariantModalClose}
-          onUpdateFontSizeVariant={(newVariant: TFontSizeVariant) => {
-            const updatedFontSizeData = [...fontPropertyData, newVariant]
-            onUpdateFontPropertyData(updatedFontSizeData as TFontSizeVariant[])
+          onUpdateFontSizeVariant={(newVariant: TNamedToken) => {
+            const newFontSizeData = { ...fontPropertyData }
+            newFontSizeData[newVariant.name] = newVariant.token
+
+            onUpdateFontPropertyData(newFontSizeData)
           }}
         />
       )}
@@ -97,11 +99,10 @@ export const DisplayFontProperty = ({
           isAdding={true}
           isOpen={isAddVariantModalOpen}
           onClose={onAddVariantModalClose}
-          onUpdateFontWeightVariant={(newVariant: TFontWeightVariant) => {
-            const updatedFontWeightData = [...fontPropertyData, newVariant]
-            onUpdateFontPropertyData(
-              updatedFontWeightData as TFontWeightVariant[]
-            )
+          onUpdateFontWeightVariant={(newVariant: TNamedToken) => {
+            const newFontWeightData = { ...fontPropertyData }
+            newFontWeightData[newVariant.name] = newVariant.token
+            onUpdateFontPropertyData(newFontWeightData)
           }}
         />
       )}
@@ -110,11 +111,10 @@ export const DisplayFontProperty = ({
           isAdding={true}
           isOpen={isAddVariantModalOpen}
           onClose={onAddVariantModalClose}
-          onUpdateLineHeightVariant={(newVariant: TLineHeightVariant) => {
-            const updatedLineHeightData = [...fontPropertyData, newVariant]
-            onUpdateFontPropertyData(
-              updatedLineHeightData as TLineHeightVariant[]
-            )
+          onUpdateLineHeightVariant={(newVariant: TNamedToken) => {
+            const newLineWeightData = { ...fontPropertyData }
+            newLineWeightData[newVariant.name] = newVariant.token
+            onUpdateFontPropertyData(newLineWeightData)
           }}
         />
       )}

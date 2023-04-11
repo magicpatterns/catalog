@@ -33,7 +33,7 @@ import { toJs } from '@core/translators/toJs'
 import { toJson } from '@core/translators/toJson'
 import { toScss } from '@core/translators/toScss'
 import { toTailwind } from '@core/translators/toTailwind'
-import { TTokens } from '@core/types'
+import { TPrimitives } from '@core/types'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
 import { FaReact } from 'react-icons/fa'
@@ -45,14 +45,18 @@ import { CodePreview } from './CodePreview'
 
 type exports = 'Colors' | 'Typography' | 'Shadows'
 
-function PackageModalBody({ tokens }: { tokens: TTokens }) {
+function PackageModalBody({ primitives }: { primitives: TPrimitives }) {
   const [exportType, setExportType] = useState<exports>('Colors')
+
+  const exampleColorTokenName = Object.keys(primitives.colors)[0] ?? 'primary'
+  const exampleFontSizeName =
+    Object.keys(primitives.typography.fontSizes)[0] ?? 'sm'
+  const exampleShadowName = Object.keys(primitives.shadows)[0] ?? 'sm'
+
   const exportTabComponent: Record<exports, React.ReactNode> = {
     Colors: (
       <TokenTab
-        primaryName={
-          tokens && tokens.colorData[0] ? tokens.colorData[0].name : 'primary'
-        }
+        primaryName={exampleColorTokenName}
         cssName="color"
         cssPropertyName="background-color"
         javascriptName="colors"
@@ -63,11 +67,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
     ),
     Typography: (
       <TokenTab
-        primaryName={
-          tokens && tokens.typography.fontSizes[0]
-            ? tokens.typography.fontSizes[0].name
-            : 'sm'
-        }
+        primaryName={exampleFontSizeName}
         cssName="font-size"
         cssPropertyName="font-size"
         javascriptName="fontSizes"
@@ -78,9 +78,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
     ),
     Shadows: (
       <TokenTab
-        primaryName={
-          tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
-        }
+        primaryName={exampleShadowName}
         cssName="box-shadow"
         cssPropertyName="box-shadow"
         javascriptName="boxShadows"
@@ -310,7 +308,7 @@ function TokenTab({
   )
 }
 
-function WebModalBody({ tokens }: { tokens: TTokens }) {
+function WebModalBody({ primitives }: { primitives: TPrimitives }) {
   return (
     <>
       <Text css={{ marginBottom: '8px', fontSize: '1rem' }}>
@@ -333,7 +331,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
               <CodePreview
                 language="css"
                 text={`/* For example, create a mirrorful.css file \n and use it throughout your project */\n\n${toCss(
-                  tokens
+                  primitives
                 )}`}
               />
             </TabPanel>
@@ -341,7 +339,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
               <CodePreview
                 language="scss"
                 text={`/* For example, create a mirrorful.scss file \n and use it throughout your project */\n\n${toScss(
-                  tokens
+                  primitives
                 )}`}
               />
             </TabPanel>
@@ -349,7 +347,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
               <CodePreview
                 language="js"
                 text={`/* For example, create a mirrorful.js file \n and use it throughout your project */ \n\n${toJs(
-                  tokens
+                  primitives
                 )}`}
               />
             </TabPanel>
@@ -357,7 +355,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
               <CodePreview
                 language="json"
                 text={`/* For example, create a mirrorful.json file \n and use it throughout your project */\n\n${toJson(
-                  tokens
+                  primitives
                 )}`}
               />
             </TabPanel>
@@ -365,7 +363,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
               <CodePreview
                 language="js"
                 text={`/* Copy into the theme section of your tailwind.config.js\n Read more here: https://tailwindcss.com/docs/theme */\n\n${toTailwind(
-                  tokens
+                  primitives
                 )}`}
               />
             </TabPanel>
@@ -373,7 +371,7 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
               <CodePreview
                 language="js"
                 text={`/* For example, create a mirrorful.cjs file \n and use it throughout your project. */ \n\n${toCjs(
-                  tokens
+                  primitives
                 )}`}
               />
             </TabPanel>
@@ -483,13 +481,13 @@ export function ExportSuccessModal({
   // primaryName,
   isOpen,
   onClose,
-  tokens,
+  primitives,
 }: {
   platform: TPlatform
   // primaryName: string
   isOpen: boolean
   onClose: () => void
-  tokens: TTokens
+  primitives: TPrimitives
 }) {
   return (
     <Modal
@@ -513,8 +511,10 @@ export function ExportSuccessModal({
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {platform === 'package' && <PackageModalBody tokens={tokens} />}
-          {platform === 'web' && <WebModalBody tokens={tokens} />}
+          {platform === 'package' && (
+            <PackageModalBody primitives={primitives} />
+          )}
+          {platform === 'web' && <WebModalBody primitives={primitives} />}
         </ModalBody>
 
         <ModalFooter>

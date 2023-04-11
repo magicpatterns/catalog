@@ -1,39 +1,66 @@
-import { TTokens } from '@core/types'
+import { assertToken, assertTokenGroup, TPrimitives } from '@core/types'
 
 import { sanitizeName } from './sanitizeName'
 
-export function createThemeObject({ colorData, typography, shadows }: TTokens) {
+export function createThemeObject({
+  colors,
+  typography,
+  shadows,
+}: TPrimitives) {
   const themeObj = new Map<
     string,
     { [key: string]: string | { [key: string]: string } }
   >()
 
   const colorObj = new Map<string, { [key: string]: string }>()
-  const fontSizeObj = new Map<string, string>()
-
-  colorData.forEach((color) => {
-    colorObj.set(sanitizeName(color.name), {
-      ...(color.baseColor && { base: color.baseColor }),
-      ...color.variants,
-    })
+  Object.keys(colors).forEach((colorName) => {
+    const color = colors[colorName]
+    const currentColorObj = new Map<string, string>()
+    if (assertTokenGroup(color)) {
+      Object.keys(color).forEach((variantName) => {
+        currentColorObj.set(variantName, `${color[variantName].value}`)
+      })
+    }
+    colorObj.set(sanitizeName(colorName), Object.fromEntries(currentColorObj))
   })
-
-  typography.fontSizes.forEach((color) => {
-    fontSizeObj.set(sanitizeName(color.name), `${color.value}${color.unit}`)
-  })
-
   themeObj.set('colors', Object.fromEntries(colorObj))
+
+  const fontSizeObj = new Map<string, string>()
+  Object.keys(typography.fontSizes).forEach((name) => {
+    const fontSize = typography.fontSizes[name]
+    if (assertToken(fontSize)) {
+      fontSizeObj.set(sanitizeName(name), `${fontSize.value}`)
+    }
+  })
   themeObj.set('fontSizes', Object.fromEntries(fontSizeObj))
 
-  const shadowsObj = new Map<string, string>()
-
-  shadows.forEach((shadow) => {
-    shadowsObj.set(sanitizeName(shadow.name), shadow.value)
+  const fontWeightObj = new Map<string, string>()
+  Object.keys(typography.fontWeights).forEach((name) => {
+    const fontWeight = typography.fontWeights[name]
+    if (assertToken(fontWeight)) {
+      fontWeightObj.set(sanitizeName(name), `${fontWeight.value}`)
+    }
   })
+  themeObj.set('fontWeights', Object.fromEntries(fontWeightObj))
 
+  const lineHeightObj = new Map<string, string>()
+  Object.keys(typography.lineHeights).forEach((name) => {
+    const lineHeight = typography.lineHeights[name]
+    if (assertToken(lineHeight)) {
+      lineHeightObj.set(sanitizeName(name), `${lineHeight.value}`)
+    }
+  })
+  themeObj.set('lineHeights', Object.fromEntries(lineHeightObj))
+
+  const shadowsObj = new Map<string, string>()
+  Object.keys(shadows).forEach((name) => {
+    const shadow = shadows[name]
+    if (assertToken(shadow)) {
+      shadowsObj.set(sanitizeName(name), `${shadow.value}`)
+    }
+  })
   themeObj.set('boxShadows', Object.fromEntries(fontSizeObj))
 
   const rawJsonObject = Object.fromEntries(themeObj)
-
   return rawJsonObject
 }

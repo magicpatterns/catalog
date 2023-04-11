@@ -65,6 +65,7 @@
     "@types/node": "^18.15.3",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
+    "@types/uuidv4": "^5.0.0",
     "@types/validate-npm-package-name": "^4.0.0",
     "cross-env": "^7.0.3",
     "eslint": "8.34.0",

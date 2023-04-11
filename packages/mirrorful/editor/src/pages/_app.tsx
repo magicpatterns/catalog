@@ -8,7 +8,7 @@ import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProv
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@mirrorful/core/lib/store/useMirrorfulStore'
-import { defaultShadows } from '@mirrorful/core/lib/types'
+import { defaultShadowsV2 } from '@mirrorful/core/lib/types'
 import type { AppProps } from 'next/app'
 import { usePathname, useRouter } from 'next/navigation'
 import posthog from 'posthog-js'
@@ -47,18 +47,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       setIsLoading(true)
       const data = await fetchStoreData()
 
-      if (
-        !Object.keys(data).length ||
-        !data.tokens.colorData ||
-        data.tokens.colorData.length === 0
-      ) {
+      console.log(data)
+      if (!data || Object.keys(data.primitives.colors).length === 0) {
         setShowOnBoarding(true)
         return
       }
 
       setColors(data.tokens.colorData ?? [])
       setTypography(data.tokens.typography)
-      setShadows(data.tokens.shadows ?? defaultShadows)
+      setShadows(data.tokens.shadows ?? defaultShadowsV2)
       setFileTypes(data.files)
     } catch (e) {
       // TODO: Handle error
