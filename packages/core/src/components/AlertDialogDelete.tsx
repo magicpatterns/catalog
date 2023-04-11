@@ -22,6 +22,8 @@ export function AlertDialogDelete({
 }) {
   const cancelRef = React.useRef(null)
 
+  console.log('delete initiated')
+
   return (
     <AlertDialog
       isOpen={isOpen}

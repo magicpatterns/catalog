@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { ExportSettingsModal } from '../components/ExportSettingsModal'
 import { ExportSuccessModal } from '../components/ExportSuccessModal'
 import useMirrorfulStore, { MirrorfulState } from '../store/useMirrorfulStore'
+import { AlertDialogDelete } from './AlertDialogDelete'
 import { Sidebar } from './Sidebar/Sidebar'
 
 export type TPlatform = 'package' | 'web'
@@ -29,8 +30,16 @@ export default function Layout({
   const pathname = usePathname()
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
-  const { colors, typography, shadows, fileTypes, setFileTypes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const {
+    colors,
+    setColors,
+    typography,
+    setTypography,
+    shadows,
+    setShadows,
+    fileTypes,
+    setFileTypes,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
@@ -43,6 +52,12 @@ export default function Layout({
     onClose: onExportSettingsModalClose,
   } = useDisclosure()
 
+  const {
+    isOpen: isAlertDialogOpen,
+    onOpen: onDeleteAlertDialogOpen,
+    onClose: onDeleteAlertDialogClose,
+  } = useDisclosure()
+
   const handleExport = async () => {
     await postStoreData({
       tokens: { colorData: colors, typography, shadows },
@@ -50,6 +65,20 @@ export default function Layout({
     })
 
     onExportSuccessModalOpen()
+  }
+
+  const onDeleteData = async () => {
+    setColors([])
+    setShadows([])
+    setTypography({ fontSizes: [], fontWeights: [], lineHeights: [] })
+    await postStoreData({
+      tokens: {
+        colorData: [],
+        typography: { fontSizes: [], fontWeights: [], lineHeights: [] },
+        shadows: [],
+      },
+      files: fileTypes,
+    })
   }
 
   return (
@@ -76,6 +105,7 @@ export default function Layout({
             onSelectTab={(newTab: TTab) => router.push(newTab)}
             onOpenSettings={() => onExportSettingsModalOpen()}
             onExport={handleExport}
+            onDelete={onDeleteAlertDialogOpen}
             isCollapsed={isSidebarCollapsed}
             onToggleCollapsed={() => setIsSidebarCollapsed((prev) => !prev)}
           />
@@ -118,6 +148,12 @@ export default function Layout({
           isOpen={isExportSuccessModalOpen}
           onClose={onExportSuccessModalClose}
           tokens={{ colorData: colors, typography, shadows }}
+        />
+        <AlertDialogDelete
+          tokenName={'data'}
+          isOpen={isAlertDialogOpen}
+          onClose={onDeleteAlertDialogClose}
+          onDelete={() => onDeleteData()}
         />
         {platform === 'package' && (
           <ExportSettingsModal

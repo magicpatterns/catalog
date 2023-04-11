@@ -131,6 +131,7 @@ export function Sidebar({
   onSelectTab,
   onOpenSettings,
   onExport,
+  onDelete,
   isDisabled,
   isCollapsed,
   onToggleCollapsed,
@@ -140,6 +141,7 @@ export function Sidebar({
   onSelectTab: (tab: TTab) => void
   onOpenSettings: () => void
   onExport: () => void
+  onDelete: () => void
   isDisabled?: boolean
   isCollapsed: boolean
   onToggleCollapsed: () => void
@@ -270,7 +272,7 @@ export function Sidebar({
               key="sidebar-delete"
               label="Wipe Data"
               icon={FiTrash2}
-              onSelect={() => onExport()}
+              onSelect={() => onDelete()}
               isCollapsed={isCollapsed}
               isDisabled={isDisabled}
             />
