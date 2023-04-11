@@ -68,6 +68,7 @@ export default function Layout({
   }
 
   const onDeleteData = async () => {
+    onDeleteAlertDialogClose()
     setColors([])
     setShadows([])
     setTypography({ fontSizes: [], fontWeights: [], lineHeights: [] })
@@ -79,7 +80,6 @@ export default function Layout({
       },
       files: fileTypes,
     })
-    onDeleteAlertDialogClose()
   }
 
   return (
