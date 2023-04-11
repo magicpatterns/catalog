@@ -59,7 +59,7 @@ export function NamePrimary({
             fontWeight="bold"
           >
             The color name is how it will be referenced in code. We recommend
-            simple names like {'"Blue"'} or {'"Light Green"'}.
+            simple names like {'"Blue"'} or {'"Light Green."'}
           </Text>
         </Box>
         <Box css={{ paddingBottom: '32px' }}>
