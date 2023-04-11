@@ -194,7 +194,7 @@ export function ColorDisplay({
         >
           BASE VALUE
         </Text>
-        {assertToken(colorData.base) && (
+        {colorData.base && assertToken(colorData.base) && (
           <>
             <Box
               css={{ display: 'flex', alignItems: 'center', marginTop: '8px' }}
