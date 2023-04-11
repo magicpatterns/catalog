@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
+import { assertToken, TNamedToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { FiMoreVertical } from 'react-icons/fi'

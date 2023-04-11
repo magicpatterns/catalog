@@ -17,7 +17,7 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react'
-import { assertToken, TNamedToken, TNamedTokenGroup } from '@core/types'
+import { assertToken, TNamedTokenGroup } from '@core/types'
 import { Color } from '@hello-pangea/color-picker'
 import { useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'

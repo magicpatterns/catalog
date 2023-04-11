@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { TNamedTokenGroup, TToken, TTokenGroup } from '../../types'
+import { TNamedTokenGroup, TTokenGroup } from '../../types'
 import { AddColorSkeleton } from './AddColorSkeleton'
 import { ColorDisplay } from './ColorDisplay'
 import { EditColorModal } from './EditColorModal'
