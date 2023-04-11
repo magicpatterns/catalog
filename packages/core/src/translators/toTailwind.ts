@@ -10,7 +10,7 @@ export const toTailwind = ({
 
   if (colorData) {
     theme.colors = colorData.reduce<Record<string, any>>((acc, color) => {
-      acc[color.name.toLowerCase()] = {
+      acc[color.name.toLowerCase().trim().replace(' ', '-')] = {
         ...color.variants,
         DEFAULT: color.baseColor,
       }
