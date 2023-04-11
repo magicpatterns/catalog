@@ -26,7 +26,7 @@ export function AlertDialogDelete({
 
   const dialogMessage = deleteAllTokens
     ? `Are you sure you want to delete all data? You can't undo this action.`
-    : `Are you sure you want to delete {"${tokenName}"}? You can't
+    : `Are you sure you want to delete "${tokenName}"? You can't
   undo this action.`
 
   return (
