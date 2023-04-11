@@ -73,7 +73,7 @@ yarn add mirrorful --dev
 
 ## ✨ Usage
 
-The following commands will start a local editor at `localhost:5050`.
+The following command will start a local editor at `localhost:5050`.
 
 ```
 npx mirrorful
