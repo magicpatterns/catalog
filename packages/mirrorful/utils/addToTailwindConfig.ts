@@ -271,13 +271,14 @@ const skipDirs = [
 ]
 
 /**
- *
+ * Uses Breadth First Search to find a specific folder
  * @param folderName Take in the folder name that needs to be found
  * @returns Either an empty string or a folder path
  */
 async function getFolderPath({ folderName }: { folderName: string }) {
   const rootDir = process.cwd()
   let finalPath = ''
+  // read in the root directory and put those files / folders in queue
   const queue = [...(await readdir(rootDir))]
   const visited = []
 
@@ -291,7 +292,7 @@ async function getFolderPath({ folderName }: { folderName: string }) {
       continue
     }
 
-    // if the path is a folder then check for the name
+    // if the path is a folder then check if the name matches
     if (fs.lstatSync(folder).isDirectory()) {
       if (folder.includes(folderName)) {
         finalPath = folder
@@ -301,7 +302,7 @@ async function getFolderPath({ folderName }: { folderName: string }) {
       queue.push(
         ...(await readdir(path.join(rootDir, folder))).map(
           (path) => `${folder}/${path}`
-        )
+        ) // next we queue the next folders but reading and concatenating the paths
       )
     }
   }
