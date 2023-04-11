@@ -15,7 +15,7 @@ export function LineHeightData({
       </Box>
       <Box
         css={{
-          fontSize: '2rem',
+          fontSize: '1rem',
           fontWeight: 'normal',
           width: '100%',
           lineHeight: lineHeightData.token.value,
