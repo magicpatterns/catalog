@@ -16,8 +16,10 @@ import {
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { TFontSizeVariant } from '@core/types'
+import { TNamedToken } from '@core/types'
+import { parseUnit } from '@core/utils/parseUnit'
 import { useEffect, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 import { fontUnits } from '../TypographyConstants'
 
@@ -32,8 +34,8 @@ export function EditFontSizeModal({
   isOpen: boolean
   isAdding: boolean
   onClose: () => void
-  initialFontSizeVariant?: TFontSizeVariant
-  onUpdateFontSizeVariant: (newVariant: TFontSizeVariant) => void
+  initialFontSizeVariant?: TNamedToken
+  onUpdateFontSizeVariant: (newVariant: TNamedToken) => void
   onDeleteFontSizeVariant?: () => void
 }) {
   const {
@@ -42,34 +44,70 @@ export function EditFontSizeModal({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [variant, setVariant] = useState<TFontSizeVariant>(
-    initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem' }
+  const [variantName, setVariantName] = useState<string>(
+    initialFontSizeVariant?.name ?? ''
+  )
+  const [variantValue, setVariantValue] = useState<number>(
+    initialFontSizeVariant?.token
+      ? parseUnit(initialFontSizeVariant.token.value).rawValue
+      : 0
+  )
+  const [id, setId] = useState<string>(
+    initialFontSizeVariant?.token.id ?? uuidv4()
+  )
+  const [variantUnit, setVariantUnit] = useState<'px' | 'em' | 'rem'>(
+    initialFontSizeVariant?.token
+      ? parseUnit(initialFontSizeVariant.token.value).unit
+      : ('px' as const)
   )
 
   const [error, setError] = useState<string | null>(null)
 
   const handleSave = () => {
     setError(null)
-    if (variant.name === '') {
+    if (variantName === '') {
       setError('Please fill out all fields.')
       return
     }
 
-    if (variant.value !== 0 && !variant.value) {
-      setError('Please fill out all fields.')
+    if (variantValue < 0 || variantValue > 10000) {
+      setError('Value must be greater than or equal to 0')
       return
     }
 
-    onUpdateFontSizeVariant(variant)
+    onUpdateFontSizeVariant({
+      name: variantName,
+      token: {
+        id,
+        value: `${variantValue}${variantUnit}`,
+        type: 'fontSize',
+      },
+    })
     onClose()
   }
 
   useEffect(() => {
     if (!isOpen) {
-      setVariant(initialFontSizeVariant ?? { name: '', value: 1, unit: 'rem' })
+      setVariantName(initialFontSizeVariant?.name ?? '')
+      setVariantValue(
+        initialFontSizeVariant?.token
+          ? parseUnit(initialFontSizeVariant.token.value).rawValue
+          : 0
+      )
+      setVariantUnit(
+        initialFontSizeVariant?.token
+          ? parseUnit(initialFontSizeVariant.token.value).unit
+          : ('px' as const)
+      )
+      setId(initialFontSizeVariant?.token.id ?? uuidv4())
       setError(null)
     }
   }, [isOpen, initialFontSizeVariant])
+
+  if (initialFontSizeVariant) {
+    console.log(initialFontSizeVariant)
+    console.log(parseUnit(initialFontSizeVariant?.token.value))
+  }
 
   return (
     <>
@@ -89,32 +127,25 @@ export function EditFontSizeModal({
               <FormControl>
                 <FormLabel>Variant Name</FormLabel>
                 <Input
-                  value={variant.name}
-                  onChange={(e) =>
-                    setVariant({ ...variant, name: e.target.value })
-                  }
+                  value={variantName}
+                  onChange={(e) => setVariantName(e.target.value)}
                 />
               </FormControl>
 
               <FormControl css={{ marginTop: '32px' }}>
                 <FormLabel>Variant Value</FormLabel>
                 <Input
-                  value={variant.value}
-                  onChange={(e) =>
-                    setVariant({ ...variant, value: Number(e.target.value) })
-                  }
+                  value={variantValue}
+                  onChange={(e) => setVariantValue(Number(e.target.value))}
                   type="number"
                 />
               </FormControl>
               <FormControl css={{ marginTop: '32px' }}>
                 <FormLabel>Variant Unit</FormLabel>
                 <Select
-                  value={variant.unit}
-                  onChange={(event) => {
-                    setVariant({
-                      ...variant,
-                      unit: event.target.value as 'px' | 'rem' | 'em',
-                    })
+                  value={variantUnit}
+                  onChange={(e) => {
+                    setVariantUnit(e.target.value as 'px' | 'rem' | 'em')
                   }}
                 >
                   {fontUnits.map((unit, index) => {
@@ -150,7 +181,7 @@ export function EditFontSizeModal({
                   Delete Variant
                 </Button>
                 <AlertDialogDelete
-                  tokenName={variant.name}
+                  tokenName={variantName}
                   isOpen={isAlertDialogOpen}
                   onClose={onDeleteAlertDialogClose}
                   onDelete={() => onDeleteFontSizeVariant()}

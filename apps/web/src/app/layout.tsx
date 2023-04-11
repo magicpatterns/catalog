@@ -50,7 +50,11 @@ export default function RootLayout({
     try {
       setIsLoading(true)
       const data = await fetchStoreData()
-      if (!data || Object.keys(data.primitives.colors).length === 0) {
+      if (
+        !data ||
+        Object.keys(data).length === 0 ||
+        Object.keys(data.primitives.colors).length === 0
+      ) {
         setShowOnBoarding(true)
         return
       }
