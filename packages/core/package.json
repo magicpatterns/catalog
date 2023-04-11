@@ -1,6 +1,6 @@
 {
   "name": "@mirrorful/core",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "build": "run-script-os",
     "build:win32": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && xcopy /Y package.json lib",
