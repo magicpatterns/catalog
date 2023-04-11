@@ -194,7 +194,7 @@ export function ColorDisplay({
         >
           BASE VALUE
         </Text>
-        {/* {colorData.baseColor && (
+        {assertToken(colorData.base) && (
           <>
             <Box
               css={{ display: 'flex', alignItems: 'center', marginTop: '8px' }}
@@ -203,18 +203,18 @@ export function ColorDisplay({
                 css={{
                   width: '1.8rem',
                   height: '1.8rem',
-                  backgroundColor: colorData.baseColor,
+                  backgroundColor: colorData.base.value,
                   marginRight: '16px',
                   borderRadius: 8,
                   border: '1px solid black',
                 }}
               />
               <Text css={{ fontWeight: 600, fontSize: '1.5rem' }}>
-                {colorData.baseColor}
+                {colorData.base.value}
               </Text>
             </Box>
           </>
-        )} */}
+        )}
         <Stack
           marginTop={'32px'}
           spacing={'16px'}
