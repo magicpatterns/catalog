@@ -1,7 +1,7 @@
 {
   "name": "Mirrorful",
   "version": "1.0.0",
-  "description": "Your Figma Plugin",
+  "description": "Sync your design tokens with Mirrorful",
   "main": "code.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
