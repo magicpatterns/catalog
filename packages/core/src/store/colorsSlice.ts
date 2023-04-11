@@ -1,10 +1,10 @@
 import { StateCreator } from 'zustand'
 
-import { TColorData } from '../types'
+import { TTokenGroup } from '../types'
 
 export interface ColorsSlice {
-  colors: TColorData[]
-  setColors: (newState: TColorData[]) => void
+  colors: TTokenGroup
+  setColors: (newState: TTokenGroup) => void
 }
 export const createColorsSlice: StateCreator<
   ColorsSlice,
@@ -12,6 +12,6 @@ export const createColorsSlice: StateCreator<
   [],
   ColorsSlice
 > = (set) => ({
-  colors: [],
+  colors: {},
   setColors: (newState) => set(() => ({ colors: newState })),
 })

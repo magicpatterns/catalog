@@ -1,4 +1,6 @@
+import { TTokenGroup } from '@core/types'
 import tinycolor from 'tinycolor2'
+import { v4 as uuidv4 } from 'uuid'
 
 import { VALID_CSS_COLORS } from './validCssColors'
 
@@ -51,6 +53,72 @@ export const generateDefaultColorShades = (primary: string) => {
     900: tinycolor(primary)
       .darken(scaleDiff * 4)
       .toHexString(),
+  }
+}
+
+export const defaultColorShadesToTokens = (shades: {
+  50: string
+  100: string
+  200: string
+  300: string
+  400: string
+  500: string
+  600: string
+  700: string
+  800: string
+  900: string
+}): TTokenGroup => {
+  return {
+    50: {
+      id: uuidv4(),
+      value: shades[50],
+      type: 'color',
+    },
+    100: {
+      id: uuidv4(),
+      value: shades[100],
+      type: 'color',
+    },
+    200: {
+      id: uuidv4(),
+      value: shades[200],
+      type: 'color',
+    },
+    300: {
+      id: uuidv4(),
+      value: shades[300],
+      type: 'color',
+    },
+    400: {
+      id: uuidv4(),
+      value: shades[400],
+      type: 'color',
+    },
+    500: {
+      id: uuidv4(),
+      value: shades[500],
+      type: 'color',
+    },
+    600: {
+      id: uuidv4(),
+      value: shades[600],
+      type: 'color',
+    },
+    700: {
+      id: uuidv4(),
+      value: shades[700],
+      type: 'color',
+    },
+    800: {
+      id: uuidv4(),
+      value: shades[800],
+      type: 'color',
+    },
+    900: {
+      id: uuidv4(),
+      value: shades[900],
+      type: 'color',
+    },
   }
 }
 

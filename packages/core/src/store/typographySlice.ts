@@ -1,10 +1,10 @@
 import { StateCreator } from 'zustand'
 
-import { TTypographyData } from '../types'
+import { TPrimitivesTypography } from '../types'
 
 export interface TypographySlice {
-  typography: TTypographyData
-  setTypography: (newState: TTypographyData) => void
+  typography: TPrimitivesTypography
+  setTypography: (newState: TPrimitivesTypography) => void
 }
 export const createTypographySlice: StateCreator<
   TypographySlice,
@@ -12,6 +12,6 @@ export const createTypographySlice: StateCreator<
   [],
   TypographySlice
 > = (set) => ({
-  typography: { fontSizes: [], fontWeights: [], lineHeights: [] },
+  typography: { fontSizes: {}, fontWeights: {}, lineHeights: {} },
   setTypography: (newState) => set(() => ({ typography: newState })),
 })

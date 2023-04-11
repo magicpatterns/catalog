@@ -2,27 +2,29 @@ import { ShadowsSection } from '@core/components/Shadows/ShadowsSection'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { TConfig, TShadowData } from '@core/types'
+import { TMirrorfulStore, TTokenGroup } from '@core/types'
 import React from 'react'
 
 export function ShadowsPage({
   postStoreData,
 }: {
-  postStoreData: (data: TConfig) => Promise<void>
+  postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
   const { typography, colors, shadows, setShadows, fileTypes } =
     useMirrorfulStore((state: MirrorfulState) => state)
-  const handleUpdateShadows = async (data: TShadowData[]) => {
+
+  const handleUpdateShadows = async (data: TTokenGroup) => {
     setShadows(data)
     await postStoreData({
-      tokens: { colorData: colors, typography, shadows: data },
+      primitives: { colors: colors, typography, shadows: data },
+      themes: [],
       files: fileTypes,
     })
   }
   return (
     <ShadowsSection
-      onUpdateShadowData={handleUpdateShadows}
       shadows={shadows}
+      onUpdateShadowData={handleUpdateShadows}
     />
   )
 }

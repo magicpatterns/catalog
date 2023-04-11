@@ -1,5 +1,6 @@
-import { TColorData } from '@core/types'
+import { TTokenGroup } from '@core/types'
 import tinycolor, { Instance } from 'tinycolor2'
+import { v4 as uuidv4 } from 'uuid'
 
 // https://chir.ag/projects/ntc/ntc.js was the source of these...
 const colorNames = [
@@ -1644,7 +1645,7 @@ const shuffleArray = (array: unknown[]) => {
 export function generatePalette(
   color: string,
   primaryName: string
-): TColorData[] {
+): TTokenGroup {
   let colors: Array<Instance> = []
 
   // If it's black or white, there are no true complements, so we randomize
@@ -1662,7 +1663,7 @@ export function generatePalette(
   colors.shift()
   shuffleArray(colors)
 
-  const randomizedColors: TColorData[] = []
+  const randomizedColors: TTokenGroup = {}
 
   colors.forEach((c) => {
     const hslColor = tinycolor(c).toHsl()
@@ -1674,30 +1675,21 @@ export function generatePalette(
 
     const hex = tinycolor(modifiedHsl).toHexString()
 
-    randomizedColors.push({
-      name: nameThatColor(modifiedHsl),
-      baseColor: hex,
-      variants: {
-        '500': hex,
-      },
-    })
-  })
-
-  // Dedupe any names
-  const nameSet = new Set<string>()
-  nameSet.add(primaryName)
-
-  randomizedColors.forEach((color) => {
-    // Name already exists
-    if (nameSet.has(color.name)) {
-      let index = 2
-      while (nameSet.has(`${color.name} ${index}`)) {
-        index += 1
-      }
-      color.name = `${color.name} ${index}`
+    randomizedColors[nameThatColor(modifiedHsl)] = {
+      id: uuidv4(),
+      value: hex,
+      type: 'color',
     }
-
-    nameSet.add(color.name)
   })
+
+  // Dedupe any primary name conflicts
+  Object.keys(randomizedColors).forEach((color) => {
+    // Name already exists
+    if (color === primaryName) {
+      randomizedColors[`${color}-2`] = randomizedColors[color]
+      delete randomizedColors[color]
+    }
+  })
+
   return randomizedColors
 }

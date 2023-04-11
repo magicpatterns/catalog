@@ -1,10 +1,5 @@
 import { Box, Divider, Heading, Text } from '@chakra-ui/react'
-import {
-  TFontSizeVariant,
-  TFontWeightVariant,
-  TLineHeightVariant,
-  TTypographyData,
-} from '@core/types'
+import { TPrimitivesTypography, TTokenGroup } from '@core/types'
 
 import { FontSizesSection } from './FontSize/FontSizesSection'
 import { FontWeightSection } from './FontWeight/FontWeightSection'
@@ -14,8 +9,8 @@ export function TypographySection({
   typography,
   onUpdateTypography,
 }: {
-  typography: TTypographyData
-  onUpdateTypography: (newTypography: TTypographyData) => void
+  typography: TPrimitivesTypography
+  onUpdateTypography: (newTypography: TPrimitivesTypography) => void
 }) {
   return (
     <Box>
@@ -35,15 +30,10 @@ export function TypographySection({
       <Box css={{ marginBottom: '48px' }} />
       <FontSizesSection
         fontSizeData={typography.fontSizes}
-        onUpdateFontPropertyData={(
-          newFontSizeData:
-            | TFontSizeVariant[]
-            | TFontWeightVariant[]
-            | TLineHeightVariant[]
-        ) => {
+        onUpdateFontPropertyData={(newFontSizeData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,
-            fontSizes: newFontSizeData as TFontSizeVariant[],
+            fontSizes: newFontSizeData,
           })
         }}
       />
@@ -51,15 +41,10 @@ export function TypographySection({
       <br />
       <FontWeightSection
         fontWeightData={typography.fontWeights}
-        onUpdateFontPropertyData={(
-          newFontWeightData:
-            | TFontSizeVariant[]
-            | TFontWeightVariant[]
-            | TLineHeightVariant[]
-        ) => {
+        onUpdateFontPropertyData={(newFontWeightData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,
-            fontWeights: newFontWeightData as TFontWeightVariant[],
+            fontWeights: newFontWeightData,
           })
         }}
       />
@@ -67,15 +52,10 @@ export function TypographySection({
       <br />
       <LineHeightSection
         lineHeightData={typography.lineHeights}
-        onUpdateFontPropertyData={(
-          newLineHeightData:
-            | TFontSizeVariant[]
-            | TFontWeightVariant[]
-            | TLineHeightVariant[]
-        ) => {
+        onUpdateFontPropertyData={(newLineHeightData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,
-            lineHeights: newLineHeightData as TLineHeightVariant[],
+            lineHeights: newLineHeightData,
           })
         }}
       />
