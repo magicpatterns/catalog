@@ -16,12 +16,10 @@ import {
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { TNamedToken } from '@core/types'
+import { TNamedToken, TUnits, Units } from '@core/types'
 import { parseUnit } from '@core/utils/parseUnit'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-
-import { fontUnits } from '../TypographyConstants'
 
 export function EditLineHeightModal({
   isOpen,
@@ -54,7 +52,7 @@ export function EditLineHeightModal({
   const [id, setId] = useState<string>(
     initialLineHeightVariant?.token.id ?? uuidv4()
   )
-  const [variantUnit, setVariantUnit] = useState<'px' | 'em' | 'rem'>(
+  const [variantUnit, setVariantUnit] = useState<TUnits>(
     initialLineHeightVariant?.token
       ? parseUnit(initialLineHeightVariant.token.value).unit
       : ('px' as const)
@@ -79,11 +77,16 @@ export function EditLineHeightModal({
       return
     }
 
+    let newValue = `${variantValue}`
+    if (variantUnit !== 'number') {
+      newValue = `${variantValue}${variantUnit}`
+    }
+
     onUpdateLineHeightVariant({
       name: variantName,
       token: {
         id,
-        value: `${variantValue}`,
+        value: newValue,
         type: 'lineHeight',
       },
     })
@@ -140,10 +143,10 @@ export function EditLineHeightModal({
                 <Select
                   value={variantUnit}
                   onChange={(event) => {
-                    setVariantUnit(event.target.value as 'px' | 'em' | 'rem')
+                    setVariantUnit(event.target.value as TUnits)
                   }}
                 >
-                  {fontUnits.map((unit, index) => {
+                  {Units.map((unit, index) => {
                     return (
                       <option key={index} value={unit}>
                         {unit}

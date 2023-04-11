@@ -16,12 +16,10 @@ import {
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { TNamedToken } from '@core/types'
+import { TNamedToken, TUnits, Units } from '@core/types'
 import { parseUnit } from '@core/utils/parseUnit'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-
-import { fontUnits } from '../TypographyConstants'
 
 export function EditFontSizeModal({
   isOpen,
@@ -55,7 +53,7 @@ export function EditFontSizeModal({
   const [id, setId] = useState<string>(
     initialFontSizeVariant?.token.id ?? uuidv4()
   )
-  const [variantUnit, setVariantUnit] = useState<'px' | 'em' | 'rem'>(
+  const [variantUnit, setVariantUnit] = useState<TUnits>(
     initialFontSizeVariant?.token
       ? parseUnit(initialFontSizeVariant.token.value).unit
       : ('px' as const)
@@ -145,12 +143,12 @@ export function EditFontSizeModal({
                 <Select
                   value={variantUnit}
                   onChange={(e) => {
-                    setVariantUnit(e.target.value as 'px' | 'rem' | 'em')
+                    setVariantUnit(e.target.value as TUnits)
                   }}
                 >
-                  {fontUnits.map((unit, index) => {
+                  {Units.map((unit) => {
                     return (
-                      <option key={index} value={unit}>
+                      <option key={unit} value={unit}>
                         {unit}
                       </option>
                     )

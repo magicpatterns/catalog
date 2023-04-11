@@ -1,8 +1,10 @@
+import { TUnits } from '@core/types'
+
 export const parseUnit = (
   value: string
 ): {
   rawValue: number
-  unit: 'px' | 'em' | 'rem'
+  unit: TUnits
 } => {
   if (value.endsWith('px')) {
     return {
@@ -25,8 +27,15 @@ export const parseUnit = (
     }
   }
 
+  if (value.endsWith('%')) {
+    return {
+      rawValue: Number(value.replace('%', '')),
+      unit: '%',
+    }
+  }
+
   return {
     rawValue: Number(value),
-    unit: 'px',
+    unit: 'number',
   }
 }

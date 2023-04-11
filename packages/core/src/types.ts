@@ -172,3 +172,7 @@ export type TNamedTokenGroup = {
   name: string
   group: TTokenGroup
 }
+
+export const Units = ['px', 'rem', 'em', '%', 'number'] as const
+
+export type TUnits = (typeof Units)[number]
