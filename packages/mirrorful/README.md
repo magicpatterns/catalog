@@ -40,8 +40,7 @@
 <kbd>[<img title="Turkish" alt="Turkish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/tr.svg" width="22">](i18n/README.tr.md)</kbd>
 <kbd>[<img title="Spanish" alt="Spanish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/es.svg" width="22">](i18n/README.es.md)</kbd>
 <kbd>[
-  <img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/pt.svg" width="22">
-  <img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/br.svg" width="22">
+<img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/pt.svg" width="22">
 ](i18n/README.pt.md)</kbd>
 
 **[Mirrorful](https://mirrorful.com)** is a simple, open-source design system framework. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
@@ -49,11 +48,12 @@
 - **Start new projects with a source of truth**
 - **Visually modify your theme**
 - **Generate colors**
-- 🔜 **Theme Templates**
+- **Theme Templates**
+- **Figma integration**
+
 - 🔜 **Lightweight Headless Component Library**
 - 🔜 **Eslint rules**
 - 🔜 **Propagate tokens across projects**
-- 🔜 **Figma integration**
 
 And more...
 
@@ -76,36 +76,18 @@ yarn add mirrorful --dev
 The following commands will start a local editor at `localhost:5050`.
 
 ```
-yarn run mirrorful
+npx mirrorful
 ```
 
 or
 
 ```
-npx mirrorful
+yarn run mirrorful
 ```
 
-## 💿 Export Formats
+## 📚 Documentation
 
-After configuring your theme in the editor, you can export it to be used by your app. We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`. If you're using tailwind, we also export to common js to work nicely with your tailwind config.
-
-**Example: Using CSS Variables**
-
-```css
-.primary-button {
-  background-color: var(--color-primary);
-}
-
-.primary-button:hover {
-  background-color: var(--color-primary-hover);
-}
-```
-
-**Example: Using Javascript Constants**
-
-```javascript
-<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
-```
+Check out our [documentation](https://mirrorful.com/docs) for more information.
 
 ## 🤝 Component Library Agnostic
 
