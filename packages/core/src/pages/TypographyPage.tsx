@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import useMirrorfulStore, {
   MirrorfulState,
@@ -9,8 +10,15 @@ export function TypographyPage({
 }: {
   postStoreData: (data: TConfig) => Promise<void>
 }) {
-  const { typography, colors, shadows, setTypography, fileTypes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const {
+    typography,
+    colors,
+    shadows,
+    setTypography,
+    fileTypes,
+    setShadows,
+    setColors,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
   const handleUpdateTypography = async (data: TTypographyData) => {
     setTypography(data)
     await postStoreData({
@@ -18,14 +26,32 @@ export function TypographyPage({
       files: fileTypes,
     })
   }
+  const deleteData = async () => {
+    setColors([])
+    setShadows([])
+    setTypography({ fontSizes: [], fontWeights: [], lineHeights: [] })
+    await postStoreData({
+      tokens: {
+        colorData: [],
+        typography: { fontSizes: [], fontWeights: [], lineHeights: [] },
+        shadows: [],
+      },
+      files: fileTypes,
+    })
+  }
   return (
-    <TypographySection
-      typography={{
-        fontSizes: typography.fontSizes,
-        fontWeights: typography.fontWeights,
-        lineHeights: typography.lineHeights,
-      }}
-      onUpdateTypography={handleUpdateTypography}
-    />
+    <>
+      <Button onClick={deleteData} colorScheme="red">
+        Delete Variant
+      </Button>
+      <TypographySection
+        typography={{
+          fontSizes: typography.fontSizes,
+          fontWeights: typography.fontWeights,
+          lineHeights: typography.lineHeights,
+        }}
+        onUpdateTypography={handleUpdateTypography}
+      />
+    </>
   )
 }

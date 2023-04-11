@@ -11,6 +11,7 @@ import {
   FiGithub,
   FiLayers,
   FiSettings,
+  FiTrash2,
   FiUnderline,
 } from 'react-icons/fi'
 import { MdOutlineColorLens } from 'react-icons/md'
@@ -264,6 +265,14 @@ export function Sidebar({
               isComingSoon
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
+            />
+            <SidebarLink
+              key="sidebar-delete"
+              label="Wipe Data"
+              icon={FiTrash2}
+              onSelect={() => onExport()}
+              isCollapsed={isCollapsed}
+              isDisabled={isDisabled}
             />
           </SidebarSection>
 
