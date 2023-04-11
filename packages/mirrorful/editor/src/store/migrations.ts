@@ -4,7 +4,7 @@ import {
   TTokenGroup,
 } from '@mirrorful/core/lib/types'
 import Conf from 'conf'
-import { uuid } from 'uuidv4'
+import { v4 as uuidv4 } from 'uuid'
 
 export const ZeroPointZeroPointTwoMigration = (store: Conf<any>) => {
   const isNewData = store.get('primitives') !== undefined
@@ -100,7 +100,7 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
 
     Object.keys(color.variants).forEach((variantName) => {
       currentColor[variantName] = {
-        id: uuid(),
+        id: uuidv4(),
         value: color.variants[variantName],
         type: 'color',
       }
@@ -108,7 +108,7 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
 
     if (color.baseColor) {
       currentColor.base = {
-        id: uuid(),
+        id: uuidv4(),
         value: color.baseColor,
         type: 'color',
       }
@@ -121,7 +121,7 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
 
   tokens.typography.fontSizes.forEach((variant: any) => {
     fontSizes[variant.name] = {
-      id: uuid(),
+      id: uuidv4(),
       value: `${variant.value}${variant.unit}`,
       type: 'fontSize',
     }
@@ -131,7 +131,7 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
 
   tokens.typography.fontWeights.forEach((variant: any) => {
     fontWeights[variant.name] = {
-      id: uuid(),
+      id: uuidv4(),
       value: variant.weight,
       type: 'fontWeight',
     }
@@ -140,7 +140,7 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
   const lineHeights: TTokenGroup = {}
   tokens.typography.lineHeights.forEach((variant: any) => {
     lineHeights[variant.name] = {
-      id: uuid(),
+      id: uuidv4(),
       value: `${variant.value}`,
       type: 'fontWeight',
     }
@@ -149,7 +149,7 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
   const shadows: TTokenGroup = {}
   tokens.shadows.forEach((variant: any) => {
     shadows[variant.name] = {
-      id: uuid(),
+      id: uuidv4(),
       value: variant.value,
       type: 'boxShadow',
     }
