@@ -1,9 +1,5 @@
 import { Box, Button, Stack, Text, useDisclosure } from '@chakra-ui/react'
-import {
-  TFontSizeVariant,
-  TFontWeightVariant,
-  TLineHeightVariant,
-} from '@core/types'
+import { TNamedToken } from '@core/types'
 
 import { EditFontSizeModal } from './FontSize/EditFontSizeModal'
 import { FontSizeRow } from './FontSize/FontSizeRow'
@@ -19,10 +15,8 @@ export function FontPropertyRow({
   onDeleteFontPropertyVariant,
 }: {
   fontProperty: 'fontSize' | 'fontWeight' | 'lineHeight'
-  fontPropertyData: TFontSizeVariant | TFontWeightVariant | TLineHeightVariant
-  onUpdateFontPropertyVariant: (
-    newVariant: TFontSizeVariant | TFontWeightVariant | TLineHeightVariant
-  ) => void
+  fontPropertyData: TNamedToken
+  onUpdateFontPropertyVariant: (newVariant: TNamedToken) => void
   onDeleteFontPropertyVariant: () => void
 }) {
   const {
@@ -61,17 +55,13 @@ export function FontPropertyRow({
           </Text>
         </Box>
         {fontProperty === 'fontSize' && (
-          <FontSizeRow fontSizeData={fontPropertyData as TFontSizeVariant} />
+          <FontSizeRow fontSizeData={fontPropertyData} />
         )}
         {fontProperty === 'fontWeight' && (
-          <FontWeightRow
-            fontWeightData={fontPropertyData as TFontWeightVariant}
-          />
+          <FontWeightRow fontWeightData={fontPropertyData} />
         )}
         {fontProperty === 'lineHeight' && (
-          <LineHeightData
-            lineHeightData={fontPropertyData as TLineHeightVariant}
-          />
+          <LineHeightData lineHeightData={fontPropertyData} />
         )}
         <Box css={{ justifySelf: 'flex-end' }}>
           <Button
@@ -86,7 +76,7 @@ export function FontPropertyRow({
             isAdding={false}
             isOpen={isEditVariantModalOpen}
             onClose={onEditVariantModalClose}
-            initialFontSizeVariant={fontPropertyData as TFontSizeVariant}
+            initialFontSizeVariant={fontPropertyData}
             onUpdateFontSizeVariant={onUpdateFontPropertyVariant}
             onDeleteFontSizeVariant={onDeleteFontPropertyVariant}
           />
@@ -96,7 +86,7 @@ export function FontPropertyRow({
             isAdding={false}
             isOpen={isEditVariantModalOpen}
             onClose={onEditVariantModalClose}
-            initialFontWeightVariant={fontPropertyData as TFontWeightVariant}
+            initialFontWeightVariant={fontPropertyData}
             onUpdateFontWeightVariant={onUpdateFontPropertyVariant}
             onDeleteFontWeightVariant={onDeleteFontPropertyVariant}
           />
@@ -106,7 +96,7 @@ export function FontPropertyRow({
             isAdding={false}
             isOpen={isEditVariantModalOpen}
             onClose={onEditVariantModalClose}
-            initialLineHeightVariant={fontPropertyData as TLineHeightVariant}
+            initialLineHeightVariant={fontPropertyData}
             onUpdateLineHeightVariant={onUpdateFontPropertyVariant}
             onDeleteLineHeightVariant={onDeleteFontPropertyVariant}
           />

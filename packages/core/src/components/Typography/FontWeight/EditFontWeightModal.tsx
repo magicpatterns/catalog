@@ -15,8 +15,9 @@ import {
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { TFontWeightVariant } from '@core/types'
+import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 export function EditFontWeightModal({
   isOpen,
@@ -29,8 +30,8 @@ export function EditFontWeightModal({
   isOpen: boolean
   isAdding: boolean
   onClose: () => void
-  initialFontWeightVariant?: TFontWeightVariant
-  onUpdateFontWeightVariant: (newVariant: TFontWeightVariant) => void
+  initialFontWeightVariant?: TNamedToken
+  onUpdateFontWeightVariant: (newVariant: TNamedToken) => void
   onDeleteFontWeightVariant?: () => void
 }) {
   const {
@@ -39,10 +40,14 @@ export function EditFontWeightModal({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [variant, setVariant] = useState<TFontWeightVariant>(
+  const [variant, setVariant] = useState<TNamedToken>(
     initialFontWeightVariant ?? {
       name: '',
-      weight: 400,
+      token: {
+        id: uuidv4(),
+        value: '',
+        type: 'fontWeight',
+      },
     }
   )
 
@@ -55,12 +60,17 @@ export function EditFontWeightModal({
       return
     }
 
-    if (variant.weight !== 0 && !variant.weight) {
+    if (isNaN(Number(variant.token.value))) {
+      setError('Please enter a valid number.')
+      return
+    }
+
+    if (Number(variant.token.value) !== 0 && !Number(variant.token.value)) {
       setError('Please fill out all fields.')
       return
     }
 
-    if (variant.weight < 1 || variant.weight > 1000) {
+    if (Number(variant.token.value) < 1 || Number(variant.token.value) > 1000) {
       setError('Font weight must be between 1 and 1000.')
       return
     }
@@ -74,7 +84,11 @@ export function EditFontWeightModal({
       setVariant(
         initialFontWeightVariant ?? {
           name: '',
-          weight: 400,
+          token: {
+            id: uuidv4(),
+            value: '',
+            type: 'fontWeight',
+          },
         }
       )
       setError(null)
@@ -109,11 +123,13 @@ export function EditFontWeightModal({
               <FormControl css={{ marginTop: '32px' }}>
                 <FormLabel>Variant Weight</FormLabel>
                 <Input
-                  value={variant.weight}
+                  value={variant.token.value}
                   onChange={(e) =>
-                    setVariant({ ...variant, weight: Number(e.target.value) })
+                    setVariant({
+                      name: variant.name,
+                      token: { ...variant.token, value: e.target.value },
+                    })
                   }
-                  type="number"
                 />
               </FormControl>
             </Box>
