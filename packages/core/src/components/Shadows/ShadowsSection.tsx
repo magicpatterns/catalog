@@ -40,36 +40,56 @@ export function ShadowRow({
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedShadowValue])
 
-  function getRgba(str: string) {
-    // console.log(typeof str)
-    // const newStr = str.map((str) => ({str});
-    const rgbaRegex = /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/
-    const match = str.match(rgbaRegex)
-    if (match) {
-      const [, r, g, b, a] = match
-      return { r: Number(r), g: Number(g), b: Number(b), a: Number(a) }
-    }
-    return { r: 0, g: 0, b: 0, a: 0.5 } // Return if no match is found
-  }
+  // function getRgba(str: string) {
+  //   // console.log(typeof str)
+  //   // const newStr = str.map((str) => ({str});
+  //   const rgbaRegex = /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/
+  //   const match = str.match(rgbaRegex)
+  //   if (match) {
+  //     const [, r, g, b, a] = match
+  //     return { r: Number(r), g: Number(g), b: Number(b), a: Number(a) }
+  //   }
+  //   return { r: 0, g: 0, b: 0, a: 0.5 } // Return if no match is found
+  // }
 
-  function getValues(str: string) {
-    const regex =
-      /(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+rgba/g
+  function getValues(str: any) {
+    const regex = /^(.+?)\s*rgba/
     const match = regex.exec(str)
-    if (match) {
-      const numbers = match.slice(1, 5).map((numStr) => parseFloat(numStr))
+    // console.log(match)
+    // const regex =
+    //   /(-?\d*\.?\d+px?)\s+(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+rgba/g
+    // const match = regex.exec(str)
+    //console.log(match)
 
+    if (match) {
+      //const numbers = match.slice(1, 5).map((numStr) => parseFloat(numStr))
+      // console.log({
+      //   hOffset: Number(numbers[0]),
+      //   vOffset: Number(numbers[1]),
+      //   blur: Number(numbers[2]),
+      //   spread: Number(numbers[3]),
+      // })
+      const values = match[1].split(' ')
+      const parsedValues = values.map((val) => parseInt(val))
+      //console.log(parsedValues)
       return {
-        hOffset: Number(numbers[0]),
-        vOffset: Number(numbers[1]),
-        blur: Number(numbers[2]),
-        spread: Number(numbers[3]),
+        hOffset: parsedValues[0],
+        vOffset: parsedValues[1],
+        blur: parsedValues[2],
+        spread: parsedValues[3],
       }
+      // return {
+      //   hOffset: Number(numbers[0]),
+      //   vOffset: Number(numbers[1]),
+      //   blur: Number(numbers[2]),
+      //   spread: Number(numbers[3]),
+      // }
     }
+    //console.log(str)
     return { hOffset: 0, vOffset: 0, blur: 0, spread: 0 } // Return if no match is found
   }
 
-  function separateBoxShadows(input, name) {
+  function separateBoxShadows(input: string | any[], name: string) {
     const result = []
     let current = ''
     let parenCount = 0
@@ -96,7 +116,9 @@ export function ShadowRow({
     return result
   }
 
-  function getRgba2(str) {
+  //console.log(shadow[length - 1].value)
+
+  function getRgba2(str: string) {
     const rgbaRegex = /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/
     const match = str.match(rgbaRegex)
     if (match) {
@@ -110,13 +132,18 @@ export function ShadowRow({
   const newInitial = shadowObjects.map((shadowObject) => {
     return getRgba2(shadowObject.value)
   })
+
+  const newInitialValues = shadowObjects.map((shadowObject) => {
+    //console.log(shadowObject.value)
+    return getValues(shadowObject.value)
+  })
   //console.log(newInitial)
 
   //const initialRgbaValue = getRgba(shadowData.value)
   const initialRgbaValue = newInitial
-  const initialValues = getValues(shadowData.value)
+  const initialValues = newInitialValues
 
-  console.log(initialRgbaValue)
+  //console.log(initialRgbaValue)
 
   /*
   
@@ -233,6 +260,8 @@ export function ShadowsSection({
     onClose: onAddVariantModalClose,
   } = useDisclosure()
 
+  console.log(shadows)
+
   return (
     <Box>
       <Heading fontSize={'2.5rem'} fontWeight="black">
@@ -258,7 +287,6 @@ export function ShadowsSection({
               onUpdateShadowVariant={(updatedShadowVariant: TShadowData) => {
                 const newShadowData = [...shadows]
                 newShadowData[index] = updatedShadowVariant
-
                 onUpdateShadowData(newShadowData)
               }}
               onDeleteShadowVariant={() => {
@@ -270,7 +298,9 @@ export function ShadowsSection({
           ))}
           <Button
             css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}
-            onClick={() => onAddVariantModalOpen()}
+            onClick={() => {
+              onAddVariantModalOpen()
+            }}
           >
             Add New Shadow
           </Button>
@@ -285,7 +315,4 @@ export function ShadowsSection({
       />
     </Box>
   )
-}
-function stypeOf(str: string): any {
-  throw new Error('Function not implemented.')
 }

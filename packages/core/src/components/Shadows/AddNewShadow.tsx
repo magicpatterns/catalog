@@ -11,7 +11,7 @@ import {
 import { RgbColor, SketchPicker } from '@hello-pangea/color-picker'
 import { Dispatch, SetStateAction } from 'react'
 
-export function ShadowColorPicker({
+export function AddNewShadow({
   blur,
   spread,
   hOffset,
@@ -20,9 +20,6 @@ export function ShadowColorPicker({
   setSpread,
   sethOffset,
   setVOffset,
-  codeResult,
-  handleColor,
-  setColor,
   color,
   initialButton,
   index,
@@ -52,7 +49,6 @@ export function ShadowColorPicker({
   handleVOffset: (e: any, index: number) => void
   handleNewColor: (e: any, index: number) => void
 }) {
-  //console.log(blur + 'blur')
   return (
     <Box
       sx={{
@@ -144,7 +140,9 @@ export function ShadowColorPicker({
             <Input
               value={blur}
               onChange={(e) => {
-                handleBlur(e.target.value, index)
+                const nextBlur = [...blur]
+                nextBlur[initialButton] = Number(e.target.value)
+                setBlur(nextBlur)
               }}
             />
             <Text>Spread</Text>

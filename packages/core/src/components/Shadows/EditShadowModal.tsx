@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import {
-  Box,
   Button,
   FormControl,
   FormLabel,
@@ -11,13 +11,24 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import { Badge, Box, Icon, Stack, Text } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TShadowData } from '@core/types'
 import { RgbColor } from '@hello-pangea/color-picker'
 import { useEffect, useMemo, useState } from 'react'
+import {} from 'react-icons'
+import {
+  FiBookOpen,
+  FiFolder,
+  FiGithub,
+  FiLayers,
+  FiPlus,
+  FiSettings,
+  FiUnderline,
+} from 'react-icons/fi'
+import { TbInnerShadowBottomLeft } from 'react-icons/tb'
 
 import { ShadowColorPicker } from './ShadowColorPicker'
 
@@ -35,20 +46,14 @@ export function EditShadowModal({
   initialShadowVariant?: TShadowData
   onUpdateShadowVariant: (newVariant: TShadowData) => void
   onDeleteShadowVariant?: () => void
-  initialRgbaValue?: [{ r: number; g: number; b: number; a: number }]
-  initialValues?:
-    | {
-        hOffset: number
-        vOffset: number
-        blur: number
-        spread: number
-      }
-    | undefined
+  initialRgbaValue?: any
+  initialValues?: any
 }) {
   const {
     isOpen: isAlertDialogOpen,
     onOpen: onDeleteAlertDialogOpen,
     onClose: onDeleteAlertDialogClose,
+    getDisclosureProps,
   } = useDisclosure()
 
   const [variant, setVariant]: [
@@ -58,17 +63,32 @@ export function EditShadowModal({
 
   const [error, setError] = useState<string | null>(null)
 
-  console.log('initialRgbaValue ' + initialRgbaValue?.map((i) => i.a))
+  //console.log('initialRgbaValue ' + initialValues?.map((i: {}) => i.vOffset))
+  function newColors() {
+    const newColorResult = []
+    for (let i = 0; i < initialValues?.length; i++) {
+      newColorResult.push(
+        `rgba(${initialRgbaValue[i].r}, ${initialRgbaValue[i].g}, ${initialRgbaValue[i].b}, ${initialRgbaValue[i].a})`
+      )
+    }
+    return newColorResult
+  }
 
-  const presetColor = initialRgbaValue
-    ? // eslint-disable-next-line react/prop-types
-      `rgba(${initialRgbaValue?.map((i) => i.r)}, ${initialRgbaValue?.map(
-        (i) => i.g
-      )}, ${initialRgbaValue?.map((i) => i.b)}, ${initialRgbaValue?.map(
-        (i) => i.a
-      )})`
-    : 'rgba(1, 1, 1, 0.4)'
+  const presetColor = newColors()
 
+  //console.log(spread)
+  // const presetColor = initialRgbaValue
+  //   ? // eslint-disable-next-line react/prop-types
+  //     `rgba(${initialRgbaValue?.map(
+  //       (i: { r: any }) => i.r
+  //     )}, ${initialRgbaValue?.map(
+  //       (i: { g: any }) => i.g
+  //     )}, ${initialRgbaValue?.map(
+  //       (i: { b: any }) => i.b
+  //     )}, ${initialRgbaValue?.map((i: { a: any }) => i.a)})`
+  //   : 'rgba(1, 1, 1, 0.4)'
+
+  // console.log(presetColor)
   const handleSave = () => {
     setError(null)
     if (variant.name === '') {
@@ -80,60 +100,152 @@ export function EditShadowModal({
       setError('Please fill out all fields.')
       return
     }
-
-    onUpdateShadowVariant(variant)
-    onClose()
+    if (newShadVar) {
+      const newVariant = {
+        name: variant.name,
+        value: `0px 0px ${blur?.[0]}px 15px ${color?.[0]}`,
+      }
+      onUpdateShadowVariant(newVariant)
+      onClose()
+    } else {
+      onUpdateShadowVariant(variant)
+      onClose()
+    }
   }
+  const [newInitialValues, setNewInitialValues] = useState(initialValues)
 
-  const [color, setColor] = useState(presetColor)
-  const [inputColor, setInputColor] = useState(presetColor)
-  const [hOffset, sethOffset] = useState(initialValues?.hOffset ?? 0)
-  const [vOffset, setVOffset] = useState(initialValues?.vOffset ?? 0)
-  const [blur, setBlur] = useState(initialValues?.blur ?? 0)
-  const [spread, setSpread] = useState(initialValues?.spread ?? 0)
+  const [color, setColor] = useState(presetColor?.map((i: {}) => i))
+  const [hOffset, sethOffset] = useState(
+    newInitialValues?.map((i: any) => i.hOffset)
+  )
+  const [vOffset, setVOffset] = useState(
+    initialValues?.map((i: any) => i.vOffset)
+  )
+  const [blur, setBlur] = useState(initialValues?.map((i: any) => i.blur))
+  const [spread, setSpread] = useState(initialValues?.map((i: any) => i.spread))
 
   const [initialButton, setInitialButton] = useState(0)
 
-  console.log(initialButton)
+  const [colorOutcome, setColorOutcome] = useState('')
+  const [newShadVar, setNewShadVar] = useState(false)
+
+  //console.log(blur))
+  function test() {
+    const newColorResult = []
+    for (let i = 0; i < newInitialValues?.length; i++) {
+      newColorResult.push(
+        `${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
+      )
+    }
+    return newColorResult.toString()
+  }
+
+  const newColorRes = test()
+
+  const [newColor, setNewColor] = useState(newColorRes)
+
+  function handleBlur(e: number, i: number) {
+    if (!blur) {
+      setBlur([0])
+    } else {
+      const nextBlur = [...blur]
+      nextBlur[i] = e
+      setBlur(nextBlur)
+    }
+  }
+
+  function handleSpread(e: number, i: number) {
+    if (!spread) {
+      setSpread([0])
+    } else {
+      const nextSpread = [...spread]
+      nextSpread[i] = e
+      setSpread(nextSpread)
+    }
+  }
+
+  function handleHOffset(e: number, i: number) {
+    if (!hOffset) {
+      sethOffset([0])
+    } else {
+      const nextHOffset = [...hOffset]
+      nextHOffset[i] = e
+      sethOffset(nextHOffset)
+    }
+  }
+
+  function handleVOffset(e: number, i: number) {
+    if (!vOffset) {
+      setVOffset([0])
+    } else {
+      const nextVOffset = [...vOffset]
+      nextVOffset[i] = e
+      setVOffset(nextVOffset)
+    }
+  }
+
+  // useEffect(() => {
+  //   const newColorResult = []
+  //   for (let i = 0; i < initialValues?.length; i++) {
+  //     newColorResult.push(
+  //       `${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
+  //     )
+  //   }
+  //   setColorOutcome(newColorResult.toString())
+  // }, [color, blur, spread, hOffset, vOffset])
 
   const codeResult = `${hOffset}px ${vOffset}px ${blur}px ${spread}px ${color}`
 
-  const handleColor = (color: RgbColor) => {
-    const rgba = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
-    setColor(rgba)
+  const handleNewColor = (value: any, i: number) => {
+    if (!color) {
+      setColor(['rgba(1, 1, 1, 0.4)'])
+    } else {
+      const nextColor = [...color]
+      nextColor[i] = `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})`
+
+      setColor(nextColor)
+    }
   }
 
-  const formatColor = (input: string) => {
-    if (
-      /^rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*(,\s*(0\.\d+|\d+(\.\d+)?))?\s*\)$/i.test(
-        input
-      )
-    ) {
-      const colors = input
-        .split('rgba')[1]
-        .replace('(', '')
-        .replace(')', '')
-        .split(',')
-        .map((value) => Number(value))
-      handleColor({
-        r: colors[0],
-        g: colors[1],
-        b: colors[2],
-        a: colors[3],
-      })
-      setError(null)
-    } else {
-      setError('Invalid color')
-    }
-    setInputColor(input)
+  const tempValues = {
+    hOffset: [0],
+    vOffset: [0],
+    blur: [0],
+    spread: [0],
+    color: ['rgba(1, 1, 1, 0.4)'],
   }
+
+  // const formatColor = (input: string) => {
+  //   if (
+  //     /^rgba?\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*(,\s*(0\.\d+|\d+(\.\d+)?))?\s*\)$/i.test(
+  //       input
+  //     )
+  //   ) {
+  //     const colors = input
+  //       .split('rgba')[1]
+  //       .replace('(', '')
+  //       .replace(')', '')
+  //       .split(',')
+  //       .map((value, index) => Number(value))
+  //     handleNewColor({
+  //       r: colors[0],
+  //       g: colors[1],
+  //       b: colors[2],
+  //       a: colors[3],
+  //     })
+  //     setError(null)
+  //   } else {
+  //     setError('Invalid color')
+  //   }
+  //   setInputColor(input)
+  // }
 
   useEffect(() => {
     setVariant({
       ...variant,
-      value: codeResult,
+      value: newColorRes,
     })
-  }, [codeResult])
+  }, [newColorRes])
 
   useEffect(() => {
     if (!isOpen) {
@@ -157,103 +269,126 @@ export function EditShadowModal({
             }}
           >
             <Box css={{ display: 'flex', flexDirection: 'column' }}>
-              {initialRgbaValue?.map((i, index) => (
-                <div key={index} style={{}}>
-                  <Button
-                    style={{
-                      backgroundColor: initialButton === index ? 'red' : '',
-                    }}
-                    onClick={() => setInitialButton(index)}
-                  >
-                    hello
-                  </Button>
-                </div>
-              ))}
-              {initialRgbaValue?.map((i, index) => (
-                <>
-                  <div style={{}}>
-                    {initialButton == index && (
-                      <div>
-                        <Input value={`${i.r}, ${i.g}, ${i.b}, ${i.a}`} />
-                        <div>kddlsflsdf</div>
-                        <div>kdsfdlke233</div>
-                      </div>
-                    )}
-                  </div>
-                </>
-              ))}
               <FormControl>
                 <FormLabel css={{ fontSize: '0.75rem' }}>
                   Variant name
                 </FormLabel>
                 <Input
                   value={variant.name}
-                  onChange={(e) =>
-                    setVariant({ ...variant, name: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setVariant({
+                      ...variant,
+                      name: e.target.value,
+                      value: 'new value',
+                    }),
+                      setNewShadVar(true)
+                  }}
                 />
-              </FormControl>
-              <FormControl>
-                <Box css={{ display: 'flex', marginTop: '1rem' }}>
-                  <Box css={{ width: '100%' }}>
-                    <FormLabel css={{ fontSize: '0.75rem' }}>
-                      Horizontal
-                    </FormLabel>
-                    <Input
-                      value={hOffset}
-                      onChange={(e) => sethOffset(Number(e.target.value))}
-                    />
-                  </Box>
-                  <Box css={{ width: '100%' }}>
-                    <FormLabel css={{ fontSize: '0.75rem' }}>
-                      Vertical
-                    </FormLabel>
-                    <Input
-                      value={vOffset}
-                      onChange={(e) => setVOffset(Number(e.target.value))}
-                    />
-                  </Box>
-                </Box>
-                <Box css={{ display: 'flex', marginTop: '1rem' }}>
-                  <Box css={{ width: '100%' }}>
-                    <FormLabel css={{ fontSize: '0.75rem' }}>Blur</FormLabel>
-                    <Input
-                      value={blur}
-                      onChange={(e) => setBlur(Number(e.target.value))}
-                    />
-                  </Box>
-                  <Box css={{ width: '100%' }}>
-                    <FormLabel css={{ fontSize: '0.75rem' }}>Spread</FormLabel>
-                    <Input
-                      value={spread}
-                      onChange={(e) => setSpread(Number(e.target.value))}
-                    />
-                  </Box>
-                </Box>
-
-                <Box css={{ marginTop: '1rem' }}>
-                  <FormLabel css={{ fontSize: '0.75rem' }}>RGBA</FormLabel>
-
-                  <Input
-                    value={inputColor}
-                    onChange={(e) => formatColor(e.target.value)}
+                {initialShadowVariant ? (
+                  ''
+                ) : (
+                  <ShadowColorPicker
+                    blur={!blur ? tempValues.blur[0] : blur?.[0]}
+                    spread={!spread ? tempValues.spread[0] : spread?.[0]}
+                    hOffset={!hOffset ? tempValues.hOffset[0] : hOffset?.[0]}
+                    vOffset={!vOffset ? tempValues.vOffset[0] : vOffset?.[0]}
+                    setBlur={setBlur}
+                    setSpread={setSpread}
+                    sethOffset={sethOffset}
+                    setVOffset={setVOffset}
+                    codeResult={codeResult}
+                    handleNewColor={handleNewColor}
+                    handleBlur={handleBlur}
+                    handleSpread={handleSpread}
+                    handleHOffset={handleHOffset}
+                    handleVOffset={handleVOffset}
+                    color={tempValues.color[0]}
+                    setColor={setColor}
+                    initialButton={initialButton}
+                    index={0}
+                    handleColor={handleNewColor}
                   />
+                )}
+              </FormControl>
+
+              <Box css={{ display: 'flex', marginTop: '1rem' }}>
+                {newInitialValues?.map((i: any, index: number) => (
+                  <Button
+                    key={index}
+                    style={{
+                      width: '100px',
+                      margin: '0.5rem',
+                      backgroundColor: index === initialButton ? '#9B9B9B' : '',
+                    }}
+                    onClick={() => setInitialButton(index)}
+                  >
+                    <Icon as={TbInnerShadowBottomLeft} />
+                  </Button>
+                ))}
+
+                <Button
+                  style={{ width: '100px', margin: '0.5rem' }}
+                  onClick={() => {
+                    sethOffset([...hOffset, 12])
+                    setVOffset([...vOffset, 12])
+                    setBlur([...blur, 12])
+                    setSpread([...spread, 12])
+                    const nextShadow = [...newInitialValues]
+                    nextShadow.push('12px 12px 12px 12px rgba(0, 0, 0, 1)')
+                    const nextColor = [...color]
+                    nextColor.push('rgba(0, 0, 0, 1)')
+                    setNewInitialValues(nextShadow)
+                    setColor(nextColor)
+                    setInitialButton(newInitialValues.length)
+                  }}
+                >
+                  <Icon as={FiPlus} />
+                </Button>
+              </Box>
+              <FormControl>
+                <Box css={{ marginTop: '1rem' }}>
+                  {newInitialValues?.map((i: any, index: number) => (
+                    <div key={index}>
+                      <div>
+                        {initialButton === index && (
+                          <ShadowColorPicker
+                            blur={blur[index]}
+                            spread={spread[index]}
+                            hOffset={hOffset[index]}
+                            vOffset={vOffset[index]}
+                            setBlur={setBlur}
+                            setSpread={setSpread}
+                            sethOffset={sethOffset}
+                            setVOffset={setVOffset}
+                            codeResult={codeResult}
+                            handleNewColor={handleNewColor}
+                            handleBlur={handleBlur}
+                            handleSpread={handleSpread}
+                            handleHOffset={handleHOffset}
+                            handleVOffset={handleVOffset}
+                            color={color[index]}
+                            setColor={setColor}
+                            initialButton={initialButton}
+                            index={index}
+                            handleColor={handleNewColor}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </Box>
               </FormControl>
-              <ShadowColorPicker
-                blur={blur}
-                spread={spread}
-                hOffset={hOffset}
-                vOffset={vOffset}
-                setBlur={setBlur}
-                setSpread={setSpread}
-                sethOffset={sethOffset}
-                setVOffset={setVOffset}
-                codeResult={codeResult}
-                handleColor={handleColor}
-                color={color}
-              />
 
+              <Text>Preview</Text>
+              <Box
+                style={{
+                  boxShadow: newColorRes,
+                  width: '100%',
+                  height: '100px',
+                  backgroundColor: '#F3F3F3',
+                  borderRadius: '5px',
+                }}
+              ></Box>
               <Box
                 css={{
                   marginTop: '16px',
@@ -261,7 +396,12 @@ export function EditShadowModal({
                   display: 'flex',
                   justifyContent: 'center',
                 }}
-              ></Box>
+              >
+                <Input
+                  onChange={(e) => setNewColor(e.target.value)}
+                  value={newColor}
+                />
+              </Box>
             </Box>
             {error && (
               <Text color="red.500" css={{ marginTop: 18 }}>
