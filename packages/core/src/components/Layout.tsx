@@ -12,7 +12,12 @@ import { Sidebar } from './Sidebar/Sidebar'
 
 export type TPlatform = 'package' | 'web'
 
-export type TTab = '/colors' | '/typography' | '/shadows' | '/theme_manager'
+export type TTab =
+  | '/colors'
+  | '/typography'
+  | '/shadows'
+  | '/theme_manager'
+  | '/components'
 
 export default function Layout({
   children,

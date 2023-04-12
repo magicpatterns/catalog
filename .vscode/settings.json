@@ -11,7 +11,7 @@
     "**/dist": true,
     "**/yarn.lock": true
   },
-  "cSpell.words": ["Chakra", "Mirrorful"],
+  "cSpell.words": ["Mirrorful", "posthog", "Chakra"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   }
