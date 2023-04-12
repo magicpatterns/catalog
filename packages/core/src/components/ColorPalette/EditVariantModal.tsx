@@ -78,6 +78,12 @@ export function EditVariantModal({
     onClose()
   }
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSave()
+    }
+  }
+
   useEffect(() => {
     if (!isOpen) {
       setVariant(
@@ -89,6 +95,18 @@ export function EditVariantModal({
       setError(null)
     }
   }, [isOpen, initialVariant])
+
+  // handle keyboad input when the modal is open to activate save button with Enter
+  useEffect(() => {
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown)
+    } else {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isOpen])
 
   return (
     <>
