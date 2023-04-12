@@ -1078,27 +1078,6 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mirrorful/core@1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-1.0.10.tgz#bda4e80676ff5f9a39f85af6eafb9586dcc7ef84"
-  integrity sha512-kaT7OliLoAPLjplrRU4AlOIUFaaJ7POuX9LaUppF1s0aGeVWt1R7x6Rf8vFEciBsH9zx3007+aWiusOGVEDaGA==
-  dependencies:
-    "@chakra-ui/icons" "^2.0.17"
-    "@chakra-ui/react" "^2.5.2"
-    "@emotion/react" "^11.10.6"
-    "@emotion/styled" "^11.10.6"
-    "@hello-pangea/color-picker" "^3.2.2"
-    framer-motion "^10.6.0"
-    json5 "^2.2.3"
-    lottie-react "^2.4.0"
-    posthog-js "^1.51.3"
-    react "^18.2.0"
-    react-dom "^18.2.0"
-    react-highlight "^0.15.0"
-    react-icons "^4.8.0"
-    tinycolor2 "^1.6.0"
-    typescript "^4.9.5"
-
 "@mirrorful/eslint-config@file:packages/eslint-config":
   version "1.0.0"
 
