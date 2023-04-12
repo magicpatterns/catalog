@@ -16,7 +16,7 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken } from '@core/types'
-import { useEffect, useState } from 'react'
+import { KeyboardEventHandler, useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { ColorPicker } from './ColorPicker'
@@ -78,7 +78,8 @@ export function EditVariantModal({
     onClose()
   }
 
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleKeyDown: KeyboardEventHandler<HTMLElement> = (e) => {
+    console.log(e.key)
     if (e.key === 'Enter') {
       handleSave()
     }
@@ -96,23 +97,11 @@ export function EditVariantModal({
     }
   }, [isOpen, initialVariant])
 
-  // handle keyboad input when the modal is open to activate save button with Enter
-  useEffect(() => {
-    if (isOpen) {
-      window.addEventListener('keydown', handleKeyDown)
-    } else {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isOpen])
-
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent onKeyDown={handleKeyDown} tabIndex={0}>
           <ModalHeader>
             {initialVariant ? 'Edit Variant' : 'Add Variant'}
           </ModalHeader>
