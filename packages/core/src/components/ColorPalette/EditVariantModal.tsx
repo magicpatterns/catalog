@@ -16,7 +16,7 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken } from '@core/types'
-import { KeyboardEventHandler, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { ColorPicker } from './ColorPicker'
@@ -158,24 +158,13 @@ export function EditVariantModal({
                           name: variant.name,
                           token: {
                             id: variant.token.id,
-                            value: e.target.value,
+                            value: e.target.value.trim(),
                             type: 'color',
                           },
                         })
                       }
                     />
                   </FormControl>
-                  {/* <FormControl css={{ marginTop: '32px' }}>
-                  <Checkbox
-                    checked={variant.isBase}
-                    onChange={(event) => {
-                      setVariant({ ...variant, isBase: event.target.checked })
-                    }}
-                    defaultChecked={variant.isBase}
-                  >
-                    Set as Base (i.e. default) variant for this color
-                  </Checkbox>
-                </FormControl> */}
                 </Box>
                 <Box
                   css={{
