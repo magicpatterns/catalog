@@ -333,6 +333,10 @@ export function ColorDisplay({
         isOpen={isAddVariantModalOpen}
         onClose={onAddVariantModalClose}
         onUpdateVariant={(newVariant: TNamedToken) => {
+          // check if the new Variant name already exist, if exist throw error
+          if (newVariant.name in colorData) {
+            throw new Error('Variant Name Already Exist')
+          }
           const updatedColorData = { ...colorData }
           updatedColorData[newVariant.name] = newVariant.token
 

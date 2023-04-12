@@ -74,7 +74,15 @@ export function EditVariantModal({
     }
     // Remove error so it doesn't persist...
     setError(null)
-    onUpdateVariant(variant)
+    // catch any thrown errors on save
+    try {
+      onUpdateVariant(variant)
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message)
+        return
+      }
+    }
     onClose()
   }
 
