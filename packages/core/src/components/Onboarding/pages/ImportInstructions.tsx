@@ -125,7 +125,6 @@ export function ImportInstructions({
               </Text>
               <CodePreview
                 language="javascript"
-                textClass="code-snippet"
                 text={`import './.mirrorful/theme.css'`}
               />
               <Text css={{ marginTop: 12, marginBottom: 8 }}>
@@ -134,7 +133,6 @@ export function ImportInstructions({
               </Text>
               <CodePreview
                 language="css"
-                textClass="code-snippet"
                 text={`.${primaryName.toLowerCase()}-button {\n    background-color: var(--color-${primaryName.toLowerCase()});\n}\n\n.${primaryName.toLowerCase()}-button:hover {\n    background-color: var(--color-${primaryName.toLowerCase()}-hover);\n}`}
               />
             </TabPanel>
@@ -151,7 +149,6 @@ export function ImportInstructions({
 
               <CodePreview
                 language="javascript"
-                textClass="code-snippet"
                 text={`import { Tokens } from './.mirrorful/theme'`}
               />
 
@@ -161,7 +158,6 @@ export function ImportInstructions({
               </Text>
               <CodePreview
                 language="javascript"
-                textClass="code-snippet"
                 text={`<button\n   style={{ backgroundColor: Tokens.colors.${primaryName.toLowerCase()}.base }}\n> Click here\n</button>`}
               />
             </TabPanel>
@@ -179,7 +175,6 @@ export function ImportInstructions({
 
               <CodePreview
                 language="javascript"
-                textClass="code-snippet"
                 text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
               />
 
@@ -189,7 +184,6 @@ export function ImportInstructions({
               </Text>
               <CodePreview
                 language="javascript"
-                textClass="code-snippet"
                 text={`theme: {\n    extend: { colors: Tokens.colors } \n}`}
               />
             </TabPanel>

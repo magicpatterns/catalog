@@ -1,0 +1,8 @@
+{
+  "name": "Figma Plugin Template",
+  "id": "00000000",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma", "figjam"]
+}
