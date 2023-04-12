@@ -1,42 +1,23 @@
-# Figma Mirrorful Integration
+# Figma Plugin React Template
 
-Below are the steps to get your plugin running. You can also find instructions at:
+![62862431-71537f00-bd0e-11e9-85db-d97c0fb729a4](https://user-images.githubusercontent.com/16322616/62862692-46b5f600-bd0f-11e9-93b0-75955d1de8f3.png)
 
-https://www.figma.com/plugin-docs/plugin-quickstart/
+This template contains the react example as shown on [Figma Docs](https://www.figma.com/plugin-docs/intro/), with some structural changes and extra tooling.
 
-This plugin template uses Typescript and NPM, two standard tools in creating JavaScript applications.
+## Quickstart
 
-First, download Node.js which comes with NPM. This will allow you to install TypeScript and other
-libraries. You can find the download link here:
+- Run `yarn` to install dependencies.
+- Run `yarn build:watch` to start webpack in watch mode.
+- Open `Figma` -> `Plugins` -> `Development` -> `Import plugin from manifest...` and choose `manifest.json` file from this repo.
 
-https://nodejs.org/en/download/
+⭐ To change the UI of your plugin (the react code), start editing [App.tsx](./src/app/components/App.tsx).  
+⭐ To interact with the Figma API edit [controller.ts](./src/plugin/controller.ts).  
+⭐ Read more on the [Figma API Overview](https://www.figma.com/plugin-docs/api/api-overview/).
 
-Next, install TypeScript using the command:
+## Toolings
 
-npm install -g typescript
+This repo is using:
 
-Finally, in the directory of your plugin, get the latest type definitions for the plugin API by running:
-
-npm install --save-dev @figma/plugin-typings
-
-If you are familiar with JavaScript, TypeScript will look very familiar. In fact, valid JavaScript code
-is already valid Typescript code.
-
-TypeScript adds type annotations to variables. This allows code editors such as Visual Studio Code
-to provide information about the Figma API while you are writing code, as well as help catch bugs
-you previously didn't notice.
-
-For more information, visit https://www.typescriptlang.org/
-
-Using TypeScript requires a compiler to convert TypeScript (code.ts) into JavaScript (code.js)
-for the browser to run.
-
-We recommend writing TypeScript code using Visual Studio code:
-
-1. Download Visual Studio Code if you haven't already: https://code.visualstudio.com/.
-2. Open this directory in Visual Studio Code.
-3. Compile TypeScript to JavaScript: Run the "Terminal > Run Build Task..." menu item,
-   then select "npm: watch". You will have to do this again every time
-   you reopen Visual Studio Code.
-
-That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
+- React + Webpack
+- TypeScript
+- Prettier precommit hook
