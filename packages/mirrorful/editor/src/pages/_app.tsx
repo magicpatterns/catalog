@@ -80,22 +80,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       oldPathname.current = pathname
       posthog.capture('$pageview')
     }
-    // const handleRouteChange = () => {
-    //   posthog.capture('$pageview')
-    // }
-
-    // router.events.on('routeChangeComplete', handleRouteChange)
-
-    // return () => {
-    //   router.events.off('routeChangeComplete', handleRouteChange)
-    // }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   useEffect(() => {
     router.prefetch('/colors')
     router.prefetch('/typography')
     router.prefetch('/shadows')
+    router.prefetch('/components')
   }, [router])
 
   useEffect(() => {

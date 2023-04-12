@@ -254,9 +254,9 @@ function TokenTab({
         </Text>
         <CodePreview
           language="jsx"
-          text={`<button\n   style={{ ${javascriptPropertyName}: Tokens.${javascriptName}.${sanitizeName(
+          text={`<button\n   style={{ ${javascriptPropertyName}: Tokens.${javascriptName}["${sanitizeName(
             primaryName
-          )} }}\n> Click here\n</button>`}
+          )}"] }}\n> Click here\n</button>`}
         />
       </TabPanel>
     ),

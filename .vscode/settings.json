@@ -11,7 +11,7 @@
     "**/dist": true,
     "**/yarn.lock": true
   },
-  "cSpell.words": ["Mirrorful"],
+  "cSpell.words": ["Mirrorful", "posthog"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   }

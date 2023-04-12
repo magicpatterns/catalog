@@ -88,6 +88,7 @@ export default function RootLayout({
     router.prefetch('/colors')
     router.prefetch('/typography')
     router.prefetch('/shadows')
+    router.prefetch('/components')
   }, [router])
 
   const handleOnboardingSubmit = async (data: TMirrorfulStore) => {
