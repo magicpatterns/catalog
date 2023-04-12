@@ -38,12 +38,7 @@ import { useState } from 'react'
 import { IconType } from 'react-icons'
 import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
-import {
-  SiChakraui,
-  SiNuxtdotjs,
-  SiStyledcomponents,
-  SiTailwindcss,
-} from 'react-icons/si'
+import { SiChakraui, SiNuxtdotjs, SiTailwindcss } from 'react-icons/si'
 import { TbBrandNextjs } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
@@ -96,8 +91,8 @@ function PackageModalBody({ primitives }: { primitives: TPrimitives }) {
   return (
     <>
       <Text css={{ marginBottom: '24px' }}>
-        All of your tokens can now be imported by your app. Open up your code
-        editor to use them!
+        Your tokens can now be imported by your app. Open up your code editor to
+        use them!
       </Text>
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -435,6 +430,11 @@ function ExternalExamples() {
       icon: <TbBrandNextjs size={EXAMPLES_ICON_SIZE} />,
     },
     {
+      name: 'Styled Components',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components',
+      icon: <span>{`💅`}</span>,
+    },
+    {
       name: 'Tailwind CSS',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/tailwind-next',
       icon: <SiTailwindcss size={EXAMPLES_ICON_SIZE} fill="#38BDF8" />,
@@ -449,14 +449,17 @@ function ExternalExamples() {
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3',
       icon: <SiNuxtdotjs size={EXAMPLES_ICON_SIZE} color="#00DC82" />,
     },
-    {
-      name: 'Styled Components',
-      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components',
-      icon: <SiStyledcomponents size={EXAMPLES_ICON_SIZE} />,
-    },
   ]
   return (
-    <Flex css={{ marginTop: '16px' }} gap={4} flexWrap="wrap">
+    <Flex
+      css={{
+        marginTop: '16px',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      gap={4}
+      flexWrap="wrap"
+    >
       {externalExamples.map((example) => {
         return (
           <Link
@@ -479,7 +482,6 @@ function ExternalExamples() {
               {example.icon}
               <Text fontSize={'md'}>{example.name}</Text>
             </Box>
-            {/* <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} /> */}
           </Link>
         )
       })}
@@ -502,11 +504,12 @@ export function ExportSuccessModal({
 }) {
   return (
     <Modal
-      size="3xl"
+      size="2xl"
       isOpen={isOpen}
       onClose={onClose}
       isCentered={true}
       closeOnEsc={true}
+      scrollBehavior="inside"
     >
       <ModalOverlay />
       <ModalContent>
