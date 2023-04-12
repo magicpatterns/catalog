@@ -37,7 +37,12 @@ import { useState } from 'react'
 import { IconType } from 'react-icons'
 import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
-import { SiChakraui, SiNuxtdotjs, SiTailwindcss } from 'react-icons/si'
+import {
+  SiChakraui,
+  SiNuxtdotjs,
+  SiStyledcomponents,
+  SiTailwindcss,
+} from 'react-icons/si'
 import { TbBrandNextjs } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
@@ -414,6 +419,7 @@ function ExternalExamples() {
     | 'Tailwind CSS'
     | 'Chakra UI'
     | 'Nuxt 3'
+    | 'Styled Components'
 
   const EXAMPLES_ICON_SIZE = 20
   const externalExamples: {
@@ -445,6 +451,11 @@ function ExternalExamples() {
       name: 'Nuxt 3',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3',
       icon: <SiNuxtdotjs size={EXAMPLES_ICON_SIZE} color="#00DC82" />,
+    },
+    {
+      name: 'Styled Components',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components',
+      icon: <SiStyledcomponents size={EXAMPLES_ICON_SIZE} />,
     },
   ]
   return (

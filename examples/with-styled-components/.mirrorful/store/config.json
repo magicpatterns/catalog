@@ -426,7 +426,7 @@
     }
   },
   "themes": [],
-  "files": ["ts", "json", "cjs", "js", "scss", "css"],
+  "files": ["ts", "css", "scss", "js", "cjs", "json"],
   "__internal__": {
     "migrations": {
       "version": "0.0.6"
