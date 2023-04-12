@@ -148,7 +148,7 @@ export function EditVariantModal({
                         name: variant.name,
                         token: {
                           id: variant.token.id,
-                          value: e.target.value,
+                          value: e.target.value.trim(),
                           type: 'color',
                         },
                       })
