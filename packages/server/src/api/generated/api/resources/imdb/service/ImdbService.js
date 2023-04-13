@@ -94,7 +94,7 @@ class ImdbService {
             catch (error) {
                 console.error(error);
                 if (error instanceof errors.MirrorfulApiError) {
-                    switch (error.constructor.name) {
+                    switch (error.errorName) {
                         case "MovieDoesNotExistError":
                             break;
                         default:

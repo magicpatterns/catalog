@@ -3,6 +3,7 @@
  */
 import express from "express";
 export declare abstract class MirrorfulApiError extends Error {
-    constructor();
+    readonly errorName?: string | undefined;
+    constructor(errorName?: string | undefined);
     abstract send(res: express.Response): Promise<void>;
 }

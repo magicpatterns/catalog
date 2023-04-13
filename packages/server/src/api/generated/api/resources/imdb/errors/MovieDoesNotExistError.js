@@ -30,7 +30,7 @@ exports.MovieDoesNotExistError = void 0;
 const errors = __importStar(require("../../../../errors"));
 class MovieDoesNotExistError extends errors.MirrorfulApiError {
     constructor() {
-        super();
+        super("MovieDoesNotExistError");
         Object.setPrototypeOf(this, MovieDoesNotExistError.prototype);
     }
     async send(res) {
