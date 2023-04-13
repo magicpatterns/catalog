@@ -40,7 +40,7 @@ jobs:
           dir: server
           cmd: build # will run `yarn build` command in apps/web
 
-      - name: lint apps/web
+      - name: lint server
         uses: borales/actions-yarn@v4
         with:
           dir: server
