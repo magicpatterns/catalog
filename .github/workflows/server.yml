@@ -23,11 +23,10 @@ jobs:
         run: npm install -g fern-api
 
       - name: fern generate
-        with:
-          dir: server
-          cmd: fern generate # will run `yarn install` command in apps/web
-          env:
-            FERN_TOKEN: ${{ secrets.FERN_API_KEY }}
+        working-directory: ./server
+        run: fern generate
+        env:
+          FERN_TOKEN: ${{ secrets.FERN_API_KEY }}
 
       - name: install server
         uses: borales/actions-yarn@v4
