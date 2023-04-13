@@ -1,5 +1,6 @@
 {
-  "name": "fern-express-starter",
+  "name": "server",
+  "version": "0.0.0",
   "scripts": {
     "build": "tsc",
     "start": "node lib/server.js",

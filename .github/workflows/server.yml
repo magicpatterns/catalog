@@ -38,11 +38,11 @@ jobs:
       - name: build server
         uses: borales/actions-yarn@v4
         with:
-          dir: server
+          dir: packages/server
           cmd: build # will run `yarn build` command in apps/web
 
       - name: lint apps/web
         uses: borales/actions-yarn@v4
         with:
-          dir: server
+          dir: packages/server
           cmd: lint # will run `yarn lint` command in apps/web
