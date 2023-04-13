@@ -17,9 +17,10 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react'
-import { TNamedTokenGroup, TTokenGroup, assertToken } from '@core/types'
+import { assertToken, TNamedTokenGroup, TTokenGroup } from '@core/types'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+
 import { HexPicker } from './ColorPicker'
 import { defaultColorShadesToTokens, generateDefaultColorShades } from './utils'
 

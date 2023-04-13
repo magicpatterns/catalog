@@ -18,6 +18,7 @@ import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+
 import { HexPicker } from './ColorPicker'
 import { handleInvalidColor } from './utils'
 
