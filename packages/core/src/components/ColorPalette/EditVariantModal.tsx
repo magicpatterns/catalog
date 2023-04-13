@@ -12,14 +12,13 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-
-import { ColorPicker } from './ColorPicker'
+import { HexPicker } from './ColorPicker'
 import { handleInvalidColor } from './utils'
 
 export function EditVariantModal({
@@ -174,7 +173,7 @@ export function EditVariantModal({
                     alignItems: 'center',
                   }}
                 >
-                  <ColorPicker
+                  <HexPicker
                     onChange={(colorPickerColor) => {
                       setVariant({
                         name: variant.name,
