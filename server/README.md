@@ -69,9 +69,7 @@ The generated code lives in [src/api/generated](src/api/generated).
 
 In addition to saving you time, the auto-generated code gives you compile-time safety
 that your API is implemented correctly. For example, if you forget to define the `getMovie`
-endpoint, you'll get a compile error:
-
-![backend mypy error](assets/missing-getMovie.png)
+endpoint, you'll get a compile error.
 
 ## Changing the API
 

@@ -1,0 +1,48 @@
+name: Server - Build, Lint, Test
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build, Lint, Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install fern
+        run: npm install -g fern-api
+
+      - name: fern generate
+        with:
+          dir: server
+          cmd: fern generate # will run `yarn install` command in apps/web
+          env:
+            FERN_TOKEN: ${{ secrets.FERN_API_KEY }}
+
+      - name: install server
+        uses: borales/actions-yarn@v4
+        with:
+          dir: server
+          cmd: install # will run `yarn install` command in apps/web
+
+      - name: build server
+        uses: borales/actions-yarn@v4
+        with:
+          dir: server
+          cmd: build # will run `yarn build` command in apps/web
+
+      - name: lint apps/web
+        uses: borales/actions-yarn@v4
+        with:
+          dir: server
+          cmd: lint # will run `yarn lint` command in apps/web

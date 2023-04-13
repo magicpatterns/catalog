@@ -1,4 +1,5 @@
 import express from 'express'
+
 import { register } from './api/generated'
 import imdb from './services/imdb'
 
@@ -11,4 +12,5 @@ register(app, {
 })
 
 app.listen(PORT)
+
 console.log(`🎉 Listening on port ${PORT}...`)
