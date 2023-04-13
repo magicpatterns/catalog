@@ -19,13 +19,13 @@ jobs:
         with:
           node-version: 18.x
 
-      # - name: Install fern
-      #   run: npm install -g fern-api
+      - name: Install fern
+        run: npm install -g fern-api
 
-      # - name: fern generate
-      #   run: fern generate
-      #   env:
-      #     FERN_TOKEN: x
+      - name: fern generate
+        run: fern generate
+        env:
+          FERN_TOKEN: ${{ secrets.FERN_API_KEY }}
 
       - name: install server
         uses: borales/actions-yarn@v4
