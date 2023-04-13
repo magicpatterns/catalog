@@ -1,3 +1,3 @@
-export * as FernApi from './api'
-export { register } from './register'
-export { FernApiError } from './errors'
+export * as MirrorfulApi from "./api";
+export { register } from "./register";
+export { MirrorfulApiError } from "./errors";

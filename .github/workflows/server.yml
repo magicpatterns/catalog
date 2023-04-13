@@ -22,10 +22,12 @@ jobs:
       - name: Install fern
         run: npm install -g fern-api
 
-      - name: fern generate
+      - name: Verify generated code is up to date
         with:
           dir: server
-          cmd: fern generate # will run `yarn install` command in apps/web
+          cmd: | 
+            fern generate # will run `yarn install` command in apps/web
+            git --no-pager diff --exit-code
           env:
             FERN_TOKEN: ${{ secrets.FERN_API_KEY }}
 

@@ -1,2 +1,2 @@
-export * as imdb from './imdb'
-export * from './imdb/types'
+export * as imdb from "./imdb";
+export * from "./imdb/types";
