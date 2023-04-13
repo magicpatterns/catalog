@@ -1,1 +1,1 @@
-export { FernApiError } from './FernApiError'
+export { MirrorfulApiError } from './MirrorfulApiError'

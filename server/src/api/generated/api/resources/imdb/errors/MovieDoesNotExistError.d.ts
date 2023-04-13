@@ -3,7 +3,7 @@
  */
 import * as errors from '../../../../errors'
 import express from 'express'
-export declare class MovieDoesNotExistError extends errors.FernApiError {
+export declare class MovieDoesNotExistError extends errors.MirrorfulApiError {
   constructor()
   send(res: express.Response): Promise<void>
 }

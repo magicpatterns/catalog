@@ -44,8 +44,8 @@ var __importStar =
     return result
   }
 Object.defineProperty(exports, '__esModule', { value: true })
-exports.FernApiError = exports.register = exports.FernApi = void 0
-exports.FernApi = __importStar(require('./api'))
+exports.MirrorfulApiError = exports.register = exports.MirrorfulApi = void 0
+exports.MirrorfulApi = __importStar(require('./api'))
 var register_1 = require('./register')
 Object.defineProperty(exports, 'register', {
   enumerable: true,
@@ -54,9 +54,9 @@ Object.defineProperty(exports, 'register', {
   },
 })
 var errors_1 = require('./errors')
-Object.defineProperty(exports, 'FernApiError', {
+Object.defineProperty(exports, 'MirrorfulApiError', {
   enumerable: true,
   get: function () {
-    return errors_1.FernApiError
+    return errors_1.MirrorfulApiError
   },
 })
