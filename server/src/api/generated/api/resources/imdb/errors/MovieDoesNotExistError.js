@@ -49,7 +49,7 @@ var __importStar =
 Object.defineProperty(exports, '__esModule', { value: true })
 exports.MovieDoesNotExistError = void 0
 const errors = __importStar(require('../../../../errors'))
-class MovieDoesNotExistError extends errors.FernApiError {
+class MovieDoesNotExistError extends errors.MirrorfulApiError {
   constructor() {
     super()
     Object.setPrototypeOf(this, MovieDoesNotExistError.prototype)
