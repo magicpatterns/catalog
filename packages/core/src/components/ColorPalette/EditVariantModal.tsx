@@ -180,13 +180,12 @@ export function EditVariantModal({
                         name: variant.name,
                         token: {
                           id: variant.token.id,
-                          value: colorPickerColor.hex,
+                          value: colorPickerColor,
                           type: 'color',
                         },
                       })
                     }}
                     colorPickerColor={`${variant.token.value}`}
-                    presetColors={[]}
                   />
                 </Box>
               </Box>

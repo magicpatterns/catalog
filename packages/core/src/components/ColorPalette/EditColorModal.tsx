@@ -54,7 +54,7 @@ export function EditColorModal({
 
   const [error, setError] = useState<string | null>(null)
 
-  const [colorPickerColor, setColorPickerColor] = useState<Color>(
+  const [colorPickerColor, setColorPickerColor] = useState<string>(
     `${initialColorData?.group.base?.value}` ?? INITIAL_COLOR_PICKER_COLOR
   )
 
@@ -217,10 +217,9 @@ export function EditColorModal({
             {showBaseColorPicker && (
               <ColorPicker
                 onChange={(colorPickerColor) => {
-                  setBase(colorPickerColor.hex)
+                  setBase(colorPickerColor)
                 }}
                 colorPickerColor={colorPickerColor}
-                presetColors={presetColors}
               />
             )}
           </Box>

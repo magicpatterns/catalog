@@ -1,34 +1,22 @@
 import { Box } from '@chakra-ui/react'
-import { Color, ColorResult, SketchPicker } from '@hello-pangea/color-picker'
+import { HexColorPicker } from 'react-colorful'
 
 export function ColorPicker({
   colorPickerColor,
   onChange,
-  presetColors,
 }: {
-  presetColors: string[]
-  colorPickerColor: Color
-  onChange: (
-    colorPickerColor: ColorResult,
-    event: React.MouseEvent<Element, MouseEvent> | undefined
-  ) => void
+  colorPickerColor: string | undefined
+  onChange: (color: string) => void
 }) {
+  console.log(colorPickerColor)
   return (
-    <Box
-      sx={{
-        // HACK: `<SketchPicker />`'s `style` prop does a shallow merge,
-        //  so this lets us preserve the other `.sketch-picker` styles
-        '.sketch-picker': {
-          boxSizing: 'border-box !important',
-        },
-      }}
-    >
-      <SketchPicker
-        width="100%"
-        color={colorPickerColor}
+    <Box width="100%">
+      <HexColorPicker
+        style={{
+          width: '100%',
+        }}
+        color={colorPickerColor ?? ''}
         onChange={onChange}
-        disableAlpha
-        presetColors={presetColors}
       />
     </Box>
   )
