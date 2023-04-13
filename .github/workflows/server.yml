@@ -23,13 +23,12 @@ jobs:
         run: npm install -g fern-api
 
       - name: Verify generated code is up to date
-        with:
-          dir: server
-          cmd: | 
-            fern generate # will run `yarn install` command in apps/web
-            git --no-pager diff --exit-code
-          env:
-            FERN_TOKEN: ${{ secrets.FERN_API_KEY }}
+        working-directory: packages/server
+        run: | 
+          fern generate # will run `yarn install` command in apps/web
+          git --no-pager diff --exit-code
+        env:
+          FERN_TOKEN: ${{ secrets.FERN_API_KEY }}
 
       - name: install server
         uses: borales/actions-yarn@v4
@@ -43,7 +42,7 @@ jobs:
           dir: packages/server
           cmd: build # will run `yarn build` command in apps/web
 
-      - name: lint apps/web
+      - name: lint server
         uses: borales/actions-yarn@v4
         with:
           dir: packages/server
