@@ -335,7 +335,7 @@ export function ColorDisplay({
         onUpdateVariant={(newVariant: TNamedToken) => {
           // check if the new Variant name already exist, if exist throw error
           if (newVariant.name in colorData) {
-            throw new Error('Variant Name Already Exist')
+            throw new Error('This name already exists, please choose a different name.')
           }
           const updatedColorData = { ...colorData }
           updatedColorData[newVariant.name] = newVariant.token
