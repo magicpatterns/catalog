@@ -8,7 +8,7 @@ import {
   SliderTrack,
   Text,
 } from '@chakra-ui/react'
-import { RgbColor, SketchPicker } from '@hello-pangea/color-picker'
+import { SketchPicker } from '@hello-pangea/color-picker'
 import { Dispatch, SetStateAction } from 'react'
 
 export function ShadowColorPicker({
@@ -16,15 +16,7 @@ export function ShadowColorPicker({
   spread,
   hOffset,
   vOffset,
-  setBlur,
-  setSpread,
-  sethOffset,
-  setVOffset,
-  codeResult,
-  handleColor,
-  setColor,
   color,
-  initialButton,
   index,
   handleBlur,
   handleSpread,
@@ -32,27 +24,28 @@ export function ShadowColorPicker({
   handleVOffset,
   handleNewColor,
 }: {
-  blur: any
-  spread: any
-  hOffset: any
-  vOffset: any
-  setBlur: Dispatch<SetStateAction<any>>
-  setSpread: Dispatch<SetStateAction<any>>
-  sethOffset: Dispatch<SetStateAction<any>>
-  setVOffset: Dispatch<SetStateAction<any>>
-  codeResult: string
-  handleColor: (rgb: RgbColor, index: number) => void
-  color: any
-  initialButton: any
-  setColor: any
+  blur: number
+  spread: number
+  hOffset: number
+  vOffset: number
+  setBlur: Dispatch<SetStateAction<number>>
+  setSpread: Dispatch<SetStateAction<number>>
+  sethOffset: Dispatch<SetStateAction<number>>
+  setVOffset: Dispatch<SetStateAction<number>>
+  codeResult: object
+  color: string
+  initialButton: number
+  setColor: Dispatch<SetStateAction<string[]>>
   index: number
-  handleBlur: (e: any, index: number) => void
-  handleSpread: (e: any, index: number) => void
-  handleHOffset: (e: any, index: number) => void
-  handleVOffset: (e: any, index: number) => void
-  handleNewColor: (e: any, index: number) => void
+  handleBlur: (e: string | number, index: number) => void
+  handleSpread: (e: string | number, index: number) => void
+  handleHOffset: (e: string | number, index: number) => void
+  handleVOffset: (e: string | number, index: number) => void
+  handleNewColor: (
+    e: { r: number; g: number; b: number },
+    index: number
+  ) => void
 }) {
-  //console.log(blur + 'blur')
   return (
     <Box
       sx={{
@@ -100,9 +93,7 @@ export function ShadowColorPicker({
             <Input
               value={hOffset}
               onChange={(e) => {
-                const nextHoffset = [...hOffset]
-                nextHoffset[initialButton] = Number(e.target.value)
-                sethOffset(nextHoffset)
+                handleHOffset(e.target.value, index)
               }}
             />
             <Text>Vertical Offset</Text>
@@ -123,15 +114,13 @@ export function ShadowColorPicker({
             <Input
               value={vOffset}
               onChange={(e) => {
-                const nextVoffset = [...vOffset]
-                nextVoffset[initialButton] = Number(e.target.value)
-                setVOffset(nextVoffset)
+                handleVOffset(e.target.value, index)
               }}
             />
             <Text>Blur</Text>
             <Slider
               aria-label="slider-blur"
-              defaultValue={blur[index]}
+              defaultValue={blur}
               onChange={(val) => {
                 handleBlur(val, index)
               }}
@@ -164,9 +153,7 @@ export function ShadowColorPicker({
             <Input
               value={spread}
               onChange={(e) => {
-                const nextSpread = [...spread]
-                nextSpread[initialButton] = Number(e.target.value)
-                setSpread(nextSpread)
+                handleSpread(e.target.value, index)
               }}
             />
           </Box>
