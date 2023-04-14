@@ -4,7 +4,7 @@ import { VERSION } from '@core/utils/constants'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
-import { CgComponents, CgSpaceBetween } from 'react-icons/cg'
+import { CgSpaceBetween } from 'react-icons/cg'
 import {
   FiBookOpen,
   FiFolder,
