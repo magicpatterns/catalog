@@ -6,7 +6,7 @@
     "baseUrl": ".",
     "rootDir": "src",
     "paths": {
-      "@core/*": ["src/*"]
+      "@ui/*": ["src/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
