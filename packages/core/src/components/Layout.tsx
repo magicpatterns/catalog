@@ -152,12 +152,14 @@ export default function Layout({
           onClose={onExportSuccessModalClose}
           primitives={{ colors, typography, shadows }}
         />
-        <AlertDialogDelete
-          isOpen={isAlertDialogOpen}
-          onClose={onDeleteAlertDialogClose}
-          onDelete={() => onDeleteData()}
-          deleteAllTokens={true}
-        />
+        {platform === 'package' && (
+          <AlertDialogDelete
+            isOpen={isAlertDialogOpen}
+            onClose={onDeleteAlertDialogClose}
+            onDelete={() => onDeleteData()}
+            deleteAllTokens={true}
+          />
+        )}
         {platform === 'package' && (
           <ExportSettingsModal
             isOpen={isExportSettingsModalOpen}

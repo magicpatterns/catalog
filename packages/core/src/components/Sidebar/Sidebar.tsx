@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { Badge, Box, Icon, Stack, Text } from '@chakra-ui/react'
+import { Badge, Box, Flex, Icon, Spacer, Stack, Text } from '@chakra-ui/react'
 import { VERSION } from '@core/utils/constants'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
@@ -11,8 +11,8 @@ import {
   FiGithub,
   FiLayers,
   FiSettings,
-  FiTrash2,
   FiUnderline,
+  FiUpload,
 } from 'react-icons/fi'
 import { MdOutlineColorLens } from 'react-icons/md'
 
@@ -42,7 +42,7 @@ function SidebarLink({
   isDisabled,
   isCollapsed,
 }: {
-  label: string
+  label?: string
   icon: IconType
   isActive?: boolean
   onSelect?: () => void
@@ -86,15 +86,17 @@ function SidebarLink({
       <Icon as={icon} css={{ height: iconSize, width: iconSize }} />
       {!isCollapsed && (
         <>
-          <Text
-            css={{
-              fontWeight: 600,
-              fontSize,
-              marginLeft: '12px',
-            }}
-          >
-            {label}
-          </Text>
+          {label && (
+            <Text
+              css={{
+                fontWeight: 600,
+                fontSize,
+                marginLeft: '12px',
+              }}
+            >
+              {label}
+            </Text>
+          )}
           {isComingSoon && (
             <Badge css={{ marginLeft: '12px' }} colorScheme="blue">
               COMING SOON
@@ -268,14 +270,6 @@ export function Sidebar({
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
-            <SidebarLink
-              key="sidebar-delete"
-              label="Delete Tokens"
-              icon={FiTrash2}
-              onSelect={() => onDelete()}
-              isCollapsed={isCollapsed}
-              isDisabled={isDisabled}
-            />
           </SidebarSection>
 
           {/* <SidebarSection header={<SidebarHeader label="Themes" />}>
@@ -292,14 +286,14 @@ export function Sidebar({
           >
             <SidebarLink
               label="Export Tokens"
-              icon={FiFolder}
+              icon={FiUpload}
               onSelect={() => onExport()}
               isCollapsed={isCollapsed}
             />
             {platform === 'package' && (
               <SidebarLink
-                label="Settings"
-                icon={FiSettings}
+                label="File Types"
+                icon={FiFolder}
                 onSelect={() => onOpenSettings()}
                 isDisabled={isDisabled}
                 isCollapsed={isCollapsed}
@@ -334,9 +328,21 @@ export function Sidebar({
             </SidebarSection>
             <Box css={{ marginTop: '32px', height: '2rem' }}>
               {!isCollapsed && (
-                <Text fontWeight="bold" color="gray.400" fontSize={'0.8rem'}>
-                  {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
-                </Text>
+                <Flex>
+                  <Text fontWeight="bold" color="gray.400" fontSize={'0.8rem'}>
+                    {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
+                  </Text>
+                  <Spacer />
+                  {platform === 'web' && (
+                    <SidebarLink
+                      key="sidebar-delete"
+                      icon={FiSettings}
+                      onSelect={() => onDelete()}
+                      isCollapsed={isCollapsed}
+                      isDisabled={isDisabled}
+                    />
+                  )}
+                </Flex>
               )}
             </Box>
           </Box>
