@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "module": "CommonJS",
     "baseUrl": ".",
     "rootDir": "src",
