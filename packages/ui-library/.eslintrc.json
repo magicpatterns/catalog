@@ -12,7 +12,11 @@
       "version": "detect"
     }
   },
-  "extends": ["@mirrorful/eslint-config", "plugin:react/recommended"],
+  "extends": [
+    "@mirrorful/eslint-config",
+    "plugin:react/recommended",
+    "plugin:storybook/recommended"
+  ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/display-name": "off",
