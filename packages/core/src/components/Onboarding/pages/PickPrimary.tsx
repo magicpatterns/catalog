@@ -2,8 +2,8 @@ import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
-import { ColorResult, SketchPicker } from '@hello-pangea/color-picker'
 import tinycolor from 'tinycolor2'
+import { HexPicker } from '@core/components/ColorPalette/ColorPicker'
 
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
 
@@ -86,15 +86,12 @@ export function PickPrimary({
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '64px',
+          padding: '24px',
         }}
       >
-        <SketchPicker
-          width="100%"
-          color={primaryColor}
-          onChange={(color: ColorResult) => {
-            onUpdatePrimaryColor(color.hex)
-          }}
+        <HexPicker
+          colorPickerColor={primaryColor}
+          onChange={onUpdatePrimaryColor}
         />
       </Box>
     </Box>

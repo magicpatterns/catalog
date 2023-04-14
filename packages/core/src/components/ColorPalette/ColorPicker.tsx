@@ -10,6 +10,7 @@ export function HexPicker({ colorPickerColor, onChange }: Props) {
     <HexColorPicker
       style={{
         width: '100%',
+        height: '100%',
       }}
       color={colorPickerColor}
       onChange={onChange}
