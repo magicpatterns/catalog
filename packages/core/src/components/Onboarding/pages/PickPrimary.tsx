@@ -1,9 +1,9 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
+import { HexPicker } from '@core/components/ColorPalette/ColorPicker'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
 import tinycolor from 'tinycolor2'
-import { HexPicker } from '@core/components/ColorPalette/ColorPicker'
 
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
 
