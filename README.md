@@ -113,7 +113,7 @@ Check out our examples:
 - [Mirrorful 🤝 Basic Create React App](https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app)
 - [Mirrorful 🤝 Basic Nuxt 3 App](https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3)
 - [Mirrorful 🤝 Bootstrap (and Next)](https://github.com/Mirrorful/mirrorful/tree/main/examples/bootstrap-next)
-- [Mirrorful 🤝 styled-components](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components
+- [Mirrorful 🤝 styled-components](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components)
 
 Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues)
 
