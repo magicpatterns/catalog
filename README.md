@@ -42,8 +42,8 @@
 <kbd>[<img title="Spanish" alt="Spanish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/es.svg" width="22">](i18n/README.es.md)</kbd>
 <kbd>[
 <img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/pt.svg" width="22">
-<img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/br.svg" width="22">
-](i18n/README.pt.md)</kbd>
+](i18n/README.pt.md)
+</kbd>
 <kbd>[<img title="Norwegian" alt="Norwegian language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/no.svg" width="22">](i18n/README.no.md)</kbd>
 
 **[Mirrorful](https://mirrorful.com)** is a simple, open-source design system framework. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
@@ -51,11 +51,12 @@
 - **Start new projects with a source of truth**
 - **Visually modify your theme**
 - **Generate colors**
-- 🔜 **Theme Templates**
+- **Figma integration**
+- **Theme Templates**
+- 🔜 **Copilot for Product Design**
 - 🔜 **Lightweight Headless Component Library**
 - 🔜 **Eslint rules**
 - 🔜 **Propagate tokens across projects**
-- 🔜 **Figma integration**
 
 And more...
 
@@ -83,45 +84,21 @@ yarn add mirrorful -D
 
 ## ✨ Usage
 
-The following commands will start a local editor at `localhost:5050`.
-
-```
-yarn run mirrorful
-```
-
-or
+The following command will start a local editor at `localhost:5050`.
 
 ```
 npx mirrorful
 ```
 
-## 💿 Export Formats
+or
 
-After configuring your theme in the editor, you can export it to be used by your app.
-
-We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`
-
-**Using CSS Variables**
-
-Example:
-
-```css
-.primary-button {
-  background-color: var(--color-primary);
-}
-
-.primary-button:hover {
-  background-color: var(--color-primary-hover);
-}
+```
+yarn run mirrorful
 ```
 
-**Using Javascript Constants**
+## 📚 Documentation
 
-Example:
-
-```javascript
-<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
-```
+Check out our [documentation](https://mirrorful.com/docs) for more information.
 
 ## 🤝 Component Library Agnostic
 
@@ -136,6 +113,7 @@ Check out our examples:
 - [Mirrorful 🤝 Basic Create React App](https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app)
 - [Mirrorful 🤝 Basic Nuxt 3 App](https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3)
 - [Mirrorful 🤝 Bootstrap (and Next)](https://github.com/Mirrorful/mirrorful/tree/main/examples/bootstrap-next)
+- [Mirrorful 🤝 styled-components](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components
 
 Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues)
 
@@ -184,6 +162,6 @@ No matter the PR, all the Github avatars of contributors will be added to the Mi
 
 ## 🌎 Translations
 
-Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md), [Turkish 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.trs.md) and [Spanish 🇲🇽](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.es.md), among other languages. Help us translate our documentation and UI to your language!
+Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md), [Turkish 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.trs.md) and [Spanish 🇪🇸](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.es.md), among other languages. Help us translate our documentation and UI to your language!
 
 You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).

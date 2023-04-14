@@ -1,20 +1,25 @@
 import {
   defaultFiles,
-  defaultTypography,
-  TColorData,
-  TConfig,
+  TPrimitives,
+  TTokenGroup,
 } from '@mirrorful/core/lib/types'
 import Conf from 'conf'
+import { v4 as uuidv4 } from 'uuid'
 
-export const ZeroPointZeroPointTwoMigration = (store: Conf<TConfig>) => {
+export const ZeroPointZeroPointTwoMigration = (store: Conf<any>) => {
+  const isNewData = store.get('primitives') !== undefined
+  if (isNewData) {
+    return
+  }
+
   const tokens = store.get('tokens')
 
   const newTokens: {
-    colorData: TColorData[]
+    colorData: any[]
   } = {
     colorData: [],
   }
-  newTokens.colorData = tokens.colorData.map((color: any): TColorData => {
+  newTokens.colorData = tokens.colorData.map((color: any): any => {
     const variants = new Map<string, string>()
     if (color.hover) {
       variants.set('Hover', color.hover)
@@ -47,22 +52,119 @@ export const ZeroPointZeroPointTwoMigration = (store: Conf<TConfig>) => {
   store.set('tokens', newTokens)
 }
 
-export const ZeroPointZeroPointThreeMigration = (store: Conf<TConfig>) => {
+export const ZeroPointZeroPointThreeMigration = (store: Conf<any>) => {
+  const isNewData = store.get('primitives') !== undefined
+  if (isNewData) {
+    return
+  }
   const tokens = store.get('tokens')
   const updatedTokens = { ...tokens }
 
-  updatedTokens.typography = defaultTypography
+  updatedTokens.typography = {}
   store.set('tokens', updatedTokens)
 }
 
-export const ZeroPointZeroPointFourMigration = (store: Conf<TConfig>) => {
+export const ZeroPointZeroPointFourMigration = (store: Conf<any>) => {
+  const isNewData = store.get('primitives') !== undefined
+  if (isNewData) {
+    return
+  }
   store.set('files', defaultFiles)
 }
 
-export const ZeroPointZeroFiveMigration = (store: Conf<TConfig>) => {
+export const ZeroPointZeroFiveMigration = (store: Conf<any>) => {
+  const isNewData = store.get('primitives') !== undefined
+  if (isNewData) {
+    return
+  }
   const tokens = store.get('tokens')
   const updatedTokens = { ...tokens }
 
-  updatedTokens.typography = defaultTypography
+  updatedTokens.typography = {}
   store.set('tokens', updatedTokens)
+}
+
+export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
+  const isNewData = anyStore.get('primitives') !== undefined
+  if (isNewData) {
+    return
+  }
+  const store = anyStore as Conf<any>
+
+  const tokens = store.get('tokens')
+
+  const colors: TTokenGroup = {}
+
+  tokens.colorData.forEach((color: any) => {
+    const currentColor: TTokenGroup = {}
+
+    Object.keys(color.variants).forEach((variantName) => {
+      currentColor[variantName] = {
+        id: uuidv4(),
+        value: color.variants[variantName],
+        type: 'color',
+      }
+    })
+
+    if (color.baseColor) {
+      currentColor.base = {
+        id: uuidv4(),
+        value: color.baseColor,
+        type: 'color',
+      }
+    }
+
+    colors[color.name] = currentColor
+  })
+
+  const fontSizes: TTokenGroup = {}
+
+  tokens.typography.fontSizes.forEach((variant: any) => {
+    fontSizes[variant.name] = {
+      id: uuidv4(),
+      value: `${variant.value}${variant.unit}`,
+      type: 'fontSize',
+    }
+  })
+
+  const fontWeights: TTokenGroup = {}
+
+  tokens.typography.fontWeights.forEach((variant: any) => {
+    fontWeights[variant.name] = {
+      id: uuidv4(),
+      value: variant.weight,
+      type: 'fontWeight',
+    }
+  })
+
+  const lineHeights: TTokenGroup = {}
+  tokens.typography.lineHeights.forEach((variant: any) => {
+    lineHeights[variant.name] = {
+      id: uuidv4(),
+      value: `${variant.value}`,
+      type: 'fontWeight',
+    }
+  })
+
+  const shadows: TTokenGroup = {}
+  tokens.shadows.forEach((variant: any) => {
+    shadows[variant.name] = {
+      id: uuidv4(),
+      value: variant.value,
+      type: 'boxShadow',
+    }
+  })
+
+  const primitives: TPrimitives = {
+    colors,
+    typography: {
+      fontSizes,
+      fontWeights,
+      lineHeights,
+    },
+    shadows,
+  }
+
+  store.set('primitives', primitives)
+  store.delete('tokens')
 }

@@ -1,14 +1,13 @@
 import '../main.css'
 import '../atom-one-dark.css'
 
-import { ChakraProvider } from '@chakra-ui/react'
 import { Onboarding } from '@mirrorful/core/lib/components/Onboarding'
 import SplashScreen from '@mirrorful/core/lib/components/SplashScreen'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@mirrorful/core/lib/store/useMirrorfulStore'
-import { defaultShadows } from '@mirrorful/core/lib/types'
+import { defaultShadowsV2 } from '@mirrorful/core/lib/types'
 import type { AppProps } from 'next/app'
 import { usePathname, useRouter } from 'next/navigation'
 import posthog from 'posthog-js'
@@ -47,18 +46,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       setIsLoading(true)
       const data = await fetchStoreData()
 
-      if (
-        !Object.keys(data).length ||
-        !data.tokens.colorData ||
-        data.tokens.colorData.length === 0
-      ) {
+      if (!data || Object.keys(data.primitives.colors).length === 0) {
         setShowOnBoarding(true)
         return
       }
 
-      setColors(data.tokens.colorData ?? [])
-      setTypography(data.tokens.typography)
-      setShadows(data.tokens.shadows ?? defaultShadows)
+      setColors(data.primitives.colors ?? {})
+      setTypography(data.primitives.typography)
+      setShadows(data.primitives.shadows ?? defaultShadowsV2)
       setFileTypes(data.files)
     } catch (e) {
       // TODO: Handle error
@@ -85,22 +80,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       oldPathname.current = pathname
       posthog.capture('$pageview')
     }
-    // const handleRouteChange = () => {
-    //   posthog.capture('$pageview')
-    // }
-
-    // router.events.on('routeChangeComplete', handleRouteChange)
-
-    // return () => {
-    //   router.events.off('routeChangeComplete', handleRouteChange)
-    // }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   useEffect(() => {
     router.prefetch('/colors')
     router.prefetch('/typography')
     router.prefetch('/shadows')
+    router.prefetch('/components')
   }, [router])
 
   useEffect(() => {

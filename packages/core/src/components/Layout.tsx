@@ -1,5 +1,5 @@
 import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
-import { TConfig } from '@core/types'
+import { TMirrorfulStore } from '@core/types'
 import { AnimatePresence, motion } from 'framer-motion'
 import Head from 'next/head'
 import { usePathname, useRouter } from 'next/navigation'
@@ -12,7 +12,12 @@ import { Sidebar } from './Sidebar/Sidebar'
 
 export type TPlatform = 'package' | 'web'
 
-export type TTab = '/colors' | '/typography' | '/shadows' | '/theme_manager'
+export type TTab =
+  | '/colors'
+  | '/typography'
+  | '/shadows'
+  | '/theme_manager'
+  | '/components'
 
 export default function Layout({
   children,
@@ -23,7 +28,7 @@ export default function Layout({
   children: React.ReactNode
   isLoading?: boolean
   platform?: TPlatform
-  postStoreData: (data: TConfig) => Promise<void>
+  postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
   const router = useRouter()
   const pathname = usePathname()
@@ -45,7 +50,8 @@ export default function Layout({
 
   const handleExport = async () => {
     await postStoreData({
-      tokens: { colorData: colors, typography, shadows },
+      primitives: { colors, typography, shadows },
+      themes: [],
       files: fileTypes,
     })
 
@@ -117,7 +123,7 @@ export default function Layout({
           platform={platform}
           isOpen={isExportSuccessModalOpen}
           onClose={onExportSuccessModalClose}
-          tokens={{ colorData: colors, typography, shadows }}
+          primitives={{ colors, typography, shadows }}
         />
         {platform === 'package' && (
           <ExportSettingsModal

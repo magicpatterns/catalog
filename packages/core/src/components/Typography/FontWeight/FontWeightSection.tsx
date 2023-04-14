@@ -1,9 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import {
-  TFontSizeVariant,
-  TFontWeightVariant,
-  TLineHeightVariant,
-} from '@core/types'
+import { TTokenGroup } from '@core/types'
 
 import { DisplayFontProperty } from '../DisplayFontProperty'
 
@@ -11,20 +7,11 @@ export function FontWeightSection({
   fontWeightData,
   onUpdateFontPropertyData,
 }: {
-  fontWeightData: TFontWeightVariant[]
-  onUpdateFontPropertyData: (
-    newFontWeightData:
-      | TFontSizeVariant[]
-      | TFontWeightVariant[]
-      | TLineHeightVariant[]
-  ) => void
+  fontWeightData: TTokenGroup
+  onUpdateFontPropertyData: (newFontWeightData: TTokenGroup) => void
 }) {
   const headingText = 'Font Weights'
   const buttonText = 'Add New Font Weight'
-
-  fontWeightData.sort((fontWeightOne, fontWeightTwo) => {
-    return fontWeightOne.weight - fontWeightTwo.weight
-  })
 
   return (
     <Box>

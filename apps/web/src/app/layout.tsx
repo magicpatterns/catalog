@@ -9,7 +9,7 @@ import { MirrorfulThemeProvider } from '@core/components/ThemeProvider'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { defaultShadows, TConfig } from '@core/types'
+import { defaultShadowsV2, TMirrorfulStore } from '@core/types'
 import { LayoutWrapper } from '@web/components/LayoutWrapper'
 import { useFetchStoreData } from '@web/hooks/useFetchStoreData'
 import { usePostStoreData } from '@web/hooks/usePostStoreData'
@@ -51,17 +51,17 @@ export default function RootLayout({
       setIsLoading(true)
       const data = await fetchStoreData()
       if (
-        !Object.keys(data).length ||
-        !data.tokens.colorData ||
-        data.tokens.colorData.length === 0
+        !data ||
+        Object.keys(data).length === 0 ||
+        Object.keys(data.primitives.colors).length === 0
       ) {
         setShowOnBoarding(true)
         return
       }
 
-      setColors(data.tokens.colorData ?? [])
-      setTypography(data.tokens.typography)
-      setShadows(data.tokens.shadows ?? defaultShadows)
+      setColors(data.primitives.colors ?? {})
+      setTypography(data.primitives.typography)
+      setShadows(data.primitives.shadows ?? defaultShadowsV2)
       setFileTypes(data.files)
     } catch (e) {
       // TODO: Handle error
@@ -88,14 +88,15 @@ export default function RootLayout({
     router.prefetch('/colors')
     router.prefetch('/typography')
     router.prefetch('/shadows')
+    router.prefetch('/components')
   }, [router])
 
-  const handleOnboardingSubmit = async (data: TConfig) => {
+  const handleOnboardingSubmit = async (data: TMirrorfulStore) => {
     postStoreData(data)
-    setColors(data.tokens.colorData)
+    setColors(data.primitives.colors)
+    setShadows(data.primitives.shadows)
+    setTypography(data.primitives.typography)
     setFileTypes(data.files)
-    setShadows(data.tokens.shadows)
-    setTypography(data.tokens.typography)
   }
 
   return (

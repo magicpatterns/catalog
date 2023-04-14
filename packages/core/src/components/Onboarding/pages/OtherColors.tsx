@@ -2,7 +2,7 @@ import { ArrowBackIcon, ArrowForwardIcon, RepeatIcon } from '@chakra-ui/icons'
 import { Badge, Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
-import { TColorData } from '@core/types'
+import { TTokenGroup } from '@core/types'
 import { useCallback, useEffect, useState } from 'react'
 import tinycolor from 'tinycolor2'
 
@@ -17,14 +17,14 @@ export function OtherColors({
   primaryName,
   platform,
 }: {
-  initialPalette: TColorData[]
-  onUpdatePalette: (newPalette: TColorData[]) => void
+  initialPalette: TTokenGroup
+  onUpdatePalette: (newPalette: TTokenGroup) => void
   onUpdatePage: (page: number) => void
   primaryColor: string
   primaryName: string
   platform: TPlatform
 }) {
-  const [palette, setPalette] = useState<TColorData[]>(initialPalette)
+  const [palette, setPalette] = useState<TTokenGroup>(initialPalette)
 
   const shades = generateDefaultColorShades(primaryColor)
 
@@ -35,7 +35,7 @@ export function OtherColors({
   }, [primaryColor, primaryName])
 
   useEffect(() => {
-    if (palette.length === 0) {
+    if (Object.keys(palette).length === 0) {
       handleGeneratePalette()
     }
   }, [palette, handleGeneratePalette])
@@ -148,33 +148,37 @@ export function OtherColors({
           </Box>
           <hr />
           <Stack spacing={8}>
-            {palette.map((color) => (
-              <Box
-                css={{ display: 'flex', alignItems: 'center' }}
-                key={color.name}
-              >
+            {Object.keys(palette).map((colorName) => {
+              const color = palette[colorName]
+
+              return (
                 <Box
-                  css={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '150px',
-                  }}
+                  css={{ display: 'flex', alignItems: 'center' }}
+                  key={colorName}
                 >
-                  <Text fontSize={24} fontWeight="black">
-                    {color.name}
-                  </Text>
+                  <Box
+                    css={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      width: '150px',
+                    }}
+                  >
+                    <Text fontSize={24} fontWeight="black">
+                      {colorName}
+                    </Text>
+                  </Box>
+                  <Box
+                    css={{
+                      height: '40px',
+                      width: '120px',
+                      backgroundColor: `${color.value}`,
+                      marginLeft: '16px',
+                      borderRadius: 8,
+                    }}
+                  />
                 </Box>
-                <Box
-                  css={{
-                    height: '40px',
-                    width: '120px',
-                    backgroundColor: color.baseColor,
-                    marginLeft: '16px',
-                    borderRadius: 8,
-                  }}
-                />
-              </Box>
-            ))}
+              )
+            })}
             <Button onClick={handleGeneratePalette} leftIcon={<RepeatIcon />}>
               Regenerate
             </Button>
