@@ -85,7 +85,7 @@ export function ShadowRow({
     return result
   }
 
-  function getRgba2(str: string) {
+  function getRgba(str: string) {
     const rgbaRegex = /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/
     const match = str.match(rgbaRegex)
     if (match) {
@@ -96,16 +96,13 @@ export function ShadowRow({
   }
 
   const shadowObjects = separateBoxShadows(shadowData.value, shadowData.name)
-  const newInitial = shadowObjects.map((shadowObject) => {
-    return getRgba2(shadowObject.value)
+  const initialRgbaValue = shadowObjects.map((shadowObject) => {
+    return getRgba(shadowObject.value)
   })
 
-  const newInitialValues = shadowObjects.map((shadowObject) => {
+  const initialValues = shadowObjects.map((shadowObject) => {
     return getValues(shadowObject.value)
   })
-
-  const initialRgbaValue = newInitial
-  const initialValues = newInitialValues
 
   return (
     <Box css={{ width: '60vw' }}>

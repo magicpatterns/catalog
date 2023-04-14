@@ -19,9 +19,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TShadowData } from '@core/types'
 import { useEffect, useState } from 'react'
-import {} from 'react-icons'
-import { FiPlus } from 'react-icons/fi'
-import { TbInnerShadowBottomLeft } from 'react-icons/tb'
+import { FiLayers, FiPlus } from 'react-icons/fi'
 
 import { ShadowColorPicker } from './ShadowColorPicker'
 
@@ -57,8 +55,6 @@ export function EditShadowModal({
     onOpen: onDeleteAlertDialogOpen,
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
-
-  console.log(initialValues)
 
   const [variant, setVariant]: [
     TShadowData,
@@ -246,27 +242,31 @@ export function EditShadowModal({
                   <Button
                     key={index}
                     style={{
+                      color: index === initialButton ? 'black' : 'gray',
                       width: '100px',
                       margin: '0.5rem',
-                      backgroundColor: index === initialButton ? '#9B9B9B' : '',
                     }}
                     onClick={() => setInitialButton(index)}
                   >
-                    <Icon as={TbInnerShadowBottomLeft} />
+                    <Icon as={FiLayers} />
                   </Button>
                 ))}
 
                 <Button
-                  style={{ width: '100px', margin: '0.5rem' }}
+                  style={{
+                    width: '100px',
+                    margin: '0.5rem',
+                    color: 'gray',
+                  }}
                   onClick={() => {
-                    sethOffset([...hOffset, 12])
-                    setVOffset([...vOffset, 12])
-                    setBlur([...blur, 12])
-                    setSpread([...spread, 12])
+                    sethOffset([...hOffset, 0])
+                    setVOffset([...vOffset, 0])
+                    setBlur([...blur, 0])
+                    setSpread([...spread, 0])
                     const nextShadow = [...newInitialValues]
-                    nextShadow.push('12px 12px 12px 12px rgba(0, 0, 0, 1)')
+                    nextShadow.push('0px 0px 0px 0px')
                     const nextColor = [...color]
-                    nextColor.push('rgba(0, 0, 0, 1)')
+                    nextColor.push('rgba(0, 0, 0, 0.25)')
                     setNewInitialValues(nextShadow)
                     setColor(nextColor)
                     setInitialButton(newInitialValues.length)
@@ -290,7 +290,7 @@ export function EditShadowModal({
                             setSpread={setSpread}
                             sethOffset={sethOffset}
                             setVOffset={setVOffset}
-                            codeResult={codeResult}
+                            codeResult={codeResult()}
                             handleNewColor={handleNewColor}
                             handleBlur={handleBlur}
                             handleSpread={handleSpread}
@@ -308,24 +308,16 @@ export function EditShadowModal({
                 </Box>
               </FormControl>
 
-              <Text>Preview</Text>
-              <Box
-                style={{
-                  boxShadow: codeResult(),
-                  width: '100%',
-                  height: '100px',
-                  backgroundColor: '#F3F3F3',
-                  borderRadius: '5px',
-                }}
-              ></Box>
               <Box
                 css={{
                   marginTop: '16px',
                   width: '100%',
                   display: 'flex',
                   justifyContent: 'center',
+                  flexDirection: 'column',
                 }}
               >
+                <Text style={{ marginBottom: '.5em' }}>Value</Text>
                 <Input value={codeResult()} />
               </Box>
             </Box>

@@ -23,6 +23,7 @@ export function ShadowColorPicker({
   handleHOffset,
   handleVOffset,
   handleNewColor,
+  codeResult,
 }: {
   blur: number
   spread: number
@@ -32,7 +33,7 @@ export function ShadowColorPicker({
   setSpread: Dispatch<SetStateAction<number>>
   sethOffset: Dispatch<SetStateAction<number>>
   setVOffset: Dispatch<SetStateAction<number>>
-  codeResult: object
+  codeResult: string
   color: string
   initialButton: number
   setColor: Dispatch<SetStateAction<string[]>>
@@ -57,13 +58,16 @@ export function ShadowColorPicker({
       }}
     >
       <Flex justifyContent={'space-between'} mt="1em">
-        <SketchPicker
-          width="45%"
-          color={color}
-          onChange={(e) => {
-            handleNewColor(e.rgb, index)
-          }}
-        />
+        <Box width="45%">
+          <Text style={{ marginBottom: '.5em' }}>Color</Text>
+          <SketchPicker
+            width="100%"
+            color={color}
+            onChange={(e) => {
+              handleNewColor(e.rgb, index)
+            }}
+          />
+        </Box>
         <Box
           width="50%"
           sx={{
@@ -76,86 +80,116 @@ export function ShadowColorPicker({
         >
           <Box>
             <Text>Horizontal Offset</Text>
-            <Slider
-              aria-label="slider-horizontal offset"
-              min={-25}
-              max={25}
-              defaultValue={hOffset}
-              onChange={(val) => {
-                handleHOffset(val, index)
-              }}
-            >
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb />
-            </Slider>
-            <Input
-              value={hOffset}
-              onChange={(e) => {
-                handleHOffset(e.target.value, index)
-              }}
-            />
+            <Flex>
+              <Slider
+                aria-label="slider-horizontal offset"
+                min={-25}
+                max={25}
+                defaultValue={hOffset}
+                onChange={(val) => {
+                  handleHOffset(val, index)
+                }}
+              >
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+                <SliderThumb />
+              </Slider>
+              <Input
+                style={{ marginLeft: '1em' }}
+                htmlSize={2}
+                width="auto"
+                value={hOffset}
+                onChange={(e) => {
+                  handleHOffset(e.target.value, index)
+                }}
+              />
+            </Flex>
             <Text>Vertical Offset</Text>
-            <Slider
-              aria-label="slider-vertical-offset"
-              min={-25}
-              max={25}
-              defaultValue={vOffset}
-              onChange={(val) => {
-                handleVOffset(val, index)
-              }}
-            >
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb />
-            </Slider>
-            <Input
-              value={vOffset}
-              onChange={(e) => {
-                handleVOffset(e.target.value, index)
-              }}
-            />
+            <Flex>
+              <Slider
+                aria-label="slider-vertical-offset"
+                min={-25}
+                max={25}
+                defaultValue={vOffset}
+                onChange={(val) => {
+                  handleVOffset(val, index)
+                }}
+              >
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+                <SliderThumb />
+              </Slider>
+              <Input
+                style={{ marginLeft: '1em' }}
+                htmlSize={2}
+                width="auto"
+                value={vOffset}
+                onChange={(e) => {
+                  handleVOffset(e.target.value, index)
+                }}
+              />
+            </Flex>
             <Text>Blur</Text>
-            <Slider
-              aria-label="slider-blur"
-              defaultValue={blur}
-              onChange={(val) => {
-                handleBlur(val, index)
-              }}
-            >
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb />
-            </Slider>
-            <Input
-              value={blur}
-              onChange={(e) => {
-                handleBlur(e.target.value, index)
-              }}
-            />
+            <Flex>
+              <Slider
+                aria-label="slider-blur"
+                defaultValue={blur}
+                onChange={(val) => {
+                  handleBlur(val, index)
+                }}
+              >
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+                <SliderThumb />
+              </Slider>
+              <Input
+                style={{ marginLeft: '1em' }}
+                htmlSize={2}
+                width="auto"
+                value={blur}
+                onChange={(e) => {
+                  handleBlur(e.target.value, index)
+                }}
+              />
+            </Flex>
             <Text>Spread</Text>
-            <Slider
-              aria-label="slider-Spread"
-              defaultValue={spread}
-              onChange={(val) => {
-                handleSpread(val, index)
+            <Flex>
+              <Slider
+                aria-label="slider-Spread"
+                defaultValue={spread}
+                onChange={(val) => {
+                  handleSpread(val, index)
+                }}
+                size="lg"
+              >
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+                <SliderThumb />
+              </Slider>
+              <Input
+                style={{ marginLeft: '1em' }}
+                htmlSize={2}
+                width="auto"
+                value={spread}
+                onChange={(e) => {
+                  handleSpread(e.target.value, index)
+                }}
+              />
+            </Flex>
+            <Text style={{ marginBottom: '.5em' }}>Preview</Text>
+            <Box
+              style={{
+                boxShadow: codeResult,
+                width: '100%',
+                height: '60px',
+                backgroundColor: '#F3F3F3',
+                borderRadius: '5px',
               }}
-              size="lg"
-            >
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb />
-            </Slider>
-            <Input
-              value={spread}
-              onChange={(e) => {
-                handleSpread(e.target.value, index)
-              }}
-            />
+            ></Box>
           </Box>
         </Box>
       </Flex>
