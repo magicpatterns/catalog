@@ -91,8 +91,8 @@ function PackageModalBody({ primitives }: { primitives: TPrimitives }) {
   return (
     <>
       <Text css={{ marginBottom: '24px' }}>
-        All of your tokens can now be imported by your app. Open up your code
-        editor to use them!
+        Your tokens can now be imported by your app. Open up your code editor to
+        use them!
       </Text>
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -254,9 +254,9 @@ function TokenTab({
         </Text>
         <CodePreview
           language="jsx"
-          text={`<button\n   style={{ ${javascriptPropertyName}: Tokens.${javascriptName}.${sanitizeName(
+          text={`<button\n   style={{ ${javascriptPropertyName}: Tokens.${javascriptName}["${sanitizeName(
             primaryName
-          )} }}\n> Click here\n</button>`}
+          )}"] }}\n> Click here\n</button>`}
         />
       </TabPanel>
     ),
@@ -411,6 +411,7 @@ function ExternalExamples() {
     | 'Tailwind CSS'
     | 'Chakra UI'
     | 'Nuxt 3'
+    | 'Styled Components'
 
   const EXAMPLES_ICON_SIZE = 20
   const externalExamples: {
@@ -429,6 +430,11 @@ function ExternalExamples() {
       icon: <TbBrandNextjs size={EXAMPLES_ICON_SIZE} />,
     },
     {
+      name: 'Styled Components',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components',
+      icon: <span>{`💅`}</span>,
+    },
+    {
       name: 'Tailwind CSS',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/tailwind-next',
       icon: <SiTailwindcss size={EXAMPLES_ICON_SIZE} fill="#38BDF8" />,
@@ -445,7 +451,15 @@ function ExternalExamples() {
     },
   ]
   return (
-    <Flex css={{ marginTop: '16px' }} gap={4} flexWrap="wrap">
+    <Flex
+      css={{
+        marginTop: '16px',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      gap={4}
+      flexWrap="wrap"
+    >
       {externalExamples.map((example) => {
         return (
           <Link
@@ -468,7 +482,6 @@ function ExternalExamples() {
               {example.icon}
               <Text fontSize={'md'}>{example.name}</Text>
             </Box>
-            {/* <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} /> */}
           </Link>
         )
       })}
@@ -491,11 +504,12 @@ export function ExportSuccessModal({
 }) {
   return (
     <Modal
-      size="3xl"
+      size="2xl"
       isOpen={isOpen}
       onClose={onClose}
       isCentered={true}
       closeOnEsc={true}
+      scrollBehavior="inside"
     >
       <ModalOverlay />
       <ModalContent>

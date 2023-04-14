@@ -74,7 +74,15 @@ export function EditVariantModal({
     }
     // Remove error so it doesn't persist...
     setError(null)
-    onUpdateVariant(variant)
+    // catch any thrown errors on save
+    try {
+      onUpdateVariant(variant)
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message)
+        return
+      }
+    }
     onClose()
   }
 
@@ -99,121 +107,121 @@ export function EditVariantModal({
             {initialVariant ? 'Edit Variant' : 'Add Variant'}
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody
-            css={{
-              padding: '0px 32px 32px 32px',
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              handleSave()
             }}
           >
-            <Box
+            <ModalBody
               css={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-between',
+                padding: '0px 32px 32px 32px',
               }}
             >
               <Box
-                css={{ display: 'flex', flexDirection: 'column', width: '50%' }}
+                css={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}
               >
-                <FormControl>
-                  <FormLabel>Variant Name</FormLabel>
-                  <Input
-                    placeholder="e.g. Blue"
-                    value={variant.name}
-                    onChange={(e) =>
-                      setVariant({ ...variant, name: e.target.value })
-                    }
-                  />
-                </FormControl>
+                <Box
+                  css={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '50%',
+                  }}
+                >
+                  <FormControl>
+                    <FormLabel>Variant Name</FormLabel>
+                    <Input
+                      placeholder="e.g. Blue"
+                      value={variant.name}
+                      onChange={(e) =>
+                        setVariant({ ...variant, name: e.target.value })
+                      }
+                    />
+                  </FormControl>
 
-                <FormControl css={{ marginTop: '32px' }}>
-                  <FormLabel>
-                    <Box css={{ display: 'flex', alignItems: 'center' }}>
-                      Variant Color{' '}
-                      <Box
-                        css={{
-                          height: '14px',
-                          width: '14px',
-                          marginLeft: '8px',
-                        }}
-                        bgColor={`${variant.token.value}`}
-                        border={'1px solid black'}
-                      />
-                    </Box>
-                  </FormLabel>
-                  <Input
-                    placeholder="e.g. #FFFFFF"
-                    value={variant.token.value}
-                    onChange={(e) =>
+                  <FormControl css={{ marginTop: '32px' }}>
+                    <FormLabel>
+                      <Box css={{ display: 'flex', alignItems: 'center' }}>
+                        Variant Color{' '}
+                        <Box
+                          css={{
+                            height: '14px',
+                            width: '14px',
+                            marginLeft: '8px',
+                          }}
+                          bgColor={`${variant.token.value}`}
+                          border={'1px solid black'}
+                        />
+                      </Box>
+                    </FormLabel>
+                    <Input
+                      placeholder="e.g. #FFFFFF"
+                      value={variant.token.value}
+                      onChange={(e) =>
+                        setVariant({
+                          name: variant.name,
+                          token: {
+                            id: variant.token.id,
+                            value: e.target.value.trim(),
+                            type: 'color',
+                          },
+                        })
+                      }
+                    />
+                  </FormControl>
+                </Box>
+                <Box
+                  css={{
+                    width: '40%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <ColorPicker
+                    onChange={(colorPickerColor) => {
                       setVariant({
                         name: variant.name,
                         token: {
                           id: variant.token.id,
-                          value: e.target.value,
+                          value: colorPickerColor.hex,
                           type: 'color',
                         },
                       })
-                    }
-                  />
-                </FormControl>
-                {/* <FormControl css={{ marginTop: '32px' }}>
-                  <Checkbox
-                    checked={variant.isBase}
-                    onChange={(event) => {
-                      setVariant({ ...variant, isBase: event.target.checked })
                     }}
-                    defaultChecked={variant.isBase}
-                  >
-                    Set as Base (i.e. default) variant for this color
-                  </Checkbox>
-                </FormControl> */}
+                    colorPickerColor={`${variant.token.value}`}
+                    presetColors={[]}
+                  />
+                </Box>
               </Box>
-              <Box
-                css={{
-                  width: '40%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <ColorPicker
-                  onChange={(colorPickerColor) => {
-                    setVariant({
-                      name: variant.name,
-                      token: {
-                        id: variant.token.id,
-                        value: colorPickerColor.hex,
-                        type: 'color',
-                      },
-                    })
-                  }}
-                  colorPickerColor={`${variant.token.value}`}
-                  presetColors={[]}
-                />
-              </Box>
-            </Box>
-            {error && (
-              <Text
-                css={{ alignSelf: 'flex-start', marginTop: '32px' }}
-                color="red.400"
-                fontWeight="medium"
-              >
-                {error}
-              </Text>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={handleSave} css={{ marginRight: '12px' }}>
-              Save
-            </Button>
-            {onDeleteVariant && (
-              <Button
-                onClick={() => onDeleteAlertDialogOpen()}
-                colorScheme="red"
-              >
-                Delete
+              {error && (
+                <Text
+                  css={{ alignSelf: 'flex-start', marginTop: '32px' }}
+                  color="red.400"
+                  fontWeight="medium"
+                >
+                  {error}
+                </Text>
+              )}
+            </ModalBody>
+            <ModalFooter>
+              <Button type="submit" css={{ marginRight: '12px' }}>
+                Save
               </Button>
-            )}
-          </ModalFooter>
+              {onDeleteVariant && (
+                <Button
+                  onClick={() => onDeleteAlertDialogOpen()}
+                  colorScheme="red"
+                >
+                  Delete
+                </Button>
+              )}
+            </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
       {onDeleteVariant && (

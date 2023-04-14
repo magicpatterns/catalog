@@ -15,6 +15,7 @@ import {
 import { CodePreview } from '@core/components/CodePreview'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
+import { sanitizeName } from '@core/translators/sanitizeName'
 import tinycolor from 'tinycolor2'
 
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
@@ -31,6 +32,8 @@ export function ImportInstructions({
   platform: TPlatform
 }) {
   const shades = generateDefaultColorShades(primaryColor)
+
+  const sanitizedName = sanitizeName(primaryName)
 
   return (
     <Box css={{ display: 'flex', height: '100%', flexGrow: 1 }} as="form">
@@ -133,7 +136,7 @@ export function ImportInstructions({
               </Text>
               <CodePreview
                 language="css"
-                text={`.${primaryName.toLowerCase()}-button {\n    background-color: var(--color-${primaryName.toLowerCase()});\n}\n\n.${primaryName.toLowerCase()}-button:hover {\n    background-color: var(--color-${primaryName.toLowerCase()}-hover);\n}`}
+                text={`.${sanitizedName}-button {\n    background-color: var(--color-${sanitizedName});\n}\n\n.${sanitizedName}-button:hover {\n    background-color: var(--color-${sanitizedName}-hover);\n}`}
               />
             </TabPanel>
             <TabPanel>
@@ -157,8 +160,8 @@ export function ImportInstructions({
                 anywhere as constants!
               </Text>
               <CodePreview
-                language="javascript"
-                text={`<button\n   style={{ backgroundColor: Tokens.colors.${primaryName.toLowerCase()}.base }}\n> Click here\n</button>`}
+                language="jsx"
+                text={`<button\n   style={{ backgroundColor: Tokens.colors["${sanitizedName}"] }}\n> Click here\n</button>`}
               />
             </TabPanel>
             <TabPanel>

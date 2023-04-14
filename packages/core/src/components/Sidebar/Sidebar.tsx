@@ -4,7 +4,7 @@ import { VERSION } from '@core/utils/constants'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
-import { CgSpaceBetween } from 'react-icons/cg'
+import { CgComponents, CgSpaceBetween } from 'react-icons/cg'
 import {
   FiBookOpen,
   FiFolder,
@@ -262,11 +262,19 @@ export function Sidebar({
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
+            {/* <SidebarLink
+              key="sidebar-components"
+              label="Components"
+              icon={CgComponents}
+              isDisabled={isDisabled}
+              isCollapsed={isCollapsed}
+              isActive={activeTab === '/components'}
+              onSelect={() => onSelectTab('/components')}
+            /> */}
             <SidebarLink
               key="sidebar-spacing"
               label="Spacing"
               icon={CgSpaceBetween}
-              isComingSoon
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
