@@ -4,7 +4,7 @@ import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 
 type Variants = 'save' | 'delete' | 'default'
 
-interface button extends ChakraProps {
+interface button {
   label: string
   variant?: Variants
   onClick?: () => void
@@ -21,6 +21,11 @@ export function Button(props: button) {
       bgColor: 'gray.200',
       _hover: { backgroundColor: 'gray.300' },
     },
+    delete: {
+      bgColor: 'red.500',
+      _hover: { backgroundColor: 'red.600' },
+      color: 'white',
+    },
   }
   return (
     <ChakraProviderWrapper>
@@ -30,7 +35,8 @@ export function Button(props: button) {
         {...variantProps[props.variant ?? 'default']}
       >
         {props.variant === 'save' && 'Save'}
-        {props.variant === 'delete' && 'Delete'} {' ' + props.label}
+        {props.variant === 'delete' && 'Delete'}
+        {' ' + props.label}
       </ChakraButton>
     </ChakraProviderWrapper>
   )
