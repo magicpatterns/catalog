@@ -1,6 +1,7 @@
 import { Button as ChakraButton } from '@chakra-ui/react'
-import { ChakraProviderWrapper } from '@ui/ChakraProviderWrapper'
 import React from 'react'
+
+import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 
 interface Button extends Partial<HTMLButtonElement> {
   title: string
