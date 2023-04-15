@@ -29,3 +29,8 @@ export const Add_Token: Story = {
   render: Button,
   args: { label: 'Add New Color', variant: 'add-token' },
 }
+
+export const Add_Variant: Story = {
+  render: Button,
+  args: { label: 'Add New Variant', variant: 'add-variant' },
+}
