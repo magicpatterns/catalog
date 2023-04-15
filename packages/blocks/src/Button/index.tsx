@@ -1,9 +1,9 @@
 import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
-import { button, Variants } from './Button'
+import { IButton, Variants } from './Button'
 
-export function Button(props: button) {
+export function Button(props: IButton) {
   const variantProps: Record<Variants, ChakraProps> = {
     save: {
       bgColor: 'blue.500',

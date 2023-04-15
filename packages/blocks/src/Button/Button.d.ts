@@ -6,7 +6,7 @@ export type Variants =
   | 'icon'
   | 'default'
 
-export interface button {
+export interface IButton {
   label: string
   icon?: React.ReactNode
   variant?: Variants
