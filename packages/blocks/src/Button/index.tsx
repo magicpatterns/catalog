@@ -2,10 +2,17 @@ import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 
-type Variants = 'save' | 'delete' | 'add-token' | 'add-variant' | 'default'
+type Variants =
+  | 'save'
+  | 'delete'
+  | 'add-token'
+  | 'add-variant'
+  | 'icon'
+  | 'default'
 
 interface button {
   label: string
+  icon?: React.ReactNode
   variant?: Variants
   onClick?: () => void
 }
@@ -45,6 +52,18 @@ export function Button(props: button) {
         backgroundColor: 'gray.200',
       },
     },
+    icon: {
+      border: '1px solid',
+      borderColor: 'gray.200',
+      backgroundColor: 'transparent',
+      _hover: {
+        backgroundColor: 'gray.200',
+      },
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '3',
+      fontWeight: 'semibold',
+    },
   }
   return (
     <ChakraProviderWrapper>
@@ -54,6 +73,7 @@ export function Button(props: button) {
         {...props}
         {...variantProps[props.variant ?? 'default']}
       >
+        {props.icon ? props.icon : null}
         {toCapitalize(props.label)}
       </ChakraButton>
     </ChakraProviderWrapper>
