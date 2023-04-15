@@ -2,7 +2,7 @@ import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 
-type Variants = 'save' | 'delete' | 'default'
+type Variants = 'save' | 'delete' | 'add-token' | 'default'
 
 interface button {
   label: string
@@ -25,6 +25,17 @@ export function Button(props: button) {
       bgColor: 'red.500',
       _hover: { backgroundColor: 'red.600' },
       color: 'white',
+    },
+    'add-token': {
+      outline: '2px solid',
+      outlineColor: 'blue.500',
+      backgroundColor: 'transparent',
+      color: 'blue.500',
+      _hover: {
+        outline: '2px solid',
+        outlineColor: 'blue.600',
+        color: 'blue.600',
+      },
     },
   }
   return (
