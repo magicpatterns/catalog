@@ -1,3 +1,4 @@
+import { EditIcon } from '@chakra-ui/icons'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from '.'
@@ -33,4 +34,9 @@ export const Add_Token: Story = {
 export const Add_Variant: Story = {
   render: Button,
   args: { label: 'Add New Variant', variant: 'add-variant' },
+}
+
+export const Icon: Story = {
+  render: Button,
+  args: { label: 'Edit Name', variant: 'icon', icon: <EditIcon /> },
 }
