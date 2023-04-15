@@ -8,7 +8,7 @@ export type Variants =
 
 export interface IButton {
   label: string
+  variant: Variants
   icon?: React.ReactNode
-  variant?: Variants
   onClick?: () => void
 }
