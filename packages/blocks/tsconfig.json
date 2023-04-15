@@ -16,13 +16,13 @@
     "resolveJsonModule": true,
     "declaration": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "src/**/*.json"],
+  "include": ["**/*.ts", "**/*.tsx", "src/**/*.json", "**/*.d.ts"],
   "exclude": [
     "node_modules",
     "lib",
     "tsconfig.json",
-    "src/stories/**/*",
-    "src/.storybook/**/*"
+    "src/.storybook/**/*",
+    "**/*.stories.tsx"
   ],
   "tsc-alias": {
     "verbose": true
