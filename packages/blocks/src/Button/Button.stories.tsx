@@ -12,5 +12,10 @@ type Story = StoryObj<typeof Button>
 
 export const Primary: Story = {
   render: Button,
-  args: {},
+  args: { label: 'Primary', variant: 'default' },
+}
+
+export const Save: Story = {
+  render: Button,
+  args: { label: 'save', variant: 'save' },
 }
