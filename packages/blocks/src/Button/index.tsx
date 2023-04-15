@@ -1,5 +1,7 @@
 import { Button as ChakraButton } from '@chakra-ui/react'
 
+import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
+
 export function Button({
   label,
   onClick,
@@ -7,5 +9,9 @@ export function Button({
   label: string
   onClick?: () => void
 }) {
-  return <ChakraButton onClick={onClick}>{label}</ChakraButton>
+  return (
+    <ChakraProviderWrapper>
+      <ChakraButton onClick={onClick}>{label}</ChakraButton>
+    </ChakraProviderWrapper>
+  )
 }
