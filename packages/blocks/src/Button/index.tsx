@@ -1,7 +1,7 @@
 import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
-import { IButton, Variants } from './Button'
+import { IButton, Variants } from './types'
 
 export function Button(props: IButton) {
   const variantProps: Record<Variants, ChakraProps> = {
