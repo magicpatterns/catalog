@@ -7,7 +7,9 @@
     "src/**/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "run-script-os",
+    "build:win32": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && xcopy /Y package.json lib",
+    "build:default": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && cp package.json lib",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -25,6 +27,7 @@
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.4",
+    "@chakra-ui/storybook-addon": "^4.0.16",
     "@storybook/addon-essentials": "7.0.4",
     "@storybook/addon-interactions": "7.0.4",
     "@storybook/addon-links": "7.0.4",
