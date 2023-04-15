@@ -34,9 +34,7 @@ export function Button(props: button) {
         {...props}
         {...variantProps[props.variant ?? 'default']}
       >
-        {props.variant === 'save' && 'Save'}
-        {props.variant === 'delete' && 'Delete'}
-        {' ' + props.label}
+        {props.label}
       </ChakraButton>
     </ChakraProviderWrapper>
   )
