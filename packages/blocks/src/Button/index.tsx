@@ -20,13 +20,13 @@ export function Button(props: button) {
       color: 'white',
     },
     'add-token': {
-      outline: '2px solid',
-      outlineColor: 'blue.500',
+      border: '2px solid',
+      borderColor: 'blue.500',
       backgroundColor: 'transparent',
       color: 'blue.500',
       _hover: {
-        outline: '2px solid',
-        outlineColor: 'blue.600',
+        border: '2px solid',
+        borderColor: 'blue.600',
         color: 'blue.600',
       },
     },
