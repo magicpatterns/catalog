@@ -10,9 +10,9 @@ const meta: Meta<typeof Button> = {
 export default meta
 type Story = StoryObj<typeof Button>
 
-export const Primary: Story = {
+export const Default: Story = {
   render: Button,
-  args: { label: 'Primary', variant: 'default' },
+  args: { label: 'Default', variant: 'default' },
 }
 
 export const Save: Story = {
@@ -23,4 +23,9 @@ export const Save: Story = {
 export const Delete: Story = {
   render: Button,
   args: { label: 'delete variant', variant: 'delete' },
+}
+
+export const Add_Token: Story = {
+  render: Button,
+  args: { label: 'Add New Color', variant: 'add-token' },
 }
