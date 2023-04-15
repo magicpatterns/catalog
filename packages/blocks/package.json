@@ -21,7 +21,6 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.0.18",
     "@chakra-ui/react": "^2.5.5",
-    "@storybook/react": "^7.0.4",
     "eslint-plugin-react": "^7.32.2",
     "mirrorful": "^6.1.9",
     "react": "^18.2.0",
