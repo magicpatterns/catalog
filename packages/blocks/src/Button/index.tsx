@@ -1,17 +1,19 @@
-import { Button as ChakraButton } from '@chakra-ui/react'
+import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 
-export function Button({
-  label,
-  onClick,
-}: {
+interface button extends ChakraProps {
   label: string
   onClick?: () => void
-}) {
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export function Button(props: button) {
   return (
     <ChakraProviderWrapper>
-      <ChakraButton onClick={onClick}>{label}</ChakraButton>
+      <ChakraButton onClick={props.onClick} size={props.size}>
+        {props.label}
+      </ChakraButton>
     </ChakraProviderWrapper>
   )
 }
