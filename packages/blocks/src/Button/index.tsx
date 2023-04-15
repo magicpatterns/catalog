@@ -2,15 +2,33 @@ import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 
+type Variants = 'save' | 'default'
+
 interface button extends ChakraProps {
   label: string
+  variant?: Variants
   onClick?: () => void
 }
 
 export function Button(props: button) {
+  const variantProps: Record<Variants, ChakraProps> = {
+    save: {
+      bgColor: 'blue.500',
+      _hover: { backgroundColor: 'blue.600' },
+      color: 'white',
+    },
+    default: {
+      bgColor: 'gray.200',
+      _hover: { backgroundColor: 'gray.300' },
+    },
+  }
   return (
     <ChakraProviderWrapper>
-      <ChakraButton onClick={props.onClick} {...props}>
+      <ChakraButton
+        onClick={props.onClick}
+        {...props}
+        {...variantProps[props.variant ?? 'default']}
+      >
         {props.label}
       </ChakraButton>
     </ChakraProviderWrapper>
