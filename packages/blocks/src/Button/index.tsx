@@ -2,7 +2,7 @@ import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 
-type Variants = 'save' | 'delete' | 'add-token' | 'default'
+type Variants = 'save' | 'delete' | 'add-token' | 'add-variant' | 'default'
 
 interface button {
   label: string
@@ -37,10 +37,19 @@ export function Button(props: button) {
         color: 'blue.600',
       },
     },
+    'add-variant': {
+      border: '1px solid',
+      borderColor: 'gray.200',
+      backgroundColor: 'transparent',
+      _hover: {
+        backgroundColor: 'gray.200',
+      },
+    },
   }
   return (
     <ChakraProviderWrapper>
       <ChakraButton
+        color="gray.800"
         onClick={props.onClick}
         {...props}
         {...variantProps[props.variant ?? 'default']}
