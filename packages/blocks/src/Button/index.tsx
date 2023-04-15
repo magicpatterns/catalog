@@ -2,7 +2,7 @@ import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 
-type Variants = 'save' | 'default'
+type Variants = 'save' | 'delete' | 'default'
 
 interface button extends ChakraProps {
   label: string
@@ -29,7 +29,8 @@ export function Button(props: button) {
         {...props}
         {...variantProps[props.variant ?? 'default']}
       >
-        {props.label}
+        {props.variant === 'save' && 'Save'}
+        {props.variant === 'delete' && 'Delete'} {' ' + props.label}
       </ChakraButton>
     </ChakraProviderWrapper>
   )
