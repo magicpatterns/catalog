@@ -34,8 +34,17 @@ export function Button(props: button) {
         {...props}
         {...variantProps[props.variant ?? 'default']}
       >
-        {props.label}
+        {toCapitalize(props.label)}
       </ChakraButton>
     </ChakraProviderWrapper>
   )
+}
+
+function toCapitalize(str: string) {
+  return str
+    .split(' ')
+    .map((word) => {
+      return word[0].toUpperCase() + word.slice(1)
+    })
+    .join(' ')
 }
