@@ -10,6 +10,9 @@
     "build": "run-script-os",
     "build:win32": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && xcopy /Y package.json lib",
     "build:default": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && cp package.json lib",
+    "build:watch": "run-script-os",
+    "build:watch:win32": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"xcopy /Y package.json lib\")",
+    "build:watch:default": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\" \"cp package.json lib\")",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
