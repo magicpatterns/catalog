@@ -1,21 +1,7 @@
 import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
-
-type Variants =
-  | 'save'
-  | 'delete'
-  | 'add-token'
-  | 'add-variant'
-  | 'icon'
-  | 'default'
-
-interface button {
-  label: string
-  icon?: React.ReactNode
-  variant?: Variants
-  onClick?: () => void
-}
+import { button, Variants } from './Button'
 
 export function Button(props: button) {
   const variantProps: Record<Variants, ChakraProps> = {
