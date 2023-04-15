@@ -19,3 +19,8 @@ export const Save: Story = {
   render: Button,
   args: { label: 'save', variant: 'save' },
 }
+
+export const Delete: Story = {
+  render: Button,
+  args: { label: 'delete variant', variant: 'delete' },
+}
