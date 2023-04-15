@@ -2314,30 +2314,6 @@
     "@types/mdx" "^2.0.0"
     "@types/react" ">=16"
 
-"@mirrorful/core@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-2.0.2.tgz#a43746e874954b7c6194fe52f6336497a1892f38"
-  integrity sha512-Vflw+cqFEbu1I3wL5nY/7DxgD8xTgsUdN8DT6IfdLwUjYStqYkk3QQMpKpgV0FdVyj9paeHVwKuQvB8uLoXAfg==
-  dependencies:
-    "@chakra-ui/icons" "^2.0.17"
-    "@chakra-ui/react" "^2.5.2"
-    "@emotion/react" "^11.10.6"
-    "@emotion/styled" "^11.10.6"
-    "@hello-pangea/color-picker" "^3.2.2"
-    eslint-plugin-react "^7.32.2"
-    framer-motion "^10.6.0"
-    json5 "^2.2.3"
-    lottie-react "^2.4.0"
-    next "13.2.4"
-    posthog-js "^1.51.3"
-    react "^18.2.0"
-    react-dom "^18.2.0"
-    react-highlight "^0.15.0"
-    react-icons "^4.8.0"
-    tinycolor2 "^1.6.0"
-    typescript "^4.9.5"
-    zustand "^4.3.7"
-
 "@mirrorful/eslint-config@file:packages/eslint-config":
   version "1.0.0"
 
@@ -3221,7 +3197,7 @@
     "@storybook/react" "7.0.4"
     "@types/node" "^16.0.0"
 
-"@storybook/react@7.0.4":
+"@storybook/react@7.0.4", "@storybook/react@^7.0.4":
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@storybook/react/-/react-7.0.4.tgz#20d40dcc21dfbc91ba71270e70c1d086497a2064"
   integrity sha512-jKDlCLbJ3iABbXJYS5KUfBrlkAw7CmCcrGcq0oKn/iN3Hrl6+CobISMWcub2RTb/HuAhKabGHEa2J1qvDLNKSg==
