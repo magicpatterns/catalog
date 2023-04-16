@@ -12,6 +12,7 @@ export type Weights =
 export type Styles = `${Sizes}/${Weights}`
 
 type main = {
+  variants?: 'hover'
   label: string
   styles: Styles
   icon?: React.ReactNode
@@ -19,13 +20,9 @@ type main = {
 }
 
 export type IText =
-  | main
-  | {
-      variants: 'hovers'
-      label: main['label']
-      styles: main['styles']
-      icon?: main['icon']
-      onClick?: main['onClick']
+  | (main & { variants?: '' })
+  | (main & {
+      variants: 'hover'
       backgroundColor: string
       color: string
-    }
+    })
