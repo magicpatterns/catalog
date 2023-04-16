@@ -61,3 +61,28 @@ export const Small = {
     ] as Styles[],
   },
 }
+
+export const Large = {
+  render: ({ styles }: { styles: Partial<Styles>[] }) => {
+    return (
+      <div>
+        {styles.map((style) => {
+          return <Text label={style} styles={style} key={style}></Text>
+        })}
+      </div>
+    )
+  },
+  args: {
+    styles: [
+      'lg/hairline',
+      'lg/thin',
+      'lg/light',
+      'lg/medium',
+      'lg/normal',
+      'lg/semibold',
+      'lg/bold',
+      'lg/extrabold',
+      'lg/black',
+    ] as Styles[],
+  },
+}
