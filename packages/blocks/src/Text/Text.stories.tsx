@@ -86,3 +86,28 @@ export const Large = {
     ] as Styles[],
   },
 }
+
+export const Extra_Large = {
+  render: ({ styles }: { styles: Partial<Styles>[] }) => {
+    return (
+      <div>
+        {styles.map((style) => {
+          return <Text label={style} styles={style} key={style}></Text>
+        })}
+      </div>
+    )
+  },
+  args: {
+    styles: [
+      'xl/hairline',
+      'xl/thin',
+      'xl/light',
+      'xl/medium',
+      'xl/normal',
+      'xl/semibold',
+      'xl/bold',
+      'xl/extrabold',
+      'xl/black',
+    ] as Styles[],
+  },
+}
