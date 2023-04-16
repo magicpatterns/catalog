@@ -36,3 +36,28 @@ export const Extra_Small = {
     ] as Styles[],
   },
 }
+
+export const Small = {
+  render: ({ styles }: { styles: Partial<Styles>[] }) => {
+    return (
+      <div>
+        {styles.map((style) => {
+          return <Text label={style} styles={style} key={style}></Text>
+        })}
+      </div>
+    )
+  },
+  args: {
+    styles: [
+      'sm/hairline',
+      'sm/thin',
+      'sm/light',
+      'sm/medium',
+      'sm/normal',
+      'sm/semibold',
+      'sm/bold',
+      'sm/extrabold',
+      'sm/black',
+    ] as Styles[],
+  },
+}
