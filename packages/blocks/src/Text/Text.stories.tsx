@@ -112,3 +112,14 @@ export const Extra_Large = {
     ] as Styles[],
   },
 }
+
+export const Hover: Story = {
+  render: Text,
+  args: {
+    styles: 'md/normal',
+    variants: 'hover',
+    backgroundColor: 'white',
+    color: 'black',
+    label: 'Hover Over Me',
+  },
+}
