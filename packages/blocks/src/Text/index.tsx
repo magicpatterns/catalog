@@ -3,8 +3,8 @@ import React from 'react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 
-type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-type Weights =
+export type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type Weights =
   | 'hairline'
   | 'thin'
   | 'light'
@@ -14,17 +14,17 @@ type Weights =
   | 'bold'
   | 'extrabold'
   | 'black'
-type Variants = `${Sizes}/${Weights}`
+export type Styles = `${Sizes}/${Weights}`
 
 export interface IText {
   label: string
-  variants: Variants
+  styles: Styles
   icon?: React.ReactNode
   onClick?: () => void
 }
 
 export function Text(props: IText) {
-  const [size, weight] = extractVariant(props.variants)
+  const [size, weight] = extractVariant(props.styles)
   return (
     <ChakraProviderWrapper>
       <ChakraText
@@ -38,7 +38,7 @@ export function Text(props: IText) {
       </ChakraText>
     </ChakraProviderWrapper>
   )
-  function extractVariant(variants: string): [Sizes, Weights] {
-    return variants.split('/') as [Sizes, Weights]
+  function extractVariant(styles: string): [Sizes, Weights] {
+    return styles.split('/') as [Sizes, Weights]
   }
 }
