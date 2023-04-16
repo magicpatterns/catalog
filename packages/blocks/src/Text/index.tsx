@@ -6,6 +6,22 @@ import { IText, Sizes, Weights } from './types'
 
 export function Text(props: IText) {
   const [size, weight] = extractVariant(props.styles)
+  if (props.variants === 'hover') {
+    return (
+      <ChakraProviderWrapper>
+        <ChakraText
+          onClick={props.onClick}
+          {...props}
+          fontSize={size}
+          fontWeight={weight}
+          backgroundColor={props.backgroundColor}
+        >
+          {props.icon ? props.icon : null}
+          {props.label}
+        </ChakraText>
+      </ChakraProviderWrapper>
+    )
+  }
   return (
     <ChakraProviderWrapper>
       <ChakraText
