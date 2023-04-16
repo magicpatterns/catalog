@@ -1,4 +1,4 @@
-import { Text as ChakraText } from '@chakra-ui/react'
+import { background, Text as ChakraText } from '@chakra-ui/react'
 import React from 'react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
@@ -15,6 +15,11 @@ export function Text(props: IText) {
           fontSize={size}
           fontWeight={weight}
           backgroundColor={props.backgroundColor}
+          color={props.color}
+          _hover={{
+            backgroundColor: props.color,
+            color: props.backgroundColor,
+          }}
         >
           {props.icon ? props.icon : null}
           {props.label}
