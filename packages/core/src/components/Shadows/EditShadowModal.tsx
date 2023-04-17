@@ -92,7 +92,7 @@ export function EditShadowModal({
       return
     }
 
-    if (variant.value === '' || !variant.value) {
+    if (variant.token.value === '' || !variant.token.value) {
       setError('Please fill out all fields.')
       return
     }
@@ -213,14 +213,14 @@ export function EditShadowModal({
   useEffect(() => {
     return setVariant({
       ...variant,
-      value: shadowInput,
+      token: { ...variant.token, value: shadowInput },
     })
   }, [shadowInput])
 
   useEffect(() => {
     return setVariant({
       ...variant,
-      value: newColorRes,
+      token: { ...variant.token, value: newColorRes },
     })
   }, [newColorRes])
 
@@ -229,6 +229,7 @@ export function EditShadowModal({
       setVariant(
         initialShadowVariant ?? {
           name: '',
+
           token: {
             id: uuidv4(),
             value: '',
@@ -405,7 +406,4 @@ export function EditShadowModal({
       </Modal>
     </>
   )
-}
-function uuidv4(): string {
-  throw new Error('Function not implemented.')
 }

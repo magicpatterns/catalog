@@ -8,7 +8,7 @@ import {
   Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
-import { TNamedToken, TToken, TTokenGroup } from '@core/types'
+import { assertToken, TNamedToken, TTokenGroup } from '@core/types'
 import { useEffect, useState } from 'react'
 
 import { EditShadowModal } from './EditShadowModal'
@@ -95,7 +95,10 @@ export function ShadowRow({
     return { r: 0, g: 0, b: 0, a: 0.5 } // Return if no match is found
   }
 
-  const shadowObjects = separateBoxShadows(shadowData.value, shadowData.name)
+  const shadowObjects = separateBoxShadows(
+    shadowData.token.value,
+    shadowData.name
+  )
   const initialRgbaValue = shadowObjects.map((shadowObject) => {
     return getRgba(shadowObject.value)
   })
@@ -211,6 +214,8 @@ export function ShadowsSection({
     onClose: onAddVariantModalClose,
   } = useDisclosure()
 
+  console.log(shadows)
+
   return (
     <Box>
       <Heading fontSize={'2.5rem'} fontWeight="black">
@@ -229,30 +234,38 @@ export function ShadowsSection({
       <Box css={{ marginBottom: '48px' }} />
       <Box>
         <Stack css={{ marginTop: '24px' }} spacing={12}>
-          {shadows.map(
-            (shadowData: { name: any; token?: TToken }, index: number) => (
+          {Object.keys(shadows)
+            .map((key) => ({
+              name: key,
+              token: shadows[key],
+            }))
+            .filter((value): value is TNamedToken => assertToken(value.token))
+            .map((data) => (
               <ShadowRow
-                key={shadowData.name}
-                shadowData={shadowData}
-                onUpdateShadowVariant={(updatedShadowVariant: TShadowData) => {
-                  const newShadowData = [...shadows]
-                  newShadowData[index] = updatedShadowVariant
+                key={data.name}
+                shadowData={data}
+                onUpdateShadowVariant={(updatedShadowVariant: TNamedToken) => {
+                  const newShadowData = { ...shadows }
+
+                  if (data.name !== updatedShadowVariant.name) {
+                    delete newShadowData[data.name]
+                  }
+
+                  newShadowData[updatedShadowVariant.name] =
+                    updatedShadowVariant.token
+
                   onUpdateShadowData(newShadowData)
                 }}
                 onDeleteShadowVariant={() => {
-                  const newShadowData = [...shadows]
-                  newShadowData.splice(index, 1)
+                  const newShadowData = { ...shadows }
+                  delete newShadowData[data.name]
                   onUpdateShadowData(newShadowData)
                 }}
               />
-            )
-          )}
-
+            ))}
           <Button
             css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}
-            onClick={() => {
-              onAddVariantModalOpen()
-            }}
+            onClick={() => onAddVariantModalOpen()}
           >
             Add New Shadow
           </Button>
