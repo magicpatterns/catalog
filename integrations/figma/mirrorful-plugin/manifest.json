@@ -1,0 +1,10 @@
+{
+  "name": "Mirrorful",
+  "id": "1227401303831519968",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma"],
+  "enableProposedApi": false,
+  "permissions": ["currentuser"]
+}

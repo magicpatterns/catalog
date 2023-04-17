@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { TColorData, TColorVariant } from '@core/types'
+import { assertToken, TNamedToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { FiMoreVertical } from 'react-icons/fi'
@@ -28,12 +28,12 @@ function VariantRow({
   onUpdateVariant,
   onDeleteVariant,
 }: {
-  variant: TColorVariant
-  onUpdateVariant: (newVariant: TColorVariant) => void
+  variant: TNamedToken
+  onUpdateVariant: (newVariant: TNamedToken) => void
   onDeleteVariant: () => void
 }) {
   const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
-  const { name, color } = variant
+  const { name, token } = variant
 
   const {
     isOpen: isEditVariantModalOpen,
@@ -53,11 +53,13 @@ function VariantRow({
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedHexCode])
 
+  const color = `${token.value}`
+
   return (
     <Box
       css={{
         height: '3rem',
-        backgroundColor: variant.color,
+        backgroundColor: `${token.value}`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -69,10 +71,11 @@ function VariantRow({
     >
       <Text
         fontSize="1rem"
-        fontWeight={variant.isBase ? 700 : 600}
-        color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+        // fontWeight={variant.isBase ? 700 : 600}
+        color={tinycolor(color).isDark() ? 'white' : 'black'}
       >
-        {name} {variant.isBase ? ' (Base)' : ''}
+        {/* {name} {variant.isBase ? ' (Base)' : ''} */}
+        {name}
       </Text>
       <Box
         css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
@@ -85,13 +88,12 @@ function VariantRow({
         >
           <Text
             fontSize="1rem"
-            fontWeight={variant.isBase ? 700 : 600}
-            color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+            // fontWeight={variant.isBase ? 700 : 600}
+            fontWeight={600}
+            color={tinycolor(color).isDark() ? 'white' : 'black'}
             _hover={{
               cursor: 'pointer',
-              backgroundColor: tinycolor(variant.color).isDark()
-                ? 'white'
-                : 'black',
+              backgroundColor: tinycolor(color).isDark() ? 'white' : 'black',
               color: color,
               borderRadius: 8,
               paddingInline: 2,
@@ -109,7 +111,7 @@ function VariantRow({
             variant="outline"
             as={IconButton}
             icon={<Icon as={FiMoreVertical} />}
-            color={tinycolor(variant.color).isDark() ? 'white' : 'black'}
+            color={tinycolor(color).isDark() ? 'white' : 'black'}
             _hover={{
               backgroundColor: 'rgba(235, 235, 235, 0.3)',
             }}
@@ -140,12 +142,16 @@ function VariantRow({
 }
 
 export function ColorDisplay({
+  colorName,
   colorData,
   onUpdateColorData,
+  onUpdateColorName,
   onDeleteColorData,
 }: {
-  colorData: TColorData
-  onUpdateColorData: (colorData: TColorData) => void
+  colorName: string
+  colorData: TTokenGroup
+  onUpdateColorName: (newColorName: string) => void
+  onUpdateColorData: (colorData: TTokenGroup) => void
   onDeleteColorData: () => void
 }) {
   const {
@@ -166,6 +172,13 @@ export function ColorDisplay({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
+  let baseColor = null
+  if (colorData.DEFAULT && assertToken(colorData.DEFAULT)) {
+    baseColor = colorData.DEFAULT.value
+  } else if (colorData.base && assertToken(colorData.base)) {
+    baseColor = colorData.base.value
+  }
+
   return (
     <Box
       css={{
@@ -177,9 +190,7 @@ export function ColorDisplay({
         <Text css={{ fontWeight: 900, fontSize: '1rem', color: 'gray' }}>
           COLOR NAME
         </Text>
-        <Text css={{ fontWeight: 600, fontSize: '1.8rem' }}>
-          {colorData.name}
-        </Text>
+        <Text css={{ fontWeight: 600, fontSize: '1.8rem' }}>{colorName}</Text>
         <Text
           css={{
             fontWeight: 900,
@@ -190,27 +201,32 @@ export function ColorDisplay({
         >
           BASE VALUE
         </Text>
-        {colorData.baseColor && (
+        {baseColor && (
           <>
             <Box
-              css={{ display: 'flex', alignItems: 'center', marginTop: '8px' }}
+              css={{
+                display: 'flex',
+                alignItems: 'center',
+                marginTop: '8px',
+              }}
             >
               <Box
                 css={{
                   width: '1.8rem',
                   height: '1.8rem',
-                  backgroundColor: colorData.baseColor,
+                  backgroundColor: baseColor,
                   marginRight: '16px',
                   borderRadius: 8,
                   border: '1px solid black',
                 }}
               />
               <Text css={{ fontWeight: 600, fontSize: '1.5rem' }}>
-                {colorData.baseColor}
+                {baseColor}
               </Text>
             </Box>
           </>
         )}
+
         <Stack
           marginTop={'32px'}
           spacing={'16px'}
@@ -260,16 +276,21 @@ export function ColorDisplay({
         </Box>
         <Box css={{ marginTop: '32px' }}>
           <Stack spacing={'4px'}>
-            {Object.keys(colorData.variants)
+            {Object.keys(colorData)
+              .map((key) => ({
+                name: key,
+                token: colorData[key],
+              }))
+              .filter((value): value is TNamedToken => assertToken(value.token))
               .sort((a, b) =>
-                tinycolor(colorData.variants[a]).toHsl().l <
-                tinycolor(colorData.variants[b]).toHsl().l
+                tinycolor(`${a.token.value}`).toHsl().l <
+                tinycolor(`${b.token.value}`).toHsl().l
                   ? 1
                   : -1
               )
               .map((variant, index) => (
                 <motion.div
-                  key={variant}
+                  key={variant.name}
                   initial={{ opacity: 0 }}
                   animate={{
                     opacity: 1,
@@ -280,44 +301,17 @@ export function ColorDisplay({
                   }}
                 >
                   <VariantRow
-                    variant={{
-                      name: variant,
-                      color: colorData.variants[variant],
-                      isBase:
-                        colorData.variants[variant].toUpperCase() ===
-                        colorData.baseColor?.toUpperCase(),
-                    }}
-                    onUpdateVariant={(newVariant: TColorVariant) => {
-                      const updatedVariants = { ...colorData.variants }
-                      delete updatedVariants[variant]
-                      updatedVariants[newVariant.name] = newVariant.color
-
-                      const updatedColorData = {
-                        ...colorData,
-                        variants: updatedVariants,
-                      }
-                      if (newVariant.isBase) {
-                        updatedColorData.baseColor = newVariant.color
-                      } else if (
-                        !newVariant.isBase &&
-                        updatedColorData.baseColor === newVariant.color
-                      ) {
-                        delete updatedColorData.baseColor
-                      }
+                    variant={variant}
+                    onUpdateVariant={(newVariant: TNamedToken) => {
+                      const updatedColorData = { ...colorData }
+                      delete updatedColorData[variant.name]
+                      updatedColorData[newVariant.name] = newVariant.token
 
                       onUpdateColorData(updatedColorData)
                     }}
                     onDeleteVariant={() => {
-                      const updatedVariants = { ...colorData.variants }
-                      delete updatedVariants[variant]
-
-                      const updatedColorData = {
-                        ...colorData,
-                        variants: updatedVariants,
-                      }
-                      if (colorData.variants[variant] === colorData.baseColor) {
-                        delete updatedColorData.baseColor
-                      }
+                      const updatedColorData = { ...colorData }
+                      delete updatedColorData[variant.name]
 
                       onUpdateColorData(updatedColorData)
                     }}
@@ -330,25 +324,28 @@ export function ColorDisplay({
       <EditColorNameModal
         isOpen={isColorNameModalOpen}
         onClose={onColorNameModalClose}
-        initialColorName={colorData.name}
+        initialColorName={colorName}
         onUpdateColorName={(newName: string) => {
-          onUpdateColorData({ ...colorData, name: newName })
+          onUpdateColorName(newName)
         }}
       />
       <EditVariantModal
         isOpen={isAddVariantModalOpen}
         onClose={onAddVariantModalClose}
-        onUpdateVariant={(newVariant: TColorVariant) => {
-          const updatedVariants = { ...colorData.variants }
-          updatedVariants[newVariant.name] = newVariant.color
-          if (newVariant.isBase) {
-            colorData.baseColor = newVariant.color
+        onUpdateVariant={(newVariant: TNamedToken) => {
+          if (newVariant.name in colorData) {
+            throw new Error(
+              'This name already exists, please choose a different name.'
+            )
           }
-          onUpdateColorData({ ...colorData, variants: updatedVariants })
+          const updatedColorData = { ...colorData }
+          updatedColorData[newVariant.name] = newVariant.token
+
+          onUpdateColorData(updatedColorData)
         }}
       />
       <AlertDialogDelete
-        tokenName={colorData.name}
+        tokenName={colorName}
         isOpen={isAlertDialogOpen}
         onClose={onDeleteAlertDialogClose}
         onDelete={() => onDeleteColorData()}

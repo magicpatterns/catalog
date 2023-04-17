@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ExternalLinkIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -32,26 +32,36 @@ import { toCss } from '@core/translators/toCss'
 import { toJs } from '@core/translators/toJs'
 import { toJson } from '@core/translators/toJson'
 import { toScss } from '@core/translators/toScss'
-import { TTokens } from '@core/types'
+import { toTailwind } from '@core/translators/toTailwind'
+import { TPrimitives } from '@core/types'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
 import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
-import { SiChakraui, SiNuxtdotjs, SiTailwindcss } from 'react-icons/si'
+import {
+  SiBootstrap,
+  SiChakraui,
+  SiNuxtdotjs,
+  SiTailwindcss,
+} from 'react-icons/si'
 import { TbBrandNextjs } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
 
 type exports = 'Colors' | 'Typography' | 'Shadows'
 
-function PackageModalBody({ tokens }: { tokens: TTokens }) {
+function PackageModalBody({ primitives }: { primitives: TPrimitives }) {
   const [exportType, setExportType] = useState<exports>('Colors')
+
+  const exampleColorTokenName = Object.keys(primitives.colors)[0] ?? 'primary'
+  const exampleFontSizeName =
+    Object.keys(primitives.typography.fontSizes)[0] ?? 'sm'
+  const exampleShadowName = Object.keys(primitives.shadows)[0] ?? 'sm'
+
   const exportTabComponent: Record<exports, React.ReactNode> = {
     Colors: (
       <TokenTab
-        primaryName={
-          tokens && tokens.colorData[0] ? tokens.colorData[0].name : 'primary'
-        }
+        primaryName={exampleColorTokenName}
         cssName="color"
         cssPropertyName="background-color"
         javascriptName="colors"
@@ -62,11 +72,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
     ),
     Typography: (
       <TokenTab
-        primaryName={
-          tokens && tokens.typography.fontSizes[0]
-            ? tokens.typography.fontSizes[0].name
-            : 'sm'
-        }
+        primaryName={exampleFontSizeName}
         cssName="font-size"
         cssPropertyName="font-size"
         javascriptName="fontSizes"
@@ -77,9 +83,7 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
     ),
     Shadows: (
       <TokenTab
-        primaryName={
-          tokens && tokens.shadows[0] ? tokens.shadows[0].name : 'sm'
-        }
+        primaryName={exampleShadowName}
         cssName="box-shadow"
         cssPropertyName="box-shadow"
         javascriptName="boxShadows"
@@ -92,8 +96,8 @@ function PackageModalBody({ tokens }: { tokens: TTokens }) {
   return (
     <>
       <Text css={{ marginBottom: '24px' }}>
-        All of your tokens can now be imported by your app. Open up your code
-        editor to use them!
+        Your tokens can now be imported by your app. Open up your code editor to
+        use them!
       </Text>
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -177,6 +181,15 @@ type TokenTabProps =
       tailwindPropertyName: 'fontSize'
       tailwindName: 'fontSizes'
     }
+  | {
+      primaryName: string
+      cssPropertyName: 'font-weight'
+      cssName: 'font-weight'
+      javascriptPropertyName: 'fontWeight'
+      javascriptName: 'fontWeights'
+      tailwindPropertyName: 'fontWeight'
+      tailwindName: 'fontWeights'
+    }
 function TokenTab({
   primaryName,
   cssPropertyName,
@@ -203,7 +216,6 @@ function TokenTab({
         </Text>
         <CodePreview
           language="javascript"
-          textClass="code-snippet"
           text={`import './.mirrorful/theme.css'`}
         />
         <Text css={{ marginTop: 12, marginBottom: 8 }}>
@@ -212,7 +224,6 @@ function TokenTab({
         </Text>
         <CodePreview
           language="css"
-          textClass="code-snippet"
           text={`.${sanitizeName(
             primaryName
           )}-button {\n    ${cssPropertyName}: var(--${cssName}-${sanitizeName(
@@ -238,8 +249,7 @@ function TokenTab({
         </Text>
 
         <CodePreview
-          language="javascript"
-          textClass="code-snippet"
+          language="jsx"
           text={`import { Tokens } from './.mirrorful/theme'`}
         />
 
@@ -248,11 +258,10 @@ function TokenTab({
           anywhere as constants!
         </Text>
         <CodePreview
-          language="javascript"
-          textClass="code-snippet"
-          text={`<button\n   style={{ ${javascriptPropertyName}: Tokens.${javascriptName}.${sanitizeName(
+          language="jsx"
+          text={`<button\n   style={{ ${javascriptPropertyName}: Tokens.${javascriptName}["${sanitizeName(
             primaryName
-          )} }}\n> Click here\n</button>`}
+          )}"] }}\n> Click here\n</button>`}
         />
       </TabPanel>
     ),
@@ -271,7 +280,6 @@ function TokenTab({
 
         <CodePreview
           language="javascript"
-          textClass="code-snippet"
           text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
         />
 
@@ -281,7 +289,6 @@ function TokenTab({
         </Text>
         <CodePreview
           language="javascript"
-          textClass="code-snippet"
           text={`theme: {\n    extend: { ${tailwindPropertyName}: Tokens.${tailwindName} } \n}`}
         />
       </TabPanel>
@@ -306,7 +313,7 @@ function TokenTab({
   )
 }
 
-function WebModalBody({ tokens }: { tokens: TTokens }) {
+function WebModalBody({ primitives }: { primitives: TPrimitives }) {
   return (
     <>
       <Text css={{ marginBottom: '8px', fontSize: '1rem' }}>
@@ -318,61 +325,65 @@ function WebModalBody({ tokens }: { tokens: TTokens }) {
           <TabList>
             <Tab>CSS</Tab>
             <Tab>SCSS</Tab>
-            <Tab>Javascript / Typescript</Tab>
+            <Tab>JS / Typescript</Tab>
             <Tab>JSON</Tab>
-            <Tab>CJS</Tab>
+            <Tab>Tailwind</Tab>
+            <Tab>Common JS</Tab>
           </TabList>
 
           <TabPanels>
             <TabPanel>
               <CodePreview
                 language="css"
-                textClass="code-snippet"
-                text={`/* For example, copy into mirrorful.css */\n\n${toCss(
-                  tokens
+                text={`/* For example, create a mirrorful.css file \n and use it throughout your project */\n\n${toCss(
+                  primitives
                 )}`}
               />
             </TabPanel>
             <TabPanel>
               <CodePreview
                 language="scss"
-                textClass="code-snippet"
-                text={`/* For example, copy into mirrorful.scss */\n\n${toScss(
-                  tokens
+                text={`/* For example, create a mirrorful.scss file \n and use it throughout your project */\n\n${toScss(
+                  primitives
                 )}`}
               />
             </TabPanel>
             <TabPanel>
               <CodePreview
-                language="javascript"
-                textClass="code-snippet"
-                text={`/* For example, copy into mirrorful.js */\n\n${toJs(
-                  tokens
+                language="js"
+                text={`/* For example, create a mirrorful.js file \n and use it throughout your project */ \n\n${toJs(
+                  primitives
                 )}`}
               />
             </TabPanel>
             <TabPanel>
               <CodePreview
-                language="javascript"
-                textClass="code-snippet"
-                text={`/* For example, copy into mirrorful.json */\n\n${toJson(
-                  tokens
+                language="json"
+                text={`/* For example, create a mirrorful.json file \n and use it throughout your project */\n\n${toJson(
+                  primitives
                 )}`}
               />
             </TabPanel>
             <TabPanel>
               <CodePreview
-                language="javascript"
-                textClass="code-snippet"
-                text={`/* For example, copy into mirrorful.cjs */\n\n${toCjs(
-                  tokens
+                language="js"
+                text={`/* Copy into the theme section of your tailwind.config.js\n Read more here: https://tailwindcss.com/docs/theme */\n\n${toTailwind(
+                  primitives
+                )}`}
+              />
+            </TabPanel>
+            <TabPanel>
+              <CodePreview
+                language="js"
+                text={`/* For example, create a mirrorful.cjs file \n and use it throughout your project. */ \n\n${toCjs(
+                  primitives
                 )}`}
               />
             </TabPanel>
           </TabPanels>
         </Tabs>
         <Text css={{ marginTop: '8px' }}>
-          To learn more about how to import these generated files, visit our{' '}
+          To learn more about how to use these generated files, visit our{' '}
           <Link
             isExternal
             color="blue.500"
@@ -405,6 +416,8 @@ function ExternalExamples() {
     | 'Tailwind CSS'
     | 'Chakra UI'
     | 'Nuxt 3'
+    | 'Bootstrap'
+    | 'Styled Components'
 
   const EXAMPLES_ICON_SIZE = 20
   const externalExamples: {
@@ -423,6 +436,11 @@ function ExternalExamples() {
       icon: <TbBrandNextjs size={EXAMPLES_ICON_SIZE} />,
     },
     {
+      name: 'Styled Components',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components',
+      icon: <span>{`💅`}</span>,
+    },
+    {
       name: 'Tailwind CSS',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/tailwind-next',
       icon: <SiTailwindcss size={EXAMPLES_ICON_SIZE} fill="#38BDF8" />,
@@ -437,9 +455,22 @@ function ExternalExamples() {
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3',
       icon: <SiNuxtdotjs size={EXAMPLES_ICON_SIZE} color="#00DC82" />,
     },
+    {
+      name: 'Bootstrap',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/bootstrap-next',
+      icon: <SiBootstrap size={EXAMPLES_ICON_SIZE} color="#7952b3" />,
+    },
   ]
   return (
-    <Flex css={{ marginTop: '16px' }} gap={4} flexWrap="wrap">
+    <Flex
+      css={{
+        marginTop: '16px',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      gap={4}
+      flexWrap="wrap"
+    >
       {externalExamples.map((example) => {
         return (
           <Link
@@ -462,7 +493,6 @@ function ExternalExamples() {
               {example.icon}
               <Text fontSize={'md'}>{example.name}</Text>
             </Box>
-            {/* <ExternalLinkIcon color="gray" _groupHover={{ color: 'black' }} /> */}
           </Link>
         )
       })}
@@ -475,21 +505,22 @@ export function ExportSuccessModal({
   // primaryName,
   isOpen,
   onClose,
-  tokens,
+  primitives,
 }: {
   platform: TPlatform
   // primaryName: string
   isOpen: boolean
   onClose: () => void
-  tokens: TTokens
+  primitives: TPrimitives
 }) {
   return (
     <Modal
-      size="3xl"
+      size="2xl"
       isOpen={isOpen}
       onClose={onClose}
       isCentered={true}
       closeOnEsc={true}
+      scrollBehavior="inside"
     >
       <ModalOverlay />
       <ModalContent>
@@ -505,8 +536,10 @@ export function ExportSuccessModal({
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {platform === 'package' && <PackageModalBody tokens={tokens} />}
-          {platform === 'web' && <WebModalBody tokens={tokens} />}
+          {platform === 'package' && (
+            <PackageModalBody primitives={primitives} />
+          )}
+          {platform === 'web' && <WebModalBody primitives={primitives} />}
         </ModalBody>
 
         <ModalFooter>

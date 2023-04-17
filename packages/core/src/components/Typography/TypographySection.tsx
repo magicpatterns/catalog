@@ -1,14 +1,16 @@
 import { Box, Divider, Heading, Text } from '@chakra-ui/react'
-import { TFontSizeVariant, TTypographyData } from '@core/types'
+import { TPrimitivesTypography, TTokenGroup } from '@core/types'
 
-import { FontSizesSection } from './FontSizesSection'
+import { FontSizesSection } from './FontSize/FontSizesSection'
+import { FontWeightSection } from './FontWeight/FontWeightSection'
+import { LineHeightSection } from './LineHeight/LineHeightSection'
 
 export function TypographySection({
   typography,
   onUpdateTypography,
 }: {
-  typography: TTypographyData
-  onUpdateTypography: (newTypography: TTypographyData) => void
+  typography: TPrimitivesTypography
+  onUpdateTypography: (newTypography: TPrimitivesTypography) => void
 }) {
   return (
     <Box>
@@ -28,10 +30,32 @@ export function TypographySection({
       <Box css={{ marginBottom: '48px' }} />
       <FontSizesSection
         fontSizeData={typography.fontSizes}
-        onUpdateFontSizeData={(newFontSizeData: TFontSizeVariant[]) => {
+        onUpdateFontPropertyData={(newFontSizeData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,
             fontSizes: newFontSizeData,
+          })
+        }}
+      />
+      <br />
+      <br />
+      <FontWeightSection
+        fontWeightData={typography.fontWeights}
+        onUpdateFontPropertyData={(newFontWeightData: TTokenGroup) => {
+          onUpdateTypography({
+            ...typography,
+            fontWeights: newFontWeightData,
+          })
+        }}
+      />
+      <br />
+      <br />
+      <LineHeightSection
+        lineHeightData={typography.lineHeights}
+        onUpdateFontPropertyData={(newLineHeightData: TTokenGroup) => {
+          onUpdateTypography({
+            ...typography,
+            lineHeights: newLineHeightData,
           })
         }}
       />

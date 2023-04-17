@@ -1,0 +1,9 @@
+default-group: local
+groups:
+  local:
+    generators:
+      - name: fernapi/fern-typescript-express
+        version: 0.5.9
+        output:
+          location: local-file-system
+          path: ../../packages/server/src/api/generated

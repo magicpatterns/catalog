@@ -2,25 +2,30 @@ import { TypographySection } from '@core/components/Typography/TypographySection
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { TConfig, TTypographyData } from '@core/types'
+import { TMirrorfulStore, TPrimitivesTypography } from '@core/types'
 
 export function TypographyPage({
   postStoreData,
 }: {
-  postStoreData: (data: TConfig) => Promise<void>
+  postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
   const { typography, colors, shadows, setTypography, fileTypes } =
     useMirrorfulStore((state: MirrorfulState) => state)
-  const handleUpdateTypography = async (data: TTypographyData) => {
+  const handleUpdateTypography = async (data: TPrimitivesTypography) => {
     setTypography(data)
     await postStoreData({
-      tokens: { colorData: colors, typography: data, shadows },
+      primitives: { colors, typography: data, shadows },
+      themes: [],
       files: fileTypes,
     })
   }
   return (
     <TypographySection
-      typography={{ fontSizes: typography.fontSizes }}
+      typography={{
+        fontSizes: typography.fontSizes,
+        fontWeights: typography.fontWeights,
+        lineHeights: typography.lineHeights,
+      }}
       onUpdateTypography={handleUpdateTypography}
     />
   )

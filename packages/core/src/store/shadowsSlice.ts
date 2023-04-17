@@ -1,10 +1,10 @@
 import { StateCreator } from 'zustand'
 
-import { TShadowData } from '../types'
+import { TTokenGroup } from '../types'
 
 export interface ShadowsSlice {
-  shadows: TShadowData[]
-  setShadows: (newState: TShadowData[]) => void
+  shadows: TTokenGroup
+  setShadows: (newState: TTokenGroup) => void
 }
 export const createShadowsSlice: StateCreator<
   ShadowsSlice,
@@ -12,6 +12,6 @@ export const createShadowsSlice: StateCreator<
   [],
   ShadowsSlice
 > = (set) => ({
-  shadows: [],
+  shadows: {},
   setShadows: (newState) => set(() => ({ shadows: newState })),
 })

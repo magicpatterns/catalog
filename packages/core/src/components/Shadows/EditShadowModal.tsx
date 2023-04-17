@@ -17,9 +17,11 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
+
 import { TShadowData } from '@core/types'
 import { useEffect, useState } from 'react'
 import { FiLayers, FiPlus } from 'react-icons/fi'
+
 
 import { ShadowColorPicker } from './ShadowColorPicker'
 
@@ -34,8 +36,8 @@ export function EditShadowModal({
 }: {
   isOpen: boolean
   onClose: () => void
-  initialShadowVariant?: TShadowData
-  onUpdateShadowVariant: (newVariant: TShadowData) => void
+  initialShadowVariant?: TNamedToken
+  onUpdateShadowVariant: (newVariant: TNamedToken) => void
   onDeleteShadowVariant?: () => void
   initialRgbaValue?: [{ r: number; g: number; b: number; a: number }] | any
   initialValues?:
@@ -57,9 +59,18 @@ export function EditShadowModal({
   } = useDisclosure()
 
   const [variant, setVariant]: [
-    TShadowData,
-    React.Dispatch<React.SetStateAction<TShadowData>>
-  ] = useState<TShadowData>(initialShadowVariant ?? { name: '', value: '' })
+    TNamedToken,
+    React.Dispatch<React.SetStateAction<TNamedToken>>
+  ] = useState<TNamedToken>(
+    initialShadowVariant ?? {
+      name: '',
+      token: {
+        id: uuidv4(),
+        value: '',
+        type: 'boxShadow',
+      },
+    }
+  )
 
   const [error, setError] = useState<string | null>(null)
 
@@ -81,7 +92,9 @@ export function EditShadowModal({
       setError('Please fill out all fields.')
       return
     }
+
     if (variant.value === '' || !variant.value) {
+
       setError('Please fill out all fields.')
       return
     }
@@ -201,8 +214,10 @@ export function EditShadowModal({
 
   useEffect(() => {
     setVariant({
+
       ...variant,
       value: shadowInput,
+
     })
   }, [shadowInput])
 
@@ -215,7 +230,16 @@ export function EditShadowModal({
 
   useEffect(() => {
     if (!isOpen) {
-      setVariant(initialShadowVariant ?? { name: '', value: '' })
+      setVariant(
+        initialShadowVariant ?? {
+          name: '',
+          token: {
+            id: uuidv4(),
+            value: '',
+            type: 'boxShadow',
+          },
+        }
+      )
       setError(null)
     }
   }, [isOpen, initialShadowVariant])

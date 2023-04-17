@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "jsx": "react-jsx",
+    "module": "CommonJS",
+    "baseUrl": ".",
+    "rootDir": "src",
+    "paths": {
+      "@ui/*": ["src/*"]
+    },
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "lib",
+    "resolveJsonModule": true,
+    "declaration": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", "src/**/*.json"],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "tsconfig.json",
+    "src/stories/**/*",
+    "src/.storybook/**/*"
+  ],
+  "tsc-alias": {
+    "verbose": true
+  }
+}

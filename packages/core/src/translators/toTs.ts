@@ -1,10 +1,10 @@
-import { TTokens } from '@core/types'
+import { TPrimitives } from '@core/types'
 import JSON5 from 'json5'
 
 import { createThemeObject } from './createThemeObject'
 
-export const toTs = (tokens: TTokens): string => {
-  const theme = createThemeObject(tokens)
+export const toTs = (primitives: TPrimitives): string => {
+  const theme = createThemeObject({ primitives })
   return `
   export type Colors = keyof typeof Tokens.colors
   export type FontSize = keyof typeof Tokens.fontSizes

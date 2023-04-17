@@ -8,7 +8,7 @@ import {
   Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
-import { TShadowData } from '@core/types'
+import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { useEffect, useState } from 'react'
 
 import { EditShadowModal } from './EditShadowModal'
@@ -18,8 +18,8 @@ export function ShadowRow({
   onUpdateShadowVariant,
   onDeleteShadowVariant,
 }: {
-  shadowData: TShadowData
-  onUpdateShadowVariant: (newVariant: TShadowData) => void
+  shadowData: TNamedToken
+  onUpdateShadowVariant: (newVariant: TNamedToken) => void
   onDeleteShadowVariant: () => void
 }) {
   const {
@@ -100,9 +100,11 @@ export function ShadowRow({
     return getRgba(shadowObject.value)
   })
 
+
   const initialValues = shadowObjects.map((shadowObject) => {
     return getValues(shadowObject.value)
   })
+
 
   return (
     <Box css={{ width: '60vw' }}>
@@ -153,11 +155,11 @@ export function ShadowRow({
                 }}
                 fontSize={18}
                 onClick={() => {
-                  navigator.clipboard.writeText(shadowData.value)
+                  navigator.clipboard.writeText(shadowData.token.value)
                   setHasCopiedShadowValue(true)
                 }}
               >
-                {shadowData.value}
+                {shadowData.token.value}
               </Text>
             </Tooltip>
           </Box>
@@ -170,7 +172,7 @@ export function ShadowRow({
               height: 50,
               backgroundColor: '#F3F3F3',
               border: '1px solid #D3D3D3',
-              boxShadow: shadowData.value,
+              boxShadow: shadowData.token.value,
               padding: '24px',
               borderRadius: 8,
             }}
@@ -202,8 +204,8 @@ export function ShadowsSection({
   shadows,
   onUpdateShadowData,
 }: {
-  shadows: TShadowData[]
-  onUpdateShadowData: (newShadowData: TShadowData[]) => void
+  shadows: TTokenGroup
+  onUpdateShadowData: (newShadowData: TTokenGroup) => void
 }) {
   const {
     isOpen: isAddVariantModalOpen,
@@ -229,6 +231,7 @@ export function ShadowsSection({
       <Box css={{ marginBottom: '48px' }} />
       <Box>
         <Stack css={{ marginTop: '24px' }} spacing={12}>
+
           {shadows.map((shadowData, index) => (
             <ShadowRow
               key={shadowData.name}
@@ -245,6 +248,7 @@ export function ShadowsSection({
               }}
             />
           ))}
+
           <Button
             css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}
             onClick={() => {
@@ -258,8 +262,11 @@ export function ShadowsSection({
       <EditShadowModal
         isOpen={isAddVariantModalOpen}
         onClose={onAddVariantModalClose}
-        onUpdateShadowVariant={(newVariant: TShadowData) => {
-          onUpdateShadowData([...shadows, newVariant])
+        onUpdateShadowVariant={(newVariant: TNamedToken) => {
+          const newShadowData = { ...shadows }
+          newShadowData[newVariant.name] = newVariant.token
+
+          onUpdateShadowData(newShadowData)
         }}
       />
     </Box>

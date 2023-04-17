@@ -2,24 +2,25 @@ import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteS
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { TColorData, TConfig } from '@core/types'
+import { TMirrorfulStore, TTokenGroup } from '@core/types'
 
 export function ColorsPage({
   postStoreData,
 }: {
-  postStoreData: (data: TConfig) => Promise<void>
+  postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
   const { colors, typography, shadows, fileTypes, setColors } =
     useMirrorfulStore((state: MirrorfulState) => state)
 
-  const handleUpdateColors = async (data: TColorData[]) => {
+  const handleUpdateColors = async (data: TTokenGroup) => {
     setColors(data)
     await postStoreData({
-      tokens: {
+      primitives: {
+        colors: data,
         typography,
-        colorData: data,
         shadows,
       },
+      themes: [],
       files: fileTypes,
     })
   }

@@ -5,6 +5,9 @@ node_modules
 lib
 /.pnp
 .pnp.js
+.idea
+
+/packages/mirrorful/node_modules
 
 # testing
 /coverage
@@ -36,3 +39,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 dist
+*.tgz
