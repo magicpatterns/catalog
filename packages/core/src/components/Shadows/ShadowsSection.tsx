@@ -214,7 +214,6 @@ export function ShadowsSection({
     onClose: onAddVariantModalClose,
   } = useDisclosure()
 
-
   return (
     <Box>
       <Heading fontSize={'2.5rem'} fontWeight="black">
