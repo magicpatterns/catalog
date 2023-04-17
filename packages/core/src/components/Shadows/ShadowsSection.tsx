@@ -8,7 +8,7 @@ import {
   Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
-import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
+import { TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { useEffect, useState } from 'react'
 
 import { EditShadowModal } from './EditShadowModal'
@@ -100,11 +100,9 @@ export function ShadowRow({
     return getRgba(shadowObject.value)
   })
 
-
   const initialValues = shadowObjects.map((shadowObject) => {
     return getValues(shadowObject.value)
   })
-
 
   return (
     <Box css={{ width: '60vw' }}>
@@ -231,23 +229,24 @@ export function ShadowsSection({
       <Box css={{ marginBottom: '48px' }} />
       <Box>
         <Stack css={{ marginTop: '24px' }} spacing={12}>
-
-          {shadows.map((shadowData, index) => (
-            <ShadowRow
-              key={shadowData.name}
-              shadowData={shadowData}
-              onUpdateShadowVariant={(updatedShadowVariant: TShadowData) => {
-                const newShadowData = [...shadows]
-                newShadowData[index] = updatedShadowVariant
-                onUpdateShadowData(newShadowData)
-              }}
-              onDeleteShadowVariant={() => {
-                const newShadowData = [...shadows]
-                newShadowData.splice(index, 1)
-                onUpdateShadowData(newShadowData)
-              }}
-            />
-          ))}
+          {shadows.map(
+            (shadowData: { name: any; token?: TToken }, index: number) => (
+              <ShadowRow
+                key={shadowData.name}
+                shadowData={shadowData}
+                onUpdateShadowVariant={(updatedShadowVariant: TShadowData) => {
+                  const newShadowData = [...shadows]
+                  newShadowData[index] = updatedShadowVariant
+                  onUpdateShadowData(newShadowData)
+                }}
+                onDeleteShadowVariant={() => {
+                  const newShadowData = [...shadows]
+                  newShadowData.splice(index, 1)
+                  onUpdateShadowData(newShadowData)
+                }}
+              />
+            )
+          )}
 
           <Button
             css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}

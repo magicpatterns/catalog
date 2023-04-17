@@ -17,11 +17,10 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-
-import { TShadowData } from '@core/types'
+import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
 import { FiLayers, FiPlus } from 'react-icons/fi'
-
+import { v4 as uuidv4 } from 'uuid'
 
 import { ShadowColorPicker } from './ShadowColorPicker'
 
@@ -94,7 +93,6 @@ export function EditShadowModal({
     }
 
     if (variant.value === '' || !variant.value) {
-
       setError('Please fill out all fields.')
       return
     }
@@ -213,16 +211,14 @@ export function EditShadowModal({
   }, [spread, blur, hOffset, vOffset, color])
 
   useEffect(() => {
-    setVariant({
-
+    return setVariant({
       ...variant,
       value: shadowInput,
-
     })
   }, [shadowInput])
 
   useEffect(() => {
-    setVariant({
+    return setVariant({
       ...variant,
       value: newColorRes,
     })
@@ -409,4 +405,7 @@ export function EditShadowModal({
       </Modal>
     </>
   )
+}
+function uuidv4(): string {
+  throw new Error('Function not implemented.')
 }
