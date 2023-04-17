@@ -214,7 +214,6 @@ export function ShadowsSection({
     onClose: onAddVariantModalClose,
   } = useDisclosure()
 
-  console.log(shadows)
 
   return (
     <Box>
