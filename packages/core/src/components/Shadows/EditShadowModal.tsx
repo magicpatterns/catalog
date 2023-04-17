@@ -126,17 +126,17 @@ export function EditShadowModal({
   )
   const [initialButton, setInitialButton] = useState(0)
 
-  function test() {
-    const newColorResult = []
+  function newColor() {
+    const result = []
     for (let i = 0; i < newInitialValues?.length; i++) {
-      newColorResult.push(
+      result.push(
         `${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
       )
     }
-    return newColorResult.toString()
+    return result.toString()
   }
 
-  const newColorRes = test()
+  const newColorRes = newColor()
 
   function handleBlur(e: string | number, i: number) {
     const nextBlur = [...blur]
@@ -181,7 +181,7 @@ export function EditShadowModal({
       const result = []
       for (let i = 0; i < newInitialValues?.length; i++) {
         result.push(
-          `${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
+          ` ${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
         )
       }
       return result.toString()
@@ -192,6 +192,19 @@ export function EditShadowModal({
       color[0] ? color[0] : 'rgba(1, 1, 1, 0.4)'
     }`
   }
+
+  const [shadowInput, setShadowInput] = useState(codeResult())
+
+  useEffect(() => {
+    setShadowInput(codeResult())
+  }, [spread, blur, hOffset, vOffset, color])
+
+  useEffect(() => {
+    setVariant({
+      ...variant,
+      value: shadowInput,
+    })
+  }, [shadowInput])
 
   useEffect(() => {
     setVariant({
@@ -221,7 +234,12 @@ export function EditShadowModal({
               padding: '0px 32px 32px 32px',
             }}
           >
-            <Box css={{ display: 'flex', flexDirection: 'column' }}>
+            <Box
+              css={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
               <FormControl>
                 <FormLabel css={{ fontSize: '0.75rem' }}>
                   Variant name
@@ -237,14 +255,22 @@ export function EditShadowModal({
                 />
               </FormControl>
 
-              <Box css={{ display: 'flex', marginTop: '1rem' }}>
+              <Box
+                css={{
+                  display: 'flex',
+                  marginTop: '1rem',
+                  flexWrap: 'wrap',
+                  margin: '0 auto',
+                  width: '510px',
+                }}
+              >
                 {newInitialValues?.map((_i: number, index: number) => (
                   <Button
                     key={index}
                     style={{
                       color: index === initialButton ? 'black' : 'gray',
-                      width: '100px',
-                      margin: '0.5rem',
+                      width: '65px',
+                      margin: '10px',
                     }}
                     onClick={() => setInitialButton(index)}
                   >
@@ -254,8 +280,8 @@ export function EditShadowModal({
 
                 <Button
                   style={{
-                    width: '100px',
-                    margin: '0.5rem',
+                    width: '65px',
+                    margin: '10px',
                     color: 'gray',
                   }}
                   onClick={() => {
@@ -276,7 +302,7 @@ export function EditShadowModal({
                 </Button>
               </Box>
               <FormControl>
-                <Box css={{ marginTop: '1rem' }}>
+                <Box>
                   {newInitialValues?.map((_i: number, index: number) => (
                     <div key={index}>
                       <div>
@@ -290,7 +316,7 @@ export function EditShadowModal({
                             setSpread={setSpread}
                             sethOffset={sethOffset}
                             setVOffset={setVOffset}
-                            codeResult={codeResult()}
+                            codeResult={shadowInput}
                             handleNewColor={handleNewColor}
                             handleBlur={handleBlur}
                             handleSpread={handleSpread}
@@ -310,7 +336,7 @@ export function EditShadowModal({
 
               <Box
                 css={{
-                  marginTop: '16px',
+                  marginTop: '1em',
                   width: '100%',
                   display: 'flex',
                   justifyContent: 'center',
@@ -318,7 +344,10 @@ export function EditShadowModal({
                 }}
               >
                 <Text style={{ marginBottom: '.5em' }}>Value</Text>
-                <Input value={codeResult()} />
+                <Input
+                  onChange={(e) => setShadowInput(e.target.value)}
+                  value={shadowInput}
+                />
               </Box>
             </Box>
             {error && (

@@ -57,7 +57,7 @@ export function ShadowColorPicker({
         },
       }}
     >
-      <Flex justifyContent={'space-between'} mt="1em">
+      <Flex justifyContent={'space-between'}>
         <Box width="45%">
           <Text style={{ marginBottom: '.5em' }}>Color</Text>
           <SketchPicker
