@@ -6,7 +6,7 @@ import { IText, Sizes, Weights } from './types'
 
 export function Text(props: IText) {
   const [size, weight] = extractVariant(props.styles)
-
+  // TODO variants success, error, warning, info
   return (
     <ChakraProviderWrapper>
       <ChakraText
