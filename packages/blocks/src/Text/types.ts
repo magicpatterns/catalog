@@ -13,7 +13,20 @@ export type Weights =
   | 'black'
 export type Styles = `${Sizes}/${Weights}`
 
-interface main extends Pick<ChakraProps, 'color' | 'bgColor'> {
+interface main
+  extends Pick<
+    ChakraProps,
+    | 'color'
+    | 'bgColor'
+    | 'textAlign'
+    | 'textDecoration'
+    | 'width'
+    | 'wordBreak'
+    | 'textOverflow'
+    | 'overflowWrap'
+    | 'maxWidth'
+    | 'minWidth'
+  > {
   label: string
   styles: Styles
   hover?: {
