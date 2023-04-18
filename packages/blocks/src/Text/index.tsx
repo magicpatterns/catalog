@@ -10,12 +10,13 @@ export function Text(props: IText) {
   return (
     <ChakraProviderWrapper>
       <ChakraText
-        onClick={props.onClick}
         {...props}
+        onClick={props.onClick}
         fontSize={size}
         fontWeight={weight}
         backgroundColor={props.bgColor}
         color={props?.color}
+        borderRadius={8}
         _hover={{
           backgroundColor: props?.hover?.color,
           color: props?.hover?.backgroundColor,
