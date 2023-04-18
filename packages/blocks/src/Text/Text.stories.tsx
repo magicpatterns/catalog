@@ -122,5 +122,7 @@ export const Hover: Story = {
       color: 'black',
     },
     label: 'Hover Over Me',
+    paddingBlock: 1,
+    paddingInline: 1,
   },
 }
