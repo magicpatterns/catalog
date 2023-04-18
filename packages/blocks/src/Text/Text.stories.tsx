@@ -117,9 +117,10 @@ export const Hover: Story = {
   render: Text,
   args: {
     styles: 'md/normal',
-    variants: 'hover',
-    backgroundColor: 'white',
-    color: 'black',
+    hover: {
+      backgroundColor: 'white',
+      color: 'black',
+    },
     label: 'Hover Over Me',
   },
 }
