@@ -124,5 +124,6 @@ export const Hover: Story = {
     label: 'Hover Over Me',
     paddingBlock: 1,
     paddingInline: 1,
+    maxWidth: 'max-content',
   },
 }
