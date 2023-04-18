@@ -14,8 +14,8 @@ export function Text(props: IText) {
         {...props}
         fontSize={size}
         fontWeight={weight}
-        backgroundColor={props?.hover?.backgroundColor}
-        color={props?.hover?.color}
+        backgroundColor={props.bgColor}
+        color={props?.color}
         _hover={{
           backgroundColor: props?.hover?.color,
           color: props?.hover?.backgroundColor,
