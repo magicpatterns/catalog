@@ -39,7 +39,7 @@ interface main
   }
   icon?: React.ReactNode
   onClick?: () => void
-  variants?: ''
+  variants?: 'success' | 'error' | 'warning' | 'info'
 }
 
 export type IText = main
