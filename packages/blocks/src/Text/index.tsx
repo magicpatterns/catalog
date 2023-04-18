@@ -6,27 +6,7 @@ import { IText, Sizes, Weights } from './types'
 
 export function Text(props: IText) {
   const [size, weight] = extractVariant(props.styles)
-  if (props.variants === 'hover') {
-    return (
-      <ChakraProviderWrapper>
-        <ChakraText
-          onClick={props.onClick}
-          {...props}
-          fontSize={size}
-          fontWeight={weight}
-          backgroundColor={props.backgroundColor}
-          color={props.color}
-          _hover={{
-            backgroundColor: props.color,
-            color: props.backgroundColor,
-          }}
-        >
-          {props.icon ? props.icon : null}
-          {props.label}
-        </ChakraText>
-      </ChakraProviderWrapper>
-    )
-  }
+
   return (
     <ChakraProviderWrapper>
       <ChakraText
@@ -34,12 +14,19 @@ export function Text(props: IText) {
         {...props}
         fontSize={size}
         fontWeight={weight}
+        backgroundColor={props?.hover?.backgroundColor}
+        color={props?.hover?.color}
+        _hover={{
+          backgroundColor: props?.hover?.color,
+          color: props?.hover?.backgroundColor,
+        }}
       >
         {props.icon ? props.icon : null}
         {props.label}
       </ChakraText>
     </ChakraProviderWrapper>
   )
+
   function extractVariant(styles: string): [Sizes, Weights] {
     return styles.split('/') as [Sizes, Weights]
   }
