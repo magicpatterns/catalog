@@ -1,4 +1,4 @@
-import { background, Text as ChakraText } from '@chakra-ui/react'
+import { Text as ChakraText } from '@chakra-ui/react'
 import React from 'react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
