@@ -26,6 +26,10 @@ interface main
     | 'overflowWrap'
     | 'maxWidth'
     | 'minWidth'
+    | 'paddingInline'
+    | 'paddingBlock'
+    | 'marginInline'
+    | 'marginBlock'
   > {
   label: string
   styles: Styles
