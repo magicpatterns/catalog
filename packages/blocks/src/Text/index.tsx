@@ -10,7 +10,6 @@ export function Text(props: IText) {
   return (
     <ChakraProviderWrapper>
       <ChakraText
-        {...props}
         onClick={props.onClick}
         fontSize={size}
         fontWeight={weight}
@@ -21,6 +20,7 @@ export function Text(props: IText) {
           backgroundColor: props?.hover?.color,
           color: props?.hover?.backgroundColor,
         }}
+        {...props}
       >
         {props.icon ? props.icon : null}
         {props.label}
