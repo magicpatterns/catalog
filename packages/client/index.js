@@ -23,10 +23,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MirrorfulApiTimeoutError = exports.MirrorfulApiError = exports.MirrorfulApiClient = exports.MirrorfulApi = void 0;
+exports.MirrorfulApiTimeoutError = exports.MirrorfulApiError = exports.MirrorfulApiEnvironment = exports.MirrorfulApiClient = exports.MirrorfulApi = void 0;
 exports.MirrorfulApi = __importStar(require("./api"));
 var Client_1 = require("./Client");
 Object.defineProperty(exports, "MirrorfulApiClient", { enumerable: true, get: function () { return Client_1.MirrorfulApiClient; } });
+var environments_1 = require("./environments");
+Object.defineProperty(exports, "MirrorfulApiEnvironment", { enumerable: true, get: function () { return environments_1.MirrorfulApiEnvironment; } });
 var errors_1 = require("./errors");
 Object.defineProperty(exports, "MirrorfulApiError", { enumerable: true, get: function () { return errors_1.MirrorfulApiError; } });
 Object.defineProperty(exports, "MirrorfulApiTimeoutError", { enumerable: true, get: function () { return errors_1.MirrorfulApiTimeoutError; } });

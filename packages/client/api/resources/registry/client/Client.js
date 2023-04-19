@@ -30,6 +30,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Registry = void 0;
+const environments = __importStar(require("../../../../environments"));
 const core = __importStar(require("../../../../core"));
 const serializers = __importStar(require("../../../../serialization"));
 const url_join_1 = __importDefault(require("url-join"));
@@ -41,7 +42,7 @@ class Registry {
     }
     async createLibrary(orgId, request) {
         const _response = await core.fetcher({
-            url: (0, url_join_1.default)(this.options.environment, `/orgs/${await serializers.OrgId.jsonOrThrow(orgId)}/library/upload`),
+            url: (0, url_join_1.default)(this.options.environment ?? environments.MirrorfulApiEnvironment.Production, `/orgs/${await serializers.OrgId.jsonOrThrow(orgId)}/library/upload`),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),

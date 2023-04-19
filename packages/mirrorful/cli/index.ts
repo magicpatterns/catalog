@@ -85,7 +85,7 @@ notifyUpdate()
     } else {
       console.log(
         chalk.red(
-          'Unexpected error.Please report it as a bug on our repo: https://github.com/Mirrorful/mirrorful'
+          'Unexpected error. Please report it as a bug on our repo: https://github.com/Mirrorful/mirrorful'
         ) + '\n',
         reason
       )
