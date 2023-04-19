@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "build": "tsc",
-    "start": "infisical run -- node lib/server.js",
+    "start": "node lib/server.js",
     "dev": "infisical run -- nodemon src/server.ts",
     "format": "prettier --write src/**",
     "format:check": "prettier --check src/**",
