@@ -1,6 +1,7 @@
 import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
+import { toCapitalize } from '../util/toCapitalize'
 import { IButton, Variants } from './types'
 
 export function Button(props: IButton) {
@@ -64,13 +65,4 @@ export function Button(props: IButton) {
       </ChakraButton>
     </ChakraProviderWrapper>
   )
-}
-
-function toCapitalize(str: string) {
-  return str
-    .split(' ')
-    .map((word) => {
-      return word[0].toUpperCase() + word.slice(1)
-    })
-    .join(' ')
 }
