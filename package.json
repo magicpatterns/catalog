@@ -4,5 +4,9 @@
     "packages/*",
     "apps/*",
     "packages/mirrorful/editor/"
-  ]
+  ],
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11"
+  }
 }
