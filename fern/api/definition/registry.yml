@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+service:
+  base-path: /orgs/{orgId}/library
+  auth: false
+  path-parameters:
+    orgId: commons.OrgId
+  endpoints:
+    getS3UrlForLibraryUpload:
+      method: GET
+      path: /{libraryId}/get-upload-url
+      path-parameters:
+        libraryId: LibraryId
+      response: S3UrlForLibraryUploadResponse
+    postS3UrlForLibraryUpload:
+      method: POST
+      path: /{libraryId}/upload-url
+      path-parameters:
+        libraryId: LibraryId
+      response: S3UrlForLibraryUploadResponse
+
+types:
+  S3UrlForLibraryUploadResponse:
+    properties:
+      s3UploadUrl: string
+
+  LibraryId:
+    type: string
+    docs: This should be the Library Id
