@@ -10,9 +10,8 @@ groups:
       - name: fernapi/fern-typescript-sdk
         version: 0.5.14
         output:
-          location: npm
-          url: npm.buildwithfern.com
-          package-name: '@mirrorful-fern/api-client'
+          location: local-file-system
+          path: ../../packages/client
       - name: fernapi/fern-postman
         version: 0.0.44
         output:

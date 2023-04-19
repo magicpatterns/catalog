@@ -1,6 +1,8 @@
 // import { AddIcon } from '@chakra-ui/icons'
 import { Box, Button } from '@chakra-ui/react'
 
+import { MirrorfulApiClient } from '../../../../client'
+
 // Accepts: numberOfMockVariants - how many variant squares you want to see after the base color...
 export function AddColorSkeleton({
   numberOfMockVariants,
