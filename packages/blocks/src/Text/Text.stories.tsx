@@ -1,3 +1,4 @@
+import { WarningIcon } from '@chakra-ui/icons'
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
@@ -125,5 +126,16 @@ export const Hover: Story = {
     paddingBlock: 1,
     paddingInline: 1,
     maxWidth: 'max-content',
+  },
+}
+
+export const VariantError: Story = {
+  render: Text,
+  args: {
+    styles: 'md/normal',
+    label: 'An Error has Occurred',
+    maxWidth: 'max-content',
+    variants: 'error',
+    icon: <WarningIcon />,
   },
 }
