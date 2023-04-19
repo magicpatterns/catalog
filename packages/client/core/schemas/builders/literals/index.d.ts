@@ -1,1 +1,1 @@
-export { stringLiteral } from './stringLiteral'
+export { stringLiteral } from "./stringLiteral";

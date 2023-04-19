@@ -39,7 +39,9 @@
             "description": null,
             "url": {
               "raw": "{{baseUrl}}/orgs/:orgId/library/:libraryId/get-upload-url",
-              "host": ["{{baseUrl}}"],
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "orgs",
                 ":orgId",
@@ -75,8 +77,16 @@
             "description": null,
             "url": {
               "raw": "{{baseUrl}}/orgs/:orgId/library/:libraryId/upload-url",
-              "host": ["{{baseUrl}}"],
-              "path": ["orgs", ":orgId", "library", ":libraryId", "upload-url"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orgs",
+                ":orgId",
+                "library",
+                ":libraryId",
+                "upload-url"
+              ],
               "query": [],
               "variable": [
                 {

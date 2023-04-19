@@ -1,2 +1,2 @@
-export { MirrorfulApiError } from './MirrorfulApiError'
-export { MirrorfulApiTimeoutError } from './MirrorfulApiTimeoutError'
+export { MirrorfulApiError } from "./MirrorfulApiError";
+export { MirrorfulApiTimeoutError } from "./MirrorfulApiTimeoutError";

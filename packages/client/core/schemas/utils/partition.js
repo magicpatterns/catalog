@@ -1,16 +1,16 @@
-'use strict'
-Object.defineProperty(exports, '__esModule', { value: true })
-exports.partition = void 0
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.partition = void 0;
 function partition(items, predicate) {
-  const trueItems = [],
-    falseItems = []
-  for (const item of items) {
-    if (predicate(item)) {
-      trueItems.push(item)
-    } else {
-      falseItems.push(item)
+    const trueItems = [], falseItems = [];
+    for (const item of items) {
+        if (predicate(item)) {
+            trueItems.push(item);
+        }
+        else {
+            falseItems.push(item);
+        }
     }
-  }
-  return [trueItems, falseItems]
+    return [trueItems, falseItems];
 }
-exports.partition = partition
+exports.partition = partition;
