@@ -11,6 +11,9 @@
     "lint:fix": "eslint --fix"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.315.0",
+    "@sentry/node": "^7.48.0",
+    "aws-sdk": "^2.1360.0",
     "express": "^4.18.2"
   },
   "devDependencies": {

@@ -1,3 +1,4 @@
 name: api
+auth: bearer # not used yet
 error-discrimination:
   strategy: status-code

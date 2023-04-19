@@ -5,6 +5,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.register = void 0;
 function register(expressApp, services) {
-    expressApp.use("/movies", services.imdb.toRouter());
+    expressApp.use("/orgs/:orgId/library", services.registry.toRouter());
 }
 exports.register = register;

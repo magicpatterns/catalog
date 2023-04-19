@@ -19,8 +19,8 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.50.0",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "css-loader": "^6.7.1",
