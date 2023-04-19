@@ -7,6 +7,12 @@ import { IText, Sizes, Weights } from './types'
 export function Text(props: IText) {
   const [size, weight] = extractVariant(props.styles)
   // TODO variants success, error, warning, info
+  const variantsColors: Record<Required<IText>['variants'], string> = {
+    error: 'red.400',
+    info: 'blue.400',
+    success: 'green.400',
+    warning: 'orange.400',
+  }
   return (
     <ChakraProviderWrapper>
       <ChakraText
@@ -14,10 +20,12 @@ export function Text(props: IText) {
         fontSize={size}
         fontWeight={weight}
         backgroundColor={props.bgColor}
-        color={props?.color}
+        color={props.variants ? variantsColors[props.variants] : props?.color}
         borderRadius={8}
         _hover={{
-          backgroundColor: props?.hover?.color,
+          backgroundColor: props.variants
+            ? variantsColors[props.variants]
+            : props?.hover?.color,
           color: props?.hover?.backgroundColor,
         }}
         {...props}
