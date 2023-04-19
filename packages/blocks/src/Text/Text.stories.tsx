@@ -1,4 +1,4 @@
-import { CheckCircleIcon, WarningIcon } from '@chakra-ui/icons'
+import { CheckCircleIcon, InfoIcon, WarningIcon } from '@chakra-ui/icons'
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
@@ -148,5 +148,16 @@ export const Variant_Success: Story = {
     maxWidth: 'max-content',
     variants: 'success',
     icon: <CheckCircleIcon />,
+  },
+}
+
+export const Variant_Info: Story = {
+  render: Text,
+  args: {
+    styles: 'md/normal',
+    label: 'You have been informed!',
+    maxWidth: 'max-content',
+    variants: 'info',
+    icon: <InfoIcon />,
   },
 }
