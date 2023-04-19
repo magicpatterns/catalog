@@ -16,6 +16,9 @@ export function Text(props: IText) {
   return (
     <ChakraProviderWrapper>
       <ChakraText
+        display={props.icon ? 'flex' : 'block'}
+        gap={props.icon ? 4 : 0}
+        alignItems={props.icon ? 'center' : 'start'}
         onClick={props.onClick}
         fontSize={size}
         fontWeight={weight}
