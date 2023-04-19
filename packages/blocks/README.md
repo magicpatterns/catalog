@@ -4,10 +4,10 @@
 
 - [x] Create Button Component
 - [x] Create Text Component
-  - [ ] Success Variant
-  - [ ] Error Variant
-  - [ ] Warn Variant
-  - [ ] Info Variant
+  - [x] Success Variant
+  - [x] Error Variant
+  - [x] Warn Variant
+  - [x] Info Variant
 - [ ] Create Heading Component
 - [ ] Universal Modal Component
   - [ ] Header
