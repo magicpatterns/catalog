@@ -1,1 +1,2 @@
 packages/server/src/api/generated/** linguist-generated linguist-vendored
+packages/client/** linguist-generated linguist-vendored
