@@ -4,4 +4,4 @@
 /**
  * This should be the Library Id
  */
-export declare type LibraryId = string
+export declare type LibraryId = string;
