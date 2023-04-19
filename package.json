@@ -6,6 +6,6 @@
     "packages/mirrorful/editor/"
   ],
   "scripts": {
-    "postinstall": "yarn --cwd server --production=false; yarn --cwd server build"
+    "postinstall": "yarn --cwd packages/server --production=false; yarn --cwd packages/server build"
   }
 }
