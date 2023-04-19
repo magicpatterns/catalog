@@ -12,7 +12,6 @@ export declare namespace Registry {
 export declare class Registry {
     protected readonly options: Registry.Options;
     constructor(options: Registry.Options);
-    getS3UrlForLibraryUpload(orgId: MirrorfulApi.OrgId, libraryId: MirrorfulApi.LibraryId): Promise<MirrorfulApi.S3UrlForLibraryUploadResponse>;
-    postS3UrlForLibraryUpload(orgId: MirrorfulApi.OrgId, libraryId: MirrorfulApi.LibraryId): Promise<MirrorfulApi.S3UrlForLibraryUploadResponse>;
+    createLibrary(orgId: MirrorfulApi.OrgId, request: MirrorfulApi.CreateLibraryRequest): Promise<MirrorfulApi.CreateLibraryResponse>;
     protected _getAuthorizationHeader(): Promise<string | undefined>;
 }

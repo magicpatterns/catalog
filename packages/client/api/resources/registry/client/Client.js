@@ -39,53 +39,18 @@ class Registry {
     constructor(options) {
         this.options = options;
     }
-    async getS3UrlForLibraryUpload(orgId, libraryId) {
+    async createLibrary(orgId, request) {
         const _response = await core.fetcher({
-            url: (0, url_join_1.default)(this.options.environment, `/orgs/${await serializers.OrgId.jsonOrThrow(orgId)}/library/${await serializers.LibraryId.jsonOrThrow(libraryId)}/get-upload-url`),
-            method: "GET",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-            },
-            contentType: "application/json",
-        });
-        if (_response.ok) {
-            return await serializers.S3UrlForLibraryUploadResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-            });
-        }
-        if (_response.error.reason === "status-code") {
-            throw new errors.MirrorfulApiError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-            });
-        }
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.MirrorfulApiError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.MirrorfulApiTimeoutError();
-            case "unknown":
-                throw new errors.MirrorfulApiError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-    async postS3UrlForLibraryUpload(orgId, libraryId) {
-        const _response = await core.fetcher({
-            url: (0, url_join_1.default)(this.options.environment, `/orgs/${await serializers.OrgId.jsonOrThrow(orgId)}/library/${await serializers.LibraryId.jsonOrThrow(libraryId)}/upload-url`),
+            url: (0, url_join_1.default)(this.options.environment, `/orgs/${await serializers.OrgId.jsonOrThrow(orgId)}/library/upload`),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
             },
             contentType: "application/json",
+            body: await serializers.CreateLibraryRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
         });
         if (_response.ok) {
-            return await serializers.S3UrlForLibraryUploadResponse.parseOrThrow(_response.body, {
+            return await serializers.CreateLibraryResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

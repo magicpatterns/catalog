@@ -26,8 +26,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.S3UrlForLibraryUploadResponse = void 0;
-const core = __importStar(require("../../../../core"));
-exports.S3UrlForLibraryUploadResponse = core.serialization.object({
-    s3Url: core.serialization.string(),
+exports.CreateLibraryRequest = void 0;
+const core = __importStar(require("../../../../../core"));
+exports.CreateLibraryRequest = core.serialization.object({
+    name: core.serialization.string(),
 });

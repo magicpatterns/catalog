@@ -34,11 +34,11 @@
       "item": [
         {
           "_type": "endpoint",
-          "name": "Get S 3 Url For Library Upload",
+          "name": "Create Library",
           "request": {
             "description": null,
             "url": {
-              "raw": "{{baseUrl}}/orgs/:orgId/library/:libraryId/get-upload-url",
+              "raw": "{{baseUrl}}/orgs/:orgId/library/upload",
               "host": [
                 "{{baseUrl}}"
               ],
@@ -46,56 +46,12 @@
                 "orgs",
                 ":orgId",
                 "library",
-                ":libraryId",
-                "get-upload-url"
+                "upload"
               ],
               "query": [],
               "variable": [
                 {
                   "key": "orgId",
-                  "value": "",
-                  "description": null
-                },
-                {
-                  "key": "libraryId",
-                  "value": "",
-                  "description": null
-                }
-              ]
-            },
-            "header": [],
-            "method": "GET",
-            "auth": null,
-            "body": null
-          },
-          "response": []
-        },
-        {
-          "_type": "endpoint",
-          "name": "Post S 3 Url For Library Upload",
-          "request": {
-            "description": null,
-            "url": {
-              "raw": "{{baseUrl}}/orgs/:orgId/library/:libraryId/upload-url",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "orgs",
-                ":orgId",
-                "library",
-                ":libraryId",
-                "upload-url"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "key": "orgId",
-                  "value": "",
-                  "description": null
-                },
-                {
-                  "key": "libraryId",
                   "value": "",
                   "description": null
                 }
@@ -104,7 +60,15 @@
             "header": [],
             "method": "POST",
             "auth": null,
-            "body": null
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"example\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
           },
           "response": []
         }
