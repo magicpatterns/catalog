@@ -44,7 +44,7 @@ export function ExportSettingsModal({
             >
               <VStack alignItems="flex-start">
                 {['css', 'scss', 'js', 'cjs', 'ts', 'json'].map((x) => (
-                  <Checkbox key={x} value={x}>
+                  <Checkbox key={x} value={x} defaultChecked={true}>
                     {getExportFileTypeName(x as TExportFileType)}
                   </Checkbox>
                 ))}

@@ -1,0 +1,12 @@
+types:
+  OrgId: string
+
+errors:
+  LibraryDoesNotExistError:
+    status-code: 404
+
+  UserNotInOrgError:
+    status-code: 403
+
+  UnauthorizedError:
+    status-code: 401

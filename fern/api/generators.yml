@@ -7,3 +7,13 @@ groups:
         output:
           location: local-file-system
           path: ../../packages/server/src/api/generated
+      - name: fernapi/fern-typescript-sdk
+        version: 0.5.14
+        output:
+          location: local-file-system
+          path: ../../packages/client
+      - name: fernapi/fern-postman
+        version: 0.0.44
+        output:
+          location: local-file-system
+          path: '../../packages/postman'
