@@ -9,23 +9,22 @@ service:
   path-parameters:
     orgId: commons.OrgId
   endpoints:
-    getS3UrlForLibraryUpload:
-      method: GET
-      path: /{libraryId}/get-upload-url
-      path-parameters:
-        libraryId: LibraryId
-      response: S3UrlForLibraryUploadResponse
-    postS3UrlForLibraryUpload:
+    createLibrary:
       method: POST
-      path: /{libraryId}/upload-url
-      path-parameters:
-        libraryId: LibraryId
-      response: S3UrlForLibraryUploadResponse
+      path: /upload
+      response: createLibraryResponse
+      request:
+        name: createLibraryRequest
+        body:
+          properties:
+            name: string
 
 types:
-  S3UrlForLibraryUploadResponse:
+  createLibraryResponse:
     properties:
-      s3Url: string
+      signedS3UploadUrl: string
+      libraryId: string
+      name: string
 
   LibraryId:
     type: string

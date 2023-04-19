@@ -45,58 +45,41 @@ class RegistryService {
         return this;
     }
     toRouter() {
-        this.router.get("/:libraryId/get-upload-url", async (req, res, next) => {
-            try {
-                await this.methods.getS3UrlForLibraryUpload(req, {
-                    send: async (responseBody) => {
-                        res.json(await serializers.S3UrlForLibraryUploadResponse.jsonOrThrow(responseBody, {
-                            unrecognizedObjectKeys: "strip",
-                        }));
-                    },
-                    cookie: res.cookie.bind(res),
-                    locals: res.locals,
+        this.router.post("/upload", async (req, res, next) => {
+            const request = await serializers.CreateLibraryRequest.parse(req.body);
+            if (request.ok) {
+                req.body = request.value;
+                try {
+                    await this.methods.createLibrary(req, {
+                        send: async (responseBody) => {
+                            res.json(await serializers.CreateLibraryResponse.jsonOrThrow(responseBody, {
+                                unrecognizedObjectKeys: "strip",
+                            }));
+                        },
+                        cookie: res.cookie.bind(res),
+                        locals: res.locals,
+                    });
+                    next();
+                }
+                catch (error) {
+                    console.error(error);
+                    if (error instanceof errors.MirrorfulApiError) {
+                        console.warn(`Endpoint 'createLibrary' unexpectedly threw ${error.constructor.name}.` +
+                            ` If this was intentional, please add ${error.constructor.name} to` +
+                            " the endpoint's errors list in your Fern Definition.");
+                        await error.send(res);
+                    }
+                    else {
+                        res.status(500).json("Internal Server Error");
+                    }
+                    next(error);
+                }
+            }
+            else {
+                res.status(422).json({
+                    errors: request.errors.map((error) => ["request", ...error.path].join(" -> ") + ": " + error.message),
                 });
-                next();
-            }
-            catch (error) {
-                console.error(error);
-                if (error instanceof errors.MirrorfulApiError) {
-                    console.warn(`Endpoint 'getS3UrlForLibraryUpload' unexpectedly threw ${error.constructor.name}.` +
-                        ` If this was intentional, please add ${error.constructor.name} to` +
-                        " the endpoint's errors list in your Fern Definition.");
-                    await error.send(res);
-                }
-                else {
-                    res.status(500).json("Internal Server Error");
-                }
-                next(error);
-            }
-        });
-        this.router.post("/:libraryId/upload-url", async (req, res, next) => {
-            try {
-                await this.methods.postS3UrlForLibraryUpload(req, {
-                    send: async (responseBody) => {
-                        res.json(await serializers.S3UrlForLibraryUploadResponse.jsonOrThrow(responseBody, {
-                            unrecognizedObjectKeys: "strip",
-                        }));
-                    },
-                    cookie: res.cookie.bind(res),
-                    locals: res.locals,
-                });
-                next();
-            }
-            catch (error) {
-                console.error(error);
-                if (error instanceof errors.MirrorfulApiError) {
-                    console.warn(`Endpoint 'postS3UrlForLibraryUpload' unexpectedly threw ${error.constructor.name}.` +
-                        ` If this was intentional, please add ${error.constructor.name} to` +
-                        " the endpoint's errors list in your Fern Definition.");
-                    await error.send(res);
-                }
-                else {
-                    res.status(500).json("Internal Server Error");
-                }
-                next(error);
+                next(request.errors);
             }
         });
         return this.router;

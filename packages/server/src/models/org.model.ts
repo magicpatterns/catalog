@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { v4 as uuidv4 } from 'uuid'
 
 interface IOrg {
   id: string
@@ -6,7 +7,7 @@ interface IOrg {
 }
 
 const orgSchema = new mongoose.Schema<IOrg>({
-  id: String,
+  id: { type: String, default: uuidv4() },
   name: String,
 })
 
