@@ -23,13 +23,14 @@ export const createPresignedUrlWithClient = async ({
   orgId,
 }: {
   libraryId: string
-  orgId: number
+  orgId: string
 }) => {
   const command = new PutObjectCommand({
     Bucket: BUCKET_NAME,
     Key: constructS3Key({ libraryId, orgId }),
   })
-  return getSignedUrl(client, command, { expiresIn: 3600 })
+  const url = await getSignedUrl(client, command, { expiresIn: 3600 })
+  return url
 }
 
 export function constructS3Key({
@@ -37,7 +38,7 @@ export function constructS3Key({
   orgId,
 }: {
   libraryId: string
-  orgId: number
+  orgId: string
 }) {
   return libraryId + '/' + orgId
 }

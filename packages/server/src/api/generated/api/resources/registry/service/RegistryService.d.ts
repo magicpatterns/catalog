@@ -5,19 +5,10 @@ import * as serializers from "../../../../serialization";
 import { MirrorfulApi } from "../../../..";
 import express from "express";
 export interface RegistryServiceMethods {
-    getS3UrlForLibraryUpload(req: express.Request<{
+    createLibrary(req: express.Request<{
         orgId: serializers.OrgId.Raw;
-        libraryId: serializers.LibraryId.Raw;
-    }, MirrorfulApi.S3UrlForLibraryUploadResponse, never, never>, res: {
-        send: (responseBody: MirrorfulApi.S3UrlForLibraryUploadResponse) => Promise<void>;
-        cookie: (cookie: string, value: string, options?: express.CookieOptions) => void;
-        locals: any;
-    }): void | Promise<void>;
-    postS3UrlForLibraryUpload(req: express.Request<{
-        orgId: serializers.OrgId.Raw;
-        libraryId: serializers.LibraryId.Raw;
-    }, MirrorfulApi.S3UrlForLibraryUploadResponse, never, never>, res: {
-        send: (responseBody: MirrorfulApi.S3UrlForLibraryUploadResponse) => Promise<void>;
+    }, MirrorfulApi.CreateLibraryResponse, MirrorfulApi.CreateLibraryRequest, never>, res: {
+        send: (responseBody: MirrorfulApi.CreateLibraryResponse) => Promise<void>;
         cookie: (cookie: string, value: string, options?: express.CookieOptions) => void;
         locals: any;
     }): void | Promise<void>;

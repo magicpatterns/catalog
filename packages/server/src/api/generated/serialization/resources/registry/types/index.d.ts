@@ -1,2 +1,2 @@
-export * from "./S3UrlForLibraryUploadResponse";
+export * from "./CreateLibraryResponse";
 export * from "./LibraryId";
