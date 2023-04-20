@@ -8,6 +8,8 @@ import {
   ModalOverlay,
   ModalProps,
 } from '@chakra-ui/react'
+import { IconProps } from '@chakra-ui/react'
+import { IButton } from '@ui/Button/types'
 import React from 'react'
 
 import { Button } from '..'
@@ -67,70 +69,71 @@ export function ModalBody({ children }: { children: React.ReactNode }) {
   return <ChakraModalBody>{children}</ChakraModalBody>
 }
 
-export function ModalFooter({
-  onClick,
-  variant,
-  closeCb,
-  primaryButton,
-  secondaryButton,
-}: {
-  onClick?: () => void
-  closeCb?: () => void
-  variant?: 'save' | 'delete' | 'add'
-  primaryButton?: React.ReactNode
-  secondaryButton?: React.ReactNode
-}) {
-  if (variant === 'save') {
+type TModalFooter =
+  | {
+      onClick: () => void
+      closeCb?: () => void
+      variant: 'save' | 'delete' | 'add'
+    }
+  | {
+      variant: 'generic'
+      primaryButton: React.ComponentType<IButton>
+      secondaryButton: React.ComponentType<IButton>
+    }
+
+export function ModalFooter(props: TModalFooter) {
+  // const primaryButton = renderPrimaryButton ? renderPrimaryButton() : undefined
+  if (props.variant === 'save') {
     return (
       <ChakraModalFooter>
         <Button
           label="cancel"
           variant="default"
           marginRight={'12px'}
-          onClick={closeCb}
+          onClick={props.closeCb}
         ></Button>
         <Button
           type="submit"
           label="save"
           variant="save"
-          onClick={onClick}
+          onClick={props.onClick}
         ></Button>
       </ChakraModalFooter>
     )
   }
-  if (variant === 'add') {
+  if (props.variant === 'add') {
     return (
       <ChakraModalFooter>
         <Button
           label="cancel"
           variant="default"
           marginRight={'12px'}
-          onClick={closeCb}
+          onClick={props.closeCb}
         ></Button>
         <Button
           type="submit"
           label="add"
           variant="save"
-          onClick={onClick}
+          onClick={props.onClick}
         ></Button>
       </ChakraModalFooter>
     )
   }
 
-  if (variant === 'delete') {
+  if (props.variant === 'delete') {
     return (
       <ChakraModalFooter>
         <Button
           label="save"
           variant="save"
           marginRight={'12px'}
-          onClick={closeCb}
+          onClick={props.closeCb}
         ></Button>
         <Button
           type="submit"
           label="delete"
           variant="delete"
-          onClick={onClick}
+          onClick={props.onClick}
         ></Button>
       </ChakraModalFooter>
     )
@@ -138,17 +141,8 @@ export function ModalFooter({
   return (
     <ChakraModalFooter>
       <>
-        {secondaryButton ?? (
-          <Button
-            label="cancel"
-            variant="default"
-            marginRight={'12px'}
-            onClick={closeCb}
-          />
-        )}
-        {primaryButton ?? (
-          <Button label="ok" variant="save" onClick={onClick} />
-        )}
+        {props.variant === 'generic' && props.secondaryButton}
+        {props.variant === 'generic' && props.primaryButton}
       </>
     </ChakraModalFooter>
   )
