@@ -40,7 +40,7 @@
 <kbd>[<img title="Swedish" alt="Swedish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/se.svg" width="22">](i18n/README.sv.md)</kbd>
 <kbd>[<img title="Turkish" alt="Turkish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/tr.svg" width="22">](i18n/README.tr.md)</kbd>
 
-**[Mirrorful](https://mirrorful.com)** Mirrorful es un framework de diseño simple y de código abierto. Instala Mirrorful para generar colores y otros tokens de diseño para tu proyecto. Después, importa los tokens directamente en tu aplicación. 
+**[Mirrorful](https://mirrorful.com)** Mirrorful es un framework de diseño simple y de código abierto. Instala Mirrorful para generar colores y otros tokens de diseño para tu proyecto. Después, importa los tokens directamente en tu aplicación.
 
 - **Empieza un nuevo proyecto con una fuente de datos**
 - **Modifica visualmente tu tema**
@@ -63,7 +63,7 @@ Además los sistemas de diseño simples te ayudan a acelerar el desarrollo - inc
 
 ## 🚀 Empieza aquí
 
-Mirrorful es un paquete NPM ideado para ser instalado como una dependencia de desarrollo. 
+Mirrorful es un paquete NPM ideado para ser instalado como una dependencia de desarrollo.
 
 ```bash
 npm install mirrorful -D
@@ -86,13 +86,12 @@ yarn run mirrorful
 o
 
 ```
-npx mirrorful
+npx mirrorful editor
 ```
 
 ## 💿 Formatos de exportación
 
-Después de configurar tu editor, puedes exportarlo para usarlo en tu aplicación. 
-
+Después de configurar tu editor, puedes exportarlo para usarlo en tu aplicación.
 
 Actualmente exportamos los siguientes tipos de archivos: `.js`, `.ts`, `.css`, `.scss`, `.json`
 
@@ -118,11 +117,11 @@ Ejemplo:
 <button backgroundColor={{ Tokens.primary.base }}>Click here</button>
 ```
 
-## 🤝 Librería de componentes agnóstica 
+## 🤝 Librería de componentes agnóstica
 
-Nos esforzamos por ser una librería de componentes agnóstica. Ya sea que uses Material UI, Chakra UI, Tailwind, Ant Design, o incluso una librería interna, Mirrorful te va a enganchar. 
+Nos esforzamos por ser una librería de componentes agnóstica. Ya sea que uses Material UI, Chakra UI, Tailwind, Ant Design, o incluso una librería interna, Mirrorful te va a enganchar.
 
-⚠️ `create-react-app` puede que te advierta que estas tratando de importar desde afuera del directorio `src`. Estamos trabajando en una solución a largo plazo, pero por ahora, te recomendamos hacer una copia del folder `.mirrorful` en tu directorio `src`. 
+⚠️ `create-react-app` puede que te advierta que estas tratando de importar desde afuera del directorio `src`. Estamos trabajando en una solución a largo plazo, pero por ahora, te recomendamos hacer una copia del folder `.mirrorful` en tu directorio `src`.
 
 Revisa nuestros ejemplos:
 
@@ -135,10 +134,10 @@ Revisa nuestros ejemplos:
 
 ## ❤️ Comunidad y soporte
 
-- [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - para discutir con la comunidad y el equipo de Mirrorful. 
+- [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - para discutir con la comunidad y el equipo de Mirrorful.
 - [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - para ayudar a construir y conversaciones sobre funciones más avanzadas
 - [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - GitHub issues - para bugs y errores que encuentres usando Mirrorful.
-- [Twitter](https://twitter.com/mirrorful) -  para mantenerte informado sobre las últimas actualizaciones del producto.
+- [Twitter](https://twitter.com/mirrorful) - para mantenerte informado sobre las últimas actualizaciones del producto.
 
 ## 🏘 Codigo abierto vs pagado
 
@@ -152,7 +151,7 @@ Mirrorful se toma la seguridad muy en serio. Si tienes cualquier duda sobre Mirr
 
 ## ⭐ Mantente al día
 
-Hay nuevas funciones que llegarán de manera frecuente. Dale Star a este repo para mantenerte al día. 
+Hay nuevas funciones que llegarán de manera frecuente. Dale Star a este repo para mantenerte al día.
 
 <img width="300" src="../assets/tower.png" alt="Build">
 

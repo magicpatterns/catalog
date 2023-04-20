@@ -1,15 +1,42 @@
 import { execSync } from 'child_process'
-import process from 'process'
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { createLibrary } from '../api'
 
-export function packageLibrary() {
+import fs from 'fs'
+import chalk from 'chalk'
+
+const logProgress = (message: string) => {
+  console.log(chalk.cyan(message))
+}
+
+export async function packageLibrary() {
+  logProgress('Compiling library...')
   execSync(`npx vite build --config ${__dirname}/vite-lib.config.js`)
 
-  console.log('Library compiled successfully.')
-  // Upload file to S3
-  createLibrary()
+  logProgress('Forming dist...')
+  // Create final dist folder
+  fs.mkdirSync(`${__dirname}/dist`, { recursive: true })
+  fs.cpSync(
+    `${__dirname}/module/library.es.js`,
+    `${__dirname}/dist/library.es.js`
+  )
 
-  // Run publish
+  const files = fs
+    .readdirSync(`${__dirname}/module/build/_assets`)
+    .filter((fileName) => fileName.startsWith('tailwind'))
+    .filter((fileName) => fileName.endsWith('.css'))
+
+  fs.cpSync(
+    `${__dirname}/module/build/_assets/${files[0]}`,
+    `${__dirname}/dist/main.css`
+  )
+
+  fs.rmdirSync(`${__dirname}/module`, { recursive: true })
+
+  logProgress('Forming package.json...')
+  // TODO: Generate a package json to put inside of dist
+
+  logProgress('Syncing files...')
+  // TODO: Upload files to S3
+
+  logProgress('Publishing...')
+  // TODO: Run npm publish INSIDE OF dist
 }

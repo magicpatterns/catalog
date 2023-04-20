@@ -21,7 +21,7 @@ This will open a website at: http://127.0.0.1:5173/
 ⚠️ This app will warn that you are trying to import from outside the src directory. We are working on a long-term solution, but for now, we would recommend making a copy of the .mirrorful folder in your `src` directory, as we have done in this example.
 
 ```
-npx mirrorful
+npx mirrorful editor
 ```
 
 This will open a browser window with the Mirrorful at localhost:5050.
