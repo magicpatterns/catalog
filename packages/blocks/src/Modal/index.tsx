@@ -69,8 +69,8 @@ type TModalFooter =
     }
   | {
       variant: 'generic'
-      primaryButton: React.ElementType<IButton>
-      secondaryButton: React.ElementType<IButton>
+      primaryButton: React.ReactElement<IButton>
+      secondaryButton: React.ReactElement<IButton>
     }
 
 export function ModalFooter(props: TModalFooter) {
