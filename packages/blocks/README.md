@@ -10,14 +10,14 @@
   - [x] Warn Variant
   - [x] Info Variant
   - [ ] Add mirrorful colors
-- [ ] Create Heading Component
-  - [ ] Heading 1
-  - [ ] Heading 2
-  - [ ] Heading 3
-  - [ ] Heading 4
-  - [ ] Heading 5
-  - [ ] Heading 6
-  - [ ] Add mirrorful colors
+- [x] Create Heading Component
+  - [x] Heading 1
+  - [x] Heading 2
+  - [x] Heading 3
+  - [x] Heading 4
+  - [x] Heading 5
+  - [x] Heading 6
+  - [ ] Add mirrorful fonts
 - [ ] Universal Modal Component
   - [ ] Header
   - [ ] Footer (save, delete)
