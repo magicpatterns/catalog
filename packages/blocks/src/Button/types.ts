@@ -1,4 +1,4 @@
-import { ChakraProps } from '@chakra-ui/react'
+import { ButtonProps, ChakraProps } from '@chakra-ui/react'
 
 export type Variants =
   | 'save'
@@ -23,6 +23,6 @@ export interface IButton
   label: string
   variant: Variants
   icon?: React.ReactNode
-  type?: HTMLButtonElement['type']
+  type?: ButtonProps['type']
   onClick?: () => void
 }
