@@ -40,7 +40,7 @@ export function TypographySection({
       <Box css={{ marginBottom: '48px' }} />
       <FontSizesSection
         fontSizeData={typography.fontSizes}
-        placeholder={placeholderText}
+        placeholder={placeholderText || 'Lorem ipsum dolor sit amet.'}
         onUpdateFontPropertyData={(newFontSizeData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,
