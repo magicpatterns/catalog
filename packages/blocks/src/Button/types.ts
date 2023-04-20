@@ -1,3 +1,5 @@
+import { ChakraProps } from '@chakra-ui/react'
+
 export type Variants =
   | 'save'
   | 'delete'
@@ -6,9 +8,21 @@ export type Variants =
   | 'icon'
   | 'default'
 
-export interface IButton {
+export interface IButton
+  extends Partial<
+    Pick<
+      ChakraProps,
+      | 'marginRight'
+      | 'marginLeft'
+      | 'marginTop'
+      | 'marginBottom'
+      | 'paddingInline'
+      | 'paddingBlock'
+    >
+  > {
   label: string
   variant: Variants
   icon?: React.ReactNode
+  type?: HTMLButtonElement['type']
   onClick?: () => void
 }
