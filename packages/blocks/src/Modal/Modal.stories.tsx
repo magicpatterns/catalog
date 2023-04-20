@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 
 import { Button } from '../Button'
-import { Modal } from '.'
+import { Modal, SaveModal } from '.'
 
 const meta: Meta<typeof Modal> = {
   title: 'Modal',
@@ -13,7 +13,7 @@ const meta: Meta<typeof Modal> = {
 export default meta
 type Story = StoryObj<typeof Modal>
 
-export const SaveModal: Story = {
+export const Save_Modal: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false)
     return (
@@ -23,24 +23,18 @@ export const SaveModal: Story = {
           variant="save"
           onClick={() => setIsOpen(true)}
         ></Button>
-        <Modal
+        <SaveModal
+          size={'xl'}
+          overlay={true}
+          body={<></>}
           headerName="Save Modal"
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           mainCb={() => alert('This is being saved!')}
           closeCb={() => setIsOpen(false)}
-          variant="save"
-        >
-          <></>
-        </Modal>
+        ></SaveModal>
       </>
     )
-  },
-  args: {
-    variant: 'save',
-    children: <></>,
-    isOpen: false,
-    headerName: 'Save Modal',
   },
 }
 
@@ -67,12 +61,6 @@ export const AddModal: Story = {
       </>
     )
   },
-  args: {
-    variant: 'add',
-    children: <></>,
-    isOpen: true,
-    headerName: 'Add Modal',
-  },
 }
 
 export const DeleteModal: Story = {
@@ -97,11 +85,5 @@ export const DeleteModal: Story = {
         </Modal>
       </>
     )
-  },
-  args: {
-    variant: 'delete',
-    children: <></>,
-    isOpen: true,
-    headerName: 'Delete Modal',
   },
 }
