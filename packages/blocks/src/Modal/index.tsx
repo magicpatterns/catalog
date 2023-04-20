@@ -52,30 +52,6 @@ export function Modal(props: IModal) {
 Modal.Header = ModalHeader
 Modal.Footer = ModalFooter
 
-interface ISaveModal extends Omit<IModal, 'header' | 'footer'> {
-  headerName: string
-  mainCb: () => void
-  closeCb?: () => void
-}
-export function SaveModal(props: ISaveModal) {
-  return (
-    <Modal
-      isOpen={props.isOpen}
-      onClose={props.onClose}
-      header={<Modal.Header headerName={props.headerName} />}
-      overlay={props.overlay}
-      body={props.body}
-      footer={
-        <Modal.Footer
-          onClick={props.mainCb}
-          closeCb={props.closeCb}
-          variant="save"
-        />
-      }
-    />
-  )
-}
-
 export function ModalHeader({ headerName }: { headerName: string }) {
   return (
     <>
@@ -146,5 +122,29 @@ export function ModalFooter({
         onClick={onClick}
       ></Button>
     </ChakraModalFooter>
+  )
+}
+
+interface ISaveModal extends Omit<IModal, 'header' | 'footer'> {
+  headerName: string
+  mainCb: () => void
+  closeCb?: () => void
+}
+export function SaveModal(props: ISaveModal) {
+  return (
+    <Modal
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      header={<Modal.Header headerName={props.headerName} />}
+      overlay={props.overlay}
+      body={props.body}
+      footer={
+        <Modal.Footer
+          onClick={props.mainCb}
+          closeCb={props.closeCb}
+          variant="save"
+        />
+      }
+    />
   )
 }
