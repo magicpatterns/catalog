@@ -71,10 +71,14 @@ export function ModalFooter({
   onClick,
   variant,
   closeCb,
+  primaryButton,
+  secondaryButton,
 }: {
-  onClick: () => void
+  onClick?: () => void
   closeCb?: () => void
-  variant: 'save' | 'delete' | 'add'
+  variant?: 'save' | 'delete' | 'add'
+  primaryButton?: React.ReactNode
+  secondaryButton?: React.ReactNode
 }) {
   if (variant === 'save') {
     return (
@@ -113,20 +117,39 @@ export function ModalFooter({
     )
   }
 
+  if (variant === 'delete') {
+    return (
+      <ChakraModalFooter>
+        <Button
+          label="save"
+          variant="save"
+          marginRight={'12px'}
+          onClick={closeCb}
+        ></Button>
+        <Button
+          type="submit"
+          label="delete"
+          variant="delete"
+          onClick={onClick}
+        ></Button>
+      </ChakraModalFooter>
+    )
+  }
   return (
     <ChakraModalFooter>
-      <Button
-        label="save"
-        variant="save"
-        marginRight={'12px'}
-        onClick={closeCb}
-      ></Button>
-      <Button
-        type="submit"
-        label="delete"
-        variant="delete"
-        onClick={onClick}
-      ></Button>
+      <>
+        {secondaryButton ?? (
+          <Button
+            label="cancel"
+            variant="default"
+            marginRight={'12px'}
+            onClick={closeCb}
+          />
+        )}
+        {primaryButton ?? (
+          <Button label="ok" variant="save" onClick={onClick} />
+        )}
+      </>
     </ChakraModalFooter>
   )
 }
