@@ -2,6 +2,7 @@ import {
   ChakraProps,
   Modal as ChakraModal,
   ModalCloseButton,
+  ModalContent,
   ModalFooter as ChakraModalFooter,
   ModalHeader as ChakraModalHeader,
   ModalProps,
@@ -28,13 +29,15 @@ export function Modal(props: IModal) {
       isCentered={true}
       closeOnEsc={true}
     >
-      <ModalHeader headerName={props.headerName} />
-      {props.children}
-      <ModalFooter
-        onClick={props.mainCb}
-        variant={props.variant}
-        closeCb={props.closeCb}
-      ></ModalFooter>
+      <ModalContent>
+        <ModalHeader headerName={props.headerName} />
+        {props.children}
+        <ModalFooter
+          onClick={props.mainCb}
+          variant={props.variant}
+          closeCb={props.closeCb}
+        ></ModalFooter>
+      </ModalContent>
     </ChakraModal>
   )
 }
