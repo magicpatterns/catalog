@@ -1,5 +1,6 @@
 import {
   Modal as ChakraModal,
+  ModalBody as ChakraModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter as ChakraModalFooter,
@@ -51,6 +52,7 @@ export function Modal(props: IModal) {
 
 Modal.Header = ModalHeader
 Modal.Footer = ModalFooter
+Modal.Body = ModalBody
 
 export function ModalHeader({ headerName }: { headerName: string }) {
   return (
@@ -59,6 +61,10 @@ export function ModalHeader({ headerName }: { headerName: string }) {
       <ModalCloseButton />
     </>
   )
+}
+
+export function ModalBody({ children }: { children: React.ReactNode }) {
+  return <ChakraModalBody>{children}</ChakraModalBody>
 }
 
 export function ModalFooter({
