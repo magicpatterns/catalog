@@ -143,7 +143,7 @@ export function SaveModal(props: ISaveModal) {
       onClose={props.onClose}
       header={<Modal.Header headerName={props.headerName} />}
       overlay={props.overlay}
-      body={props.body}
+      body={<Modal.Body>{props.body}</Modal.Body>}
       footer={
         <Modal.Footer
           onClick={props.mainCb}
@@ -167,7 +167,7 @@ export function AddModal(props: IAddModal) {
       onClose={props.onClose}
       header={<Modal.Header headerName={props.headerName} />}
       overlay={props.overlay}
-      body={props.body}
+      body={<Modal.Body>{props.body}</Modal.Body>}
       footer={
         <Modal.Footer
           onClick={props.mainCb}
@@ -191,7 +191,7 @@ export function DeleteModal(props: IDeleteModal) {
       onClose={props.onClose}
       header={<Modal.Header headerName={props.headerName} />}
       overlay={props.overlay}
-      body={props.body}
+      body={<Modal.Body>{props.body}</Modal.Body>}
       footer={
         <Modal.Footer
           onClick={props.mainCb}
