@@ -78,4 +78,23 @@ export function ModalFooter({
       </ChakraModalFooter>
     )
   }
+
+  if (variants === 'delete') {
+    return (
+      <ChakraModalFooter>
+        <Button
+          label="save"
+          variant="save"
+          marginLeft={'12px'}
+          onClick={closeCb}
+        ></Button>
+        <Button
+          type="submit"
+          label="delete"
+          variant="delete"
+          onClick={onClick}
+        ></Button>
+      </ChakraModalFooter>
+    )
+  }
 }
