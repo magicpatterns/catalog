@@ -10,6 +10,7 @@ import {
 import React from 'react'
 
 import { Button } from '..'
+import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 
 interface IModal extends Partial<Pick<ModalProps, 'size'>> {
   isOpen: boolean
@@ -22,23 +23,25 @@ interface IModal extends Partial<Pick<ModalProps, 'size'>> {
 }
 export function Modal(props: IModal) {
   return (
-    <ChakraModal
-      isOpen={props.isOpen}
-      onClose={props.onClose}
-      size={props.size}
-      isCentered={true}
-      closeOnEsc={true}
-    >
-      <ModalContent>
-        <ModalHeader headerName={props.headerName} />
-        {props.children}
-        <ModalFooter
-          onClick={props.mainCb}
-          variant={props.variant}
-          closeCb={props.closeCb}
-        ></ModalFooter>
-      </ModalContent>
-    </ChakraModal>
+    <ChakraProviderWrapper>
+      <ChakraModal
+        isOpen={props.isOpen}
+        onClose={props.onClose}
+        size={props.size}
+        isCentered={true}
+        closeOnEsc={true}
+      >
+        <ModalContent>
+          <ModalHeader headerName={props.headerName} />
+          {props.children}
+          <ModalFooter
+            onClick={props.mainCb}
+            variant={props.variant}
+            closeCb={props.closeCb}
+          ></ModalFooter>
+        </ModalContent>
+      </ChakraModal>
+    </ChakraProviderWrapper>
   )
 }
 

@@ -1,7 +1,7 @@
 import { ChakraProps, Heading as ChakraHeading } from '@chakra-ui/react'
-import { ChakraProviderWrapper } from '@ui/ChakraProviderWrapper'
 import React from 'react'
 
+import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 import { toCapitalize } from '../util/toCapitalize'
 
 interface IHeading
