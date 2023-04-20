@@ -10,6 +10,7 @@ import React from 'react'
 
 import { Button } from '..'
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
+import { toCapitalize } from '../util/toCapitalize'
 
 interface IModal extends Partial<Pick<ModalProps, 'size'>> {
   isOpen: boolean
@@ -31,7 +32,7 @@ export function Modal(props: IModal) {
         closeOnEsc={true}
       >
         <ModalContent>
-          <ModalHeader headerName={props.headerName} />
+          <ModalHeader headerName={toCapitalize(props.headerName)} />
           {props.children}
           <ModalFooter
             onClick={props.mainCb}
