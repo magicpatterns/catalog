@@ -36,15 +36,27 @@ export function ModalHeader({ headerName }: { headerName: string }) {
 export function ModalFooter({
   onClick,
   variants,
+  closeCb,
 }: {
   onClick: () => void
+  closeCb?: () => void
   variants: IModal['variants']
 }) {
   if (variants === 'save') {
     return (
       <ChakraModalFooter>
-        <Button label="cancel" variant="default"></Button>
-        <Button type="submit" label="save" variant="save"></Button>
+        <Button
+          label="cancel"
+          variant="default"
+          marginLeft={'12px'}
+          onClick={closeCb}
+        ></Button>
+        <Button
+          type="submit"
+          label="save"
+          variant="save"
+          onClick={onClick}
+        ></Button>
       </ChakraModalFooter>
     )
   }
