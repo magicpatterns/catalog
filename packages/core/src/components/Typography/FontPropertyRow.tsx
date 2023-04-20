@@ -11,11 +11,13 @@ import { LineHeightData } from './LineHeight/LineHeightData'
 export function FontPropertyRow({
   fontProperty,
   fontPropertyData,
+  placeholder,
   onUpdateFontPropertyVariant,
   onDeleteFontPropertyVariant,
 }: {
   fontProperty: 'fontSize' | 'fontWeight' | 'lineHeight'
   fontPropertyData: TNamedToken
+  placeholder: string
   onUpdateFontPropertyVariant: (newVariant: TNamedToken) => void
   onDeleteFontPropertyVariant: () => void
 }) {
@@ -55,13 +57,22 @@ export function FontPropertyRow({
           </Text>
         </Box>
         {fontProperty === 'fontSize' && (
-          <FontSizeRow fontSizeData={fontPropertyData} />
+          <FontSizeRow
+            fontSizeData={fontPropertyData}
+            placeholder={placeholder}
+          />
         )}
         {fontProperty === 'fontWeight' && (
-          <FontWeightRow fontWeightData={fontPropertyData} />
+          <FontWeightRow
+            fontWeightData={fontPropertyData}
+            placeholder={placeholder}
+          />
         )}
         {fontProperty === 'lineHeight' && (
-          <LineHeightData lineHeightData={fontPropertyData} />
+          <LineHeightData
+            lineHeightData={fontPropertyData}
+            placeholder={placeholder}
+          />
         )}
         <Box css={{ justifySelf: 'flex-end' }}>
           <Button

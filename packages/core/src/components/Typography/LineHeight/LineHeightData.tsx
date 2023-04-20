@@ -3,8 +3,10 @@ import { TNamedToken } from '@core/types'
 
 export function LineHeightData({
   lineHeightData,
+  placeholder,
 }: {
   lineHeightData: TNamedToken
+  placeholder: string
 }) {
   return (
     <>
@@ -21,9 +23,9 @@ export function LineHeightData({
           lineHeight: lineHeightData.token.value,
         }}
       >
-        Lorem ipsum dolor sit amet.
+        {placeholder.slice(0, placeholder.length / 2)}
         <br />
-        Illum omnis, sunt corrupti.
+        {placeholder.slice(placeholder.length / 2, placeholder.length)}
       </Box>
     </>
   )
