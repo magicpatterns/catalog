@@ -22,7 +22,7 @@ export function Heading(props: IHeading) {
     h6: { fontSize: '1.1rem', fontWeight: 'black' },
   }
   return (
-    <ChakraHeading {...variantProps[props.variants]}>
+    <ChakraHeading {...variantProps[props.variants]} {...props}>
       {toCapitalize(props.label)}
     </ChakraHeading>
   )
