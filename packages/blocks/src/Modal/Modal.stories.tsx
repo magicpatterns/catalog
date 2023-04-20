@@ -28,6 +28,7 @@ export const SaveModal: Story = {
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           mainCb={() => alert('This is being saved!')}
+          closeCb={() => setIsOpen(false)}
           variant="save"
         >
           <></>
@@ -44,12 +45,33 @@ export const SaveModal: Story = {
 }
 
 export const AddModal: Story = {
-  render: Modal,
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false)
+    return (
+      <>
+        <Button
+          label="open add modal"
+          variant="add-token"
+          onClick={() => setIsOpen(true)}
+        ></Button>
+        <Modal
+          headerName="Add Modal"
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          mainCb={() => alert('This is being added!')}
+          closeCb={() => setIsOpen(false)}
+          variant="add"
+        >
+          <></>
+        </Modal>
+      </>
+    )
+  },
   args: {
     variant: 'add',
     children: <></>,
     isOpen: true,
-    headerName: 'Save Modal',
+    headerName: 'Add Modal',
   },
 }
 
