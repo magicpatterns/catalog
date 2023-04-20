@@ -55,7 +55,7 @@ Modal.Footer = ModalFooter
 export function ModalHeader({ headerName }: { headerName: string }) {
   return (
     <>
-      <ChakraModalHeader>{headerName}</ChakraModalHeader>
+      <ChakraModalHeader>{toCapitalize(headerName)}</ChakraModalHeader>
       <ModalCloseButton />
     </>
   )
