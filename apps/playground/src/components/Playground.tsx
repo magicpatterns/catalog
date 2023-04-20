@@ -1,32 +1,14 @@
-import { Box, Textarea, Button, Text } from '@chakra-ui/react'
+import { Box, Textarea, Button, Text, Stack } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { transpileCode } from '../utils/transpileCode'
 import MonacoEditor, { Monaco } from '@monaco-editor/react'
 import { SOURCE_BOILERPLATE, DEFAULT_CODE } from '../utils/constants'
 import { replaceImports } from '../utils/replacers'
-
-type TLogData = {
-  text: string
-  type: 'success' | 'error' | 'info'
-  timestamp: string
-}
-
-function LogInstance({ data }: { data: TLogData }) {
-  const { timestamp, text, type } = data
-  let color = 'gray'
-  if (type === 'success') {
-    color = 'green'
-  } else if (type === 'error') {
-    color = 'red'
-  }
-
-  return (
-    <Box css={{ display: 'flex' }}>
-      <Text css={{ color: 'gray', marginRight: '8px' }}>{timestamp}: </Text>
-      <Text css={{ color }}>{text}</Text>
-    </Box>
-  )
-}
+import { TLogData } from '../types'
+import { Console } from './Console'
+import { Toolbar } from './Toolbar'
+import { editor } from 'monaco-editor'
+import { Source } from './Source'
 
 export function Playground() {
   const [inputCode, setInputCode] = useState<string>(DEFAULT_CODE)
@@ -40,7 +22,8 @@ export function Playground() {
     },
   ])
 
-  const logsContainer = useRef<HTMLDivElement>(null)
+  const [panelTab, setPanelTab] = useState<'console' | 'source'>('console')
+  const [widthDivide, setWidthDivide] = useState<number>(50)
 
   const handleTranspileCode = () => {
     try {
@@ -72,26 +55,36 @@ export function Playground() {
         ])
       }
     }
-
-    setTimeout(() => {
-      if (logsContainer.current) {
-        logsContainer.current.scroll({
-          top: logsContainer.current.scrollHeight,
-          behavior: 'smooth',
-        })
-      }
-    }, 10)
   }
 
   function handleEditorWillMount(monaco: Monaco) {
-    // here is the monaco instance
-    // do something before editor is mounted
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({})
+    monaco.editor.defineTheme('dark', {
+      base: 'vs-dark',
+      inherit: true,
+      rules: [],
+      colors: {
+        'editor.background': '#040712',
+      },
+    })
+  }
+
+  function handleEditorDidMount(
+    editor: editor.IStandaloneCodeEditor,
+    monaco: Monaco
+  ) {
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+      handleTranspileCode()
+    })
   }
 
   const handleEditorChange = (value: string | undefined) => {
     setInputCode(value ?? '')
   }
+
+  useEffect(() => {
+    handleTranspileCode()
+  }, [])
 
   return (
     <Box>
@@ -100,47 +93,108 @@ export function Playground() {
           width: '100vw',
           height: '100vh',
           display: 'flex',
-          padding: '24px',
+          flexDirection: 'column',
         }}
+        backgroundColor={'bg'}
       >
-        <Box css={{ width: '50%' }}>
-          <MonacoEditor
-            defaultLanguage="typescript"
-            defaultValue={DEFAULT_CODE}
-            beforeMount={handleEditorWillMount}
-            onChange={handleEditorChange}
-            options={{
-              minimap: { enabled: false },
-            }}
-            height={'80%'}
-          />
-          <Button onClick={() => handleTranspileCode()}>Transpile</Button>
-        </Box>
-        <Box
-          css={{
-            width: '50%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <Box css={{ height: '70%', padding: '24px' }}>
-            <iframe srcDoc={transpiledCode} />
+        <Toolbar />
+        <Box css={{ width: '100%', display: 'flex', flexGrow: 1 }}>
+          <Box
+            css={{ width: `${widthDivide}%`, position: 'relative' }}
+            paddingY={'24px'}
+          >
+            <MonacoEditor
+              defaultLanguage="typescript"
+              value={inputCode}
+              beforeMount={handleEditorWillMount}
+              onMount={handleEditorDidMount}
+              onChange={handleEditorChange}
+              options={{
+                minimap: { enabled: false },
+                scrollbar: { vertical: 'hidden' },
+                hideCursorInOverviewRuler: true,
+                overviewRulerLanes: 0,
+                automaticLayout: true,
+              }}
+              height={'100%'}
+              theme={'dark'}
+            />
+            <Box css={{ position: 'absolute', bottom: '24px', right: '36px' }}>
+              <Button
+                backgroundColor={'bg'}
+                borderColor={'divider'}
+                borderWidth={'1px'}
+                color={'playgroundText'}
+                css={{
+                  backdropFilter: 'blur(2px)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+                _hover={{
+                  boxShadow: '0 0 20px 1px #805AD5',
+                  // bgGradient: 'linear(to-br, bg, primary, bg)',
+                }}
+                onClick={handleTranspileCode}
+              >
+                <Text>Transpile</Text>
+                <Text
+                  css={{
+                    marginLeft: '6px',
+                    fontWeight: 'bold',
+                  }}
+                  color={'playgroundTextHover'}
+                >
+                  ⌘ + Enter
+                </Text>
+              </Button>
+            </Box>
           </Box>
           <Box
             css={{
-              height: '30%',
-              borderTop: '1px solid lightgray',
-              padding: '24px',
+              width: `${widthDivide}%`,
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
             }}
+            borderLeftWidth={'1px'}
+            borderColor={'divider'}
           >
+            <Box css={{ height: '60%' }}>
+              <iframe srcDoc={transpiledCode} />
+            </Box>
             <Box
-              css={{ height: '100%', overflow: 'scroll' }}
-              ref={logsContainer}
+              css={{
+                height: '40%',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+              borderTopWidth={'1px'}
+              borderColor={'divider'}
             >
-              {logs.map((log, index) => (
-                <LogInstance key={index} data={log} />
-              ))}
+              <Box
+                css={{
+                  height: '48px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '14px',
+                }}
+                borderBottomWidth={'1px'}
+                borderColor="divider"
+              >
+                <Stack direction="row" spacing={16}>
+                  <Button variant="tab" onClick={() => setPanelTab('console')}>
+                    Console
+                  </Button>
+                  <Button variant="tab" onClick={() => setPanelTab('source')}>
+                    Source
+                  </Button>
+                </Stack>
+              </Box>
+              <Box css={{ padding: '12px' }}>
+                {panelTab === 'console' && <Console logs={logs} />}
+                {panelTab === 'source' && <Source code={transpiledCode} />}
+              </Box>
             </Box>
           </Box>
         </Box>

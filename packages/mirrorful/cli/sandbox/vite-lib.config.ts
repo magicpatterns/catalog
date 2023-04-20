@@ -9,9 +9,9 @@ export default defineConfig(async ({ command, mode }) => {
   return {
     plugins: [
       react(),
-      dts({
-        include: [`app/components/primitives`],
-      }),
+      // dts({
+      //   include: [`app/components/primitives`],
+      // }),
       cssInjectedByJsPlugin(),
     ],
     build: {

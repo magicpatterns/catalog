@@ -9,5 +9,10 @@ export function replaceImports(code: string) {
     `'https://esm.sh/react-dom@18.2.0'`
   )
 
+  modifiedCode = modifiedCode.replace(
+    `'@trigger-dev/components'`,
+    `'https://cdn.jsdelivr.net/gh/teddarific/example-component-library/lib/library11.es.js'`
+  )
+
   return modifiedCode
 }
