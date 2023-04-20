@@ -11,8 +11,8 @@ type THeading = {
 
 export function Heading(props: THeading) {
   const variantProps: Record<THeading['variants'], ChakraProps> = {
-    h1: { fontSize: '2xl', fontWeight: 'black' },
-    h2: {},
+    h1: { fontSize: '2.5rem', fontWeight: 'black' },
+    h2: { fontSize: '2rem', fontWeight: 'black' },
     h3: {},
     h4: {},
     h5: {},
