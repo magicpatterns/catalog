@@ -8,7 +8,6 @@ import {
   ModalOverlay,
   ModalProps,
 } from '@chakra-ui/react'
-import { IconProps } from '@chakra-ui/react'
 import { IButton } from '@ui/Button/types'
 import React from 'react'
 
