@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 
 import { Button } from '../Button'
-import { AddModal, Modal, SaveModal } from '.'
+import { AddModal, DeleteModal, Modal, SaveModal } from '.'
 
 const meta: Meta<typeof Modal> = {
   title: 'Modal',
@@ -62,7 +62,7 @@ export const Add_Modal: Story = {
   },
 }
 
-export const DeleteModal: Story = {
+export const Delete_Modal: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false)
     return (
@@ -72,16 +72,15 @@ export const DeleteModal: Story = {
           variant="delete"
           onClick={() => setIsOpen(true)}
         ></Button>
-        <Modal
+        <DeleteModal
           headerName="delete modal"
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           mainCb={() => alert('This is being deleted!')}
           closeCb={() => setIsOpen(false)}
-          variant="delete"
-        >
-          <></>
-        </Modal>
+          body={<></>}
+          overlay={true}
+        ></DeleteModal>
       </>
     )
   },
