@@ -1,4 +1,5 @@
 import { ChakraProps, Heading as ChakraHeading } from '@chakra-ui/react'
+import { ChakraProviderWrapper } from '@ui/ChakraProviderWrapper'
 import React from 'react'
 
 import { toCapitalize } from '../util/toCapitalize'
@@ -22,9 +23,11 @@ export function Heading(props: IHeading) {
     h6: { fontSize: '1.1rem', fontWeight: 'black' },
   }
   return (
-    <ChakraHeading {...variantProps[props.variants]} {...props}>
-      {toCapitalize(props.label)}
-    </ChakraHeading>
+    <ChakraProviderWrapper>
+      <ChakraHeading {...variantProps[props.variants]} {...props}>
+        {toCapitalize(props.label)}
+      </ChakraHeading>
+    </ChakraProviderWrapper>
   )
 }
 
