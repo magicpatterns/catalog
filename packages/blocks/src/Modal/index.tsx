@@ -4,6 +4,7 @@ import {
   ModalContent,
   ModalFooter as ChakraModalFooter,
   ModalHeader as ChakraModalHeader,
+  ModalOverlay,
   ModalProps,
 } from '@chakra-ui/react'
 import React from 'react'
@@ -31,6 +32,7 @@ export function Modal(props: IModal) {
         isCentered={true}
         closeOnEsc={true}
       >
+        <ModalOverlay />
         <ModalContent>
           <ModalHeader headerName={toCapitalize(props.headerName)} />
           {props.children}
