@@ -148,3 +148,27 @@ export function SaveModal(props: ISaveModal) {
     />
   )
 }
+
+interface IAddModal extends Omit<IModal, 'header' | 'footer'> {
+  headerName: string
+  mainCb: () => void
+  closeCb?: () => void
+}
+export function AddModal(props: IAddModal) {
+  return (
+    <Modal
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      header={<Modal.Header headerName={props.headerName} />}
+      overlay={props.overlay}
+      body={props.body}
+      footer={
+        <Modal.Footer
+          onClick={props.mainCb}
+          closeCb={props.closeCb}
+          variant="add"
+        />
+      }
+    />
+  )
+}
