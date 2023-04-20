@@ -38,13 +38,6 @@ export function Modal(props: IModal) {
           {props.header}
           {props.body}
           {props.footer}
-          {/* <ModalHeader headerName={toCapitalize(props.headerName)} />
-          {props.ModalBody}
-          <ModalFooter
-            onClick={props.mainCb}
-            variant={props.variant}
-            closeCb={props.closeCb}
-          /> */}
         </ModalContent>
       </ChakraModal>
     </ChakraProviderWrapper>
@@ -76,8 +69,8 @@ type TModalFooter =
     }
   | {
       variant: 'generic'
-      primaryButton: React.ComponentType<IButton>
-      secondaryButton: React.ComponentType<IButton>
+      primaryButton: React.ElementType<IButton>
+      secondaryButton: React.ElementType<IButton>
     }
 
 export function ModalFooter(props: TModalFooter) {
