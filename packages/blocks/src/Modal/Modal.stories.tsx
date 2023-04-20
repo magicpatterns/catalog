@@ -34,23 +34,21 @@ export const Generic_Modal: Story = {
           header={<ModalHeader headerName="generic modal" />}
           footer={
             <ModalFooter
-              // onClick={() => alert('This is a generic modal!')}
-              // variant="add"
-              // closeCb={() => setIsOpen(false)}
-              primaryButton={
+              variant="generic"
+              primaryButton={() => (
                 <Button
                   label="ok"
                   variant="save"
                   onClick={() => alert('This is a generic modal!')}
                 />
-              }
-              secondaryButton={
+              )}
+              secondaryButton={() => (
                 <Button
                   label="cancel"
                   variant="default"
                   onClick={() => setIsOpen(false)}
                 />
-              }
+              )}
             />
           }
           isOpen={isOpen}
