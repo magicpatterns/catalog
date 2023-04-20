@@ -23,6 +23,7 @@ import { FiLayers, FiPlus } from 'react-icons/fi'
 import { v4 as uuidv4 } from 'uuid'
 
 import { ShadowColorPicker } from './ShadowColorPicker'
+import { sep } from 'path'
 
 export function EditShadowModal({
   isOpen,
@@ -32,6 +33,8 @@ export function EditShadowModal({
   onDeleteShadowVariant,
   initialRgbaValue,
   initialValues,
+  tokenName,
+  tokenValue,
 }: {
   isOpen: boolean
   onClose: () => void
@@ -72,6 +75,97 @@ export function EditShadowModal({
   )
 
   const [error, setError] = useState<string | null>(null)
+
+  //console.log(shadowData)
+
+  // New code for multiple shadows
+  function getValues(str: string) {
+    const regex = /^(.+?)\s*rgba/
+    const match = regex.exec(str)
+
+    if (match) {
+      const values = match[1].split(' ')
+      const parsedValues = values.map((val) => parseInt(val))
+
+      return {
+        hOffset: parsedValues[0],
+        vOffset: parsedValues[1],
+        blur: parsedValues[2],
+        spread: parsedValues[3],
+      }
+    }
+    return { hOffset: 0, vOffset: 0, blur: 0, spread: 0 } // Return if no match is found
+  }
+
+  function separateBoxShadows(input: string | [], name: string) {
+    const result = []
+    let current = ''
+    let parenCount = 0
+
+    for (let i = 0; i < input.length; i++) {
+      const char = input[i]
+
+      if (char === ',' && parenCount === 0) {
+        result.push({ name: name, value: current.trim() })
+        current = ''
+      } else {
+        current += char
+
+        if (char === '(') {
+          parenCount++
+        } else if (char === ')') {
+          parenCount--
+        }
+      }
+    }
+
+    result.push({ name: name, value: current.trim() })
+
+    return result
+  }
+
+  function getRgba(str: string) {
+    const rgbaRegex = /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/
+    const match = str.match(rgbaRegex)
+    if (match) {
+      const [, r, g, b, a] = match
+      return { r: Number(r), g: Number(g), b: Number(b), a: Number(a) }
+    }
+    return { r: 0, g: 0, b: 0, a: 0.5 } // Return if no match is found
+  }
+
+  const shadowObjects = separateBoxShadows(variant.token.value, variant.name)
+
+  const x_initialRgbaValue = shadowObjects.map((shadowObject) => {
+    return getRgba(shadowObject.value)
+  })
+
+  const x_initialValues = shadowObjects.map((shadowObject) => {
+    return getValues(shadowObject.value)
+  })
+
+  /*
+  We need to get the data and than separate the box shadows
+  and than get the rgba values and than get the values
+
+
+
+
+  */
+
+  // const shadowObjects = separateBoxShadows(
+  //   shadowData.token.value,
+  //   shadowData.name
+  // )
+  // const initialRgbaValue = shadowObjects.map((shadowObject) => {
+  //   return getRgba(shadowObject.value)
+  // })
+
+  // const initialValues = shadowObjects.map((shadowObject) => {
+  //   return getValues(shadowObject.value)
+  // })
+
+  // New code for multiple shadows ^^^
 
   function newColors() {
     const newColorResult = []
@@ -130,11 +224,7 @@ export function EditShadowModal({
   const [blur, setBlur] = useState(
     initialValues ? initialValues?.map((i: { blur: number }) => i.blur) : [0]
   )
-  const [spread, setSpread] = useState(
-    initialValues
-      ? initialValues?.map((i: { spread: number }) => i.spread)
-      : [0]
-  )
+  const [spread, setSpread] = useState(x_initialValues?.map((i) => i.spread))
   const [initialButton, setInitialButton] = useState(0)
 
   function newColor() {
@@ -147,7 +237,17 @@ export function EditShadowModal({
     return result.toString()
   }
 
+  // useEffect(() => {
+  //   const nextSpread = x_initialValues.map((i) => i.spread)
+  //   return setSpread(nextSpread)
+  // }, [variant])
+
   const newColorRes = newColor()
+
+  useEffect(() => {
+    setShadowInput(codeResult())
+    setVariant({ ...variant, token: { ...variant.token, value: codeResult() } })
+  }, [spread, blur, hOffset, vOffset, color])
 
   function handleBlur(e: string | number, i: number) {
     const nextBlur = [...blur]
@@ -158,6 +258,7 @@ export function EditShadowModal({
   function handleSpread(e: string | number, i: number) {
     const nextSpread = [...spread]
     nextSpread[i] = e
+    console.log(nextSpread)
     setSpread(nextSpread)
   }
 
@@ -188,9 +289,9 @@ export function EditShadowModal({
   }
 
   const codeResult = function () {
-    if (newInitialValues) {
+    if (x_initialValues) {
       const result = []
-      for (let i = 0; i < newInitialValues?.length; i++) {
+      for (let i = 0; i < x_initialValues?.length; i++) {
         result.push(
           ` ${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
         )
@@ -206,11 +307,16 @@ export function EditShadowModal({
 
   const [shadowInput, setShadowInput] = useState(codeResult())
 
-  useEffect(() => {
-    setShadowInput(codeResult())
-  }, [spread, blur, hOffset, vOffset, color])
+  //console.log(codeResult())
+
+  //console.log(spread)
 
   useEffect(() => {
+    const nextSpread = [...spread]
+    const sep = separateBoxShadows(shadowInput[initialButton])
+    nextSpread[initialButton] = getValues(sep)
+    console.log(nextSpread)
+    //setSpread(x.spread)
     return setVariant({
       ...variant,
       token: { ...variant.token, value: shadowInput },
@@ -329,6 +435,7 @@ export function EditShadowModal({
                       <div>
                         {initialButton === index && (
                           <ShadowColorPicker
+                            variant={variant}
                             blur={blur[index]}
                             spread={spread[index]}
                             hOffset={hOffset[index]}

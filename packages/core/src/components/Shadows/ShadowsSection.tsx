@@ -194,6 +194,8 @@ export function ShadowRow({
             onDeleteShadowVariant={onDeleteShadowVariant}
             initialRgbaValue={initialRgbaValue}
             initialValues={initialValues}
+            tokenName={shadowData.name}
+            tokenValue={shadowData.token.value}
           />
         </Box>
       </Stack>
