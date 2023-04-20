@@ -4,14 +4,14 @@ imports:
   commons: commons.yml
 
 service:
-  base-path: /orgs/{orgId}/library
+  base-path: /orgs/{orgId}
   auth: false
   path-parameters:
     orgId: commons.OrgId
   endpoints:
     createLibrary:
       method: POST
-      path: /upload
+      path: /library
       response: createLibraryResponse
       request:
         name: createLibraryRequest
@@ -19,13 +19,39 @@ service:
           properties:
             name: string
 
+    updateFile:
+      method: POST
+      path: /file/{fileId}
+      path-parameters:
+        fileId: commons.FileId
+      response: fileResponse
+      request:
+        name: updateFileRequest
+        body:
+          properties:
+            code: string
+
+    getFile:
+      method: GET
+      path: /file/{fileId}
+      path-parameters:
+        fileId: commons.FileId
+      response: fileResponse
+
 types:
   createLibraryResponse:
     properties:
       signedS3UploadUrl: string
-      libraryId: string
+      libraryId: LibraryId
       name: string
-
+  fileResponse:
+    properties:
+      fileId: commons.FileId
+      code: string
   LibraryId:
     type: string
     docs: This should be the Library Id
+
+errors:
+  FileDoesNotExistError:
+    status-code: 404

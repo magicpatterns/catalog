@@ -15,4 +15,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./CreateLibraryResponse"), exports);
+__exportStar(require("./FileResponse"), exports);
 __exportStar(require("./LibraryId"), exports);

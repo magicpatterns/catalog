@@ -1,5 +1,6 @@
 types:
   OrgId: string
+  FileId: string
 
 errors:
   LibraryDoesNotExistError:

@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
 const connectionString =
   process.env.MIRRORFUL_MONGO_DB_URI || 'mongob://localhost:27017/mirrorful'
 
-mongoose.connect(connectionString)
+mongoose.connect(connectionString, { dbName: 'mirrorful' })
 /****************************************/
 
 app.get('/', function mainHandler(req, res) {
