@@ -16,7 +16,7 @@ export function Heading(props: IHeading) {
   const variantProps: Record<IHeading['variants'], ChakraProps> = {
     h1: { fontSize: '2.5rem', fontWeight: 'black' },
     h2: { fontSize: '2.1rem', fontWeight: 'black' },
-    h3: { fontSize: '1.9rem', fontWeight: 'black' },
+    h3: { fontSize: '1.8rem', fontWeight: 'black' },
     h4: { fontSize: '1.5rem', fontWeight: 'black' },
     h5: { fontSize: '1.3rem', fontWeight: 'black' },
     h6: { fontSize: '1.1rem', fontWeight: 'black' },
