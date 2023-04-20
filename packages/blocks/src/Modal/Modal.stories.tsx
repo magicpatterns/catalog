@@ -2,7 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 
 import { Button } from '../Button'
-import { AddModal, DeleteModal, Modal, SaveModal } from '.'
+import {
+  AddModal,
+  DeleteModal,
+  Modal,
+  ModalFooter,
+  ModalHeader,
+  SaveModal,
+} from '.'
 
 const meta: Meta<typeof Modal> = {
   title: 'Modal',
@@ -12,6 +19,35 @@ const meta: Meta<typeof Modal> = {
 
 export default meta
 type Story = StoryObj<typeof Modal>
+
+export const Generic_Modal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false)
+    return (
+      <>
+        <Button
+          label="open generic modal"
+          variant="default"
+          onClick={() => setIsOpen(true)}
+        ></Button>
+        <Modal
+          header={<ModalHeader headerName="generic modal" />}
+          footer={
+            <ModalFooter
+              onClick={() => alert('This is a generic modal!')}
+              variant="add"
+              closeCb={() => setIsOpen(false)}
+            />
+          }
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          body={<></>}
+          overlay={true}
+        ></Modal>
+      </>
+    )
+  },
+}
 
 export const Save_Modal: Story = {
   render: () => {
