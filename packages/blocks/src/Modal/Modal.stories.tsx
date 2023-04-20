@@ -76,11 +76,32 @@ export const AddModal: Story = {
 }
 
 export const DeleteModal: Story = {
-  render: Modal,
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false)
+    return (
+      <>
+        <Button
+          label="open delete modal"
+          variant="delete"
+          onClick={() => setIsOpen(true)}
+        ></Button>
+        <Modal
+          headerName="delete modal"
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          mainCb={() => alert('This is being deleted!')}
+          closeCb={() => setIsOpen(false)}
+          variant="delete"
+        >
+          <></>
+        </Modal>
+      </>
+    )
+  },
   args: {
     variant: 'delete',
     children: <></>,
     isOpen: true,
-    headerName: 'Save Modal',
+    headerName: 'Delete Modal',
   },
 }
