@@ -16,11 +16,10 @@ import { toCapitalize } from '../util/toCapitalize'
 interface IModal extends Partial<Pick<ModalProps, 'size'>> {
   isOpen: boolean
   onClose: () => void
-  children: React.ReactNode
-  headerName: string
-  variant: 'save' | 'delete' | 'add'
-  mainCb: () => void
-  closeCb?: () => void
+  body: React.ReactNode
+  header: React.ReactNode
+  footer: React.ReactNode
+  overlay: true
 }
 export function Modal(props: IModal) {
   return (
@@ -34,16 +33,46 @@ export function Modal(props: IModal) {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader headerName={toCapitalize(props.headerName)} />
-          {props.children}
+          {props.header}
+          {props.body}
+          {props.footer}
+          {/* <ModalHeader headerName={toCapitalize(props.headerName)} />
+          {props.ModalBody}
           <ModalFooter
             onClick={props.mainCb}
             variant={props.variant}
             closeCb={props.closeCb}
-          />
+          /> */}
         </ModalContent>
       </ChakraModal>
     </ChakraProviderWrapper>
+  )
+}
+
+Modal.Header = ModalHeader
+Modal.Footer = ModalFooter
+
+interface ISaveModal extends Omit<IModal, 'header' | 'footer'> {
+  headerName: string
+  mainCb: () => void
+  closeCb?: () => void
+}
+export function SaveModal(props: ISaveModal) {
+  return (
+    <Modal
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      header={<Modal.Header headerName={props.headerName} />}
+      overlay={props.overlay}
+      body={props.body}
+      footer={
+        <Modal.Footer
+          onClick={props.mainCb}
+          closeCb={props.closeCb}
+          variant="save"
+        />
+      }
+    />
   )
 }
 
@@ -63,7 +92,7 @@ export function ModalFooter({
 }: {
   onClick: () => void
   closeCb?: () => void
-  variant: IModal['variant']
+  variant: 'save' | 'delete' | 'add'
 }) {
   if (variant === 'save') {
     return (
