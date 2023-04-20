@@ -11,7 +11,7 @@ groups:
         version: 0.5.14
         output:
           location: local-file-system
-          path: ../../packages/client
+          path: ../../packages/mirrorful/cli/client
       - name: fernapi/fern-postman
         version: 0.0.44
         output:

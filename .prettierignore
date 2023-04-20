@@ -1,3 +1,3 @@
 packages/server/src/api/generated
-packages/client
+packages/mirrorful/cli/client
 packages/postman/collection.json
