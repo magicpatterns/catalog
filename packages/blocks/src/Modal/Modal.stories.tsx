@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import React from 'react'
+import React, { useState } from 'react'
 
+import { Button } from '../Button'
 import { Modal } from '.'
 
 const meta: Meta<typeof Modal> = {
@@ -13,11 +14,31 @@ export default meta
 type Story = StoryObj<typeof Modal>
 
 export const SaveModal: Story = {
-  render: Modal,
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false)
+    return (
+      <>
+        <Button
+          label="open save modal"
+          variant="save"
+          onClick={() => setIsOpen(true)}
+        ></Button>
+        <Modal
+          headerName="Save Modal"
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          mainCb={() => alert('This is being saved!')}
+          variant="save"
+        >
+          <></>
+        </Modal>
+      </>
+    )
+  },
   args: {
     variant: 'save',
     children: <></>,
-    isOpen: true,
+    isOpen: false,
     headerName: 'Save Modal',
   },
 }
