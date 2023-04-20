@@ -1,5 +1,4 @@
 import {
-  ChakraProps,
   Modal as ChakraModal,
   ModalCloseButton,
   ModalContent,
