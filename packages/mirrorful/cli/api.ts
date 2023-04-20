@@ -1,4 +1,4 @@
-import { MirrorfulApiClient } from '../../client/index'
+import { MirrorfulApiClient } from '@mirrorful-fern/api-client'
 
 const client = new MirrorfulApiClient({
   environment: process.env.NODE_ENV || 'NODE_ENV_NOT_FOUND',
