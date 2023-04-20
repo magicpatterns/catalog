@@ -81,9 +81,9 @@ program
     console.log('hello!')
   })
 
-program.command('package').action(() => {
+program.command('package').action(async () => {
   console.log('Running package...')
-  packageLibrary()
+  await packageLibrary()
 })
 
 program
