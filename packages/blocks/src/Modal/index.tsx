@@ -60,4 +60,22 @@ export function ModalFooter({
       </ChakraModalFooter>
     )
   }
+  if (variants === 'add') {
+    return (
+      <ChakraModalFooter>
+        <Button
+          label="cancel"
+          variant="default"
+          marginLeft={'12px'}
+          onClick={closeCb}
+        ></Button>
+        <Button
+          type="submit"
+          label="add"
+          variant="save"
+          onClick={onClick}
+        ></Button>
+      </ChakraModalFooter>
+    )
+  }
 }
