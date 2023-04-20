@@ -14,15 +14,30 @@ type Story = StoryObj<typeof Modal>
 
 export const SaveModal: Story = {
   render: Modal,
-  args: { variant: 'save', children: <></>, isOpen: true },
+  args: {
+    variant: 'save',
+    children: <></>,
+    isOpen: true,
+    headerName: 'Save Modal',
+  },
 }
 
 export const AddModal: Story = {
   render: Modal,
-  args: { variant: 'add', children: <></>, isOpen: true },
+  args: {
+    variant: 'add',
+    children: <></>,
+    isOpen: true,
+    headerName: 'Save Modal',
+  },
 }
 
 export const DeleteModal: Story = {
   render: Modal,
-  args: { variant: 'delete', children: <></>, isOpen: true },
+  args: {
+    variant: 'delete',
+    children: <></>,
+    isOpen: true,
+    headerName: 'Save Modal',
+  },
 }
