@@ -3281,6 +3281,17 @@
     "@types/mdx" "^2.0.0"
     "@types/react" ">=16"
 
+"@mirrorful-fern/api-client@0.0.223":
+  version "0.0.223"
+  resolved "https://npm.buildwithfern.com/@mirrorful-fern/api-client/-/api-client-0.0.223.tgz#ef40b304119e8aa7e7eae7cd7e7a77962d134561"
+  integrity sha512-7Ii3NBTwt6uA5SjTU1R91RHpTq7K6MTZTH0E16lQlY+8GbWdbPVo8ZerZV/mKHaHD3SOfxe92D2z4Z0HZcuLhg==
+  dependencies:
+    "@types/url-join" "4.0.1"
+    "@ungap/url-search-params" "0.2.2"
+    axios "0.27.2"
+    js-base64 "3.7.2"
+    url-join "4.0.1"
+
 "@mirrorful/eslint-config@file:packages/eslint-config":
   version "1.0.0"
 
@@ -4934,6 +4945,11 @@
   dependencies:
     "@typescript-eslint/types" "5.58.0"
     eslint-visitor-keys "^3.3.0"
+
+"@ungap/url-search-params@0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@ungap/url-search-params/-/url-search-params-0.2.2.tgz#2de3bdec21476a9b70ef11fd7b794752f9afa04c"
+  integrity sha512-qQsguKXZVKdCixOHX9jqnX/K/1HekPDpGKyEcXHT+zR6EjGA7S4boSuelL4uuPv6YfhN0n8c4UxW+v/Z3gM2iw==
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
