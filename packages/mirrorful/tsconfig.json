@@ -11,5 +11,5 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "allowJs": true
   },
-  "include": ["./package.json", "cli/", "removeFileOrDirectory.ts", "../client"]
+  "include": ["./package.json", "cli/"]
 }
