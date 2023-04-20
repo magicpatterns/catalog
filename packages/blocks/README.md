@@ -19,8 +19,9 @@
   - [x] Heading 6
   - [ ] Add mirrorful fonts
 - [ ] Universal Modal Component
-  - [ ] Header
-  - [ ] Footer (save, delete)
+  - [x] Header
+  - [x] Footer (save, delete)
+  - [x] Body
   - [ ] Add mirrorful colors
 - [ ] Links Component
   - [ ] Add mirrorful colors
