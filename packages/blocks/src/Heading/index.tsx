@@ -3,14 +3,17 @@ import React from 'react'
 
 import { toCapitalize } from '../util/toCapitalize'
 
-type THeading = {
+interface IHeading
+  extends Partial<
+    Pick<ChakraProps, 'color' | 'bgColor' | 'textDecoration' | 'textAlign'>
+  > {
   label: string
   variants: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   onClick?: () => void
 }
 
-export function Heading(props: THeading) {
-  const variantProps: Record<THeading['variants'], ChakraProps> = {
+export function Heading(props: IHeading) {
+  const variantProps: Record<IHeading['variants'], ChakraProps> = {
     h1: { fontSize: '2.5rem', fontWeight: 'black' },
     h2: { fontSize: '2.1rem', fontWeight: 'black' },
     h3: { fontSize: '1.9rem', fontWeight: 'black' },
