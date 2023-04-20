@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 
 import { Button } from '../Button'
-import { Modal, SaveModal } from '.'
+import { AddModal, Modal, SaveModal } from '.'
 
 const meta: Meta<typeof Modal> = {
   title: 'Modal',
@@ -38,7 +38,7 @@ export const Save_Modal: Story = {
   },
 }
 
-export const AddModal: Story = {
+export const Add_Modal: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false)
     return (
@@ -48,16 +48,15 @@ export const AddModal: Story = {
           variant="add-token"
           onClick={() => setIsOpen(true)}
         ></Button>
-        <Modal
+        <AddModal
           headerName="Add Modal"
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           mainCb={() => alert('This is being added!')}
           closeCb={() => setIsOpen(false)}
-          variant="add"
-        >
-          <></>
-        </Modal>
+          body={<></>}
+          overlay={true}
+        ></AddModal>
       </>
     )
   },
