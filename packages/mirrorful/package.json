@@ -43,6 +43,7 @@
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@mirrorful/api-client": "file:../client",
     "@mirrorful/core": "2.0.5",
     "@vitejs/plugin-react": "^3.1.0",
     "chalk": "^2.4.2",

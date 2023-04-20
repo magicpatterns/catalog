@@ -2,6 +2,7 @@ import { execSync } from 'child_process'
 
 import fs from 'fs'
 import chalk from 'chalk'
+import { createLibrary } from '../api'
 
 const logProgress = (message: string) => {
   console.log(chalk.cyan(message))
@@ -36,6 +37,7 @@ export async function packageLibrary() {
 
   logProgress('Syncing files...')
   // TODO: Upload files to S3
+  createLibrary()
 
   logProgress('Publishing...')
   // TODO: Run npm publish INSIDE OF dist
