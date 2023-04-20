@@ -25,7 +25,7 @@ jobs:
       - name: Verify generated code is up to date
         working-directory: packages/server
         run: | 
-          fern generate
+          fern generate --local
           git --no-pager diff --exit-code
         env:
           FERN_TOKEN: ${{ secrets.FERN_API_KEY }}
