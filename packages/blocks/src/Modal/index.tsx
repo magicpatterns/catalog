@@ -14,12 +14,19 @@ interface IModal {
   children: React.ReactNode
   headerName: string
   variants: 'save' | 'delete' | 'add'
+  mainCb: () => void
+  closeCb?: () => void
 }
 export function Modal(props: IModal) {
   return (
     <ChakraModal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalHeader headerName={props.headerName} />
       {props.children}
+      <ModalFooter
+        onClick={props.mainCb}
+        variants={props.variants}
+        closeCb={props.closeCb}
+      ></ModalFooter>
     </ChakraModal>
   )
 }
@@ -79,22 +86,20 @@ export function ModalFooter({
     )
   }
 
-  if (variants === 'delete') {
-    return (
-      <ChakraModalFooter>
-        <Button
-          label="save"
-          variant="save"
-          marginLeft={'12px'}
-          onClick={closeCb}
-        ></Button>
-        <Button
-          type="submit"
-          label="delete"
-          variant="delete"
-          onClick={onClick}
-        ></Button>
-      </ChakraModalFooter>
-    )
-  }
+  return (
+    <ChakraModalFooter>
+      <Button
+        label="save"
+        variant="save"
+        marginLeft={'12px'}
+        onClick={closeCb}
+      ></Button>
+      <Button
+        type="submit"
+        label="delete"
+        variant="delete"
+        onClick={onClick}
+      ></Button>
+    </ChakraModalFooter>
+  )
 }
