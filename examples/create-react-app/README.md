@@ -20,7 +20,7 @@ npm start
 ## Run Mirrorful
 
 ```bash
-npx mirrorful
+npx mirrorful editor
 ```
 
 This will open a localhost editor at 5050.
