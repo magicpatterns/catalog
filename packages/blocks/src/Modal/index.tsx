@@ -38,7 +38,7 @@ export function Modal(props: IModal) {
             onClick={props.mainCb}
             variant={props.variant}
             closeCb={props.closeCb}
-          ></ModalFooter>
+          />
         </ModalContent>
       </ChakraModal>
     </ChakraProviderWrapper>
