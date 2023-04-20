@@ -9,7 +9,7 @@ type THeading = {
   onClick?: () => void
 }
 
-function Heading(props: THeading) {
+export function Heading(props: THeading) {
   const variantProps: Record<THeading['variants'], ChakraProps> = {
     h1: { fontSize: '2xl', fontWeight: 'black' },
     h2: {},
