@@ -1,30 +1,38 @@
 import {
+  ChakraProps,
   Modal as ChakraModal,
   ModalCloseButton,
   ModalFooter as ChakraModalFooter,
   ModalHeader as ChakraModalHeader,
+  ModalProps,
 } from '@chakra-ui/react'
 import React from 'react'
 
 import { Button } from '..'
 
-interface IModal {
+interface IModal extends Partial<Pick<ModalProps, 'size'>> {
   isOpen: boolean
   onClose: () => void
   children: React.ReactNode
   headerName: string
-  variants: 'save' | 'delete' | 'add'
+  variant: 'save' | 'delete' | 'add'
   mainCb: () => void
   closeCb?: () => void
 }
 export function Modal(props: IModal) {
   return (
-    <ChakraModal isOpen={props.isOpen} onClose={props.onClose}>
+    <ChakraModal
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      size={props.size}
+      isCentered={true}
+      closeOnEsc={true}
+    >
       <ModalHeader headerName={props.headerName} />
       {props.children}
       <ModalFooter
         onClick={props.mainCb}
-        variants={props.variants}
+        variant={props.variant}
         closeCb={props.closeCb}
       ></ModalFooter>
     </ChakraModal>
@@ -42,14 +50,14 @@ export function ModalHeader({ headerName }: { headerName: string }) {
 
 export function ModalFooter({
   onClick,
-  variants,
+  variant,
   closeCb,
 }: {
   onClick: () => void
   closeCb?: () => void
-  variants: IModal['variants']
+  variant: IModal['variant']
 }) {
-  if (variants === 'save') {
+  if (variant === 'save') {
     return (
       <ChakraModalFooter>
         <Button
@@ -67,7 +75,7 @@ export function ModalFooter({
       </ChakraModalFooter>
     )
   }
-  if (variants === 'add') {
+  if (variant === 'add') {
     return (
       <ChakraModalFooter>
         <Button
