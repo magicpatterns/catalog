@@ -5,7 +5,7 @@ import express from 'express'
 import * as Sentry from '@sentry/node'
 import mongoose from 'mongoose'
 
-const PORT = 8080
+const PORT = process.env.PORT || 8080
 const app = express()
 
 if (process.env.NODE_ENV === 'production') {
