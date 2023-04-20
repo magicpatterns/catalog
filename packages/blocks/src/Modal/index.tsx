@@ -63,7 +63,7 @@ export function ModalFooter({
         <Button
           label="cancel"
           variant="default"
-          marginLeft={'12px'}
+          marginRight={'12px'}
           onClick={closeCb}
         ></Button>
         <Button
@@ -81,7 +81,7 @@ export function ModalFooter({
         <Button
           label="cancel"
           variant="default"
-          marginLeft={'12px'}
+          marginRight={'12px'}
           onClick={closeCb}
         ></Button>
         <Button
@@ -99,7 +99,7 @@ export function ModalFooter({
       <Button
         label="save"
         variant="save"
-        marginLeft={'12px'}
+        marginRight={'12px'}
         onClick={closeCb}
       ></Button>
       <Button
