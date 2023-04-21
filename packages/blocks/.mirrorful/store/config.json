@@ -127,6 +127,36 @@
           "id": "c1605153-a21f-4c68-8c0f-2fac0489d9d5",
           "value": "1.25rem",
           "type": "fontSize"
+        },
+        "h1": {
+          "id": "827931f6-d2f9-430f-aec3-e748ba8ff6ff",
+          "value": "2.5rem",
+          "type": "fontSize"
+        },
+        "h2": {
+          "id": "86bba588-6da9-4137-8afe-5533897119f4",
+          "value": "2.1rem",
+          "type": "fontSize"
+        },
+        "h3": {
+          "id": "e0655864-af3b-4578-a03b-4ca2e9c85ad5",
+          "value": "1.8rem",
+          "type": "fontSize"
+        },
+        "h4": {
+          "id": "c9d723e9-e236-42dc-a254-d4b159225320",
+          "value": "1.5rem",
+          "type": "fontSize"
+        },
+        "h5": {
+          "id": "3af80f27-88dc-48a1-9ae5-84573d09411e",
+          "value": "1.3rem",
+          "type": "fontSize"
+        },
+        "h6": {
+          "id": "c403a502-55e8-4388-9bd3-2370789feb95",
+          "value": "1.1rem",
+          "type": "fontSize"
         }
       },
       "fontWeights": {
