@@ -1,17 +1,18 @@
 import { Text as ChakraText } from '@chakra-ui/react'
 import React from 'react'
 
+import { Tokens } from '../../.mirrorful/theme'
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 import { IText, Sizes, Weights } from './types'
 
 export function Text(props: IText) {
+  const { colors, fontSizes, fontWeights } = Tokens
   const [size, weight] = extractVariant(props.styles)
-  // TODO variants success, error, warning, info
   const variantsColors: Record<Required<IText>['variants'], string> = {
-    error: 'red.400',
-    info: 'blue.400',
-    success: 'green.400',
-    warning: 'orange.400',
+    error: colors['text-error'].base,
+    info: colors['text-info'].base,
+    success: colors['text-success'].base,
+    warning: colors['text-warning'].base,
   }
   return (
     <ChakraProviderWrapper>
