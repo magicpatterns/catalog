@@ -83,7 +83,8 @@ export const theme = extendTheme({
           border: 'none',
           background: 'transparent',
           padding: 0,
-          fontWeight: 'bold',
+          fontSize: '12px',
+          fontWeight: 'black',
           _hover: {
             color: 'playgroundTextHover',
           },

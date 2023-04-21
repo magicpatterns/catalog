@@ -21,7 +21,7 @@ export const SOURCE_BOILERPLATE = (iframeCode: string) => `
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/teddarific/example-component-library/lib/example.css">
 </head>
 <body style="color:white; width:100vw; height:100vh;">
-  <div id="root"></div>
+  <div id="root" style="width: 100vw; height: 100vh"></div>
   <script type="module">${iframeCode}</script>
 </body>
 </html>

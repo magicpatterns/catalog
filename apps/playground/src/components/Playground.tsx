@@ -9,6 +9,7 @@ import { Console } from './Console'
 import { Toolbar } from './Toolbar'
 import { editor } from 'monaco-editor'
 import { Source } from './Source'
+import { TbDevices } from 'react-icons/Tb'
 
 export function Playground() {
   const [inputCode, setInputCode] = useState<string>(DEFAULT_CODE)
@@ -184,8 +185,8 @@ export function Playground() {
             borderLeftWidth={'1px'}
             borderColor={'divider'}
           >
-            <Box css={{ height: '60%' }}>
-              <iframe srcDoc={transpiledCode} />
+            <Box css={{ height: '60%', display: 'flex', flexGrow: 1 }}>
+              <iframe srcDoc={transpiledCode} style={{ flexGrow: 1 }} />
             </Box>
             <Box
               css={{
@@ -201,21 +202,36 @@ export function Playground() {
                   height: '48px',
                   display: 'flex',
                   alignItems: 'center',
+                  justifyContent: 'space-between',
                   padding: '14px',
                 }}
                 borderBottomWidth={'1px'}
                 borderColor="divider"
               >
-                <Stack direction="row" spacing={16}>
+                <Stack direction="row" spacing={8}>
                   <Button variant="tab" onClick={() => setPanelTab('console')}>
-                    Console
+                    CONSOLE
                   </Button>
                   <Button variant="tab" onClick={() => setPanelTab('source')}>
-                    Source
+                    SOURCE
                   </Button>
                 </Stack>
+                <Box>
+                  <Button
+                    variant="tab"
+                    leftIcon={<TbDevices />}
+                    css={{ fontSize: '22px' }}
+                  />
+                </Box>
               </Box>
-              <Box css={{ padding: '12px' }}>
+              <Box
+                css={{
+                  padding: '12px',
+                  flexGrow: 1,
+                  overflowY: 'scroll',
+                  overflowX: 'hidden',
+                }}
+              >
                 {panelTab === 'console' && <Console logs={logs} />}
                 {panelTab === 'source' && <Source code={transpiledCode} />}
               </Box>
