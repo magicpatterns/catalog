@@ -4,7 +4,6 @@
     "jsx": "react-jsx",
     "module": "CommonJS",
     "baseUrl": ".",
-    "rootDir": "src",
     "paths": {
       "@ui/*": ["src/*"]
     },
@@ -21,8 +20,13 @@
     "node_modules",
     "lib",
     "tsconfig.json",
-    "src/.storybook/**/*",
-    "**/*.stories.tsx"
+    ".storybook/**/*",
+    "**/*.stories.tsx",
+    ".babelrc.*",
+    ".eslintrc.*",
+    "README.md",
+    "yarn.*",
+    "yarn-error.*"
   ],
   "tsc-alias": {
     "verbose": true
