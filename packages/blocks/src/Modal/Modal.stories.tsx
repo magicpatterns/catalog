@@ -20,6 +20,29 @@ const meta: Meta<typeof Modal> = {
 export default meta
 type Story = StoryObj<typeof Modal>
 
+export const Made_Up_Modal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false)
+    return (
+      <>
+        <Button
+          label="open made up modal"
+          variant="default"
+          onClick={() => setIsOpen(true)}
+        ></Button>
+        <Modal
+          header={<header>Random</header>}
+          footer={<footer>Random footer</footer>}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          body={<>Random Body</>}
+          overlay={true}
+        ></Modal>
+      </>
+    )
+  },
+}
+
 export const Generic_Modal: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false)
