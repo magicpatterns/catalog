@@ -44,7 +44,7 @@ export function Toolbar({ code }: { code: string }) {
           style={{ height: '24px', marginRight: '16px' }}
         />
         <Text css={{ fontSize: '14px', fontWeight: 'bold' }} color="gray.700">
-          Component Sandbox Powered by Mirrorful
+          Component Sandbox by Mirrorful
         </Text>
       </Box>
       <Box>

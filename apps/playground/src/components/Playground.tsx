@@ -161,7 +161,7 @@ export function Playground() {
                 }}
                 onClick={() => handleTranspileCode(inputCode)}
               >
-                <Text>Transpile</Text>
+                <Text>Run</Text>
                 <Text
                   css={{
                     marginLeft: '6px',
