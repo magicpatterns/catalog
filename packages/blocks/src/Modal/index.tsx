@@ -69,12 +69,20 @@ type TModalFooter =
     }
   | {
       variant: 'generic'
-      primaryButton: React.ReactElement<IButton>
-      secondaryButton: React.ReactElement<IButton>
+      PrimaryButton: React.ReactComponentElement<typeof Button>
+      SecondaryButton: React.ReactComponentElement<typeof Button>
     }
 
 export function ModalFooter(props: TModalFooter) {
   // const primaryButton = renderPrimaryButton ? renderPrimaryButton() : undefined
+  if (props.variant === 'generic') {
+    if (props.PrimaryButton.type !== Button) {
+      throw new Error('Primary Button is not of type Button')
+    }
+    if (props.SecondaryButton.type !== Button) {
+      throw new Error('Secondary Button is not of type Button')
+    }
+  }
   if (props.variant === 'save') {
     return (
       <ChakraModalFooter>
@@ -133,8 +141,8 @@ export function ModalFooter(props: TModalFooter) {
   return (
     <ChakraModalFooter>
       <>
-        {props.variant === 'generic' && props.secondaryButton}
-        {props.variant === 'generic' && props.primaryButton}
+        {props.variant === 'generic' && props.SecondaryButton}
+        {props.variant === 'generic' && props.PrimaryButton}
       </>
     </ChakraModalFooter>
   )
