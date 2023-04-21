@@ -1,55 +1,58 @@
 import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
+import { Tokens } from '../../.mirrorful/theme'
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 import { toCapitalize } from '../util/toCapitalize'
 import { IButton, Variants } from './types'
 
 export function Button(props: IButton) {
+  const { colors, fontWeights } = Tokens
+
   const variantProps: Record<Variants, ChakraProps> = {
     save: {
-      bgColor: 'blue.500',
-      _hover: { backgroundColor: 'blue.600' },
-      color: 'white',
+      bgColor: colors['save-button'].background,
+      _hover: { backgroundColor: colors['save-button']['bg hover'] },
+      color: colors['save-button'].color,
     },
     default: {
-      bgColor: 'gray.200',
-      _hover: { backgroundColor: 'gray.300' },
+      bgColor: colors['button-default'].background,
+      _hover: { backgroundColor: colors['button-default']['bg hover'] },
     },
     delete: {
-      bgColor: 'red.500',
-      _hover: { backgroundColor: 'red.600' },
-      color: 'white',
+      bgColor: colors['delete-button'].background,
+      _hover: { backgroundColor: colors['delete-button']['bg hover'] },
+      color: colors['delete-button'].color,
     },
     'add-token': {
       border: '2px solid',
-      borderColor: 'blue.500',
+      borderColor: colors['add-new-token'].border,
       backgroundColor: 'transparent',
-      color: 'blue.500',
+      color: colors['add-new-token'].color,
       _hover: {
         border: '2px solid',
-        borderColor: 'blue.600',
-        color: 'blue.600',
+        borderColor: colors['add-new-token']['border hover'],
+        color: colors['add-new-token']['color hover'],
       },
     },
     'add-variant': {
       border: '1px solid',
-      borderColor: 'gray.200',
+      borderColor: colors['add-new-variant'].border,
       backgroundColor: 'transparent',
       _hover: {
-        backgroundColor: 'gray.200',
+        backgroundColor: colors['add-new-variant']['bg hover'],
       },
     },
     icon: {
       border: '1px solid',
-      borderColor: 'gray.200',
+      borderColor: colors['icon-button'].border,
       backgroundColor: 'transparent',
       _hover: {
-        backgroundColor: 'gray.200',
+        backgroundColor: colors['icon-button']['bg hover'],
       },
       display: 'inline-flex',
       alignItems: 'center',
       gap: '3',
-      fontWeight: 'semibold',
+      fontWeight: fontWeights['semibold'],
     },
   }
   return (
