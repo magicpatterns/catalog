@@ -105,7 +105,7 @@ function SidebarLink({
                 marginLeft: '12px',
               }}
             >
-              <Link href={link} style={{ textDecoration:"none" }}>
+              <Link href={link} style={{ textDecoration: 'none' }}>
                 {label}
               </Link>
             </Text>
