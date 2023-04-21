@@ -2309,6 +2309,30 @@
     "@types/mdx" "^2.0.0"
     "@types/react" ">=16"
 
+"@mirrorful/core@2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-2.0.5.tgz#e3ad685846f46292f81d27ea8329412c10a88e9b"
+  integrity sha512-Xzd5lyfvGFH/4xV8SVUB7ApfR38v/k8szIX60o/yPzOVZFOk+akGS4177GpLidSnTSW3+gkOhGxUE0bOOTWsbA==
+  dependencies:
+    "@chakra-ui/icons" "^2.0.17"
+    "@chakra-ui/react" "^2.5.2"
+    "@emotion/react" "^11.10.6"
+    "@emotion/styled" "^11.10.6"
+    "@hello-pangea/color-picker" "^3.2.2"
+    eslint-plugin-react "^7.32.2"
+    framer-motion "^10.6.0"
+    json5 "^2.2.3"
+    lottie-react "^2.4.0"
+    next "13.2.4"
+    posthog-js "^1.51.3"
+    react "^18.2.0"
+    react-dom "^18.2.0"
+    react-highlight "^0.15.0"
+    react-icons "^4.8.0"
+    tinycolor2 "^1.6.0"
+    typescript "^4.9.5"
+    zustand "^4.3.7"
+
 "@mirrorful/eslint-config@file:packages/eslint-config":
   version "1.0.0"
 
@@ -7881,6 +7905,33 @@ minizlib@^2.1.1:
   dependencies:
     minipass "^3.0.0"
     yallist "^4.0.0"
+
+mirrorful@^6.1.10:
+  version "6.1.10"
+  resolved "https://registry.yarnpkg.com/mirrorful/-/mirrorful-6.1.10.tgz#bccc13af1643b98cf4e745979f6f5f79e9154367"
+  integrity sha512-cgCFZlYexWAjH66SNj0EJZua4ItpSBilUWkZhTn/Bxbco3ppGieuDGzq8MSh43KyIX9IJJg2w2UZ5krI2jG0rg==
+  dependencies:
+    "@chakra-ui/icons" "^2.0.17"
+    "@chakra-ui/react" "^2.5.1"
+    "@emotion/react" "^11.10.6"
+    "@emotion/styled" "^11.10.6"
+    "@mirrorful/core" "2.0.5"
+    chalk "^2.4.2"
+    commander "^2.20.0"
+    conf "^10.0.2"
+    cross-spawn "^7.0.3"
+    framer-motion "^9.0.4"
+    fs "^0.0.1-security"
+    next "13.2.4"
+    open "^8.4.2"
+    path "^0.12.7"
+    posthog-js "^1.50.0"
+    react "18.2.0"
+    react-dom "18.2.0"
+    rimraf "^4.1.2"
+    update-check "^1.5.4"
+    uuid "^9.0.0"
+    zustand "^4.3.7"
 
 mkdirp-classic@^0.5.2:
   version "0.5.3"
