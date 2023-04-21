@@ -1,0 +1,18 @@
+{
+  "primitives": {
+    "colors": {},
+    "typography": {
+      "fontSizes": {},
+      "fontWeights": {},
+      "lineHeights": {}
+    },
+    "shadows": {}
+  },
+  "themes": [],
+  "files": ["ts"],
+  "__internal__": {
+    "migrations": {
+      "version": "0.0.6"
+    }
+  }
+}
