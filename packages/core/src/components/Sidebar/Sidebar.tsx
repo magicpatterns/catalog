@@ -338,7 +338,7 @@ export function Sidebar({
               />
               <SidebarLink
                 label="Github"
-                link='https://github.com/Mirrorful/mirrorful'
+                link="https://github.com/Mirrorful/mirrorful"
                 icon={FiGithub}
                 onSelect={() =>
                   window.open(
