@@ -35,14 +35,14 @@ export const Generic_Modal: Story = {
           footer={
             <ModalFooter
               variant="generic"
-              primaryButton={
+              PrimaryButton={
                 <Button
                   label="ok"
                   variant="save"
                   onClick={() => alert('This is a generic modal!')}
                 />
               }
-              secondaryButton={
+              SecondaryButton={
                 <Button
                   label="cancel"
                   variant="default"
