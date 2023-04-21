@@ -42,7 +42,7 @@
     "@storybook/react": "7.0.4",
     "@storybook/react-webpack5": "7.0.4",
     "@storybook/testing-library": "0.0.14-next.2",
-    "@types/react": "^18.0.35",
+    "@types/react": "^18.0.28",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "eslint": "^8.38.0",
