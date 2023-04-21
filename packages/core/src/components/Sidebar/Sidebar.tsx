@@ -329,6 +329,7 @@ export function Sidebar({
             >
               <SidebarLink
                 label="Documentation"
+                link="https://mirrorful.com/docs"
                 icon={FiBookOpen}
                 onSelect={() =>
                   window.open('https://mirrorful.com/docs', '_blank')
@@ -337,6 +338,7 @@ export function Sidebar({
               />
               <SidebarLink
                 label="Github"
+                link='https://github.com/Mirrorful/mirrorful'
                 icon={FiGithub}
                 onSelect={() =>
                   window.open(
