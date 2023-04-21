@@ -34,6 +34,9 @@ export const Tokens = {
       border: '#E2E8F0',
       'bg hover': '#E2E8F0',
     },
+    'default-color': {
+      base: '#1A202C',
+    },
   },
   fontSizes: {
     xs: '0.75rem',

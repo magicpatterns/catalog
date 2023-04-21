@@ -92,6 +92,13 @@
           "value": "#E2E8F0",
           "type": "color"
         }
+      },
+      "Default Color": {
+        "base": {
+          "id": "37a9bc38-fa22-4a97-a677-220ebd80e149",
+          "value": "#1A202C",
+          "type": "color"
+        }
       }
     },
     "typography": {
