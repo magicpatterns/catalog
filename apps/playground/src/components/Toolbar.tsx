@@ -2,8 +2,17 @@ import { Box, Button, Stack, Text } from '@chakra-ui/react'
 import TriggerDevLogo from '../assets/triggerdev_logo.png'
 import { FiShare2, FiCloudLightning } from 'react-icons/fi'
 import { MoonIcon } from '@chakra-ui/icons'
+import { MirrorfulApiClient } from '@mirrorful-fern/api-client'
 
 export function Toolbar() {
+  async function onShare() {
+    const client = new MirrorfulApiClient({ environment: 'production' })
+    await client.registry.updateFile('trigger-org-id', 'fileId', {
+      code: 'Test',
+    })
+    alert('Link shown here.')
+  }
+
   return (
     <Box
       css={{
@@ -28,7 +37,14 @@ export function Toolbar() {
       </Box>
       <Box>
         <Stack direction="row" spacing={4}>
-          <Button variant="primary" size="compact" leftIcon={<FiShare2 />}>
+          <Button
+            onClick={() => {
+              onShare()
+            }}
+            variant="primary"
+            size="compact"
+            leftIcon={<FiShare2 />}
+          >
             Share
           </Button>
           <Button

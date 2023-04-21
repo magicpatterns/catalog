@@ -3349,6 +3349,17 @@
     js-base64 "3.7.2"
     url-join "4.0.1"
 
+"@mirrorful-fern/api-client@0.0.278":
+  version "0.0.278"
+  resolved "https://npm.buildwithfern.com/@mirrorful-fern/api-client/-/api-client-0.0.278.tgz#990648157b1d7bc64a0e7ada963b65cd665e9431"
+  integrity sha512-S2xu5B+XtjNbHzsU0Z/G1KMhmOo/HpEkwCta0FM+3y08+POICGEbzaQA0vGy3w+OZPQ+AjHhcXpqtlmL+FTkiw==
+  dependencies:
+    "@types/url-join" "4.0.1"
+    "@ungap/url-search-params" "0.2.2"
+    axios "0.27.2"
+    js-base64 "3.7.2"
+    url-join "4.0.1"
+
 "@mirrorful/eslint-config@file:packages/eslint-config":
   version "1.0.0"
 

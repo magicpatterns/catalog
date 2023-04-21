@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mirrorful-fern/api-client": "0.0.278",
     "@babel/standalone": "^7.21.4",
     "@chakra-ui/icons": "^2.0.18",
     "@chakra-ui/react": "^2.5.5",
