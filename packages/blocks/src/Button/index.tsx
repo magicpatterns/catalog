@@ -58,7 +58,7 @@ export function Button(props: IButton) {
   return (
     <ChakraProviderWrapper>
       <ChakraButton
-        color="gray.800"
+        color={colors['default-color'].base}
         onClick={props.onClick}
         {...props}
         {...variantProps[props.variant ?? 'default']}
