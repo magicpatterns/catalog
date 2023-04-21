@@ -63,6 +63,12 @@ export function Toolbar({ code }: { code: string }) {
             variant="secondary"
             size="compact"
             leftIcon={<FiCloudLightning />}
+            onClick={() => {
+              //@ts-ignore
+              window
+                .open('https://buy.stripe.com/14k7sJaldbRVexGdQU', '_blank')
+                .focus()
+            }}
           >
             Upgrade
           </Button>

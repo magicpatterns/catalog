@@ -33,7 +33,6 @@ export function Playground() {
       if (e.key === 'Enter') pressingEnter = true
       if (e.key === 'Meta') pressingCmd = true
       if (pressingEnter && pressingCmd) {
-        console.log('Command running!')
         handleTranspileCode(inputCode)
       }
     }
@@ -53,7 +52,6 @@ export function Playground() {
 
   const handleTranspileCode = (theInputCode: string) => {
     try {
-      console.log(`Transpiling... ${theInputCode}`)
       const modifiedInputCode = replaceImports(theInputCode)
       const { iframeCode, sourceCode: sc } = transpileCode(modifiedInputCode)
       const source = SOURCE_BOILERPLATE(iframeCode)
