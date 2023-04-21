@@ -1,5 +1,6 @@
-import { Box, Divider, Heading, Text } from '@chakra-ui/react'
+import { Box, Divider, Heading, Input, Text } from '@chakra-ui/react'
 import { TPrimitivesTypography, TTokenGroup } from '@core/types'
+import { useState } from 'react'
 
 import { FontSizesSection } from './FontSize/FontSizesSection'
 import { FontWeightSection } from './FontWeight/FontWeightSection'
@@ -12,6 +13,9 @@ export function TypographySection({
   typography: TPrimitivesTypography
   onUpdateTypography: (newTypography: TPrimitivesTypography) => void
 }) {
+  const [placeholderText, setPlaceholderText] = useState<string>(
+    'Lorem ipsum dolor sit amet.'
+  )
   return (
     <Box>
       <Heading fontSize={'2.5rem'} fontWeight="black">
@@ -28,8 +32,15 @@ export function TypographySection({
 
       <Divider css={{ borderWidth: '2px', margin: '12px 0' }} />
       <Box css={{ marginBottom: '48px' }} />
+      <Input
+        placeholder="Type here to preview text"
+        value={placeholderText}
+        onChange={(e) => setPlaceholderText(e.target.value)}
+      />
+      <Box css={{ marginBottom: '48px' }} />
       <FontSizesSection
         fontSizeData={typography.fontSizes}
+        placeholder={placeholderText || 'Lorem ipsum dolor sit amet.'}
         onUpdateFontPropertyData={(newFontSizeData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,
@@ -41,6 +52,7 @@ export function TypographySection({
       <br />
       <FontWeightSection
         fontWeightData={typography.fontWeights}
+        placeholder={placeholderText}
         onUpdateFontPropertyData={(newFontWeightData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,
@@ -52,6 +64,7 @@ export function TypographySection({
       <br />
       <LineHeightSection
         lineHeightData={typography.lineHeights}
+        placeholder={placeholderText}
         onUpdateFontPropertyData={(newLineHeightData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,
