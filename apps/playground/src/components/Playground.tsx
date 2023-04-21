@@ -97,7 +97,7 @@ export function Playground() {
         }}
         backgroundColor={'bg'}
       >
-        <Toolbar />
+        <Toolbar code={inputCode ?? ''} />
         <Box css={{ width: '100%', display: 'flex', flexGrow: 1 }}>
           <Box
             css={{ width: `${widthDivide}%`, position: 'relative' }}

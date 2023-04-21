@@ -2,15 +2,28 @@ import { Box, Button, Stack, Text } from '@chakra-ui/react'
 import TriggerDevLogo from '../assets/triggerdev_logo.png'
 import { FiShare2, FiCloudLightning } from 'react-icons/fi'
 import { MoonIcon } from '@chakra-ui/icons'
-import { MirrorfulApiClient } from '@mirrorful-fern/api-client'
+import {
+  MirrorfulApiClient,
+  MirrorfulApiEnvironment,
+} from '@mirrorful-fern/api-client'
 
-export function Toolbar() {
+export const TRIGGER_ORG_ID = '95d65865-b2fc-4802-8760-43c489645e1d'
+export const FILE_ID = '123'
+
+export function Toolbar({ code }: { code: string }) {
   async function onShare() {
-    const client = new MirrorfulApiClient({ environment: 'production' })
-    await client.registry.updateFile('trigger-org-id', 'fileId', {
-      code: 'Test',
+    console.log(code)
+    const environment =
+      process.env.NODE_ENV === 'production'
+        ? MirrorfulApiEnvironment.Production
+        : MirrorfulApiEnvironment.Development
+    const client = new MirrorfulApiClient({
+      environment,
     })
-    alert('Link shown here.')
+    await client.registry.updateFile(TRIGGER_ORG_ID, FILE_ID, {
+      code,
+    })
+    alert(`Share ${window.location.href}. Copy link.`)
   }
 
   return (
