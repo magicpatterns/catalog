@@ -21,8 +21,8 @@ export function Text(props: IText) {
         gap={props.icon ? 4 : 0}
         alignItems={props.icon ? 'center' : 'start'}
         onClick={props.onClick}
-        fontSize={size}
-        fontWeight={weight}
+        fontSize={fontSizes[size]}
+        fontWeight={fontWeights[weight]}
         backgroundColor={props.bgColor}
         color={props.variants ? variantsColors[props.variants] : props?.color}
         borderRadius={8}
