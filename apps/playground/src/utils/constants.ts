@@ -1,3 +1,5 @@
+import { MirrorfulApiEnvironment } from '@mirrorful-fern/api-client/environments'
+
 export const DEFAULT_CODE = `
 import React from 'react'
 import { render } from 'react-dom'
@@ -26,3 +28,8 @@ export const SOURCE_BOILERPLATE = (iframeCode: string) => `
 </body>
 </html>
 `
+
+export const API_ENV =
+  process.env.NODE_ENV === 'production'
+    ? MirrorfulApiEnvironment.Production
+    : MirrorfulApiEnvironment.Development

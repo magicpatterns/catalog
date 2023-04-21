@@ -10,8 +10,22 @@ import { Toolbar } from './Toolbar'
 import { editor } from 'monaco-editor'
 import { Source } from './Source'
 import { TbDevices } from 'react-icons/Tb'
+import { API_ENV } from '../utils/constants'
+import { MirrorfulApiClient } from '@mirrorful-fern/api-client/Client'
+import { Params, useLoaderData } from 'react-router-dom'
+
+export async function loader({ params }: { params: Params<string> }) {
+  const client = new MirrorfulApiClient({
+    environment: API_ENV,
+  })
+  // TODO(Danilowicz): type params
+  // @ts-ignore
+  return await client.registry.getFile(params.orgId, params.fileId)
+}
 
 export function Playground() {
+  const file = useLoaderData()
+
   const [inputCode, setInputCode] = useState<string>(DEFAULT_CODE)
   const [transpiledCode, setTranspiledCode] = useState<string>('')
   const [sourceCode, setSourceCode] = useState<string>('')

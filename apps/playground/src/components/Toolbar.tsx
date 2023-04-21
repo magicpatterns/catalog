@@ -6,11 +6,11 @@ import {
   MirrorfulApiClient,
   MirrorfulApiEnvironment,
 } from '@mirrorful-fern/api-client'
-
-export const TRIGGER_ORG_ID = '95d65865-b2fc-4802-8760-43c489645e1d'
-export const FILE_ID = '123'
+import { useParams } from 'react-router-dom'
 
 export function Toolbar({ code }: { code: string }) {
+  const { fileId, orgId } = useParams()
+
   async function onShare() {
     const environment =
       process.env.NODE_ENV === 'production'
@@ -19,10 +19,14 @@ export function Toolbar({ code }: { code: string }) {
     const client = new MirrorfulApiClient({
       environment,
     })
-    await client.registry.updateFile(TRIGGER_ORG_ID, FILE_ID, {
-      code,
-    })
-    alert(`Share ${window.location.href}. Copy link.`)
+    if (!orgId || !fileId) {
+      throw Error('Need :fileId and :orgId')
+    } else {
+      await client.registry.updateFile(orgId, fileId, {
+        code,
+      })
+      alert(`Share ${window.location.href}. Copy link.`)
+    }
   }
 
   return (
