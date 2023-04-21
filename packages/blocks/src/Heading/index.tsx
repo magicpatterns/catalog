@@ -1,9 +1,9 @@
 import { ChakraProps, Heading as ChakraHeading } from '@chakra-ui/react'
 import React from 'react'
 
+import { Tokens } from '../../.mirrorful/theme'
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 import { toCapitalize } from '../util/toCapitalize'
-import { Tokens } from '.mirrorful/theme'
 
 interface IHeading
   extends Partial<

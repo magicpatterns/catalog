@@ -1,9 +1,9 @@
 import { Button as ChakraButton, ChakraProps } from '@chakra-ui/react'
 
+import { Tokens } from '../../.mirrorful/theme'
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 import { toCapitalize } from '../util/toCapitalize'
 import { IButton, Variants } from './types'
-import { Tokens } from '.mirrorful/theme'
 
 export function Button(props: IButton) {
   const { colors, fontWeights } = Tokens
