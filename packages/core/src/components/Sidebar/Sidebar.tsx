@@ -1,5 +1,14 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { Badge, Box, Flex, Icon, Spacer, Stack, Text } from '@chakra-ui/react'
+import {
+  Badge,
+  Box,
+  Flex,
+  Icon,
+  Link,
+  Spacer,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 import { VERSION } from '@core/utils/constants'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
@@ -36,6 +45,7 @@ function SidebarHeader({ label }: { label: string }) {
 function SidebarLink({
   label,
   icon,
+  link,
   isActive,
   onSelect,
   isComingSoon,
@@ -44,6 +54,7 @@ function SidebarLink({
 }: {
   label?: string
   icon: IconType
+  link?: string
   isActive?: boolean
   onSelect?: () => void
   isComingSoon?: boolean
@@ -94,7 +105,9 @@ function SidebarLink({
                 marginLeft: '12px',
               }}
             >
-              {label}
+              <Link href={link} style={{ textDecoration:"none" }}>
+                {label}
+              </Link>
             </Text>
           )}
           {isComingSoon && (
@@ -236,6 +249,7 @@ export function Sidebar({
             <SidebarLink
               key="sidebar-colors"
               label="Colors"
+              link="/colors"
               icon={MdOutlineColorLens}
               isActive={activeTab === '/colors'}
               onSelect={() => onSelectTab('/colors')}
@@ -246,6 +260,7 @@ export function Sidebar({
             <SidebarLink
               key="sidebar-typography"
               label="Typography"
+              link="/typography"
               icon={FiUnderline}
               isActive={activeTab === '/typography'}
               onSelect={() => onSelectTab('/typography')}
@@ -256,6 +271,7 @@ export function Sidebar({
             <SidebarLink
               key="sidebar-shadows"
               label="Shadows"
+              link="/shadows"
               icon={FiLayers}
               isActive={activeTab === '/shadows'}
               onSelect={() => onSelectTab('/shadows')}
@@ -265,6 +281,7 @@ export function Sidebar({
             <SidebarLink
               key="sidebar-spacing"
               label="Spacing"
+              link="/spacing"
               icon={CgSpaceBetween}
               isComingSoon
               isDisabled={isDisabled}
