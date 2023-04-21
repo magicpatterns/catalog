@@ -7,58 +7,88 @@
           "value": "#E2E8F0",
           "type": "color"
         },
-        "hover": {
+        "bg hover": {
           "id": "545b05e1-d641-41d3-aa54-06f03f6015c7",
           "value": "#CBD5E0",
           "type": "color"
         }
       },
       "Save Button": {
-        "hover": {
-          "id": "45f90c49-36de-4ed8-9863-3f6490bff46c",
-          "value": "#2B6CB0",
-          "type": "color"
-        },
         "background": {
           "id": "84259ce5-c760-45bf-8568-8fe5eaa3dda7",
           "value": "#3182CE",
           "type": "color"
+        },
+        "color": {
+          "id": "e01081d8-c82e-4ba9-b381-7c6a3dd18d76",
+          "value": "#FFFFFF",
+          "type": "color"
+        },
+        "bg hover": {
+          "id": "45f90c49-36de-4ed8-9863-3f6490bff46c",
+          "value": "#2B6CB0",
+          "type": "color"
         }
       },
       "Delete Button": {
-        "hover": {
-          "id": "3f9256c3-9c76-41e7-ae85-f29f165534d4",
-          "value": "#C53030",
-          "type": "color"
-        },
         "background": {
           "id": "a66ed05e-7490-400e-a531-7adc80bc1579",
           "value": "#E53E3E",
           "type": "color"
+        },
+        "color": {
+          "id": "a43cf94a-01dd-42a5-a67d-2ddaf9d84700",
+          "value": "#FFFFFF",
+          "type": "color"
+        },
+        "bg hover": {
+          "id": "3f9256c3-9c76-41e7-ae85-f29f165534d4",
+          "value": "#C53030",
+          "type": "color"
         }
       },
       "Add New Token": {
-        "hover": {
+        "color": {
+          "id": "a619b881-57d1-4d6f-98bb-7688cd57b68c",
+          "value": "#3182CE",
+          "type": "color"
+        },
+        "border": {
+          "id": "0eee131b-4a7b-4a24-ac5e-66fdc5f8a0e1",
+          "value": "#3182CE",
+          "type": "color"
+        },
+        "border hover": {
           "id": "c18b2560-a2c7-4d10-a63d-7bf2b8953ee0",
           "value": "#2B6CB0",
           "type": "color"
         },
-        "background": {
-          "id": "0eee131b-4a7b-4a24-ac5e-66fdc5f8a0e1",
-          "value": "#3182CE",
+        "color hover": {
+          "id": "26849f79-1cbd-43c7-855e-cf6ea4898a0d",
+          "value": "#2B6CB0",
           "type": "color"
         }
       },
       "Add New Variant": {
-        "background": {
+        "border": {
           "id": "5cae4c58-158d-4f1e-a01f-7165dd7eb5f2",
+          "value": "#E2E8F0",
+          "type": "color"
+        },
+        "bg hover": {
+          "id": "4959ed10-b765-461d-a894-03a788dfc9d3",
           "value": "#E2E8F0",
           "type": "color"
         }
       },
       "Icon Button": {
-        "background": {
+        "border": {
           "id": "1ac6e8d4-088b-4e6b-81fe-759fb0ffd0f6",
+          "value": "#E2E8F0",
+          "type": "color"
+        },
+        "bg hover": {
+          "id": "79060ef9-e6f2-44ab-8c54-e46c97877ec1",
           "value": "#E2E8F0",
           "type": "color"
         }

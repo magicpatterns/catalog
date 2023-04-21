@@ -1,38 +1,29 @@
-export type Colors = keyof typeof Tokens.colors
-export type FontSize = keyof typeof Tokens.fontSizes
-export type Shadows = keyof typeof Tokens.boxShadows
-
-export type Token = Colors | FontSize | Shadows
-
-export const Tokens = {
+'use strict'
+Object.defineProperty(exports, '__esModule', { value: true })
+exports.Tokens = void 0
+exports.Tokens = {
   colors: {
     'button-default': {
       background: '#E2E8F0',
-      'bg hover': '#CBD5E0',
+      hover: '#CBD5E0',
     },
     'save-button': {
+      hover: '#2B6CB0',
       background: '#3182CE',
-      color: '#FFFFFF',
-      'bg hover': '#2B6CB0',
     },
     'delete-button': {
+      hover: '#C53030',
       background: '#E53E3E',
-      color: '#FFFFFF',
-      'bg hover': '#C53030',
     },
     'add-new-token': {
-      color: '#3182CE',
-      border: '#3182CE',
-      'border hover': '#2B6CB0',
-      'color hover': '#2B6CB0',
+      hover: '#2B6CB0',
+      background: '#3182CE',
     },
     'add-new-variant': {
-      border: '#E2E8F0',
-      'bg hover': '#E2E8F0',
+      background: '#E2E8F0',
     },
     'icon-button': {
-      border: '#E2E8F0',
-      'bg hover': '#E2E8F0',
+      background: '#E2E8F0',
     },
   },
   fontSizes: {
