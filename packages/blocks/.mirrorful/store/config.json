@@ -1,9 +1,144 @@
 {
   "primitives": {
-    "colors": {},
+    "colors": {
+      "Button Default": {
+        "background": {
+          "id": "427c16af-a003-4e23-bfcd-83edfb6a364b",
+          "value": "#E2E8F0",
+          "type": "color"
+        },
+        "hover": {
+          "id": "545b05e1-d641-41d3-aa54-06f03f6015c7",
+          "value": "#CBD5E0",
+          "type": "color"
+        }
+      },
+      "Save Button": {
+        "hover": {
+          "id": "45f90c49-36de-4ed8-9863-3f6490bff46c",
+          "value": "#2B6CB0",
+          "type": "color"
+        },
+        "background": {
+          "id": "84259ce5-c760-45bf-8568-8fe5eaa3dda7",
+          "value": "#3182CE",
+          "type": "color"
+        }
+      },
+      "Delete Button": {
+        "hover": {
+          "id": "3f9256c3-9c76-41e7-ae85-f29f165534d4",
+          "value": "#C53030",
+          "type": "color"
+        },
+        "background": {
+          "id": "a66ed05e-7490-400e-a531-7adc80bc1579",
+          "value": "#E53E3E",
+          "type": "color"
+        }
+      },
+      "Add New Token": {
+        "hover": {
+          "id": "c18b2560-a2c7-4d10-a63d-7bf2b8953ee0",
+          "value": "#2B6CB0",
+          "type": "color"
+        },
+        "background": {
+          "id": "0eee131b-4a7b-4a24-ac5e-66fdc5f8a0e1",
+          "value": "#3182CE",
+          "type": "color"
+        }
+      },
+      "Add New Variant": {
+        "background": {
+          "id": "5cae4c58-158d-4f1e-a01f-7165dd7eb5f2",
+          "value": "#E2E8F0",
+          "type": "color"
+        }
+      },
+      "Icon Button": {
+        "background": {
+          "id": "1ac6e8d4-088b-4e6b-81fe-759fb0ffd0f6",
+          "value": "#E2E8F0",
+          "type": "color"
+        }
+      }
+    },
     "typography": {
-      "fontSizes": {},
-      "fontWeights": {},
+      "fontSizes": {
+        "xs": {
+          "id": "23ef24d6-1471-42c4-874e-e34e7b459a50",
+          "value": "0.75rem",
+          "type": "fontSize"
+        },
+        "sm": {
+          "id": "8f34a050-3892-4277-885a-565cf9b0d852",
+          "value": "0.875rem",
+          "type": "fontSize"
+        },
+        "md": {
+          "id": "f616113d-a7da-48ef-9bfe-f37825d48a3c",
+          "value": "1rem",
+          "type": "fontSize"
+        },
+        "lg": {
+          "id": "86418033-c0d3-4500-8c05-1caa064634e7",
+          "value": "1.125rem",
+          "type": "fontSize"
+        },
+        "xl": {
+          "id": "c1605153-a21f-4c68-8c0f-2fac0489d9d5",
+          "value": "1.25rem",
+          "type": "fontSize"
+        }
+      },
+      "fontWeights": {
+        "hairline": {
+          "id": "764315cc-1f44-4f80-84ee-4dc8875f111e",
+          "value": "100",
+          "type": "fontWeight"
+        },
+        "thin": {
+          "id": "691e867d-6d54-44ff-be94-45a708bb20f5",
+          "value": "200",
+          "type": "fontWeight"
+        },
+        "light": {
+          "id": "9648ea8e-c8ad-4670-83be-8c4b1fb65737",
+          "value": "300",
+          "type": "fontWeight"
+        },
+        "normal": {
+          "id": "14f9ee0b-057b-4e3d-9db3-5b7a94687121",
+          "value": "400",
+          "type": "fontWeight"
+        },
+        "medium": {
+          "id": "ebaebae8-a942-4a06-9954-e0db64379d82",
+          "value": "500",
+          "type": "fontWeight"
+        },
+        "semibold": {
+          "id": "49aad1c9-16e7-4480-878e-a8e278395a61",
+          "value": "600",
+          "type": "fontWeight"
+        },
+        "bold": {
+          "id": "14ecbec8-0698-4e73-a200-23e1ad71e734",
+          "value": "700",
+          "type": "fontWeight"
+        },
+        "extrabold": {
+          "id": "0aca3ebc-b242-40dd-b31d-a2ce64b4b6cc",
+          "value": "800",
+          "type": "fontWeight"
+        },
+        "black": {
+          "id": "8987d1a7-8789-4250-a398-4ab092162897",
+          "value": "900",
+          "type": "fontWeight"
+        }
+      },
       "lineHeights": {}
     },
     "shadows": {}
