@@ -37,6 +37,18 @@ export const Tokens = {
     'default-color': {
       base: '#1A202C',
     },
+    'text-error': {
+      base: '#F56565',
+    },
+    'text-success': {
+      base: '#48BB78',
+    },
+    'text-warning': {
+      base: '#ED8936',
+    },
+    'text-info': {
+      base: '#4299E1',
+    },
   },
   fontSizes: {
     xs: '0.75rem',

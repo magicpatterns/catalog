@@ -99,6 +99,34 @@
           "value": "#1A202C",
           "type": "color"
         }
+      },
+      "Text Error": {
+        "base": {
+          "id": "e2c31894-e0a2-4171-8c2c-e682d09e0229",
+          "value": "#F56565",
+          "type": "color"
+        }
+      },
+      "Text Success": {
+        "base": {
+          "id": "6dfb0e0b-76e1-4dd4-808d-f863326774b6",
+          "value": "#48BB78",
+          "type": "color"
+        }
+      },
+      "Text Warning": {
+        "base": {
+          "id": "61082b73-b117-483b-a073-25740e920f63",
+          "value": "#ED8936",
+          "type": "color"
+        }
+      },
+      "Text Info": {
+        "base": {
+          "id": "7549fb93-1141-40fb-918b-d600f0fd1446",
+          "value": "#4299E1",
+          "type": "color"
+        }
       }
     },
     "typography": {
