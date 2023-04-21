@@ -5,9 +5,11 @@ import { DisplayFontProperty } from '../DisplayFontProperty'
 
 export function FontSizesSection({
   fontSizeData,
+  placeholder,
   onUpdateFontPropertyData,
 }: {
   fontSizeData: TTokenGroup
+  placeholder: string
   onUpdateFontPropertyData: (newFontSizeData: TTokenGroup) => void
 }) {
   const headingText = 'Font Sizes'
@@ -20,6 +22,7 @@ export function FontSizesSection({
         buttonText={buttonText}
         fontProperty="fontSize"
         fontPropertyData={fontSizeData}
+        placeholder={placeholder}
         onUpdateFontPropertyData={onUpdateFontPropertyData}
       />
     </Box>
