@@ -3394,6 +3394,11 @@
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.7.tgz"
   "version" "2.11.7"
 
+"@remix-run/router@1.5.0":
+  "integrity" "sha512-bkUDCp8o1MvFO+qxkODcbhSqRa6P2GXgrGZVpt0dCXNW2HCSCqYI0ZoAqEOSAjRWmmlKcYgFvN4B4S+zo/f8kg=="
+  "resolved" "https://registry.npmjs.org/@remix-run/router/-/router-1.5.0.tgz"
+  "version" "1.5.0"
+
 "@rollup/pluginutils@^5.0.2":
   "integrity" "sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA=="
   "resolved" "https://registry.npmjs.org/@rollup/pluginutils/-/pluginutils-5.0.2.tgz"
@@ -4498,7 +4503,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/cors@*":
+"@types/cors@^2.8.13":
   "integrity" "sha512-RG8AStHlUiV5ysZQKq97copd2UmVYw3/pRMLefISZ3S1hK104Cwm7iLQ3fTKx+lsUH2CE8FlLaYeEA2LSeqYUA=="
   "resolved" "https://registry.npmjs.org/@types/cors/-/cors-2.8.13.tgz"
   "version" "2.8.13"
@@ -10240,7 +10245,7 @@
     "node-dir" "^0.1.10"
     "strip-indent" "^3.0.0"
 
-"react-dom@^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^18.0.0", "react-dom@^18.2.0", "react-dom@>=16.8.0", "react-dom@>=18", "react-dom@16.8.0 - 18", "react-dom@18.2.0":
+"react-dom@^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^18.0.0", "react-dom@^18.2.0", "react-dom@>=16.8", "react-dom@>=16.8.0", "react-dom@>=18", "react-dom@16.8.0 - 18", "react-dom@18.2.0":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
@@ -10334,6 +10339,21 @@
     "tslib" "^2.1.0"
     "use-callback-ref" "^1.3.0"
     "use-sidecar" "^1.1.2"
+
+"react-router-dom@*":
+  "integrity" "sha512-E5dfxRPuXKJqzwSe/qGcqdwa18QiWC6f3H3cWXM24qj4N0/beCIf/CWTipop2xm7mR0RCS99NnaqPNjHtrAzCg=="
+  "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.10.0.tgz"
+  "version" "6.10.0"
+  dependencies:
+    "@remix-run/router" "1.5.0"
+    "react-router" "6.10.0"
+
+"react-router@6.10.0":
+  "integrity" "sha512-Nrg0BWpQqrC3ZFFkyewrflCud9dio9ME3ojHCF/WLsprJVzkq3q3UeEhMCAW1dobjeGbWgjNn/PVF6m46ANxXQ=="
+  "resolved" "https://registry.npmjs.org/react-router/-/react-router-6.10.0.tgz"
+  "version" "6.10.0"
+  dependencies:
+    "@remix-run/router" "1.5.0"
 
 "react-style-singleton@^2.2.1":
   "integrity" "sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g=="
