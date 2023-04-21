@@ -25,14 +25,38 @@ export function Playground() {
   const [panelTab, setPanelTab] = useState<'console' | 'source'>('console')
   const [widthDivide, setWidthDivide] = useState<number>(50)
 
-  const handleTranspileCode = () => {
+  // Even when not in the editor, listen for the command
+  useEffect(() => {
+    let pressingCmd = false
+    let pressingEnter = false
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') pressingEnter = true
+      if (e.key === 'Meta') pressingCmd = true
+      if (pressingEnter && pressingCmd) {
+        console.log('Command running!')
+        handleTranspileCode(inputCode)
+      }
+    }
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') pressingEnter = false
+      if (e.key === 'Meta') pressingCmd = false
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', handleKeyUp)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+    }
+    // because inputCode changes, we want to re-run the effect
+    // this is pretty costly i think
+  }, [inputCode])
+
+  const handleTranspileCode = (theInputCode: string) => {
     try {
-      const modifiedInputCode = replaceImports(inputCode)
-
+      console.log(`Transpiling... ${theInputCode}`)
+      const modifiedInputCode = replaceImports(theInputCode)
       const { iframeCode, sourceCode: sc } = transpileCode(modifiedInputCode)
-
       const source = SOURCE_BOILERPLATE(iframeCode)
-
       setLogs([
         ...logs,
         {
@@ -53,6 +77,8 @@ export function Playground() {
             timestamp: new Date().toLocaleTimeString(),
           },
         ])
+      } else {
+        throw e
       }
     }
   }
@@ -74,7 +100,7 @@ export function Playground() {
     monaco: Monaco
   ) {
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
-      handleTranspileCode()
+      handleTranspileCode(editor.getValue())
     })
   }
 
@@ -83,7 +109,7 @@ export function Playground() {
   }
 
   useEffect(() => {
-    handleTranspileCode()
+    handleTranspileCode(inputCode)
   }, [])
 
   return (
@@ -135,7 +161,7 @@ export function Playground() {
                   boxShadow: '0 0 20px 1px #805AD5',
                   // bgGradient: 'linear(to-br, bg, primary, bg)',
                 }}
-                onClick={handleTranspileCode}
+                onClick={() => handleTranspileCode(inputCode)}
               >
                 <Text>Transpile</Text>
                 <Text

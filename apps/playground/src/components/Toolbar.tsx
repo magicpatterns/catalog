@@ -12,7 +12,6 @@ export const FILE_ID = '123'
 
 export function Toolbar({ code }: { code: string }) {
   async function onShare() {
-    console.log(code)
     const environment =
       process.env.NODE_ENV === 'production'
         ? MirrorfulApiEnvironment.Production
