@@ -3,6 +3,7 @@ import React from 'react'
 
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 import { toCapitalize } from '../util/toCapitalize'
+import { Tokens } from '.mirrorful/theme'
 
 interface IHeading
   extends Partial<
@@ -14,13 +15,14 @@ interface IHeading
 }
 
 export function Heading(props: IHeading) {
+  const { fontSizes, fontWeights } = Tokens
   const variantProps: Record<IHeading['variants'], ChakraProps> = {
-    h1: { fontSize: '2.5rem', fontWeight: 'black' },
-    h2: { fontSize: '2.1rem', fontWeight: 'black' },
-    h3: { fontSize: '1.8rem', fontWeight: 'black' },
-    h4: { fontSize: '1.5rem', fontWeight: 'black' },
-    h5: { fontSize: '1.3rem', fontWeight: 'black' },
-    h6: { fontSize: '1.1rem', fontWeight: 'black' },
+    h1: { fontSize: fontSizes.h1, fontWeight: fontWeights.black },
+    h2: { fontSize: fontSizes.h2, fontWeight: fontWeights.black },
+    h3: { fontSize: fontSizes.h3, fontWeight: fontWeights.black },
+    h4: { fontSize: fontSizes.h4, fontWeight: fontWeights.black },
+    h5: { fontSize: fontSizes.h5, fontWeight: fontWeights.black },
+    h6: { fontSize: fontSizes.h6, fontWeight: fontWeights.black },
   }
   return (
     <ChakraProviderWrapper>
