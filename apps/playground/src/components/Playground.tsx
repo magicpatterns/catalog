@@ -13,6 +13,7 @@ import { TbDevices } from 'react-icons/Tb'
 import { API_ENV } from '../utils/constants'
 import { MirrorfulApiClient } from '@mirrorful-fern/api-client/Client'
 import { Params, useLoaderData } from 'react-router-dom'
+import { FileResponse } from '@mirrorful-fern/api-client/api'
 
 export async function loader({ params }: { params: Params<string> }) {
   const client = new MirrorfulApiClient({
@@ -24,9 +25,9 @@ export async function loader({ params }: { params: Params<string> }) {
 }
 
 export function Playground() {
-  const file = useLoaderData()
+  const file = useLoaderData() as FileResponse
 
-  const [inputCode, setInputCode] = useState<string>(DEFAULT_CODE)
+  const [inputCode, setInputCode] = useState<string>(file.code)
   const [transpiledCode, setTranspiledCode] = useState<string>('')
   const [sourceCode, setSourceCode] = useState<string>('')
   const [logs, setLogs] = useState<TLogData[]>([
