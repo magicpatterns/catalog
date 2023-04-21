@@ -18,12 +18,12 @@ import {
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken } from '@core/types'
+import { sep } from 'path'
 import { useEffect, useState } from 'react'
 import { FiLayers, FiPlus } from 'react-icons/fi'
 import { v4 as uuidv4 } from 'uuid'
 
 import { ShadowColorPicker } from './ShadowColorPicker'
-import { sep } from 'path'
 
 export function EditShadowModal({
   isOpen,
@@ -224,7 +224,11 @@ export function EditShadowModal({
   const [blur, setBlur] = useState(
     initialValues ? initialValues?.map((i: { blur: number }) => i.blur) : [0]
   )
-  const [spread, setSpread] = useState(x_initialValues?.map((i) => i.spread))
+  const [spread, setSpread] = useState(
+    initialValues
+      ? initialValues?.map((i: { spread: number }) => i.spread)
+      : [0]
+  )
   const [initialButton, setInitialButton] = useState(0)
 
   function newColor() {
@@ -237,17 +241,7 @@ export function EditShadowModal({
     return result.toString()
   }
 
-  // useEffect(() => {
-  //   const nextSpread = x_initialValues.map((i) => i.spread)
-  //   return setSpread(nextSpread)
-  // }, [variant])
-
   const newColorRes = newColor()
-
-  useEffect(() => {
-    setShadowInput(codeResult())
-    setVariant({ ...variant, token: { ...variant.token, value: codeResult() } })
-  }, [spread, blur, hOffset, vOffset, color])
 
   function handleBlur(e: string | number, i: number) {
     const nextBlur = [...blur]
@@ -258,7 +252,6 @@ export function EditShadowModal({
   function handleSpread(e: string | number, i: number) {
     const nextSpread = [...spread]
     nextSpread[i] = e
-    console.log(nextSpread)
     setSpread(nextSpread)
   }
 
@@ -288,6 +281,18 @@ export function EditShadowModal({
     }
   }
 
+  function newCodeResult() {
+    const result = []
+    for (let i = 0; i < newInitialValues?.length; i++) {
+      result.push(
+        ` ${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
+      )
+    }
+    return result.toString()
+  }
+
+  console.log(newCodeResult())
+
   const codeResult = function () {
     if (x_initialValues) {
       const result = []
@@ -304,19 +309,42 @@ export function EditShadowModal({
       color[0] ? color[0] : 'rgba(1, 1, 1, 0.4)'
     }`
   }
+  //console.log(isNaN(blur[0]))
+
+  function handleInputValue(e) {
+    const x = separateBoxShadows(e.target.value, 'shadow')
+    const y = getValues(x[initialButton].value)
+
+    console.log(y)
+
+    const nextBlur = [...blur]
+    console.log(nextBlur)
+    nextBlur[initialButton] = isNaN(y.blur) ? 0 : y.blur
+    setBlur(nextBlur)
+
+    const nextSpread = [...spread]
+    nextSpread[initialButton] = isNaN(y.spread) ? 0 : y.spread
+    setSpread(nextSpread)
+    setShadowInput(e.target.value)
+
+    const nextHOffset = [...hOffset]
+    nextHOffset[initialButton] = isNaN(y.hOffset) ? 0 : y.hOffset
+    sethOffset(nextHOffset)
+
+    const nextVOffset = [...vOffset]
+    nextVOffset[initialButton] = isNaN(y.vOffset) ? 0 : y.vOffset
+    setVOffset(nextVOffset)
+  }
 
   const [shadowInput, setShadowInput] = useState(codeResult())
 
-  //console.log(codeResult())
+  useEffect(() => {
+    setShadowInput(codeResult())
 
-  //console.log(spread)
+    setVariant({ ...variant, token: { ...variant.token, value: codeResult() } })
+  }, [spread, blur, hOffset, vOffset, color])
 
   useEffect(() => {
-    const nextSpread = [...spread]
-    const sep = separateBoxShadows(shadowInput[initialButton])
-    nextSpread[initialButton] = getValues(sep)
-    console.log(nextSpread)
-    //setSpread(x.spread)
     return setVariant({
       ...variant,
       token: { ...variant.token, value: shadowInput },
@@ -435,7 +463,6 @@ export function EditShadowModal({
                       <div>
                         {initialButton === index && (
                           <ShadowColorPicker
-                            variant={variant}
                             blur={blur[index]}
                             spread={spread[index]}
                             hOffset={hOffset[index]}
@@ -472,10 +499,17 @@ export function EditShadowModal({
                 }}
               >
                 <Text style={{ marginBottom: '.5em' }}>Value</Text>
-                <Input
+                {/* <Input
                   onChange={(e) => setShadowInput(e.target.value)}
                   value={shadowInput}
-                />
+                /> */}
+                {newInitialValues?.map((_i: number, index: number) => (
+                  <div key={index}>
+                    {initialButton === index && (
+                      <Input onChange={handleInputValue} value={shadowInput} />
+                    )}
+                  </div>
+                ))}
               </Box>
             </Box>
             {error && (

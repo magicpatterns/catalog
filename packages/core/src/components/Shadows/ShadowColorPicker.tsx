@@ -24,8 +24,6 @@ export function ShadowColorPicker({
   handleVOffset,
   handleNewColor,
   codeResult,
-  newValues,
-  variant,
 }: {
   blur: number
   spread: number
