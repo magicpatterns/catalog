@@ -134,6 +134,7 @@ Veja nossos exemplos:
 - [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
 - [Mirrorful 🤝 Create React App básico](https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app)
 - [Mirrorful 🤝 Aplicação Nuxt 3 básica](https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3)
+- [Mirrorful 🤝 SvelteKit](https://github.com/Mirrorful/mirrorful/tree/main/examples/sveltekit)
 
 Procurando por um exemplo específico? [Solicite um aqui!](https://github.com/Mirrorful/mirrorful/issues)
 
