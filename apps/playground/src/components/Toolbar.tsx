@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Stack, Text, useToast } from '@chakra-ui/react'
 import TriggerDevLogo from '../assets/triggerdev_logo.png'
 import { FiShare2, FiCloudLightning } from 'react-icons/fi'
 import { MoonIcon } from '@chakra-ui/icons'
@@ -6,10 +6,12 @@ import {
   MirrorfulApiClient,
   MirrorfulApiEnvironment,
 } from '@mirrorful-fern/api-client'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export function Toolbar({ code }: { code: string }) {
   const { fileId, orgId } = useParams()
+  const toast = useToast()
+  const navigate = useNavigate()
 
   async function onShare() {
     const environment =
@@ -19,14 +21,28 @@ export function Toolbar({ code }: { code: string }) {
     const client = new MirrorfulApiClient({
       environment,
     })
-    if (!orgId || !fileId) {
-      throw Error('Need :fileId and :orgId')
-    } else {
-      await client.registry.updateFile(orgId, fileId, {
-        code,
-      })
-      alert(`Share ${window.location.href}. Copy link.`)
-    }
+
+    const finalOrgId = orgId ? orgId : 'triggerdev'
+    const finalFileId = fileId
+      ? fileId
+      : Math.floor(100000 + Math.random() * 900000).toString()
+
+    await client.registry.updateFile(finalOrgId, finalFileId, {
+      code,
+    })
+
+    navigate(`/${finalOrgId}/${finalFileId}`)
+    navigator.clipboard.writeText(
+      `${window.location.origin}/${finalOrgId}/${finalFileId}`
+    )
+    toast({
+      title: 'Link copied.',
+      description: "We've saved your changes.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+      position: 'bottom-right',
+    })
   }
 
   return (

@@ -19,15 +19,19 @@ export async function loader({ params }: { params: Params<string> }) {
   const client = new MirrorfulApiClient({
     environment: API_ENV,
   })
-  // TODO(Danilowicz): type params
-  // @ts-ignore
-  return await client.registry.getFile(params.orgId, params.fileId)
+  if (params && params.orgId && params.fileId) {
+    return await client.registry.getFile(params.orgId, params.fileId)
+  } else {
+    return null
+  }
 }
 
 export function Playground() {
-  const file = useLoaderData() as FileResponse
+  const file = useLoaderData() as FileResponse | null
 
-  const [inputCode, setInputCode] = useState<string>(file.code)
+  const [inputCode, setInputCode] = useState<string>(
+    file ? file.code : DEFAULT_CODE
+  )
   const [transpiledCode, setTranspiledCode] = useState<string>('')
   const [sourceCode, setSourceCode] = useState<string>('')
   const [logs, setLogs] = useState<TLogData[]>([
