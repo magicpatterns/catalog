@@ -25,6 +25,7 @@ export async function loader({ params }: { params: Params<string> }) {
     return null
   }
 }
+import { PageRender } from './PageRender'
 
 export function Playground() {
   const file = useLoaderData() as FileResponse | null
@@ -41,6 +42,8 @@ export function Playground() {
       timestamp: new Date().toLocaleTimeString(),
     },
   ])
+
+  const [isResponsiveMode, setIsResponsiveMode] = useState<boolean>(false)
 
   const [panelTab, setPanelTab] = useState<'console' | 'source'>('console')
   const [widthDivide, setWidthDivide] = useState<number>(50)
@@ -204,8 +207,20 @@ export function Playground() {
             borderLeftWidth={'1px'}
             borderColor={'divider'}
           >
-            <Box css={{ height: '60%', display: 'flex', flexGrow: 1 }}>
-              <iframe srcDoc={transpiledCode} style={{ flexGrow: 1 }} />
+            <Box
+              css={{
+                height: '60%',
+                display: 'flex',
+                ...(isResponsiveMode && {
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }),
+              }}
+            >
+              <PageRender
+                transpiledCode={transpiledCode}
+                isResponsiveMode={isResponsiveMode}
+              />
             </Box>
             <Box
               css={{
@@ -240,6 +255,7 @@ export function Playground() {
                     variant="tab"
                     leftIcon={<TbDevices />}
                     css={{ fontSize: '22px' }}
+                    onClick={() => setIsResponsiveMode(!isResponsiveMode)}
                   />
                 </Box>
               </Box>
