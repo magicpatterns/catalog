@@ -22,7 +22,7 @@ export function Toolbar({ code }: { code: string }) {
       environment,
     })
 
-    const finalOrgId = orgId ? orgId : 'triggerdev'
+    const finalOrgId = orgId ? orgId : '535f2ra'
     const finalFileId = fileId
       ? fileId
       : Math.floor(100000 + Math.random() * 900000).toString()
