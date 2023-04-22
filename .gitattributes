@@ -1,0 +1,3 @@
+packages/server/src/api/generated/** linguist-generated linguist-vendored
+packages/client/** linguist-generated linguist-vendored
+packages/postman/collection.json linguist-generated linguist-vendored

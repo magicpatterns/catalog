@@ -1,33 +1,36 @@
 import { Box, Text } from '@chakra-ui/react'
-import { TFontSizeVariant } from '@core/types'
+import { TNamedToken } from '@core/types'
+import { parseUnit } from '@core/utils/parseUnit'
 
 // max font size in px or em/rem
 const maxFontSizePx = 48
 const maxFontSizeEmRem = maxFontSizePx / 16
 
 // return boolean font size is too large for preview
-function isFontSizeTooLarge(fontSizeData: TFontSizeVariant) {
-  if (fontSizeData.unit === 'px') {
-    return fontSizeData.value > maxFontSizePx
+function isFontSizeTooLarge(fontSizeData: TNamedToken) {
+  const { rawValue, unit } = parseUnit(fontSizeData.token.value)
+
+  if (unit === 'px') {
+    return rawValue > maxFontSizePx
   }
 
-  if (fontSizeData.unit === 'rem' || fontSizeData.unit === 'em') {
-    return fontSizeData.value > maxFontSizeEmRem
+  if (unit === 'rem' || unit === 'em') {
+    return rawValue > maxFontSizeEmRem
   }
 
   return false
 }
 
 // return font size for preview default to 1rem if too large
-function normalizeFontSize(fontSizeData: TFontSizeVariant) {
-  if (fontSizeData.unit === 'px') {
-    return isFontSizeTooLarge(fontSizeData) ? '1rem' : `${fontSizeData.value}px`
+function normalizeFontSize(fontSizeData: TNamedToken) {
+  const { rawValue, unit } = parseUnit(fontSizeData.token.value)
+
+  if (unit === 'px') {
+    return isFontSizeTooLarge(fontSizeData) ? '1rem' : `${rawValue}px`
   }
 
-  if (fontSizeData.unit === 'rem' || fontSizeData.unit === 'em') {
-    return isFontSizeTooLarge(fontSizeData)
-      ? '1rem'
-      : `${fontSizeData.value}${fontSizeData.unit}`
+  if (unit === 'rem' || unit === 'em') {
+    return isFontSizeTooLarge(fontSizeData) ? '1rem' : `${rawValue}${unit}`
   }
 
   return '1rem'
@@ -35,14 +38,16 @@ function normalizeFontSize(fontSizeData: TFontSizeVariant) {
 
 export function FontSizeRow({
   fontSizeData,
+  placeholder,
 }: {
-  fontSizeData: TFontSizeVariant
+  fontSizeData: TNamedToken
+  placeholder: string
 }) {
   return (
     <>
       <Box>
         <Text css={{ fontWeight: 'bold', width: 100 }} fontSize={18}>
-          {fontSizeData.value} {fontSizeData.unit}
+          {fontSizeData.token.value}
         </Text>
       </Box>
       <Box
@@ -53,8 +58,8 @@ export function FontSizeRow({
         }}
       >
         {isFontSizeTooLarge(fontSizeData)
-          ? `Font size ${fontSizeData.value}${fontSizeData.unit} is too large to render.`
-          : `Lorem ipsum dolor sit amet.`}
+          ? `Font size ${fontSizeData.token.value} is too large to render.`
+          : placeholder}
       </Box>
     </>
   )

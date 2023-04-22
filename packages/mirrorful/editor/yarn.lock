@@ -1511,19 +1511,21 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@mirrorful/core@1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-1.0.10.tgz#bda4e80676ff5f9a39f85af6eafb9586dcc7ef84"
-  integrity sha512-kaT7OliLoAPLjplrRU4AlOIUFaaJ7POuX9LaUppF1s0aGeVWt1R7x6Rf8vFEciBsH9zx3007+aWiusOGVEDaGA==
+"@mirrorful/core@2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@mirrorful/core/-/core-2.0.5.tgz#e3ad685846f46292f81d27ea8329412c10a88e9b"
+  integrity sha512-Xzd5lyfvGFH/4xV8SVUB7ApfR38v/k8szIX60o/yPzOVZFOk+akGS4177GpLidSnTSW3+gkOhGxUE0bOOTWsbA==
   dependencies:
     "@chakra-ui/icons" "^2.0.17"
     "@chakra-ui/react" "^2.5.2"
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"
     "@hello-pangea/color-picker" "^3.2.2"
+    eslint-plugin-react "^7.32.2"
     framer-motion "^10.6.0"
     json5 "^2.2.3"
     lottie-react "^2.4.0"
+    next "13.2.4"
     posthog-js "^1.51.3"
     react "^18.2.0"
     react-dom "^18.2.0"
@@ -1531,6 +1533,7 @@
     react-icons "^4.8.0"
     tinycolor2 "^1.6.0"
     typescript "^4.9.5"
+    zustand "^4.3.7"
 
 "@mirrorful/eslint-config@file:../../eslint-config":
   version "1.0.0"
@@ -2561,7 +2564,7 @@ eslint-plugin-react-hooks@^4.5.0:
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.6.0.tgz#4c3e697ad95b77e93f8646aaa1630c1ba607edd3"
   integrity sha512-oFc7Itz9Qxh2x4gNHStv3BqJq54ExXmfC+a1NjAta66IAN87Wu0R/QArgIS9qKzX3dXKPI9H5crl9QchNMY9+g==
 
-eslint-plugin-react@^7.31.7:
+eslint-plugin-react@^7.31.7, eslint-plugin-react@^7.32.2:
   version "7.32.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.32.2.tgz#e71f21c7c265ebce01bcbc9d0955170c55571f10"
   integrity sha512-t2fBMa+XzonrrNkyVirzKlvn5RXzzPwRHtMvLAtVZrt8oxgnTQaYbU6SXTOO1mwQgp1y5+toMSKInnzGr0Knqg==
@@ -4300,5 +4303,12 @@ zustand@^4.3.6:
   version "4.3.6"
   resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.3.6.tgz#ce7804eb75361af0461a2d0536b65461ec5de86f"
   integrity sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==
+  dependencies:
+    use-sync-external-store "1.2.0"
+
+zustand@^4.3.7:
+  version "4.3.7"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.3.7.tgz#501b1f0393a7f1d103332e45ab574be5747fedce"
+  integrity sha512-dY8ERwB9Nd21ellgkBZFhudER8KVlelZm8388B5nDAXhO/+FZDhYMuRnqDgu5SYyRgz/iaf8RKnbUs/cHfOGlQ==
   dependencies:
     use-sync-external-store "1.2.0"

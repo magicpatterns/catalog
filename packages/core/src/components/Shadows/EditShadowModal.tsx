@@ -15,9 +15,10 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { TShadowData } from '@core/types'
+import { TNamedToken } from '@core/types'
 import { RgbColor } from '@hello-pangea/color-picker'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 import { ShadowColorPicker } from './ShadowColorPicker'
 
@@ -32,8 +33,8 @@ export function EditShadowModal({
 }: {
   isOpen: boolean
   onClose: () => void
-  initialShadowVariant?: TShadowData
-  onUpdateShadowVariant: (newVariant: TShadowData) => void
+  initialShadowVariant?: TNamedToken
+  onUpdateShadowVariant: (newVariant: TNamedToken) => void
   onDeleteShadowVariant?: () => void
   initialRgbaValue?: { r: number; g: number; b: number; a: number }
   initialValues?:
@@ -52,9 +53,18 @@ export function EditShadowModal({
   } = useDisclosure()
 
   const [variant, setVariant]: [
-    TShadowData,
-    React.Dispatch<React.SetStateAction<TShadowData>>
-  ] = useState<TShadowData>(initialShadowVariant ?? { name: '', value: '' })
+    TNamedToken,
+    React.Dispatch<React.SetStateAction<TNamedToken>>
+  ] = useState<TNamedToken>(
+    initialShadowVariant ?? {
+      name: '',
+      token: {
+        id: uuidv4(),
+        value: '',
+        type: 'boxShadow',
+      },
+    }
+  )
 
   const [error, setError] = useState<string | null>(null)
 
@@ -70,7 +80,7 @@ export function EditShadowModal({
       return
     }
 
-    if (variant.value === '' || !variant.value) {
+    if (variant.token.value === '' || !variant.token.value) {
       setError('Please fill out all fields.')
       return
     }
@@ -120,14 +130,26 @@ export function EditShadowModal({
 
   useEffect(() => {
     setVariant({
-      ...variant,
-      value: codeResult,
+      name: variant.name,
+      token: {
+        ...variant.token,
+        value: codeResult,
+      },
     })
   }, [codeResult])
 
   useEffect(() => {
     if (!isOpen) {
-      setVariant(initialShadowVariant ?? { name: '', value: '' })
+      setVariant(
+        initialShadowVariant ?? {
+          name: '',
+          token: {
+            id: uuidv4(),
+            value: '',
+            type: 'boxShadow',
+          },
+        }
+      )
       setError(null)
     }
   }, [isOpen, initialShadowVariant])

@@ -1,42 +1,31 @@
 import { Box, Text } from '@chakra-ui/react'
-import { TLineHeightVariant } from '@core/types'
+import { TNamedToken } from '@core/types'
 
 export function LineHeightData({
   lineHeightData,
+  placeholder,
 }: {
-  lineHeightData: TLineHeightVariant
+  lineHeightData: TNamedToken
+  placeholder: string
 }) {
-  let lineHeight = ''
-  switch (lineHeightData.unit) {
-    case 'number':
-      lineHeight = `${lineHeightData.value}`
-      break
-    case 'percent':
-      lineHeight = `${lineHeightData.value}%`
-      break
-    case 'length':
-      lineHeight = `${lineHeightData.value}${lineHeightData.lengthUnit}`
-      break
-  }
-
   return (
     <>
       <Box>
         <Text css={{ fontWeight: 'bold', width: 100 }} fontSize={18}>
-          {lineHeight.replace(/(\d)([a-z%])/i, '$1 $2')}
+          {lineHeightData.token.value}
         </Text>
       </Box>
       <Box
         css={{
-          fontSize: '2rem',
+          fontSize: '1rem',
           fontWeight: 'normal',
           width: '100%',
-          lineHeight: lineHeight,
+          lineHeight: lineHeightData.token.value,
         }}
       >
-        Lorem ipsum dolor sit amet.
+        {placeholder.slice(0, placeholder.length / 2)}
         <br />
-        Illum omnis, sunt corrupti.
+        {placeholder.slice(placeholder.length / 2, placeholder.length)}
       </Box>
     </>
   )

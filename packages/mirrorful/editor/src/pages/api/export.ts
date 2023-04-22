@@ -1,12 +1,12 @@
 import { translators } from '@mirrorful/core/lib/translators'
-import { TConfig, TExportFileType } from '@mirrorful/core/lib/types'
+import { TExportFileType, TMirrorfulStore } from '@mirrorful/core/lib/types'
 import fs from 'fs'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import { rootPath, store } from '../../store/store'
 
-const generateStorageFile = async ({ tokens, files }: TConfig) => {
-  store.set('tokens', tokens)
+const generateStorageFile = async ({ primitives, files }: TMirrorfulStore) => {
+  store.set('primitives', primitives)
   store.set('files', files)
 }
 
@@ -14,7 +14,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const config = JSON.parse(req.body) as TConfig // TODO: Validate request body
+  const config = JSON.parse(req.body) as TMirrorfulStore // TODO: Validate request body
 
   await generateStorageFile(config)
 
@@ -22,7 +22,7 @@ export default async function handler(
     const translator = translators[fileType as TExportFileType]
 
     const fileName = `${rootPath}/theme${translator.extension}`
-    const content = translator.toContent(config.tokens)
+    const content = translator.toContent(config.primitives)
 
     fs.writeFileSync(fileName, content)
   }

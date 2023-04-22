@@ -1,26 +1,28 @@
 import { Box, Text } from '@chakra-ui/react'
-import { TFontWeightVariant } from '@core/types'
+import { TNamedToken } from '@core/types'
 
 export function FontWeightRow({
   fontWeightData,
+  placeholder,
 }: {
-  fontWeightData: TFontWeightVariant
+  fontWeightData: TNamedToken
+  placeholder: string
 }) {
   return (
     <>
       <Box>
         <Text css={{ fontWeight: 'bold', width: 100 }} fontSize={18}>
-          {fontWeightData.weight}
+          {fontWeightData.token.value}
         </Text>
       </Box>
       <Box
         css={{
           fontSize: '1rem',
-          fontWeight: fontWeightData.weight,
+          fontWeight: fontWeightData.token.value,
           width: '100%',
         }}
       >
-        Lorem ipsum dolor sit amet.
+        {placeholder}
       </Box>
     </>
   )

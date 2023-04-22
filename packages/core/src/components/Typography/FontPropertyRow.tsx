@@ -1,9 +1,5 @@
 import { Box, Button, Stack, Text, useDisclosure } from '@chakra-ui/react'
-import {
-  TFontSizeVariant,
-  TFontWeightVariant,
-  TLineHeightVariant,
-} from '@core/types'
+import { TNamedToken } from '@core/types'
 
 import { EditFontSizeModal } from './FontSize/EditFontSizeModal'
 import { FontSizeRow } from './FontSize/FontSizeRow'
@@ -15,14 +11,14 @@ import { LineHeightData } from './LineHeight/LineHeightData'
 export function FontPropertyRow({
   fontProperty,
   fontPropertyData,
+  placeholder,
   onUpdateFontPropertyVariant,
   onDeleteFontPropertyVariant,
 }: {
   fontProperty: 'fontSize' | 'fontWeight' | 'lineHeight'
-  fontPropertyData: TFontSizeVariant | TFontWeightVariant | TLineHeightVariant
-  onUpdateFontPropertyVariant: (
-    newVariant: TFontSizeVariant | TFontWeightVariant | TLineHeightVariant
-  ) => void
+  fontPropertyData: TNamedToken
+  placeholder: string
+  onUpdateFontPropertyVariant: (newVariant: TNamedToken) => void
   onDeleteFontPropertyVariant: () => void
 }) {
   const {
@@ -61,16 +57,21 @@ export function FontPropertyRow({
           </Text>
         </Box>
         {fontProperty === 'fontSize' && (
-          <FontSizeRow fontSizeData={fontPropertyData as TFontSizeVariant} />
+          <FontSizeRow
+            fontSizeData={fontPropertyData}
+            placeholder={placeholder}
+          />
         )}
         {fontProperty === 'fontWeight' && (
           <FontWeightRow
-            fontWeightData={fontPropertyData as TFontWeightVariant}
+            fontWeightData={fontPropertyData}
+            placeholder={placeholder}
           />
         )}
         {fontProperty === 'lineHeight' && (
           <LineHeightData
-            lineHeightData={fontPropertyData as TLineHeightVariant}
+            lineHeightData={fontPropertyData}
+            placeholder={placeholder}
           />
         )}
         <Box css={{ justifySelf: 'flex-end' }}>
@@ -86,7 +87,7 @@ export function FontPropertyRow({
             isAdding={false}
             isOpen={isEditVariantModalOpen}
             onClose={onEditVariantModalClose}
-            initialFontSizeVariant={fontPropertyData as TFontSizeVariant}
+            initialFontSizeVariant={fontPropertyData}
             onUpdateFontSizeVariant={onUpdateFontPropertyVariant}
             onDeleteFontSizeVariant={onDeleteFontPropertyVariant}
           />
@@ -96,7 +97,7 @@ export function FontPropertyRow({
             isAdding={false}
             isOpen={isEditVariantModalOpen}
             onClose={onEditVariantModalClose}
-            initialFontWeightVariant={fontPropertyData as TFontWeightVariant}
+            initialFontWeightVariant={fontPropertyData}
             onUpdateFontWeightVariant={onUpdateFontPropertyVariant}
             onDeleteFontWeightVariant={onDeleteFontPropertyVariant}
           />
@@ -106,7 +107,7 @@ export function FontPropertyRow({
             isAdding={false}
             isOpen={isEditVariantModalOpen}
             onClose={onEditVariantModalClose}
-            initialLineHeightVariant={fontPropertyData as TLineHeightVariant}
+            initialLineHeightVariant={fontPropertyData}
             onUpdateLineHeightVariant={onUpdateFontPropertyVariant}
             onDeleteLineHeightVariant={onDeleteFontPropertyVariant}
           />

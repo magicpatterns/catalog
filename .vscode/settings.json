@@ -8,9 +8,10 @@
     "**/vendor": true,
     "**/lib": true,
     "**/.mirrorful": true,
-    "**/dist": true
+    "**/dist": true,
+    "**/yarn.lock": true
   },
-  "cSpell.words": ["Mirrorful"],
+  "cSpell.words": ["Chakra", "infisical", "Mirrorful", "posthog"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   }

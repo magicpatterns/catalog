@@ -1,0 +1,22 @@
+default-group: local
+groups:
+  client: 
+    generators: 
+      - name: fernapi/fern-typescript-sdk
+        version: 0.5.14
+        output:
+          location: npm
+          url: npm.buildwithfern.com
+          package-name: "@mirrorful-fern/api-client"
+  local:
+    generators:
+      - name: fernapi/fern-typescript-express
+        version: 0.5.9
+        output:
+          location: local-file-system
+          path: ../../packages/server/src/api/generated
+      - name: fernapi/fern-postman
+        version: 0.0.44
+        output:
+          location: local-file-system
+          path: '../../packages/postman'
