@@ -41,11 +41,11 @@
 <kbd>[<img title="Turkish" alt="Turkish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/tr.svg" width="22">](i18n/README.tr.md)</kbd>
 <kbd>[<img title="Spanish" alt="Spanish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/es.svg" width="22">](i18n/README.es.md)</kbd>
 <kbd>[
-  <img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/pt.svg" width="22">
-  <img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/br.svg" width="22">
+<img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/pt.svg" width="22">
+<img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/br.svg" width="22">
 ](i18n/README.pt.md)</kbd>
 
-**[Mirrorful](https://mirrorful.com)** é um framework de *design systems* simples, e de código aberto. Instale Mirrorful para criar cores e outros tokens de design para seu projeto. Então, importe esses tokens diretamente para sua aplicação.
+**[Mirrorful](https://mirrorful.com)** é um framework de _design systems_ simples, e de código aberto. Instale Mirrorful para criar cores e outros tokens de design para seu projeto. Então, importe esses tokens diretamente para sua aplicação.
 
 - **Inicie novos projetos com uma fonte da verdade**
 - **Modifique seu tema visualmente**
@@ -60,11 +60,11 @@ E mais...
 
 ## 🎨 Por que eu deveria usar Mirrorful?
 
-*Design system* é a fundação de sua aplicação, mas muitos projetos não começam a utilizar antes que seja tarde demais porque é algo difícil de implementar corretamente. Mirrorful te entrega um *design system* básico em minutos, deixando flexibilidade para customizações futuras. É leve e simples.
+_Design system_ é a fundação de sua aplicação, mas muitos projetos não começam a utilizar antes que seja tarde demais porque é algo difícil de implementar corretamente. Mirrorful te entrega um _design system_ básico em minutos, deixando flexibilidade para customizações futuras. É leve e simples.
 
 Estamos em uma missão de ajudar seu projeto a ser tão bonito quanto possível. A régua para designs de alta qualidade está ficando mais alta. Nós queremos ajudar todos a adicionar tokens de design simples a novos projetos (e a projetos existentes!).
 
-*Design systems* simples também aceleram o desenvolvimento — até em projetos nos estágios iniciais! Um relatório sugere que é 47% mais rápido de construir um simples formulário utilizando um *design system*. É útil para desenvolvedores, designes, e especialmente para seus clientes se não existir uma cor aleatória para cada botão na sua aplicação.
+_Design systems_ simples também aceleram o desenvolvimento — até em projetos nos estágios iniciais! Um relatório sugere que é 47% mais rápido de construir um simples formulário utilizando um _design system_. É útil para desenvolvedores, designes, e especialmente para seus clientes se não existir uma cor aleatória para cada botão na sua aplicação.
 
 ## 🚀 Passos iniciais
 
@@ -91,7 +91,7 @@ yarn run mirrorful
 ou
 
 ```
-npx mirrorful
+npx mirrorful editor
 ```
 
 ## 💿 Formatos de Exportação

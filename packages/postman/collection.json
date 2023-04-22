@@ -38,15 +38,14 @@
           "request": {
             "description": null,
             "url": {
-              "raw": "{{baseUrl}}/orgs/:orgId/library/upload",
+              "raw": "{{baseUrl}}/orgs/:orgId/library",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "orgs",
                 ":orgId",
-                "library",
-                "upload"
+                "library"
               ],
               "query": [],
               "variable": [
@@ -69,6 +68,88 @@
                 }
               }
             }
+          },
+          "response": []
+        },
+        {
+          "_type": "endpoint",
+          "name": "Update File",
+          "request": {
+            "description": null,
+            "url": {
+              "raw": "{{baseUrl}}/orgs/:orgId/file/:fileId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orgs",
+                ":orgId",
+                "file",
+                ":fileId"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "orgId",
+                  "value": "",
+                  "description": null
+                },
+                {
+                  "key": "fileId",
+                  "value": "",
+                  "description": null
+                }
+              ]
+            },
+            "header": [],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"code\": \"example\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "_type": "endpoint",
+          "name": "Get File",
+          "request": {
+            "description": null,
+            "url": {
+              "raw": "{{baseUrl}}/orgs/:orgId/file/:fileId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orgs",
+                ":orgId",
+                "file",
+                ":fileId"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "orgId",
+                  "value": "",
+                  "description": null
+                },
+                {
+                  "key": "fileId",
+                  "value": "",
+                  "description": null
+                }
+              ]
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null,
+            "body": null
           },
           "response": []
         }

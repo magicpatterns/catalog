@@ -12,6 +12,22 @@ export interface RegistryServiceMethods {
         cookie: (cookie: string, value: string, options?: express.CookieOptions) => void;
         locals: any;
     }): void | Promise<void>;
+    updateFile(req: express.Request<{
+        orgId: serializers.OrgId.Raw;
+        fileId: serializers.FileId.Raw;
+    }, MirrorfulApi.FileResponse, MirrorfulApi.UpdateFileRequest, never>, res: {
+        send: (responseBody: MirrorfulApi.FileResponse) => Promise<void>;
+        cookie: (cookie: string, value: string, options?: express.CookieOptions) => void;
+        locals: any;
+    }): void | Promise<void>;
+    getFile(req: express.Request<{
+        orgId: serializers.OrgId.Raw;
+        fileId: serializers.FileId.Raw;
+    }, MirrorfulApi.FileResponse, never, never>, res: {
+        send: (responseBody: MirrorfulApi.FileResponse) => Promise<void>;
+        cookie: (cookie: string, value: string, options?: express.CookieOptions) => void;
+        locals: any;
+    }): void | Promise<void>;
 }
 export declare class RegistryService {
     private readonly methods;
