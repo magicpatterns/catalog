@@ -29,19 +29,19 @@ export function ShadowColorPicker({
   spread: number
   hOffset: number
   vOffset: number
-  setBlur: Dispatch<SetStateAction<number>>
-  setSpread: Dispatch<SetStateAction<number>>
-  sethOffset: Dispatch<SetStateAction<number>>
-  setVOffset: Dispatch<SetStateAction<number>>
+  setBlur: Dispatch<SetStateAction<any>>
+  setSpread: Dispatch<SetStateAction<any>>
+  sethOffset: Dispatch<SetStateAction<any>>
+  setVOffset: Dispatch<SetStateAction<any>>
   codeResult: string
   color: string
   initialButton: number
   setColor: Dispatch<SetStateAction<string[]>>
   index: number
-  handleBlur: (e: string | number, index: number) => void
-  handleSpread: (e: string | number, index: number) => void
-  handleHOffset: (e: string | number, index: number) => void
-  handleVOffset: (e: string | number, index: number) => void
+  handleBlur: (e: number | string, index: number) => void
+  handleSpread: (e: number | string, index: number) => void
+  handleHOffset: (e: number | string, index: number) => void
+  handleVOffset: (e: number | string, index: number) => void
   handleNewColor: (
     e: { r: number; g: number; b: number },
     index: number

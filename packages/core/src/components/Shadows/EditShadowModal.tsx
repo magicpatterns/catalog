@@ -18,7 +18,6 @@ import {
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken } from '@core/types'
-import { sep } from 'path'
 import { useEffect, useState } from 'react'
 import { FiLayers, FiPlus } from 'react-icons/fi'
 import { v4 as uuidv4 } from 'uuid'
@@ -32,9 +31,6 @@ export function EditShadowModal({
   onUpdateShadowVariant,
   onDeleteShadowVariant,
   initialRgbaValue,
-  initialValues,
-  tokenName,
-  tokenValue,
 }: {
   isOpen: boolean
   onClose: () => void
@@ -42,17 +38,6 @@ export function EditShadowModal({
   onUpdateShadowVariant: (newVariant: TNamedToken) => void
   onDeleteShadowVariant?: () => void
   initialRgbaValue?: [{ r: number; g: number; b: number; a: number }] | any
-  initialValues?:
-    | [
-        {
-          hOffset: number
-          vOffset: number
-          blur: number
-          spread: number
-          color: string
-        }
-      ]
-    | any
 }) {
   const {
     isOpen: isAlertDialogOpen,
@@ -76,9 +61,6 @@ export function EditShadowModal({
 
   const [error, setError] = useState<string | null>(null)
 
-  //console.log(shadowData)
-
-  // New code for multiple shadows
   function getValues(str: string) {
     const regex = /^(.+?)\s*rgba/
     const match = regex.exec(str)
@@ -144,32 +126,9 @@ export function EditShadowModal({
     return getValues(shadowObject.value)
   })
 
-  /*
-  We need to get the data and than separate the box shadows
-  and than get the rgba values and than get the values
-
-
-
-
-  */
-
-  // const shadowObjects = separateBoxShadows(
-  //   shadowData.token.value,
-  //   shadowData.name
-  // )
-  // const initialRgbaValue = shadowObjects.map((shadowObject) => {
-  //   return getRgba(shadowObject.value)
-  // })
-
-  // const initialValues = shadowObjects.map((shadowObject) => {
-  //   return getValues(shadowObject.value)
-  // })
-
-  // New code for multiple shadows ^^^
-
   function newColors() {
     const newColorResult = []
-    for (let i = 0; i < initialValues?.length; i++) {
+    for (let i = 0; i < initialRgbaValue?.length; i++) {
       newColorResult.push(
         `rgba(${initialRgbaValue[i].r}, ${initialRgbaValue[i].g}, ${initialRgbaValue[i].b}, ${initialRgbaValue[i].a})`
       )
@@ -194,9 +153,9 @@ export function EditShadowModal({
     onClose()
   }
 
-  const [newInitialValues, setNewInitialValues] = useState(
-    initialValues
-      ? initialValues
+  const [newInitialValues, setNewInitialValues] = useState<any>(
+    x_initialValues
+      ? x_initialValues
       : [
           {
             hOffset: 0,
@@ -212,24 +171,32 @@ export function EditShadowModal({
     presetColor[0] ? presetColor?.map((i: string) => i) : ['rgba(1, 1, 1, 0.4)']
   )
   const [hOffset, sethOffset] = useState(
-    newInitialValues
-      ? newInitialValues?.map((i: { hOffset: number }) => i.hOffset)
+    x_initialValues
+      ? x_initialValues?.map((i: { hOffset: number }) => i.hOffset)
       : [0]
   )
   const [vOffset, setVOffset] = useState(
-    initialValues
-      ? initialValues?.map((i: { vOffset: number }) => i.vOffset)
+    x_initialValues
+      ? x_initialValues?.map((i: { vOffset: number }) => i.vOffset)
       : [0]
   )
   const [blur, setBlur] = useState(
-    initialValues ? initialValues?.map((i: { blur: number }) => i.blur) : [0]
-  )
-  const [spread, setSpread] = useState(
-    initialValues
-      ? initialValues?.map((i: { spread: number }) => i.spread)
+    x_initialValues
+      ? x_initialValues?.map((i: { blur: number }) => i.blur)
       : [0]
   )
-  const [initialButton, setInitialButton] = useState(0)
+  const [spread, setSpread] = useState(
+    x_initialValues
+      ? x_initialValues?.map((i: { spread: number }) => i.spread)
+      : [0]
+  )
+  const [shadowIndex, setShadowIndex] = useState(0)
+
+  const [shadowInputValidation, setShadowInputValidation] = useState(false)
+
+  const [shadowInput, setShadowInput] = useState(codeResult())
+
+  const [codeRes, setCodeRes] = useState(shadd2())
 
   function newColor() {
     const result = []
@@ -243,28 +210,44 @@ export function EditShadowModal({
 
   const newColorRes = newColor()
 
-  function handleBlur(e: string | number, i: number) {
+  function handleBlur(e: number, i: number) {
     const nextBlur = [...blur]
     nextBlur[i] = e
     setBlur(nextBlur)
+
+    const nextCodeRes = [...codeRes]
+    nextCodeRes[i] = shadd2()[i]
+    setCodeRes(nextCodeRes)
   }
 
-  function handleSpread(e: string | number, i: number) {
+  function handleSpread(e: number, i: any) {
     const nextSpread = [...spread]
     nextSpread[i] = e
     setSpread(nextSpread)
+
+    const nextCodeRes = [...codeRes]
+    nextCodeRes[i] = shadd2()[i]
+    setCodeRes(nextCodeRes)
   }
 
-  function handleHOffset(e: string | number, i: number) {
+  function handleHOffset(e: number, i: number) {
     const nextHOffset = [...hOffset]
     nextHOffset[i] = e
     sethOffset(nextHOffset)
+
+    const nextCodeRes = [...codeRes]
+    nextCodeRes[i] = shadd2()[i]
+    setCodeRes(nextCodeRes)
   }
 
-  function handleVOffset(e: string | number, i: number) {
+  function handleVOffset(e: number, i: number) {
     const nextVOffset = [...vOffset]
     nextVOffset[i] = e
     setVOffset(nextVOffset)
+
+    const nextCodeRes = [...codeRes]
+    nextCodeRes[i] = shadd2()[i]
+    setCodeRes(nextCodeRes)
   }
 
   const handleNewColor = (
@@ -281,7 +264,9 @@ export function EditShadowModal({
     }
   }
 
-  function newCodeResult() {
+  //console.log(x_initialValues)
+
+  function codeResult() {
     const result = []
     for (let i = 0; i < newInitialValues?.length; i++) {
       result.push(
@@ -291,52 +276,60 @@ export function EditShadowModal({
     return result.toString()
   }
 
-  console.log(newCodeResult())
-
-  const codeResult = function () {
-    if (x_initialValues) {
-      const result = []
-      for (let i = 0; i < x_initialValues?.length; i++) {
-        result.push(
-          ` ${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
-        )
-      }
-      return result.toString()
-    }
-    return `${hOffset ? hOffset : '0'}px ${vOffset ? vOffset : '0'}px ${
-      blur ? blur : '0'
-    }px ${spread ? spread : '0'}px ${
-      color[0] ? color[0] : 'rgba(1, 1, 1, 0.4)'
-    }`
-  }
-  //console.log(isNaN(blur[0]))
-
-  function handleInputValue(e) {
+  function handleInputValue(e: any) {
     const x = separateBoxShadows(e.target.value, 'shadow')
-    const y = getValues(x[initialButton].value)
-
-    console.log(y)
+    const y = getValues(x?.[0].value)
+    const z = getRgba(x?.[0].value)
 
     const nextBlur = [...blur]
-    console.log(nextBlur)
-    nextBlur[initialButton] = isNaN(y.blur) ? 0 : y.blur
+
+    nextBlur[shadowIndex] = y.blur
     setBlur(nextBlur)
 
     const nextSpread = [...spread]
-    nextSpread[initialButton] = isNaN(y.spread) ? 0 : y.spread
+    nextSpread[shadowIndex] = isNaN(y.spread) ? 0 : y.spread
     setSpread(nextSpread)
-    setShadowInput(e.target.value)
 
     const nextHOffset = [...hOffset]
-    nextHOffset[initialButton] = isNaN(y.hOffset) ? 0 : y.hOffset
+    nextHOffset[shadowIndex] = isNaN(y.hOffset) ? 0 : y.hOffset
     sethOffset(nextHOffset)
 
     const nextVOffset = [...vOffset]
-    nextVOffset[initialButton] = isNaN(y.vOffset) ? 0 : y.vOffset
+    nextVOffset[shadowIndex] = isNaN(y.vOffset) ? 0 : y.vOffset
     setVOffset(nextVOffset)
+
+    const newColor = `rgba(${z?.r}, ${z?.g}, ${z?.b}, ${z?.a})`
+    const nextColor = [...color]
+    nextColor[shadowIndex] = newColor
+    setColor(nextColor)
+
+    const nextCodeRes = [...codeRes]
+    nextCodeRes[shadowIndex] = e.target.value
+    setCodeRes(nextCodeRes)
   }
 
-  const [shadowInput, setShadowInput] = useState(codeResult())
+  function shadd2() {
+    const result = []
+    for (let i = 0; i < x_initialValues?.length; i++) {
+      result.push(
+        `${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
+      )
+    }
+    return result
+  }
+
+  console.log(shadd2()[0])
+
+  useEffect(() => {
+    const shadowRegex =
+      /^(-?\d+px\s){3}-?\d+px\srgba\((\d{1,3},\s){2}\d{1,3},\s\d\.\d{1,2}\)$/
+
+    if (codeRes?.[shadowIndex] && codeRes?.[shadowIndex].match(shadowRegex)) {
+      setShadowInputValidation(true)
+    } else {
+      setShadowInputValidation(false)
+    }
+  }, [spread, blur, hOffset, vOffset, color])
 
   useEffect(() => {
     setShadowInput(codeResult())
@@ -419,15 +412,15 @@ export function EditShadowModal({
                   width: '510px',
                 }}
               >
-                {newInitialValues?.map((_i: number, index: number) => (
+                {newInitialValues?.map((_i: any, index: any) => (
                   <Button
                     key={index}
                     style={{
-                      color: index === initialButton ? 'black' : 'gray',
+                      color: index === shadowIndex ? 'black' : 'gray',
                       width: '65px',
                       margin: '10px',
                     }}
-                    onClick={() => setInitialButton(index)}
+                    onClick={() => setShadowIndex(index)}
                   >
                     <Icon as={FiLayers} />
                   </Button>
@@ -450,7 +443,10 @@ export function EditShadowModal({
                     nextColor.push('rgba(0, 0, 0, 0.25)')
                     setNewInitialValues(nextShadow)
                     setColor(nextColor)
-                    setInitialButton(newInitialValues.length)
+                    setShadowIndex(newInitialValues.length)
+                    const nextCodeRes = [...codeRes]
+                    nextCodeRes.push('0px 0px 0px 0px rgba(0, 0, 0, 0.25)')
+                    setCodeRes(nextCodeRes)
                   }}
                 >
                   <Icon as={FiPlus} />
@@ -458,10 +454,10 @@ export function EditShadowModal({
               </Box>
               <FormControl>
                 <Box>
-                  {newInitialValues?.map((_i: number, index: number) => (
+                  {newInitialValues?.map((_i: any, index: any) => (
                     <div key={index}>
                       <div>
-                        {initialButton === index && (
+                        {shadowIndex === index && (
                           <ShadowColorPicker
                             blur={blur[index]}
                             spread={spread[index]}
@@ -479,7 +475,7 @@ export function EditShadowModal({
                             handleVOffset={handleVOffset}
                             color={color[index]}
                             setColor={setColor}
-                            initialButton={initialButton}
+                            shadowIndex={shadowIndex}
                             index={index}
                           />
                         )}
@@ -498,15 +494,22 @@ export function EditShadowModal({
                   flexDirection: 'column',
                 }}
               >
-                <Text style={{ marginBottom: '.5em' }}>Value</Text>
-                {/* <Input
-                  onChange={(e) => setShadowInput(e.target.value)}
-                  value={shadowInput}
-                /> */}
-                {newInitialValues?.map((_i: number, index: number) => (
+                <Text style={{ marginBottom: '.5em' }}>
+                  Value{' '}
+                  {shadowInputValidation ? (
+                    ''
+                  ) : (
+                    <span style={{ color: 'red' }}>Invalid format</span>
+                  )}
+                </Text>
+
+                {newInitialValues?.map((_i: any, index: any) => (
                   <div key={index}>
-                    {initialButton === index && (
-                      <Input onChange={handleInputValue} value={shadowInput} />
+                    {shadowIndex === index && (
+                      <Input
+                        onChange={handleInputValue}
+                        value={codeRes[shadowIndex]}
+                      />
                     )}
                   </div>
                 ))}

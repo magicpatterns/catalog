@@ -103,10 +103,6 @@ export function ShadowRow({
     return getRgba(shadowObject.value)
   })
 
-  const initialValues = shadowObjects.map((shadowObject) => {
-    return getValues(shadowObject.value)
-  })
-
   return (
     <Box css={{ width: '60vw' }}>
       <Stack
@@ -193,9 +189,6 @@ export function ShadowRow({
             onUpdateShadowVariant={onUpdateShadowVariant}
             onDeleteShadowVariant={onDeleteShadowVariant}
             initialRgbaValue={initialRgbaValue}
-            initialValues={initialValues}
-            tokenName={shadowData.name}
-            tokenValue={shadowData.token.value}
           />
         </Box>
       </Stack>
