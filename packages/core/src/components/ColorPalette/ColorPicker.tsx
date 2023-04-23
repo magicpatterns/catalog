@@ -28,7 +28,7 @@ const useColorStore = create<ColorState>((set) => ({
   setType: (type) => set(() => ({ type })),
 }))
 
-function DropdownInput() {
+function DropdownInput({ onChange }: { onChange: (color: string) => void }) {
   const type = useColorStore((state) => state.type)
   const setType = useColorStore((state) => state.setType)
   return (
@@ -56,7 +56,11 @@ function DropdownInput() {
           ))}
         </MenuList>
       </Menu>
-      <Input type="text" css={{ width: '100%', height: '100%' }} />
+      <Input
+        type="text"
+        css={{ width: '100%', height: '100%' }}
+        onChange={(e) => onChange(e.target.value)}
+      />
     </Box>
   )
 }
@@ -100,7 +104,7 @@ export default function ColorPicker({ colorPickerColor, onChange }: Props) {
         <HexPicker colorPickerColor={colorPickerColor} onChange={onChange} />
       )}
       {type === 'RGB' && <RgbaPicker />}
-      <DropdownInput />
+      <DropdownInput onChange={onChange} />
     </Box>
   )
 }
