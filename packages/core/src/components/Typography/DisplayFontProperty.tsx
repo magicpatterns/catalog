@@ -23,12 +23,14 @@ export const DisplayFontProperty = ({
   buttonText,
   fontProperty,
   fontPropertyData,
+  placeholder,
   onUpdateFontPropertyData,
 }: {
   headingText: string
   buttonText: string
   fontProperty: 'fontSize' | 'fontWeight' | 'lineHeight'
   fontPropertyData: TTokenGroup
+  placeholder: string
   onUpdateFontPropertyData: (newFontData: TTokenGroup) => void
 }) => {
   const {
@@ -55,6 +57,7 @@ export const DisplayFontProperty = ({
               key={`${fontProperty}-${data.name}`}
               fontProperty={fontProperty}
               fontPropertyData={data}
+              placeholder={placeholder}
               onUpdateFontPropertyVariant={(updatedFontPropertyData) => {
                 const newFontPropertyData = { ...fontPropertyData }
 

@@ -27,8 +27,8 @@ export default function Home() {
           Mirrorful + Chakra UI Example
         </Heading>
         <Text css={{ marginBottom: '24px' }} fontSize="16" fontWeight="medium">
-          Open your Mirrorful editor (<Code>npx mirrorful</Code>) to make live
-          changes!
+          Open your Mirrorful editor (<Code>npx mirrorful editor</Code>) to make
+          live changes!
         </Text>
         <Stack spacing={8} direction="row">
           {['pink', 'green', 'teal'].map((color) => (

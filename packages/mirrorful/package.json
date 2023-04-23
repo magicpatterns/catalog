@@ -44,6 +44,8 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mirrorful/core": "2.0.5",
+    "@mirrorful-fern/api-client": "0.0.223",
+    "@vitejs/plugin-react": "^3.1.0",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "conf": "^10.0.2",
@@ -52,13 +54,17 @@
     "fs": "^0.0.1-security",
     "next": "13.2.4",
     "open": "^8.4.2",
+    "ora": "5.4.1",
     "path": "^0.12.7",
     "posthog-js": "^1.50.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "rimraf": "^4.1.2",
     "update-check": "^1.5.4",
+    "url": "^0.11.0",
     "uuid": "^9.0.0",
+    "vite": "^4.2.1",
+    "vite-plugin-dts": "^2.3.0",
     "zustand": "^4.3.7"
   },
   "devDependencies": {
@@ -78,7 +84,8 @@
     "pretty-quick": "^3.1.3",
     "run-script-os": "^1.1.6",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "vite-plugin-css-injected-by-js": "^3.1.0"
   },
   "engines": {
     "node": ">=14.6.0"

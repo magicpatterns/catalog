@@ -5,9 +5,11 @@ import { DisplayFontProperty } from '../DisplayFontProperty'
 
 export function FontWeightSection({
   fontWeightData,
+  placeholder,
   onUpdateFontPropertyData,
 }: {
   fontWeightData: TTokenGroup
+  placeholder: string
   onUpdateFontPropertyData: (newFontWeightData: TTokenGroup) => void
 }) {
   const headingText = 'Font Weights'
@@ -20,6 +22,7 @@ export function FontWeightSection({
         buttonText={buttonText}
         fontProperty="fontWeight"
         fontPropertyData={fontWeightData}
+        placeholder={placeholder}
         onUpdateFontPropertyData={onUpdateFontPropertyData}
       />
     </Box>
