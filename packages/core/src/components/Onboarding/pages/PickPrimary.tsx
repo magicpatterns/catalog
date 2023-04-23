@@ -1,6 +1,6 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
-import { HexPicker } from '@core/components/ColorPalette/ColorPicker'
+import ColorPicker from '@core/components/ColorPalette/ColorPicker'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
 import tinycolor from 'tinycolor2'
@@ -89,7 +89,7 @@ export function PickPrimary({
           padding: '24px',
         }}
       >
-        <HexPicker
+        <ColorPicker
           colorPickerColor={primaryColor}
           onChange={onUpdatePrimaryColor}
         />

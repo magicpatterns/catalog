@@ -21,7 +21,7 @@ import { assertToken, TNamedTokenGroup, TTokenGroup } from '@core/types'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { HexPicker } from './ColorPicker'
+import ColorPicker from './ColorPicker'
 import { defaultColorShadesToTokens, generateDefaultColorShades } from './utils'
 
 interface ModalProps {
@@ -261,7 +261,7 @@ export function EditColorModal({
             ) : null}
           </Flex>
           <Box flex="1">
-            <HexPicker
+            <ColorPicker
               onChange={(colorPickerColor) => {
                 setBase(colorPickerColor)
               }}

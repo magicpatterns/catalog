@@ -19,7 +19,7 @@ import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { HexPicker } from './ColorPicker'
+import ColorPicker from './ColorPicker'
 import { handleInvalidColor } from './utils'
 
 export function EditVariantModal({
@@ -182,7 +182,7 @@ export function EditVariantModal({
                     alignItems: 'center',
                   }}
                 >
-                  <HexPicker
+                  <ColorPicker
                     onChange={(colorPickerColor) => {
                       setVariant({
                         name: variant.name,
