@@ -264,6 +264,7 @@ export function EditColorModal({
             <ColorPicker
               onChange={(colorPickerColor) => {
                 setBase(colorPickerColor)
+                setColorPickerColor(colorPickerColor)
               }}
               colorPickerColor={colorPickerColor}
             />
