@@ -1,4 +1,5 @@
 import { register } from './api/generated'
+import cors from 'cors'
 
 import { getRegistryService } from './services/registry'
 import express from 'express'
@@ -30,8 +31,10 @@ if (process.env.NODE_ENV === 'production') {
 const connectionString =
   process.env.MIRRORFUL_MONGO_DB_URI || 'mongob://localhost:27017/mirrorful'
 
-mongoose.connect(connectionString)
+mongoose.connect(connectionString, { dbName: 'mirrorful' })
 /****************************************/
+
+app.use(cors())
 
 app.get('/', function mainHandler(req, res) {
   res.send('Hello world, this is the Mirrorful Server')

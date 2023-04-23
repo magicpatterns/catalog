@@ -74,7 +74,7 @@ yarn add mirrorful --dev
 The following command will start a local editor at `localhost:5050`.
 
 ```
-npx mirrorful
+npx mirrorful editor
 ```
 
 or

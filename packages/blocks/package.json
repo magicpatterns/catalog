@@ -55,6 +55,8 @@
     "prop-types": "15.8.1",
     "run-script-os": "^1.1.6",
     "storybook": "7.0.4",
-    "tsc-alias": "^1.8.5"
+    "tsc-alias": "^1.8.5",
+    "vite": "^4.2.1",
+    "vite-plugin-dts": "^2.2.0"
   }
 }

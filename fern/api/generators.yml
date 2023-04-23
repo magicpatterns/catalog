@@ -1,13 +1,13 @@
 default-group: local
 groups:
-  client: 
-    generators: 
+  client:
+    generators:
       - name: fernapi/fern-typescript-sdk
         version: 0.5.14
         output:
           location: npm
           url: npm.buildwithfern.com
-          package-name: "@mirrorful-fern/api-client"
+          package-name: '@mirrorful-fern/api-client'
   local:
     generators:
       - name: fernapi/fern-typescript-express
