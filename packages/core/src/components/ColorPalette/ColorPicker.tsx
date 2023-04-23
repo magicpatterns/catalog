@@ -2,11 +2,11 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
+  Input,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Input,
 } from '@chakra-ui/react'
 import { HexColorPicker, RgbaColorPicker } from 'react-colorful'
 import { create } from 'zustand'
