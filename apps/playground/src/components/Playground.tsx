@@ -105,7 +105,20 @@ export function Playground() {
   }
 
   function handleEditorWillMount(monaco: Monaco) {
-    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({})
+    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+      target: monaco.languages.typescript.ScriptTarget.ESNext,
+      moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+      skipLibCheck: true,
+      allowNonTsExtensions: true,
+      module: monaco.languages.typescript.ModuleKind.ESNext,
+      jsx: monaco.languages.typescript.JsxEmit.React,
+      esModuleInterop: true,
+    })
+    monaco.languages.typescript.typescriptDefaults.addExtraLib(
+      `declare module '@trigger-dev/components'`,
+      'https://cdn.jsdelivr.net/gh/teddarific/example-component-library/lib/example.d.ts'
+    )
+
     monaco.editor.defineTheme('dark', {
       base: 'vs-dark',
       inherit: true,

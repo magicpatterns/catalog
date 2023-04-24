@@ -3,6 +3,7 @@ import { execSync } from 'child_process'
 import fs from 'fs'
 import chalk from 'chalk'
 import { createLibrary } from '../api'
+import dts from 'dts-bundle'
 
 const logProgress = (message: string) => {
   console.log(chalk.cyan(message))
@@ -10,7 +11,9 @@ const logProgress = (message: string) => {
 
 export async function packageLibrary() {
   logProgress('Compiling library...')
-  execSync(`npx vite build --config ${__dirname}/vite-lib.config.js`)
+  execSync(`npx vite build --config ${__dirname}/vite-lib.config.js`, {
+    stdio: 'inherit',
+  })
 
   logProgress('Forming dist...')
   // Create final dist folder
@@ -30,15 +33,21 @@ export async function packageLibrary() {
     `${__dirname}/dist/main.css`
   )
 
-  fs.rmdirSync(`${__dirname}/module`, { recursive: true })
+  execSync(
+    `npx dts-bundle-generator -o ${__dirname}/dist/all.d.ts ./app/components/primitives/index.ts --external-inlines '@remix-run/react' 'react-router-dom'`,
+    { stdio: 'inherit' }
+  )
+
+  // fs.rmdirSync(`${__dirname}/module`, { recursive: true })
 
   logProgress('Forming package.json...')
   // TODO: Generate a package json to put inside of dist
 
   logProgress('Syncing files...')
   // TODO(Danilowicz): Upload files to S3
-  await createLibrary()
+  // await createLibrary()
 
   logProgress('Publishing...')
+  logProgress('hello!')
   // TODO: Run npm publish INSIDE OF dist
 }
