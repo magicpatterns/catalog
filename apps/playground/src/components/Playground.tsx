@@ -11,9 +11,13 @@ import { editor } from 'monaco-editor'
 import { Source } from './Source'
 import { TbDevices } from 'react-icons/tb'
 import { API_ENV } from '../utils/constants'
-import { MirrorfulApiClient } from '@mirrorful-fern/api-client/Client'
 import { Params, useLoaderData } from 'react-router-dom'
 import { FileResponse } from '@mirrorful-fern/api-client/api'
+import {
+  MirrorfulApiClient,
+  MirrorfulApiEnvironment,
+} from '@mirrorful-fern/api-client'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export async function loader({ params }: { params: Params<string> }) {
   const client = new MirrorfulApiClient({
@@ -28,6 +32,8 @@ export async function loader({ params }: { params: Params<string> }) {
 import { PageRender } from './PageRender'
 
 export function Playground() {
+  const { fileId, orgId } = useParams()
+
   const file = useLoaderData() as FileResponse | null
 
   const [inputCode, setInputCode] = useState<string>(
@@ -73,7 +79,7 @@ export function Playground() {
     // this is pretty costly i think
   }, [inputCode])
 
-  const handleTranspileCode = (theInputCode: string) => {
+  const handleTranspileCode = async (theInputCode: string) => {
     try {
       const modifiedInputCode = replaceImports(theInputCode)
       const { iframeCode, sourceCode: sc } = transpileCode(modifiedInputCode)
@@ -88,6 +94,20 @@ export function Playground() {
       ])
       setTranspiledCode(source)
       setSourceCode(sc)
+
+      if (fileId && orgId) {
+        const environment =
+          process.env.NODE_ENV === 'production'
+            ? MirrorfulApiEnvironment.Production
+            : MirrorfulApiEnvironment.Development
+        const client = new MirrorfulApiClient({
+          environment,
+        })
+
+        await client.registry.updateFile(orgId, fileId, {
+          code: theInputCode,
+        })
+      }
     } catch (e) {
       if (e instanceof Error) {
         setLogs([
@@ -134,7 +154,7 @@ export function Playground() {
   }, [])
 
   return (
-    <Box>
+    <>
       <Box
         css={{
           width: '100vw',
@@ -147,8 +167,10 @@ export function Playground() {
         <Toolbar code={inputCode ?? ''} />
         <Box css={{ width: '100%', display: 'flex', flexGrow: 1 }}>
           <Box
-            css={{ width: `${widthDivide}%`, position: 'relative' }}
-            paddingY={'24px'}
+            css={{
+              flex: 1,
+              flexBasis: '40%',
+            }}
           >
             <MonacoEditor
               defaultLanguage="typescript"
@@ -166,40 +188,48 @@ export function Playground() {
               height={'100%'}
               theme={'dark'}
             />
-            <Box css={{ position: 'absolute', bottom: '24px', right: '36px' }}>
-              <Button
-                backgroundColor={'bg'}
-                borderColor={'divider'}
-                borderWidth={'1px'}
-                color={'playgroundText'}
-                css={{
-                  backdropFilter: 'blur(2px)',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                _hover={{
-                  boxShadow: '0 0 20px 1px #805AD5',
-                  // bgGradient: 'linear(to-br, bg, primary, bg)',
-                }}
-                onClick={() => handleTranspileCode(inputCode)}
-              >
-                <Text>Run</Text>
-                <Text
-                  css={{
-                    marginLeft: '6px',
-                    fontWeight: 'bold',
-                  }}
-                  color={'playgroundTextHover'}
-                >
-                  ⌘ + Enter
-                </Text>
-              </Button>
-            </Box>
           </Box>
           <Box
             css={{
-              width: `${widthDivide}%`,
+              position: 'fixed',
+              bottom: '24px',
+              right: '36px',
+              zIndex: 2,
+            }}
+          >
+            <Button
+              backgroundColor={'bg'}
+              borderColor={'divider'}
+              borderWidth={'1px'}
+              color={'playgroundText'}
+              css={{
+                backdropFilter: 'blur(2px)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              _hover={{
+                boxShadow: '0 0 20px 1px #805AD5',
+                // bgGradient: 'linear(to-br, bg, primary, bg)',
+              }}
+              onClick={() => handleTranspileCode(inputCode)}
+            >
+              <Text>Run</Text>
+              <Text
+                css={{
+                  marginLeft: '6px',
+                  fontWeight: 'bold',
+                }}
+                color={'playgroundTextHover'}
+              >
+                ⌘ + Enter
+              </Text>
+            </Button>
+          </Box>
+          <Box
+            id="right-side"
+            css={{
+              flexBasis: '60%',
               height: '100%',
               display: 'flex',
               flexDirection: 'column',
@@ -208,8 +238,9 @@ export function Playground() {
             borderColor={'divider'}
           >
             <Box
+              id="page-render"
               css={{
-                height: '60%',
+                flexBasis: '60%',
                 display: 'flex',
                 ...(isResponsiveMode && {
                   justifyContent: 'center',
@@ -224,8 +255,9 @@ export function Playground() {
               />
             </Box>
             <Box
+              id="console"
               css={{
-                height: '40%',
+                flexBasis: '40%',
                 display: 'flex',
                 flexDirection: 'column',
               }}
@@ -276,6 +308,6 @@ export function Playground() {
           </Box>
         </Box>
       </Box>
-    </Box>
+    </>
   )
 }
