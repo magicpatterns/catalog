@@ -220,6 +220,7 @@ export function Playground() {
               <PageRender
                 transpiledCode={transpiledCode}
                 isResponsiveMode={isResponsiveMode}
+                onCloseResponsiveMode={() => setIsResponsiveMode(false)}
               />
             </Box>
             <Box
@@ -256,6 +257,7 @@ export function Playground() {
                     leftIcon={<TbDevices />}
                     css={{ fontSize: '22px' }}
                     onClick={() => setIsResponsiveMode(!isResponsiveMode)}
+                    isActive={isResponsiveMode}
                   />
                 </Box>
               </Box>
