@@ -39,8 +39,6 @@ import { IconType } from 'react-icons'
 import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
 import {
-  SiChakraui,
-  SiNuxtdotjs,
   SiSvelte,
   SiBootstrap,
   SiChakraui,
