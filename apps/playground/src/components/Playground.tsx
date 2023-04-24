@@ -134,7 +134,7 @@ export function Playground() {
   }, [])
 
   return (
-    <Box>
+    <>
       <Box
         css={{
           width: '100vw',
@@ -147,8 +147,10 @@ export function Playground() {
         <Toolbar code={inputCode ?? ''} />
         <Box css={{ width: '100%', display: 'flex', flexGrow: 1 }}>
           <Box
-            css={{ width: `${widthDivide}%`, position: 'relative' }}
-            paddingY={'24px'}
+            css={{
+              flex: 1,
+              flexBasis: '40%',
+            }}
           >
             <MonacoEditor
               defaultLanguage="typescript"
@@ -166,40 +168,48 @@ export function Playground() {
               height={'100%'}
               theme={'dark'}
             />
-            <Box css={{ position: 'absolute', bottom: '24px', right: '36px' }}>
-              <Button
-                backgroundColor={'bg'}
-                borderColor={'divider'}
-                borderWidth={'1px'}
-                color={'playgroundText'}
-                css={{
-                  backdropFilter: 'blur(2px)',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                _hover={{
-                  boxShadow: '0 0 20px 1px #805AD5',
-                  // bgGradient: 'linear(to-br, bg, primary, bg)',
-                }}
-                onClick={() => handleTranspileCode(inputCode)}
-              >
-                <Text>Run</Text>
-                <Text
-                  css={{
-                    marginLeft: '6px',
-                    fontWeight: 'bold',
-                  }}
-                  color={'playgroundTextHover'}
-                >
-                  ⌘ + Enter
-                </Text>
-              </Button>
-            </Box>
           </Box>
           <Box
             css={{
-              width: `${widthDivide}%`,
+              position: 'fixed',
+              bottom: '24px',
+              right: '36px',
+              zIndex: 2,
+            }}
+          >
+            <Button
+              backgroundColor={'bg'}
+              borderColor={'divider'}
+              borderWidth={'1px'}
+              color={'playgroundText'}
+              css={{
+                backdropFilter: 'blur(2px)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              _hover={{
+                boxShadow: '0 0 20px 1px #805AD5',
+                // bgGradient: 'linear(to-br, bg, primary, bg)',
+              }}
+              onClick={() => handleTranspileCode(inputCode)}
+            >
+              <Text>Run</Text>
+              <Text
+                css={{
+                  marginLeft: '6px',
+                  fontWeight: 'bold',
+                }}
+                color={'playgroundTextHover'}
+              >
+                ⌘ + Enter
+              </Text>
+            </Button>
+          </Box>
+          <Box
+            id="right-side"
+            css={{
+              flexBasis: '60%',
               height: '100%',
               display: 'flex',
               flexDirection: 'column',
@@ -208,8 +218,9 @@ export function Playground() {
             borderColor={'divider'}
           >
             <Box
+              id="page-render"
               css={{
-                height: '60%',
+                flexBasis: '60%',
                 display: 'flex',
                 ...(isResponsiveMode && {
                   justifyContent: 'center',
@@ -224,8 +235,9 @@ export function Playground() {
               />
             </Box>
             <Box
+              id="console"
               css={{
-                height: '40%',
+                flexBasis: '40%',
                 display: 'flex',
                 flexDirection: 'column',
               }}
@@ -276,6 +288,6 @@ export function Playground() {
           </Box>
         </Box>
       </Box>
-    </Box>
+    </>
   )
 }

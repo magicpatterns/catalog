@@ -120,7 +120,10 @@ export function PageRender({
             }}
             backgroundColor="bg"
           >
-            <iframe srcDoc={transpiledCode} style={{ flexGrow: 1 }} />
+            <iframe
+              srcDoc={transpiledCode}
+              style={{ flexGrow: 1, zIndex: 1 }}
+            />
           </Box>
         </Box>
       </>
