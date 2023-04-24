@@ -35,13 +35,13 @@ export function ShadowColorPicker({
   setVOffset: Dispatch<SetStateAction<any>>
   codeResult: string
   color: string
-  initialButton: number
+  shadowIndex: number
   setColor: Dispatch<SetStateAction<string[]>>
   index: number
-  handleBlur: (e: number | string, index: number) => void
-  handleSpread: (e: number | string, index: number) => void
-  handleHOffset: (e: number | string, index: number) => void
-  handleVOffset: (e: number | string, index: number) => void
+  handleBlur: (e: any | string, index: number) => void
+  handleSpread: (e: any | string, index: number) => void
+  handleHOffset: (e: any | string, index: number) => void
+  handleVOffset: (e: any | string, index: number) => void
   handleNewColor: (
     e: { r: number; g: number; b: number },
     index: number

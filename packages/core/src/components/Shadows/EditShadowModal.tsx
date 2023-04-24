@@ -30,14 +30,12 @@ export function EditShadowModal({
   initialShadowVariant,
   onUpdateShadowVariant,
   onDeleteShadowVariant,
-  initialRgbaValue,
 }: {
   isOpen: boolean
   onClose: () => void
   initialShadowVariant?: TNamedToken
   onUpdateShadowVariant: (newVariant: TNamedToken) => void
   onDeleteShadowVariant?: () => void
-  initialRgbaValue?: [{ r: number; g: number; b: number; a: number }] | any
 }) {
   const {
     isOpen: isAlertDialogOpen,
@@ -118,25 +116,17 @@ export function EditShadowModal({
 
   const shadowObjects = separateBoxShadows(variant.token.value, variant.name)
 
-  const x_initialRgbaValue = shadowObjects.map((shadowObject) => {
+  const initialRgbaValues = shadowObjects.map((shadowObject) => {
     return getRgba(shadowObject.value)
   })
 
-  const x_initialValues = shadowObjects.map((shadowObject) => {
+  const initialValues = shadowObjects.map((shadowObject) => {
     return getValues(shadowObject.value)
   })
 
-  function newColors() {
-    const newColorResult = []
-    for (let i = 0; i < initialRgbaValue?.length; i++) {
-      newColorResult.push(
-        `rgba(${initialRgbaValue[i].r}, ${initialRgbaValue[i].g}, ${initialRgbaValue[i].b}, ${initialRgbaValue[i].a})`
-      )
-    }
-    return newColorResult
-  }
-
-  const presetColor = newColors()
+  const presetColor = initialRgbaValues.map((i) => {
+    return `rgba(${i.r}, ${i.g}, ${i.b}, ${i.a})`
+  })
 
   const handleSave = () => {
     setError(null)
@@ -154,8 +144,8 @@ export function EditShadowModal({
   }
 
   const [newInitialValues, setNewInitialValues] = useState<any>(
-    x_initialValues
-      ? x_initialValues
+    initialValues
+      ? initialValues
       : [
           {
             hOffset: 0,
@@ -171,23 +161,21 @@ export function EditShadowModal({
     presetColor[0] ? presetColor?.map((i: string) => i) : ['rgba(1, 1, 1, 0.4)']
   )
   const [hOffset, sethOffset] = useState(
-    x_initialValues
-      ? x_initialValues?.map((i: { hOffset: number }) => i.hOffset)
+    initialValues
+      ? initialValues?.map((i: { hOffset: number }) => i.hOffset)
       : [0]
   )
   const [vOffset, setVOffset] = useState(
-    x_initialValues
-      ? x_initialValues?.map((i: { vOffset: number }) => i.vOffset)
+    initialValues
+      ? initialValues?.map((i: { vOffset: number }) => i.vOffset)
       : [0]
   )
   const [blur, setBlur] = useState(
-    x_initialValues
-      ? x_initialValues?.map((i: { blur: number }) => i.blur)
-      : [0]
+    initialValues ? initialValues?.map((i: { blur: number }) => i.blur) : [0]
   )
   const [spread, setSpread] = useState(
-    x_initialValues
-      ? x_initialValues?.map((i: { spread: number }) => i.spread)
+    initialValues
+      ? initialValues?.map((i: { spread: number }) => i.spread)
       : [0]
   )
   const [shadowIndex, setShadowIndex] = useState(0)
@@ -254,17 +242,18 @@ export function EditShadowModal({
     value: { r: number; g: number; b: number; a?: number },
     i: number
   ) => {
-    if (!color) {
-      setColor(['rgba(1, 1, 1, 0.4)'])
-    } else {
-      const nextColor = [...color]
-      nextColor[i] = `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})`
+    const updatedColor = `rgba(${value.r}, ${value.g}, ${value.b}, ${value.a})`
+    const nextColor = [...color]
+    nextColor[i] = updatedColor
+    setColor(nextColor)
 
-      setColor(nextColor)
-    }
+    const nextCodeRes = [...nextColor]
+    nextCodeRes[
+      i
+    ] = `${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${updatedColor}`
+    console.log(nextCodeRes)
+    setCodeRes(nextCodeRes)
   }
-
-  //console.log(x_initialValues)
 
   function codeResult() {
     const result = []
@@ -310,15 +299,13 @@ export function EditShadowModal({
 
   function shadd2() {
     const result = []
-    for (let i = 0; i < x_initialValues?.length; i++) {
+    for (let i = 0; i < initialValues?.length; i++) {
       result.push(
         `${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
       )
     }
     return result
   }
-
-  console.log(shadd2()[0])
 
   useEffect(() => {
     const shadowRegex =
@@ -333,7 +320,6 @@ export function EditShadowModal({
 
   useEffect(() => {
     setShadowInput(codeResult())
-
     setVariant({ ...variant, token: { ...variant.token, value: codeResult() } })
   }, [spread, blur, hOffset, vOffset, color])
 
