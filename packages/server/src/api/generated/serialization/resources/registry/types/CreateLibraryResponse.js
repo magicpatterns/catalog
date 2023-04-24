@@ -30,6 +30,6 @@ exports.CreateLibraryResponse = void 0;
 const core = __importStar(require("../../../../core"));
 exports.CreateLibraryResponse = core.serialization.object({
     signedS3UploadUrl: core.serialization.string(),
-    libraryId: core.serialization.string(),
+    libraryId: core.serialization.lazy(async () => (await Promise.resolve().then(() => __importStar(require("../../..")))).LibraryId),
     name: core.serialization.string(),
 });

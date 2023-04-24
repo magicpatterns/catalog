@@ -8,7 +8,7 @@ export declare const CreateLibraryResponse: core.serialization.ObjectSchema<seri
 export declare namespace CreateLibraryResponse {
     interface Raw {
         signedS3UploadUrl: string;
-        libraryId: string;
+        libraryId: serializers.LibraryId.Raw;
         name: string;
     }
 }

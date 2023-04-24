@@ -83,7 +83,7 @@ yarn run mirrorful
 or
 
 ```
-npx mirrorful
+npx mirrorful editor
 ```
 
 ## 💿 Formate exportieren

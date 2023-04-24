@@ -81,7 +81,7 @@ yarn run mirrorful
 veya
 
 ```
-npx mirrorful
+npx mirrorful editor
 ```
 
 ## 💿 Dışa Aktarma Biçimleri

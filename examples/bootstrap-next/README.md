@@ -39,7 +39,7 @@ yarn mirrorful
 ### Using NPM
 
 ```bash
-npx mirrorful
+npx mirrorful editor
 ```
 
 This will open a browser window with the Mirrorful at localhost:5050.

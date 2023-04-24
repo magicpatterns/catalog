@@ -45,7 +45,7 @@ class RegistryService {
         return this;
     }
     toRouter() {
-        this.router.post("/upload", async (req, res, next) => {
+        this.router.post("/library", async (req, res, next) => {
             const request = await serializers.CreateLibraryRequest.parse(req.body);
             if (request.ok) {
                 req.body = request.value;
@@ -80,6 +80,70 @@ class RegistryService {
                     errors: request.errors.map((error) => ["request", ...error.path].join(" -> ") + ": " + error.message),
                 });
                 next(request.errors);
+            }
+        });
+        this.router.post("/file/:fileId", async (req, res, next) => {
+            const request = await serializers.UpdateFileRequest.parse(req.body);
+            if (request.ok) {
+                req.body = request.value;
+                try {
+                    await this.methods.updateFile(req, {
+                        send: async (responseBody) => {
+                            res.json(await serializers.FileResponse.jsonOrThrow(responseBody, {
+                                unrecognizedObjectKeys: "strip",
+                            }));
+                        },
+                        cookie: res.cookie.bind(res),
+                        locals: res.locals,
+                    });
+                    next();
+                }
+                catch (error) {
+                    console.error(error);
+                    if (error instanceof errors.MirrorfulApiError) {
+                        console.warn(`Endpoint 'updateFile' unexpectedly threw ${error.constructor.name}.` +
+                            ` If this was intentional, please add ${error.constructor.name} to` +
+                            " the endpoint's errors list in your Fern Definition.");
+                        await error.send(res);
+                    }
+                    else {
+                        res.status(500).json("Internal Server Error");
+                    }
+                    next(error);
+                }
+            }
+            else {
+                res.status(422).json({
+                    errors: request.errors.map((error) => ["request", ...error.path].join(" -> ") + ": " + error.message),
+                });
+                next(request.errors);
+            }
+        });
+        this.router.get("/file/:fileId", async (req, res, next) => {
+            try {
+                await this.methods.getFile(req, {
+                    send: async (responseBody) => {
+                        res.json(await serializers.FileResponse.jsonOrThrow(responseBody, {
+                            unrecognizedObjectKeys: "strip",
+                        }));
+                    },
+                    cookie: res.cookie.bind(res),
+                    locals: res.locals,
+                });
+                next();
+            }
+            catch (error) {
+                console.error(error);
+                if (error instanceof errors.MirrorfulApiError) {
+                    console.warn(`Endpoint 'getFile' unexpectedly threw ${error.constructor.name}.` +
+                        ` If this was intentional, please add ${error.constructor.name} to` +
+                        " the endpoint's errors list in your Fern Definition.");
+                    await error.send(res);
+                }
+                else {
+                    res.status(500).json("Internal Server Error");
+                }
+                next(error);
             }
         });
         return this.router;
