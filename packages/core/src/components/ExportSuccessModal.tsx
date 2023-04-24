@@ -39,10 +39,10 @@ import { IconType } from 'react-icons'
 import { FaReact } from 'react-icons/fa'
 import { FiCheckCircle } from 'react-icons/fi'
 import {
-  SiSvelte,
   SiBootstrap,
   SiChakraui,
   SiNuxtdotjs,
+  SiSvelte,
   SiTailwindcss,
 } from 'react-icons/si'
 import { TbBrandNextjs } from 'react-icons/tb'
