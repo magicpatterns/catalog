@@ -146,17 +146,10 @@ export function Toolbar({ code }: { code: string }) {
                 <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <Button
                     disabled={copyText === 'Copied'}
-                    size="sm"
-                    backgroundColor={'bg'}
-                    borderColor={'divider'}
-                    borderWidth={'1px'}
-                    color={'playgroundText'}
+                    variant="secondary"
+                    size="compact"
                     css={{
-                      minWidth: '110px', // no jumping when pressing copy
-                      backdropFilter: 'blur(2px)',
-                    }}
-                    _hover={{
-                      backgroundColor: 'bg',
+                      minWidth: '135px', // no jumping when pressing copy
                     }}
                     onClick={async () => await onCopy()}
                   >
