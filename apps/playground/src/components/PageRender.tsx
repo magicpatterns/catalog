@@ -1,14 +1,17 @@
-import { Box, Select, Text } from '@chakra-ui/react'
-import { useState, useRef, useEffect } from 'react'
+import { Box, Select, Text, Icon } from '@chakra-ui/react'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { FiX } from 'react-icons/fi'
 
 type TScreenSizeOptions = 'mobile' | 'tablet' | 'desktop'
 
 export function PageRender({
   transpiledCode,
   isResponsiveMode,
+  onCloseResponsiveMode,
 }: {
   transpiledCode: string
   isResponsiveMode: boolean
+  onCloseResponsiveMode: () => void
 }) {
   const frameContainer = useRef<HTMLDivElement>(null)
   const [screenSizeOption, setScreenSizeOption] =
@@ -18,12 +21,12 @@ export function PageRender({
     height: number
   }>({ width: 414, height: 896 })
 
-  const calculateScale = () => {
+  const calculateScale = useCallback(() => {
     if (frameContainer.current) {
       const { width, height } = frameContainer.current.getBoundingClientRect()
 
-      const limitingWidthScale = (0.7 * width) / screenSize.width
-      const limitingHeightScale = (0.7 * height) / screenSize.height
+      const limitingWidthScale = (0.8 * width) / screenSize.width
+      const limitingHeightScale = (0.8 * height) / screenSize.height
 
       const scale = Math.min(limitingWidthScale, limitingHeightScale)
 
@@ -31,26 +34,17 @@ export function PageRender({
     }
 
     return 0.5
-  }
+  }, [screenSize, frameContainer.current, isResponsiveMode])
 
   const scale = calculateScale()
 
+  let content = (
+    <iframe srcDoc={transpiledCode} style={{ flexGrow: 1, height: '100%' }} />
+  )
+
   if (isResponsiveMode) {
-    return (
-      <Box
-        css={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexGrow: 1,
-          position: 'relative',
-          height: '100%',
-          width: '100%',
-          overflow: 'hidden',
-        }}
-        ref={frameContainer}
-        backgroundColor="space.500"
-      >
+    content = (
+      <>
         <Box
           css={{
             position: 'absolute',
@@ -68,35 +62,53 @@ export function PageRender({
             css={{
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'space-between',
+              width: '100%',
             }}
             paddingX={'14px'}
           >
-            <Select
-              color="playgroundText"
-              value={screenSizeOption}
-              onChange={(e) => {
-                const newOption = e.target.value as TScreenSizeOptions
-                setScreenSizeOption(newOption)
-                if (newOption === 'mobile') {
-                  setScreenSize({ width: 414, height: 896 })
-                } else if (newOption === 'tablet') {
-                  setScreenSize({ width: 601, height: 962 })
-                } else if (newOption === 'desktop') {
-                  setScreenSize({ width: 1280, height: 720 })
-                }
-              }}
-              css={{ border: 'none' }}
-            >
-              <option value="mobile">Mobile</option>
-              <option value="tablet">Tablet</option>
-              <option value="desktop">Desktop</option>
-            </Select>
-            <Text
-              css={{ marginLeft: '16px', whiteSpace: 'nowrap' }}
-              color={'playgroundText'}
-            >
-              ({screenSize.width} x {screenSize.height})
-            </Text>
+            <Box css={{ display: 'flex', alignItems: 'center' }}>
+              <Select
+                color="playgroundText"
+                value={screenSizeOption}
+                onChange={(e) => {
+                  const newOption = e.target.value as TScreenSizeOptions
+                  setScreenSizeOption(newOption)
+                  if (newOption === 'mobile') {
+                    setScreenSize({ width: 414, height: 896 })
+                  } else if (newOption === 'tablet') {
+                    setScreenSize({ width: 601, height: 962 })
+                  } else if (newOption === 'desktop') {
+                    setScreenSize({ width: 1280, height: 720 })
+                  }
+                }}
+                css={{ border: 'none' }}
+              >
+                <option value="mobile">Mobile</option>
+                <option value="tablet">Tablet</option>
+                <option value="desktop">Desktop</option>
+                <option value="responsive" disabled>
+                  Responsive (COMING SOON)
+                </option>
+              </Select>
+              <Text
+                css={{ marginLeft: '16px', whiteSpace: 'nowrap' }}
+                color={'playgroundText'}
+              >
+                ({screenSize.width} x {screenSize.height})
+              </Text>
+            </Box>
+            <Box>
+              <Icon
+                as={FiX}
+                color="playgroundText"
+                css={{
+                  cursor: 'pointer',
+                }}
+                _hover={{ color: 'playgroundTextHover' }}
+                onClick={onCloseResponsiveMode}
+              />
+            </Box>
           </Box>
         </Box>
         <Box css={{ position: 'absolute' }}>
@@ -111,9 +123,27 @@ export function PageRender({
             <iframe srcDoc={transpiledCode} style={{ flexGrow: 1 }} />
           </Box>
         </Box>
-      </Box>
+      </>
     )
   }
 
-  return <iframe srcDoc={transpiledCode} style={{ flexGrow: 1 }} />
+  return (
+    <Box
+      css={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexGrow: 1,
+        position: 'relative',
+        height: '100%',
+        width: '100%',
+        overflow: 'hidden',
+        padding: '24px',
+      }}
+      backgroundColor={isResponsiveMode ? 'space.500' : 'bg'}
+      ref={frameContainer}
+    >
+      {content}
+    </Box>
+  )
 }
