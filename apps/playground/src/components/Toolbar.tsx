@@ -41,7 +41,7 @@ export function Toolbar({ code }: { code: string }) {
       status: 'success',
       duration: 9000,
       isClosable: true,
-      position: 'bottom-right',
+      position: 'top-right',
     })
   }
 
@@ -79,7 +79,7 @@ export function Toolbar({ code }: { code: string }) {
           >
             Share
           </Button>
-          <Button
+          {/* <Button
             variant="secondary"
             size="compact"
             leftIcon={<FiCloudLightning />}
@@ -91,10 +91,10 @@ export function Toolbar({ code }: { code: string }) {
             }}
           >
             Upgrade
-          </Button>
-          <Button variant="secondary" size="compact">
+          </Button> */}
+          {/* <Button variant="secondary" size="compact">
             <MoonIcon />
-          </Button>
+          </Button> */}
         </Stack>
       </Box>
     </Box>
