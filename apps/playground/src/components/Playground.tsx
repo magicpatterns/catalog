@@ -11,9 +11,13 @@ import { editor } from 'monaco-editor'
 import { Source } from './Source'
 import { TbDevices } from 'react-icons/tb'
 import { API_ENV } from '../utils/constants'
-import { MirrorfulApiClient } from '@mirrorful-fern/api-client/Client'
 import { Params, useLoaderData } from 'react-router-dom'
 import { FileResponse } from '@mirrorful-fern/api-client/api'
+import {
+  MirrorfulApiClient,
+  MirrorfulApiEnvironment,
+} from '@mirrorful-fern/api-client'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export async function loader({ params }: { params: Params<string> }) {
   const client = new MirrorfulApiClient({
@@ -28,6 +32,8 @@ export async function loader({ params }: { params: Params<string> }) {
 import { PageRender } from './PageRender'
 
 export function Playground() {
+  const { fileId, orgId } = useParams()
+
   const file = useLoaderData() as FileResponse | null
 
   const [inputCode, setInputCode] = useState<string>(
@@ -73,7 +79,7 @@ export function Playground() {
     // this is pretty costly i think
   }, [inputCode])
 
-  const handleTranspileCode = (theInputCode: string) => {
+  const handleTranspileCode = async (theInputCode: string) => {
     try {
       const modifiedInputCode = replaceImports(theInputCode)
       const { iframeCode, sourceCode: sc } = transpileCode(modifiedInputCode)
@@ -88,6 +94,20 @@ export function Playground() {
       ])
       setTranspiledCode(source)
       setSourceCode(sc)
+
+      if (fileId && orgId) {
+        const environment =
+          process.env.NODE_ENV === 'production'
+            ? MirrorfulApiEnvironment.Production
+            : MirrorfulApiEnvironment.Development
+        const client = new MirrorfulApiClient({
+          environment,
+        })
+
+        await client.registry.updateFile(orgId, fileId, {
+          code: theInputCode,
+        })
+      }
     } catch (e) {
       if (e instanceof Error) {
         setLogs([
