@@ -23,9 +23,16 @@ export default defineConfig(async ({ command, mode }) => {
       },
       outDir: `${__dirname}/module`,
       emptyOutDir: true,
+      minify: false,
     },
     define: {
       'process.env.NODE_ENV': '"production"',
+    },
+    resolve: {
+      alias: {
+        react: 'https://esm.sh/react@18.2.0',
+        'react-dom': 'https://esm.sh/react-dom@18.2.0',
+      },
     },
   }
 })
