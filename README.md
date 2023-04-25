@@ -116,7 +116,7 @@ Check out our examples:
 - [Mirrorful 🤝 Bootstrap (and Next)](https://github.com/Mirrorful/mirrorful/tree/main/examples/bootstrap-next)
 - [Mirrorful 🤝 styled-components](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components)
 
-Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues)
+Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues/357)
 
 ## ❤️ Community & Support
 
@@ -163,6 +163,6 @@ No matter the PR, all the Github avatars of contributors will be added to the Mi
 
 ## 🌎 Translations
 
-Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md), [Turkish 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.trs.md) and [Spanish 🇪🇸](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.es.md), among other languages. Help us translate our documentation and UI to your language!
+Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md), [Turkish 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.trs.md) and [Spanish 🇪🇸](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.es.md), and other languages. Help us translate our documentation and UI to your language!
 
 You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).
