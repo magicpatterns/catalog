@@ -7,6 +7,7 @@ import spawn from 'cross-spawn'
 import { findNodeModulesMirrorfulPath } from './helpers/find-node-modules'
 import fs from 'fs'
 import openBrowser from './helpers/openBrowser'
+import { patchNextFile } from './helpers/patch-next-file'
 
 export async function init({
   appPath,
@@ -77,6 +78,13 @@ export async function init({
   console.log(chalk.cyan(`  ${useYarn ? 'yarn run ' : 'npx '}mirrorful`))
   console.log('to start the visual editor at any time.')
   console.log()
+
+  // patching file to support .pnpm
+  const nodeModulesPath = findNodeModulesMirrorfulPath()
+  await patchNextFile({
+    packageManager,
+    rootNodeModulesFile: nodeModulesPath ?? '',
+  })
 
   try {
     const outputMode = verbose ? 'inherit' : 'ignore'
