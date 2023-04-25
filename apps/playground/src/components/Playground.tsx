@@ -44,13 +44,13 @@ export function Playground() {
   )
   const [transpiledCode, setTranspiledCode] = useState<string>('')
   const [sourceCode, setSourceCode] = useState<string>('')
-  const [logs, setLogs] = useState<TLogData[]>([
-    {
+  const [logs, setLogs] = useState<TLogData[]>(
+    Array(1).fill({
       text: 'Welcome to Mirrorful!',
       type: 'info',
       timestamp: new Date().toLocaleTimeString(),
-    },
-  ])
+    })
+  )
 
   const [isResponsiveMode, setIsResponsiveMode] = useState<boolean>(false)
 
@@ -253,7 +253,7 @@ export function Playground() {
           >
             <Box
               id="page-render"
-              minHeight={{ base: '50%', lg: '70%' }}
+              minHeight={{ base: '50%', lg: '60%' }}
               css={{
                 display: 'flex',
                 ...(isResponsiveMode && {
@@ -270,7 +270,7 @@ export function Playground() {
             </Box>
             <Box
               id="console"
-              minHeight={{ base: '50%', lg: '30%' }}
+              minHeight={{ base: '50%', lg: '40%' }}
               css={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -298,9 +298,9 @@ export function Playground() {
                   <Button variant="tab" onClick={() => setPanelTab('console')}>
                     CONSOLE
                   </Button>
-                  {/* <Button variant="tab" onClick={() => setPanelTab('source')}>
+                  <Button variant="tab" onClick={() => setPanelTab('source')}>
                     SOURCE
-                  </Button> */}
+                  </Button>
                 </Stack>
                 <Box>
                   <Button
@@ -315,14 +315,22 @@ export function Playground() {
               <Box
                 css={{
                   padding: '12px',
-                  flexGrow: 1,
+                  flexGrow: 1, // important for editor to grow
                   overflowY: 'scroll',
                   overflowX: 'hidden',
                 }}
               >
                 {panelTab === 'code' && editor}
-                {panelTab === 'console' && <Console logs={logs} />}
-                {/* {panelTab === 'source' && <Source code={transpiledCode} />} */}
+                {panelTab === 'console' && (
+                  <Box maxHeight="200">
+                    <Console logs={logs} />
+                  </Box>
+                )}
+                {panelTab === 'source' && (
+                  <Box maxHeight="200">
+                    <Source code={transpiledCode} />
+                  </Box>
+                )}
               </Box>
             </Box>
           </Box>

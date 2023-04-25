@@ -33,14 +33,7 @@ export function Console({ logs }: { logs: TLogData[] }) {
   }, [logs])
 
   return (
-    <Box
-      css={{
-        flexGrow: 1,
-        overflowY: 'scroll',
-        overflowX: 'hidden',
-      }}
-      ref={logsContainer}
-    >
+    <Box ref={logsContainer}>
       {logs.map((log, index) => (
         <LogInstance key={index} {...log} />
       ))}
