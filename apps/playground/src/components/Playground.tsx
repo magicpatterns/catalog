@@ -20,6 +20,7 @@ import {
 import { useParams } from 'react-router-dom'
 import { PageRender } from './PageRender'
 import { useMediaQuery } from 'react-responsive'
+import axios from 'axios'
 
 export async function loader({ params }: { params: Params<string> }) {
   const client = new MirrorfulApiClient({
@@ -135,7 +136,17 @@ export function Playground() {
   }
 
   function handleEditorWillMount(monaco: Monaco) {
-    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({})
+    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+      jsx: monaco.languages.typescript.JsxEmit.React,
+      moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+      allowNonTsExtensions: true,
+    })
+
+    monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+      noSemanticValidation: true,
+      noSyntaxValidation: true,
+    })
+
     monaco.editor.defineTheme('dark', {
       base: 'vs-dark',
       inherit: true,
@@ -163,6 +174,19 @@ export function Playground() {
         ]
       },
     })
+
+    const fetchTypes = async () => {
+      const { data: reactTypeDefs } = await axios.get(
+        `https://unpkg.com/@types/react/index.d.ts`
+      )
+
+      monaco.languages.typescript.typescriptDefaults.addExtraLib(
+        reactTypeDefs,
+        'react.d.ts'
+      )
+    }
+
+    fetchTypes()
   }
 
   function handleEditorDidMount(
