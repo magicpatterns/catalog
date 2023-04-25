@@ -29,6 +29,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import { generateRandomId } from '../utils/generateId'
 
 const TRIGGER_DEV_ORG_ID = '535f2ra'
 
@@ -62,9 +63,7 @@ export function Toolbar({ code, onRun }: { code: string; onRun: () => void }) {
     })
 
     const finalOrgId = orgId ? orgId : TRIGGER_DEV_ORG_ID
-    const finalFileId = fileId
-      ? fileId
-      : Math.floor(100000 + Math.random() * 900000).toString()
+    const finalFileId = fileId ? fileId : generateRandomId()
 
     await client.registry.updateFile(finalOrgId, finalFileId, {
       code,
