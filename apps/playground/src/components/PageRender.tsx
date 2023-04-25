@@ -122,7 +122,7 @@ export function PageRender({
           >
             <iframe
               srcDoc={transpiledCode}
-              style={{ flexGrow: 1, zIndex: 1 }}
+              style={{ flexGrow: 1, zIndex: 1, height: '100%' }}
             />
           </Box>
         </Box>
