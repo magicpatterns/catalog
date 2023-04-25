@@ -23,5 +23,5 @@
   - [x] Footer (save, delete)
   - [x] Body
   - [x] Add mirrorful colors
-- [ ] Links Component
-  - [ ] Add mirrorful colors
+- [x] Links Component
+  - [x] Add mirrorful colors
