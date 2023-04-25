@@ -1,17 +1,5 @@
 import { ChakraProps } from '@chakra-ui/react'
-
-export type Sizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-export type Weights =
-  | 'hairline'
-  | 'thin'
-  | 'light'
-  | 'normal'
-  | 'medium'
-  | 'semibold'
-  | 'bold'
-  | 'extrabold'
-  | 'black'
-export type Styles = `${Sizes}/${Weights}`
+import { Styles } from '@ui/shared/types'
 
 interface main
   extends Pick<
@@ -32,7 +20,7 @@ interface main
     | 'marginBlock'
   > {
   label: string
-  styles: Styles
+  styles?: Styles
   hover?: {
     backgroundColor: string
     color: string
