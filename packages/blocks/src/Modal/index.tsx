@@ -123,8 +123,8 @@ export function ModalFooter(props: TModalFooter) {
     return (
       <ChakraModalFooter>
         <Button
-          label="save"
-          variant="save"
+          label="cancel"
+          variant="default"
           marginRight={'12px'}
           onClick={props.closeCb}
         ></Button>
