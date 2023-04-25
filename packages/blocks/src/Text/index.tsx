@@ -3,7 +3,8 @@ import React from 'react'
 
 import { Tokens } from '../../.mirrorful/theme'
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
-import { IText, Sizes, Weights } from './types'
+import { extractVariant } from '../util/extractVariant'
+import { IText } from './types'
 
 export function Text(props: IText) {
   const { colors, fontSizes, fontWeights } = Tokens
@@ -39,8 +40,4 @@ export function Text(props: IText) {
       </ChakraText>
     </ChakraProviderWrapper>
   )
-
-  function extractVariant(styles: string): [Sizes, Weights] {
-    return styles.split('/') as [Sizes, Weights]
-  }
 }
