@@ -104,7 +104,7 @@ Check out our [documentation](https://mirrorful.com/docs) for more information.
 
 We strive to be component library agnostic. Whether you're using Material UI, Chakra UI, Tailwind, Ant Design, or even your in-house library, Mirrorful hooks right in.
 
-⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory. If you're working with Vite, you can add a config that copies the .mirrorful dir to `src`. Check out the example `vite.config.ts` [https://github.com/Mirrorful/mirrorful/blob/main/examples/sveltekit/vite.config.ts](here). 
+⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory. If you're working with Vite, you can add a config that copies the .mirrorful dir to `src`. Check out the example `vite.config.ts` [here](https://github.com/Mirrorful/mirrorful/blob/main/examples/sveltekit/vite.config.ts). 
 
 Check out our examples:
 
