@@ -135,6 +135,7 @@ Se på våre eksempler:
 
 - [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
 - [Mirrorful 🤝 Basic Create React App](https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app)
+- [Mirrorful 🤝 Sveltekit](https://github.com/Mirrorful/mirrorful/tree/main/examples/sveltekit)
 
 Ser du etter et spesifikt eksempel? [Be om en her!](https://github.com/Mirrorful/mirrorful/issues)
 

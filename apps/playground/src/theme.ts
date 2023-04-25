@@ -88,7 +88,9 @@ export const theme = extendTheme({
           _hover: {
             color: 'playgroundTextHover',
           },
-          _active: {},
+          _active: {
+            color: 'primary',
+          },
         }),
       },
       sizes: {
