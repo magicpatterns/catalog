@@ -24,7 +24,6 @@ export function ColorsPage({
       files: fileTypes,
     })
   }
-
   return (
     <ColorPaletteSection colors={colors} onUpdateColors={handleUpdateColors} />
   )
