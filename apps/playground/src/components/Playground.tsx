@@ -58,6 +58,8 @@ export function Playground() {
     'console'
   )
 
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null)
+
   // Even when not in the editor, listen for the command
   useEffect(() => {
     let pressingCmd = false
@@ -84,6 +86,10 @@ export function Playground() {
   }, [inputCode])
 
   const handleTranspileCode = async (theInputCode: string) => {
+    if (editorRef.current) {
+      editorRef.current.getAction('editor.action.formatDocument')?.run()
+    }
+
     try {
       const modifiedInputCode = replaceImports(theInputCode)
       const { iframeCode, sourceCode: sc } = transpileCode(modifiedInputCode)
@@ -138,12 +144,32 @@ export function Playground() {
         'editor.background': '#040712',
       },
     })
+
+    monaco.languages.registerDocumentFormattingEditProvider('typescript', {
+      async provideDocumentFormattingEdits(model, options, token) {
+        const prettier = await import('prettier/standalone')
+        const babel = await import('prettier/parser-babel')
+        const text = prettier.format(model.getValue(), {
+          parser: 'babel',
+          plugins: [babel],
+          singleQuote: true,
+        })
+
+        return [
+          {
+            range: model.getFullModelRange(),
+            text,
+          },
+        ]
+      },
+    })
   }
 
   function handleEditorDidMount(
     editor: editor.IStandaloneCodeEditor,
     monaco: Monaco
   ) {
+    editorRef.current = editor
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
       handleTranspileCode(editor.getValue())
     })
