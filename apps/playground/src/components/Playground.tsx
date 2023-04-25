@@ -344,7 +344,6 @@ export function Playground() {
               </Box>
               <Box
                 css={{
-                  padding: '12px',
                   flexGrow: 1, // important for editor to grow
                   overflowY: 'scroll',
                   overflowX: 'hidden',
@@ -357,7 +356,7 @@ export function Playground() {
                   </Box>
                 )}
                 {panelTab === 'source' && (
-                  <Box maxHeight="200">
+                  <Box maxHeight="200" padding={4}>
                     <Source code={transpiledCode} />
                   </Box>
                 )}
