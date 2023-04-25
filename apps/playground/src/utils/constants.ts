@@ -1,7 +1,6 @@
 import { MirrorfulApiEnvironment } from '@mirrorful-fern/api-client/environments'
 
-export const DEFAULT_CODE = `
-import React from 'react'
+export const DEFAULT_CODE = `import React from 'react'
 import { render } from 'react-dom'
 import { PrimaryButton } from '@trigger-dev/components'
 

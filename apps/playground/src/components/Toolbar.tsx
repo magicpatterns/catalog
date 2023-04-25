@@ -33,7 +33,7 @@ import { useMediaQuery } from 'react-responsive'
 const TRIGGER_DEV_ORG_ID = '535f2ra'
 
 export function Toolbar({ code, onRun }: { code: string; onRun: () => void }) {
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 700px)' })
   const { fileId, orgId } = useParams()
   const navigate = useNavigate()
   const [copyText, setCopyText] = useState<'Copy' | 'Copied'>('Copy')
