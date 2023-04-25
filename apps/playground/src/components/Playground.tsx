@@ -17,7 +17,9 @@ import {
   MirrorfulApiClient,
   MirrorfulApiEnvironment,
 } from '@mirrorful-fern/api-client'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { PageRender } from './PageRender'
+import { useMediaQuery } from 'react-responsive'
 
 export async function loader({ params }: { params: Params<string> }) {
   const client = new MirrorfulApiClient({
@@ -29,9 +31,10 @@ export async function loader({ params }: { params: Params<string> }) {
     return null
   }
 }
-import { PageRender } from './PageRender'
 
 export function Playground() {
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 700px)' })
+
   const { fileId, orgId } = useParams()
 
   const file = useLoaderData() as FileResponse | null
@@ -51,8 +54,9 @@ export function Playground() {
 
   const [isResponsiveMode, setIsResponsiveMode] = useState<boolean>(false)
 
-  const [panelTab, setPanelTab] = useState<'console' | 'source'>('console')
-  const [widthDivide, setWidthDivide] = useState<number>(50)
+  const [panelTab, setPanelTab] = useState<'console' | 'source' | 'code'>(
+    'console'
+  )
 
   // Even when not in the editor, listen for the command
   useEffect(() => {
@@ -153,6 +157,25 @@ export function Playground() {
     handleTranspileCode(inputCode)
   }, [])
 
+  const editor = (
+    <MonacoEditor
+      defaultLanguage="typescript"
+      value={inputCode}
+      beforeMount={handleEditorWillMount}
+      onMount={handleEditorDidMount}
+      onChange={handleEditorChange}
+      options={{
+        minimap: { enabled: false },
+        scrollbar: { vertical: 'hidden' },
+        hideCursorInOverviewRuler: true,
+        overviewRulerLanes: 0,
+        automaticLayout: true,
+      }}
+      height={'100%'}
+      theme={'dark'}
+    />
+  )
+
   return (
     <>
       <Box
@@ -164,72 +187,63 @@ export function Playground() {
         }}
         backgroundColor={'bg'}
       >
-        <Toolbar code={inputCode ?? ''} />
+        <Toolbar
+          code={inputCode ?? ''}
+          onRun={() => handleTranspileCode(inputCode)}
+        />
         <Box css={{ width: '100%', display: 'flex', flexGrow: 1 }}>
-          <Box
-            css={{
-              flex: 1,
-              flexBasis: '40%',
-            }}
-          >
-            <MonacoEditor
-              defaultLanguage="typescript"
-              value={inputCode}
-              beforeMount={handleEditorWillMount}
-              onMount={handleEditorDidMount}
-              onChange={handleEditorChange}
-              options={{
-                minimap: { enabled: false },
-                scrollbar: { vertical: 'hidden' },
-                hideCursorInOverviewRuler: true,
-                overviewRulerLanes: 0,
-                automaticLayout: true,
+          {!isTabletOrMobile && (
+            <Box
+              css={{
+                flex: 1,
               }}
-              height={'100%'}
-              theme={'dark'}
-            />
-          </Box>
+            >
+              {editor}
+            </Box>
+          )}
           <Box
             css={{
               position: 'fixed',
               bottom: '24px',
-              right: '36px',
+              left: '400px',
               zIndex: 2,
             }}
           >
-            <Button
-              backgroundColor={'bg'}
-              borderColor={'divider'}
-              borderWidth={'1px'}
-              color={'playgroundText'}
-              css={{
-                backdropFilter: 'blur(2px)',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              _hover={{
-                boxShadow: '0 0 20px 1px #805AD5',
-                // bgGradient: 'linear(to-br, bg, primary, bg)',
-              }}
-              onClick={() => handleTranspileCode(inputCode)}
-            >
-              <Text>Run</Text>
-              <Text
+            {!isTabletOrMobile && (
+              <Button
+                backgroundColor={'bg'}
+                borderColor={'divider'}
+                borderWidth={'1px'}
+                color={'playgroundText'}
                 css={{
-                  marginLeft: '6px',
-                  fontWeight: 'bold',
+                  backdropFilter: 'blur(2px)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-                color={'playgroundTextHover'}
+                _hover={{
+                  boxShadow: '0 0 20px 1px #805AD5',
+                  // bgGradient: 'linear(to-br, bg, primary, bg)',
+                }}
+                onClick={() => handleTranspileCode(inputCode)}
               >
-                ⌘ + Enter
-              </Text>
-            </Button>
+                <Text>Run</Text>
+                <Text
+                  css={{
+                    marginLeft: '6px',
+                    fontWeight: 'bold',
+                  }}
+                  color={'playgroundTextHover'}
+                >
+                  ⌘ + Enter
+                </Text>
+              </Button>
+            )}
           </Box>
           <Box
             id="right-side"
             css={{
-              flexBasis: '60%',
+              flexBasis: isTabletOrMobile ? '100%' : '40%',
               height: '100%',
               display: 'flex',
               flexDirection: 'column',
@@ -239,8 +253,8 @@ export function Playground() {
           >
             <Box
               id="page-render"
+              minHeight={{ base: '50%', lg: '70%' }}
               css={{
-                flexBasis: '60%',
                 display: 'flex',
                 ...(isResponsiveMode && {
                   justifyContent: 'center',
@@ -256,8 +270,8 @@ export function Playground() {
             </Box>
             <Box
               id="console"
+              minHeight={{ base: '50%', lg: '30%' }}
               css={{
-                flexBasis: '40%',
                 display: 'flex',
                 flexDirection: 'column',
               }}
@@ -276,12 +290,17 @@ export function Playground() {
                 borderColor="divider"
               >
                 <Stack direction="row" spacing={8}>
+                  {isTabletOrMobile && (
+                    <Button variant="tab" onClick={() => setPanelTab('code')}>
+                      CODE
+                    </Button>
+                  )}
                   <Button variant="tab" onClick={() => setPanelTab('console')}>
                     CONSOLE
                   </Button>
-                  <Button variant="tab" onClick={() => setPanelTab('source')}>
+                  {/* <Button variant="tab" onClick={() => setPanelTab('source')}>
                     SOURCE
-                  </Button>
+                  </Button> */}
                 </Stack>
                 <Box>
                   <Button
@@ -301,8 +320,9 @@ export function Playground() {
                   overflowX: 'hidden',
                 }}
               >
+                {panelTab === 'code' && editor}
                 {panelTab === 'console' && <Console logs={logs} />}
-                {panelTab === 'source' && <Source code={transpiledCode} />}
+                {/* {panelTab === 'source' && <Source code={transpiledCode} />} */}
               </Box>
             </Box>
           </Box>

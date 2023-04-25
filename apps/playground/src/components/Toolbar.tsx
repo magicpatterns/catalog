@@ -17,6 +17,7 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  Image,
 } from '@chakra-ui/react'
 import TriggerDevLogo from '../assets/triggerdev_logo.png'
 import { FiShare2, FiCloudLightning } from 'react-icons/fi'
@@ -27,10 +28,12 @@ import {
 } from '@mirrorful-fern/api-client'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 const TRIGGER_DEV_ORG_ID = '535f2ra'
 
-export function Toolbar({ code }: { code: string }) {
+export function Toolbar({ code, onRun }: { code: string; onRun: () => void }) {
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
   const { fileId, orgId } = useParams()
   const navigate = useNavigate()
   const [copyText, setCopyText] = useState<'Copy' | 'Copied'>('Copy')
@@ -75,7 +78,7 @@ export function Toolbar({ code }: { code: string }) {
       css={{
         width: '100%',
         height: '52px',
-        padding: '12px 36px',
+        padding: '12px 24px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -83,14 +86,19 @@ export function Toolbar({ code }: { code: string }) {
       borderBottomWidth={'1px'}
       borderColor={'divider'}
     >
-      <Box css={{ display: 'flex', alignItems: 'center' }}>
-        <img
+      <Box css={{ alignItems: 'center', display: 'flex' }}>
+        <Image
           src={TriggerDevLogo}
-          style={{ height: '24px', marginRight: '16px' }}
+          style={{
+            height: isTabletOrMobile ? '20px' : '24px',
+            marginRight: '16px',
+          }}
         />
-        <Text css={{ fontSize: '14px', fontWeight: 'bold' }} color="gray.700">
-          Component Sandbox by Mirrorful
-        </Text>
+        {!isTabletOrMobile && (
+          <Text css={{ fontSize: '14px', fontWeight: 'bold' }} color="gray.700">
+            Component Sandbox by Mirrorful
+          </Text>
+        )}
       </Box>
       <Box>
         <Stack direction="row" spacing={4}>
@@ -169,6 +177,16 @@ export function Toolbar({ code }: { code: string }) {
               </PopoverBody>
             </PopoverContent>
           </Popover>
+          {isTabletOrMobile && (
+            <Button
+              variant="secondary"
+              size="compact"
+              leftIcon={<FiCloudLightning />}
+              onClick={onRun}
+            >
+              Run
+            </Button>
+          )}
           {/* <Button
             variant="secondary"
             size="compact"
