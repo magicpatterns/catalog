@@ -24,6 +24,7 @@ export function ShadowColorPicker({
   handleVOffset,
   handleNewColor,
   codeResult,
+  codeRes,
 }: {
   blur: number
   spread: number
@@ -101,6 +102,7 @@ export function ShadowColorPicker({
                 width="auto"
                 value={hOffset}
                 onChange={(e) => {
+                  console.log(e.target.value)
                   handleHOffset(e.target.value, index)
                 }}
               />
@@ -183,7 +185,7 @@ export function ShadowColorPicker({
             <Text style={{ marginBottom: '.5em' }}>Preview</Text>
             <Box
               style={{
-                boxShadow: codeResult,
+                boxShadow: codeRes,
                 width: '100%',
                 height: '60px',
                 backgroundColor: '#F3F3F3',
