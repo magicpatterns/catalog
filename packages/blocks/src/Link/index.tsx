@@ -11,15 +11,20 @@ interface ILink
   label: string
   href: string
   as: 'a' | typeof NextLink
+  target?: '_blank' | '_parent' | '_top' | '_self'
   icon?: React.ReactNode
 }
 
-function Link(props: ILink) {
+export function Link(props: ILink) {
   return (
     <ChakraProviderWrapper>
-      <ChakraLink {...props}>{props.label}</ChakraLink>
+      <ChakraLink
+        css={{ display: 'flex', gap: 8, alignItems: 'center' }}
+        {...props}
+      >
+        {props.icon}
+        {props.label}
+      </ChakraLink>
     </ChakraProviderWrapper>
   )
 }
-
-export default Link
