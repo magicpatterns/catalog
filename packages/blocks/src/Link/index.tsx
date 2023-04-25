@@ -1,10 +1,10 @@
-import { ChakraProps, ChakraTheme, Link as ChakraLink } from '@chakra-ui/react'
+import { ChakraProps, Link as ChakraLink } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import React from 'react'
 
-import { extractVariant } from '..'
 import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
-import { Styles } from '../Text/types'
+import { Styles } from '../shared/types'
+import { extractVariant } from '../util/extractVariant'
 
 interface ILink
   extends Partial<
