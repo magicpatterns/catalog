@@ -93,8 +93,6 @@ export async function init({
       stdio: [outputMode, outputMode, 'inherit'],
     })
 
-    await openBrowser({ url: 'http://localhost', port })
-
     if (output.stderr) {
       console.log(
         chalk.red(
@@ -111,4 +109,5 @@ export async function init({
       console.log(`Error: ${error.message}`)
     }
   }
+  await openBrowser({ url: 'http://localhost', port })
 }
