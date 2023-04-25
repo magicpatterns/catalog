@@ -196,6 +196,7 @@ export function Playground() {
             <Box
               css={{
                 flex: 1,
+                paddingTop: '12px',
               }}
             >
               {editor}
