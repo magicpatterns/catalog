@@ -182,18 +182,18 @@ export function Playground() {
       },
     })
 
-    const fetchTypes = async () => {
-      const { data: reactTypeDefs } = await axios.get(
-        `https://unpkg.com/@types/react/index.d.ts`
-      )
+    // const fetchTypes = async () => {
+    //   const { data: reactTypeDefs } = await axios.get(
+    //     `https://unpkg.com/@types/react/index.d.ts`
+    //   )
 
-      monaco.languages.typescript.typescriptDefaults.addExtraLib(
-        reactTypeDefs,
-        'file:///node_modules/@react/types/index.d.ts'
-      )
-    }
+    //   monaco.languages.typescript.typescriptDefaults.addExtraLib(
+    //     reactTypeDefs,
+    //     'file:///node_modules/@react/types/index.d.ts'
+    //   )
+    // }
 
-    fetchTypes()
+    // fetchTypes()
   }
 
   function handleEditorDidMount(
@@ -205,23 +205,39 @@ export function Playground() {
       handleTranspileCode(editor.getValue())
     })
 
-    // const fetchTypes = async () => {
-    //   const { data: reactTypeDefs } = await axios.get(
-    //     `https://unpkg.com/@types/react/index.d.ts`
-    //   )
+    const fetchTypes = async () => {
+      const { data: reactTypeDefs } = await axios.get(
+        `https://unpkg.com/@types/react/index.d.ts`
+      )
 
-    //   monaco.languages.typescript.typescriptDefaults.addExtraLib(
-    //     reactTypeDefs,
-    //     'file:///node_modules/@react/types/index.d.ts'
-    //   )
+      const { data: reactDomTypeDefs } = await axios.get(
+        `https://unpkg.com/@types/react-dom/index.d.ts`
+      )
+      // monaco.languages.typescript.typescriptDefaults.addExtraLib(
+      //   reactTypeDefs,
+      //   'file:///node_modules/@react/types/index.d.ts'
+      // )
 
-    //   // monaco.editor.createModel(
-    //   //   `declare module 'react' { ${reactTypeDefs} }`,
-    //   //   'typescript'
-    //   // )
-    // }
+      monaco.editor.createModel(
+        `declare module 'react' { ${reactTypeDefs} }`,
+        'typescript',
+        monaco.Uri.from({
+          scheme: 'inmemory',
+          path: 'node_modules/react/types/index.d.ts',
+        })
+      )
 
-    // fetchTypes()
+      monaco.editor.createModel(
+        `declare module 'react-dom' { ${reactDomTypeDefs} }`,
+        'typescript',
+        monaco.Uri.from({
+          scheme: 'inmemory',
+          path: 'node_modules/react-dom/types/index.d.ts',
+        })
+      )
+    }
+
+    fetchTypes()
   }
 
   const handleEditorChange = (value: string | undefined) => {
