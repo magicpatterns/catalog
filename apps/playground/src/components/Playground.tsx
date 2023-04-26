@@ -2,7 +2,7 @@ import { Box, Textarea, Button, Text, Stack } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { transpileCode } from '../utils/transpileCode'
 import MonacoEditor, { Monaco } from '@monaco-editor/react'
-import { SOURCE_BOILERPLATE, DEFAULT_CODE } from '../utils/constants'
+import { SOURCE_BOILERPLATE, DEFAULT_FEATURE_CODE } from '../utils/constants'
 import { replaceImports } from '../utils/replacers'
 import { TLogData } from '../types'
 import { Console } from './Console'
@@ -20,6 +20,7 @@ import {
 import { useParams } from 'react-router-dom'
 import { PageRender } from './PageRender'
 import { useMediaQuery } from 'react-responsive'
+import axios from 'axios'
 
 export async function loader({ params }: { params: Params<string> }) {
   const client = new MirrorfulApiClient({
@@ -40,7 +41,7 @@ export function Playground() {
   const file = useLoaderData() as FileResponse | null
 
   const [inputCode, setInputCode] = useState<string>(
-    file ? file.code : DEFAULT_CODE
+    file ? file.code : DEFAULT_FEATURE_CODE
   )
   const [transpiledCode, setTranspiledCode] = useState<string>('')
   const [sourceCode, setSourceCode] = useState<string>('')
@@ -135,7 +136,24 @@ export function Playground() {
   }
 
   function handleEditorWillMount(monaco: Monaco) {
-    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({})
+    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+      target: monaco.languages.typescript.ScriptTarget.Latest,
+      allowNonTsExtensions: true,
+      moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+      module: monaco.languages.typescript.ModuleKind.CommonJS,
+      noEmit: true,
+      esModuleInterop: true,
+      jsx: monaco.languages.typescript.JsxEmit.React,
+      reactNamespace: 'React',
+      allowJs: true,
+      typeRoots: ['node_modules/@types'],
+    })
+
+    monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+      noSemanticValidation: false,
+      noSyntaxValidation: false,
+    })
+
     monaco.editor.defineTheme('dark', {
       base: 'vs-dark',
       inherit: true,
@@ -173,6 +191,36 @@ export function Playground() {
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
       handleTranspileCode(editor.getValue())
     })
+
+    const fetchTypes = async () => {
+      const { data: reactTypeDefs } = await axios.get(
+        `https://unpkg.com/@types/react/index.d.ts`
+      )
+
+      const { data: reactDomTypeDefs } = await axios.get(
+        `https://unpkg.com/@types/react-dom/index.d.ts`
+      )
+
+      monaco.editor.createModel(
+        `declare module 'react' { ${reactTypeDefs} }`,
+        'typescript',
+        monaco.Uri.from({
+          scheme: 'inmemory',
+          path: 'node_modules/react/types/index.d.ts',
+        })
+      )
+
+      monaco.editor.createModel(
+        `declare module 'react-dom' { ${reactDomTypeDefs} }`,
+        'typescript',
+        monaco.Uri.from({
+          scheme: 'inmemory',
+          path: 'node_modules/react-dom/types/index.d.ts',
+        })
+      )
+    }
+
+    fetchTypes()
   }
 
   const handleEditorChange = (value: string | undefined) => {

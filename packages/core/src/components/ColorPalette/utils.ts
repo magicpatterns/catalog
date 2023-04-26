@@ -25,33 +25,33 @@ export const newShade = (hexColor: string, magnitude: number) => {
 }
 /* eslint-enable @typescript-eslint/no-unused-expressions */
 
-const scaleDiff = 6
+const scaleDiff = 7
 
 export const generateDefaultColorShades = (primary: string) => {
   return {
     50: tinycolor(primary)
-      .lighten(scaleDiff * 5)
+      .lighten(scaleDiff * 4.8)
       .toHexString(),
     100: tinycolor(primary)
-      .lighten(scaleDiff * 4)
+      .lighten(scaleDiff * 3.8)
       .toHexString(),
     200: tinycolor(primary)
-      .lighten(scaleDiff * 3)
+      .lighten(scaleDiff * 2.8)
       .toHexString(),
     300: tinycolor(primary)
-      .lighten(scaleDiff * 2)
+      .lighten(scaleDiff * 1.8)
       .toHexString(),
     400: tinycolor(primary).lighten(scaleDiff).toHexString(),
     500: tinycolor(primary).toHexString(),
     600: tinycolor(primary).darken(scaleDiff).toHexString(),
     700: tinycolor(primary)
-      .darken(scaleDiff * 2)
+      .darken(scaleDiff * 2.8)
       .toHexString(),
     800: tinycolor(primary)
-      .darken(scaleDiff * 3)
+      .darken(scaleDiff * 3.8)
       .toHexString(),
     900: tinycolor(primary)
-      .darken(scaleDiff * 4)
+      .darken(scaleDiff * 4.8)
       .toHexString(),
   }
 }
