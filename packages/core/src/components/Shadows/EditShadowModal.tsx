@@ -167,7 +167,7 @@ export function EditShadowModal({
 
   const [shadowInputValidation, setShadowInputValidation] = useState(false)
 
-  const [codeRes, setCodeRes] = useState(initialCodeResult())
+  const [codeResult, setCodeResult] = useState<string[]>(initialCodeResult())
 
   function initialCodeResult() {
     const result = []
@@ -179,30 +179,28 @@ export function EditShadowModal({
     return result
   }
 
-  console.log(initialValues)
-
   function handleBlur(e: number, i: number) {
     const nextBlur = [...blur]
     nextBlur[i] = e
     setBlur(nextBlur)
 
-    const nextCodeRes = [...codeRes]
+    const nextCodeRes = [...codeResult]
     nextCodeRes[
       i
     ] = `${hOffset[i]}px ${vOffset[i]}px ${nextBlur[i]}px ${spread[i]}px ${color[i]}`
-    setCodeRes(nextCodeRes)
+    setCodeResult(nextCodeRes)
   }
 
-  function handleSpread(e: number, i: any) {
+  function handleSpread(e: number, i: number) {
     const nextSpread = [...spread]
     nextSpread[i] = e
     setSpread(nextSpread)
 
-    const nextCodeRes = [...codeRes]
+    const nextCodeRes = [...codeResult]
     nextCodeRes[
       i
     ] = `${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${nextSpread[i]}px ${color[i]}`
-    setCodeRes(nextCodeRes)
+    setCodeResult(nextCodeRes)
   }
 
   function handleHOffset(e: number, i: number) {
@@ -210,26 +208,27 @@ export function EditShadowModal({
     nextHOffset[i] = e
     sethOffset(nextHOffset)
 
-    const nextCodeRes = [...codeRes]
+    const nextCodeRes = [...codeResult]
     nextCodeRes[
       i
     ] = `${nextHOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
-    setCodeRes(nextCodeRes)
+    setCodeResult(nextCodeRes)
   }
 
   function handleVOffset(e: number, i: number) {
+    console.log(e)
     const nextVOffset = [...vOffset]
     nextVOffset[i] = e
     setVOffset(nextVOffset)
 
-    const nextCodeRes = [...codeRes]
+    const nextCodeRes = [...codeResult]
     nextCodeRes[
       i
     ] = `${hOffset[i]}px ${nextVOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
-    setCodeRes(nextCodeRes)
+    setCodeResult(nextCodeRes)
   }
 
-  const handleNewColor = (
+  const handleColor = (
     value: { r: number; g: number; b: number; a?: number },
     i: number
   ) => {
@@ -238,14 +237,15 @@ export function EditShadowModal({
     nextColor[i] = updatedColor
     setColor(nextColor)
 
-    const nextCodeRes = [...codeRes]
+    const nextCodeRes = [...codeResult]
     nextCodeRes[
       i
     ] = `${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${updatedColor}`
-    setCodeRes(nextCodeRes)
+    setCodeResult(nextCodeRes)
   }
 
-  function handleInputValue(e: any) {
+  // Update values when input is changed
+  function handleInputValue(e: React.ChangeEvent<HTMLInputElement>) {
     const x = separateBoxShadows(e.target.value, 'shadow')
     const y = getValues(x?.[0].value)
     const z = getRgba(x?.[0].value)
@@ -272,9 +272,9 @@ export function EditShadowModal({
     nextColor[shadowIndex] = newColor
     setColor(nextColor)
 
-    const nextCodeRes = [...codeRes]
+    const nextCodeRes = [...codeResult]
     nextCodeRes[shadowIndex] = e.target.value
-    setCodeRes(nextCodeRes)
+    setCodeResult(nextCodeRes)
   }
 
   const handleSave = () => {
@@ -302,7 +302,10 @@ export function EditShadowModal({
     const shadowRegex =
       /^(-?\d*\.?\d+(px)?\s){0,3}-?\d*\.?\d+(px)?\srgba\((\d{1,3},\s){2}\d{1,3},\s\d*\.?\d+\)$/
 
-    if (codeRes?.[shadowIndex] && codeRes?.[shadowIndex].match(shadowRegex)) {
+    if (
+      codeResult?.[shadowIndex] &&
+      codeResult?.[shadowIndex].match(shadowRegex)
+    ) {
       setShadowInputValidation(true)
     } else {
       setShadowInputValidation(false)
@@ -312,9 +315,9 @@ export function EditShadowModal({
   useEffect(() => {
     return setVariant({
       ...variant,
-      token: { ...variant.token, value: codeRes.toString() },
+      token: { ...variant.token, value: codeResult.toString() },
     })
-  }, [codeRes])
+  }, [codeResult])
 
   useEffect(() => {
     if (!isOpen) {
@@ -377,7 +380,7 @@ export function EditShadowModal({
                   width: '510px',
                 }}
               >
-                {newInitialValues?.map((_i: any, index: any) => (
+                {newInitialValues?.map((_i: number, index: number) => (
                   <Button
                     key={index}
                     style={{
@@ -409,9 +412,9 @@ export function EditShadowModal({
                     setNewInitialValues(nextShadow)
                     setColor(nextColor)
                     setShadowIndex(newInitialValues.length)
-                    const nextCodeRes = [...codeRes]
+                    const nextCodeRes = [...codeResult]
                     nextCodeRes.push('0px 0px 0px 0px rgba(0, 0, 0, 0.25)')
-                    setCodeRes(nextCodeRes)
+                    setCodeResult(nextCodeRes)
                   }}
                 >
                   <Icon as={FiPlus} />
@@ -419,7 +422,7 @@ export function EditShadowModal({
               </Box>
               <FormControl>
                 <Box>
-                  {newInitialValues?.map((_i: any, index: any) => (
+                  {newInitialValues?.map((_i: number, index: number) => (
                     <div key={index}>
                       <div>
                         {shadowIndex === index && (
@@ -432,8 +435,7 @@ export function EditShadowModal({
                             setSpread={setSpread}
                             sethOffset={sethOffset}
                             setVOffset={setVOffset}
-                            //codeResult={shadowInput}
-                            handleNewColor={handleNewColor}
+                            handleColor={handleColor}
                             handleBlur={handleBlur}
                             handleSpread={handleSpread}
                             handleHOffset={handleHOffset}
@@ -442,7 +444,7 @@ export function EditShadowModal({
                             setColor={setColor}
                             shadowIndex={shadowIndex}
                             index={index}
-                            codeRes={codeRes}
+                            codeResult={codeResult}
                           />
                         )}
                       </div>
@@ -469,12 +471,12 @@ export function EditShadowModal({
                   )}
                 </Text>
 
-                {newInitialValues?.map((_i: any, index: any) => (
+                {newInitialValues?.map((_i: number, index: number) => (
                   <div key={index}>
                     {shadowIndex === index && (
                       <Input
                         onChange={handleInputValue}
-                        value={codeRes[shadowIndex]}
+                        value={codeResult[shadowIndex]}
                       />
                     )}
                   </div>

@@ -22,31 +22,27 @@ export function ShadowColorPicker({
   handleSpread,
   handleHOffset,
   handleVOffset,
-  handleNewColor,
+  handleColor,
   codeResult,
-  codeRes,
 }: {
   blur: number
   spread: number
   hOffset: number
   vOffset: number
-  setBlur: Dispatch<SetStateAction<any>>
-  setSpread: Dispatch<SetStateAction<any>>
-  sethOffset: Dispatch<SetStateAction<any>>
-  setVOffset: Dispatch<SetStateAction<any>>
-  codeResult: string
+  setBlur: Dispatch<SetStateAction<number[]>>
+  setSpread: Dispatch<SetStateAction<number[]>>
+  sethOffset: Dispatch<SetStateAction<number[]>>
+  setVOffset: Dispatch<SetStateAction<number[]>>
   color: string
   shadowIndex: number
   setColor: Dispatch<SetStateAction<string[]>>
   index: number
-  handleBlur: (e: any | string, index: number) => void
-  handleSpread: (e: any | string, index: number) => void
-  handleHOffset: (e: any | string, index: number) => void
-  handleVOffset: (e: any | string, index: number) => void
-  handleNewColor: (
-    e: { r: number; g: number; b: number },
-    index: number
-  ) => void
+  codeResult: string[]
+  handleBlur: (e: number, index: number) => void
+  handleSpread: (e: number, index: number) => void
+  handleHOffset: (e: number, index: number) => void
+  handleVOffset: (e: number, index: number) => void
+  handleColor: (e: { r: number; g: number; b: number }, index: number) => void
 }) {
   return (
     <Box
@@ -65,7 +61,7 @@ export function ShadowColorPicker({
             width="100%"
             color={color}
             onChange={(e) => {
-              handleNewColor(e.rgb, index)
+              handleColor(e.rgb, index)
             }}
           />
         </Box>
@@ -102,8 +98,7 @@ export function ShadowColorPicker({
                 width="auto"
                 value={hOffset}
                 onChange={(e) => {
-                  console.log(e.target.value)
-                  handleHOffset(e.target.value, index)
+                  handleHOffset(Number(e.target.value), index)
                 }}
               />
             </Flex>
@@ -129,7 +124,7 @@ export function ShadowColorPicker({
                 width="auto"
                 value={vOffset}
                 onChange={(e) => {
-                  handleVOffset(e.target.value, index)
+                  handleVOffset(Number(e.target.value), index)
                 }}
               />
             </Flex>
@@ -153,7 +148,7 @@ export function ShadowColorPicker({
                 width="auto"
                 value={blur}
                 onChange={(e) => {
-                  handleBlur(e.target.value, index)
+                  handleBlur(Number(e.target.value), index)
                 }}
               />
             </Flex>
@@ -178,14 +173,14 @@ export function ShadowColorPicker({
                 width="auto"
                 value={spread}
                 onChange={(e) => {
-                  handleSpread(e.target.value, index)
+                  handleSpread(Number(e.target.value), index)
                 }}
               />
             </Flex>
             <Text style={{ marginBottom: '.5em' }}>Preview</Text>
             <Box
               style={{
-                boxShadow: codeRes,
+                boxShadow: codeResult.toString(),
                 width: '100%',
                 height: '60px',
                 backgroundColor: '#F3F3F3',
