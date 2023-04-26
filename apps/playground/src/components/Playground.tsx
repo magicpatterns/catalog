@@ -181,19 +181,6 @@ export function Playground() {
         ]
       },
     })
-
-    // const fetchTypes = async () => {
-    //   const { data: reactTypeDefs } = await axios.get(
-    //     `https://unpkg.com/@types/react/index.d.ts`
-    //   )
-
-    //   monaco.languages.typescript.typescriptDefaults.addExtraLib(
-    //     reactTypeDefs,
-    //     'file:///node_modules/@react/types/index.d.ts'
-    //   )
-    // }
-
-    // fetchTypes()
   }
 
   function handleEditorDidMount(
@@ -213,10 +200,6 @@ export function Playground() {
       const { data: reactDomTypeDefs } = await axios.get(
         `https://unpkg.com/@types/react-dom/index.d.ts`
       )
-      // monaco.languages.typescript.typescriptDefaults.addExtraLib(
-      //   reactTypeDefs,
-      //   'file:///node_modules/@react/types/index.d.ts'
-      // )
 
       monaco.editor.createModel(
         `declare module 'react' { ${reactTypeDefs} }`,
