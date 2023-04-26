@@ -8,37 +8,44 @@ export async function patchNextJsFileForPnpm({
   rootNodeModulesFile: string
 }) {
   const main_path = '/node_modules/.bin'
-  let [next, nextCMD, nextPs] = await Promise.all([
-    fs.promises.readFile(`${rootNodeModulesFile}${main_path}/next`, 'utf-8'),
-    fs.promises.readFile(
-      `${rootNodeModulesFile}${main_path}/next.CMD`,
-      'utf-8'
-    ),
-    fs.promises.readFile(
-      `${rootNodeModulesFile}${main_path}/next.ps1`,
-      'utf-8'
-    ),
-  ])
 
+  let next = await fs.promises.readFile(
+    `${rootNodeModulesFile}/${main_path}/next`,
+    'utf-8'
+  )
   next = next.replace(/(\\\.\.\\\.\.\\\.\.\\\.\.\\\.\.\\)/g, '/../../../.pnpm/')
-  nextCMD = nextCMD.replace(
-    /(\\\.\.\\\.\.\\\.\.\\\.\.\\\.\.\\)/g,
-    '/../../../.pnpm/'
-  )
-  nextPs = nextPs.replace(
-    /(\\\.\.\\\.\.\\\.\.\\\.\.\\\.\.\\)/g,
-    '/../../../.pnpm/'
-  )
+  await fs.promises.writeFile(`${rootNodeModulesFile}/${main_path}/next`, next)
 
-  await Promise.all([
-    fs.promises.writeFile(`${rootNodeModulesFile}${main_path}/next`, next),
-    fs.promises.writeFile(
-      `${rootNodeModulesFile}${main_path}/next.CMD`,
-      nextCMD
-    ),
-    fs.promises.writeFile(
-      `${rootNodeModulesFile}${main_path}/next.ps1`,
-      nextPs
-    ),
-  ])
+  if (process.platform === 'win32') {
+    let [nextCMD, nextPs] = await Promise.all([
+      fs.promises.readFile(
+        `${rootNodeModulesFile}/${main_path}/next.CMD`,
+        'utf-8'
+      ),
+      fs.promises.readFile(
+        `${rootNodeModulesFile}/${main_path}/next.ps1`,
+        'utf-8'
+      ),
+    ])
+
+    nextCMD = nextCMD.replace(
+      /(\\\.\.\\\.\.\\\.\.\\\.\.\\\.\.=\\)/g,
+      '/../../../.pnpm/'
+    )
+    nextPs = nextPs.replace(
+      /(\\\.\.\\\.\.\\\.\.\\\.\.\\\.\.\\)/g,
+      '/../../../.pnpm/'
+    )
+
+    await Promise.all([
+      fs.promises.writeFile(
+        `${rootNodeModulesFile}/${main_path}/next.CMD`,
+        nextCMD
+      ),
+      fs.promises.writeFile(
+        `${rootNodeModulesFile}/${main_path}/next.ps1`,
+        nextPs
+      ),
+    ])
+  }
 }
