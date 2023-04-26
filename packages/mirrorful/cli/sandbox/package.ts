@@ -37,7 +37,7 @@ export async function packageLibrary() {
 
   logProgress('Syncing files...')
   // TODO(Danilowicz): Upload files to S3
-  await createLibrary()
+  // await createLibrary()
 
   logProgress('Publishing...')
   // TODO: Run npm publish INSIDE OF dist
