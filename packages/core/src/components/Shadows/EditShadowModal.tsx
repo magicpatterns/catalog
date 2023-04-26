@@ -12,6 +12,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
@@ -20,6 +21,7 @@ import { RgbColor } from '@hello-pangea/color-picker'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
+import { darkTheme, lightTheme } from '../theme'
 import { ShadowColorPicker } from './ShadowColorPicker'
 
 export function EditShadowModal({
@@ -154,11 +156,16 @@ export function EditShadowModal({
     }
   }, [isOpen, initialShadowVariant])
 
+  const backgroundColor = useColorModeValue(
+    lightTheme.backgroundColors.secondary,
+    darkTheme.backgroundColors.secondary
+  )
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg={backgroundColor}>
           <ModalHeader>
             {initialShadowVariant ? 'Edit' : 'Add'} Shadow Variant
           </ModalHeader>
