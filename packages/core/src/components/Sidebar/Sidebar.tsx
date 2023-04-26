@@ -179,7 +179,7 @@ export function Sidebar({
   isCollapsed: boolean
   onToggleCollapsed: () => void
 }) {
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { toggleColorMode } = useColorMode()
   const backgroundColor = useColorModeValue(
     lightTheme.backgroundColors.secondary,
     darkTheme.backgroundColors.secondary
