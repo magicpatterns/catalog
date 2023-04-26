@@ -14,7 +14,7 @@ export function replaceImports(code: string) {
   if (LIBRARY_CONTEXT === 'fabra') {
     modifiedCode = modifiedCode.replace(
       `'@fabra/components'`,
-      `'https://cdn.jsdelivr.net/gh/teddarific/example-component-library/lib/fabra/fabra-library-2.es.js'`
+      `'https://cdn.jsdelivr.net/gh/teddarific/example-component-library/lib/fabra/fabra-library-3.es.js'`
     )
   } else if (LIBRARY_CONTEXT === 'triggerdev') {
     modifiedCode = modifiedCode.replace(
