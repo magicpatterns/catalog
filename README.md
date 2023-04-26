@@ -104,7 +104,7 @@ Check out our [documentation](https://mirrorful.com/docs) for more information.
 
 We strive to be component library agnostic. Whether you're using Material UI, Chakra UI, Tailwind, Ant Design, or even your in-house library, Mirrorful hooks right in.
 
-⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory. If you're working with Vite, you can add a config that copies the .mirrorful dir to `src`. Check out the example `vite.config.ts` [here](https://github.com/Mirrorful/mirrorful/blob/main/examples/sveltekit/vite.config.ts). 
+> ⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory. If you're working with Vite, you can add a config that copies the .mirrorful dir to `src`. Check out the example `vite.config.ts` [here](https://github.com/Mirrorful/mirrorful/blob/main/examples/sveltekit/vite.config.ts). 
 
 Check out our examples:
 
@@ -123,7 +123,6 @@ Looking for a specific example? [Request one here!](https://github.com/Mirrorful
 - [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - for live discussion with the community and the Mirrorful team.
 - [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - for help with building and deeper conversations about features.
 - [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - for any bugs and errors you encounter using Mirrorful.
-- [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates.
 
 ## 🏘 Open-source vs. paid
 
@@ -163,6 +162,6 @@ No matter the PR, all the Github avatars of contributors will be added to the Mi
 
 ## 🌎 Translations
 
-Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md), [Turkish 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.trs.md) and [Spanish 🇪🇸](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.es.md), and other languages. Help us translate our documentation and UI to your language!
+Mirrorful is currently available in English, [German 🇩🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.de.md), [Swedish 🇸🇪](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.sv.md), [Turkish 🇹🇷](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.trs.md), [Spanish 🇪🇸](https://github.com/Mirrorful/mirrorful/tree/main/i18n/README.es.md), and other languages. Help us translate our documentation and UI to your language.
 
 You can find all the info in [this issue](https://github.com/Mirrorful/mirrorful/issues/18).
