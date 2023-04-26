@@ -4,12 +4,14 @@ import dts from 'vite-plugin-dts'
 import react from '@vitejs/plugin-react'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 import externalGlobals from 'rollup-plugin-external-globals'
+import viteTsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig(async ({ command, mode }) => {
   console.log(__dirname)
   return {
     plugins: [
       react(),
+      viteTsconfigPaths(),
       // dts({
       //   include: [`app/components/primitives`],
       // }),
@@ -17,7 +19,7 @@ export default defineConfig(async ({ command, mode }) => {
     ],
     build: {
       lib: {
-        entry: resolve('./app/components/primitives/index.ts'),
+        entry: resolve('./src/components/index.ts'),
         name: 'Library',
         formats: ['es'],
         fileName: (format) => `library.${format}.js`,
