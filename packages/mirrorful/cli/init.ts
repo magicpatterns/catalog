@@ -7,7 +7,7 @@ import spawn from 'cross-spawn'
 import { findNodeModulesMirrorfulPath } from './helpers/find-node-modules'
 import fs from 'fs'
 import openBrowser from './helpers/openBrowser'
-import { patchNextFile } from './helpers/patch-next-file'
+import { patchNextJsFileForPnpm } from './helpers/patch-next-js-file-for-pnpm'
 
 export async function init({
   appPath,
@@ -38,13 +38,14 @@ export async function init({
     console.log('Current directory:', process.cwd())
   }
 
+  // find where the node_modules folder is
+  const nodeModulesPath = await findNodeModulesMirrorfulPath()
+
   let isUsingNextJs = false
   if (process.env.NODE_ENV === 'development') {
     // just run the editor in its own directory
     process.chdir(`editor`)
   } else {
-    // find where the node_modules folder is
-    const nodeModulesPath = await findNodeModulesMirrorfulPath()
     if (nodeModulesPath) {
       try {
         await fs.promises.access(`next.config.js`, fs.constants.F_OK)
@@ -79,12 +80,11 @@ export async function init({
   console.log('to start the visual editor at any time.')
   console.log()
 
-  // patching file to support .pnpm
-  const nodeModulesPath = findNodeModulesMirrorfulPath()
-  await patchNextFile({
-    packageManager,
-    rootNodeModulesFile: nodeModulesPath ?? '',
-  })
+  if (packageManager === 'pnpm') {
+    await patchNextJsFileForPnpm({
+      rootNodeModulesFile: nodeModulesPath ?? '',
+    })
+  }
 
   try {
     const outputMode = verbose ? 'inherit' : 'ignore'
