@@ -137,14 +137,21 @@ export function Playground() {
 
   function handleEditorWillMount(monaco: Monaco) {
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-      jsx: monaco.languages.typescript.JsxEmit.React,
-      moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+      target: monaco.languages.typescript.ScriptTarget.Latest,
       allowNonTsExtensions: true,
+      moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+      module: monaco.languages.typescript.ModuleKind.CommonJS,
+      noEmit: true,
+      esModuleInterop: true,
+      jsx: monaco.languages.typescript.JsxEmit.React,
+      reactNamespace: 'React',
+      allowJs: true,
+      typeRoots: ['node_modules/@types'],
     })
 
     monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
-      noSemanticValidation: true,
-      noSyntaxValidation: true,
+      noSemanticValidation: false,
+      noSyntaxValidation: false,
     })
 
     monaco.editor.defineTheme('dark', {
@@ -182,7 +189,7 @@ export function Playground() {
 
       monaco.languages.typescript.typescriptDefaults.addExtraLib(
         reactTypeDefs,
-        'react.d.ts'
+        'file:///node_modules/@react/types/index.d.ts'
       )
     }
 
@@ -197,6 +204,24 @@ export function Playground() {
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
       handleTranspileCode(editor.getValue())
     })
+
+    // const fetchTypes = async () => {
+    //   const { data: reactTypeDefs } = await axios.get(
+    //     `https://unpkg.com/@types/react/index.d.ts`
+    //   )
+
+    //   monaco.languages.typescript.typescriptDefaults.addExtraLib(
+    //     reactTypeDefs,
+    //     'file:///node_modules/@react/types/index.d.ts'
+    //   )
+
+    //   // monaco.editor.createModel(
+    //   //   `declare module 'react' { ${reactTypeDefs} }`,
+    //   //   'typescript'
+    //   // )
+    // }
+
+    // fetchTypes()
   }
 
   const handleEditorChange = (value: string | undefined) => {
