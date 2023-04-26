@@ -51,6 +51,14 @@ Alternatively, you can individually configure the rules you want to use under th
 }
 ```
 
+## Publishing
+
+You can publish this plugin to the NPM registry:
+
+```
+npm publish
+```
+
 ## Rules
 
 <!-- begin auto-generated rules list -->
