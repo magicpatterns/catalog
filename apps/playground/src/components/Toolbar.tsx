@@ -20,6 +20,7 @@ import {
   Image,
 } from '@chakra-ui/react'
 import TriggerDevLogo from '../assets/triggerdev_logo.png'
+import FabraLogo from '../assets/fabra_logo.png'
 import { FiShare2, FiCloudLightning } from 'react-icons/fi'
 import { TbPlanet, TbShare, TbCheck } from 'react-icons/tb'
 import {
@@ -29,8 +30,14 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import { LIBRARY_CONTEXT } from '../utils/constants'
 
 const TRIGGER_DEV_ORG_ID = '535f2ra'
+
+let logoToUse = TriggerDevLogo
+if (LIBRARY_CONTEXT === 'fabra') {
+  logoToUse = FabraLogo
+}
 
 export function Toolbar({ code, onRun }: { code: string; onRun: () => void }) {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 700px)' })
@@ -88,7 +95,7 @@ export function Toolbar({ code, onRun }: { code: string; onRun: () => void }) {
     >
       <Box css={{ alignItems: 'center', display: 'flex' }}>
         <Image
-          src={TriggerDevLogo}
+          src={logoToUse}
           style={{
             height: isTabletOrMobile ? '20px' : '24px',
             marginRight: '16px',

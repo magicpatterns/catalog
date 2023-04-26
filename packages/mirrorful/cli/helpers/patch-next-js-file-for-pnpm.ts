@@ -8,12 +8,13 @@ export async function patchNextJsFileForPnpm({
   rootNodeModulesFile: string
 }) {
   const main_path = '/node_modules/.bin'
-
+  const regex =
+    /(\\\.\.\\\.\.\\\.\.\\\.\.\\\.\.\\)|(\/\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/)/g
   let next = await fs.promises.readFile(
     `${rootNodeModulesFile}/${main_path}/next`,
     'utf-8'
   )
-  next = next.replace(/(\\\.\.\\\.\.\\\.\.\\\.\.\\\.\.\\)/g, '/../../../.pnpm/')
+  next = next.replace(regex, '/../../../.pnpm/')
   await fs.promises.writeFile(`${rootNodeModulesFile}/${main_path}/next`, next)
 
   if (process.platform === 'win32') {
@@ -28,14 +29,8 @@ export async function patchNextJsFileForPnpm({
       ),
     ])
 
-    nextCMD = nextCMD.replace(
-      /(\\\.\.\\\.\.\\\.\.\\\.\.\\\.\.=\\)/g,
-      '/../../../.pnpm/'
-    )
-    nextPs = nextPs.replace(
-      /(\\\.\.\\\.\.\\\.\.\\\.\.\\\.\.\\)/g,
-      '/../../../.pnpm/'
-    )
+    nextCMD = nextCMD.replace(regex, '/../../../.pnpm/')
+    nextPs = nextPs.replace(regex, '/../../../.pnpm/')
 
     await Promise.all([
       fs.promises.writeFile(
