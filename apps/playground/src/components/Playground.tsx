@@ -21,6 +21,7 @@ import { PageRender } from './PageRender'
 import { useMediaQuery } from 'react-responsive'
 import { Message } from 'console-feed/lib/definitions/Component'
 import { generateRandomId } from '../utils/generateId'
+import axios from 'axios'
 
 export async function loader({ params }: { params: Params<string> }) {
   const client = new MirrorfulApiClient({
@@ -138,7 +139,24 @@ export function Playground() {
   }
 
   function handleEditorWillMount(monaco: Monaco) {
-    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({})
+    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+      target: monaco.languages.typescript.ScriptTarget.Latest,
+      allowNonTsExtensions: true,
+      moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+      module: monaco.languages.typescript.ModuleKind.CommonJS,
+      noEmit: true,
+      esModuleInterop: true,
+      jsx: monaco.languages.typescript.JsxEmit.React,
+      reactNamespace: 'React',
+      allowJs: true,
+      typeRoots: ['node_modules/@types'],
+    })
+
+    monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+      noSemanticValidation: false,
+      noSyntaxValidation: false,
+    })
+
     monaco.editor.defineTheme('dark', {
       base: 'vs-dark',
       inherit: true,
@@ -176,6 +194,36 @@ export function Playground() {
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
       handleTranspileCode(editor.getValue())
     })
+
+    const fetchTypes = async () => {
+      const { data: reactTypeDefs } = await axios.get(
+        `https://unpkg.com/@types/react/index.d.ts`
+      )
+
+      const { data: reactDomTypeDefs } = await axios.get(
+        `https://unpkg.com/@types/react-dom/index.d.ts`
+      )
+
+      monaco.editor.createModel(
+        `declare module 'react' { ${reactTypeDefs} }`,
+        'typescript',
+        monaco.Uri.from({
+          scheme: 'inmemory',
+          path: 'node_modules/react/types/index.d.ts',
+        })
+      )
+
+      monaco.editor.createModel(
+        `declare module 'react-dom' { ${reactDomTypeDefs} }`,
+        'typescript',
+        monaco.Uri.from({
+          scheme: 'inmemory',
+          path: 'node_modules/react-dom/types/index.d.ts',
+        })
+      )
+    }
+
+    fetchTypes()
   }
 
   const handleEditorChange = (value: string | undefined) => {
