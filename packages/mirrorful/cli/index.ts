@@ -87,7 +87,8 @@ program.command('package').action(async () => {
 })
 
 program
-  .command('editor', 'Run the mirrorful token editor', { isDefault: true })
+  .command('editor')
+  .description('Runs the Mirrorful Editor')
   .action(() => {
     notifyUpdate()
       .then(main)
