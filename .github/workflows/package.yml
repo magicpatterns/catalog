@@ -3,9 +3,15 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'packages/core/**'
+      - 'packages/mirrorful/**'
   push:
     branches:
       - main
+    paths:
+      - 'packages/core/**'
+      - 'packages/mirrorful/**'
 
 jobs:
   build:
