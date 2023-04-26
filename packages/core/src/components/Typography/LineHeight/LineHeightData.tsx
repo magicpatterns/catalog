@@ -1,4 +1,5 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, useColorModeValue } from '@chakra-ui/react'
+import { darkTheme, lightTheme } from '@core/components/theme'
 import { TNamedToken } from '@core/types'
 
 export function LineHeightData({
@@ -8,10 +9,17 @@ export function LineHeightData({
   lineHeightData: TNamedToken
   placeholder: string
 }) {
+  const fontTokenValueColor = useColorModeValue(
+    lightTheme.text.colors.secondary,
+    darkTheme.text.colors.secondary
+  )
   return (
     <>
       <Box>
-        <Text css={{ fontWeight: 'bold', width: 100 }} fontSize={18}>
+        <Text
+          css={{ fontWeight: 'bold', width: 100, color: fontTokenValueColor }}
+          fontSize={18}
+        >
           {lineHeightData.token.value}
         </Text>
       </Box>

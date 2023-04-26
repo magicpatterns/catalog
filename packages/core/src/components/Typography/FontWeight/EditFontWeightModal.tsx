@@ -12,9 +12,11 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
+import { darkTheme, lightTheme } from '@core/components/theme'
 import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
@@ -39,6 +41,11 @@ export function EditFontWeightModal({
     onOpen: onDeleteAlertDialogOpen,
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
+
+  const backgroundColor = useColorModeValue(
+    lightTheme.backgroundColors.secondary,
+    darkTheme.backgroundColors.secondary
+  )
 
   const [variant, setVariant] = useState<TNamedToken>(
     initialFontWeightVariant ?? {
@@ -99,7 +106,7 @@ export function EditFontWeightModal({
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg={backgroundColor}>
           <ModalHeader>
             {isAdding ? 'Add' : 'Edit'} Font Weight Variant
           </ModalHeader>

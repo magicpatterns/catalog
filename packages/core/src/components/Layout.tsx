@@ -1,4 +1,9 @@
-import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
+import {
+  Box,
+  Spinner,
+  useColorModeValue,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { TMirrorfulStore } from '@core/types'
 import { AnimatePresence, motion } from 'framer-motion'
 import Head from 'next/head'
@@ -10,6 +15,7 @@ import { ExportSuccessModal } from '../components/ExportSuccessModal'
 import useMirrorfulStore, { MirrorfulState } from '../store/useMirrorfulStore'
 import { AlertDialogDelete } from './AlertDialogDelete'
 import { Sidebar } from './Sidebar/Sidebar'
+import { darkTheme, lightTheme } from './theme'
 
 export type TPlatform = 'package' | 'web'
 
@@ -62,6 +68,11 @@ export default function Layout({
     onOpen: onDeleteAlertDialogOpen,
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
+
+  const backgroundColor = useColorModeValue(
+    lightTheme.backgroundColors.primary,
+    darkTheme.backgroundColors.primary
+  )
 
   const handleExport = async () => {
     await postStoreData({
@@ -124,7 +135,10 @@ export default function Layout({
           }}
         />
         <Box
-          css={{ backgroundColor: 'white', flexGrow: 1 }}
+          bg={backgroundColor}
+          css={{
+            flexGrow: 1,
+          }}
           padding={{
             base: '24px 48px',
             md: '36px 72px',

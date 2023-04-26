@@ -13,9 +13,11 @@ import {
   ModalOverlay,
   Select,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
+import { darkTheme, lightTheme } from '@core/components/theme'
 import { TNamedToken, TUnits, Units } from '@core/types'
 import { parseUnit } from '@core/utils/parseUnit'
 import { useEffect, useState } from 'react'
@@ -60,6 +62,10 @@ export function EditFontSizeModal({
   )
 
   const [error, setError] = useState<string | null>(null)
+  const backgroundColor = useColorModeValue(
+    lightTheme.backgroundColors.secondary,
+    darkTheme.backgroundColors.secondary
+  )
 
   const handleSave = () => {
     setError(null)
@@ -111,7 +117,7 @@ export function EditFontSizeModal({
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent css={{ background: backgroundColor }}>
           <ModalHeader>
             {isAdding ? 'Add' : 'Edit'} Font Size Variant
           </ModalHeader>

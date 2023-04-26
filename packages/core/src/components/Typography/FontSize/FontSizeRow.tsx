@@ -1,4 +1,5 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, useColorModeValue } from '@chakra-ui/react'
+import { darkTheme, lightTheme } from '@core/components/theme'
 import { TNamedToken } from '@core/types'
 import { parseUnit } from '@core/utils/parseUnit'
 
@@ -43,10 +44,17 @@ export function FontSizeRow({
   fontSizeData: TNamedToken
   placeholder: string
 }) {
+  const fontTokenValueColor = useColorModeValue(
+    lightTheme.text.colors.secondary,
+    darkTheme.text.colors.secondary
+  )
   return (
     <>
       <Box>
-        <Text css={{ fontWeight: 'bold', width: 100 }} fontSize={18}>
+        <Text
+          css={{ fontWeight: 'bold', width: 100, color: fontTokenValueColor }}
+          fontSize={18}
+        >
           {fontSizeData.token.value}
         </Text>
       </Box>

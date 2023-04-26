@@ -1,6 +1,14 @@
-import { Box, Button, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Stack,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { TNamedToken } from '@core/types'
 
+import { darkTheme, lightTheme } from '../theme'
 import { EditFontSizeModal } from './FontSize/EditFontSizeModal'
 import { FontSizeRow } from './FontSize/FontSizeRow'
 import { EditFontWeightModal } from './FontWeight/EditFontWeightModal'
@@ -27,6 +35,25 @@ export function FontPropertyRow({
     onClose: onEditVariantModalClose,
   } = useDisclosure()
 
+  const backgroundColor = useColorModeValue(
+    lightTheme.buttons.backgroundColors.default,
+    darkTheme.buttons.small.backgroundColors.default
+  )
+  const backgroundColorOnHover = useColorModeValue(
+    lightTheme.buttons.backgroundColors.hover,
+    darkTheme.buttons.small.backgroundColors.hover
+  )
+  const color = useColorModeValue(
+    lightTheme.buttons.textColors.secondary,
+    darkTheme.buttons.small.textColors
+  )
+  const border = useColorModeValue('none', '2px solid transparent')
+  const borderRadius = useColorModeValue(8, 30)
+  const fontTokenNameColor = useColorModeValue(
+    lightTheme.text.colors.secondary,
+    darkTheme.text.colors.secondary
+  )
+
   return (
     <Box>
       <Stack
@@ -37,7 +64,7 @@ export function FontPropertyRow({
         <Box
           css={{
             padding: '12px',
-            border: '1px dashed black',
+            border: '1px dashed gray',
             borderRadius: 8,
             width: 100,
             display: 'flex',
@@ -50,6 +77,7 @@ export function FontPropertyRow({
               fontWeight: 'bold',
               width: 50,
               textAlign: 'center',
+              color: fontTokenNameColor,
             }}
             noOfLines={1}
           >
@@ -76,7 +104,16 @@ export function FontPropertyRow({
         )}
         <Box css={{ justifySelf: 'flex-end' }}>
           <Button
-            css={{ marginRight: 16 }}
+            css={{
+              marginRight: 16,
+              color: color,
+              background: backgroundColor,
+              border: border,
+              borderRadius: borderRadius,
+            }}
+            _hover={{
+              background: backgroundColorOnHover,
+            }}
             onClick={() => onEditVariantModalOpen()}
           >
             Edit Variant
