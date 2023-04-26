@@ -91,7 +91,7 @@ Check out our [documentation](https://mirrorful.com/docs) for more information.
 
 We strive to be component library agnostic. Whether you're using Material UI, Chakra UI, Tailwind, Ant Design, or even your in-house library, Mirrorful hooks right in.
 
-⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory.
+⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory. If you're working with Vite, you can add a config that copies the .mirrorful dir to `src`. Check out the example `vite.config.ts` [here](https://github.com/Mirrorful/mirrorful/blob/main/examples/sveltekit/vite.config.ts). 
 
 Check out our examples:
 
@@ -99,6 +99,7 @@ Check out our examples:
 - [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
 - [Mirrorful 🤝 Basic Create React App](https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app)
 - [Mirrorful 🤝 Basic Nuxt 3 App](https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3)
+- [Mirrorful 🤝 SvelteKit](https://github.com/Mirrorful/mirrorful/tree/main/examples/sveltekit)
 - [Mirrorful 🤝 Bootstrap (and Next)](https://github.com/Mirrorful/mirrorful/tree/main/examples/bootstrap-next)
 - [Mirrorful 🤝 styled-components](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components)
 
