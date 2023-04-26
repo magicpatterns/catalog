@@ -269,7 +269,7 @@ function TokenTab({
       <TabPanel key="tailwind">
         <Text css={{ marginBottom: 4 }}>
           <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-          <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code>{' '}
+          <Code>theme_cjs.cjs</Code> in <Code>tailwind.config.js</Code>{' '}
         </Text>
 
         <Text fontSize="sm" css={{ marginBottom: 8 }}>
@@ -280,7 +280,7 @@ function TokenTab({
 
         <CodePreview
           language="javascript"
-          text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
+          text={`const { Tokens } = require('./.mirrorful/theme_cjs.cjs')`}
         />
 
         <Text css={{ marginTop: 12, marginBottom: 8 }}>
