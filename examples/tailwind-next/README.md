@@ -2,7 +2,7 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and with [Tailwind CSS](https://tailwindcss.com/) and [Mirrorful](https://mirrorful.com/) added.
 
-It followed the directions [here](https://tailwindcss.com/docs/guides/nextjs).
+It followed the directions [here](https://tailwindcss.com/docs/guides/nextjs). It also incorporates the Mirrorful [eslint plugin](/packages/eslint-plugin).
 
 ## Run the development server:
 

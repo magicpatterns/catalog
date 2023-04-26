@@ -40,3 +40,5 @@ yarn-error.log*
 next-env.d.ts
 dist
 *.tgz
+
+!packages/eslint-plugin/lib
