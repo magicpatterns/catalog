@@ -117,6 +117,10 @@ Check out our examples:
 
 Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues)
 
+### ESLint Plugin
+
+We have an ESLint plugin with a recommended configuration that's ready to integrate with any project and UI library. It will detect hard-coded color strings throughout your project and help you convert them to the Mirrorful theme with a simple `npm run lint`. Learn more [here](/packages/eslint-plugin/).
+
 ## ❤️ Community & Support
 
 - [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - for live discussion with the community and the Mirrorful team.

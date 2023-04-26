@@ -2,6 +2,8 @@
 
 This directory contains a plugin containing ESLint rules for Mirrorful. This plugin should only be installed into a pre-existing [Mirrorful](https://github.com/mirrorful/mirrorful) project.
 
+See it in action [here](/examples/tailwind-next/).
+
 ## Installation
 
 You'll first need to install [ESLint](https://eslint.org/):
