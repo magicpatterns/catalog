@@ -23,11 +23,7 @@ if (verbose) {
   console.log()
 }
 
-const packageManager = !!program.useNpm
-  ? 'npm'
-  : !!program.usePnpm
-  ? 'pnpm'
-  : getPkgManager()
+const packageManager = getPkgManager()
 
 async function notifyUpdate() {
   try {
@@ -75,19 +71,15 @@ async function main() {
 }
 
 program
-  .command('sandbox')
-  .description('Runs Mirrorful Stories')
-  .action(() => {
-    console.log('hello!')
+  .command('package')
+  .description('Packages your component library')
+  .action(async () => {
+    console.log('Running package...')
+    await packageLibrary()
   })
 
-program.command('package').action(async () => {
-  console.log('Running package...')
-  await packageLibrary()
-})
-
 program
-  .command('editor')
+  .command('editor', { isDefault: true })
   .description('Runs the Mirrorful Editor')
   .action(() => {
     notifyUpdate()
