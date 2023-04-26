@@ -58,12 +58,14 @@
     "posthog-js": "^1.50.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.32.0",
     "update-check": "^1.5.4",
     "url": "^0.11.0",
     "uuid": "^9.0.0",
     "vite": "^4.2.1",
     "vite-plugin-dts": "^2.3.0",
     "vite-tsconfig-paths": "^4.2.0",
+    "yarn": "^1.22.19",
     "zustand": "^4.3.7"
   },
   "devDependencies": {
