@@ -9,13 +9,13 @@ export async function patchNextJsFileForPnpm({
 }) {
   const main_path = '/node_modules/.bin'
   let [next, nextCMD, nextPs] = await Promise.all([
-    fs.promises.readFile(`${rootNodeModulesFile}/${main_path}/next`, 'utf-8'),
+    fs.promises.readFile(`${rootNodeModulesFile}${main_path}/next`, 'utf-8'),
     fs.promises.readFile(
-      `${rootNodeModulesFile}/${main_path}/next.CMD`,
+      `${rootNodeModulesFile}${main_path}/next.CMD`,
       'utf-8'
     ),
     fs.promises.readFile(
-      `${rootNodeModulesFile}/${main_path}/next.ps1`,
+      `${rootNodeModulesFile}${main_path}/next.ps1`,
       'utf-8'
     ),
   ])
@@ -31,13 +31,13 @@ export async function patchNextJsFileForPnpm({
   )
 
   await Promise.all([
-    fs.promises.writeFile(`${rootNodeModulesFile}/${main_path}/next`, next),
+    fs.promises.writeFile(`${rootNodeModulesFile}${main_path}/next`, next),
     fs.promises.writeFile(
-      `${rootNodeModulesFile}/${main_path}/next.CMD`,
+      `${rootNodeModulesFile}${main_path}/next.CMD`,
       nextCMD
     ),
     fs.promises.writeFile(
-      `${rootNodeModulesFile}/${main_path}/next.ps1`,
+      `${rootNodeModulesFile}${main_path}/next.ps1`,
       nextPs
     ),
   ])
