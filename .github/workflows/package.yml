@@ -60,3 +60,9 @@ jobs:
         with:
           dir: packages/mirrorful/editor
           cmd: lint # will run `yarn lint` command in packages/mirrorful/editor
+
+      - name: test packages/eslint-plugin
+        uses: borales/actions-yarn@v4
+        with:
+          dir: packages/eslint-plugin
+          cmd: test # will run `yarn lint` command in packages/mirrorful/editor
