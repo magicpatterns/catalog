@@ -42,3 +42,4 @@ dist
 *.tgz
 
 !packages/eslint-plugin/lib
+!packages/eslint-plugin/tests/*
