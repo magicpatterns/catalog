@@ -67,7 +67,7 @@ export const SOURCE_BOILERPLATE = (iframeCode: string) => `
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/teddarific/example-component-library/lib/example.css">
-</head>
+  </head>
 <body style="color:white; width:100vw; height:100vh;">
   <div id="root" style="width: 100vw; height: 100vh"></div>
   <script type="module">${iframeCode}</script>
@@ -103,8 +103,8 @@ function App(){
               className="flex py-4 text-center lg:py-2 lg:pr-4 lg:text-left"
             >
               Trigger workflows from APIs, on a schedule, or on demand. API
-              calls are easy with authentication handled for you. Add durable
-              delays that survive server restarts.
+     are easy with authentication handled for you. Add durable
+              delays that surviv         calls e server restarts.
             </Paragraph>
 
             <div className="mt-4 mr-4 flex flex-col items-center justify-center pb-8 sm:px-12 md:mt-8 md:gap-x-4 lg:flex-row lg:justify-start lg:px-0  lg:pb-0">
