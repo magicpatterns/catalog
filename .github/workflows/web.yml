@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - 'apps/web/**'
+      - 'packages/core/**'
   push:
     branches:
       - main
