@@ -50,6 +50,11 @@ export function ShadowRow({
   )
   const border = useColorModeValue('none', '2px solid transparent')
   const borderRadius = useColorModeValue(8, 30)
+  const previewBoxColor = useColorModeValue(
+    lightTheme.backgroundColors.primary,
+    darkTheme.backgroundColors.primary
+  )
+  const previewBoxBorder = useColorModeValue('#e6e4e4', '#252323')
 
   useEffect(() => {
     let copiedTimeout: NodeJS.Timeout
@@ -164,10 +169,8 @@ export function ShadowRow({
             css={{
               width: 100,
               height: 50,
-              // backgroundColor: '#F3F3F3',
-              // border: '1px solid #D3D3D3',
-              backgroundColor: '#121212',
-              border: '1px solid #171717',
+              backgroundColor: previewBoxColor,
+              border: `1px solid ${previewBoxBorder}`,
               boxShadow: shadowData.token.value,
               padding: '24px',
               borderRadius: 8,

@@ -69,11 +69,12 @@ export function ShadowColorPicker({
               max={25}
               defaultValue={hOffset}
               onChange={(val) => sethOffset(val)}
+              colorScheme="orange"
             >
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>
-              <SliderThumb />
+              <SliderThumb bg="orange" />
             </Slider>
             <Text>Vertical Offset</Text>
             <Slider
@@ -82,22 +83,24 @@ export function ShadowColorPicker({
               max={25}
               defaultValue={vOffset}
               onChange={(val) => setVOffset(val)}
+              colorScheme="orange"
             >
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>
-              <SliderThumb />
+              <SliderThumb bg="orange" />
             </Slider>
             <Text>Blur</Text>
             <Slider
               aria-label="slider-blur"
               defaultValue={blur}
               onChange={(val) => setBlur(val)}
+              colorScheme="orange"
             >
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>
-              <SliderThumb />
+              <SliderThumb bg="orange" />
             </Slider>
             <Text>Spread</Text>
             <Slider
@@ -105,11 +108,12 @@ export function ShadowColorPicker({
               defaultValue={spread}
               onChange={(val) => setSpread(val)}
               size="lg"
+              colorScheme="orange"
             >
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>
-              <SliderThumb />
+              <SliderThumb bg="orange" />
             </Slider>
             <Text>Preview</Text>
             <Box

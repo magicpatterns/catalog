@@ -265,7 +265,7 @@ export function EditShadowModal({
             <Button
               onClick={handleSave}
               css={{ marginRight: '12px' }}
-              colorScheme="blue"
+              colorScheme="green"
             >
               Save
             </Button>
