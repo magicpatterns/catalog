@@ -5,6 +5,7 @@ import {
   Checkbox,
   CheckboxGroup,
   Heading,
+  LightMode,
   Stack,
   Text,
   VStack,
@@ -35,89 +36,91 @@ export function ExportSettings({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }} as="form">
-      <Box
-        width="50%"
-        padding="12px"
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-      >
-        <Box paddingTop="32px">
-          <Stack spacing={1} direction={'row'}>
-            <Text color="gray.500" fontWeight="black" fontSize={18}>
-              05
+    <LightMode>
+      <Box css={{ display: 'flex', height: '100%', color: 'black' }} as="form">
+        <Box
+          width="50%"
+          padding="12px"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+        >
+          <Box paddingTop="32px">
+            <Stack spacing={1} direction={'row'}>
+              <Text color="gray.500" fontWeight="black" fontSize={18}>
+                05
+              </Text>
+              <Text color="gray.500" fontWeight="bold" fontSize={18}>
+                of
+              </Text>
+              <Text color="gray.500" fontWeight="black" fontSize={18}>
+                {getNumberOfStepsInOnboardingFlow(platform)}
+              </Text>
+            </Stack>
+            <Heading fontWeight="black" marginTop="12px" fontSize={36}>
+              Choose your export files.
+            </Heading>
+            <Text
+              marginTop="32px"
+              fontSize={20}
+              color="gray.500"
+              fontWeight="bold"
+            >
+              These are the token files that Mirrorful will export.
             </Text>
-            <Text color="gray.500" fontWeight="bold" fontSize={18}>
-              of
-            </Text>
-            <Text color="gray.500" fontWeight="black" fontSize={18}>
-              {getNumberOfStepsInOnboardingFlow(platform)}
-            </Text>
-          </Stack>
-          <Heading fontWeight="black" marginTop="12px" fontSize={36}>
-            Choose your export files.
-          </Heading>
-          <Text
-            marginTop="32px"
-            fontSize={20}
-            color="gray.500"
-            fontWeight="bold"
-          >
-            These are the token files that Mirrorful will export.
-          </Text>
+          </Box>
+          <Box paddingBottom="32px">
+            <Button
+              size="lg"
+              onClick={() => {
+                onUpdatePage(4)
+              }}
+              css={{ marginRight: '16px' }}
+            >
+              <ArrowBackIcon />
+            </Button>
+            <Button
+              bgColor={shades['500']}
+              color={tinycolor(primaryColor).isDark() ? 'white' : 'black'}
+              _hover={{
+                bgColor: shades['700'],
+              }}
+              _active={{
+                bgColor: shades['800'],
+              }}
+              padding="8px 36px"
+              size="lg"
+              rightIcon={<ArrowForwardIcon />}
+              onClick={(e) => {
+                e.preventDefault()
+                onExport()
+                onUpdatePage(6)
+              }}
+              isDisabled={!fileTypes.length}
+              type="submit"
+            >
+              Next
+            </Button>
+          </Box>
         </Box>
-        <Box paddingBottom="32px">
-          <Button
-            size="lg"
-            onClick={() => {
-              onUpdatePage(4)
-            }}
-            css={{ marginRight: '16px' }}
-          >
-            <ArrowBackIcon />
-          </Button>
-          <Button
-            bgColor={shades['500']}
-            color={tinycolor(primaryColor).isDark() ? 'white' : 'black'}
-            _hover={{
-              bgColor: shades['700'],
-            }}
-            _active={{
-              bgColor: shades['800'],
-            }}
-            padding="8px 36px"
-            size="lg"
-            rightIcon={<ArrowForwardIcon />}
-            onClick={(e) => {
-              e.preventDefault()
-              onExport()
-              onUpdatePage(6)
-            }}
-            isDisabled={!fileTypes.length}
-            type="submit"
-          >
-            Next
-          </Button>
+        <Box
+          width="50%"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          padding="64px"
+        >
+          <CheckboxGroup defaultValue={fileTypes} onChange={onUpdateFileTypes}>
+            <VStack alignItems="flex-start">
+              {defaultFiles.map((x) => (
+                <Checkbox key={x} value={x}>
+                  {getExportFileTypeName(x)}
+                </Checkbox>
+              ))}
+            </VStack>
+          </CheckboxGroup>
         </Box>
       </Box>
-      <Box
-        width="50%"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        padding="64px"
-      >
-        <CheckboxGroup defaultValue={fileTypes} onChange={onUpdateFileTypes}>
-          <VStack alignItems="flex-start">
-            {defaultFiles.map((x) => (
-              <Checkbox key={x} value={x}>
-                {getExportFileTypeName(x)}
-              </Checkbox>
-            ))}
-          </VStack>
-        </CheckboxGroup>
-      </Box>
-    </Box>
+    </LightMode>
   )
 }

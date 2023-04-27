@@ -1,5 +1,13 @@
 import { ArrowBackIcon, ArrowForwardIcon, RepeatIcon } from '@chakra-ui/icons'
-import { Badge, Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
+import {
+  Badge,
+  Box,
+  Button,
+  Heading,
+  LightMode,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
 import { TTokenGroup } from '@core/types'
@@ -41,150 +49,160 @@ export function OtherColors({
   }, [palette, handleGeneratePalette])
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }} as="form">
-      <Box
-        css={{
-          width: '50%',
-          padding: '12px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Box css={{ paddingTop: '32px' }}>
-          <Stack spacing={1} direction={'row'}>
-            <Text color="gray.500" fontWeight="black" fontSize={18}>
-              04
-            </Text>
-            <Text color="gray.500" fontWeight="bold" fontSize={18}>
-              of
-            </Text>
-            <Text color="gray.500" fontWeight="black" fontSize={18}>
-              {getNumberOfStepsInOnboardingFlow(platform)}
-            </Text>
-          </Stack>
-
-          <Heading fontWeight="black" css={{ marginTop: '12px' }} fontSize={36}>
-            {`Let's pick out the rest of your theme.`}
-          </Heading>
-          <Text
-            css={{ marginTop: '32px' }}
-            fontSize={20}
-            color="gray.500"
-            fontWeight="bold"
-          >
-            {`You can always fine-tune these later!`}
-          </Text>
-        </Box>
-        <Box css={{ paddingBottom: '32px' }}>
-          <Button
-            size="lg"
-            onClick={() => {
-              onUpdatePage(3)
-            }}
-            css={{ marginRight: '16px' }}
-          >
-            <ArrowBackIcon />
-          </Button>
-          <Button
-            bgColor={shades['500']}
-            color={tinycolor(primaryColor).isDark() ? 'white' : 'black'}
-            _hover={{
-              bgColor: shades['700'],
-            }}
-            _active={{
-              bgColor: shades['800'],
-            }}
-            padding={'8px 36px'}
-            size="lg"
-            rightIcon={<ArrowForwardIcon />}
-            onClick={(e) => {
-              e.preventDefault()
-              onUpdatePalette(palette)
-
-              if (platform === 'web') {
-                onUpdatePage(7)
-              } else {
-                onUpdatePage(5)
-              }
-            }}
-            type="submit"
-          >
-            Next
-          </Button>
-        </Box>
-      </Box>
-      <Box
-        css={{
-          width: '50%',
-          marginLeft: '10px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '64px 32px',
-        }}
-      >
-        <Stack spacing={4}>
-          <Box css={{ display: 'flex', alignItems: 'center' }}>
-            <Box
-              css={{ display: 'flex', flexDirection: 'column', width: '150px' }}
-            >
-              <Text fontSize={24} fontWeight="black">
-                {primaryName}
+    <LightMode>
+      <Box css={{ display: 'flex', height: '100%', color: 'black' }} as="form">
+        <Box
+          css={{
+            width: '50%',
+            padding: '12px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Box css={{ paddingTop: '32px' }}>
+            <Stack spacing={1} direction={'row'}>
+              <Text color="gray.500" fontWeight="black" fontSize={18}>
+                04
               </Text>
-              <Badge color={primaryColor} css={{ alignSelf: 'flex-start' }}>
-                PRIMARY
-              </Badge>
-            </Box>
-            <Box
-              css={{
-                height: '40px',
-                width: '120px',
-                backgroundColor: primaryColor,
-                marginLeft: '16px',
-                borderRadius: 8,
-              }}
-            />
-          </Box>
-          <hr />
-          <Stack spacing={8}>
-            {Object.keys(palette).map((colorName) => {
-              const color = palette[colorName]
+              <Text color="gray.500" fontWeight="bold" fontSize={18}>
+                of
+              </Text>
+              <Text color="gray.500" fontWeight="black" fontSize={18}>
+                {getNumberOfStepsInOnboardingFlow(platform)}
+              </Text>
+            </Stack>
 
-              return (
-                <Box
-                  css={{ display: 'flex', alignItems: 'center' }}
-                  key={colorName}
-                >
-                  <Box
-                    css={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '150px',
-                    }}
-                  >
-                    <Text fontSize={24} fontWeight="black">
-                      {colorName}
-                    </Text>
-                  </Box>
-                  <Box
-                    css={{
-                      height: '40px',
-                      width: '120px',
-                      backgroundColor: `${color.value}`,
-                      marginLeft: '16px',
-                      borderRadius: 8,
-                    }}
-                  />
-                </Box>
-              )
-            })}
-            <Button onClick={handleGeneratePalette} leftIcon={<RepeatIcon />}>
-              Regenerate
+            <Heading
+              fontWeight="black"
+              css={{ marginTop: '12px' }}
+              fontSize={36}
+            >
+              {`Let's pick out the rest of your theme.`}
+            </Heading>
+            <Text
+              css={{ marginTop: '32px' }}
+              fontSize={20}
+              color="gray.500"
+              fontWeight="bold"
+            >
+              {`You can always fine-tune these later!`}
+            </Text>
+          </Box>
+          <Box css={{ paddingBottom: '32px' }}>
+            <Button
+              size="lg"
+              onClick={() => {
+                onUpdatePage(3)
+              }}
+              css={{ marginRight: '16px' }}
+            >
+              <ArrowBackIcon />
             </Button>
+            <Button
+              bgColor={shades['500']}
+              color={tinycolor(primaryColor).isDark() ? 'white' : 'black'}
+              _hover={{
+                bgColor: shades['700'],
+              }}
+              _active={{
+                bgColor: shades['800'],
+              }}
+              padding={'8px 36px'}
+              size="lg"
+              rightIcon={<ArrowForwardIcon />}
+              onClick={(e) => {
+                e.preventDefault()
+                onUpdatePalette(palette)
+
+                if (platform === 'web') {
+                  onUpdatePage(7)
+                } else {
+                  onUpdatePage(5)
+                }
+              }}
+              type="submit"
+            >
+              Next
+            </Button>
+          </Box>
+        </Box>
+        <Box
+          css={{
+            width: '50%',
+            marginLeft: '10px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: '64px 32px',
+          }}
+        >
+          <Stack spacing={4}>
+            <Box css={{ display: 'flex', alignItems: 'center' }}>
+              <Box
+                css={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '150px',
+                }}
+              >
+                <Text fontSize={24} fontWeight="black">
+                  {primaryName}
+                </Text>
+                <Badge color={primaryColor} css={{ alignSelf: 'flex-start' }}>
+                  PRIMARY
+                </Badge>
+              </Box>
+              <Box
+                css={{
+                  height: '40px',
+                  width: '120px',
+                  backgroundColor: primaryColor,
+                  marginLeft: '16px',
+                  borderRadius: 8,
+                }}
+              />
+            </Box>
+            <hr />
+            <Stack spacing={8}>
+              {Object.keys(palette).map((colorName) => {
+                const color = palette[colorName]
+
+                return (
+                  <Box
+                    css={{ display: 'flex', alignItems: 'center' }}
+                    key={colorName}
+                  >
+                    <Box
+                      css={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: '150px',
+                      }}
+                    >
+                      <Text fontSize={24} fontWeight="black">
+                        {colorName}
+                      </Text>
+                    </Box>
+                    <Box
+                      css={{
+                        height: '40px',
+                        width: '120px',
+                        backgroundColor: `${color.value}`,
+                        marginLeft: '16px',
+                        borderRadius: 8,
+                      }}
+                    />
+                  </Box>
+                )
+              })}
+              <Button onClick={handleGeneratePalette} leftIcon={<RepeatIcon />}>
+                Regenerate
+              </Button>
+            </Stack>
           </Stack>
-        </Stack>
+        </Box>
       </Box>
-    </Box>
+    </LightMode>
   )
 }

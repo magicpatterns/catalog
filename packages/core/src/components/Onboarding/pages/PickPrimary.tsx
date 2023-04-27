@@ -21,7 +21,7 @@ export function PickPrimary({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }} as="form">
+    <Box css={{ display: 'flex', height: '100%', color: 'black' }} as="form">
       <Box
         css={{
           width: '50%',
