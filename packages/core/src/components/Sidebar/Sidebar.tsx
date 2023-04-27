@@ -22,6 +22,7 @@ import {
   FiFolder,
   FiGithub,
   FiLayers,
+  FiMoon,
   FiSettings,
   FiSun,
   FiUnderline,
@@ -395,7 +396,7 @@ export function Sidebar({
                     <Spacer />
                     <SidebarLink
                       key="sidebar-toggle-mode"
-                      icon={FiSun}
+                      icon={colorMode === 'dark' ? FiSun : FiMoon}
                       onSelect={toggleColorMode}
                       isCollapsed={isCollapsed}
                       isDisabled={isDisabled}
