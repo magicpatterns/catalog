@@ -72,24 +72,25 @@ export const defaultLineHeightsV2: TTokenGroup = {
 export const defaultShadowsV2: TTokenGroup = {
   sm: {
     id: 'default-shadow-sm-id',
-    value: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    value: '0px 1px 2px 0px rgba(226, 221, 221, 0.8)',
     type: 'boxShadow',
   },
   md: {
     id: 'default-shadow-md-id',
-    value: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+    value:
+      '0 1px 3px 0 rgba(226, 221, 221, 0.8), 0 1px 2px 0 rgba(226, 221, 221, 0.5)',
     type: 'boxShadow',
   },
   lg: {
     id: 'default-shadow-lg-id',
     value:
-      '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+      '0 4px 6px -1px rgba(226, 221, 221, 0.8), 0 2px 4px -1px rgba(226, 221, 221, 0.4)',
     type: 'boxShadow',
   },
   'dark-lg': {
     id: 'default-shadow-dark-lg-id',
     value:
-      '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+      '0 10px 15px -3px rgba(226, 221, 221, 0.8), 0 4px 6px -2px rgba(226, 221, 221, 0.2)',
     type: 'boxShadow',
   },
 }
