@@ -3,32 +3,37 @@
  * @fileoverview Disallow hard-coded color values when using Mirrorful
  * @author Tyler Vergho
  */
-"use strict";
+'use strict'
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
 
-const rule = require("../../../lib/rules/no-hardcoded-colors"),
-  RuleTester = require("eslint").RuleTester;
+const rule = require('../../../lib/rules/no-hardcoded-colors'),
+  RuleTester = require('eslint').RuleTester
 
-const messageId = 'noHardcodedColors';
-const importStatement = "import { Tokens } from '.mirrorful/theme';\n";
+const messageId = 'noHardcodedColors'
+const importStatement = "import { Tokens } from '.mirrorful/theme';\n"
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  parserOptions: { ecmaVersion: 2018, sourceType: 'module', ecmaFeatures: { jsx: true } },
-});
-ruleTester.run("no-hardcoded-colors", rule, {
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    ecmaFeatures: { jsx: true },
+  },
+})
+ruleTester.run('no-hardcoded-colors', rule, {
   valid: [
-    "const backgroundColor = Tokens.primary.base;",
+    'const backgroundColor = Tokens.primary.base;',
     "<button style={{ backgroundColor: Tokens.colors.blue['300'] }}>Click</button>",
     "<button style={{ backgroundColor: Tokens.colors['medium-purple']['50'] }}>Click</button>",
     "const notAColor = 'my-red';", // Invalid CSS color name
-    "const notAColor = '#1234567';" // Invalid hex length
+    "const notAColor = '#1234567';", // Invalid hex length
+    "const notAColor = 'lightgoldenrod';",
   ],
 
   invalid: [
@@ -45,7 +50,10 @@ ruleTester.run("no-hardcoded-colors", rule, {
     },
     {
       code: "const styles = { color: 'green', backgroundColor: '#7aeaca' };",
-      errors: [{ messageId, type: 'Literal' }, { messageId, type: 'Literal' }],
+      errors: [
+        { messageId, type: 'Literal' },
+        { messageId, type: 'Literal' },
+      ],
       output: `${importStatement}const styles = { color: 'green', backgroundColor: Tokens.colors.bermuda.base };`,
     },
     // RGB
@@ -71,6 +79,10 @@ ruleTester.run("no-hardcoded-colors", rule, {
       errors: [{ messageId, type: 'Literal' }],
     },
     {
+      code: "<button style={{ color: 'darkcyan' }}>Click</button>",
+      errors: [{ messageId, type: 'Literal' }],
+    },
+    {
       code: "<button style={{ color: 'red' }}>Click</button>",
       errors: [{ messageId, type: 'Literal' }],
     },
@@ -78,6 +90,6 @@ ruleTester.run("no-hardcoded-colors", rule, {
     {
       code: '<div className="card bg-[#c5aff2]">Test</div>',
       errors: [{ messageId, type: 'Literal' }],
-    }
+    },
   ],
-});
+})
