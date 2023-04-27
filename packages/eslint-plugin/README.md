@@ -1,10 +1,10 @@
-# eslint-plugin-mirrorful
+# eslint-plugin-mirrorful 🪞✨
 
 This directory contains a plugin containing ESLint rules for Mirrorful. This plugin should only be installed into a pre-existing [Mirrorful](https://github.com/mirrorful/mirrorful) project.
 
 See it in action [here](/examples/tailwind-next/).
 
-## Installation
+## 📦 Installation
 
 You'll first need to install [ESLint](https://eslint.org/):
 
@@ -18,26 +18,21 @@ Next, install `eslint-plugin-mirrorful`:
 npm install eslint-plugin-mirrorful --save-dev
 ```
 
-## Usage
+## 🔧 Usage
 
 Add `mirrorful` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
-    "plugins": [
-        "mirrorful"
-    ]
+  "plugins": ["mirrorful"]
 }
 ```
-
 
 Then, simply extend the recommended configuration.
 
 ```json
 {
-    "extends": [
-        "plugin:mirrorful/recommended",
-    ]
+  "extends": ["plugin:mirrorful/recommended"]
 }
 ```
 
@@ -45,21 +40,13 @@ Alternatively, you can individually configure the rules you want to use under th
 
 ```json
 {
-    "rules": {
-        "mirrorful/no-hardcoded-colors": 2
-    }
+  "rules": {
+    "mirrorful/no-hardcoded-colors": 2
+  }
 }
 ```
 
-## Publishing
-
-You can publish this plugin to the NPM registry:
-
-```
-npm publish
-```
-
-## Rules
+## 📖 Rules
 
 <!-- begin auto-generated rules list -->
 
@@ -69,4 +56,12 @@ npm publish
 
 <!-- end auto-generated rules list -->
 
+## 💻 Development and Publishing
 
+You can publish this plugin to the NPM registry:
+
+```
+npm publish
+```
+
+Additional rules can be added as files to the `lib/rules` directory. Corresponding unit tests should go in `tests/lib/rules`.
