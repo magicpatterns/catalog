@@ -11,10 +11,13 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useColorModeValue,
   VStack,
 } from '@chakra-ui/react'
 import { TExportFileType } from '@core/types'
 import { getExportFileTypeName } from '@core/utils/getExportFileTypeString'
+
+import { darkTheme, lightTheme } from './theme'
 
 type Props = {
   isOpen: boolean
@@ -29,10 +32,14 @@ export function ExportSettingsModal({
   fileTypes,
   onUpdateFileTypes,
 }: Props) {
+  const backgroundColor = useColorModeValue(
+    lightTheme.backgroundColors.secondary,
+    darkTheme.backgroundColors.secondary
+  )
   return (
     <Modal size="lg" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg={backgroundColor}>
         <ModalHeader>Export Settings</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -44,7 +51,12 @@ export function ExportSettingsModal({
             >
               <VStack alignItems="flex-start">
                 {['css', 'scss', 'js', 'cjs', 'ts', 'json'].map((x) => (
-                  <Checkbox key={x} value={x} defaultChecked={true}>
+                  <Checkbox
+                    key={x}
+                    value={x}
+                    defaultChecked={true}
+                    colorScheme="purple"
+                  >
                     {getExportFileTypeName(x as TExportFileType)}
                   </Checkbox>
                 ))}
