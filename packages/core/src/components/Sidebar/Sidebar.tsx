@@ -382,7 +382,7 @@ export function Sidebar({
                       {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
                     </Text>
                     <Spacer />
-                    {platform === 'web' && (
+                    {platform === 'package' && (
                       <SidebarLink
                         key="sidebar-delete"
                         icon={FiSettings}

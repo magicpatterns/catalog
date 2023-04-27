@@ -161,7 +161,11 @@ export function EditLineHeightModal({
                 >
                   {Units.map((unit, index) => {
                     return (
-                      <option key={index} value={unit}>
+                      <option
+                        key={index}
+                        value={unit}
+                        style={{ backgroundColor: backgroundColor }}
+                      >
                         {unit}
                       </option>
                     )

@@ -171,7 +171,7 @@ export default function Layout({
           onClose={onExportSuccessModalClose}
           primitives={{ colors, typography, shadows }}
         />
-        {platform === 'web' && (
+        {platform === 'package' && (
           <AlertDialogDelete
             isOpen={isAlertDialogOpen}
             onClose={onDeleteAlertDialogClose}

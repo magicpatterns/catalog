@@ -154,7 +154,11 @@ export function EditFontSizeModal({
                 >
                   {Units.map((unit) => {
                     return (
-                      <option key={unit} value={unit}>
+                      <option
+                        key={unit}
+                        value={unit}
+                        style={{ backgroundColor: backgroundColor }}
+                      >
                         {unit}
                       </option>
                     )
