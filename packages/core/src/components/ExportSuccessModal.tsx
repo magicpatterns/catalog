@@ -24,6 +24,7 @@ import {
   TabPanels,
   Tabs,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { TPlatform } from '@core/components/Layout'
 import { sanitizeName } from '@core/translators/sanitizeName'
@@ -48,6 +49,7 @@ import {
 import { TbBrandNextjs } from 'react-icons/tb'
 
 import { CodePreview } from './CodePreview'
+import { darkTheme, lightTheme } from './theme'
 
 type exports = 'Colors' | 'Typography' | 'Shadows'
 
@@ -520,6 +522,10 @@ export function ExportSuccessModal({
   onClose: () => void
   primitives: TPrimitives
 }) {
+  const backgroundColor = useColorModeValue(
+    lightTheme.backgroundColors.secondary,
+    darkTheme.backgroundColors.secondary
+  )
   return (
     <Modal
       size="2xl"
@@ -530,7 +536,7 @@ export function ExportSuccessModal({
       scrollBehavior="inside"
     >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg={backgroundColor}>
         <ModalHeader>
           <Box css={{ display: 'flex', alignItems: 'center' }}>
             <Icon
