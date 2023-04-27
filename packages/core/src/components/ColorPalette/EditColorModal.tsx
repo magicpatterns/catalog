@@ -16,12 +16,14 @@ import {
   ModalOverlay,
   Text,
   Tooltip,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { assertToken, TNamedTokenGroup, TTokenGroup } from '@core/types'
 import { Color } from '@hello-pangea/color-picker'
 import { useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
+import { darkTheme, lightTheme } from '../theme'
 import { ColorPicker } from './ColorPicker'
 import {
   defaultColorShadesToTokens,
@@ -59,6 +61,11 @@ export function EditColorModal({
   )
 
   const [showBaseColorPicker, setShowBaseColorPicker] = useState<boolean>(true)
+
+  const backgroundColor = useColorModeValue(
+    lightTheme.backgroundColors.secondary,
+    darkTheme.backgroundColors.secondary
+  )
 
   const onBaseBlur = () => {
     const value = handleInvalidColor(base)
@@ -106,7 +113,7 @@ export function EditColorModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg={backgroundColor}>
         <ModalHeader>
           {initialColorData ? 'Edit Color' : 'Add Color'}
         </ModalHeader>
@@ -227,7 +234,7 @@ export function EditColorModal({
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={handleClose}>
+          <Button onClick={handleClose} colorScheme="green">
             {initialColorData ? 'Save' : 'Add'}
           </Button>
         </ModalFooter>

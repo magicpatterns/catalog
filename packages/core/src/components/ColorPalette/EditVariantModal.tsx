@@ -12,6 +12,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
@@ -19,6 +20,7 @@ import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
+import { darkTheme, lightTheme } from '../theme'
 import { ColorPicker } from './ColorPicker'
 import { handleInvalidColor } from './utils'
 
@@ -48,6 +50,11 @@ export function EditVariantModal({
     }
   )
   const [error, setError] = useState<string | null>(null)
+
+  const backgroundColor = useColorModeValue(
+    lightTheme.backgroundColors.secondary,
+    darkTheme.backgroundColors.secondary
+  )
 
   const handleSave = () => {
     // Save the submitted color value
@@ -102,7 +109,7 @@ export function EditVariantModal({
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg={backgroundColor}>
           <ModalHeader>
             {initialVariant ? 'Edit Variant' : 'Add Variant'}
           </ModalHeader>
@@ -209,7 +216,11 @@ export function EditVariantModal({
               )}
             </ModalBody>
             <ModalFooter>
-              <Button type="submit" css={{ marginRight: '12px' }}>
+              <Button
+                type="submit"
+                css={{ marginRight: '12px' }}
+                colorScheme="green"
+              >
                 Save
               </Button>
               {onDeleteVariant && (

@@ -1,5 +1,7 @@
 // import { AddIcon } from '@chakra-ui/icons'
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Button, useColorModeValue } from '@chakra-ui/react'
+
+import { darkTheme, lightTheme } from '../theme'
 
 // Accepts: numberOfMockVariants - how many variant squares you want to see after the base color...
 export function AddColorSkeleton({
@@ -37,6 +39,25 @@ export function AddColorSkeleton({
   //   )
   // }
 
+  const buttonBackgroundColor = useColorModeValue(
+    lightTheme.buttons.backgroundColors.default,
+    darkTheme.buttons.large.backgroundColors.default
+  )
+  const buttonBackgroundColorOnHover = useColorModeValue(
+    lightTheme.buttons.backgroundColors.hover,
+    darkTheme.buttons.large.backgroundColors.hover
+  )
+  const buttonBorder = useColorModeValue('none', '3px solid transparent')
+  const borderRadius = useColorModeValue(8, 30)
+  const buttonBorderOnHover = useColorModeValue(
+    'none',
+    '3.5px solid transparent'
+  )
+  const buttonTextColor = useColorModeValue(
+    lightTheme.buttons.textColors.primary,
+    darkTheme.buttons.large.textColors
+  )
+
   return (
     <Box
       css={{
@@ -51,7 +72,23 @@ export function AddColorSkeleton({
           width: '100%',
         }}
       >
-        <Button fontSize="1rem" fontWeight={600} color="black" height="3rem">
+        <Button
+          fontSize="1rem"
+          fontWeight={600}
+          color="black"
+          height="3rem"
+          css={{
+            background: buttonBackgroundColor,
+            borderRadius: borderRadius,
+            border: buttonBorder,
+            color: buttonTextColor,
+            transition: '.2s',
+          }}
+          _hover={{
+            background: buttonBackgroundColorOnHover,
+            border: buttonBorderOnHover,
+          }}
+        >
           Add New Color
         </Button>
       </Box>

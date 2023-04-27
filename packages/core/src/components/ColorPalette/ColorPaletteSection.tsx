@@ -5,11 +5,13 @@ import {
   Heading,
   Stack,
   Text,
+  useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 import { TNamedTokenGroup, TTokenGroup } from '../../types'
+import { darkTheme, lightTheme } from '../theme'
 import { AddColorSkeleton } from './AddColorSkeleton'
 import { ColorDisplay } from './ColorDisplay'
 import { EditColorModal } from './EditColorModal'
@@ -22,6 +24,28 @@ export function ColorPaletteSection({
   onUpdateColors: (newColors: TTokenGroup) => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const headingColor = useColorModeValue(
+    lightTheme.headings.colors.large,
+    darkTheme.headings.colors.large
+  )
+  const buttonBackgroundColor = useColorModeValue(
+    lightTheme.buttons.backgroundColors.default,
+    darkTheme.buttons.large.backgroundColors.default
+  )
+  const buttonBackgroundColorOnHover = useColorModeValue(
+    lightTheme.buttons.backgroundColors.hover,
+    darkTheme.buttons.large.backgroundColors.hover
+  )
+  const buttonBorder = useColorModeValue('none', '3px solid transparent')
+  const borderRadius = useColorModeValue(8, 30)
+  const buttonBorderOnHover = useColorModeValue(
+    'none',
+    '3.5px solid transparent'
+  )
+  const buttonTextColor = useColorModeValue(
+    lightTheme.buttons.textColors.primary,
+    darkTheme.buttons.large.textColors
+  )
 
   let totalVariants = 0
   Object.keys(colors).forEach((name) => {
@@ -30,7 +54,15 @@ export function ColorPaletteSection({
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <Heading fontSize={'2.5rem'} fontWeight="black">
+      <Heading
+        fontSize={'2.5rem'}
+        fontWeight="black"
+        css={{
+          background: headingColor,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }}
+      >
         Color Palette
       </Heading>
       <Box display="flex" justifyContent="space-between">
@@ -44,7 +76,24 @@ export function ColorPaletteSection({
         </Text>
         {totalVariants > 5 && (
           <>
-            <Button width="160px" variant="outline" onClick={() => onOpen()}>
+            <Button
+              width="180px"
+              css={{
+                height: '50px',
+                fontSize: '18px',
+                fontWeight: 'bold',
+                background: buttonBackgroundColor,
+                borderRadius: borderRadius,
+                border: buttonBorder,
+                color: buttonTextColor,
+                transition: '.2s',
+              }}
+              _hover={{
+                background: buttonBackgroundColorOnHover,
+                border: buttonBorderOnHover,
+              }}
+              onClick={() => onOpen()}
+            >
               Add New Color
             </Button>
           </>

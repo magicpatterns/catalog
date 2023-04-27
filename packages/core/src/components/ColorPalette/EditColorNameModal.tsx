@@ -13,8 +13,11 @@ import {
   ModalHeader,
   ModalOverlay,
   Tooltip,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { useState } from 'react'
+
+import { darkTheme, lightTheme } from '../theme'
 
 export function EditColorNameModal({
   isOpen,
@@ -29,6 +32,11 @@ export function EditColorNameModal({
 }) {
   const [colorName, setColorName] = useState<string>(initialColorName)
 
+  const backgroundColor = useColorModeValue(
+    lightTheme.backgroundColors.secondary,
+    darkTheme.backgroundColors.secondary
+  )
+
   const handleSave = () => {
     onUpdateColorName(colorName)
     onClose()
@@ -37,7 +45,7 @@ export function EditColorNameModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg={backgroundColor}>
         <ModalHeader>Edit Color</ModalHeader>
         <ModalCloseButton />
         <ModalBody
@@ -66,7 +74,9 @@ export function EditColorNameModal({
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={handleSave}>Save</Button>
+          <Button onClick={handleSave} colorScheme="green">
+            Save
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

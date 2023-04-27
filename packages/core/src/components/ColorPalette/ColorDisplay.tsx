@@ -11,6 +11,7 @@ import {
   Stack,
   Text,
   Tooltip,
+  useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
@@ -20,6 +21,7 @@ import { useEffect, useState } from 'react'
 import { FiMoreVertical } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
+import { darkTheme, lightTheme } from '../theme'
 import { EditColorNameModal } from './EditColorNameModal'
 import { EditVariantModal } from './EditVariantModal'
 
@@ -178,6 +180,32 @@ export function ColorDisplay({
   } else if (colorData.base && assertToken(colorData.base)) {
     baseColor = colorData.base.value
   }
+  const headingColor = useColorModeValue(
+    lightTheme.headings.colors.medium,
+    darkTheme.headings.colors.medium
+  )
+  const backgroundColor = useColorModeValue(
+    lightTheme.buttons.backgroundColors.default,
+    darkTheme.buttons.small.backgroundColors.default
+  )
+  const backgroundColorOnHover = useColorModeValue(
+    lightTheme.buttons.backgroundColors.hover,
+    darkTheme.buttons.small.backgroundColors.hover
+  )
+  const color = useColorModeValue(
+    lightTheme.buttons.textColors.secondary,
+    darkTheme.buttons.small.textColors
+  )
+  const variantName = useColorModeValue(
+    lightTheme.text.colors.primary,
+    darkTheme.text.colors.primary
+  )
+  const border = useColorModeValue('none', '2px solid transparent')
+  const borderRadius = useColorModeValue(8, 30)
+  const baseColorValue = useColorModeValue(
+    lightTheme.text.colors.secondary,
+    darkTheme.text.colors.secondary
+  )
 
   return (
     <Box
@@ -187,15 +215,35 @@ export function ColorDisplay({
       }}
     >
       <Box css={{ display: 'flex', flexDirection: 'column', width: '400px' }}>
-        <Text css={{ fontWeight: 900, fontSize: '1rem', color: 'gray' }}>
-          COLOR NAME
-        </Text>
-        <Text css={{ fontWeight: 600, fontSize: '1.8rem' }}>{colorName}</Text>
         <Text
           css={{
             fontWeight: 900,
             fontSize: '1rem',
-            color: 'gray',
+            background: headingColor,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          COLOR NAME
+        </Text>
+        <Text
+          css={{
+            fontWeight: 600,
+            fontSize: '1.8rem',
+            background: variantName,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          {colorName}
+        </Text>
+        <Text
+          css={{
+            fontWeight: 900,
+            fontSize: '1rem',
+            background: headingColor,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
             marginTop: '32px',
           }}
         >
@@ -217,10 +265,16 @@ export function ColorDisplay({
                   backgroundColor: baseColor,
                   marginRight: '16px',
                   borderRadius: 8,
-                  border: '1px solid black',
+                  border: '1px solid #cdcdcd',
                 }}
               />
-              <Text css={{ fontWeight: 600, fontSize: '1.5rem' }}>
+              <Text
+                css={{
+                  fontWeight: 600,
+                  fontSize: '1.5rem',
+                  color: baseColorValue,
+                }}
+              >
                 {baseColor}
               </Text>
             </Box>
@@ -234,20 +288,36 @@ export function ColorDisplay({
           direction="row"
         >
           <Button
-            variant="outline"
             onClick={() => {
               onColorNameModalOpen()
             }}
             leftIcon={<EditIcon />}
+            css={{
+              color: color,
+              background: backgroundColor,
+              border: border,
+              borderRadius: borderRadius,
+            }}
+            _hover={{
+              background: backgroundColorOnHover,
+            }}
           >
             Edit Name
           </Button>
           <Button
-            variant="outline"
             onClick={() => {
               onDeleteAlertDialogOpen()
             }}
             leftIcon={<DeleteIcon />}
+            css={{
+              color: color,
+              background: backgroundColor,
+              border: border,
+              borderRadius: borderRadius,
+            }}
+            _hover={{
+              background: backgroundColorOnHover,
+            }}
           >
             Delete Color
           </Button>
@@ -265,12 +335,25 @@ export function ColorDisplay({
             css={{
               fontWeight: 900,
               fontSize: '1rem',
-              color: 'gray',
+              background: headingColor,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
             }}
           >
             COLOR VARIANTS
           </Text>
-          <Button variant="outline" onClick={onAddVariantModalOpen}>
+          <Button
+            onClick={onAddVariantModalOpen}
+            css={{
+              color: color,
+              background: backgroundColor,
+              border: border,
+              borderRadius: borderRadius,
+            }}
+            _hover={{
+              background: backgroundColorOnHover,
+            }}
+          >
             Add New Variant
           </Button>
         </Box>

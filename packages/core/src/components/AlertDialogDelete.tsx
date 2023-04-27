@@ -6,8 +6,11 @@ import {
   AlertDialogHeader,
   AlertDialogOverlay,
   Button,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
+
+import { darkTheme, lightTheme } from './theme'
 
 export function AlertDialogDelete({
   tokenName,
@@ -24,6 +27,11 @@ export function AlertDialogDelete({
 }) {
   const cancelRef = React.useRef(null)
 
+  const backgroundColor = useColorModeValue(
+    lightTheme.backgroundColors.secondary,
+    darkTheme.backgroundColors.secondary
+  )
+
   const dialogMessage = deleteAllTokens
     ? `Are you sure you want to delete all data? You can't undo this action.`
     : `Are you sure you want to delete "${tokenName}"? You can't
@@ -36,7 +44,7 @@ export function AlertDialogDelete({
       onClose={onClose}
     >
       <AlertDialogOverlay>
-        <AlertDialogContent>
+        <AlertDialogContent bg={backgroundColor}>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
             Are you sure?
           </AlertDialogHeader>

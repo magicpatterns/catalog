@@ -164,8 +164,10 @@ export function ShadowRow({
             css={{
               width: 100,
               height: 50,
-              backgroundColor: '#F3F3F3',
-              border: '1px solid #D3D3D3',
+              // backgroundColor: '#F3F3F3',
+              // border: '1px solid #D3D3D3',
+              backgroundColor: '#121212',
+              border: '1px solid #171717',
               boxShadow: shadowData.token.value,
               padding: '24px',
               borderRadius: 8,
