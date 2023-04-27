@@ -116,7 +116,7 @@ Check out our [documentation](https://mirrorful.com/docs) for more information.
 - [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - for any bugs and errors you encounter using Mirrorful.
 - [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates.
 - [Book a free, non-pressure pairing sessions with one of our teammates](https://usemotion.com/meet/teddyni/meet?d=15)!
-- [Showcase](https://mirrorful.com/docs/showcase) - to see the awesome projects our community has built on Mirrorful!
+- [Showcase](https://mirrorful.com/docs/home/showcase) - to see the awesome projects our community has built on Mirrorful!
 
 ## 🪞 Contributors
 
