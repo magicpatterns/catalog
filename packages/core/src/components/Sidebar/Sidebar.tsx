@@ -179,7 +179,7 @@ export function Sidebar({
   isCollapsed: boolean
   onToggleCollapsed: () => void
 }) {
-  const { toggleColorMode } = useColorMode()
+  const { colorMode, toggleColorMode } = useColorMode()
   const backgroundColor = useColorModeValue(
     lightTheme.backgroundColors.secondary,
     darkTheme.backgroundColors.secondary
@@ -234,7 +234,6 @@ export function Sidebar({
             padding: isCollapsed ? '36px 12px' : '36px 24px',
             height: '100%',
             width: '100%',
-            // backgroundColor: 'green',
           }}
         >
           <Box
@@ -254,6 +253,8 @@ export function Sidebar({
                 >
                   <img src="/simple_logo.png" style={{ width: '150px' }} />
                 </motion.div>
+              ) : colorMode === 'dark' ? (
+                <img src="/logo-dark-mode.png" style={{ width: '150px' }} />
               ) : (
                 <img src="/mirrorful_logo.png" style={{ width: '150px' }} />
               )}
