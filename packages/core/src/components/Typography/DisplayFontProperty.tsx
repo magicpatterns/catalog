@@ -88,14 +88,18 @@ export const DisplayFontProperty = ({
       >
         {headingText}
       </Heading>
-      <Stack css={{ marginTop: '24px' }} spacing={12}>
+      <Stack css={{ marginTop: '24px' }}>
         <Stack
           css={{
-            marginTop: '24px',
+            marginTop:
+              Object.keys(fontPropertyData).length === 0 ? '0px' : '24px',
             backgroundColor: containerColor,
-            padding: padding,
+            padding:
+              Object.keys(fontPropertyData).length === 0 ? '0px' : padding,
             borderRadius: 25,
             color: textColor,
+            marginBottom:
+              Object.keys(fontPropertyData).length === 0 ? '0px' : '32px',
           }}
           spacing={12}
         >

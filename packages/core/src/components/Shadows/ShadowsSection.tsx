@@ -275,14 +275,15 @@ export function ShadowsSection({
       <Divider css={{ borderWidth: '2px', margin: '12px 0' }} />
       <Box css={{ marginBottom: '48px' }} />
       <Box>
-        <Stack css={{ marginTop: '24px' }} spacing={12}>
+        <Stack css={{ marginTop: '24px' }}>
           <Stack
             css={{
-              marginTop: '24px',
+              marginTop: Object.keys(shadows).length === 0 ? '0px' : '24px',
               backgroundColor: containerColor,
-              padding: padding,
+              padding: Object.keys(shadows).length === 0 ? '0px' : padding,
               borderRadius: 25,
               color: textColor,
+              marginBottom: Object.keys(shadows).length === 0 ? '0px' : '32px',
             }}
             spacing={12}
           >
