@@ -56,6 +56,36 @@ ruleTester.run('no-hardcoded-colors', rule, {
       ],
       output: `${importStatement}const styles = { color: 'green', backgroundColor: Tokens.colors.bermuda.base };`,
     },
+    {
+      code: `${importStatement}
+      const styles = { color: 'green', backgroundColor: '#7aeaca' };`,
+      errors: [
+        { messageId, type: 'Literal' },
+        { messageId, type: 'Literal' },
+      ],
+      output: `${importStatement}
+      const styles = { color: 'green', backgroundColor: Tokens.colors.bermuda.base };`,
+    },
+    {
+      code: `import { Tokens as theme } from '.mirrorful/theme';
+      const styles = { color: 'green', backgroundColor: '#7aeaca' };`,
+      errors: [
+        { messageId, type: 'Literal' },
+        { messageId, type: 'Literal' },
+      ],
+      output: `import { Tokens as theme } from '.mirrorful/theme';
+      const styles = { color: 'green', backgroundColor: theme.colors.bermuda.base };`,
+    },
+    {
+      code: `import { Tokens as MyTokens } from '.mirrorful/theme';
+      const styles = { color: 'green', backgroundColor: '#7aeaca' };`,
+      errors: [
+        { messageId, type: 'Literal' },
+        { messageId, type: 'Literal' },
+      ],
+      output: `import { Tokens as MyTokens } from '.mirrorful/theme';
+      const styles = { color: 'green', backgroundColor: MyTokens.colors.bermuda.base };`,
+    },
     // RGB
     {
       code: "const color = 'rgb(0, 0, 0)';",

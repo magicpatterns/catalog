@@ -61,10 +61,16 @@ module.exports = {
         const suggestedVariable = colorMap[value.toLowerCase()]
         const sourceCode = context.getSourceCode()
         const text = sourceCode.getText(node.parent)
-        const isPartOfTokensObject = text.includes('Tokens') // Don't throw a warning if it's already an imported part of the Tokens object
 
-        const importStatement = "import { Tokens } from '.mirrorful/theme';"
-        const hasImportStatement = sourceCode.text.includes('import { Tokens }')
+        const importStatementRegex =
+          /import\s+\{\s*Tokens(\s+as\s+(\w+))?\s*\}\s+from\s+'.mirrorful\/theme';/
+        const importStatementMatch = sourceCode.text.match(importStatementRegex)
+        const tokensAlias = importStatementMatch
+          ? importStatementMatch[2] || 'Tokens'
+          : 'Tokens'
+        const isPartOfTokensObject = text.includes(tokensAlias) // Don't throw a warning if it's already an imported part of the Tokens object
+
+        const importStatement = `import { Tokens } from '.mirrorful/theme';`
 
         if (
           !isPartOfTokensObject &&
@@ -84,11 +90,11 @@ module.exports = {
                     /^\d+$/.test(childKey) || childKey.includes('-')
                   const parentKeyBracket =
                     /^\d+$/.test(parentKey) || parentKey.includes('-')
-                  const replacement = `Tokens.colors${
+                  const replacement = `${tokensAlias}.colors${
                     parentKeyBracket ? `['${parentKey}']` : `.${parentKey}`
                   }${childKeyBracket ? `['${childKey}']` : `.${childKey}`}`
 
-                  if (hasImportStatement) {
+                  if (importStatementMatch) {
                     return fixer.replaceText(node, replacement)
                   } else {
                     return [
