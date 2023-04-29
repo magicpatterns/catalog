@@ -1,10 +1,9 @@
-import { Tokens } from '.mirrorful/theme'
 import { Tokens as theme } from '.mirrorful/theme'
 import './App.css'
 
 function App() {
   return (
-    <main style={{ backgroundColor: Tokens.colors['medium-purple']['400'] }}>
+    <main style={{ backgroundColor: theme.colors['medium-purple']['300'] }}>
       Hello World!
     </main>
   )

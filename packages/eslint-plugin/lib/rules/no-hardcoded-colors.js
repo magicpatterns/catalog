@@ -63,7 +63,7 @@ module.exports = {
         const text = sourceCode.getText(node.parent)
 
         const importStatementRegex =
-          /import\s+\{\s*Tokens(\s+as\s+(\w+))?\s*\}\s+from\s+'.mirrorful\/theme';/
+          /import\s+\{\s*Tokens(\s+as\s+(\w+))?\s*\}\s+from\s+'.mirrorful\/theme'/
         const importStatementMatch = sourceCode.text.match(importStatementRegex)
         const tokensAlias = importStatementMatch
           ? importStatementMatch[2] || 'Tokens'
