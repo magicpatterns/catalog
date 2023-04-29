@@ -21,11 +21,3 @@ npx mirrorful editor
 ```
 
 This will open a browser window with the Mirrorful at localhost:5050.
-
-## ESLint Plugin Demo
-
-This project also incorporates the Mirrorful [eslint plugin](/packages/eslint-plugin). As demonstrated by the screenshots below, this plugin properly configured will detect hard-coded color values and automatically convert to the Mirrorful `Tokens` equivalent if present in the theme configuration.
-
-Before Linting            |  After Linting
-:-------------------------:|:-------------------------:
-![Before](/assets/eslint-1.png)  |  ![After](/assets/eslint-2.png)
