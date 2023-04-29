@@ -77,6 +77,7 @@ ruleTester.run('no-hardcoded-colors', rule, {
       const styles = { color: 'green', backgroundColor: theme.colors.bermuda.base };`,
     },
     {
+      // Custom alias for importing Tokens
       code: `import { Tokens as MyTokens } from '.mirrorful/theme';
       const styles = { color: 'green', backgroundColor: '#7aeaca' };`,
       errors: [
@@ -84,6 +85,17 @@ ruleTester.run('no-hardcoded-colors', rule, {
         { messageId, type: 'Literal' },
       ],
       output: `import { Tokens as MyTokens } from '.mirrorful/theme';
+      const styles = { color: 'green', backgroundColor: MyTokens.colors.bermuda.base };`,
+    },
+    {
+      // Without a semicolon
+      code: `import { Tokens as MyTokens } from '.mirrorful/theme'
+      const styles = { color: 'green', backgroundColor: '#7aeaca' };`,
+      errors: [
+        { messageId, type: 'Literal' },
+        { messageId, type: 'Literal' },
+      ],
+      output: `import { Tokens as MyTokens } from '.mirrorful/theme'
       const styles = { color: 'green', backgroundColor: MyTokens.colors.bermuda.base };`,
     },
     // RGB
