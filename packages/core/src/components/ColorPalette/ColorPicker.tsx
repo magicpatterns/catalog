@@ -11,28 +11,25 @@ import {
 import { HexColorPicker, RgbaColorPicker } from 'react-colorful'
 import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
-import { create } from 'zustand'
 
 const formats = ['HEX', 'RGB'] as const
 
 interface Props {
   colorPickerColor: AnyColor
-  onChange: (color: string) => void
+  onChange: ((color: AnyColor) => void)
 }
 
-interface ColorState {
-  type: (typeof formats)[number]
-  setType: (type: (typeof formats)[number]) => void
-}
+function DropdownInput({ onChange, colorPickerColor }: Props) {
+  const colorParsed = tinycolor(colorPickerColor);
+  const type = colorParsed.getFormat().toUpperCase();
+  const updateType = (item: (typeof formats)[number]) => {
+    if (item === 'HEX') {
+      onChange(colorParsed.toHex());
+    } else {
+      onChange(colorParsed.toRgb());
+    }
+  };
 
-const useColorStore = create<ColorState>((set) => ({
-  type: 'HEX',
-  setType: (type) => set(() => ({ type })),
-}))
-
-function DropdownInput({ onChange }: { onChange: (color: string) => void }) {
-  const type = useColorStore((state) => state.type)
-  const setType = useColorStore((state) => state.setType)
   return (
     <Box
       css={{
@@ -52,7 +49,7 @@ function DropdownInput({ onChange }: { onChange: (color: string) => void }) {
         </MenuButton>
         <MenuList>
           {formats.map((item) => (
-            <MenuItem key={item} onClick={() => setType(item)}>
+            <MenuItem key={item} onClick={() => updateType(item)}>
               {item}
             </MenuItem>
           ))}
@@ -61,6 +58,7 @@ function DropdownInput({ onChange }: { onChange: (color: string) => void }) {
       <Input
         type="text"
         css={{ width: '100%', height: '100%' }}
+        value={colorParsed.toString()}
         onChange={(e) => onChange(e.target.value)}
       />
     </Box>
@@ -80,13 +78,16 @@ function HexPicker({ colorPickerColor, onChange }: Props) {
   )
 }
 
-function RgbaPicker() {
+function RgbaPicker({ colorPickerColor, onChange }: Props) {
+  const rgbColor = tinycolor(colorPickerColor).toRgb();
   return (
     <RgbaColorPicker
       style={{
         width: '100%',
         height: '100%',
       }}
+      color={rgbColor}
+      onChange={onChange}
     />
   )
 }
@@ -105,8 +106,8 @@ export default function ColorPicker({ colorPickerColor, onChange }: Props) {
       {type === 'hex' && (
         <HexPicker colorPickerColor={colorPickerColor} onChange={onChange} />
       )}
-      {type === 'rgb' && <RgbaPicker />}
-      <DropdownInput onChange={onChange} />
+      {type === 'rgb' && <RgbaPicker colorPickerColor={colorPickerColor} onChange={onChange}/>}
+      <DropdownInput onChange={onChange} colorPickerColor={colorPickerColor}/>
     </Box>
   )
 }
