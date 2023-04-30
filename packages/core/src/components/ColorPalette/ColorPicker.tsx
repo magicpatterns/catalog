@@ -9,12 +9,14 @@ import {
   MenuList,
 } from '@chakra-ui/react'
 import { HexColorPicker, RgbaColorPicker } from 'react-colorful'
+import { AnyColor } from 'react-colorful/dist/types'
+import tinycolor from 'tinycolor2'
 import { create } from 'zustand'
 
 const formats = ['HEX', 'RGB'] as const
 
 interface Props {
-  colorPickerColor: string
+  colorPickerColor: AnyColor
   onChange: (color: string) => void
 }
 
@@ -72,7 +74,7 @@ function HexPicker({ colorPickerColor, onChange }: Props) {
         width: '100%',
         height: '100%',
       }}
-      color={colorPickerColor}
+      color={tinycolor(colorPickerColor).toHexString()}
       onChange={onChange}
     />
   )
@@ -90,7 +92,7 @@ function RgbaPicker() {
 }
 
 export default function ColorPicker({ colorPickerColor, onChange }: Props) {
-  const type = useColorStore((state) => state.type)
+  const type = tinycolor(colorPickerColor).getFormat();
   return (
     <Box
       css={{
@@ -100,10 +102,10 @@ export default function ColorPicker({ colorPickerColor, onChange }: Props) {
         height: '100%',
       }}
     >
-      {type === 'HEX' && (
+      {type === 'hex' && (
         <HexPicker colorPickerColor={colorPickerColor} onChange={onChange} />
       )}
-      {type === 'RGB' && <RgbaPicker />}
+      {type === 'rgb' && <RgbaPicker />}
       <DropdownInput onChange={onChange} />
     </Box>
   )
