@@ -44,7 +44,7 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
     >
       <Menu>
         <MenuButton
-          css={{ width: '65%' }}
+          css={{ width: '65%', maxWidth: '100px' }}
           as={Button}
           rightIcon={<ChevronDownIcon />}
         >
