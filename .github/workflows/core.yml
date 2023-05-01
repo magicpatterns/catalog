@@ -3,9 +3,13 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'packages/core/**'
   push:
     branches:
       - main
+    paths:
+      - 'packages/core/**'
 
 jobs:
   build:
