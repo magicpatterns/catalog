@@ -50,7 +50,6 @@
     "cross-spawn": "^7.0.3",
     "framer-motion": "^9.0.4",
     "fs": "^0.0.1-security",
-    "mirrorful": "^5.0.0",
     "next": "^12.0.0",
     "open": "^8.4.2",
     "path": "^0.12.7",
