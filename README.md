@@ -119,6 +119,7 @@ We have an ESLint plugin with a recommended configuration that's ready to integr
 - [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) - for live discussion with the community and the Mirrorful team.
 - [GitHub Discussions](https://github.com/Mirrorful/mirrorful/discussions) - for help with building and deeper conversations about features.
 - [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - for any bugs and errors you encounter using Mirrorful.
+- [Showcase](https://mirrorful.com/docs/home/showcase) - to see the awesome projects our community has built on Mirrorful!
 
 ## 🏘 Open-source vs. paid
 
