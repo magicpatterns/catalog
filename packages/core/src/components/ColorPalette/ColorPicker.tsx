@@ -8,6 +8,7 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/react'
+import { useState } from 'react'
 import { HexColorPicker, RgbaColorPicker } from 'react-colorful'
 import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
@@ -29,6 +30,8 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
       onChange(colorParsed.toRgb());
     }
   };
+
+  const [currentColor, setCurrentColor] = useState<string>(colorParsed.toString());
 
   return (
     <Box
@@ -58,8 +61,9 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
       <Input
         type="text"
         css={{ width: '100%', height: '100%' }}
-        value={colorParsed.toString()}
-        onChange={(e) => onChange(e.target.value)}
+        value={currentColor}
+        onChange={(e) => setCurrentColor(e.target.value)}
+        onBlur={() => onChange(currentColor)}
       />
     </Box>
   )
