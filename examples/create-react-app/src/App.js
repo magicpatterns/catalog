@@ -12,7 +12,7 @@ function App() {
           fontSize: '60px',
         }}
       >
-        Acme Corp, Inc.
+        Create React App + Mirrorful
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
         <button className="primary-button">Buy now</button>

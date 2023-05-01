@@ -1,4 +1,4 @@
-import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { TPlatform } from '@core/components/Dashboard'
+import { TPlatform } from '@core/components/Layout'
 import { defaultFiles, TExportFileType } from '@core/types'
 import { getExportFileTypeName } from '@core/utils/getExportFileTypeString'
 import tinycolor from 'tinycolor2'
@@ -35,7 +35,7 @@ export function ExportSettings({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%' }} as="form">
       <Box
         width="50%"
         padding="12px"
@@ -69,6 +69,15 @@ export function ExportSettings({
         </Box>
         <Box paddingBottom="32px">
           <Button
+            size="lg"
+            onClick={() => {
+              onUpdatePage(4)
+            }}
+            css={{ marginRight: '16px' }}
+          >
+            <ArrowBackIcon />
+          </Button>
+          <Button
             bgColor={shades['500']}
             color={tinycolor(primaryColor).isDark() ? 'white' : 'black'}
             _hover={{
@@ -80,11 +89,13 @@ export function ExportSettings({
             padding="8px 36px"
             size="lg"
             rightIcon={<ArrowForwardIcon />}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               onExport()
               onUpdatePage(6)
             }}
             isDisabled={!fileTypes.length}
+            type="submit"
           >
             Next
           </Button>

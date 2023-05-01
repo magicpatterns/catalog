@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Divider,
   Heading,
   Stack,
@@ -8,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
-import { TColorData } from '../../types'
+import { TNamedTokenGroup, TTokenGroup } from '../../types'
 import { AddColorSkeleton } from './AddColorSkeleton'
 import { ColorDisplay } from './ColorDisplay'
 import { EditColorModal } from './EditColorModal'
@@ -17,31 +18,45 @@ export function ColorPaletteSection({
   colors,
   onUpdateColors,
 }: {
-  colors: TColorData[]
-  onUpdateColors: (newColors: TColorData[]) => void
+  colors: TTokenGroup
+  onUpdateColors: (newColors: TTokenGroup) => void
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  let totalVariants = 0
+  Object.keys(colors).forEach((name) => {
+    totalVariants += Object.keys(colors[name]).length
+  })
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Heading fontSize={'2.5rem'} fontWeight="black">
         Color Palette
       </Heading>
-      <Text
-        fontSize={'1.2rem'}
-        fontWeight="medium"
-        color="gray.600"
-        css={{ marginTop: '12px' }}
-      >
-        {`Add and edit the colors in your theme. `}
-      </Text>
+      <Box display="flex" justifyContent="space-between">
+        <Text
+          fontSize={'1.2rem'}
+          fontWeight="medium"
+          color="gray.600"
+          css={{ marginTop: '12px' }}
+        >
+          {`Add and edit the colors in your theme. `}
+        </Text>
+        {totalVariants > 5 && (
+          <>
+            <Button width="160px" variant="outline" onClick={() => onOpen()}>
+              Add New Color
+            </Button>
+          </>
+        )}
+      </Box>
       <Divider css={{ borderWidth: '2px', margin: '12px 0', width: '100%' }} />
 
       <Box>
         <Stack direction="column" spacing={12}>
-          {colors.map((color, index) => (
+          {Object.keys(colors).map((name, index) => (
             <motion.div
-              key={color.name}
+              key={name}
               initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
@@ -52,22 +67,30 @@ export function ColorPaletteSection({
               }}
             >
               <ColorDisplay
-                colorData={color}
-                onUpdateColorData={(updatedColorData: TColorData) => {
-                  const newColors = [...colors]
-                  const colorIndex = colors.findIndex(
-                    (ec) => ec.name === color.name
-                  )
-                  newColors[colorIndex] = updatedColorData
+                colorName={name}
+                colorData={colors[name] as TTokenGroup}
+                onUpdateColorName={(newName: string) => {
+                  // Rename the color while retaining the order of the keys
+                  const newColors = Object.keys(colors).reduce((acc, key) => {
+                    if (key !== name) acc[key] = colors[key]
+                    else acc[newName] = colors[key]
+                    return acc
+                  }, {} as TTokenGroup)
+
+                  onUpdateColors(newColors)
+                }}
+                onUpdateColorData={(updatedColorData: TTokenGroup) => {
+                  const newColors = { ...colors }
+                  newColors[name] = updatedColorData
 
                   onUpdateColors(newColors)
                 }}
                 onDeleteColorData={() => {
-                  const newColors = colors.filter((c) => c.name !== color.name)
+                  const newColors = { ...colors }
+                  delete newColors[name]
 
                   onUpdateColors(newColors)
                 }}
-                animationDelayAddition={0.3 * index}
               />
             </motion.div>
           ))}
@@ -75,7 +98,7 @@ export function ColorPaletteSection({
         <Box
           css={{
             padding: '18px 0',
-            marginTop: colors.length > 0 ? '32px' : '0',
+            marginTop: Object.keys(colors).length > 0 ? '32px' : '0',
           }}
           onClick={() => onOpen()}
         >
@@ -84,37 +107,11 @@ export function ColorPaletteSection({
       </Box>
       <EditColorModal
         isOpen={isOpen}
-        onClose={(colorData?: TColorData) => {
-          if (colorData) {
-            const newColors = [...colors]
-            const existingColorRegex = new RegExp(
-              '(' + colorData.name + ')(?: ([0-9]+))?'
-            )
-            let finalName = ''
-            let maxNum = 0
+        onClose={(newColor?: TNamedTokenGroup) => {
+          if (newColor) {
+            const newColors = { ...colors }
 
-            newColors.map((col) => {
-              // Do a regex check to find both the color name, and it's number
-              const match: RegExpMatchArray | null =
-                col.name.match(existingColorRegex)
-
-              // If we have a match, construct the (incremented) final color name
-              if (match) {
-                // match[2] represents the number this iteration color has previously been incremented to.  If it's incremented value is bigger than the last iteration, assign it to maxNum
-                maxNum =
-                  parseInt(match[2]) + 1 > maxNum
-                    ? parseInt(match[2]) + 1
-                    : maxNum
-
-                // If we have zero, it means the color name exists, but hasn't yet been incremented, so we assign 2.  Otherwise, assign the max number
-                if (maxNum > 0) finalName = colorData.name + ' ' + maxNum
-                else finalName = colorData.name + ' 2'
-              }
-            })
-            // Lastly, construct the final string and assign it to the colorData.name if it's not blank
-            colorData.name = finalName === '' ? colorData.name : finalName
-
-            newColors.push(colorData)
+            newColors[newColor.name] = newColor.group
 
             onUpdateColors(newColors)
           }

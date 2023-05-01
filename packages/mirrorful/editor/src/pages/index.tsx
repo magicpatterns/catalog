@@ -1,14 +1,20 @@
-import { Dashboard } from '@mirrorful/core/lib/components/Dashboard'
-import ServerEndedMessage from '@mirrorful/core/lib/components/ServerEndedMessage'
-import { TConfig } from '@mirrorful/core/lib/types'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Editor() {
+  const router = useRouter()
+  useEffect(() => {
+    router.replace('/colors')
+  }, [router])
+
   const [hasShutDown, setHasShutDown] = useState(false)
   const isShuttingDown = useRef<boolean>(false) // need this to keep it from rerendering
+
+  // TODO(Danilowicz): when we let the user choose their own, we'll need to change this
   const PORT = 5050
   const URL = 'http://localhost'
+
   useEffect(() => {
     function pollForServerEndCheck() {
       fetch(`${URL}:${PORT}/api/longPoll`, { keepalive: true })
@@ -35,6 +41,7 @@ export default function Editor() {
       pollForServerEndCheck()
     }
   }, [hasShutDown])
+
   return (
     <>
       <Head>
@@ -46,24 +53,6 @@ export default function Editor() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {hasShutDown ? (
-        <ServerEndedMessage />
-      ) : (
-        <Dashboard
-          fetchStoreData={async () => {
-            const response = await fetch('/api/config')
-            const data: TConfig = await response.json()
-
-            return data
-          }}
-          postStoreData={async (data) => {
-            await fetch('/api/export', {
-              method: 'POST',
-              body: JSON.stringify(data),
-            })
-          }}
-        />
-      )}
     </>
   )
 }

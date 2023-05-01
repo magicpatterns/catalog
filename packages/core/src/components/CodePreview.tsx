@@ -3,13 +3,13 @@ import { Tooltip } from '@chakra-ui/react'
 import { useState } from 'react'
 import Highlight from 'react-highlight'
 
+// NOTE: react-highlight is not safely typed!
+// Check the docs before modifying: https://www.npmjs.com/package/react-highlight
 export function CodePreview({
   language,
-  textClass,
   text,
 }: {
   language: string
-  textClass: string
   text: string
 }) {
   const [tooltip, setTooltip] = useState<string>('Copy')
@@ -17,9 +17,7 @@ export function CodePreview({
     <div
       style={{ position: 'relative', maxHeight: '40vh', overflowY: 'scroll' }}
     >
-      <Highlight language={language} className={textClass}>
-        {text}
-      </Highlight>
+      <Highlight className={language}>{text}</Highlight>
       <Tooltip placement="top" closeDelay={500} hasArrow label={tooltip}>
         <CopyIcon
           style={{

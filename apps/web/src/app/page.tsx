@@ -1,10 +1,24 @@
-import { DashboardWrapper } from '@web/components/DashboardWrapper'
+'use client'
 
-export const metadata = {
-  title: 'Mirrorful Editor',
-  description: `Create, edit, and manage your app's theme.`,
-}
+import Head from 'next/head'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function Home() {
-  return <DashboardWrapper />
+  const router = useRouter()
+  useEffect(() => {
+    router.replace('/colors')
+  }, [router])
+
+  return (
+    <Head>
+      <title>Mirrorful Editor</title>
+      <meta content="width=device-width, initial-scale=1" name="viewport" />
+      <meta
+        name="description"
+        content="Create, edit, and manage your app's theme."
+      />
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+  )
 }

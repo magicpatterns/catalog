@@ -1,0 +1,159 @@
+{
+  "info": {
+    "name": "Api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": null
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://mirrorful-server.herokuapp.com/",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "_type": "container",
+      "description": null,
+      "name": "Registry",
+      "item": [
+        {
+          "_type": "endpoint",
+          "name": "Create Library",
+          "request": {
+            "description": null,
+            "url": {
+              "raw": "{{baseUrl}}/orgs/:orgId/library",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orgs",
+                ":orgId",
+                "library"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "orgId",
+                  "value": "",
+                  "description": null
+                }
+              ]
+            },
+            "header": [],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"example\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "_type": "endpoint",
+          "name": "Update File",
+          "request": {
+            "description": null,
+            "url": {
+              "raw": "{{baseUrl}}/orgs/:orgId/file/:fileId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orgs",
+                ":orgId",
+                "file",
+                ":fileId"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "orgId",
+                  "value": "",
+                  "description": null
+                },
+                {
+                  "key": "fileId",
+                  "value": "",
+                  "description": null
+                }
+              ]
+            },
+            "header": [],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"code\": \"example\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "_type": "endpoint",
+          "name": "Get File",
+          "request": {
+            "description": null,
+            "url": {
+              "raw": "{{baseUrl}}/orgs/:orgId/file/:fileId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orgs",
+                ":orgId",
+                "file",
+                ":fileId"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "orgId",
+                  "value": "",
+                  "description": null
+                },
+                {
+                  "key": "fileId",
+                  "value": "",
+                  "description": null
+                }
+              ]
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null,
+            "body": null
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "tokens": {
+    "typography": {
+      "fontSizes": [
+        {
+          "value": 1,
+          "unit": "rem",
+          "name": "sm"
+        },
+        {
+          "value": 1.2,
+          "unit": "rem",
+          "name": "md"
+        },
+        {
+          "value": 1.4,
+          "unit": "rem",
+          "name": "lg"
+        }
+      ]
+    },
+    "colorData": [
+      {
+        "name": "Hot Pink",
+        "baseColor": "#ED64A6",
+        "variants": {
+          "50": "#fdedf5",
+          "100": "#fad2e5",
+          "200": "#f7b6d5",
+          "300": "#f39bc5",
+          "400": "#f07fb6",
+          "500": "#ed64a6",
+          "600": "#ea4996",
+          "700": "#e72d86",
+          "800": "#dc1a77",
+          "900": "#c01668"
+        }
+      },
+      {
+        "name": "Cool Teal",
+        "baseColor": "#38B2AC",
+        "variants": {
+          "50": "#a1e2de",
+          "100": "#8adad6",
+          "200": "#73d3ce",
+          "300": "#5cccc6",
+          "400": "#44c4be",
+          "500": "#38b2ac",
+          "600": "#319b95",
+          "700": "#29837f",
+          "800": "#226c69",
+          "900": "#1b5552"
+        }
+      },
+      {
+        "name": "Lizard Green",
+        "baseColor": "#48BB78",
+        "variants": {
+          "50": "#b8e4ca",
+          "100": "#a1dcba",
+          "200": "#8bd4a9",
+          "300": "#75cc99",
+          "400": "#5ec388",
+          "500": "#48bb78",
+          "600": "#3ea66a",
+          "700": "#36905b",
+          "800": "#2d7a4d",
+          "900": "#25643f"
+        }
+      },
+      {
+        "name": "Cool Gray",
+        "baseColor": "#edf2f7",
+        "variants": {
+          "50": "#ffffff",
+          "100": "#ffffff",
+          "200": "#ffffff",
+          "300": "#ffffff",
+          "400": "#ffffff",
+          "500": "#edf2f7",
+          "600": "#d8e3ee",
+          "700": "#c3d3e4",
+          "800": "#adc4db",
+          "900": "#98b5d1"
+        }
+      }
+    ],
+    "shadows": [
+      {
+        "name": "sm",
+        "value": "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+      },
+      {
+        "name": "md",
+        "value": "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)"
+      },
+      {
+        "name": "lg",
+        "value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+      },
+      {
+        "name": "dark-lg",
+        "value": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+      }
+    ]
+  },
+  "files": ["css", "scss", "js", "cjs", "ts", "json"],
+  "__internal__": {
+    "migrations": {
+      "version": "0.0.5"
+    }
+  }
+}

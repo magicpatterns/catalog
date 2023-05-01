@@ -1,6 +1,6 @@
 {
   "name": "@mirrorful/core",
-  "version": "1.0.7",
+  "version": "2.0.6",
   "scripts": {
     "build": "run-script-os",
     "build:win32": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json && xcopy /Y package.json lib",
@@ -28,16 +28,19 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@hello-pangea/color-picker": "^3.2.2",
+    "eslint-plugin-react": "^7.32.2",
     "framer-motion": "^10.6.0",
     "json5": "^2.2.3",
     "lottie-react": "^2.4.0",
+    "next": "13.2.4",
     "posthog-js": "^1.51.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-highlight": "^0.15.0",
     "react-icons": "^4.8.0",
     "tinycolor2": "^1.6.0",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@mirrorful/eslint-config": "file:../eslint-config",
@@ -52,6 +55,7 @@
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.4",
     "run-script-os": "^1.1.6",

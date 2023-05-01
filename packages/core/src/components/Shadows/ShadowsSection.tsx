@@ -5,9 +5,11 @@ import {
   Heading,
   Stack,
   Text,
+  Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
-import { TShadowData } from '@core/types'
+import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
+import { useEffect, useState } from 'react'
 
 import { EditShadowModal } from './EditShadowModal'
 
@@ -16,8 +18,8 @@ export function ShadowRow({
   onUpdateShadowVariant,
   onDeleteShadowVariant,
 }: {
-  shadowData: TShadowData
-  onUpdateShadowVariant: (newVariant: TShadowData) => void
+  shadowData: TNamedToken
+  onUpdateShadowVariant: (newVariant: TNamedToken) => void
   onDeleteShadowVariant: () => void
 }) {
   const {
@@ -25,6 +27,48 @@ export function ShadowRow({
     onOpen: onEditVariantModalOpen,
     onClose: onEditVariantModalClose,
   } = useDisclosure()
+
+  const [hasCopiedShadowValue, setHasCopiedShadowValue] = useState(false)
+
+  useEffect(() => {
+    let copiedTimeout: NodeJS.Timeout
+    if (hasCopiedShadowValue) {
+      copiedTimeout = setTimeout(() => {
+        setHasCopiedShadowValue(false)
+      }, 1500)
+    }
+    return () => clearTimeout(copiedTimeout)
+  }, [hasCopiedShadowValue])
+
+  function getRgba(str: string) {
+    const rgbaRegex = /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/
+    const match = str.match(rgbaRegex)
+    if (match) {
+      const [, r, g, b, a] = match
+      return { r: Number(r), g: Number(g), b: Number(b), a: Number(a) }
+    }
+    return { r: 0, g: 0, b: 0, a: 0.5 } // Return if no match is found
+  }
+
+  function getValues(str: string) {
+    const regex =
+      /(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+rgba/g
+    const match = regex.exec(str)
+    if (match) {
+      const numbers = match.slice(1, 5).map((numStr) => parseFloat(numStr))
+
+      return {
+        hOffset: Number(numbers[0]),
+        vOffset: Number(numbers[1]),
+        blur: Number(numbers[2]),
+        spread: Number(numbers[3]),
+      }
+    }
+    return { hOffset: 0, vOffset: 0, blur: 0, spread: 0 } // Return if no match is found
+  }
+
+  const initialRgbaValue = getRgba(shadowData.token.value)
+  const initialValues = getValues(shadowData.token.value)
 
   return (
     <Box css={{ width: '60vw' }}>
@@ -49,20 +93,39 @@ export function ShadowRow({
               alignItems: 'center',
             }}
           >
-            <Text css={{ fontWeight: 'bold' }}>{shadowData.name}</Text>
+            <Text css={{ fontWeight: 'bold' }} noOfLines={1}>
+              {shadowData.name}
+            </Text>
           </Box>
           <Box>
-            <Text
-              css={{
-                fontWeight: 'bold',
-                flexGrow: 1,
-                fontSize: '1rem',
-                marginLeft: '12px',
-              }}
-              fontSize={18}
+            <Tooltip
+              label="Copied Shadow to Clipboard"
+              hasArrow
+              isDisabled={!hasCopiedShadowValue}
+              isOpen={hasCopiedShadowValue}
             >
-              {shadowData.value}
-            </Text>
+              <Text
+                css={{
+                  fontWeight: 'bold',
+                  paddingInline: 2,
+                  fontSize: '1rem',
+                  marginLeft: '12px',
+                }}
+                _hover={{
+                  cursor: 'pointer',
+                  backgroundColor: 'black',
+                  color: 'white',
+                  borderRadius: 8,
+                }}
+                fontSize={18}
+                onClick={() => {
+                  navigator.clipboard.writeText(shadowData.token.value)
+                  setHasCopiedShadowValue(true)
+                }}
+              >
+                {shadowData.token.value}
+              </Text>
+            </Tooltip>
           </Box>
         </Box>
 
@@ -73,7 +136,7 @@ export function ShadowRow({
               height: 50,
               backgroundColor: '#F3F3F3',
               border: '1px solid #D3D3D3',
-              boxShadow: shadowData.value,
+              boxShadow: shadowData.token.value,
               padding: '24px',
               borderRadius: 8,
             }}
@@ -92,6 +155,8 @@ export function ShadowRow({
             initialShadowVariant={shadowData}
             onUpdateShadowVariant={onUpdateShadowVariant}
             onDeleteShadowVariant={onDeleteShadowVariant}
+            initialRgbaValue={initialRgbaValue}
+            initialValues={initialValues}
           />
         </Box>
       </Stack>
@@ -103,8 +168,8 @@ export function ShadowsSection({
   shadows,
   onUpdateShadowData,
 }: {
-  shadows: TShadowData[]
-  onUpdateShadowData: (newShadowData: TShadowData[]) => void
+  shadows: TTokenGroup
+  onUpdateShadowData: (newShadowData: TTokenGroup) => void
 }) {
   const {
     isOpen: isAddVariantModalOpen,
@@ -130,23 +195,35 @@ export function ShadowsSection({
       <Box css={{ marginBottom: '48px' }} />
       <Box>
         <Stack css={{ marginTop: '24px' }} spacing={12}>
-          {shadows.map((shadowData, index) => (
-            <ShadowRow
-              key={shadowData.name}
-              shadowData={shadowData}
-              onUpdateShadowVariant={(updatedShadowVariant: TShadowData) => {
-                const newShadowData = [...shadows]
-                newShadowData[index] = updatedShadowVariant
+          {Object.keys(shadows)
+            .map((key) => ({
+              name: key,
+              token: shadows[key],
+            }))
+            .filter((value): value is TNamedToken => assertToken(value.token))
+            .map((data) => (
+              <ShadowRow
+                key={data.name}
+                shadowData={data}
+                onUpdateShadowVariant={(updatedShadowVariant: TNamedToken) => {
+                  const newShadowData = { ...shadows }
 
-                onUpdateShadowData(newShadowData)
-              }}
-              onDeleteShadowVariant={() => {
-                const newShadowData = [...shadows]
-                newShadowData.splice(index, 1)
-                onUpdateShadowData(newShadowData)
-              }}
-            />
-          ))}
+                  if (data.name !== updatedShadowVariant.name) {
+                    delete newShadowData[data.name]
+                  }
+
+                  newShadowData[updatedShadowVariant.name] =
+                    updatedShadowVariant.token
+
+                  onUpdateShadowData(newShadowData)
+                }}
+                onDeleteShadowVariant={() => {
+                  const newShadowData = { ...shadows }
+                  delete newShadowData[data.name]
+                  onUpdateShadowData(newShadowData)
+                }}
+              />
+            ))}
           <Button
             css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}
             onClick={() => onAddVariantModalOpen()}
@@ -158,8 +235,11 @@ export function ShadowsSection({
       <EditShadowModal
         isOpen={isAddVariantModalOpen}
         onClose={onAddVariantModalClose}
-        onUpdateShadowVariant={(newVariant: TShadowData) => {
-          onUpdateShadowData([...shadows, newVariant])
+        onUpdateShadowVariant={(newVariant: TNamedToken) => {
+          const newShadowData = { ...shadows }
+          newShadowData[newVariant.name] = newVariant.token
+
+          onUpdateShadowData(newShadowData)
         }}
       />
     </Box>

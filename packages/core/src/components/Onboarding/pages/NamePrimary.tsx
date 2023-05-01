@@ -1,7 +1,7 @@
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Input, Stack, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { TPlatform } from '@core/components/Dashboard'
+import { TPlatform } from '@core/components/Layout'
 import { useState } from 'react'
 import tinycolor from 'tinycolor2'
 
@@ -26,7 +26,7 @@ export function NamePrimary({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%' }} as="form">
       <Box
         css={{
           width: '50%',
@@ -59,7 +59,7 @@ export function NamePrimary({
             fontWeight="bold"
           >
             The color name is how it will be referenced in code. We recommend
-            simple names like {'"Blue"'} or {'"Light Green"'}.
+            simple names like {'"Blue"'} or {'"Light Green."'}
           </Text>
         </Box>
         <Box css={{ paddingBottom: '32px' }}>
@@ -84,7 +84,8 @@ export function NamePrimary({
             padding={'8px 36px'}
             size="lg"
             rightIcon={<ArrowForwardIcon />}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               if (!name) {
                 setError('Please enter a name for your color.')
                 return
@@ -93,6 +94,7 @@ export function NamePrimary({
               onUpdatePrimaryName(name)
               onUpdatePage(3)
             }}
+            type="submit"
           >
             Next
           </Button>

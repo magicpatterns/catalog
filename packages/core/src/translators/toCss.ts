@@ -1,39 +1,53 @@
-import { TTokens } from '@core/types'
-import { getKeys } from '@core/utils/getKeys'
+import { assertToken, assertTokenGroup, TPrimitives } from '@core/types'
 
 import { sanitizeName } from './sanitizeName'
 
-export const toCss = ({ colorData, typography, shadows }: TTokens): string => {
+export const toCss = ({ colors, typography, shadows }: TPrimitives): string => {
   const content = [':root {']
 
-  colorData.forEach((color) => {
-    if (color.baseColor) {
-      content.push(`  --color-${sanitizeName(color.name)}: ${color.baseColor};`)
-    }
-
-    getKeys(color.variants).forEach((key) => {
-      if (color.variants[key]) {
+  Object.keys(colors).forEach((colorName) => {
+    const color = colors[colorName]
+    if (assertTokenGroup(color)) {
+      Object.keys(color).forEach((variantName) => {
         content.push(
-          `  --color-${sanitizeName(color.name)}-${sanitizeName(key)}: ${
-            color.variants[key]
+          `  --color-${sanitizeName(colorName)}-${sanitizeName(variantName)}: ${
+            color[variantName].value
           };`
         )
-      }
-    })
+      })
+    }
   })
 
-  typography.fontSizes.forEach((fontSize) => {
-    content.push(
-      `  --font-size-${sanitizeName(fontSize.name)}: ${fontSize.value}${
-        fontSize.unit
-      };`
-    )
+  Object.keys(typography.fontSizes).forEach((name) => {
+    const fontSize = typography.fontSizes[name]
+    if (assertToken(fontSize)) {
+      content.push(`  --font-size-${sanitizeName(name)}: ${fontSize.value};`)
+    }
   })
 
-  shadows.forEach((shadow) => {
-    content.push(
-      `  --box-shadow-${sanitizeName(shadow.name)}: ${shadow.value};`
-    )
+  Object.keys(typography.fontWeights).forEach((name) => {
+    const fontWeight = typography.fontWeights[name]
+    if (assertToken(fontWeight)) {
+      content.push(
+        `  --font-weight-${sanitizeName(name)}: ${fontWeight.value};`
+      )
+    }
+  })
+
+  Object.keys(typography.lineHeights).forEach((name) => {
+    const lineHeight = typography.lineHeights[name]
+    if (assertToken(lineHeight)) {
+      content.push(
+        `  --line-height-${sanitizeName(name)}: ${lineHeight.value};`
+      )
+    }
+  })
+
+  Object.keys(shadows).forEach((name) => {
+    const shadow = shadows[name]
+    if (assertToken(shadow)) {
+      content.push(`  --box-shadow-${sanitizeName(name)}: ${shadow.value};`)
+    }
   })
 
   content.push(`}`)

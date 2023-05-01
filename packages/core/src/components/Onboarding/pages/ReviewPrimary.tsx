@@ -17,7 +17,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { TPlatform } from '@core/components/Dashboard'
+import { TPlatform } from '@core/components/Layout'
 import tinycolor from 'tinycolor2'
 
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
@@ -34,7 +34,7 @@ export function ReviewPrimary({
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%' }} as="form">
       <Box
         css={{
           width: '50%',
@@ -67,6 +67,9 @@ export function ReviewPrimary({
             fontWeight="bold"
           >
             {`Here's a quick little preview of what your primary color looks like in action.`}
+            <br />
+            <br />
+            This is only a preview, you can always change it later.
           </Text>
         </Box>
         <Box css={{ paddingBottom: '32px' }}>
@@ -91,9 +94,11 @@ export function ReviewPrimary({
             padding={'8px 36px'}
             size="lg"
             rightIcon={<ArrowForwardIcon />}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               onUpdatePage(4)
             }}
+            type="submit"
           >
             Next
           </Button>

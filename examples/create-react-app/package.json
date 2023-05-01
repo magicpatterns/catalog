@@ -36,6 +36,6 @@
     ]
   },
   "devDependencies": {
-    "mirrorful": "^4.0.0"
+    "mirrorful": "^5.0.7"
   }
 }

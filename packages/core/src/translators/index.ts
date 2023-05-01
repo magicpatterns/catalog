@@ -3,6 +3,7 @@ import { toCss } from './toCss'
 import { toJs } from './toJs'
 import { toJson } from './toJson'
 import { toScss } from './toScss'
+import { toTs } from './toTs'
 import { TranslatorMap } from './types'
 
 export const translators: TranslatorMap = {
@@ -20,10 +21,10 @@ export const translators: TranslatorMap = {
   },
   cjs: {
     toContent: toCjs,
-    extension: '_cjs.js',
+    extension: '_cjs.cjs',
   },
   ts: {
-    toContent: toJs,
+    toContent: toTs,
     extension: '.ts',
   },
   json: {

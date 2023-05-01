@@ -39,21 +39,19 @@
 <kbd>[<img title="Swedish" alt="Swedish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/se.svg" width="22">](i18n/README.sv.md)</kbd>
 <kbd>[<img title="Turkish" alt="Turkish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/tr.svg" width="22">](i18n/README.tr.md)</kbd>
 <kbd>[<img title="Spanish" alt="Spanish language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/es.svg" width="22">](i18n/README.es.md)</kbd>
-<kbd>[
-  <img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/pt.svg" width="22">
-  <img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/br.svg" width="22">
-](i18n/README.pt.md)</kbd>
+<kbd>[<img title="Portuguese" alt="Portuguese language" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/pt.svg" width="22">](i18n/README.pt.md)</kbd>
 
 **[Mirrorful](https://mirrorful.com)** is a simple, open-source design system framework. Install Mirrorful to generate colors and other design tokens for your project. Then, import these tokens directly into your app.
 
 - **Start new projects with a source of truth**
 - **Visually modify your theme**
 - **Generate colors**
-- 🔜 **Theme Templates**
+- **Theme Templates**
+- **Figma integration**
+
 - 🔜 **Lightweight Headless Component Library**
 - 🔜 **Eslint rules**
 - 🔜 **Propagate tokens across projects**
-- 🔜 **Figma integration**
 
 And more...
 
@@ -73,45 +71,27 @@ yarn add mirrorful --dev
 
 ## ✨ Usage
 
-The following commands will start a local editor at `localhost:5050`.
+The following command will start a local editor at `localhost:5050`.
 
 ```
-yarn run mirrorful
+npx mirrorful editor
 ```
 
 or
 
 ```
-npx mirrorful
+yarn run mirrorful
 ```
 
-## 💿 Export Formats
+## 📚 Documentation
 
-After configuring your theme in the editor, you can export it to be used by your app. We currently export to the following file types: `.js`, `.ts`, `.css`, `.scss`, `.json`. If you're using tailwind, we also export to common js to work nicely with your tailwind config.
-
-**Example: Using CSS Variables**
-
-```css
-.primary-button {
-  background-color: var(--color-primary);
-}
-
-.primary-button:hover {
-  background-color: var(--color-primary-hover);
-}
-```
-
-**Example: Using Javascript Constants**
-
-```javascript
-<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
-```
+Check out our [documentation](https://mirrorful.com/docs) for more information.
 
 ## 🤝 Component Library Agnostic
 
 We strive to be component library agnostic. Whether you're using Material UI, Chakra UI, Tailwind, Ant Design, or even your in-house library, Mirrorful hooks right in.
 
-⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory.
+⚠️ `create-react-app` may warn that you are trying to import from outside the `src` directory. We are working on a long-term solution, but for now, we would recommend making a copy of the `.mirrorful` folder in your `src` directory. If you're working with Vite, you can add a config that copies the .mirrorful dir to `src`. Check out the example `vite.config.ts` [here](https://github.com/Mirrorful/mirrorful/blob/main/examples/sveltekit/vite.config.ts).
 
 Check out our examples:
 
@@ -119,6 +99,9 @@ Check out our examples:
 - [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
 - [Mirrorful 🤝 Basic Create React App](https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app)
 - [Mirrorful 🤝 Basic Nuxt 3 App](https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3)
+- [Mirrorful 🤝 SvelteKit](https://github.com/Mirrorful/mirrorful/tree/main/examples/sveltekit)
+- [Mirrorful 🤝 Bootstrap (and Next)](https://github.com/Mirrorful/mirrorful/tree/main/examples/bootstrap-next)
+- [Mirrorful 🤝 styled-components](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-styled-components)
 
 Looking for a specific example? [Request one here!](https://github.com/Mirrorful/mirrorful/issues)
 
@@ -133,6 +116,7 @@ Check out our [documentation](https://mirrorful.com/docs) for more information.
 - [GitHub Issues](https://github.com/Mirrorful/mirrorful/issues) - for any bugs and errors you encounter using Mirrorful.
 - [Twitter](https://twitter.com/mirrorful) - stay up to date with the latest product updates.
 - [Book a free, non-pressure pairing sessions with one of our teammates](https://usemotion.com/meet/teddyni/meet?d=15)!
+- [Showcase](https://mirrorful.com/docs/home/showcase) - to see the awesome projects our community has built on Mirrorful!
 
 ## 🪞 Contributors
 

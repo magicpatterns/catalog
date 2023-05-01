@@ -1,0 +1,23 @@
+:root {
+  --color-orange-base: #f2994a;
+  --color-grey-base: #bdbdbd;
+  --color-grey-intro-text: #4f4f4f;
+  --color-black-base: #000000;
+  --color-black-light-black: #333333;
+  --font-size-intro-text: 12px;
+  --font-size-h1: 48px;
+  --font-size-normal: 14px;
+  --font-size-b: 0.5rem;
+  --font-size-p: 0.625rem;
+  --font-size-h1-mobile: 24px;
+  --font-size-h2-mobile: 18px;
+  --font-size-h3-mobile: 16px;
+  --font-size-h2: 24px;
+  --font-size-h3: 18px;
+  --font-weight-bold: 400;
+  --font-weight-bolder: 500;
+  --font-weight-boldest: 700;
+  --line-height-intro-text: 15px;
+  --line-height-instructions: 24px;
+  --box-shadow-minor-info: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}

@@ -1,15 +1,7 @@
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-import {
-  Box,
-  Button,
-  Checkbox,
-  Heading,
-  Input,
-  Stack,
-  Text,
-} from '@chakra-ui/react'
+import { ArrowForwardIcon } from '@chakra-ui/icons'
+import { Box, Button, Checkbox, Heading, Stack, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
-import { TPlatform } from '@core/components/Dashboard'
+import { TPlatform } from '@core/components/Layout'
 import { posthog } from 'posthog-js'
 import { useState } from 'react'
 import tinycolor from 'tinycolor2'
@@ -33,11 +25,12 @@ export function Referral({
   const [isFriendChecked, setIsFriendChecked] = useState<boolean>(false)
   const [isGithubChecked, setIsGithubChecked] = useState<boolean>(false)
   const [isOtherChecked, setIsOtherChecked] = useState<boolean>(false)
+  const [isHackerNewsChecked, setIsHackerNewsChecked] = useState<boolean>(false)
 
   const shades = generateDefaultColorShades(primaryColor)
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }}>
+    <Box css={{ display: 'flex', height: '100%' }} as="form">
       <Box
         css={{
           width: '50%',
@@ -127,8 +120,13 @@ export function Referral({
                 posthog.capture('onboarding-referral-youtube')
               }
 
+              if (isHackerNewsChecked) {
+                posthog.capture('onboarding-referral-hackernews')
+              }
+
               onFinish()
             }}
+            type="submit"
           >
             Finish
           </Button>
@@ -173,7 +171,7 @@ export function Referral({
             isChecked={isBlogChecked}
             onChange={(e) => setIsBlogChecked(e.target.checked)}
           >
-            Blog
+            Mirrorful Blog
           </Checkbox>
           <Checkbox
             isChecked={isTikTokChecked}
@@ -186,6 +184,12 @@ export function Referral({
             onChange={(e) => setIsGithubChecked(e.target.checked)}
           >
             Github
+          </Checkbox>
+          <Checkbox
+            isChecked={isHackerNewsChecked}
+            onChange={(e) => setIsHackerNewsChecked(e.target.checked)}
+          >
+            HackerNews
           </Checkbox>
           <Checkbox
             isChecked={isFriendChecked}

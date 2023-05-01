@@ -1,15 +1,21 @@
-import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import {
+  defaultColorShadesToTokens,
+  generateDefaultColorShades,
+} from '@core/components/ColorPalette/utils'
+import {
+  assertToken,
   defaultFiles,
-  defaultShadows,
-  defaultTypography,
-  TColorData,
-  TConfig,
+  defaultShadowsV2,
+  defaultTypographyV2,
   TExportFileType,
+  TMirrorfulStore,
+  TTokenGroup,
 } from '@core/types'
 import { useState } from 'react'
+import tinycolor from 'tinycolor2'
+import { v4 as uuidv4 } from 'uuid'
 
-import { TPlatform } from '../Dashboard'
+import { TPlatform } from '../Layout'
 import { OnboardingContainer } from './OnboardingContainer'
 import { ExportSettings } from './pages/ExportSettings'
 import { ImportInstructions } from './pages/ImportInstructions'
@@ -19,61 +25,95 @@ import { PickPrimary } from './pages/PickPrimary'
 import { Referral } from './pages/Referral'
 import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
+import { nameThatColor } from './utils'
 
 export function Onboarding({
   postStoreData,
   onFinishOnboarding,
   platform,
 }: {
-  postStoreData: (data: TConfig) => Promise<void>
+  postStoreData: (data: TMirrorfulStore) => Promise<void>
   onFinishOnboarding: () => void
   platform: TPlatform
 }) {
   const [primaryColor, setPrimaryColor] = useState<string>('#9F7AEA')
   const [primaryName, setPrimaryName] = useState<string>('')
-  const [palette, setPalette] = useState<TColorData[]>([])
+  const [palette, setPalette] = useState<TTokenGroup>({})
   const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
 
-  const [page, setPage] = useState<number>(0)
+  const [page, setPage] = useState<number>(platform === 'web' ? 1 : 0)
+
+  const updatePrimaryColor = (newColor: string) => {
+    // set the color in state
+    setPrimaryColor(newColor)
+
+    const hslColor = tinycolor(newColor).toHsl()
+    const name = nameThatColor(hslColor)
+    setPrimaryName(name)
+  }
 
   const handleExport = async (
     primaryColorHex: string,
     primaryColorName: string,
-    latestPalette: TColorData[]
+    paletteGroupTokens: TTokenGroup
   ) => {
-    const colors: TColorData[] = [
-      {
-        name: primaryColorName,
-        baseColor: primaryColorHex,
-        variants: generateDefaultColorShades(primaryColorHex),
+    const primaryColorTokenGroup: TTokenGroup = {
+      base: {
+        id: uuidv4(),
+        value: primaryColorHex,
+        type: 'color',
       },
-      ...latestPalette,
-    ]
+      ...defaultColorShadesToTokens(
+        generateDefaultColorShades(primaryColorHex)
+      ),
+    }
+
+    const colors: TTokenGroup = {
+      [primaryColorName]: primaryColorTokenGroup,
+      ...paletteGroupTokens,
+    }
 
     await postStoreData({
-      tokens: {
-        colorData: colors,
-        typography: defaultTypography,
-        shadows: defaultShadows,
+      primitives: {
+        colors,
+        typography: defaultTypographyV2,
+        shadows: defaultShadowsV2,
       },
+      themes: [],
       files: fileTypes,
     })
   }
 
-  let content = (
-    <Welcome
-      onFinishOnboarding={onFinishOnboarding}
-      onUpdatePage={setPage}
-      platform={platform}
-    />
-  )
+  let content
+  if (platform === 'package') {
+    content = (
+      <Welcome
+        onFinishOnboarding={onFinishOnboarding}
+        onUpdatePage={setPage}
+        platform={platform}
+      />
+    )
+  } else {
+    content = (
+      <PickPrimary
+        primaryColor={primaryColor}
+        onUpdatePage={setPage}
+        onUpdatePrimaryColor={(newColor: string) =>
+          updatePrimaryColor(newColor)
+        }
+        platform={platform}
+      />
+    )
+  }
 
   if (page === 1) {
     content = (
       <PickPrimary
-        initialPrimary={primaryColor}
+        primaryColor={primaryColor}
         onUpdatePage={setPage}
-        onUpdatePrimaryColor={(newColor: string) => setPrimaryColor(newColor)}
+        onUpdatePrimaryColor={(newColor: string) =>
+          updatePrimaryColor(newColor)
+        }
         platform={platform}
       />
     )
@@ -99,10 +139,18 @@ export function Onboarding({
     content = (
       <OtherColors
         initialPalette={palette}
-        onUpdatePalette={(newPalette: TColorData[]) => {
-          newPalette.map((color) => {
-            if (color.baseColor) {
-              color.variants = generateDefaultColorShades(color.baseColor)
+        onUpdatePalette={(newPalette: TTokenGroup) => {
+          Object.keys(newPalette).map((colorName) => {
+            const color = newPalette[colorName]
+            if (assertToken(color)) {
+              newPalette[colorName] = {
+                base: {
+                  ...newPalette[colorName],
+                },
+                ...defaultColorShadesToTokens(
+                  generateDefaultColorShades(`${color.value}`)
+                ),
+              }
             }
           })
           setPalette(newPalette)
@@ -151,5 +199,9 @@ export function Onboarding({
     )
   }
 
-  return <OnboardingContainer>{content}</OnboardingContainer>
+  return (
+    <OnboardingContainer primaryColor={primaryColor}>
+      {content}
+    </OnboardingContainer>
+  )
 }

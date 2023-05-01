@@ -19,23 +19,17 @@ pnpm install
 
 # Using Mirrorful
 
-To run Mirrorful's visual theme editor,
+To run Mirrorful's visual theme editor at http://localhost:5050
 
 ```bash
 yarn run mirrorful
 ```
-
-The following commands will start a local editor at http://localhost:5050
 
 ## Nuxt 3 Development Server
 
 Start the development server on http://localhost:3000
 
 ```bash
-# yarn
-yarn dev
-
-# npm
 npm run dev
 ```
 
