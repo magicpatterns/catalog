@@ -134,9 +134,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <MirrorfulThemeProvider>
-      {hasShutDown && <ServerEndedMessage />}
       {isLoading && <SplashScreen />}
-      {!shouldForceSkipOnboarding && showOnBoarding ? (
+      {hasShutDown ? (
+        <ServerEndedMessage />
+      ) : !shouldForceSkipOnboarding && showOnBoarding ? (
         <Onboarding
           postStoreData={postStoreData}
           onFinishOnboarding={() => {
