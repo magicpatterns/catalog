@@ -3,9 +3,7 @@ import NextLink from 'next/link'
 import React from 'react'
 
 import { Tokens } from '../../.mirrorful/theme'
-import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
 import { Styles } from '../shared/types'
-import { extractVariant } from '../util/extractVariant'
 
 interface ILink
   extends Partial<
@@ -24,18 +22,13 @@ interface ILink
 
 export function Link(props: ILink) {
   const { fontSizes, fontWeights } = Tokens
-  const [Size, Weight] = extractVariant(props.variants ?? '')
   return (
-    <ChakraProviderWrapper>
-      <ChakraLink
-        css={{ display: 'flex', gap: 8, alignItems: 'center' }}
-        fontSize={fontSizes[Size]}
-        fontWeight={fontWeights[Weight]}
-        {...props}
-      >
-        {props.icon}
-        {props.label}
-      </ChakraLink>
-    </ChakraProviderWrapper>
+    <ChakraLink
+      css={{ display: 'flex', gap: 8, alignItems: 'center' }}
+      {...props}
+    >
+      {props.icon}
+      {props.label}
+    </ChakraLink>
   )
 }

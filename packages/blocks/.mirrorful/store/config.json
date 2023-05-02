@@ -1,245 +1,199 @@
 {
   "primitives": {
     "colors": {
-      "Button Default": {
-        "background": {
-          "id": "427c16af-a003-4e23-bfcd-83edfb6a364b",
-          "value": "#E2E8F0",
+      "Violet": {
+        "50": {
+          "id": "0ff5affa-d49d-4232-a8de-a8987c76f0e1",
+          "value": "#FAF5FF",
           "type": "color"
         },
-        "bg hover": {
-          "id": "545b05e1-d641-41d3-aa54-06f03f6015c7",
-          "value": "#CBD5E0",
-          "type": "color"
-        }
-      },
-      "Save Button": {
-        "background": {
-          "id": "84259ce5-c760-45bf-8568-8fe5eaa3dda7",
-          "value": "#3182CE",
+        "100": {
+          "id": "2d533f57-1b0a-4b46-9d23-e9c17b827a37",
+          "value": "#E9D8FD",
           "type": "color"
         },
-        "color": {
-          "id": "e01081d8-c82e-4ba9-b381-7c6a3dd18d76",
-          "value": "#FFFFFF",
+        "200": {
+          "id": "345da864-e0fa-4f92-b815-515b90a3360e",
+          "value": "#D6BCFA",
           "type": "color"
         },
-        "bg hover": {
-          "id": "45f90c49-36de-4ed8-9863-3f6490bff46c",
-          "value": "#2B6CB0",
-          "type": "color"
-        }
-      },
-      "Delete Button": {
-        "background": {
-          "id": "a66ed05e-7490-400e-a531-7adc80bc1579",
-          "value": "#E53E3E",
+        "300": {
+          "id": "5a8e165d-05e2-4ec3-86da-b647da71ce85",
+          "value": "#B794F4",
           "type": "color"
         },
-        "color": {
-          "id": "a43cf94a-01dd-42a5-a67d-2ddaf9d84700",
-          "value": "#FFFFFF",
+        "400": {
+          "id": "2e24a22e-345a-4984-853f-937286b7cc1e",
+          "value": "#9F7AEA",
           "type": "color"
         },
-        "bg hover": {
-          "id": "3f9256c3-9c76-41e7-ae85-f29f165534d4",
-          "value": "#C53030",
-          "type": "color"
-        }
-      },
-      "Add New Token": {
-        "color": {
-          "id": "a619b881-57d1-4d6f-98bb-7688cd57b68c",
-          "value": "#3182CE",
+        "500": {
+          "id": "cb946d8b-4268-4065-975f-4cfc30fff4ab",
+          "value": "#805AD5",
           "type": "color"
         },
-        "border": {
-          "id": "0eee131b-4a7b-4a24-ac5e-66fdc5f8a0e1",
-          "value": "#3182CE",
+        "600": {
+          "id": "d47fcf30-2f6c-4010-a8c8-db73ad619f8b",
+          "value": "#6B46C1",
           "type": "color"
         },
-        "border hover": {
-          "id": "c18b2560-a2c7-4d10-a63d-7bf2b8953ee0",
-          "value": "#2B6CB0",
+        "700": {
+          "id": "4be15a49-86e0-4676-9fed-3b1d1dcee4f1",
+          "value": "#553C9A",
           "type": "color"
         },
-        "color hover": {
-          "id": "26849f79-1cbd-43c7-855e-cf6ea4898a0d",
-          "value": "#2B6CB0",
-          "type": "color"
-        }
-      },
-      "Add New Variant": {
-        "border": {
-          "id": "5cae4c58-158d-4f1e-a01f-7165dd7eb5f2",
-          "value": "#E2E8F0",
+        "800": {
+          "id": "51945f68-09fa-46b8-b5cb-879a2fc936a8",
+          "value": "#44337A",
           "type": "color"
         },
-        "bg hover": {
-          "id": "4959ed10-b765-461d-a894-03a788dfc9d3",
-          "value": "#E2E8F0",
-          "type": "color"
-        }
-      },
-      "Icon Button": {
-        "border": {
-          "id": "1ac6e8d4-088b-4e6b-81fe-759fb0ffd0f6",
-          "value": "#E2E8F0",
+        "900": {
+          "id": "cd093337-41f4-40cd-b585-b26669367caa",
+          "value": "#322659",
           "type": "color"
         },
-        "bg hover": {
-          "id": "79060ef9-e6f2-44ab-8c54-e46c97877ec1",
-          "value": "#E2E8F0",
-          "type": "color"
-        }
-      },
-      "Default Color": {
         "base": {
-          "id": "37a9bc38-fa22-4a97-a677-220ebd80e149",
-          "value": "#1A202C",
+          "id": "792bc008-d25c-47e1-8096-012e52ce3449",
+          "value": "#805ad5",
           "type": "color"
         }
       },
-      "Text Error": {
-        "base": {
-          "id": "e2c31894-e0a2-4171-8c2c-e682d09e0229",
-          "value": "#F56565",
+      "Space": {
+        "50": {
+          "id": "3ab9c945-6d55-4993-a510-dec20d488207",
+          "value": "#d1d1d3",
           "type": "color"
-        }
-      },
-      "Text Success": {
-        "base": {
-          "id": "6dfb0e0b-76e1-4dd4-808d-f863326774b6",
-          "value": "#48BB78",
+        },
+        "100": {
+          "id": "49e6733a-ca8e-4b4c-b0bf-da1d0a5c4759",
+          "value": "#c1c1c4",
           "type": "color"
-        }
-      },
-      "Text Warning": {
-        "base": {
-          "id": "61082b73-b117-483b-a073-25740e920f63",
-          "value": "#ED8936",
+        },
+        "200": {
+          "id": "2ed1165c-8be8-4989-a50d-592a9255c5c3",
+          "value": "#b1b2b6",
           "type": "color"
-        }
-      },
-      "Text Info": {
+        },
+        "300": {
+          "id": "6a5af5c9-d978-43e0-b585-39b21a230a2c",
+          "value": "#a1a2a7",
+          "type": "color"
+        },
+        "400": {
+          "id": "35409382-a5f3-48cc-ac4a-f0fd18aeacb2",
+          "value": "#929398",
+          "type": "color"
+        },
+        "500": {
+          "id": "a0767f31-8b48-4617-a5eb-f56e41ebb5b4",
+          "value": "#828389",
+          "type": "color"
+        },
+        "600": {
+          "id": "b88cc224-b874-4dd4-a483-bf91f6454d06",
+          "value": "#73747a",
+          "type": "color"
+        },
+        "700": {
+          "id": "669522b4-ff0b-4b5c-871f-166728edda18",
+          "value": "#64656a",
+          "type": "color"
+        },
+        "800": {
+          "id": "d6c93e34-39c1-4640-987a-923f79cf3faa",
+          "value": "#55565a",
+          "type": "color"
+        },
+        "900": {
+          "id": "7960c493-f63e-43a6-9281-4f109a799f2f",
+          "value": "#46474a",
+          "type": "color"
+        },
         "base": {
-          "id": "7549fb93-1141-40fb-918b-d600f0fd1446",
-          "value": "#4299E1",
+          "id": "0ac04fa4-3608-405d-8a7a-41c371734548",
+          "value": "#828389",
           "type": "color"
         }
       }
     },
     "typography": {
       "fontSizes": {
-        "xs": {
-          "id": "23ef24d6-1471-42c4-874e-e34e7b459a50",
-          "value": "0.75rem",
-          "type": "fontSize"
-        },
         "sm": {
-          "id": "8f34a050-3892-4277-885a-565cf9b0d852",
-          "value": "0.875rem",
-          "type": "fontSize"
-        },
-        "md": {
-          "id": "f616113d-a7da-48ef-9bfe-f37825d48a3c",
+          "id": "default-font-size-sm-id",
           "value": "1rem",
           "type": "fontSize"
         },
+        "md": {
+          "id": "default-font-size-md-id",
+          "value": "1.2rem",
+          "type": "fontSize"
+        },
         "lg": {
-          "id": "86418033-c0d3-4500-8c05-1caa064634e7",
-          "value": "1.125rem",
-          "type": "fontSize"
-        },
-        "xl": {
-          "id": "c1605153-a21f-4c68-8c0f-2fac0489d9d5",
-          "value": "1.25rem",
-          "type": "fontSize"
-        },
-        "h1": {
-          "id": "827931f6-d2f9-430f-aec3-e748ba8ff6ff",
-          "value": "2.5rem",
-          "type": "fontSize"
-        },
-        "h2": {
-          "id": "86bba588-6da9-4137-8afe-5533897119f4",
-          "value": "2.1rem",
-          "type": "fontSize"
-        },
-        "h3": {
-          "id": "e0655864-af3b-4578-a03b-4ca2e9c85ad5",
-          "value": "1.8rem",
-          "type": "fontSize"
-        },
-        "h4": {
-          "id": "c9d723e9-e236-42dc-a254-d4b159225320",
-          "value": "1.5rem",
-          "type": "fontSize"
-        },
-        "h5": {
-          "id": "3af80f27-88dc-48a1-9ae5-84573d09411e",
-          "value": "1.3rem",
-          "type": "fontSize"
-        },
-        "h6": {
-          "id": "c403a502-55e8-4388-9bd3-2370789feb95",
-          "value": "1.1rem",
+          "id": "default-font-size-lg-id",
+          "value": "1.4rem",
           "type": "fontSize"
         }
       },
       "fontWeights": {
-        "hairline": {
-          "id": "764315cc-1f44-4f80-84ee-4dc8875f111e",
-          "value": "100",
-          "type": "fontWeight"
-        },
-        "thin": {
-          "id": "691e867d-6d54-44ff-be94-45a708bb20f5",
+        "light": {
+          "id": "default-font-weight-light-id",
           "value": "200",
           "type": "fontWeight"
         },
-        "light": {
-          "id": "9648ea8e-c8ad-4670-83be-8c4b1fb65737",
-          "value": "300",
-          "type": "fontWeight"
-        },
         "normal": {
-          "id": "14f9ee0b-057b-4e3d-9db3-5b7a94687121",
+          "id": "default-font-weight-normal-id",
           "value": "400",
           "type": "fontWeight"
         },
-        "medium": {
-          "id": "ebaebae8-a942-4a06-9954-e0db64379d82",
-          "value": "500",
-          "type": "fontWeight"
-        },
-        "semibold": {
-          "id": "49aad1c9-16e7-4480-878e-a8e278395a61",
-          "value": "600",
-          "type": "fontWeight"
-        },
         "bold": {
-          "id": "14ecbec8-0698-4e73-a200-23e1ad71e734",
+          "id": "default-font-weight-bold-id",
           "value": "700",
-          "type": "fontWeight"
-        },
-        "extrabold": {
-          "id": "0aca3ebc-b242-40dd-b31d-a2ce64b4b6cc",
-          "value": "800",
-          "type": "fontWeight"
-        },
-        "black": {
-          "id": "8987d1a7-8789-4250-a398-4ab092162897",
-          "value": "900",
           "type": "fontWeight"
         }
       },
-      "lineHeights": {}
+      "lineHeights": {
+        "short": {
+          "id": "default-line-height-short-id",
+          "value": "1",
+          "type": "lineHeight"
+        },
+        "normal": {
+          "id": "default-line-height-normal-id",
+          "value": "1.5",
+          "type": "lineHeight"
+        },
+        "tall": {
+          "id": "default-line-height-tall-id",
+          "value": "2",
+          "type": "lineHeight"
+        }
+      }
     },
-    "shadows": {}
+    "shadows": {
+      "sm": {
+        "id": "default-shadow-sm-id",
+        "value": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+        "type": "boxShadow"
+      },
+      "md": {
+        "id": "default-shadow-md-id",
+        "value": "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+        "type": "boxShadow"
+      },
+      "lg": {
+        "id": "default-shadow-lg-id",
+        "value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        "type": "boxShadow"
+      },
+      "dark-lg": {
+        "id": "default-shadow-dark-lg-id",
+        "value": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+        "type": "boxShadow"
+      }
+    }
   },
   "themes": [],
-  "files": ["ts"],
+  "files": ["css", "ts"],
   "__internal__": {
     "migrations": {
       "version": "0.0.6"
