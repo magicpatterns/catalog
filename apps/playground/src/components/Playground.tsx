@@ -22,6 +22,7 @@ import { useMediaQuery } from 'react-responsive'
 import { Message } from 'console-feed/lib/definitions/Component'
 import { generateRandomId } from '../utils/generateId'
 import axios from 'axios'
+import { Hook, Unhook, Decode } from 'console-feed'
 
 export async function loader({ params }: { params: Params<string> }) {
   const client = new MirrorfulApiClient({
@@ -55,6 +56,17 @@ export function Playground() {
       method: 'info',
     },
   ])
+
+  // @ts-ignore
+  useEffect(() => {
+    const hookedConsole = Hook(
+      window.console,
+      //@ts-ignore
+      (log) => setLogs((currLogs: Message[]) => [...currLogs, Decode(log)]),
+      true
+    )
+    return () => Unhook(hookedConsole)
+  }, [])
 
   const [isResponsiveMode, setIsResponsiveMode] = useState<boolean>(false)
 
