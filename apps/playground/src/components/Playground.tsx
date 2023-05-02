@@ -2,7 +2,7 @@ import { Box, Textarea, Button, Text, Stack } from '@chakra-ui/react'
 import { useEffect, useRef, useState } from 'react'
 import { transpileCode } from '../utils/transpileCode'
 import MonacoEditor, { Monaco } from '@monaco-editor/react'
-import { SOURCE_BOILERPLATE, DEFAULT_CODE } from '../utils/constants'
+import { SOURCE_BOILERPLATE, DEFAULT_FEATURE_CODE } from '../utils/constants'
 import { replaceImports } from '../utils/replacers'
 import { LogsContainer } from './LogsContainer'
 import { Toolbar } from './Toolbar'
@@ -42,7 +42,7 @@ export function Playground() {
   const file = useLoaderData() as FileResponse | null
 
   const [inputCode, setInputCode] = useState<string>(
-    file ? file.code : DEFAULT_CODE
+    file ? file.code : DEFAULT_FEATURE_CODE
   )
   const [transpiledCode, setTranspiledCode] = useState<string>('')
   const [sourceCode, setSourceCode] = useState<string>('')

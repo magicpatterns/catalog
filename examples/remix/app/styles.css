@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+@import '../.mirrorful/theme.css';
+
+body {
+  background-color: white;
+  color: var(--color-black-base);
+  font-family: 'Montserrat', sans-serif;
+  max-width: 970px;
+  margin: auto;
+}
+
+.container {
+  padding: 8px 12px;
+  letter-spacing: 0.5px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+h1 {
+  font-weight: var(--font-weight-boldest);
+  font-size: var(--font-size-h1-mobile);
+  line-height: 32px;
+}
+
+h2 {
+  font-size: var(--font-size-h2-mobile);
+  font-weight: var(--font-weight-boldest);
+}
+
+h3 {
+  font-size: var(--font-size-h3-mobile);
+  font-weight: var(--font-weight-bold);
+  font-style: italic;
+}
+
+.intro-text {
+  font-style: italic;
+  font-weight: var(--font-weight-intro-text);
+  line-height: var(--line-height-intro-text);
+  font-size: var(--font-size-intro-text);
+  width: 90%;
+  margin-left: 5%;
+}
+
+img {
+  /* min-width: 352px;
+  min-height: 213px; */
+  width: 100%;
+  height: 100%;
+}
+
+.minor-info {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.minor-info-item:first-child {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.minor-info-item {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.minor-info-item-icon {
+  margin-right: 4px;
+}
+
+.minor-info-item b {
+  text-transform: uppercase;
+  font-size: var(--font-size-b);
+  color: var(--color-grey-base);
+}
+
+.minor-info-item p {
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-bolder);
+  margin-top: 0;
+}
+
+/* Ingredients */
+.ingredients ul {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-instructions);
+}
+
+.ingredients-cracker > li::marker {
+  content: '🍘 ';
+  font-size: 1.2em;
+}
+
+.ingredients-cheesecake > li::marker {
+  content: '🧀 ';
+  font-size: 1.2em;
+}
+
+/* Instructions */
+.instructions > ol {
+  list-style: none;
+  counter-reset: my-awesome-counter;
+  padding-left: 0;
+}
+
+.instructions li {
+  display: flex;
+  flex-wrap: 1;
+  line-height: var(--line-height-instructions);
+  counter-increment: my-awesome-counter;
+  margin-top: 1rem;
+}
+
+.instructions li::before {
+  flex-direction: row;
+  padding: 0.1rem 1rem;
+  content: counter(my-awesome-counter);
+  background: var(--color-orange-base);
+  max-width: 1rem;
+  height: 2.3rem;
+  border-radius: 25%;
+  line-height: 2rem;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  margin-right: 0.5rem;
+}
+
+.instructions p {
+  margin: 0;
+}
+
+footer i {
+  color: var(--color-grey-base);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-intro-text);
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .container {
+    padding: 1% 8%;
+  }
+  h1 {
+    font-size: var(--font-size-h1);
+    line-height: 64px;
+  }
+
+  h2 {
+    font-size: var(--font-size-h2);
+  }
+  h3 {
+    font-size: var(--font-size-h3);
+  }
+
+  .intro-text {
+    font-size: 14px;
+    line-height: 17px;
+    padding-bottom: 3%;
+  }
+
+  img {
+    margin-bottom: 8%;
+  }
+
+  .minor-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    float: right;
+    box-shadow: var(--box-shadow-minor-info);
+    border-radius: 12px;
+    width: 22%;
+    padding: 18px 8px;
+  }
+
+  .minor-info-item {
+    padding: 6px;
+    font-size: 1.5em;
+  }
+
+  .minor-info-item b {
+    font-size: 0.6rem;
+  }
+  .minor-info-item p {
+    font-size: 0.75rem;
+  }
+  .ingredients,
+  .instructions {
+    width: 70%;
+  }
+}
