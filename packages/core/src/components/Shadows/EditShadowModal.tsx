@@ -58,6 +58,7 @@ export function EditShadowModal({
   )
 
   const [error, setError] = useState<string | null>(null)
+  const [nameError, setNameError] = useState<boolean>(false)
 
   function separateBoxShadows(input: string | [], name: string) {
     const result = []
@@ -165,7 +166,7 @@ export function EditShadowModal({
   )
   const [shadowIndex, setShadowIndex] = useState(0)
 
-  const [shadowInputValidation, setShadowInputValidation] = useState(false)
+  const [shadowInputValidation, setShadowInputValidation] = useState(true)
 
   const [codeResult, setCodeResult] = useState<string[]>(initialCodeResult())
 
@@ -280,6 +281,7 @@ export function EditShadowModal({
   const handleSave = () => {
     setError(null)
     if (variant.name === '') {
+      setNameError(true)
       setError('Please fill out all fields.')
       return
     }
@@ -289,7 +291,8 @@ export function EditShadowModal({
       return
     }
 
-    if (!shadowInputValidation) {
+    if (!shadowValidation()) {
+      setShadowInputValidation(false)
       setError('Please fill out all fields.')
       return
     }
@@ -297,8 +300,23 @@ export function EditShadowModal({
     onClose()
   }
 
+  console.log(nameError)
   //Input validation
-  useEffect(() => {
+  // useEffect(() => {
+  //   const shadowRegex =
+  //     /^(-?\d*\.?\d+(px)?\s){0,3}-?\d*\.?\d+(px)?\srgba\((\d{1,3},\s){2}\d{1,3},\s\d*\.?\d+\)$/
+
+  //   if (
+  //     codeResult?.[shadowIndex] &&
+  //     codeResult?.[shadowIndex].match(shadowRegex)
+  //   ) {
+  //     setShadowInputValidation(true)
+  //   } else {
+  //     setShadowInputValidation(false)
+  //   }
+  // }, [spread, blur, hOffset, vOffset, color])
+
+  function shadowValidation() {
     const shadowRegex =
       /^(-?\d*\.?\d+(px)?\s){0,3}-?\d*\.?\d+(px)?\srgba\((\d{1,3},\s){2}\d{1,3},\s\d*\.?\d+\)$/
 
@@ -306,11 +324,11 @@ export function EditShadowModal({
       codeResult?.[shadowIndex] &&
       codeResult?.[shadowIndex].match(shadowRegex)
     ) {
-      setShadowInputValidation(true)
+      return true
     } else {
-      setShadowInputValidation(false)
+      return false
     }
-  }, [spread, blur, hOffset, vOffset, color])
+  }
 
   useEffect(() => {
     return setVariant({
@@ -357,6 +375,11 @@ export function EditShadowModal({
               }}
             >
               <FormControl>
+                {nameError && (
+                  <Text color="red.500" css={{ marginTop: 18 }}>
+                    {'nameError'}
+                  </Text>
+                )}
                 <FormLabel css={{ fontSize: '0.75rem' }}>
                   Variant name
                 </FormLabel>
@@ -490,13 +513,6 @@ export function EditShadowModal({
             )}
           </ModalBody>
           <ModalFooter>
-            <Button
-              onClick={handleSave}
-              css={{ marginRight: '12px' }}
-              colorScheme="blue"
-            >
-              Save
-            </Button>
             {onDeleteShadowVariant && (
               <>
                 <Button
@@ -513,6 +529,9 @@ export function EditShadowModal({
                 />
               </>
             )}
+            <Button onClick={handleSave} css={{ marginLeft: '12px' }}>
+              Save
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
