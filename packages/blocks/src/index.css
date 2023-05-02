@@ -11,4 +11,9 @@
   --button-primary-bg-color: var(--primary-color);
   --button-primary-bg-color-accent: var(--primary-color-accent);
   --button-primary-text-color: white;
+
+  /* Secondary Button */
+  --button-secondary-bg-color: var(--secondary-color);
+  --button-secondary-bg-color-accent: var(--secondary-color-accent);
+  --button-secondary-text-color: white;
 }
