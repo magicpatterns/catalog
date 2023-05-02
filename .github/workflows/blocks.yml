@@ -1,0 +1,24 @@
+# Workflow name
+name: 'Blocks'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/blocks/**'
+
+jobs:
+  chromatic-deployment:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./packages/blocks
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: yarn
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
