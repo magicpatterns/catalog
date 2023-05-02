@@ -25,7 +25,7 @@ const color = 'rgb(0, 0, 0)';
 Examples of **correct** code for this rule:
 
 ```js
-;<Button
+<Button
   style={{
     backgroundColor: Tokens.primary.base,
     fontWeight: 600,
