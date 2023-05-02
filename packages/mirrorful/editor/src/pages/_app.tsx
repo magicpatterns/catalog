@@ -2,7 +2,6 @@ import '../main.css'
 import '../atom-one-dark.css'
 
 import { Onboarding } from '@mirrorful/core/lib/components/Onboarding'
-import ServerEndedMessage from '@mirrorful/core/lib/components/ServerEndedMessage'
 import SplashScreen from '@mirrorful/core/lib/components/SplashScreen'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
 import useMirrorfulStore, {
@@ -15,6 +14,7 @@ import posthog from 'posthog-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { LayoutWrapper } from 'src/components/LayoutWrapper'
 
+import ServerEndedMessage from '../components/ServerEndedMessage'
 import { fetchStoreData } from '../utils/fetchStoreData'
 import { postStoreData } from '../utils/postStoreData'
 
