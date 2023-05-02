@@ -20,8 +20,8 @@ export function Link({
       as={NextLink}
       isExternal={isExternal}
       href={href}
-      color={'purple.500'}
-      fontWeight="medium"
+      color={`var(--primary-color)`}
+      fontWeight={`var(--font-weight-bold)`}
     >
       {label}
     </ChakraLink>
