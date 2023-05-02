@@ -107,18 +107,21 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       fetch(`${URL}:${PORT}/api/longPoll`, { keepalive: true })
         .then((res) => res.text())
         .then((res) => {
+          // if the server sends exiting message
           if (res === 'exiting') {
             setHasShutDown(true)
             isShuttingDown.current = true
           }
         })
         .catch(() => {
+          // if we get an error but the browser is online
           if (navigator.onLine) {
             setHasShutDown(true)
             isShuttingDown.current = true
           }
         })
         .finally(() => {
+          // if the fetch connection shuts down but the server is up then long poll again
           if (!isShuttingDown.current) {
             pollForServerEndCheck()
           }
