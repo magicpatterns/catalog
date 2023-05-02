@@ -2,6 +2,7 @@ import '../main.css'
 import '../atom-one-dark.css'
 
 import { Onboarding } from '@mirrorful/core/lib/components/Onboarding'
+import ServerEndedMessage from '@mirrorful/core/lib/components/ServerEndedMessage'
 import SplashScreen from '@mirrorful/core/lib/components/SplashScreen'
 import { MirrorfulThemeProvider } from '@mirrorful/core/lib/components/ThemeProvider'
 import useMirrorfulStore, {
@@ -95,8 +96,42 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [fetchStoredData, shouldForceSkipOnboarding, showOnBoarding])
 
+  const [hasShutDown, setHasShutDown] = useState(false)
+  const isShuttingDown = useRef<boolean>(false) // need this to keep it from rerendering
+
+  // TODO(Danilowicz): when we let the user choose their own, we'll need to change this
+  const PORT = 5050
+  const URL = 'http://localhost'
+  useEffect(() => {
+    function pollForServerEndCheck() {
+      fetch(`${URL}:${PORT}/api/longPoll`, { keepalive: true })
+        .then((res) => res.text())
+        .then((res) => {
+          if (res === 'exiting') {
+            setHasShutDown(true)
+            isShuttingDown.current = true
+          }
+        })
+        .catch(() => {
+          if (navigator.onLine) {
+            setHasShutDown(true)
+            isShuttingDown.current = true
+          }
+        })
+        .finally(() => {
+          if (!isShuttingDown.current) {
+            pollForServerEndCheck()
+          }
+        })
+    }
+    if (!isShuttingDown.current) {
+      pollForServerEndCheck()
+    }
+  }, [hasShutDown])
+
   return (
     <MirrorfulThemeProvider>
+      {hasShutDown && <ServerEndedMessage />}
       {isLoading && <SplashScreen />}
       {!shouldForceSkipOnboarding && showOnBoarding ? (
         <Onboarding
