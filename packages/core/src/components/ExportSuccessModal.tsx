@@ -42,6 +42,7 @@ import {
   SiBootstrap,
   SiChakraui,
   SiNuxtdotjs,
+  SiRemix,
   SiSvelte,
   SiTailwindcss,
 } from 'react-icons/si'
@@ -420,6 +421,7 @@ function ExternalExamples() {
     | 'SvelteKit'
     | 'Bootstrap'
     | 'Styled Components'
+    | 'Remix'
 
   const EXAMPLES_ICON_SIZE = 20
   const externalExamples: {
@@ -436,6 +438,11 @@ function ExternalExamples() {
       name: 'Next JS',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui',
       icon: <TbBrandNextjs size={EXAMPLES_ICON_SIZE} />,
+    },
+    {
+      name: 'Remix',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/remix',
+      icon: <SiRemix size={EXAMPLES_ICON_SIZE} fill="#000000" />,
     },
     {
       name: 'Styled Components',
