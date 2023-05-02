@@ -1,34 +1,29 @@
-import { ChakraProps, Link as ChakraLink } from '@chakra-ui/react'
+import { Link as ChakraLink } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import React from 'react'
 
-import { Tokens } from '../../.mirrorful/theme'
-import { Styles } from '../shared/types'
-
-interface ILink
-  extends Partial<
-    Pick<
-      ChakraProps,
-      'bgColor' | 'color' | 'textDecoration' | 'textAlign' | 'width'
-    >
-  > {
+/**
+ * The link component.
+ * @param isExternal - If true, the link will open in a new tab.
+ * @returns
+ */
+export function Link({
+  label,
+  href,
+  isExternal = false,
+}: {
   label: string
   href: string
-  as: 'a' | typeof NextLink
-  variants?: Styles
-  target?: '_blank' | '_parent' | '_top' | '_self'
-  icon?: React.ReactNode
-}
-
-export function Link(props: ILink) {
-  const { fontSizes, fontWeights } = Tokens
+  isExternal?: boolean
+}) {
   return (
     <ChakraLink
-      css={{ display: 'flex', gap: 8, alignItems: 'center' }}
-      {...props}
+      as={NextLink}
+      isExternal={isExternal}
+      href={href}
+      color={'purple.500'}
+      fontWeight="medium"
     >
-      {props.icon}
-      {props.label}
+      {label}
     </ChakraLink>
   )
 }
