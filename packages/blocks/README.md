@@ -1,5 +1,7 @@
 # Mirrorful Blocks
 
+Mirrorful's component library.
+
 ## Todo list
 
 - [x] Create Button Component
