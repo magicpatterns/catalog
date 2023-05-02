@@ -17,6 +17,7 @@ export default function ServerEndedMessage() {
             paddingInline: 4,
             paddingBlock: 2,
             marginInline: 4,
+            borderRadius: 8,
           }}
           as="span"
         >
@@ -31,6 +32,7 @@ export default function ServerEndedMessage() {
             paddingInline: 4,
             paddingBlock: 2,
             marginInline: 4,
+            borderRadius: 8,
           }}
           as="span"
         >
@@ -45,6 +47,7 @@ export default function ServerEndedMessage() {
             paddingInline: 4,
             paddingBlock: 2,
             marginInline: 4,
+            borderRadius: 8,
           }}
           as="span"
         >
