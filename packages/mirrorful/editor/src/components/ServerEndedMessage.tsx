@@ -1,9 +1,11 @@
 import { Grid, Text, Tooltip } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useCopied } from 'src/hooks/useCopied'
 
 export default function ServerEndedMessage() {
   const { copied: yarnCopied, setCopied: setYarnCopied } = useCopied()
+  const { copied: npxCopied, setCopied: setNpxCopied } = useCopied()
+  const { copied: pnpmCopied, setCopied: setPnpmCopied } = useCopied()
 
   return (
     <Grid placeContent={'center'} minHeight="100svh" backgroundColor="#F2F2F2">
@@ -28,6 +30,7 @@ export default function ServerEndedMessage() {
               marginInline: 4,
               borderRadius: 8,
             }}
+            _hover={{ cursor: 'pointer' }}
             as="span"
             onClick={() =>
               navigator.clipboard.writeText('yarn run mirrorful').then(() => {
@@ -42,8 +45,8 @@ export default function ServerEndedMessage() {
         <Tooltip
           label="Copied to Clipboard"
           hasArrow
-          isDisabled={!copied}
-          isOpen={copied}
+          isDisabled={!npxCopied}
+          isOpen={npxCopied}
         >
           <Text
             css={{
@@ -55,8 +58,13 @@ export default function ServerEndedMessage() {
               marginInline: 4,
               borderRadius: 8,
             }}
+            _hover={{ cursor: 'pointer' }}
             as="span"
-            onClick={() => copyText('npx mirrorful')}
+            onClick={() =>
+              navigator.clipboard.writeText('npx mirrorful').then(() => {
+                setNpxCopied(true)
+              })
+            }
           >
             npx mirrorful
           </Text>
@@ -65,8 +73,8 @@ export default function ServerEndedMessage() {
         <Tooltip
           label="Copied to Clipboard"
           hasArrow
-          isDisabled={!copied}
-          isOpen={copied}
+          isDisabled={!pnpmCopied}
+          isOpen={pnpmCopied}
         >
           <Text
             css={{
@@ -78,8 +86,13 @@ export default function ServerEndedMessage() {
               marginInline: 4,
               borderRadius: 8,
             }}
+            _hover={{ cursor: 'pointer' }}
             as="span"
-            onClick={() => copyText('pnpm mirrorful')}
+            onClick={() =>
+              navigator.clipboard.writeText('pnpm mirrorful').then(() => {
+                setPnpmCopied(true)
+              })
+            }
           >
             pnpm mirrorful
           </Text>
