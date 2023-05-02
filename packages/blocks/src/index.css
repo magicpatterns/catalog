@@ -1,0 +1,14 @@
+@import '../.mirrorful/theme.css';
+
+:root {
+  --primary-color: var(--color-violet-500);
+  --primary-color-accent: var(--color-violet-700);
+
+  --secondary-color: var(--color-space-500);
+  --secondary-color-accent: var(--color-space-700);
+
+  /* Primary Button */
+  --button-primary-bg-color: var(--primary-color);
+  --button-primary-bg-color-accent: var(--primary-color-accent);
+  --button-primary-text-color: white;
+}

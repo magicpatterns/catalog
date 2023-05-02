@@ -11,7 +11,7 @@ import {
 import React from 'react'
 
 import { Button } from '..'
-import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
+import { ChakraProviderWrapper } from '../ThemeProvider'
 import { toCapitalize } from '../util/toCapitalize'
 
 interface IModal extends Partial<Pick<ModalProps, 'size'>> {

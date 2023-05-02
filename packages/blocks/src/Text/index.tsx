@@ -2,7 +2,7 @@ import { Text as ChakraText } from '@chakra-ui/react'
 import React from 'react'
 
 import { Tokens } from '../../.mirrorful/theme'
-import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
+import { ChakraProviderWrapper } from '../ThemeProvider'
 import { extractVariant } from '../util/extractVariant'
 import { IText } from './types'
 

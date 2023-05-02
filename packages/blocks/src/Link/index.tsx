@@ -3,7 +3,7 @@ import NextLink from 'next/link'
 import React from 'react'
 
 import { Tokens } from '../../.mirrorful/theme'
-import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
+import { ChakraProviderWrapper } from '../ThemeProvider'
 import { Styles } from '../shared/types'
 import { extractVariant } from '../util/extractVariant'
 
