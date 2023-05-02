@@ -2,28 +2,26 @@
  * @fileoverview ESLint rules for Mirrorful.
  * @author Tyler Vergho
  */
-"use strict";
+'use strict'
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
 
-const requireIndex = require("requireindex");
+const requireIndex = require('requireindex')
 
 //------------------------------------------------------------------------------
 // Plugin Definition
 //------------------------------------------------------------------------------
 
-
 // import all rules in lib/rules
-module.exports.rules = requireIndex(__dirname + "/rules");
+module.exports.rules = requireIndex(__dirname + '/rules')
 
 module.exports.configs = {
   recommended: {
-    plugins: ["mirrorful"],
+    plugins: ['mirrorful'],
     rules: {
-      "mirrorful/no-hardcoded-colors": "error",
+      'mirrorful/no-hardcoded-colors': 'error',
     },
   },
 }
-

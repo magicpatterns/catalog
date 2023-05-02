@@ -4,8 +4,7 @@ import { transpileCode } from '../utils/transpileCode'
 import MonacoEditor, { Monaco } from '@monaco-editor/react'
 import { SOURCE_BOILERPLATE, DEFAULT_FEATURE_CODE } from '../utils/constants'
 import { replaceImports } from '../utils/replacers'
-import { TLogData } from '../types'
-import { Console } from './Console'
+import { LogsContainer } from './LogsContainer'
 import { Toolbar } from './Toolbar'
 import { editor } from 'monaco-editor'
 import { Source } from './Source'
@@ -20,7 +19,10 @@ import {
 import { useParams } from 'react-router-dom'
 import { PageRender } from './PageRender'
 import { useMediaQuery } from 'react-responsive'
+import { Message } from 'console-feed/lib/definitions/Component'
+import { generateRandomId } from '../utils/generateId'
 import axios from 'axios'
+import { Hook, Unhook, Decode } from 'console-feed'
 
 export async function loader({ params }: { params: Params<string> }) {
   const client = new MirrorfulApiClient({
@@ -45,13 +47,26 @@ export function Playground() {
   )
   const [transpiledCode, setTranspiledCode] = useState<string>('')
   const [sourceCode, setSourceCode] = useState<string>('')
-  const [logs, setLogs] = useState<TLogData[]>(
-    Array(1).fill({
-      text: 'Welcome to Mirrorful!',
-      type: 'info',
-      timestamp: new Date().toLocaleTimeString(),
-    })
-  )
+  const [logs, setLogs] = useState<Message[]>([
+    {
+      id: generateRandomId(),
+      data: [
+        'Welcome to Mirrorful: import, prototype, and share your components.',
+      ],
+      method: 'info',
+    },
+  ])
+
+  // @ts-ignore
+  useEffect(() => {
+    const hookedConsole = Hook(
+      window.console,
+      //@ts-ignore
+      (log) => setLogs((currLogs: Message[]) => [...currLogs, Decode(log)]),
+      true
+    )
+    return () => Unhook(hookedConsole)
+  }, [])
 
   const [isResponsiveMode, setIsResponsiveMode] = useState<boolean>(false)
 
@@ -98,9 +113,9 @@ export function Playground() {
       setLogs([
         ...logs,
         {
-          text: 'Code transpiled successfully',
-          type: 'success',
-          timestamp: new Date().toLocaleTimeString(),
+          data: ['Code transpiled successfully'],
+          method: 'log',
+          id: generateRandomId(),
         },
       ])
       setTranspiledCode(source)
@@ -124,9 +139,9 @@ export function Playground() {
         setLogs([
           ...logs,
           {
-            text: `Error: ${e.message}}`,
-            type: 'error',
-            timestamp: new Date().toLocaleTimeString(),
+            id: generateRandomId(),
+            data: [`Error: ${e.message}}`],
+            method: 'error',
           },
         ])
       } else {
@@ -389,7 +404,6 @@ export function Playground() {
               </Box>
               <Box
                 css={{
-                  padding: '12px',
                   flexGrow: 1, // important for editor to grow
                   overflowY: 'scroll',
                   overflowX: 'hidden',
@@ -398,11 +412,11 @@ export function Playground() {
                 {panelTab === 'code' && editor}
                 {panelTab === 'console' && (
                   <Box maxHeight="200">
-                    <Console logs={logs} />
+                    <LogsContainer theLogs={logs} />
                   </Box>
                 )}
                 {panelTab === 'source' && (
-                  <Box maxHeight="200">
+                  <Box maxHeight="200" padding={4}>
                     <Source code={transpiledCode} />
                   </Box>
                 )}

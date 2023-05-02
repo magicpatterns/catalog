@@ -25,15 +25,15 @@ const color = 'rgb(0, 0, 0)';
 Examples of **correct** code for this rule:
 
 ```js
-<Button
+;<Button
   style={{
     backgroundColor: Tokens.primary.base,
     fontWeight: 600,
-    color: Tokens.black.base
+    color: Tokens.black.base,
   }}
 >
   Complete
 </Button>
 
-const color = Tokens.red.base;
+const color = Tokens.red.base
 ```
