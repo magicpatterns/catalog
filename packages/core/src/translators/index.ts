@@ -21,7 +21,7 @@ export const translators: TranslatorMap = {
   },
   cjs: {
     toContent: toCjs,
-    extension: '_cjs.js',
+    extension: '_cjs.cjs',
   },
   ts: {
     toContent: toTs,

@@ -4,7 +4,6 @@
     "jsx": "react-jsx",
     "module": "CommonJS",
     "baseUrl": ".",
-    "rootDir": "src",
     "paths": {
       "@ui/*": ["src/*"]
     },
@@ -16,13 +15,18 @@
     "resolveJsonModule": true,
     "declaration": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "src/**/*.json"],
+  "include": ["**/*.ts", "**/*.tsx", "src/**/*.json", "**/*.d.ts"],
   "exclude": [
     "node_modules",
     "lib",
     "tsconfig.json",
-    "src/stories/**/*",
-    "src/.storybook/**/*"
+    ".storybook/**/*",
+    "**/*.stories.tsx",
+    ".babelrc.*",
+    ".eslintrc.*",
+    "README.md",
+    "yarn.*",
+    "yarn-error.*"
   ],
   "tsc-alias": {
     "verbose": true
