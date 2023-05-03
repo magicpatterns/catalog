@@ -2,8 +2,6 @@ import { ChakraProps, Heading as ChakraHeading } from '@chakra-ui/react'
 import React from 'react'
 
 import { Tokens } from '../../.mirrorful/theme'
-import { ChakraProviderWrapper } from '../ChakraProviderWrapper'
-import { toCapitalize } from '../util/toCapitalize'
 
 interface IHeading
   extends Partial<
@@ -25,11 +23,9 @@ export function Heading(props: IHeading) {
     h6: { fontSize: fontSizes.h6, fontWeight: fontWeights.black },
   }
   return (
-    <ChakraProviderWrapper>
-      <ChakraHeading {...variantProps[props.variants]} {...props}>
-        {toCapitalize(props.label)}
-      </ChakraHeading>
-    </ChakraProviderWrapper>
+    <ChakraHeading {...variantProps[props.variants]} {...props}>
+      {props.label}
+    </ChakraHeading>
   )
 }
 
