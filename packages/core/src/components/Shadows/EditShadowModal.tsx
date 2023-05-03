@@ -196,6 +196,7 @@ export function EditShadowModal({
   }
 
   function handleInputValue(e: React.ChangeEvent<HTMLInputElement>) {
+    setError(null)
     const x = separateBoxShadows(e.target.value, 'shadow')
     const y = getValues(x?.[0].value)
     const z = getRgba(x?.[0].value)
@@ -229,6 +230,7 @@ export function EditShadowModal({
 
   const handleSave = () => {
     setError(null)
+    setNameError(false)
     if (variant.name === '') {
       setNameError(true)
       setError('Please fill out all fields.')
@@ -270,7 +272,6 @@ export function EditShadowModal({
       setVariant(
         initialShadowVariant ?? {
           name: '',
-
           token: {
             id: uuidv4(),
             value: '',
@@ -303,12 +304,13 @@ export function EditShadowModal({
               }}
             >
               <FormControl>
-                <FormLabel>Shadow name</FormLabel>
+                <FormLabel>Variant Name</FormLabel>
                 <Input
                   isInvalid={nameError ? true : false}
                   errorBorderColor="red.500"
                   value={variant.name}
                   onChange={(e) => {
+                    setNameError(false)
                     setVariant({
                       ...variant,
                       name: e.target.value,
@@ -369,32 +371,24 @@ export function EditShadowModal({
               <FormControl>
                 <Box>
                   {newInitialValues?.map((_arg: ShadowValue, index: number) => (
-                    <div key={index}>
-                      <div>
-                        {shadowIndex === index && (
-                          <ShadowColorPicker
-                            blur={blur[index]}
-                            spread={spread[index]}
-                            hOffset={hOffset[index]}
-                            vOffset={vOffset[index]}
-                            setBlur={setBlur}
-                            setSpread={setSpread}
-                            sethOffset={sethOffset}
-                            setVOffset={setVOffset}
-                            handleColor={handleColor}
-                            handleBlur={handleBlur}
-                            handleSpread={handleSpread}
-                            handleHOffset={handleHOffset}
-                            handleVOffset={handleVOffset}
-                            color={color[index]}
-                            setColor={setColor}
-                            shadowIndex={shadowIndex}
-                            index={index}
-                            codeResult={codeResult}
-                          />
-                        )}
-                      </div>
-                    </div>
+                    <>
+                      {shadowIndex === index && (
+                        <ShadowColorPicker
+                          blur={blur[index]}
+                          spread={spread[index]}
+                          hOffset={hOffset[index]}
+                          vOffset={vOffset[index]}
+                          handleColor={handleColor}
+                          handleBlur={handleBlur}
+                          handleSpread={handleSpread}
+                          handleHOffset={handleHOffset}
+                          handleVOffset={handleVOffset}
+                          color={color[index]}
+                          index={index}
+                          codeResult={codeResult}
+                        />
+                      )}
+                    </>
                   ))}
                 </Box>
               </FormControl>
@@ -409,13 +403,13 @@ export function EditShadowModal({
                 }}
               >
                 <Text style={{ marginBottom: '.5em' }}>
-                  Value
+                  <FormLabel>Value of Shadow {shadowIndex + 1}</FormLabel>
                   {shadowInputValidation ? (
                     ''
                   ) : (
                     <span style={{ color: 'var(--chakra-colors-red-500' }}>
                       {' '}
-                      Invalid format
+                      Invalid shadow format.
                     </span>
                   )}
                 </Text>

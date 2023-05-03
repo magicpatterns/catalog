@@ -1,6 +1,7 @@
 import {
   Box,
   Flex,
+  FormLabel,
   Input,
   Slider,
   SliderFilledTrack,
@@ -9,7 +10,6 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { SketchPicker } from '@hello-pangea/color-picker'
-import { Dispatch, SetStateAction } from 'react'
 
 export function ShadowColorPicker({
   blur,
@@ -29,13 +29,7 @@ export function ShadowColorPicker({
   spread: number
   hOffset: number
   vOffset: number
-  setBlur: Dispatch<SetStateAction<number[]>>
-  setSpread: Dispatch<SetStateAction<number[]>>
-  sethOffset: Dispatch<SetStateAction<number[]>>
-  setVOffset: Dispatch<SetStateAction<number[]>>
   color: string
-  shadowIndex: number
-  setColor: Dispatch<SetStateAction<string[]>>
   index: number
   codeResult: string[]
   handleBlur: (e: number, index: number) => void
@@ -56,7 +50,7 @@ export function ShadowColorPicker({
     >
       <Flex justifyContent={'space-between'}>
         <Box width="45%">
-          <Text style={{ marginBottom: '.5em' }}>Color</Text>
+          <FormLabel>Color of Shadow {index + 1}</FormLabel>
           <SketchPicker
             width="100%"
             color={color}
@@ -177,7 +171,9 @@ export function ShadowColorPicker({
                 }}
               />
             </Flex>
-            <Text style={{ marginBottom: '.5em' }}>Preview</Text>
+            <Text style={{ marginBottom: '.5em' }}>
+              Preview of Composite Shadows
+            </Text>
             <Box
               style={{
                 boxShadow: codeResult.toString(),
