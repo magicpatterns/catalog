@@ -17,11 +17,40 @@ import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { FiMoreVertical } from 'react-icons/fi'
+import { IconType } from 'react-icons'
+import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
 import { EditColorNameModal } from './EditColorNameModal'
 import { EditVariantModal } from './EditVariantModal'
+
+function MirrorfulMenuButton({
+  color,
+  icon = FiMoreHorizontal,
+}: {
+  color?: string
+  icon?: IconType
+}) {
+  return (
+    <MenuButton
+      variant="outline"
+      as={IconButton}
+      icon={<Icon as={icon} />}
+      color={color ? (tinycolor(color).isDark() ? 'white' : 'black') : 'black'}
+      _hover={{
+        backgroundColor: 'rgba(235, 235, 235, 0.3)',
+      }}
+      _active={{
+        backgroundColor: 'rgba(235, 235, 235, 0.3)',
+      }}
+      size="sm"
+      css={{
+        // borderRadius: '50%',
+        border: 'none',
+      }}
+    />
+  )
+}
 
 function VariantRow({
   variant,
@@ -107,27 +136,13 @@ function VariantRow({
           </Text>
         </Tooltip>
         <Menu>
-          <MenuButton
-            variant="outline"
-            as={IconButton}
-            icon={<Icon as={FiMoreVertical} />}
-            color={tinycolor(color).isDark() ? 'white' : 'black'}
-            _hover={{
-              backgroundColor: 'rgba(235, 235, 235, 0.3)',
-            }}
-            _active={{
-              backgroundColor: 'rgba(235, 235, 235, 0.3)',
-            }}
-            size="sm"
-            css={{
-              borderRadius: '50%',
-              border: 'none',
-              marginLeft: '24px',
-            }}
-          />
+          <Box style={{ marginLeft: '24px' }}>
+            <MirrorfulMenuButton color={color} />
+          </Box>
           <MenuList>
-            <MenuItem onClick={() => onEditVariantModalOpen()}>Edit</MenuItem>
-            <MenuItem onClick={() => onDeleteVariant()}>Delete</MenuItem>
+            <MenuItem onClick={() => alert('set as base')}>
+              Set as Base
+            </MenuItem>
           </MenuList>
         </Menu>
       </Box>
@@ -183,145 +198,76 @@ export function ColorDisplay({
     <Box
       css={{
         display: 'flex',
+        flexDirection: 'column',
         borderRadius: 8,
       }}
     >
-      <Box css={{ display: 'flex', flexDirection: 'column', width: '400px' }}>
-        <Text css={{ fontWeight: 900, fontSize: '1rem', color: 'gray' }}>
-          COLOR NAME
-        </Text>
-        <Text css={{ fontWeight: 600, fontSize: '1.8rem' }}>{colorName}</Text>
-        <Text
-          css={{
-            fontWeight: 900,
-            fontSize: '1rem',
-            color: 'gray',
-            marginTop: '32px',
-          }}
-        >
-          BASE VALUE
-        </Text>
-        {baseColor && (
-          <>
-            <Box
-              css={{
-                display: 'flex',
-                alignItems: 'center',
-                marginTop: '8px',
+      <Box
+        mb={5}
+        style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+      >
+        <Text style={{ fontWeight: 600, fontSize: '1.5rem' }}>{colorName}</Text>
+        <Menu>
+          <Box style={{ marginLeft: '4px' }}>
+            <MirrorfulMenuButton icon={FiEdit} />
+          </Box>
+          <MenuList>
+            <MenuItem onClick={() => onColorNameModalOpen()}>
+              Edit Color Name
+            </MenuItem>
+            <MenuItem onClick={() => onDeleteAlertDialogOpen()}>
+              Delete
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Box>
+      <Stack spacing={'4px'}>
+        {Object.keys(colorData)
+          .map((key) => ({
+            name: key,
+            token: colorData[key],
+          }))
+          .filter((value): value is TNamedToken => assertToken(value.token))
+          .sort((a, b) =>
+            tinycolor(`${a.token.value}`).toHsl().l <
+            tinycolor(`${b.token.value}`).toHsl().l
+              ? 1
+              : -1
+          )
+          .map((variant, index) => (
+            <motion.div
+              key={variant.name}
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+              }}
+              transition={{
+                duration: 0.5,
+                delay: 0.08 * index,
               }}
             >
-              <Box
-                css={{
-                  width: '1.8rem',
-                  height: '1.8rem',
-                  backgroundColor: baseColor,
-                  marginRight: '16px',
-                  borderRadius: 8,
-                  border: '1px solid black',
+              <VariantRow
+                variant={variant}
+                onUpdateVariant={(newVariant: TNamedToken) => {
+                  const updatedColorData = { ...colorData }
+                  delete updatedColorData[variant.name]
+                  updatedColorData[newVariant.name] = newVariant.token
+
+                  onUpdateColorData(updatedColorData)
+                }}
+                onDeleteVariant={() => {
+                  const updatedColorData = { ...colorData }
+                  delete updatedColorData[variant.name]
+
+                  onUpdateColorData(updatedColorData)
                 }}
               />
-              <Text css={{ fontWeight: 600, fontSize: '1.5rem' }}>
-                {baseColor}
-              </Text>
-            </Box>
-          </>
-        )}
+            </motion.div>
+          ))}
+      </Stack>
 
-        <Stack
-          marginTop={'32px'}
-          spacing={'16px'}
-          paddingRight={'36px'}
-          direction="row"
-        >
-          <Button
-            variant="outline"
-            onClick={() => {
-              onColorNameModalOpen()
-            }}
-            leftIcon={<EditIcon />}
-          >
-            Edit Name
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => {
-              onDeleteAlertDialogOpen()
-            }}
-            leftIcon={<DeleteIcon />}
-          >
-            Delete Color
-          </Button>
-        </Stack>
-      </Box>
-      <Box css={{ flexGrow: 1 }}>
-        <Box
-          css={{
-            display: 'flex',
-            width: '100%',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Text
-            css={{
-              fontWeight: 900,
-              fontSize: '1rem',
-              color: 'gray',
-            }}
-          >
-            COLOR VARIANTS
-          </Text>
-          <Button variant="outline" onClick={onAddVariantModalOpen}>
-            Add New Variant
-          </Button>
-        </Box>
-        <Box css={{ marginTop: '32px' }}>
-          <Stack spacing={'4px'}>
-            {Object.keys(colorData)
-              .map((key) => ({
-                name: key,
-                token: colorData[key],
-              }))
-              .filter((value): value is TNamedToken => assertToken(value.token))
-              .sort((a, b) =>
-                tinycolor(`${a.token.value}`).toHsl().l <
-                tinycolor(`${b.token.value}`).toHsl().l
-                  ? 1
-                  : -1
-              )
-              .map((variant, index) => (
-                <motion.div
-                  key={variant.name}
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 1,
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.08 * index,
-                  }}
-                >
-                  <VariantRow
-                    variant={variant}
-                    onUpdateVariant={(newVariant: TNamedToken) => {
-                      const updatedColorData = { ...colorData }
-                      delete updatedColorData[variant.name]
-                      updatedColorData[newVariant.name] = newVariant.token
-
-                      onUpdateColorData(updatedColorData)
-                    }}
-                    onDeleteVariant={() => {
-                      const updatedColorData = { ...colorData }
-                      delete updatedColorData[variant.name]
-
-                      onUpdateColorData(updatedColorData)
-                    }}
-                  />
-                </motion.div>
-              ))}
-          </Stack>
-        </Box>
-      </Box>
       <EditColorNameModal
+        color={baseColor}
         isOpen={isColorNameModalOpen}
         onClose={onColorNameModalClose}
         initialColorName={colorName}
