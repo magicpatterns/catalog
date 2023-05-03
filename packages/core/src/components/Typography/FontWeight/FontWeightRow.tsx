@@ -3,8 +3,10 @@ import { TNamedToken } from '@core/types'
 
 export function FontWeightRow({
   fontWeightData,
+  placeholder,
 }: {
   fontWeightData: TNamedToken
+  placeholder: string
 }) {
   return (
     <>
@@ -20,7 +22,7 @@ export function FontWeightRow({
           width: '100%',
         }}
       >
-        Lorem ipsum dolor sit amet.
+        {placeholder}
       </Box>
     </>
   )

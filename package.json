@@ -4,5 +4,8 @@
     "packages/*",
     "apps/*",
     "packages/mirrorful/editor/"
-  ]
+  ],
+  "scripts": {
+    "postinstall": "yarn --cwd packages/server --production=false; yarn --cwd packages/server build"
+  }
 }

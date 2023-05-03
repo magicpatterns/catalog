@@ -42,6 +42,8 @@ import {
   SiBootstrap,
   SiChakraui,
   SiNuxtdotjs,
+  SiRemix,
+  SiSvelte,
   SiTailwindcss,
 } from 'react-icons/si'
 import { TbBrandNextjs } from 'react-icons/tb'
@@ -269,7 +271,7 @@ function TokenTab({
       <TabPanel key="tailwind">
         <Text css={{ marginBottom: 4 }}>
           <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-          <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code>{' '}
+          <Code>theme_cjs.cjs</Code> in <Code>tailwind.config.js</Code>{' '}
         </Text>
 
         <Text fontSize="sm" css={{ marginBottom: 8 }}>
@@ -280,7 +282,7 @@ function TokenTab({
 
         <CodePreview
           language="javascript"
-          text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
+          text={`const { Tokens } = require('./.mirrorful/theme_cjs.cjs')`}
         />
 
         <Text css={{ marginTop: 12, marginBottom: 8 }}>
@@ -416,8 +418,10 @@ function ExternalExamples() {
     | 'Tailwind CSS'
     | 'Chakra UI'
     | 'Nuxt 3'
+    | 'SvelteKit'
     | 'Bootstrap'
     | 'Styled Components'
+    | 'Remix'
 
   const EXAMPLES_ICON_SIZE = 20
   const externalExamples: {
@@ -434,6 +438,11 @@ function ExternalExamples() {
       name: 'Next JS',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui',
       icon: <TbBrandNextjs size={EXAMPLES_ICON_SIZE} />,
+    },
+    {
+      name: 'Remix',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/remix',
+      icon: <SiRemix size={EXAMPLES_ICON_SIZE} fill="#000000" />,
     },
     {
       name: 'Styled Components',
@@ -454,6 +463,11 @@ function ExternalExamples() {
       name: 'Nuxt 3',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/nuxt-3',
       icon: <SiNuxtdotjs size={EXAMPLES_ICON_SIZE} color="#00DC82" />,
+    },
+    {
+      name: 'SvelteKit',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/sveltekit',
+      icon: <SiSvelte size={EXAMPLES_ICON_SIZE} color="#FF3E00" />,
     },
     {
       name: 'Bootstrap',

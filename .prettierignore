@@ -1,0 +1,4 @@
+packages/server/src/api/generated
+packages/client
+packages/postman/collection.json
+examples/

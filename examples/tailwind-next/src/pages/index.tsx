@@ -15,7 +15,7 @@ export default function Home() {
         <h2 className="text-purple-400">
           This uses Tailwind + Mirrorful. Custom Purple Color!
         </h2>
-        <h2 style={{ color: Tokens['colors']['green'][800] }}>
+        <h2 style={{ color: Tokens.colors.green['800'] }}>
           This is a regular JS + Mirrorful usage. Not tailwind.
         </h2>
       </main>

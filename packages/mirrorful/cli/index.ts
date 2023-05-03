@@ -6,6 +6,7 @@ import packageJson from '../package.json'
 import Commander from 'commander'
 import { getPkgManager } from './helpers/get-pkg-manager'
 import { init } from './init'
+import { packageLibrary } from './sandbox/package'
 
 const handleSigTerm = () => process.exit(0)
 process.on('SIGINT', handleSigTerm)
@@ -15,8 +16,6 @@ let verbose: boolean = false
 const program = new Commander.Command(packageJson.name)
   .version(packageJson.version)
   .option('-v, --verbose', 'Enable verbose output')
-
-program.parse(process.argv)
 const options = program.opts() as { verbose: boolean }
 verbose = options.verbose ? true : false
 if (verbose) {
@@ -24,11 +23,7 @@ if (verbose) {
   console.log()
 }
 
-const packageManager = !!program.useNpm
-  ? 'npm'
-  : !!program.usePnpm
-  ? 'pnpm'
-  : getPkgManager()
+const packageManager = getPkgManager()
 
 async function notifyUpdate() {
   try {
@@ -75,24 +70,37 @@ async function main() {
   }
 }
 
-notifyUpdate()
-  .then(main)
-  .catch(async (reason) => {
-    console.log()
-    console.log('Aborting.')
-    if (reason.command) {
-      console.log(`  ${chalk.cyan(reason.command)} has failed.`)
-    } else {
-      console.log(
-        chalk.red(
-          'Unexpected error.Please report it as a bug on our repo: https://github.com/Mirrorful/mirrorful'
-        ) + '\n',
-        reason
-      )
-    }
-    console.log()
-
-    await notifyUpdate()
-
-    process.exit(1)
+program
+  .command('package')
+  .description('Packages your component library')
+  .action(async () => {
+    console.log('Running package...')
+    await packageLibrary()
   })
+
+program
+  .command('editor', { isDefault: true })
+  .description('Runs the Mirrorful Editor')
+  .action(() => {
+    notifyUpdate()
+      .then(main)
+      .catch(async (reason) => {
+        console.log()
+        console.log('Aborting.')
+        if (reason.command) {
+          console.log(`  ${chalk.cyan(reason.command)} has failed.`)
+        } else {
+          console.log(
+            chalk.red(
+              'Unexpected error.Please report it as a bug on our repo: https://github.com/Mirrorful/mirrorful'
+            ) + '\n',
+            reason
+          )
+        }
+        console.log()
+        await notifyUpdate()
+        process.exit(1)
+      })
+  })
+
+program.parse(process.argv)

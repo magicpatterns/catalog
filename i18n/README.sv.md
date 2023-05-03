@@ -90,7 +90,7 @@ yarn run mirrorful
 eller
 
 ```
-npx mirrorful
+npx mirrorful editor
 ```
 
 ## 💿 Exportera Format
@@ -133,6 +133,7 @@ Titta på våra exempel:
 
 - [Mirrorful 🤝 Chakra UI](https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui)
 - [Mirrorful 🤝 Basic Create React App](https://github.com/Mirrorful/mirrorful/tree/main/examples/create-react-app)
+- [Mirrorful 🤝 SvelteKit](https://github.com/Mirrorful/mirrorful/tree/main/examples/sveltekit)
 
 Letar du efter ett specifikt exmepel? [Begär en här!](https://github.com/Mirrorful/mirrorful/issues)
 

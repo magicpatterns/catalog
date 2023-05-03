@@ -1,0 +1,64 @@
+---
+title: '🪞 ESLint Plugin'
+description: 'eslint-plugin-mirrorful is a plugin containing ESLint rules for Mirrorful projects. It helps maintain code quality and best practices when working with Mirrorful.'
+---
+
+## 📦 Installation
+
+Before installing the `eslint-plugin-mirrorful`, make sure you have [ESLint](https://eslint.org/) installed:
+
+<CodeGroup>
+
+```bash npm
+npm i eslint --save-dev
+```
+
+```bash yarn
+yarn add eslint --dev
+```
+
+</CodeGroup>
+
+Next, install `eslint-plugin-mirrorful`:
+
+<CodeGroup>
+
+```bash npm
+npm i eslint-plugin-mirrorful --save-dev
+```
+
+```bash yarn
+yarn add eslint-plugin-mirrorful --dev
+```
+
+</CodeGroup>
+
+## 🔧 Usage
+
+Add mirrorful to the plugins section of your .eslintrc configuration file. You can omit the eslint-plugin- prefix:
+
+```json
+{
+  "plugins": ["mirrorful"]
+}
+```
+
+Then, simply extend the recommended configuration.
+
+```json
+{
+  "extends": ["plugin:mirrorful/recommended"]
+}
+```
+
+Alternatively, you can individually configure the rules you want to use under the rules section.
+
+```json
+{
+  "rules": {
+    "mirrorful/no-hardcoded-colors": 2
+  }
+}
+```
+
+This plugin should only be used within a pre-existing Mirrorful project. To see the ESLint plugin in action, you can check the [eslint-demo](https://github.com/Mirrorful/mirrorful/tree/main/examples/eslint-demo) example.

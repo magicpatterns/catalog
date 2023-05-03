@@ -1,0 +1,202 @@
+{
+  "primitives": {
+    "colors": {
+      "Violet": {
+        "50": {
+          "id": "0ff5affa-d49d-4232-a8de-a8987c76f0e1",
+          "value": "#FAF5FF",
+          "type": "color"
+        },
+        "100": {
+          "id": "2d533f57-1b0a-4b46-9d23-e9c17b827a37",
+          "value": "#E9D8FD",
+          "type": "color"
+        },
+        "200": {
+          "id": "345da864-e0fa-4f92-b815-515b90a3360e",
+          "value": "#D6BCFA",
+          "type": "color"
+        },
+        "300": {
+          "id": "5a8e165d-05e2-4ec3-86da-b647da71ce85",
+          "value": "#B794F4",
+          "type": "color"
+        },
+        "400": {
+          "id": "2e24a22e-345a-4984-853f-937286b7cc1e",
+          "value": "#9F7AEA",
+          "type": "color"
+        },
+        "500": {
+          "id": "cb946d8b-4268-4065-975f-4cfc30fff4ab",
+          "value": "#805AD5",
+          "type": "color"
+        },
+        "600": {
+          "id": "d47fcf30-2f6c-4010-a8c8-db73ad619f8b",
+          "value": "#6B46C1",
+          "type": "color"
+        },
+        "700": {
+          "id": "4be15a49-86e0-4676-9fed-3b1d1dcee4f1",
+          "value": "#553C9A",
+          "type": "color"
+        },
+        "800": {
+          "id": "51945f68-09fa-46b8-b5cb-879a2fc936a8",
+          "value": "#44337A",
+          "type": "color"
+        },
+        "900": {
+          "id": "cd093337-41f4-40cd-b585-b26669367caa",
+          "value": "#322659",
+          "type": "color"
+        },
+        "base": {
+          "id": "792bc008-d25c-47e1-8096-012e52ce3449",
+          "value": "#805ad5",
+          "type": "color"
+        }
+      },
+      "Space": {
+        "50": {
+          "id": "3ab9c945-6d55-4993-a510-dec20d488207",
+          "value": "#d1d1d3",
+          "type": "color"
+        },
+        "100": {
+          "id": "49e6733a-ca8e-4b4c-b0bf-da1d0a5c4759",
+          "value": "#c1c1c4",
+          "type": "color"
+        },
+        "200": {
+          "id": "2ed1165c-8be8-4989-a50d-592a9255c5c3",
+          "value": "#b1b2b6",
+          "type": "color"
+        },
+        "300": {
+          "id": "6a5af5c9-d978-43e0-b585-39b21a230a2c",
+          "value": "#a1a2a7",
+          "type": "color"
+        },
+        "400": {
+          "id": "35409382-a5f3-48cc-ac4a-f0fd18aeacb2",
+          "value": "#929398",
+          "type": "color"
+        },
+        "500": {
+          "id": "a0767f31-8b48-4617-a5eb-f56e41ebb5b4",
+          "value": "#828389",
+          "type": "color"
+        },
+        "600": {
+          "id": "b88cc224-b874-4dd4-a483-bf91f6454d06",
+          "value": "#73747a",
+          "type": "color"
+        },
+        "700": {
+          "id": "669522b4-ff0b-4b5c-871f-166728edda18",
+          "value": "#64656a",
+          "type": "color"
+        },
+        "800": {
+          "id": "d6c93e34-39c1-4640-987a-923f79cf3faa",
+          "value": "#55565a",
+          "type": "color"
+        },
+        "900": {
+          "id": "7960c493-f63e-43a6-9281-4f109a799f2f",
+          "value": "#46474a",
+          "type": "color"
+        },
+        "base": {
+          "id": "0ac04fa4-3608-405d-8a7a-41c371734548",
+          "value": "#828389",
+          "type": "color"
+        }
+      }
+    },
+    "typography": {
+      "fontSizes": {
+        "sm": {
+          "id": "default-font-size-sm-id",
+          "value": "1rem",
+          "type": "fontSize"
+        },
+        "md": {
+          "id": "default-font-size-md-id",
+          "value": "1.2rem",
+          "type": "fontSize"
+        },
+        "lg": {
+          "id": "default-font-size-lg-id",
+          "value": "1.4rem",
+          "type": "fontSize"
+        }
+      },
+      "fontWeights": {
+        "light": {
+          "id": "default-font-weight-light-id",
+          "value": "200",
+          "type": "fontWeight"
+        },
+        "normal": {
+          "id": "default-font-weight-normal-id",
+          "value": "400",
+          "type": "fontWeight"
+        },
+        "bold": {
+          "id": "default-font-weight-bold-id",
+          "value": "700",
+          "type": "fontWeight"
+        }
+      },
+      "lineHeights": {
+        "short": {
+          "id": "default-line-height-short-id",
+          "value": "1",
+          "type": "lineHeight"
+        },
+        "normal": {
+          "id": "default-line-height-normal-id",
+          "value": "1.5",
+          "type": "lineHeight"
+        },
+        "tall": {
+          "id": "default-line-height-tall-id",
+          "value": "2",
+          "type": "lineHeight"
+        }
+      }
+    },
+    "shadows": {
+      "sm": {
+        "id": "default-shadow-sm-id",
+        "value": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+        "type": "boxShadow"
+      },
+      "md": {
+        "id": "default-shadow-md-id",
+        "value": "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+        "type": "boxShadow"
+      },
+      "lg": {
+        "id": "default-shadow-lg-id",
+        "value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        "type": "boxShadow"
+      },
+      "dark-lg": {
+        "id": "default-shadow-dark-lg-id",
+        "value": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+        "type": "boxShadow"
+      }
+    }
+  },
+  "themes": [],
+  "files": ["css", "ts"],
+  "__internal__": {
+    "migrations": {
+      "version": "0.0.6"
+    }
+  }
+}

@@ -36,7 +36,13 @@ function normalizeFontSize(fontSizeData: TNamedToken) {
   return '1rem'
 }
 
-export function FontSizeRow({ fontSizeData }: { fontSizeData: TNamedToken }) {
+export function FontSizeRow({
+  fontSizeData,
+  placeholder,
+}: {
+  fontSizeData: TNamedToken
+  placeholder: string
+}) {
   return (
     <>
       <Box>
@@ -53,7 +59,7 @@ export function FontSizeRow({ fontSizeData }: { fontSizeData: TNamedToken }) {
       >
         {isFontSizeTooLarge(fontSizeData)
           ? `Font size ${fontSizeData.token.value} is too large to render.`
-          : `Lorem ipsum dolor sit amet.`}
+          : placeholder}
       </Box>
     </>
   )

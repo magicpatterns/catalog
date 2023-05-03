@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import {
   Box,
   Button,
@@ -23,6 +22,17 @@ import { FiPlus } from 'react-icons/fi'
 import { v4 as uuidv4 } from 'uuid'
 
 import { ShadowColorPicker } from './ShadowColorPicker'
+import { getRgba, getValues, separateBoxShadows } from './shadowUtils'
+
+type ShadowValue =
+  | {
+      hOffset: number
+      vOffset: number
+      blur: number
+      spread: number
+      color?: string
+    }
+  | string
 
 export function EditShadowModal({
   isOpen,
@@ -43,10 +53,7 @@ export function EditShadowModal({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [variant, setVariant]: [
-    TNamedToken,
-    React.Dispatch<React.SetStateAction<TNamedToken>>
-  ] = useState<TNamedToken>(
+  const [variant, setVariant] = useState<TNamedToken>(
     initialShadowVariant ?? {
       name: '',
       token: {
@@ -59,61 +66,6 @@ export function EditShadowModal({
 
   const [error, setError] = useState<string | null>(null)
   const [nameError, setNameError] = useState<boolean>(false)
-
-  function separateBoxShadows(input: string | [], name: string) {
-    const result = []
-    let current = ''
-    let parenCount = 0
-
-    for (let i = 0; i < input.length; i++) {
-      const char = input[i]
-
-      if (char === ',' && parenCount === 0) {
-        result.push({ name: name, value: current.trim() })
-        current = ''
-      } else {
-        current += char
-
-        if (char === '(') {
-          parenCount++
-        } else if (char === ')') {
-          parenCount--
-        }
-      }
-    }
-
-    result.push({ name: name, value: current.trim() })
-
-    return result
-  }
-
-  function getValues(str: string) {
-    const regex = /^(.+?)\s*rgba/
-    const match = regex.exec(str)
-
-    if (match) {
-      const values = match[1].split(' ')
-      const parsedValues = values.map((val) => parseInt(val))
-
-      return {
-        hOffset: parsedValues[0],
-        vOffset: parsedValues[1],
-        blur: parsedValues[2],
-        spread: parsedValues[3],
-      }
-    }
-    return { hOffset: 0, vOffset: 0, blur: 0, spread: 0 } // Return if no match is found
-  }
-
-  function getRgba(str: string) {
-    const rgbaRegex = /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/
-    const match = str.match(rgbaRegex)
-    if (match) {
-      const [, r, g, b, a] = match
-      return { r: Number(r), g: Number(g), b: Number(b), a: Number(a) }
-    }
-    return { r: 0, g: 0, b: 0, a: 0.5 } // Return if no match is found
-  }
 
   const shadowObjects = separateBoxShadows(variant.token.value, variant.name)
 
@@ -129,7 +81,7 @@ export function EditShadowModal({
     return `rgba(${i.r}, ${i.g}, ${i.b}, ${i.a})`
   })
 
-  const [newInitialValues, setNewInitialValues] = useState<any>(
+  const [newInitialValues, setNewInitialValues] = useState<ShadowValue[]>(
     initialValues
       ? initialValues
       : [
@@ -165,9 +117,7 @@ export function EditShadowModal({
       : [0]
   )
   const [shadowIndex, setShadowIndex] = useState(0)
-
   const [shadowInputValidation, setShadowInputValidation] = useState(true)
-
   const [codeResult, setCodeResult] = useState<string[]>(initialCodeResult())
 
   function initialCodeResult() {
@@ -245,7 +195,6 @@ export function EditShadowModal({
     setCodeResult(nextCodeRes)
   }
 
-  // Update values when input is changed
   function handleInputValue(e: React.ChangeEvent<HTMLInputElement>) {
     const x = separateBoxShadows(e.target.value, 'shadow')
     const y = getValues(x?.[0].value)
@@ -304,14 +253,9 @@ export function EditShadowModal({
     const shadowRegex =
       /^(-?\d*\.?\d+(px)?\s){0,3}-?\d*\.?\d+(px)?\srgba\((\d{1,3},\s){2}\d{1,3},\s\d*\.?\d+\)$/
 
-    if (
-      codeResult?.[shadowIndex] &&
-      codeResult?.[shadowIndex].match(shadowRegex)
-    ) {
-      return true
-    } else {
-      return false
-    }
+    return (
+      codeResult?.[shadowIndex] && codeResult?.[shadowIndex].match(shadowRegex)
+    )
   }
 
   useEffect(() => {
@@ -382,7 +326,7 @@ export function EditShadowModal({
                   width: '510px',
                 }}
               >
-                {newInitialValues?.map((_i: number, index: number) => (
+                {newInitialValues?.map((_arg: ShadowValue, index: number) => (
                   <Button
                     key={index}
                     style={{
@@ -424,7 +368,7 @@ export function EditShadowModal({
               </Box>
               <FormControl>
                 <Box>
-                  {newInitialValues?.map((_i: number, index: number) => (
+                  {newInitialValues?.map((_arg: ShadowValue, index: number) => (
                     <div key={index}>
                       <div>
                         {shadowIndex === index && (
@@ -476,7 +420,7 @@ export function EditShadowModal({
                   )}
                 </Text>
 
-                {newInitialValues?.map((_i: number, index: number) => (
+                {newInitialValues?.map((_arg: ShadowValue, index: number) => (
                   <div key={index}>
                     {shadowIndex === index && (
                       <Input

@@ -37,7 +37,7 @@ export default function Home() {
                   color: 'black',
                 }}
               >
-                npx mirrorful
+                npx mirrorful editor
               </code>
               ) to make live changes!
             </p>

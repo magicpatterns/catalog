@@ -5,9 +5,11 @@ import { DisplayFontProperty } from '../DisplayFontProperty'
 
 export function LineHeightSection({
   lineHeightData,
+  placeholder,
   onUpdateFontPropertyData,
 }: {
   lineHeightData: TTokenGroup
+  placeholder: string
   onUpdateFontPropertyData: (newLineHeightData: TTokenGroup) => void
 }) {
   const headingText = 'Line Heights'
@@ -20,6 +22,7 @@ export function LineHeightSection({
         buttonText={buttonText}
         fontProperty="lineHeight"
         fontPropertyData={lineHeightData}
+        placeholder={placeholder}
         onUpdateFontPropertyData={onUpdateFontPropertyData}
       />
     </Box>

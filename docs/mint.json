@@ -47,11 +47,13 @@
           ]
         },
         "home/examples",
+        "home/showcase",
         "home/component-library",
         "home/community-support",
         "home/open-source-vs-paid",
         "home/security",
-        "home/contributing"
+        "home/contributing",
+        "home/eslint-plugin"
       ]
     }
   ],
