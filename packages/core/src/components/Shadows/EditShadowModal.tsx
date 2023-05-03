@@ -19,7 +19,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
-import { FiLayers, FiPlus } from 'react-icons/fi'
+import { FiPlus } from 'react-icons/fi'
 import { v4 as uuidv4 } from 'uuid'
 
 import { ShadowColorPicker } from './ShadowColorPicker'
@@ -300,22 +300,6 @@ export function EditShadowModal({
     onClose()
   }
 
-  console.log(nameError)
-  //Input validation
-  // useEffect(() => {
-  //   const shadowRegex =
-  //     /^(-?\d*\.?\d+(px)?\s){0,3}-?\d*\.?\d+(px)?\srgba\((\d{1,3},\s){2}\d{1,3},\s\d*\.?\d+\)$/
-
-  //   if (
-  //     codeResult?.[shadowIndex] &&
-  //     codeResult?.[shadowIndex].match(shadowRegex)
-  //   ) {
-  //     setShadowInputValidation(true)
-  //   } else {
-  //     setShadowInputValidation(false)
-  //   }
-  // }, [spread, blur, hOffset, vOffset, color])
-
   function shadowValidation() {
     const shadowRegex =
       /^(-?\d*\.?\d+(px)?\s){0,3}-?\d*\.?\d+(px)?\srgba\((\d{1,3},\s){2}\d{1,3},\s\d*\.?\d+\)$/
@@ -375,15 +359,10 @@ export function EditShadowModal({
               }}
             >
               <FormControl>
-                {nameError && (
-                  <Text color="red.500" css={{ marginTop: 18 }}>
-                    {'nameError'}
-                  </Text>
-                )}
-                <FormLabel css={{ fontSize: '0.75rem' }}>
-                  Variant name
-                </FormLabel>
+                <FormLabel>Shadow name</FormLabel>
                 <Input
+                  isInvalid={nameError ? true : false}
+                  errorBorderColor="red.500"
                   value={variant.name}
                   onChange={(e) => {
                     setVariant({
@@ -413,7 +392,7 @@ export function EditShadowModal({
                     }}
                     onClick={() => setShadowIndex(index)}
                   >
-                    <Icon as={FiLayers} />
+                    {index + 1}
                   </Button>
                 ))}
 
@@ -486,11 +465,14 @@ export function EditShadowModal({
                 }}
               >
                 <Text style={{ marginBottom: '.5em' }}>
-                  Value{' '}
+                  Value
                   {shadowInputValidation ? (
                     ''
                   ) : (
-                    <span style={{ color: 'red' }}>Invalid format</span>
+                    <span style={{ color: 'var(--chakra-colors-red-500' }}>
+                      {' '}
+                      Invalid format
+                    </span>
                   )}
                 </Text>
 
@@ -506,7 +488,7 @@ export function EditShadowModal({
                 ))}
               </Box>
             </Box>
-            {error && (
+            {nameError && (
               <Text color="red.500" css={{ marginTop: 18 }}>
                 {error}
               </Text>
