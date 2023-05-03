@@ -8,7 +8,7 @@ import {
   Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
-import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
+import { assertToken, TNamedToken, TTokenGroup } from '@core/types'
 import { useEffect, useState } from 'react'
 
 import { EditShadowModal } from './EditShadowModal'
@@ -39,36 +39,6 @@ export function ShadowRow({
     }
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedShadowValue])
-
-  function getRgba(str: string) {
-    const rgbaRegex = /rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/
-    const match = str.match(rgbaRegex)
-    if (match) {
-      const [, r, g, b, a] = match
-      return { r: Number(r), g: Number(g), b: Number(b), a: Number(a) }
-    }
-    return { r: 0, g: 0, b: 0, a: 0.5 } // Return if no match is found
-  }
-
-  function getValues(str: string) {
-    const regex =
-      /(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+(-?\d*\.?\d+px)\s+rgba/g
-    const match = regex.exec(str)
-    if (match) {
-      const numbers = match.slice(1, 5).map((numStr) => parseFloat(numStr))
-
-      return {
-        hOffset: Number(numbers[0]),
-        vOffset: Number(numbers[1]),
-        blur: Number(numbers[2]),
-        spread: Number(numbers[3]),
-      }
-    }
-    return { hOffset: 0, vOffset: 0, blur: 0, spread: 0 } // Return if no match is found
-  }
-
-  const initialRgbaValue = getRgba(shadowData.token.value)
-  const initialValues = getValues(shadowData.token.value)
 
   return (
     <Box css={{ width: '60vw' }}>
@@ -155,8 +125,6 @@ export function ShadowRow({
             initialShadowVariant={shadowData}
             onUpdateShadowVariant={onUpdateShadowVariant}
             onDeleteShadowVariant={onDeleteShadowVariant}
-            initialRgbaValue={initialRgbaValue}
-            initialValues={initialValues}
           />
         </Box>
       </Stack>
