@@ -52,13 +52,3 @@ export function getRgba(str: string) {
   }
   return { r: 0, g: 0, b: 0, a: 0.5 }
 }
-
-export function initialCodeResult() {
-  const result = []
-  for (let i = 0; i < initialValues?.length; i++) {
-    result.push(
-      `${hOffset[i]}px ${vOffset[i]}px ${blur[i]}px ${spread[i]}px ${color[i]}`
-    )
-  }
-  return result
-}
