@@ -17,8 +17,8 @@ import { IconType } from 'react-icons'
 import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
+import { EditBaseColorModal } from './EditBaseColorModal'
 import { EditColorNameModal } from './EditColorNameModal'
-import { EditVariantModal } from './EditVariantModal'
 import { VariantRow } from './VariantRow'
 
 export function MirrorfulMenuButton({
@@ -42,7 +42,6 @@ export function MirrorfulMenuButton({
       }}
       size="sm"
       css={{
-        // borderRadius: '50%',
         border: 'none',
       }}
     />
@@ -59,13 +58,13 @@ export function ColorDisplay({
   colorName: string
   colorData: TTokenGroup
   onUpdateColorName: (newColorName: string) => void
-  onUpdateColorData: (colorData: TTokenGroup) => void
+  onUpdateColorData: (colorData: TTokenGroup, newName?: string) => void
   onDeleteColorData: () => void
 }) {
   const {
-    isOpen: isEditVariantModalOpen,
-    onOpen: onEditVariantModalOpen,
-    onClose: onEditVariantModalClose,
+    isOpen: isBaseModalOpen,
+    onOpen: onBaseModalOpen,
+    onClose: onBaseModalClose,
   } = useDisclosure()
 
   const {
@@ -106,7 +105,7 @@ export function ColorDisplay({
             <MirrorfulMenuButton icon={FiEdit} />
           </Box>
           <MenuList>
-            <MenuItem onClick={() => onEditVariantModalOpen()}>
+            <MenuItem onClick={() => onBaseModalOpen()}>
               Edit Base Color
             </MenuItem>
             <MenuItem onClick={() => onColorNameModalOpen()}>
@@ -172,22 +171,19 @@ export function ColorDisplay({
                   updatedColorData[newVariant.name] = newVariant.token
                   onUpdateColorData(updatedColorData)
                 }}
-                // onDeleteVariant={() => {
-                //   const updatedColorData = { ...colorData }
-                //   delete updatedColorData[variant.name]
-
-                //   onUpdateColorData(updatedColorData)
-                // }}
               />
             </motion.div>
           ))}
       </Stack>
 
-      <EditVariantModal
-        isOpen={isEditVariantModalOpen}
-        onClose={onEditVariantModalClose}
+      <EditBaseColorModal
+        colorName={colorName}
+        isOpen={isBaseModalOpen}
+        onClose={onBaseModalClose}
         color={baseNamedToken}
-        onUpdateVariant={() => alert('TODO: Danilowicz')}
+        onUpdateBaseColor={(updatedColorData: TTokenGroup, newName: string) => {
+          onUpdateColorData(updatedColorData, newName)
+        }}
       />
 
       <EditColorNameModal

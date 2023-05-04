@@ -79,16 +79,28 @@ export function ColorPaletteSection({
 
                   onUpdateColors(newColors)
                 }}
-                onUpdateColorData={(updatedColorData: TTokenGroup) => {
-                  const newColors = { ...colors }
-                  newColors[name] = updatedColorData
-
-                  onUpdateColors(newColors)
+                onUpdateColorData={(
+                  updatedColorData: TTokenGroup,
+                  newColorName?: string
+                ) => {
+                  if (newColorName) {
+                    // Rename the color while retaining the order of the keys
+                    const newColors = Object.keys(colors).reduce((acc, key) => {
+                      if (key !== name) acc[key] = colors[key]
+                      else acc[newColorName] = colors[key]
+                      return acc
+                    }, {} as TTokenGroup)
+                    newColors[newColorName] = updatedColorData
+                    onUpdateColors(newColors)
+                  } else {
+                    const newColors = { ...colors }
+                    newColors[name] = updatedColorData
+                    onUpdateColors(newColors)
+                  }
                 }}
                 onDeleteColorData={() => {
                   const newColors = { ...colors }
                   delete newColors[name]
-
                   onUpdateColors(newColors)
                 }}
               />

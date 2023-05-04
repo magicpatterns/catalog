@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Checkbox,
   FormControl,
   Modal,
   ModalBody,
@@ -11,37 +10,34 @@ import {
   ModalOverlay,
   Text,
 } from '@chakra-ui/react'
-import { useDisclosure } from '@chakra-ui/react'
-import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken, TTokenGroup } from '@core/types'
 import { useEffect, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
+import { nameThatColor } from '../Onboarding/utils'
 import { ColorPicker } from './ColorPicker'
 import { defaultColorShadesToTokens, generateDefaultColorShades } from './utils'
 import { VariantRow } from './VariantRow'
 
-export function EditVariantModal({
+export function EditBaseColorModal({
   isOpen,
   onClose,
   color,
-  onUpdateVariant,
-  onDeleteVariant,
+  onUpdateBaseColor,
+  colorName,
 }: {
   isOpen: boolean
   onClose: () => void
   color: TNamedToken
-  onUpdateVariant: (newVariant: TNamedToken) => void
-  onDeleteVariant?: () => void
+  colorName: string
+  onUpdateBaseColor: (newTokenGroup: TTokenGroup, newName: string) => void
 }) {
-  const {
-    isOpen: isAlertDialogOpen,
-    onOpen: onDeleteAlertDialogOpen,
-    onClose: onDeleteAlertDialogClose,
-  } = useDisclosure()
-
   const [variant, setVariant] = useState<TNamedToken>(color)
   const [error, setError] = useState<string | null>(null)
-  const [shouldGenerateVariants, setShouldGenerateVariants] = useState(true)
+  const [newColorName, setNewColorName] = useState<string>(colorName)
+
+  // Right now, we don't let the user choose, but could down the road
+  // const [shouldGenerateVariants, setShouldGenerateVariants] = useState(true)
 
   const handleSave = () => {
     // Check for blank / missing color
@@ -53,17 +49,22 @@ export function EditVariantModal({
     // Remove error so it doesn't persist...
     setError(null)
 
-    // TODO(Danilowicz): need to add new variants to the colordata
     let additionalVariants: TTokenGroup = {}
-    if (shouldGenerateVariants) {
-      additionalVariants = defaultColorShadesToTokens(
-        generateDefaultColorShades(variant.token.value)
-      )
-    }
+    additionalVariants = defaultColorShadesToTokens(
+      generateDefaultColorShades(variant.token.value)
+    )
 
-    // catch any thrown errors on save
     try {
-      onUpdateVariant(variant)
+      const colorTokenGroup: TTokenGroup = {
+        DEFAULT: {
+          id: uuidv4(),
+          value: variant.token.value,
+          type: 'color',
+        },
+        ...additionalVariants,
+      }
+      console.log(newColorName)
+      onUpdateBaseColor(colorTokenGroup, newColorName)
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message)
@@ -75,17 +76,18 @@ export function EditVariantModal({
 
   useEffect(() => {
     if (!isOpen) {
+      setNewColorName(colorName)
       setVariant(color)
       setError(null)
     }
-  }, [isOpen, color])
+  }, [isOpen, color, colorName])
 
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{color ? `Edit Base Color` : 'Add Variant'}</ModalHeader>
+          <ModalHeader>{`Edit Base Color: ${newColorName}`}</ModalHeader>
           <ModalCloseButton />
           <form
             onSubmit={(e) => {
@@ -116,6 +118,9 @@ export function EditVariantModal({
                 >
                   <ColorPicker
                     onChange={(colorPickerColor) => {
+                      const name = nameThatColor(colorPickerColor.hsl)
+                      setNewColorName(name)
+
                       // TODO(Danilowicz): we should spread here, or there's going to be a big fat bug
                       setVariant({
                         name: variant.name,
@@ -140,11 +145,10 @@ export function EditVariantModal({
                   <FormControl
                     style={{
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
+                      justifyContent: 'flex-end',
                     }}
                   >
-                    <Checkbox
+                    {/* <Checkbox
                       checked={shouldGenerateVariants}
                       onChange={() =>
                         setShouldGenerateVariants((prev) => !prev)
@@ -152,7 +156,7 @@ export function EditVariantModal({
                       defaultChecked={shouldGenerateVariants}
                     >
                       Automatically generate new shades
-                    </Checkbox>
+                    </Checkbox> */}
                     <Button type="submit">Save</Button>
                   </FormControl>
                 </Box>
@@ -170,14 +174,6 @@ export function EditVariantModal({
           </form>
         </ModalContent>
       </Modal>
-      {onDeleteVariant && (
-        <AlertDialogDelete
-          tokenName={variant.name}
-          isOpen={isAlertDialogOpen}
-          onClose={onDeleteAlertDialogClose}
-          onDelete={() => onDeleteVariant()}
-        />
-      )}
     </>
   )
 }
