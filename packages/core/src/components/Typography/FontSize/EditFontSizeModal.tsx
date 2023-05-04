@@ -79,6 +79,9 @@ export function EditFontSizeModal({
         id,
         value: `${variantValue}${variantUnit}`,
         type: 'fontSize',
+        metadata: {
+          isBase: false,
+        },
       },
     })
     onClose()
