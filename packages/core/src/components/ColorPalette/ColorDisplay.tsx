@@ -1,7 +1,5 @@
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import {
   Box,
-  Button,
   Icon,
   IconButton,
   Menu,
@@ -10,21 +8,19 @@ import {
   MenuList,
   Stack,
   Text,
-  Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
-import { assertToken, TNamedToken, TTokenGroup } from '@core/types'
+import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
 import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
 import { EditColorNameModal } from './EditColorNameModal'
-import { EditVariantModal } from './EditVariantModal'
+import { VariantRow } from './VariantRow'
 
-function MirrorfulMenuButton({
+export function MirrorfulMenuButton({
   color,
   icon = FiMoreHorizontal,
 }: {
@@ -52,110 +48,6 @@ function MirrorfulMenuButton({
   )
 }
 
-function VariantRow({
-  variant,
-  onUpdateVariant,
-  onDeleteVariant,
-}: {
-  variant: TNamedToken
-  onUpdateVariant: (newVariant: TNamedToken) => void
-  onDeleteVariant: () => void
-}) {
-  const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
-  const { name, token } = variant
-
-  const {
-    isOpen: isEditVariantModalOpen,
-    onOpen: onEditVariantModalOpen,
-    onClose: onEditVariantModalClose,
-  } = useDisclosure()
-
-  useEffect(() => {
-    let copiedTimeout: NodeJS.Timeout
-
-    if (hasCopiedHexCode) {
-      copiedTimeout = setTimeout(() => {
-        setHasCopiedHexCode(false)
-      }, 1500)
-    }
-
-    return () => clearTimeout(copiedTimeout)
-  }, [hasCopiedHexCode])
-
-  const color = `${token.value}`
-
-  return (
-    <Box
-      css={{
-        height: '3rem',
-        backgroundColor: `${token.value}`,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0px 24px',
-        borderRadius: 8,
-        border: '1px solid black',
-      }}
-      role="group"
-    >
-      <Text
-        fontSize="1rem"
-        // fontWeight={variant.isBase ? 700 : 600}
-        color={tinycolor(color).isDark() ? 'white' : 'black'}
-      >
-        {/* {name} {variant.isBase ? ' (Base)' : ''} */}
-        {name}
-      </Text>
-      <Box
-        css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
-      >
-        <Tooltip
-          label="Copied Hex to Clipboard"
-          hasArrow
-          isDisabled={!hasCopiedHexCode}
-          isOpen={hasCopiedHexCode}
-        >
-          <Text
-            fontSize="1rem"
-            // fontWeight={variant.isBase ? 700 : 600}
-            fontWeight={600}
-            color={tinycolor(color).isDark() ? 'white' : 'black'}
-            _hover={{
-              cursor: 'pointer',
-              backgroundColor: tinycolor(color).isDark() ? 'white' : 'black',
-              color: color,
-              borderRadius: 8,
-              paddingInline: 2,
-            }}
-            onClick={() => {
-              navigator.clipboard.writeText(color)
-              setHasCopiedHexCode(true)
-            }}
-          >
-            {color}
-          </Text>
-        </Tooltip>
-        <Menu>
-          <Box style={{ marginLeft: '24px' }}>
-            <MirrorfulMenuButton color={color} />
-          </Box>
-          <MenuList>
-            <MenuItem onClick={() => alert('set as base')}>
-              Set as Base
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      </Box>
-      <EditVariantModal
-        isOpen={isEditVariantModalOpen}
-        onClose={onEditVariantModalClose}
-        initialVariant={variant}
-        onUpdateVariant={onUpdateVariant}
-      />
-    </Box>
-  )
-}
-
 export function ColorDisplay({
   colorName,
   colorData,
@@ -176,24 +68,19 @@ export function ColorDisplay({
   } = useDisclosure()
 
   const {
-    isOpen: isAddVariantModalOpen,
-    onOpen: onAddVariantModalOpen,
-    onClose: onAddVariantModalClose,
-  } = useDisclosure()
-
-  const {
     isOpen: isAlertDialogOpen,
     onOpen: onDeleteAlertDialogOpen,
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  let baseColor = null
-  if (colorData.DEFAULT && assertToken(colorData.DEFAULT)) {
-    baseColor = colorData.DEFAULT.value
-  } else if (colorData.base && assertToken(colorData.base)) {
-    baseColor = colorData.base.value
-  }
+  const namedTokens = Object.keys(colorData)
+    .map((key) => ({
+      name: key,
+      token: colorData[key],
+    }))
+    .filter((value): value is TNamedToken => assertToken(value.token))
 
+  const baseNamedToken = namedTokens.filter((v) => v.token.metadata?.isBase)[0]
   return (
     <Box
       css={{
@@ -221,19 +108,15 @@ export function ColorDisplay({
           </MenuList>
         </Menu>
       </Box>
-      <Stack spacing={'4px'}>
-        {Object.keys(colorData)
-          .map((key) => ({
-            name: key,
-            token: colorData[key],
-          }))
-          .filter((value): value is TNamedToken => assertToken(value.token))
+      <Stack spacing={'8px'}>
+        {namedTokens
           .sort((a, b) =>
             tinycolor(`${a.token.value}`).toHsl().l <
             tinycolor(`${b.token.value}`).toHsl().l
               ? 1
               : -1
           )
+          .filter((variant) => variant.name !== 'DEFAULT')
           .map((variant, index) => (
             <motion.div
               key={variant.name}
@@ -250,24 +133,48 @@ export function ColorDisplay({
                 variant={variant}
                 onUpdateVariant={(newVariant: TNamedToken) => {
                   const updatedColorData = { ...colorData }
-                  delete updatedColorData[variant.name]
+
+                  // This is absurd that this is how we get the baseColor
+                  // There is a better way, we are just refactoring right now...
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
+                  const existingBaseColor: { name: string; value: TToken } =
+                    Object.keys(updatedColorData)
+                      .map((key) => {
+                        return { name: key, value: updatedColorData[key] }
+                      })
+                      .filter(
+                        (c) => assertToken(c.value) && c.value.metadata?.isBase
+                      )[0]
+
+                  try {
+                    const oldBaseColorValue = {
+                      ...existingBaseColor.value,
+                      metadata: { isBase: false },
+                    }
+                    updatedColorData[existingBaseColor.name] = oldBaseColorValue
+                  } catch (e) {
+                    // No existing base color
+                    console.log(e)
+                  }
+
+                  updatedColorData['DEFAULT'] = newVariant.token
                   updatedColorData[newVariant.name] = newVariant.token
-
                   onUpdateColorData(updatedColorData)
                 }}
-                onDeleteVariant={() => {
-                  const updatedColorData = { ...colorData }
-                  delete updatedColorData[variant.name]
+                // onDeleteVariant={() => {
+                //   const updatedColorData = { ...colorData }
+                //   delete updatedColorData[variant.name]
 
-                  onUpdateColorData(updatedColorData)
-                }}
+                //   onUpdateColorData(updatedColorData)
+                // }}
               />
             </motion.div>
           ))}
       </Stack>
 
       <EditColorNameModal
-        color={baseColor}
+        color={baseNamedToken}
         isOpen={isColorNameModalOpen}
         onClose={onColorNameModalClose}
         initialColorName={colorName}
@@ -275,21 +182,7 @@ export function ColorDisplay({
           onUpdateColorName(newName)
         }}
       />
-      <EditVariantModal
-        isOpen={isAddVariantModalOpen}
-        onClose={onAddVariantModalClose}
-        onUpdateVariant={(newVariant: TNamedToken) => {
-          if (newVariant.name in colorData) {
-            throw new Error(
-              'This name already exists, please choose a different name.'
-            )
-          }
-          const updatedColorData = { ...colorData }
-          updatedColorData[newVariant.name] = newVariant.token
 
-          onUpdateColorData(updatedColorData)
-        }}
-      />
       <AlertDialogDelete
         tokenName={colorName}
         isOpen={isAlertDialogOpen}

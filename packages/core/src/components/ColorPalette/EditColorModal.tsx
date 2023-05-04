@@ -50,7 +50,6 @@ export function EditColorModal({
   const [base, setBase] = useState<string>(
     assertToken(initialBaseValue) ? initialBaseValue.value : ''
   )
-  const [shouldGenerateVariants, setShouldGenerateVariants] = useState(false)
 
   const [error, setError] = useState<string | null>(null)
 
@@ -67,29 +66,23 @@ export function EditColorModal({
   }
 
   const handleClose = () => {
-    // Check for blank / missing color name
-
     if (!name) {
-      setError('Please enter a variable name.')
+      setError('Please enter a color name.')
       return
     }
-    // Check for blank / missing color
     if (!base) {
       setError('Please enter a base color.')
       return
     }
     onBaseBlur()
-    let additionalVariants: TTokenGroup = {}
-    if (shouldGenerateVariants) {
-      additionalVariants = defaultColorShadesToTokens(
-        generateDefaultColorShades(base)
-      )
-    }
+    const additionalVariants = defaultColorShadesToTokens(
+      generateDefaultColorShades(base)
+    )
 
     onClose({
       name,
       group: {
-        base: {
+        DEFAULT: {
           id: uuidv4(),
           value: base,
           type: 'color',
@@ -121,18 +114,18 @@ export function EditColorModal({
           <Flex flexDirection="column" flex="1" gap={4}>
             <FormControl>
               <Flex>
-                <FormLabel>Variable Name</FormLabel>
+                <FormLabel>Color Name</FormLabel>
                 <Tooltip
                   placement="right"
                   closeDelay={500}
                   hasArrow
-                  label={"Variable names don't need a hyphen."}
+                  label={"Color names don't need a hyphen."}
                 >
                   <InfoIcon css={{ marginTop: '5px', marginLeft: '-6px' }} />
                 </Tooltip>
               </Flex>
               <Input
-                placeholder="e.g. Pepsi Blue"
+                placeholder="e.g. Sky Blue"
                 size="md"
                 value={name}
                 onChange={(e) => {
@@ -200,18 +193,6 @@ export function EditColorModal({
                 </Text>
               )}
             </FormControl>
-            {!initialColorData ||
-            base !== initialColorData.group?.base.value ? (
-              <FormControl>
-                <Checkbox
-                  checked={shouldGenerateVariants}
-                  onChange={() => setShouldGenerateVariants((prev) => !prev)}
-                  defaultChecked={shouldGenerateVariants}
-                >
-                  Automatically generate variants
-                </Checkbox>
-              </FormControl>
-            ) : null}
           </Flex>
           <Box flex="1">
             {showBaseColorPicker && (

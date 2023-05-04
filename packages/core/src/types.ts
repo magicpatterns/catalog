@@ -151,6 +151,9 @@ export type TToken = {
   value: string
   type: 'color' | 'fontSize' | 'fontWeight' | 'lineHeight' | 'boxShadow'
   ref?: string // means that this token itself is a reference to another token
+  metadata?: {
+    isBase?: boolean
+  }
 }
 
 export const assertTokenGroup = (

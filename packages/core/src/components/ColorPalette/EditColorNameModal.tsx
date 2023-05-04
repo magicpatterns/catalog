@@ -3,7 +3,6 @@ import {
   Button,
   Flex,
   FormControl,
-  FormLabel,
   Input,
   Modal,
   ModalBody,
@@ -14,6 +13,7 @@ import {
   ModalOverlay,
   Text,
 } from '@chakra-ui/react'
+import { TNamedToken } from '@core/types'
 import { useState } from 'react'
 
 export function EditColorNameModal({
@@ -23,7 +23,7 @@ export function EditColorNameModal({
   onUpdateColorName,
   color,
 }: {
-  color: string | null
+  color: TNamedToken
   isOpen: boolean
   onClose: () => void
   initialColorName: string
@@ -57,7 +57,7 @@ export function EditColorNameModal({
                   css={{
                     width: '1rem',
                     height: '1rem',
-                    backgroundColor: color,
+                    backgroundColor: color.token.value,
                     marginLeft: '10px',
                     border: '1px solid black',
                     borderRadius: '20%',
