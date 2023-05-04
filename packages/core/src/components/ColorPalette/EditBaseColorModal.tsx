@@ -32,6 +32,7 @@ export function EditBaseColorModal({
   colorName: string
   onUpdateBaseColor: (newTokenGroup: TTokenGroup, newName: string) => void
 }) {
+  console.log('color', color)
   const [variant, setVariant] = useState<TNamedToken>(color)
   const [error, setError] = useState<string | null>(null)
   const [newColorName, setNewColorName] = useState<string>(colorName)
@@ -60,10 +61,12 @@ export function EditBaseColorModal({
           id: uuidv4(),
           value: variant.token.value,
           type: 'color',
+          metadata: {
+            isBase: false,
+          },
         },
         ...additionalVariants,
       }
-      console.log(newColorName)
       onUpdateBaseColor(colorTokenGroup, newColorName)
     } catch (err) {
       if (err instanceof Error) {
@@ -138,7 +141,7 @@ export function EditBaseColorModal({
                   <Box style={{ width: '100%' }}>
                     <VariantRow
                       variant={variant}
-                      onUpdateVariant={() => alert('todo')}
+                      onUpdateVariant={() => console.log('not needed')}
                       hideIcons
                     />
                   </Box>

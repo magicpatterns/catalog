@@ -62,6 +62,9 @@ export function Onboarding({
         id: uuidv4(),
         value: primaryColorHex,
         type: 'color',
+        metadata: {
+          isBase: false,
+        },
       },
       ...defaultColorShadesToTokens(
         generateDefaultColorShades(primaryColorHex)

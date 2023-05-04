@@ -79,6 +79,9 @@ export function AddColorModal({
           id: uuidv4(),
           value: base,
           type: 'color',
+          metadata: {
+            isBase: false,
+          },
         },
         ...additionalVariants,
       },

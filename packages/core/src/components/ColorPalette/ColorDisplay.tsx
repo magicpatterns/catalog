@@ -86,7 +86,9 @@ export function ColorDisplay({
     }))
     .filter((value): value is TNamedToken => assertToken(value.token))
 
-  const baseNamedToken = namedTokens.filter((v) => v.token.metadata?.isBase)[0]
+  const baseNamedToken: TNamedToken | undefined = namedTokens.filter(
+    (v) => v.token.metadata.isBase
+  )[0]
   return (
     <Box
       css={{
@@ -141,6 +143,7 @@ export function ColorDisplay({
               <VariantRow
                 variant={variant}
                 onUpdateVariant={(newVariant: TNamedToken) => {
+                  console.log('new v', newVariant)
                   const updatedColorData = { ...colorData }
 
                   // This is absurd that this is how we get the baseColor
@@ -153,7 +156,7 @@ export function ColorDisplay({
                         return { name: key, value: updatedColorData[key] }
                       })
                       .filter(
-                        (c) => assertToken(c.value) && c.value.metadata?.isBase
+                        (c) => assertToken(c.value) && c.value.metadata.isBase
                       )[0]
 
                   try {

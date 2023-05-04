@@ -9,9 +9,9 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react'
-import { TNamedToken } from '@core/types'
+import { assertToken, TNamedToken } from '@core/types'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { BsSliders2 } from 'react-icons/bs'
 import {
   MdOutlineCheckBox,
@@ -19,9 +19,19 @@ import {
 } from 'react-icons/md'
 import tinycolor from 'tinycolor2'
 
-function MirrorfulSlider({ label }: { label: string }) {
-  const [sliderValue, setSliderValue] = useState(50)
-
+function MirrorfulSlider({
+  label,
+  onSlide,
+  sliderValue,
+  min,
+  max,
+}: {
+  label: string
+  onSlide: (v: number) => void
+  sliderValue: number
+  min: number
+  max: number
+}) {
   return (
     <Flex>
       <Flex mr={2}>
@@ -31,9 +41,11 @@ function MirrorfulSlider({ label }: { label: string }) {
         </Text>
       </Flex>
       <Slider
+        min={min}
+        max={max}
         colorScheme={'gray.700'}
         aria-label="slider"
-        onChange={(val: number) => setSliderValue(val)}
+        onChange={(val: number) => onSlide(val)}
         size="lg"
       >
         <SliderTrack>
@@ -57,6 +69,13 @@ export function VariantRow({
   const [showSlider, setShowSlider] = useState(false)
   const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
   const { name, token } = variant
+  const color = `${token.value}`
+  const isBase = variant.token.metadata.isBase
+  const c = token.value
+  const hsl = tinycolor(c).toHsl()
+  const [h, setH] = useState<number>(Math.round(hsl.h))
+  const [s, setS] = useState<number>(Math.round(hsl.s * 100))
+  const [l, setL] = useState<number>(Math.round(hsl.l * 100))
 
   useEffect(() => {
     let copiedTimeout: NodeJS.Timeout
@@ -70,8 +89,45 @@ export function VariantRow({
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedHexCode])
 
-  const color = `${token.value}`
-  const isBase = variant.token?.metadata?.isBase
+  const onHSLSlide = ({
+    val,
+    type,
+  }: {
+    val: number
+    type: 'h' | 's' | 'l'
+  }) => {
+    let newColor = ''
+    if (type === 'h') {
+      newColor = tinycolor({
+        h: val,
+        s: s / 100,
+        l: l / 100,
+      }).toHexString()
+    } else if (type === 's') {
+      newColor = tinycolor({ h, s: s / 100, l: l / 100 }).toHexString()
+    } else {
+      newColor = tinycolor({
+        h,
+        s: val / 100,
+        l: val / 100,
+      }).toHexString()
+    }
+
+    console.log(newColor)
+
+    const newToken = {
+      ...variant.token,
+      value: newColor,
+    }
+    onUpdateVariant({ ...variant, token: newToken })
+
+    // const newVariant = {
+    //   ...variant,
+    //   token: { ...variant.token, value: newColor },
+    // }
+    // onUpdateVariant(newVariant)
+  }
+
   return (
     <Flex>
       <Box
@@ -155,7 +211,7 @@ export function VariantRow({
                 }}
                 aria-label="Select as base"
                 icon={
-                  variant.token?.metadata?.isBase ? (
+                  variant.token.metadata.isBase ? (
                     <MdOutlineCheckBox />
                   ) : (
                     <MdOutlineCheckBoxOutlineBlank />
@@ -198,10 +254,41 @@ export function VariantRow({
             height: '3rem',
           }}
         >
-          {['H', 'S', 'L'].map((label, i) => {
+          {[
+            {
+              label: 'H',
+              onSlide: (h: number) => {
+                setH(h)
+                onHSLSlide({ val: h, type: 'h' })
+              },
+              sliderValue: h,
+              min: 0,
+              max: 360,
+            },
+            {
+              label: 'S',
+              onSlide: (s: number) => {
+                setS(s)
+                onHSLSlide({ val: s, type: 's' })
+              },
+              sliderValue: s,
+              min: 0,
+              max: 100,
+            },
+            {
+              label: 'L',
+              onSlide: (l: number) => {
+                setL(l)
+                onHSLSlide({ val: l, type: 'l' })
+              },
+              sliderValue: l,
+              min: 0,
+              max: 100,
+            },
+          ].map((obj, i) => {
             return (
               <motion.div
-                key={label}
+                key={obj.label}
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
@@ -211,7 +298,7 @@ export function VariantRow({
                   delay: 0.08 * i,
                 }}
               >
-                <MirrorfulSlider label={label} />
+                <MirrorfulSlider {...obj} />
               </motion.div>
             )
           })}

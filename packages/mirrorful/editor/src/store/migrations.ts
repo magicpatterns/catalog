@@ -103,16 +103,11 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
         id: uuidv4(),
         value: color.variants[variantName],
         type: 'color',
+        metadata: {
+          isBase: false,
+        },
       }
     })
-
-    if (color.baseColor) {
-      currentColor.base = {
-        id: uuidv4(),
-        value: color.baseColor,
-        type: 'color',
-      }
-    }
 
     colors[color.name] = currentColor
   })
@@ -124,6 +119,9 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
       id: uuidv4(),
       value: `${variant.value}${variant.unit}`,
       type: 'fontSize',
+      metadata: {
+        isBase: false,
+      },
     }
   })
 
@@ -134,6 +132,9 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
       id: uuidv4(),
       value: variant.weight,
       type: 'fontWeight',
+      metadata: {
+        isBase: false,
+      },
     }
   })
 
@@ -143,6 +144,9 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
       id: uuidv4(),
       value: `${variant.value}`,
       type: 'fontWeight',
+      metadata: {
+        isBase: false,
+      },
     }
   })
 
@@ -152,6 +156,9 @@ export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {
       id: uuidv4(),
       value: variant.value,
       type: 'boxShadow',
+      metadata: {
+        isBase: false,
+      },
     }
   })
 
