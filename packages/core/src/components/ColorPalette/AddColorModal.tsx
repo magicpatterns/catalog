@@ -2,7 +2,6 @@ import { InfoIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
-  Checkbox,
   Flex,
   FormControl,
   FormLabel,
@@ -17,7 +16,7 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react'
-import { assertToken, TNamedTokenGroup, TTokenGroup } from '@core/types'
+import { TNamedTokenGroup } from '@core/types'
 import { Color } from '@hello-pangea/color-picker'
 import { useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
@@ -29,32 +28,26 @@ import {
   handleInvalidColor,
 } from './utils'
 
-const INITIAL_COLOR_PICKER_COLOR = '#000000'
+const INITIAL_COLOR_PICKER_COLOR = '#008EC8'
 
-export function EditColorModal({
+export function AddColorModal({
   isOpen,
   onClose,
-  initialColorData,
 }: {
   isOpen: boolean
   onClose: (newColor?: TNamedTokenGroup) => void
-  initialColorData?: TNamedTokenGroup
 }) {
   const baseRef = useRef<HTMLInputElement | null>(null)
   const hoverRef = useRef<HTMLInputElement | null>(null)
 
-  const initialBaseValue = initialColorData?.group.base ?? {}
-
   const presetColors: string[] = []
-  const [name, setName] = useState<string>(initialColorData?.name ?? '')
-  const [base, setBase] = useState<string>(
-    assertToken(initialBaseValue) ? initialBaseValue.value : ''
-  )
+  const [name, setName] = useState<string>('')
+  const [base, setBase] = useState<string>('')
 
   const [error, setError] = useState<string | null>(null)
 
   const [colorPickerColor, setColorPickerColor] = useState<Color>(
-    `${initialColorData?.group.base?.value}` ?? INITIAL_COLOR_PICKER_COLOR
+    INITIAL_COLOR_PICKER_COLOR
   )
 
   const [showBaseColorPicker, setShowBaseColorPicker] = useState<boolean>(true)
@@ -100,9 +93,7 @@ export function EditColorModal({
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>
-          {initialColorData ? 'Edit Color' : 'Add Color'}
-        </ModalHeader>
+        <ModalHeader>Add Color</ModalHeader>
         <ModalCloseButton />
         <ModalBody
           css={{
@@ -208,9 +199,7 @@ export function EditColorModal({
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={handleClose}>
-            {initialColorData ? 'Save' : 'Add'}
-          </Button>
+          <Button onClick={handleClose}>Add</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

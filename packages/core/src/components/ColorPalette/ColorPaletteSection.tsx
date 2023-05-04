@@ -10,9 +10,9 @@ import {
 import { motion } from 'framer-motion'
 
 import { TNamedTokenGroup, TTokenGroup } from '../../types'
+import { AddColorModal } from './AddColorModal'
 import { AddColorSkeleton } from './AddColorSkeleton'
 import { ColorDisplay } from './ColorDisplay'
-import { EditColorModal } from './EditColorModal'
 
 export function ColorPaletteSection({
   colors,
@@ -105,14 +105,12 @@ export function ColorPaletteSection({
           <AddColorSkeleton numberOfMockVariants={4} />
         </Box>
       </Box>
-      <EditColorModal
+      <AddColorModal
         isOpen={isOpen}
         onClose={(newColor?: TNamedTokenGroup) => {
           if (newColor) {
             const newColors = { ...colors }
-
             newColors[newColor.name] = newColor.group
-
             onUpdateColors(newColors)
           }
           onClose()

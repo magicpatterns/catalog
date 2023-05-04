@@ -18,6 +18,7 @@ import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
 import { EditColorNameModal } from './EditColorNameModal'
+import { EditVariantModal } from './EditVariantModal'
 import { VariantRow } from './VariantRow'
 
 export function MirrorfulMenuButton({
@@ -62,6 +63,12 @@ export function ColorDisplay({
   onDeleteColorData: () => void
 }) {
   const {
+    isOpen: isEditVariantModalOpen,
+    onOpen: onEditVariantModalOpen,
+    onClose: onEditVariantModalClose,
+  } = useDisclosure()
+
+  const {
     isOpen: isColorNameModalOpen,
     onOpen: onColorNameModalOpen,
     onClose: onColorNameModalClose,
@@ -99,6 +106,9 @@ export function ColorDisplay({
             <MirrorfulMenuButton icon={FiEdit} />
           </Box>
           <MenuList>
+            <MenuItem onClick={() => onEditVariantModalOpen()}>
+              Edit Base Color
+            </MenuItem>
             <MenuItem onClick={() => onColorNameModalOpen()}>
               Edit Color Name
             </MenuItem>
@@ -172,6 +182,13 @@ export function ColorDisplay({
             </motion.div>
           ))}
       </Stack>
+
+      <EditVariantModal
+        isOpen={isEditVariantModalOpen}
+        onClose={onEditVariantModalClose}
+        color={baseNamedToken}
+        onUpdateVariant={() => alert('TODO: Danilowicz')}
+      />
 
       <EditColorNameModal
         color={baseNamedToken}

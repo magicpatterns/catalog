@@ -48,7 +48,9 @@ function MirrorfulSlider({ label }: { label: string }) {
 export function VariantRow({
   variant,
   onUpdateVariant,
+  hideIcons = false,
 }: {
+  hideIcons?: boolean
   variant: TNamedToken
   onUpdateVariant: (newVariant: TNamedToken) => void
 }) {
@@ -121,58 +123,70 @@ export function VariantRow({
               {color}
             </Text>
           </Tooltip>
-          <IconButton
-            disabled={isBase}
-            onClick={() => {
-              const newToken = {
-                ...variant.token,
-                metadata: { isBase: true },
-              }
-              onUpdateVariant({ ...variant, token: newToken })
-            }}
-            style={{ marginLeft: '24px' }}
-            variant="outline"
-            color={
-              color ? (tinycolor(color).isDark() ? 'white' : 'black') : 'black'
-            }
-            _hover={{
-              backgroundColor: 'rgba(235, 235, 235, 0.3)',
-            }}
-            _active={{
-              backgroundColor: 'rgba(235, 235, 235, 0.3)',
-            }}
-            size="sm"
-            css={{
-              border: 'none',
-            }}
-            aria-label="Select as base"
-            icon={
-              variant.token?.metadata?.isBase ? (
-                <MdOutlineCheckBox />
-              ) : (
-                <MdOutlineCheckBoxOutlineBlank />
-              )
-            }
-          />
-          <IconButton
-            onClick={() => setShowSlider(!showSlider)}
-            variant="outline"
-            color={
-              color ? (tinycolor(color).isDark() ? 'white' : 'black') : 'black'
-            }
-            _hover={{
-              backgroundColor: 'rgba(235, 235, 235, 0.3)',
-            }}
-            _active={{
-              backgroundColor: 'rgba(235, 235, 235, 0.3)',
-            }}
-            size="sm"
-            css={{
-              border: 'none',
-            }}
-            aria-label="Show sliders"
-            icon={<BsSliders2 />}
-          />
+          {!hideIcons && (
+            <>
+              <IconButton
+                disabled={isBase}
+                onClick={() => {
+                  const newToken = {
+                    ...variant.token,
+                    metadata: { isBase: true },
+                  }
+                  onUpdateVariant({ ...variant, token: newToken })
+                }}
+                style={{ marginLeft: '24px' }}
+                variant="outline"
+                color={
+                  color
+                    ? tinycolor(color).isDark()
+                      ? 'white'
+                      : 'black'
+                    : 'black'
+                }
+                _hover={{
+                  backgroundColor: 'rgba(235, 235, 235, 0.3)',
+                }}
+                _active={{
+                  backgroundColor: 'rgba(235, 235, 235, 0.3)',
+                }}
+                size="sm"
+                css={{
+                  border: 'none',
+                }}
+                aria-label="Select as base"
+                icon={
+                  variant.token?.metadata?.isBase ? (
+                    <MdOutlineCheckBox />
+                  ) : (
+                    <MdOutlineCheckBoxOutlineBlank />
+                  )
+                }
+              />
+              <IconButton
+                onClick={() => setShowSlider(!showSlider)}
+                variant="outline"
+                color={
+                  color
+                    ? tinycolor(color).isDark()
+                      ? 'white'
+                      : 'black'
+                    : 'black'
+                }
+                _hover={{
+                  backgroundColor: 'rgba(235, 235, 235, 0.3)',
+                }}
+                _active={{
+                  backgroundColor: 'rgba(235, 235, 235, 0.3)',
+                }}
+                size="sm"
+                css={{
+                  border: 'none',
+                }}
+                aria-label="Show sliders"
+                icon={<BsSliders2 />}
+              />
+            </>
+          )}
         </Box>
       </Box>
       {showSlider && (

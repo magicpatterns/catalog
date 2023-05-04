@@ -51,7 +51,7 @@ export function EditColorNameModal({
         >
           <FormControl>
             <Flex alignItems={'center'} mb="2">
-              <Text>Color Name</Text>
+              <Text style={{ fontWeight: 500 }}>Color Name</Text>
               {color && (
                 <Box
                   css={{
