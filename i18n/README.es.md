@@ -114,7 +114,7 @@ Ejemplo:
 Ejemplo:
 
 ```javascript
-<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
+<button backgroundColor={{ Tokens.colors.primary }}>Click here</button>
 ```
 
 ## 🤝 Librería de componentes agnóstica
