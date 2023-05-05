@@ -143,10 +143,10 @@ export function VariantRow({
       >
         <Text
           fontSize="1rem"
-          fontWeight={isBase ? 800 : 400}
+          fontWeight={isBase || hideIcons ? 800 : 400}
           color={tinycolor(color).isDark() ? 'white' : 'black'}
         >
-          {name} {isBase && '[BASE]'}
+          {name} {(isBase || hideIcons) && '[BASE]'}
         </Text>
         <Box
           css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
@@ -193,10 +193,10 @@ export function VariantRow({
                     : 'black'
                 }
                 _hover={{
-                  backgroundColor: 'rgba(235, 235, 235, 0.3)',
+                  backgroundColor: isBase ? 'none' : 'rgba(235, 235, 235, 0.3)',
                 }}
                 _active={{
-                  backgroundColor: 'rgba(235, 235, 235, 0.3)',
+                  backgroundColor: isBase ? 'none' : 'rgba(235, 235, 235, 0.3)',
                 }}
                 size="sm"
                 css={{
@@ -212,6 +212,7 @@ export function VariantRow({
                 }
               />
               <IconButton
+                isActive={showSlider}
                 onClick={() => setShowSlider(!showSlider)}
                 variant="outline"
                 color={
