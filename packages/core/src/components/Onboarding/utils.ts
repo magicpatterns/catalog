@@ -1679,9 +1679,6 @@ export function generatePalette(
       id: uuidv4(),
       value: hex,
       type: 'color',
-      metadata: {
-        isBase: false,
-      },
     }
   })
 

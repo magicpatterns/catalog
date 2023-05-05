@@ -73,81 +73,51 @@ export const defaultColorShadesToTokens = (shades: {
       id: uuidv4(),
       value: shades[50],
       type: 'color',
-      metadata: {
-        isBase: false,
-      },
     },
     100: {
       id: uuidv4(),
       value: shades[100],
       type: 'color',
-      metadata: {
-        isBase: false,
-      },
     },
     200: {
       id: uuidv4(),
       value: shades[200],
       type: 'color',
-      metadata: {
-        isBase: false,
-      },
     },
     300: {
       id: uuidv4(),
       value: shades[300],
       type: 'color',
-      metadata: {
-        isBase: false,
-      },
     },
     400: {
       id: uuidv4(),
       value: shades[400],
       type: 'color',
-      metadata: {
-        isBase: false,
-      },
     },
     500: {
       id: uuidv4(),
       value: shades[500],
       type: 'color',
-      metadata: {
-        isBase: true,
-      },
     },
     600: {
       id: uuidv4(),
       value: shades[600],
       type: 'color',
-      metadata: {
-        isBase: false,
-      },
     },
     700: {
       id: uuidv4(),
       value: shades[700],
       type: 'color',
-      metadata: {
-        isBase: false,
-      },
     },
     800: {
       id: uuidv4(),
       value: shades[800],
       type: 'color',
-      metadata: {
-        isBase: false,
-      },
     },
     900: {
       id: uuidv4(),
       value: shades[900],
       type: 'color',
-      metadata: {
-        isBase: false,
-      },
     },
   }
 }

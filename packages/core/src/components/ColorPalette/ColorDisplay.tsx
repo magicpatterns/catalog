@@ -86,9 +86,25 @@ export function ColorDisplay({
     }))
     .filter((value): value is TNamedToken => assertToken(value.token))
 
-  const baseNamedToken: TNamedToken | undefined = namedTokens.filter(
-    (v) => v.token.metadata.isBase
-  )[0]
+  const defaultNamedToken: TNamedToken = {
+    name: 'DEFAULT',
+    token: colorData['DEFAULT'] as TToken,
+  }
+
+  let baseColorToken = defaultNamedToken
+  try {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    baseColorToken = namedTokens.find(
+      (i) => i.token.value === defaultNamedToken.token.value
+    )
+    if (!baseColorToken) {
+      throw new Error('Base color not found')
+    }
+  } catch (e) {
+    console.error(e)
+  }
+
   return (
     <Box
       css={{
@@ -121,12 +137,6 @@ export function ColorDisplay({
       </Box>
       <Stack spacing={'8px'}>
         {namedTokens
-          .sort((a, b) =>
-            tinycolor(`${a.token.value}`).toHsl().l <
-            tinycolor(`${b.token.value}`).toHsl().l
-              ? 1
-              : -1
-          )
           .filter((variant) => variant.name !== 'DEFAULT')
           .map((variant, index) => (
             <motion.div
@@ -141,36 +151,16 @@ export function ColorDisplay({
               }}
             >
               <VariantRow
+                defaultNamedToken={defaultNamedToken}
                 variant={variant}
-                onUpdateVariant={(newVariant: TNamedToken) => {
-                  console.log('new v', newVariant)
+                onUpdateVariant={(
+                  newVariant: TNamedToken,
+                  updateDefault: boolean
+                ) => {
                   const updatedColorData = { ...colorData }
-
-                  // This is absurd that this is how we get the baseColor
-                  // There is a better way, we are just refactoring right now...
-                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                  // @ts-ignore
-                  const existingBaseColor: { name: string; value: TToken } =
-                    Object.keys(updatedColorData)
-                      .map((key) => {
-                        return { name: key, value: updatedColorData[key] }
-                      })
-                      .filter(
-                        (c) => assertToken(c.value) && c.value.metadata.isBase
-                      )[0]
-
-                  try {
-                    const oldBaseColorValue = {
-                      ...existingBaseColor.value,
-                      metadata: { isBase: false },
-                    }
-                    updatedColorData[existingBaseColor.name] = oldBaseColorValue
-                  } catch (e) {
-                    // No existing base color
-                    console.log(e)
+                  if (updateDefault) {
+                    updatedColorData['DEFAULT'] = newVariant.token
                   }
-
-                  updatedColorData['DEFAULT'] = newVariant.token
                   updatedColorData[newVariant.name] = newVariant.token
                   onUpdateColorData(updatedColorData)
                 }}
@@ -183,14 +173,14 @@ export function ColorDisplay({
         colorName={colorName}
         isOpen={isBaseModalOpen}
         onClose={onBaseModalClose}
-        color={baseNamedToken}
+        baseColorToken={baseColorToken}
         onUpdateBaseColor={(updatedColorData: TTokenGroup, newName: string) => {
           onUpdateColorData(updatedColorData, newName)
         }}
       />
 
       <EditColorNameModal
-        color={baseNamedToken}
+        defaultNamedToken={defaultNamedToken}
         isOpen={isColorNameModalOpen}
         onClose={onColorNameModalClose}
         initialColorName={colorName}

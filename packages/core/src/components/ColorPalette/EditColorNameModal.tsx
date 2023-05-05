@@ -21,9 +21,9 @@ export function EditColorNameModal({
   onClose,
   initialColorName,
   onUpdateColorName,
-  color,
+  defaultNamedToken,
 }: {
-  color: TNamedToken
+  defaultNamedToken: TNamedToken
   isOpen: boolean
   onClose: () => void
   initialColorName: string
@@ -52,18 +52,16 @@ export function EditColorNameModal({
           <FormControl>
             <Flex alignItems={'center'} mb="2">
               <Text style={{ fontWeight: 500 }}>Color Name</Text>
-              {color && (
-                <Box
-                  css={{
-                    width: '1rem',
-                    height: '1rem',
-                    backgroundColor: color.token.value,
-                    marginLeft: '10px',
-                    border: '1px solid black',
-                    borderRadius: '20%',
-                  }}
-                />
-              )}
+              <Box
+                css={{
+                  width: '1rem',
+                  height: '1rem',
+                  backgroundColor: defaultNamedToken.token.value,
+                  marginLeft: '10px',
+                  border: '1px solid black',
+                  borderRadius: '20%',
+                }}
+              />
             </Flex>
             <Input
               value={colorName}

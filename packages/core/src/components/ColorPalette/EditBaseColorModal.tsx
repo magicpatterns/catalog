@@ -22,18 +22,17 @@ import { VariantRow } from './VariantRow'
 export function EditBaseColorModal({
   isOpen,
   onClose,
-  color,
+  baseColorToken,
   onUpdateBaseColor,
   colorName,
 }: {
   isOpen: boolean
   onClose: () => void
-  color: TNamedToken
+  baseColorToken: TNamedToken
   colorName: string
   onUpdateBaseColor: (newTokenGroup: TTokenGroup, newName: string) => void
 }) {
-  console.log('color', color)
-  const [variant, setVariant] = useState<TNamedToken>(color)
+  const [variant, setVariant] = useState<TNamedToken>(baseColorToken)
   const [error, setError] = useState<string | null>(null)
   const [newColorName, setNewColorName] = useState<string>(colorName)
 
@@ -61,9 +60,6 @@ export function EditBaseColorModal({
           id: uuidv4(),
           value: variant.token.value,
           type: 'color',
-          metadata: {
-            isBase: false,
-          },
         },
         ...additionalVariants,
       }
@@ -80,10 +76,10 @@ export function EditBaseColorModal({
   useEffect(() => {
     if (!isOpen) {
       setNewColorName(colorName)
-      setVariant(color)
+      setVariant(baseColorToken)
       setError(null)
     }
-  }, [isOpen, color, colorName])
+  }, [isOpen, baseColorToken, colorName])
 
   return (
     <>
@@ -131,7 +127,6 @@ export function EditBaseColorModal({
                           id: variant.token.id,
                           value: colorPickerColor.hex,
                           type: 'color',
-                          metadata: variant.token.metadata,
                         },
                       })
                     }}
@@ -140,6 +135,7 @@ export function EditBaseColorModal({
                   />
                   <Box style={{ width: '100%' }}>
                     <VariantRow
+                      defaultNamedToken={baseColorToken}
                       variant={variant}
                       onUpdateVariant={() => console.log('not needed')}
                       hideIcons

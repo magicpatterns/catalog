@@ -79,9 +79,6 @@ export function AddColorModal({
           id: uuidv4(),
           value: base,
           type: 'color',
-          metadata: {
-            isBase: false,
-          },
         },
         ...additionalVariants,
       },
@@ -109,14 +106,6 @@ export function AddColorModal({
             <FormControl>
               <Flex>
                 <FormLabel>Color Name</FormLabel>
-                <Tooltip
-                  placement="right"
-                  closeDelay={500}
-                  hasArrow
-                  label={"Color names don't need a hyphen."}
-                >
-                  <InfoIcon css={{ marginTop: '5px', marginLeft: '-6px' }} />
-                </Tooltip>
               </Flex>
               <Input
                 placeholder="e.g. Sky Blue"

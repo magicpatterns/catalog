@@ -35,7 +35,10 @@ function MirrorfulSlider({
   return (
     <Flex>
       <Flex mr={2}>
-        <Text fontSize={12}>{`${label}:`}</Text>
+        <Text fontSize={12}>
+          <span style={{ fontWeight: 700 }}>{label}</span>
+          {`:`}
+        </Text>
         <Text fontSize={12} ml={1} mr={1}>
           {sliderValue}
         </Text>
@@ -58,19 +61,20 @@ function MirrorfulSlider({
 }
 
 export function VariantRow({
+  defaultNamedToken,
   variant,
   onUpdateVariant,
   hideIcons = false,
 }: {
+  defaultNamedToken: TNamedToken
   hideIcons?: boolean
   variant: TNamedToken
-  onUpdateVariant: (newVariant: TNamedToken) => void
+  onUpdateVariant: (newVariant: TNamedToken, updateDefault: boolean) => void
 }) {
   const [showSlider, setShowSlider] = useState(false)
   const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
   const { name, token } = variant
   const color = `${token.value}`
-  const isBase = variant.token.metadata.isBase
   const c = token.value
   const hsl = tinycolor(c).toHsl()
   const [h, setH] = useState<number>(Math.round(hsl.h))
@@ -89,6 +93,7 @@ export function VariantRow({
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedHexCode])
 
+  const isBase = defaultNamedToken.token.value === variant.token.value
   const onHSLSlide = ({
     val,
     type,
@@ -113,19 +118,11 @@ export function VariantRow({
       }).toHexString()
     }
 
-    console.log(newColor)
-
     const newToken = {
       ...variant.token,
       value: newColor,
     }
-    onUpdateVariant({ ...variant, token: newToken })
-
-    // const newVariant = {
-    //   ...variant,
-    //   token: { ...variant.token, value: newColor },
-    // }
-    // onUpdateVariant(newVariant)
+    onUpdateVariant({ ...variant, token: newToken }, isBase)
   }
 
   return (
@@ -184,11 +181,7 @@ export function VariantRow({
               <IconButton
                 disabled={isBase}
                 onClick={() => {
-                  const newToken = {
-                    ...variant.token,
-                    metadata: { isBase: true },
-                  }
-                  onUpdateVariant({ ...variant, token: newToken })
+                  onUpdateVariant(variant, true)
                 }}
                 style={{ marginLeft: '24px' }}
                 variant="outline"
@@ -211,7 +204,7 @@ export function VariantRow({
                 }}
                 aria-label="Select as base"
                 icon={
-                  variant.token.metadata.isBase ? (
+                  isBase ? (
                     <MdOutlineCheckBox />
                   ) : (
                     <MdOutlineCheckBoxOutlineBlank />
