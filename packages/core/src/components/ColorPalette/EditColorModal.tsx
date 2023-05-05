@@ -19,6 +19,8 @@ import {
 } from '@chakra-ui/react'
 import { assertToken, TNamedTokenGroup, TTokenGroup } from '@core/types'
 import { Dispatch, SetStateAction, useState } from 'react'
+import { AnyColor } from 'react-colorful/dist/types'
+import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
 import ColorPicker from './ColorPicker'
@@ -43,7 +45,7 @@ interface ColorProps {
   error: string | null
   setBase: Dispatch<SetStateAction<string>>
   setError: Dispatch<SetStateAction<string | null>>
-  setColorPickerColor: Dispatch<SetStateAction<string>>
+  setColorPickerColor: Dispatch<SetStateAction<AnyColor>>
 }
 
 interface VariantProps {
@@ -187,7 +189,7 @@ export function EditColorModal({
   )
   const [shouldGenerateVariants, setShouldGenerateVariants] = useState(false)
 
-  const [colorPickerColor, setColorPickerColor] = useState<string>(
+  const [colorPickerColor, setColorPickerColor] = useState<AnyColor>(
     `${initialColorData?.group.base?.value}` ?? ''
   )
 
@@ -262,8 +264,8 @@ export function EditColorModal({
           </Flex>
           <Box flex="1">
             <ColorPicker
-              onChange={(colorPickerColor) => {
-                setBase(colorPickerColor)
+              onChange={(colorPickerColor: AnyColor) => {
+                setBase(tinycolor(colorPickerColor).toHexString())
                 setColorPickerColor(colorPickerColor)
               }}
               colorPickerColor={colorPickerColor}

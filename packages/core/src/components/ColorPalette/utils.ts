@@ -1,4 +1,5 @@
 import { TTokenGroup } from '@core/types'
+import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -27,7 +28,7 @@ export const newShade = (hexColor: string, magnitude: number) => {
 
 const scaleDiff = 7
 
-export const generateDefaultColorShades = (primary: string) => {
+export const generateDefaultColorShades = (primary: AnyColor) => {
   return {
     50: tinycolor(primary)
       .lighten(scaleDiff * 4.8)

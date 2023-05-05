@@ -3,6 +3,7 @@ import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
 import ColorPicker from '@core/components/ColorPalette/ColorPicker'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
+import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
@@ -13,9 +14,9 @@ export function PickPrimary({
   onUpdatePrimaryColor,
   platform,
 }: {
-  primaryColor: string
+  primaryColor: AnyColor
   onUpdatePage: (page: number) => void
-  onUpdatePrimaryColor: (newColor: string) => void
+  onUpdatePrimaryColor: (newColor: AnyColor) => void
   platform: TPlatform
 }) {
   const shades = generateDefaultColorShades(primaryColor)
@@ -90,6 +91,7 @@ export function PickPrimary({
         }}
       >
         <ColorPicker
+          key={tinycolor(primaryColor).toString()}
           colorPickerColor={primaryColor}
           onChange={onUpdatePrimaryColor}
         />

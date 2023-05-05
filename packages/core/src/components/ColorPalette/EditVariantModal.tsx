@@ -17,6 +17,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
+import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
 import ColorPicker from './ColorPicker'
@@ -188,7 +189,7 @@ export function EditVariantModal({
                         name: variant.name,
                         token: {
                           id: variant.token.id,
-                          value: colorPickerColor,
+                          value: tinycolor(colorPickerColor).toHexString(),
                           type: 'color',
                         },
                       })
