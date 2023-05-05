@@ -9,9 +9,9 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react'
-import { assertToken, TNamedToken } from '@core/types'
+import { TNamedToken } from '@core/types'
 import { motion } from 'framer-motion'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BsSliders2 } from 'react-icons/bs'
 import {
   MdOutlineCheckBox,
