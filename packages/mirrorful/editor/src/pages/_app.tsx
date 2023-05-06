@@ -127,7 +127,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           }
         })
     }
-    if (!isShuttingDown.current && process.env.NODE_ENV !== 'development') {
+    if (!isShuttingDown.current) {
       pollForServerEndCheck()
     }
   }, [hasShutDown])
