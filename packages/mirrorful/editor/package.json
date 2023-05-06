@@ -8,7 +8,7 @@
   "author": "Mirrorful Team <founders@mirrorful.io>",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 5050",
     "build": "next build",
     "next-start": "../node_modules/.bin/next start",
     "start": "next start",
