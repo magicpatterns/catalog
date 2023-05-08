@@ -8,11 +8,8 @@ import { SketchPicker } from '@hello-pangea/color-picker'
 import { useMemo, useState } from 'react'
 import Select, {
   components,
-  ControlProps,
-  GroupBase,
   InputProps,
   OptionProps,
-  Props,
   SingleValue,
 } from 'react-select'
 
