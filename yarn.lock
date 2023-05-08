@@ -3209,7 +3209,7 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@eslint/eslintrc@^2.0.1", "@eslint/eslintrc@^2.0.3":
+"@eslint/eslintrc@^2.0.3":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-2.0.3.tgz#4910db5505f4d503f27774bf356e3704818a0331"
   integrity sha512-+5gy6OQfk+xx3q0d6jGZZC3f3KzAkXc/IanVxd1is/VIIziRqqt3ongQz0FiTUXqTk0c7aDB3OaFuKnuSoJicQ==
@@ -3223,11 +3223,6 @@
     js-yaml "^4.1.0"
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
-
-"@eslint/js@8.36.0":
-  version "8.36.0"
-  resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.36.0.tgz#9837f768c03a1e4a30bd304a64fb8844f0e72efe"
-  integrity sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==
 
 "@eslint/js@8.40.0":
   version "8.40.0"
@@ -7907,53 +7902,7 @@ eslint@8.34.0:
     strip-json-comments "^3.1.0"
     text-table "^0.2.0"
 
-eslint@8.36.0:
-  version "8.36.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.36.0.tgz#1bd72202200a5492f91803b113fb8a83b11285cf"
-  integrity sha512-Y956lmS7vDqomxlaaQAHVmeb4tNMp2FWIvU/RnU5BD3IKMD/MJPr76xdyr68P8tV1iNMvN2mRK0yy3c+UjL+bw==
-  dependencies:
-    "@eslint-community/eslint-utils" "^4.2.0"
-    "@eslint-community/regexpp" "^4.4.0"
-    "@eslint/eslintrc" "^2.0.1"
-    "@eslint/js" "8.36.0"
-    "@humanwhocodes/config-array" "^0.11.8"
-    "@humanwhocodes/module-importer" "^1.0.1"
-    "@nodelib/fs.walk" "^1.2.8"
-    ajv "^6.10.0"
-    chalk "^4.0.0"
-    cross-spawn "^7.0.2"
-    debug "^4.3.2"
-    doctrine "^3.0.0"
-    escape-string-regexp "^4.0.0"
-    eslint-scope "^7.1.1"
-    eslint-visitor-keys "^3.3.0"
-    espree "^9.5.0"
-    esquery "^1.4.2"
-    esutils "^2.0.2"
-    fast-deep-equal "^3.1.3"
-    file-entry-cache "^6.0.1"
-    find-up "^5.0.0"
-    glob-parent "^6.0.2"
-    globals "^13.19.0"
-    grapheme-splitter "^1.0.4"
-    ignore "^5.2.0"
-    import-fresh "^3.0.0"
-    imurmurhash "^0.1.4"
-    is-glob "^4.0.0"
-    is-path-inside "^3.0.3"
-    js-sdsl "^4.1.4"
-    js-yaml "^4.1.0"
-    json-stable-stringify-without-jsonify "^1.0.1"
-    levn "^0.4.1"
-    lodash.merge "^4.6.2"
-    minimatch "^3.1.2"
-    natural-compare "^1.4.0"
-    optionator "^0.9.1"
-    strip-ansi "^6.0.1"
-    strip-json-comments "^3.1.0"
-    text-table "^0.2.0"
-
-eslint@^8.19.0, eslint@^8.33.0, eslint@^8.36.0, eslint@^8.38.0:
+eslint@^8.19.0, eslint@^8.33.0, eslint@^8.36.0, eslint@^8.38.0, eslint@^8.40.0:
   version "8.40.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.40.0.tgz#a564cd0099f38542c4e9a2f630fa45bf33bc42a4"
   integrity sha512-bvR+TsP9EHL3TqNtj9sCNJVAFK3fBN8Q7g5waghxyRsPLIMwL73XSKnZFK0hk/O2ANC+iAoq6PWMQ+IfBAJIiQ==
@@ -7999,7 +7948,7 @@ eslint@^8.19.0, eslint@^8.33.0, eslint@^8.36.0, eslint@^8.38.0:
     strip-json-comments "^3.1.0"
     text-table "^0.2.0"
 
-espree@^9.4.0, espree@^9.5.0, espree@^9.5.2:
+espree@^9.4.0, espree@^9.5.2:
   version "9.5.2"
   resolved "https://registry.yarnpkg.com/espree/-/espree-9.5.2.tgz#e994e7dc33a082a7a82dceaf12883a829353215b"
   integrity sha512-7OASN1Wma5fum5SrNhFMAMJxOUAbhyfQ8dQ//PJaJbNw0URTPWqIghHWt1MmAANKhHZIYOHruW4Kw4ruUWOdGw==
