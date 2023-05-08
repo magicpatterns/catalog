@@ -145,6 +145,10 @@ function RgbaPicker({ colorPickerColor, onChange }: Props) {
 }
 
 export default function ColorPicker({ colorPickerColor, onChange }: Props) {
+  if (!colorPickerColor) {
+    colorPickerColor = '#000000';
+  }
+
   const type = tinycolor(colorPickerColor).getFormat();
   return (
     <Box
