@@ -228,7 +228,7 @@ export function EditColorModal({
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+    <Modal isOpen={isOpen} onClose={onClose} size="5xl">
       <ModalOverlay />
       <ModalContent>
         <Header initialColorData={initialColorData} />
@@ -264,6 +264,7 @@ export function EditColorModal({
           </Flex>
           <Box flex="1">
             <ColorPicker
+              key={tinycolor(colorPickerColor).toString()}
               onChange={(colorPickerColor: AnyColor) => {
                 setBase(tinycolor(colorPickerColor).toHexString())
                 setColorPickerColor(colorPickerColor)
