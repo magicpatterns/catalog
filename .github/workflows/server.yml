@@ -28,7 +28,7 @@ jobs:
 
       - name: Verify generated code is up to date
         working-directory: packages/server
-        run: | 
+        run: |
           fern generate
           git --no-pager diff --exit-code
         env:

@@ -5,6 +5,7 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    'storybook-addon-variants',
   ],
   framework: {
     name: '@storybook/react-webpack5',
@@ -12,6 +13,9 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: 'tag',
+  },
+  refs: {
+    '@chakra-ui/react': { disable: true },
   },
 }
 export default config

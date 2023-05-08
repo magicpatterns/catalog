@@ -42,6 +42,7 @@ import {
   SiBootstrap,
   SiChakraui,
   SiNuxtdotjs,
+  SiRemix,
   SiSvelte,
   SiTailwindcss,
 } from 'react-icons/si'
@@ -270,7 +271,7 @@ function TokenTab({
       <TabPanel key="tailwind">
         <Text css={{ marginBottom: 4 }}>
           <span style={{ fontWeight: 'bold' }}>1.</span> Import{' '}
-          <Code>theme_cjs.js</Code> in <Code>tailwind.config.js</Code>{' '}
+          <Code>theme_cjs.cjs</Code> in <Code>tailwind.config.js</Code>{' '}
         </Text>
 
         <Text fontSize="sm" css={{ marginBottom: 8 }}>
@@ -281,7 +282,7 @@ function TokenTab({
 
         <CodePreview
           language="javascript"
-          text={`const { Tokens } = require('./.mirrorful/theme_cjs.js')`}
+          text={`const { Tokens } = require('./.mirrorful/theme_cjs.cjs')`}
         />
 
         <Text css={{ marginTop: 12, marginBottom: 8 }}>
@@ -420,6 +421,7 @@ function ExternalExamples() {
     | 'SvelteKit'
     | 'Bootstrap'
     | 'Styled Components'
+    | 'Remix'
 
   const EXAMPLES_ICON_SIZE = 20
   const externalExamples: {
@@ -436,6 +438,11 @@ function ExternalExamples() {
       name: 'Next JS',
       link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/with-chakra-ui',
       icon: <TbBrandNextjs size={EXAMPLES_ICON_SIZE} />,
+    },
+    {
+      name: 'Remix',
+      link: 'https://github.com/Mirrorful/mirrorful/tree/main/examples/remix',
+      icon: <SiRemix size={EXAMPLES_ICON_SIZE} fill="#000000" />,
     },
     {
       name: 'Styled Components',
