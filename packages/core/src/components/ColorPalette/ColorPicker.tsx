@@ -24,10 +24,10 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
   const colorParsed = tinycolor(colorPickerColor);
   const type = colorParsed.getFormat().toUpperCase();
   const updateType = (item: (typeof formats)[number]) => {
-    if (item === 'HEX') {
-      onChange(colorParsed.toHex());
-    } else {
+    if (item === 'RGB') {
       onChange(colorParsed.toRgb());
+    } else {
+      onChange(colorParsed.toHex());
     }
   };
 
