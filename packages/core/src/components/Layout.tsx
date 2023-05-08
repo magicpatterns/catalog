@@ -17,7 +17,7 @@ export type TTab =
   | '/colors'
   | '/typography'
   | '/shadows'
-  | '/theme_manager'
+  | '/themes'
   | '/components'
 
 export default function Layout({

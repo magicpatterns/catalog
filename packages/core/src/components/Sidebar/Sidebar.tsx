@@ -24,6 +24,7 @@ import {
   FiUpload,
 } from 'react-icons/fi'
 import { MdOutlineColorLens } from 'react-icons/md'
+import { TbColorSwatch } from 'react-icons/tb'
 
 import { TPlatform, TTab } from '../Layout'
 
@@ -293,13 +294,20 @@ export function Sidebar({
             />
           </SidebarSection>
 
-          {/* <SidebarSection header={<SidebarHeader label="Themes" />}>
+          <SidebarSection
+            header={<SidebarHeader label="LIBRARY" />}
+            isCollapsed={isCollapsed}
+          >
             <SidebarLink
-              label="Theme Manager"
+              key="themes"
+              label="Themes"
+              link="/themes"
               icon={TbColorSwatch}
-              onSelect={() => onSelectTab('theme_manager')}
+              isActive={activeTab === '/themes'}
+              onSelect={() => onSelectTab('/themes')}
+              isCollapsed={isCollapsed}
             />
-          </SidebarSection> */}
+          </SidebarSection>
 
           <SidebarSection
             header={<SidebarHeader label="Export" />}

@@ -100,6 +100,65 @@ export const defaultTypographyV2: TPrimitivesTypography = {
   lineHeights: defaultLineHeightsV2,
 }
 
+export const defaultTheme: TTheme = {
+  name: 'Light',
+  tokens: {
+    colors: {
+      primary: {
+        value: '#ffffff',
+        type: 'color',
+        id: 'default-primary-id',
+      },
+      primaryAccent: {
+        value: '#ffffff',
+        type: 'color',
+        id: 'default-primary-accent-id',
+      },
+      bg: {
+        100: {
+          value: '#ffffff',
+          type: 'color',
+          id: 'default-bg-100-id',
+        },
+        200: {
+          value: '#ffffff',
+          type: 'color',
+          id: 'default-bg-200-id',
+        },
+        300: {
+          value: '#ffffff',
+          type: 'color',
+          id: 'default-bg-300-id',
+        },
+      },
+      button: {
+        primary: {
+          bg: {
+            value: '{primary}',
+            type: 'color',
+            id: 'default-button-primary-bg-id',
+          },
+          bgHover: {
+            value: '{primaryAccent}',
+            type: 'color',
+            id: 'default-button-primary-accent-bg-id',
+          },
+          bgActive: {
+            value: '{primaryAccent}',
+            type: 'color',
+            id: 'default-button-primary-accent-bg-active-id',
+          },
+          text: {
+            value: '#ffffff',
+            type: 'color',
+            id: 'default-button-primary-text-id',
+          },
+        },
+      },
+    },
+  },
+}
+
 export const defaultConfigV2: TMirrorfulStore = {
   primitives: {
     colors: defaultColorsV2,
@@ -146,10 +205,17 @@ export type TTokenGroup = {
   [key: string]: TTokenGroup | TToken
 }
 
+export type TTokenType =
+  | 'color'
+  | 'fontSize'
+  | 'fontWeight'
+  | 'lineHeight'
+  | 'boxShadow'
+
 export type TToken = {
   id: string
   value: string
-  type: 'color' | 'fontSize' | 'fontWeight' | 'lineHeight' | 'boxShadow'
+  type: TTokenType
   ref?: string // means that this token itself is a reference to another token
 }
 
