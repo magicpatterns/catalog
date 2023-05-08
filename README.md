@@ -23,7 +23,7 @@
     <img src="https://img.shields.io/github/commit-activity/m/Mirrorful/mirrorful" alt="git commit activity" />
   </a>
   <a href="https://www.npmjs.com/package/mirrorful">
-    <img src="https://img.shields.io/badge/Downloads-2.1k-orange" alt="Mirrorful downloads" />
+    <img src="https://img.shields.io/badge/Downloads-1k-orange" alt="Mirrorful downloads" />
   </a>
   <a href="https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA">
     <img src="https://img.shields.io/badge/chat-on%20Slack-blueviolet" alt="Slack community channel" />
