@@ -145,7 +145,7 @@ function RgbaPicker({ colorPickerColor, onChange }: Props) {
 }
 
 export default function ColorPicker({ colorPickerColor, onChange }: Props) {
-  if (!colorPickerColor) {
+  if (!colorPickerColor || colorPickerColor === 'undefined') {
     colorPickerColor = '#000000';
   }
 
