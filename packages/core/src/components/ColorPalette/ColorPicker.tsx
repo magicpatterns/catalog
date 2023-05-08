@@ -24,10 +24,10 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
   const colorParsed = tinycolor(colorPickerColor);
   const type = colorParsed.getFormat().toUpperCase();
   const updateType = (item: (typeof formats)[number]) => {
-    if (item === 'HEX') {
-      onChange(colorParsed.toHex());
-    } else {
+    if (item === 'RGB') {
       onChange(colorParsed.toRgb());
+    } else {
+      onChange(colorParsed.toHex());
     }
   };
 
@@ -145,6 +145,10 @@ function RgbaPicker({ colorPickerColor, onChange }: Props) {
 }
 
 export default function ColorPicker({ colorPickerColor, onChange }: Props) {
+  if (!colorPickerColor || colorPickerColor === 'undefined') {
+    colorPickerColor = '#000000';
+  }
+
   const type = tinycolor(colorPickerColor).getFormat();
   return (
     <Box
@@ -153,6 +157,7 @@ export default function ColorPicker({ colorPickerColor, onChange }: Props) {
         flexDirection: 'column',
         width: '100%',
         height: '100%',
+        minHeight: '375px'
       }}
     >
       {type === 'hex' && (
