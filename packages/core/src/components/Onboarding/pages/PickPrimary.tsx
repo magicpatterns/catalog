@@ -91,7 +91,6 @@ export function PickPrimary({
         }}
       >
         <ColorPicker
-          key={tinycolor(primaryColor).toString()}
           colorPickerColor={primaryColor}
           onChange={onUpdatePrimaryColor}
         />

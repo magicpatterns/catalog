@@ -26,6 +26,8 @@ import { v4 as uuidv4 } from 'uuid'
 import ColorPicker from './ColorPicker'
 import { defaultColorShadesToTokens, generateDefaultColorShades } from './utils'
 
+const INITIAL_COLOR_PICKER_COLOR = '#008EC8'
+
 interface ModalProps {
   isOpen: boolean
   onClose: (newColor?: TNamedTokenGroup) => void
@@ -81,7 +83,7 @@ function NameInput({ name, error, setName, setError }: InputProps) {
         </Tooltip>
       </Flex>
       <Input
-        placeholder="e.g. Pepsi Blue"
+        placeholder="e.g. Sky Blue"
         size="md"
         value={name}
         onChange={(e) => {
@@ -180,13 +182,9 @@ export function EditColorModal({
   onClose,
   initialColorData,
 }: ModalProps) {
-  const initialBaseValue = initialColorData?.group.base ?? {}
-
   const [error, setError] = useState<string | null>(null)
   const [name, setName] = useState<string>(initialColorData?.name ?? '')
-  const [base, setBase] = useState<string>(
-    assertToken(initialBaseValue) ? initialBaseValue.value : ''
-  )
+  const [base, setBase] = useState<string>(INITIAL_COLOR_PICKER_COLOR)
   const [shouldGenerateVariants, setShouldGenerateVariants] = useState(false)
 
   const [colorPickerColor, setColorPickerColor] = useState<AnyColor>(
@@ -196,7 +194,7 @@ export function EditColorModal({
   const handleOnSave = () => {
     // Check for blank / missing color name
     if (!name) {
-      setError('Please enter a variable name.')
+      setError('Please enter a color name.')
       return
     }
 
@@ -206,18 +204,14 @@ export function EditColorModal({
       return
     }
 
-    let additionalVariants: TTokenGroup = {}
-
-    if (shouldGenerateVariants) {
-      additionalVariants = defaultColorShadesToTokens(
-        generateDefaultColorShades(base)
-      )
-    }
+    const additionalVariants = defaultColorShadesToTokens(
+      generateDefaultColorShades(base)
+    )
 
     onClose({
       name,
       group: {
-        base: {
+        DEFAULT: {
           id: uuidv4(),
           value: base,
           type: 'color',
@@ -228,10 +222,10 @@ export function EditColorModal({
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="5xl">
+    <Modal isOpen={isOpen} onClose={onClose} size="3xl">
       <ModalOverlay />
       <ModalContent>
-        <Header initialColorData={initialColorData} />
+        <ModalHeader>Add Color</ModalHeader>
         <ModalBody
           css={{
             flexDirection: 'row',
@@ -240,6 +234,7 @@ export function EditColorModal({
           }}
         >
           <Flex flexDirection="column" flex="1" gap={4}>
+            <FormLabel>Color Name</FormLabel>
             <NameInput
               name={name}
               error={error}
@@ -264,7 +259,6 @@ export function EditColorModal({
           </Flex>
           <Box flex="1">
             <ColorPicker
-              key={tinycolor(colorPickerColor).toString()}
               onChange={(colorPickerColor: AnyColor) => {
                 setBase(tinycolor(colorPickerColor).toHexString())
                 setColorPickerColor(colorPickerColor)
