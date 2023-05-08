@@ -19,6 +19,8 @@ import {
 import { TNamedTokenGroup } from '@core/types'
 import { Color } from '@hello-pangea/color-picker'
 import { useRef, useState } from 'react'
+import { AnyColor } from 'react-colorful/dist/types'
+import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
 import ColorPicker from './ColorPicker'
@@ -27,8 +29,6 @@ import {
   generateDefaultColorShades,
   handleInvalidColor,
 } from './utils'
-import tinycolor from 'tinycolor2'
-import { AnyColor } from 'react-colorful/dist/types'
 
 const INITIAL_COLOR_PICKER_COLOR = '#008EC8'
 

@@ -12,13 +12,13 @@ import {
 } from '@chakra-ui/react'
 import { TNamedToken, TTokenGroup } from '@core/types'
 import { useEffect, useState } from 'react'
+import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
 import { nameThatColor } from '../Onboarding/utils'
 import ColorPicker from './ColorPicker'
 import { defaultColorShadesToTokens, generateDefaultColorShades } from './utils'
 import { VariantRow } from './VariantRow'
-import tinycolor from 'tinycolor2'
 
 export function EditBaseColorModal({
   isOpen,
