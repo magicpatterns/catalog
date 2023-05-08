@@ -44,9 +44,9 @@ export function Onboarding({
 
   const [page, setPage] = useState<number>(platform === 'web' ? 1 : 0)
 
-  const colorParsed = tinycolor(primaryColor);
-  const colorStringified = colorParsed.toString();
-  const colorHexStringified = colorParsed.toHexString();
+  const colorParsed = tinycolor(primaryColor)
+  const colorStringified = colorParsed.toString()
+  const colorHexStringified = colorParsed.toHexString()
 
   const updatePrimaryColor = (newColor: AnyColor) => {
     // set the color in state

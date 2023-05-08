@@ -49,7 +49,9 @@ export function EditVariantModal({
       token: { id: uuidv4(), value: '', type: 'color' },
     }
   )
-  const [variantColorRaw, setVariantColorRaw] = useState<AnyColor>(initialVariant?.token?.value ?? "");
+  const [variantColorRaw, setVariantColorRaw] = useState<AnyColor>(
+    initialVariant?.token?.value ?? ''
+  )
   const [error, setError] = useState<string | null>(null)
 
   const handleSave = () => {
@@ -188,7 +190,7 @@ export function EditVariantModal({
                   <ColorPicker
                     key={tinycolor(variantColorRaw).toString()}
                     onChange={(colorPickerColor) => {
-                      setVariantColorRaw(colorPickerColor);
+                      setVariantColorRaw(colorPickerColor)
                       setVariant({
                         name: variant.name,
                         token: {

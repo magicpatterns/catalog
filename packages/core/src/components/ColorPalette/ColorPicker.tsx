@@ -17,25 +17,27 @@ const formats = ['HEX', 'RGB'] as const
 
 interface Props {
   colorPickerColor: AnyColor
-  onChange: ((color: AnyColor) => void)
+  onChange: (color: AnyColor) => void
 }
 
 function DropdownInput({ onChange, colorPickerColor }: Props) {
-  const colorParsed = tinycolor(colorPickerColor);
-  const type = colorParsed.getFormat().toUpperCase();
+  const colorParsed = tinycolor(colorPickerColor)
+  const type = colorParsed.getFormat().toUpperCase()
   const updateType = (item: (typeof formats)[number]) => {
     if (item === 'RGB') {
-      onChange(colorParsed.toRgb());
+      onChange(colorParsed.toRgb())
     } else {
-      onChange(colorParsed.toHex());
+      onChange(colorParsed.toHex())
     }
-  };
+  }
 
-  const [hexColor, setHexColor] = useState<string>(colorParsed.toString());
-  const [colorR, setColorR] = useState<string>(`${colorParsed.toRgb().r}`);
-  const [colorG, setColorG] = useState<string>(`${colorParsed.toRgb().g}`);
-  const [colorB, setColorB] = useState<string>(`${colorParsed.toRgb().b}`);
-  const [colorA, setColorA] = useState<string>(`${colorParsed.toRgb().a * 100}%`);
+  const [hexColor, setHexColor] = useState<string>(colorParsed.toString())
+  const [colorR, setColorR] = useState<string>(`${colorParsed.toRgb().r}`)
+  const [colorG, setColorG] = useState<string>(`${colorParsed.toRgb().g}`)
+  const [colorB, setColorB] = useState<string>(`${colorParsed.toRgb().b}`)
+  const [colorA, setColorA] = useState<string>(
+    `${colorParsed.toRgb().a * 100}%`
+  )
 
   return (
     <Box
@@ -77,38 +79,66 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
             type="number"
             min={0}
             max={255}
-            css={{ width: '20%', height: '100%', paddingLeft: '0.5rem', paddingRight: '0.5rem' }}
+            css={{
+              width: '20%',
+              height: '100%',
+              paddingLeft: '0.5rem',
+              paddingRight: '0.5rem',
+            }}
             value={colorR}
             onChange={(e) => setColorR(e.target.value)}
-            onBlur={() => onChange(`rgba(${colorR},${colorG},${colorB},${colorA})`)}
+            onBlur={() =>
+              onChange(`rgba(${colorR},${colorG},${colorB},${colorA})`)
+            }
             placeholder="R"
           />
           <Input
             type="number"
             min={0}
             max={255}
-            css={{ width: '20%', height: '100%', paddingLeft: '0.5rem', paddingRight: '0.5rem' }}
+            css={{
+              width: '20%',
+              height: '100%',
+              paddingLeft: '0.5rem',
+              paddingRight: '0.5rem',
+            }}
             value={colorG}
             onChange={(e) => setColorG(e.target.value)}
-            onBlur={() => onChange(`rgba(${colorR},${colorG},${colorB},${colorA})`)}
+            onBlur={() =>
+              onChange(`rgba(${colorR},${colorG},${colorB},${colorA})`)
+            }
             placeholder="G"
           />
           <Input
             type="number"
             min={0}
             max={255}
-            css={{ width: '20%', height: '100%', paddingLeft: '0.5rem', paddingRight: '0.5rem' }}
+            css={{
+              width: '20%',
+              height: '100%',
+              paddingLeft: '0.5rem',
+              paddingRight: '0.5rem',
+            }}
             value={colorB}
             onChange={(e) => setColorB(e.target.value)}
-            onBlur={() => onChange(`rgba(${colorR},${colorG},${colorB},${colorA})`)}
+            onBlur={() =>
+              onChange(`rgba(${colorR},${colorG},${colorB},${colorA})`)
+            }
             placeholder="B"
           />
           <Input
             type="text"
-            css={{ width: '30%', height: '100%', paddingLeft: '0.5rem', paddingRight: '0.5rem' }}
+            css={{
+              width: '30%',
+              height: '100%',
+              paddingLeft: '0.5rem',
+              paddingRight: '0.5rem',
+            }}
             value={colorA}
             onChange={(e) => setColorA(e.target.value)}
-            onBlur={() => onChange(`rgba(${colorR},${colorG},${colorB},${colorA})`)}
+            onBlur={() =>
+              onChange(`rgba(${colorR},${colorG},${colorB},${colorA})`)
+            }
             placeholder="A"
           />
         </>
@@ -131,7 +161,7 @@ function HexPicker({ colorPickerColor, onChange }: Props) {
 }
 
 function RgbaPicker({ colorPickerColor, onChange }: Props) {
-  const rgbColor = tinycolor(colorPickerColor).toRgb();
+  const rgbColor = tinycolor(colorPickerColor).toRgb()
   return (
     <RgbaColorPicker
       style={{
@@ -146,10 +176,10 @@ function RgbaPicker({ colorPickerColor, onChange }: Props) {
 
 export default function ColorPicker({ colorPickerColor, onChange }: Props) {
   if (!colorPickerColor || colorPickerColor === 'undefined') {
-    colorPickerColor = '#000000';
+    colorPickerColor = '#000000'
   }
 
-  const type = tinycolor(colorPickerColor).getFormat();
+  const type = tinycolor(colorPickerColor).getFormat()
   return (
     <Box
       css={{
@@ -157,14 +187,16 @@ export default function ColorPicker({ colorPickerColor, onChange }: Props) {
         flexDirection: 'column',
         width: '100%',
         height: '100%',
-        minHeight: '375px'
+        minHeight: '375px',
       }}
     >
       {type === 'hex' && (
         <HexPicker colorPickerColor={colorPickerColor} onChange={onChange} />
       )}
-      {type === 'rgb' && <RgbaPicker colorPickerColor={colorPickerColor} onChange={onChange}/>}
-      <DropdownInput onChange={onChange} colorPickerColor={colorPickerColor}/>
+      {type === 'rgb' && (
+        <RgbaPicker colorPickerColor={colorPickerColor} onChange={onChange} />
+      )}
+      <DropdownInput onChange={onChange} colorPickerColor={colorPickerColor} />
     </Box>
   )
 }
