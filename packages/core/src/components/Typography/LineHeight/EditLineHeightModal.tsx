@@ -169,13 +169,6 @@ export function EditLineHeightModal({
             )}
           </ModalBody>
           <ModalFooter>
-            <Button
-              onClick={handleSave}
-              css={{ marginRight: '12px' }}
-              colorScheme="green"
-            >
-              Save Variant
-            </Button>
             {onDeleteLineHeightVariant && (
               <>
                 <Button
@@ -192,6 +185,9 @@ export function EditLineHeightModal({
                 />
               </>
             )}
+            <Button onClick={handleSave} css={{ marginLeft: '12px' }}>
+              Save Variant
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

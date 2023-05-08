@@ -163,13 +163,6 @@ export function EditFontSizeModal({
             )}
           </ModalBody>
           <ModalFooter>
-            <Button
-              onClick={handleSave}
-              css={{ marginRight: '12px' }}
-              colorScheme="green"
-            >
-              Save Variant
-            </Button>
             {onDeleteFontSizeVariant && (
               <>
                 <Button
@@ -186,6 +179,9 @@ export function EditFontSizeModal({
                 />
               </>
             )}
+            <Button onClick={handleSave} css={{ marginLeft: '12px' }}>
+              Save Variant
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
