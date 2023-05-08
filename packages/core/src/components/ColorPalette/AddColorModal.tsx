@@ -1,4 +1,3 @@
-import { InfoIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
@@ -14,10 +13,8 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  Tooltip,
 } from '@chakra-ui/react'
 import { TNamedTokenGroup } from '@core/types'
-import { Color } from '@hello-pangea/color-picker'
 import { useRef, useState } from 'react'
 import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'

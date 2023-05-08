@@ -17,7 +17,7 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react'
-import { assertToken, TNamedTokenGroup, TTokenGroup } from '@core/types'
+import { TNamedTokenGroup } from '@core/types'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
@@ -57,15 +57,6 @@ interface VariantProps {
 
 interface LayoutProps {
   initialColorData?: TNamedTokenGroup
-}
-
-function Header({ initialColorData }: LayoutProps) {
-  return (
-    <>
-      <ModalHeader>{initialColorData ? 'Edit Color' : 'Add Color'}</ModalHeader>
-      <ModalCloseButton />
-    </>
-  )
 }
 
 function NameInput({ name, error, setName, setError }: InputProps) {
