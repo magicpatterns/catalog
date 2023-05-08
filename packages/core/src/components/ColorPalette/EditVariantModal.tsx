@@ -17,6 +17,8 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
+import { AnyColor } from 'react-colorful/dist/types'
+import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
 import ColorPicker from './ColorPicker'
@@ -47,6 +49,7 @@ export function EditVariantModal({
       token: { id: uuidv4(), value: '', type: 'color' },
     }
   )
+  const [variantColorRaw, setVariantColorRaw] = useState<AnyColor>(initialVariant?.token?.value ?? "");
   const [error, setError] = useState<string | null>(null)
 
   const handleSave = () => {
@@ -100,7 +103,7 @@ export function EditVariantModal({
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size="5xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
@@ -183,17 +186,19 @@ export function EditVariantModal({
                   }}
                 >
                   <ColorPicker
+                    key={tinycolor(variantColorRaw).toString()}
                     onChange={(colorPickerColor) => {
+                      setVariantColorRaw(colorPickerColor);
                       setVariant({
                         name: variant.name,
                         token: {
                           id: variant.token.id,
-                          value: colorPickerColor,
+                          value: tinycolor(colorPickerColor).toHexString(),
                           type: 'color',
                         },
                       })
                     }}
-                    colorPickerColor={`${variant.token.value}`}
+                    colorPickerColor={variantColorRaw}
                   />
                 </Box>
               </Box>
