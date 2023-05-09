@@ -45,10 +45,10 @@ export function EditFontSizeModal({
   const [variantName, setVariantName] = useState<string>(
     initialFontSizeVariant?.name ?? ''
   )
-  const [variantValue, setVariantValue] = useState<number>(
+  const [variantValue, setVariantValue] = useState<string>(
     initialFontSizeVariant?.token
-      ? parseUnit(initialFontSizeVariant.token.value).rawValue
-      : 0
+      ? `${parseUnit(initialFontSizeVariant.token.value).rawValue}`
+      : ''
   )
   const [id, setId] = useState<string>(
     initialFontSizeVariant?.token.id ?? uuidv4()
@@ -63,12 +63,12 @@ export function EditFontSizeModal({
 
   const handleSave = () => {
     setError(null)
-    if (variantName === '') {
+    if (variantName === '' || variantValue === '') {
       setError('Please fill out all fields.')
       return
     }
 
-    if (variantValue < 0 || variantValue > 10000) {
+    if (Number(variantValue) < 0 || Number(variantValue) > 10000) {
       setError('Value must be greater than or equal to 0')
       return
     }
@@ -89,8 +89,8 @@ export function EditFontSizeModal({
       setVariantName(initialFontSizeVariant?.name ?? '')
       setVariantValue(
         initialFontSizeVariant?.token
-          ? parseUnit(initialFontSizeVariant.token.value).rawValue
-          : 0
+          ? `${parseUnit(initialFontSizeVariant.token.value).rawValue}`
+          : ''
       )
       setVariantUnit(
         initialFontSizeVariant?.token
@@ -134,7 +134,7 @@ export function EditFontSizeModal({
                 <FormLabel>Variant Value</FormLabel>
                 <Input
                   value={variantValue}
-                  onChange={(e) => setVariantValue(Number(e.target.value))}
+                  onChange={(e) => setVariantValue(e.target.value)}
                   type="number"
                 />
               </FormControl>
