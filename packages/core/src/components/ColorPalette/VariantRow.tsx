@@ -93,7 +93,18 @@ export function VariantRow({
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedHexCode])
 
-  const isBase = defaultNamedToken.token.value === variant.token.value
+  let isBase = false
+  try {
+    // just in case we are comparing rgba to hex
+    isBase =
+      tinycolor(defaultNamedToken.token.value).toHexString() ===
+      tinycolor(variant.token.value).toHexString()
+  } catch (e) {
+    throw Error(
+      `Migration 0.0.7 likely failed, please contact support at founders@mirrorful.io: ${e}`
+    )
+    // Sentry.captureException(e)
+  }
   const onHSLSlide = ({
     val,
     type,

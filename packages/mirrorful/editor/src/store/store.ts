@@ -6,6 +6,7 @@ import {
   ZeroPointZeroPointFourMigration,
   ZeroPointZeroPointThreeMigration,
   ZeroPointZeroPointTwoMigration,
+  ZeroPointZeroSevenMigration,
   ZeroPointZeroSixMigration,
 } from './migrations'
 
@@ -17,7 +18,7 @@ export const rootPath =
 
 export const store = new Conf<TMirrorfulStore>({
   projectName: 'Mirrorful',
-  projectVersion: '0.0.6',
+  projectVersion: '0.0.7',
   cwd: `${rootPath}/store`,
   defaults: defaultConfigV2,
   beforeEachMigration: (store, context) => {
@@ -31,5 +32,6 @@ export const store = new Conf<TMirrorfulStore>({
     '0.0.4': ZeroPointZeroPointFourMigration,
     '0.0.5': ZeroPointZeroFiveMigration,
     '0.0.6': ZeroPointZeroSixMigration,
+    '0.0.7': ZeroPointZeroSevenMigration,
   },
 })
