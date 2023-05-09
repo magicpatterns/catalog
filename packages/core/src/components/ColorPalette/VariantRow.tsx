@@ -34,7 +34,7 @@ function MirrorfulSlider({
 }) {
   return (
     <Flex>
-      <Flex mr={2}>
+      <Flex mr={2} style={{ minWidth: '40px' }}>
         <Text fontSize={12}>
           <span style={{ fontWeight: 700 }}>{label}</span>
           {`:`}
@@ -283,21 +283,7 @@ export function VariantRow({
               max: 100,
             },
           ].map((obj, i) => {
-            return (
-              <motion.div
-                key={obj.label}
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.08 * i,
-                }}
-              >
-                <MirrorfulSlider {...obj} />
-              </motion.div>
-            )
+            return <MirrorfulSlider key={obj.label} {...obj} />
           })}
         </Flex>
       )}
