@@ -109,7 +109,7 @@ Editörde temanızı yapılandırdıktan sonra, uygulamanızda kullanmak için d
 Örnek:
 
 ```javascript
-<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
+<button backgroundColor={{ Tokens.colors.primary  }}>Click here</button>
 ```
 
 ## 🤝 Bağımsız Bileşen Kütüphanesi

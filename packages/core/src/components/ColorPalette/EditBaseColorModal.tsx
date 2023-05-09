@@ -120,10 +120,11 @@ export function EditBaseColorModal({
                         ? tinycolor(colorPickerColor).toHexString()
                         : tinycolor(colorPickerColor).toRgbString()
 
-                    // TODO(Danilowicz): we should spread here, or there's going to be a big fat bug
                     setVariant({
+                      ...variant,
                       name: variant.name,
                       token: {
+                        ...variant.token,
                         id: variant.token.id,
                         value: color,
                         type: 'color',

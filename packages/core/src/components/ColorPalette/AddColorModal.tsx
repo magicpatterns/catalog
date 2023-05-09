@@ -9,10 +9,8 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Text,
 } from '@chakra-ui/react'
 import { TNamedTokenGroup } from '@core/types'
 import { useState } from 'react'
