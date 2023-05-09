@@ -8,34 +8,32 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
-import { create } from 'zustand'
 
 import HexPicker from './HexPicker'
 import RgbaPicker from './RgbaPicker'
 
 const formats = ['HEX', 'RGBA'] as const
+type TFormat = 'HEX' | 'RGBA'
 
 interface Props {
   colorPickerColor: AnyColor
   onChange: (color: AnyColor) => void
 }
 
-interface ColorState {
-  type: (typeof formats)[number]
-  setType: (type: (typeof formats)[number]) => void
-}
-
-const useColorStore = create<ColorState>((set) => ({
-  type: 'HEX',
-  setType: (type) => set(() => ({ type })),
-}))
-
-function DropdownInput({ onChange, colorPickerColor }: Props) {
-  const type = useColorStore((state) => state.type)
-  const setType = useColorStore((state) => state.setType)
-
+function DropdownInput({
+  onChange,
+  colorPickerColor,
+  format,
+  onSetFormat,
+}: {
+  colorPickerColor: AnyColor
+  onChange: (color: AnyColor) => void
+  format: TFormat
+  onSetFormat: (format: TFormat) => void
+}) {
   return (
     <Box
       css={{
@@ -51,17 +49,17 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
           as={Button}
           rightIcon={<ChevronDownIcon />}
         >
-          {type}
+          {format}
         </MenuButton>
         <MenuList>
           {formats.map((item) => (
-            <MenuItem key={item} onClick={() => setType(item)}>
+            <MenuItem key={item} onClick={() => onSetFormat(item)}>
               {item}
             </MenuItem>
           ))}
         </MenuList>
       </Menu>
-      {type === 'HEX' && (
+      {format === 'HEX' && (
         <Input
           isDisabled={true}
           type="text"
@@ -73,7 +71,7 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
           }}
         />
       )}
-      {type === 'RGBA' && (
+      {format === 'RGBA' && (
         <>
           <Input
             isDisabled={true}
@@ -160,23 +158,41 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
 }
 
 export default function ColorPicker({ colorPickerColor, onChange }: Props) {
-  const type = useColorStore((state) => state.type)
+  const initialFormat =
+    typeof colorPickerColor === 'string' && colorPickerColor.includes('#')
+      ? 'HEX'
+      : 'RGBA'
+  const [format, setFormat] = useState<TFormat>(initialFormat)
+
+  const onSetFormat = (format: TFormat) => {
+    if (format === 'HEX') {
+      onChange(tinycolor(colorPickerColor).toHexString())
+      setFormat('HEX')
+    } else {
+      onChange(tinycolor(colorPickerColor).toRgbString())
+      setFormat('RGBA')
+    }
+  }
   return (
     <Box
       css={{
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        minHeight: '100%',
       }}
     >
-      {type === 'HEX' && (
+      {format === 'HEX' && (
         <HexPicker colorPickerColor={colorPickerColor} onChange={onChange} />
       )}
-      {type === 'RGBA' && (
+      {format === 'RGBA' && (
         <RgbaPicker colorPickerColor={colorPickerColor} onChange={onChange} />
       )}
-      <DropdownInput onChange={onChange} colorPickerColor={colorPickerColor} />
+      <DropdownInput
+        format={format}
+        onSetFormat={(format: TFormat) => onSetFormat(format)}
+        onChange={onChange}
+        colorPickerColor={colorPickerColor}
+      />
     </Box>
   )
 }

@@ -125,6 +125,10 @@ export function VariantRow({
     onUpdateVariant({ ...variant, token: newToken }, isBase)
   }
 
+  const textColor =
+    tinycolor(color).isDark() && tinycolor(color).getAlpha() > 0.5
+      ? 'white'
+      : 'black'
   return (
     <Flex>
       <Box
@@ -144,7 +148,7 @@ export function VariantRow({
         <Text
           fontSize="1rem"
           fontWeight={isBase || hideIcons ? 800 : 400}
-          color={tinycolor(color).isDark() ? 'white' : 'black'}
+          color={textColor}
         >
           {name} {(isBase || hideIcons) && '[BASE]'}
         </Text>
@@ -160,10 +164,10 @@ export function VariantRow({
             <Text
               fontSize="1rem"
               fontWeight={600}
-              color={tinycolor(color).isDark() ? 'white' : 'black'}
+              color={textColor}
               _hover={{
                 cursor: 'pointer',
-                backgroundColor: tinycolor(color).isDark() ? 'white' : 'black',
+                backgroundColor: textColor,
                 color: color,
                 borderRadius: 8,
                 paddingInline: 2,
@@ -185,13 +189,7 @@ export function VariantRow({
                 }}
                 style={{ marginLeft: '24px' }}
                 variant="outline"
-                color={
-                  color
-                    ? tinycolor(color).isDark()
-                      ? 'white'
-                      : 'black'
-                    : 'black'
-                }
+                color={textColor}
                 _hover={{
                   backgroundColor: isBase ? 'none' : 'rgba(235, 235, 235, 0.3)',
                 }}
@@ -215,13 +213,7 @@ export function VariantRow({
                 isActive={showSlider}
                 onClick={() => setShowSlider(!showSlider)}
                 variant="outline"
-                color={
-                  color
-                    ? tinycolor(color).isDark()
-                      ? 'white'
-                      : 'black'
-                    : 'black'
-                }
+                color={textColor}
                 _hover={{
                   backgroundColor: 'rgba(235, 235, 235, 0.3)',
                 }}

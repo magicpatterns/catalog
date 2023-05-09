@@ -81,7 +81,7 @@ export function EditBaseColorModal({
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{`Edit Base Color: ${newColorName}`}</ModalHeader>
@@ -115,7 +115,8 @@ export function EditBaseColorModal({
                     setNewColorName(name)
 
                     const color =
-                      typeof colorPickerColor === 'string'
+                      typeof colorPickerColor === 'string' &&
+                      colorPickerColor.includes('#')
                         ? tinycolor(colorPickerColor).toHexString()
                         : tinycolor(colorPickerColor).toRgbString()
 

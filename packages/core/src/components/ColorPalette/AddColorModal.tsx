@@ -20,12 +20,10 @@ import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
+import { nameThatColor } from '../Onboarding/utils'
 import ColorPicker from './ColorPicker'
-import {
-  defaultColorShadesToTokens,
-  generateDefaultColorShades,
-  handleInvalidColor,
-} from './utils'
+import { defaultColorShadesToTokens, generateDefaultColorShades } from './utils'
+import { VariantRow } from './VariantRow'
 
 const INITIAL_COLOR_PICKER_COLOR = '#008EC8'
 
@@ -38,16 +36,15 @@ export function AddColorModal({
 }) {
   const [name, setName] = useState<string>('')
 
-  const [error, setError] = useState<string | null>(null)
-
   const [colorPickerColor, setColorPickerColor] = useState<AnyColor>(
     INITIAL_COLOR_PICKER_COLOR
   )
 
   const handleClose = () => {
+    let finalName = name
     if (!name) {
-      setError('Please enter a color name.')
-      return
+      const generatedName = nameThatColor(tinycolor(colorPickerColor).toHsl())
+      finalName = generatedName
     }
 
     const additionalVariants = defaultColorShadesToTokens(
@@ -55,7 +52,7 @@ export function AddColorModal({
     )
 
     onClose({
-      name,
+      name: finalName,
       group: {
         DEFAULT: {
           id: uuidv4(),
@@ -68,6 +65,21 @@ export function AddColorModal({
 
     setName('')
     setColorPickerColor(INITIAL_COLOR_PICKER_COLOR)
+  }
+
+  const getColor = (color: AnyColor) => {
+    return typeof color === 'string' && color.includes('#')
+      ? tinycolor(color).toHexString()
+      : tinycolor(color).toRgbString()
+  }
+
+  const namedToken = {
+    name: 'DEFAULT',
+    token: {
+      id: uuidv4(),
+      value: getColor(colorPickerColor),
+      type: 'color' as const,
+    },
   }
 
   return (
@@ -94,47 +106,39 @@ export function AddColorModal({
                 value={name}
                 onChange={(e) => {
                   setName(e.target.value)
-                  if (error) setError(null)
                 }}
               />
-              {error && !name && (
-                <Text
-                  css={{ alignSelf: 'flex-start', marginTop: '8px' }}
-                  color="red.400"
-                  fontWeight="medium"
-                >
-                  {error}
-                </Text>
-              )}
             </FormControl>
             <FormControl>
               <ColorPicker
                 onChange={(colorPickerColor) => {
-                  const color =
-                    typeof colorPickerColor === 'string'
-                      ? tinycolor(colorPickerColor).toHexString()
-                      : tinycolor(colorPickerColor).toRgbString()
+                  const color = getColor(colorPickerColor)
 
                   setColorPickerColor(color)
                 }}
                 colorPickerColor={colorPickerColor}
-              />
-              {error && name && (
-                <Text
-                  css={{ alignSelf: 'flex-start', marginTop: '8px' }}
-                  color="red.400"
-                  fontWeight="medium"
+              />{' '}
+              <Box mt={5} style={{ width: '100%' }}>
+                <VariantRow
+                  defaultNamedToken={namedToken}
+                  variant={namedToken}
+                  onUpdateVariant={() => console.log('not needed')}
+                  hideIcons
+                />
+                <FormControl
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                  }}
                 >
-                  {error}
-                </Text>
-              )}
+                  <Button mt={5} onClick={handleClose}>
+                    Add
+                  </Button>
+                </FormControl>
+              </Box>
             </FormControl>
           </Flex>
         </ModalBody>
-
-        <ModalFooter>
-          <Button onClick={handleClose}>Add</Button>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   )

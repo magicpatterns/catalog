@@ -13,7 +13,7 @@ export default function HexPicker({ colorPickerColor, onChange }: Props) {
       style={{
         width: '100%',
         height: '100%',
-        minHeight: '250px',
+        minHeight: '275px',
       }}
       color={tinycolor(colorPickerColor).toHexString()}
       onChange={onChange}

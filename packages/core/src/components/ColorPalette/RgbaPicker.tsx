@@ -14,7 +14,7 @@ export default function RgbaPicker({ colorPickerColor, onChange }: Props) {
       style={{
         width: '100%',
         height: '100%',
-        minHeight: '250px',
+        minHeight: '275px',
       }}
       color={rgbColor}
       onChange={onChange}
