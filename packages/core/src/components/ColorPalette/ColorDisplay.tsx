@@ -16,7 +16,6 @@ import { motion } from 'framer-motion'
 import { IconType } from 'react-icons'
 import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
-import { v4 as uuidv4 } from 'uuid'
 
 import { EditBaseColorModal } from './EditBaseColorModal'
 import { EditColorNameModal } from './EditColorNameModal'
@@ -111,6 +110,8 @@ export function ColorDisplay({
     console.error(e)
   }
 
+  let alreadySetBase = false
+  let isBase = false
   return (
     <Box
       css={{
@@ -144,49 +145,68 @@ export function ColorDisplay({
       <Stack spacing={'8px'}>
         {namedTokens
           .filter((variant) => variant.name !== 'DEFAULT')
-          .map((variant, index) => (
-            <motion.div
-              key={variant.name}
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-              }}
-              transition={{
-                duration: 0.5,
-                delay: 0.08 * index,
-              }}
-            >
-              <VariantRow
-                defaultNamedToken={defaultNamedToken}
-                variant={variant}
-                onUpdateVariant={(
-                  newVariant: TNamedToken,
-                  updateDefault: boolean
-                ) => {
-                  const updatedColorData = { ...colorData }
-                  if (updateDefault) {
-                    let additionalVariants: TTokenGroup = {}
-                    additionalVariants = defaultColorShadesToTokens(
-                      generateDefaultColorShades({
-                        primary: newVariant.token.value,
-                        baseStop: Number.isNaN(Number(newVariant.name))
-                          ? 500
-                          : (Number(newVariant.name) as ShadeStop),
-                      })
-                    )
-                    const colorTokenGroup: TTokenGroup = {
-                      DEFAULT: newVariant.token,
-                      ...additionalVariants,
-                    }
-                    onUpdateColorData(colorTokenGroup)
-                  } else {
-                    updatedColorData[newVariant.name] = newVariant.token
-                    onUpdateColorData(updatedColorData)
-                  }
+          .map((variant, index) => {
+            if (!alreadySetBase) {
+              try {
+                // just in case we are comparing rgba to hex
+                isBase =
+                  tinycolor(defaultNamedToken.token.value).toHexString() ===
+                  tinycolor(variant.token.value).toHexString()
+                alreadySetBase = isBase
+              } catch (e) {
+                throw Error(
+                  `Migration 0.0.7 likely failed, please contact support at founders@mirrorful.io: ${e}`
+                )
+                // Sentry.captureException(e)
+              }
+            } else {
+              isBase = false
+            }
+            return (
+              <motion.div
+                key={variant.name}
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
                 }}
-              />
-            </motion.div>
-          ))}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.08 * index,
+                }}
+              >
+                <VariantRow
+                  defaultNamedToken={defaultNamedToken}
+                  variant={variant}
+                  isBase={isBase}
+                  onUpdateVariant={(
+                    newVariant: TNamedToken,
+                    updateDefault: boolean
+                  ) => {
+                    const updatedColorData = { ...colorData }
+                    if (updateDefault) {
+                      let additionalVariants: TTokenGroup = {}
+                      additionalVariants = defaultColorShadesToTokens(
+                        generateDefaultColorShades({
+                          primary: newVariant.token.value,
+                          baseStop: Number.isNaN(Number(newVariant.name))
+                            ? 500
+                            : (Number(newVariant.name) as ShadeStop),
+                        })
+                      )
+                      const colorTokenGroup: TTokenGroup = {
+                        DEFAULT: newVariant.token,
+                        ...additionalVariants,
+                      }
+                      onUpdateColorData(colorTokenGroup)
+                    } else {
+                      updatedColorData[newVariant.name] = newVariant.token
+                      onUpdateColorData(updatedColorData)
+                    }
+                  }}
+                />
+              </motion.div>
+            )
+          })}
       </Stack>
 
       <EditBaseColorModal

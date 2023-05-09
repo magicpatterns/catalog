@@ -2,7 +2,6 @@ import { TTokenGroup } from '@core/types'
 import tinycolor, { Instance } from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
-// https://chir.ag/projects/ntc/ntc.js was the source of these...
 const colorNames = [
   ['000000', 'Black'],
   ['000080', 'Navy Blue'],
@@ -1694,6 +1693,5 @@ export function generatePalette(
     }
   })
 
-  console.log(randomizedColors)
   return randomizedColors
 }

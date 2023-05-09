@@ -40,15 +40,20 @@ function MirrorfulSlider({
           {`:`}
         </Text>
         <Input
+          style={{
+            border: 'none',
+          }}
           width={10}
           height={3}
-          padding={0}
+          padding={1}
           fontSize={10}
           ml={1}
           mr={1}
           mt={1}
           value={sliderValue}
-          onChange={(e) => onSlide(Number(e.target.value))}
+          onChange={(e) => {
+            onSlide(Number(e.target.value))
+          }}
         />
       </Flex>
       <Slider
@@ -57,7 +62,9 @@ function MirrorfulSlider({
         colorScheme={'gray.700'}
         aria-label="slider"
         value={sliderValue}
-        onChange={(val: number) => onSlide(val)}
+        onChange={(val: number) => {
+          onSlide(val)
+        }}
         size="lg"
       >
         <SliderTrack>
@@ -74,9 +81,11 @@ export function VariantRow({
   variant,
   onUpdateVariant,
   hideIcons = false,
+  isBase = false,
 }: {
   defaultNamedToken: TNamedToken
   hideIcons?: boolean
+  isBase?: boolean
   variant: TNamedToken
   onUpdateVariant: (newVariant: TNamedToken, updateDefault: boolean) => void
 }) {
@@ -102,18 +111,6 @@ export function VariantRow({
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedHexCode])
 
-  let isBase = false
-  try {
-    // just in case we are comparing rgba to hex
-    isBase =
-      tinycolor(defaultNamedToken.token.value).toHexString() ===
-      tinycolor(variant.token.value).toHexString()
-  } catch (e) {
-    throw Error(
-      `Migration 0.0.7 likely failed, please contact support at founders@mirrorful.io: ${e}`
-    )
-    // Sentry.captureException(e)
-  }
   const onHSLSlide = ({
     val,
     type,
