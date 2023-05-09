@@ -68,6 +68,11 @@ export function EditFontSizeModal({
       return
     }
 
+    if (isNaN(Number(variantValue))) {
+      setError('Value must be a number')
+      return
+    }
+
     if (Number(variantValue) < 0 || Number(variantValue) > 10000) {
       setError('Value must be greater than or equal to 0')
       return
