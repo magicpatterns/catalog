@@ -72,21 +72,30 @@ Simple design systems also speed up development — even early-stage projects! O
 
 Mirrorful is a NPM package intended to be installed as dev dependency.
 
-```bash
-npm i -D mirrorful
-# or
-yarn add -D mirrorful
+```console
+npm i -D mirrorful # or yarn -D mirrorful; or pnpm i -D mirrorful
 ```
 
 ## ✨ Usage
 
 The following command will start a local editor at `localhost:5050`.
 
-```
+```console
 npx mirrorful editor
-# or
+```
+
+or
+
+```console
 yarn run mirrorful editor
 ```
+
+or 
+
+```console
+pnpm mirrorful editor
+```
+
 
 ## 📚 Documentation
 
