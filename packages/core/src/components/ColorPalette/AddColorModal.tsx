@@ -15,7 +15,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { TNamedTokenGroup } from '@core/types'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
@@ -36,11 +36,7 @@ export function AddColorModal({
   isOpen: boolean
   onClose: (newColor?: TNamedTokenGroup) => void
 }) {
-  const baseRef = useRef<HTMLInputElement | null>(null)
-  const hoverRef = useRef<HTMLInputElement | null>(null)
-
   const [name, setName] = useState<string>('')
-  const [base, setBase] = useState<string>('')
 
   const [error, setError] = useState<string | null>(null)
 
@@ -48,26 +44,14 @@ export function AddColorModal({
     INITIAL_COLOR_PICKER_COLOR
   )
 
-  const [showBaseColorPicker, setShowBaseColorPicker] = useState<boolean>(true)
-
-  const onBaseBlur = () => {
-    const value = handleInvalidColor(base)
-    setColorPickerColor(value)
-    setBase(value)
-  }
-
   const handleClose = () => {
     if (!name) {
       setError('Please enter a color name.')
       return
     }
-    if (!base) {
-      setError('Please enter a base color.')
-      return
-    }
-    onBaseBlur()
+
     const additionalVariants = defaultColorShadesToTokens(
-      generateDefaultColorShades(base)
+      generateDefaultColorShades(colorPickerColor)
     )
 
     onClose({
@@ -75,7 +59,7 @@ export function AddColorModal({
       group: {
         DEFAULT: {
           id: uuidv4(),
-          value: base,
+          value: tinycolor(colorPickerColor).toHexString(),
           type: 'color',
         },
         ...additionalVariants,
@@ -83,7 +67,6 @@ export function AddColorModal({
     })
 
     setName('')
-    setBase('')
     setColorPickerColor(INITIAL_COLOR_PICKER_COLOR)
   }
 
@@ -113,14 +96,6 @@ export function AddColorModal({
                   setName(e.target.value)
                   if (error) setError(null)
                 }}
-                onFocus={() => {
-                  setShowBaseColorPicker(true)
-                }}
-                onKeyPress={(event) => {
-                  if (event.key === 'Enter' && baseRef.current) {
-                    baseRef.current.focus()
-                  }
-                }}
               />
               {error && !name && (
                 <Text
@@ -133,36 +108,16 @@ export function AddColorModal({
               )}
             </FormControl>
             <FormControl>
-              <FormLabel>
-                <Box css={{ display: 'flex', alignItems: 'center' }}>
-                  Base Color{' '}
-                  <Box
-                    css={{ height: '14px', width: '14px', marginLeft: '8px' }}
-                    bgColor={base}
-                    border={'1px solid black'}
-                  />
-                </Box>
-              </FormLabel>
-              <Input
-                ref={baseRef}
-                placeholder="e.g. #D3AC3B"
-                size="md"
-                value={base}
-                onChange={(e) => {
-                  setColorPickerColor(e.target.value)
-                  setBase(e.target.value)
-                  if (error) setError(null)
+              <ColorPicker
+                onChange={(colorPickerColor) => {
+                  const color =
+                    typeof colorPickerColor === 'string'
+                      ? tinycolor(colorPickerColor).toHexString()
+                      : tinycolor(colorPickerColor).toRgbString()
+
+                  setColorPickerColor(color)
                 }}
-                onBlur={onBaseBlur}
-                onFocus={(e) => {
-                  setColorPickerColor(e.target.value)
-                  setShowBaseColorPicker(true)
-                }}
-                onKeyPress={(event) => {
-                  if (event.key === 'Enter' && hoverRef.current) {
-                    hoverRef.current.focus()
-                  }
-                }}
+                colorPickerColor={colorPickerColor}
               />
               {error && name && (
                 <Text
@@ -175,16 +130,6 @@ export function AddColorModal({
               )}
             </FormControl>
           </Flex>
-          <Box flex="1">
-            {showBaseColorPicker && (
-              <ColorPicker
-                onChange={(colorPickerColor) => {
-                  setColorPickerColor(tinycolor(colorPickerColor).toHex())
-                }}
-                colorPickerColor={colorPickerColor}
-              />
-            )}
-          </Box>
         </ModalBody>
 
         <ModalFooter>

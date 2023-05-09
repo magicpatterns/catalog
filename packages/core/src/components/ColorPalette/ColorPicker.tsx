@@ -15,7 +15,7 @@ import { create } from 'zustand'
 import HexPicker from './HexPicker'
 import RgbaPicker from './RgbaPicker'
 
-const formats = ['HEX', 'RGB'] as const
+const formats = ['HEX', 'RGBA'] as const
 
 interface Props {
   colorPickerColor: AnyColor
@@ -47,7 +47,7 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
     >
       <Menu>
         <MenuButton
-          css={{ width: '65%', maxWidth: '100px' }}
+          css={{ minWidth: '100px' }}
           as={Button}
           rightIcon={<ChevronDownIcon />}
         >
@@ -63,21 +63,24 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
       </Menu>
       {type === 'HEX' && (
         <Input
+          isDisabled={true}
           type="text"
-          css={{ width: '100%', height: '100%' }}
+          css={{ width: '100%', height: '100%', minHeight: '2.5rem' }}
           value={tinycolor(colorPickerColor).toString()}
-          onChange={(e) => onChange(tinycolor(e.target.value).toString())}
+          onChange={(e) => {
+            console.log(e.target.value)
+            onChange(tinycolor(e.target.value).toString())
+          }}
         />
       )}
-      {type === 'RGB' && (
+      {type === 'RGBA' && (
         <>
           <Input
+            isDisabled={true}
             type="number"
             min={0}
             max={255}
             css={{
-              width: '20%',
-              height: '100%',
               paddingLeft: '0.5rem',
               paddingRight: '0.5rem',
             }}
@@ -93,12 +96,11 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
             }
           />
           <Input
+            isDisabled={true}
             type="number"
             min={0}
             max={255}
             css={{
-              width: '20%',
-              height: '100%',
               paddingLeft: '0.5rem',
               paddingRight: '0.5rem',
             }}
@@ -114,12 +116,11 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
             }
           />
           <Input
+            isDisabled={true}
             type="number"
             min={0}
             max={255}
             css={{
-              width: '20%',
-              height: '100%',
               paddingLeft: '0.5rem',
               paddingRight: '0.5rem',
             }}
@@ -135,10 +136,9 @@ function DropdownInput({ onChange, colorPickerColor }: Props) {
             }
           />
           <Input
+            isDisabled={true}
             type="text"
             css={{
-              width: '30%',
-              height: '100%',
               paddingLeft: '0.5rem',
               paddingRight: '0.5rem',
             }}
@@ -167,14 +167,13 @@ export default function ColorPicker({ colorPickerColor, onChange }: Props) {
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        height: '100%',
-        minHeight: '375px',
+        minHeight: '100%',
       }}
     >
       {type === 'HEX' && (
         <HexPicker colorPickerColor={colorPickerColor} onChange={onChange} />
       )}
-      {type === 'RGB' && (
+      {type === 'RGBA' && (
         <RgbaPicker colorPickerColor={colorPickerColor} onChange={onChange} />
       )}
       <DropdownInput onChange={onChange} colorPickerColor={colorPickerColor} />

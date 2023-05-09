@@ -37,9 +37,6 @@ export function EditBaseColorModal({
   const [error, setError] = useState<string | null>(null)
   const [newColorName, setNewColorName] = useState<string>(colorName)
 
-  // Right now, we don't let the user choose, but could down the road
-  // const [shouldGenerateVariants, setShouldGenerateVariants] = useState(true)
-
   const handleSave = () => {
     // Check for blank / missing color
     if (!variant.token.value) {
@@ -84,7 +81,7 @@ export function EditBaseColorModal({
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{`Edit Base Color: ${newColorName}`}</ModalHeader>
@@ -102,65 +99,54 @@ export function EditBaseColorModal({
             >
               <Box
                 css={{
-                  width: '100%',
+                  gap: 16,
                   display: 'flex',
-                  justifyContent: 'space-between',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flexDirection: 'column',
                 }}
               >
-                <Box
-                  css={{
-                    gap: 16,
+                <ColorPicker
+                  onChange={(colorPickerColor) => {
+                    console.log('colorPickerColor', colorPickerColor)
+                    const name = nameThatColor(
+                      tinycolor(colorPickerColor).toHsl()
+                    )
+                    setNewColorName(name)
+
+                    const color =
+                      typeof colorPickerColor === 'string'
+                        ? tinycolor(colorPickerColor).toHexString()
+                        : tinycolor(colorPickerColor).toRgbString()
+
+                    // TODO(Danilowicz): we should spread here, or there's going to be a big fat bug
+                    setVariant({
+                      name: variant.name,
+                      token: {
+                        id: variant.token.id,
+                        value: color,
+                        type: 'color',
+                      },
+                    })
+                  }}
+                  colorPickerColor={`${variant.token.value}`}
+                />
+                <Box style={{ width: '100%' }}>
+                  <VariantRow
+                    defaultNamedToken={baseColorToken}
+                    variant={variant}
+                    onUpdateVariant={() => console.log('not needed')}
+                    hideIcons
+                  />
+                </Box>
+                <FormControl
+                  style={{
                     display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',
+                    justifyContent: 'flex-end',
                   }}
                 >
-                  <ColorPicker
-                    onChange={(colorPickerColor) => {
-                      const name = nameThatColor(
-                        tinycolor(colorPickerColor).toHsl()
-                      )
-                      setNewColorName(name)
-
-                      // TODO(Danilowicz): we should spread here, or there's going to be a big fat bug
-                      setVariant({
-                        name: variant.name,
-                        token: {
-                          id: variant.token.id,
-                          value: tinycolor(colorPickerColor).toHex(),
-                          type: 'color',
-                        },
-                      })
-                    }}
-                    colorPickerColor={`${variant.token.value}`}
-                  />
-                  <Box style={{ width: '100%' }}>
-                    <VariantRow
-                      defaultNamedToken={baseColorToken}
-                      variant={variant}
-                      onUpdateVariant={() => console.log('not needed')}
-                      hideIcons
-                    />
-                  </Box>
-                  <FormControl
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                    }}
-                  >
-                    {/* <Checkbox
-                      checked={shouldGenerateVariants}
-                      onChange={() =>
-                        setShouldGenerateVariants((prev) => !prev)
-                      }
-                      defaultChecked={shouldGenerateVariants}
-                    >
-                      Automatically generate new shades
-                    </Checkbox> */}
-                    <Button type="submit">Save</Button>
-                  </FormControl>
-                </Box>
+                  <Button type="submit">Save</Button>
+                </FormControl>
               </Box>
               {error && (
                 <Text
