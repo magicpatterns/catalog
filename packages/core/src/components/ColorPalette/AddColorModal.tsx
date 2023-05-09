@@ -46,7 +46,7 @@ export function AddColorModal({
     }
 
     const additionalVariants = defaultColorShadesToTokens(
-      generateDefaultColorShades(colorPickerColor)
+      generateDefaultColorShades({ primary: colorPickerColor })
     )
 
     onClose({
@@ -54,7 +54,7 @@ export function AddColorModal({
       group: {
         DEFAULT: {
           id: uuidv4(),
-          value: tinycolor(colorPickerColor).toHexString(),
+          value: getColor(colorPickerColor),
           type: 'color',
         },
         ...additionalVariants,

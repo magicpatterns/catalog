@@ -23,7 +23,7 @@ export function NamePrimary({
   const [error, setError] = useState<string | null>(null)
   const [name, setName] = useState<string>(initialName)
 
-  const shades = generateDefaultColorShades(primaryColor)
+  const shades = generateDefaultColorShades({ primary: primaryColor })
 
   return (
     <Box css={{ display: 'flex', height: '100%' }} as="form">

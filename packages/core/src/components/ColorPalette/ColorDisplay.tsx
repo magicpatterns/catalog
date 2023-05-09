@@ -16,9 +16,15 @@ import { motion } from 'framer-motion'
 import { IconType } from 'react-icons'
 import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
+import { v4 as uuidv4 } from 'uuid'
 
 import { EditBaseColorModal } from './EditBaseColorModal'
 import { EditColorNameModal } from './EditColorNameModal'
+import {
+  defaultColorShadesToTokens,
+  generateDefaultColorShades,
+  ShadeStop,
+} from './utils'
 import { VariantRow } from './VariantRow'
 
 export function MirrorfulMenuButton({
@@ -159,10 +165,24 @@ export function ColorDisplay({
                 ) => {
                   const updatedColorData = { ...colorData }
                   if (updateDefault) {
-                    updatedColorData['DEFAULT'] = newVariant.token
+                    let additionalVariants: TTokenGroup = {}
+                    additionalVariants = defaultColorShadesToTokens(
+                      generateDefaultColorShades({
+                        primary: newVariant.token.value,
+                        baseStop: Number.isNaN(Number(newVariant.name))
+                          ? 500
+                          : (Number(newVariant.name) as ShadeStop),
+                      })
+                    )
+                    const colorTokenGroup: TTokenGroup = {
+                      DEFAULT: newVariant.token,
+                      ...additionalVariants,
+                    }
+                    onUpdateColorData(colorTokenGroup)
+                  } else {
+                    updatedColorData[newVariant.name] = newVariant.token
+                    onUpdateColorData(updatedColorData)
                   }
-                  updatedColorData[newVariant.name] = newVariant.token
-                  onUpdateColorData(updatedColorData)
                 }}
               />
             </motion.div>

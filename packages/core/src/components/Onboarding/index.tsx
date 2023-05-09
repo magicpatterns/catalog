@@ -68,7 +68,7 @@ export function Onboarding({
         type: 'color',
       },
       ...defaultColorShadesToTokens(
-        generateDefaultColorShades(primaryColorStringified)
+        generateDefaultColorShades({ primary: primaryColorStringified })
       ),
     }
 
@@ -152,7 +152,7 @@ export function Onboarding({
                   ...newPalette[colorName],
                 },
                 ...defaultColorShadesToTokens(
-                  generateDefaultColorShades(`${color.value}`)
+                  generateDefaultColorShades({ primary: `${color.value}` })
                 ),
               }
             }

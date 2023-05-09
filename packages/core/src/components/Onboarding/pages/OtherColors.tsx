@@ -26,7 +26,7 @@ export function OtherColors({
 }) {
   const [palette, setPalette] = useState<TTokenGroup>(initialPalette)
 
-  const shades = generateDefaultColorShades(primaryColor)
+  const shades = generateDefaultColorShades({ primary: primaryColor })
 
   const handleGeneratePalette = useCallback(() => {
     const alternativeColors = generatePalette(primaryColor, primaryName)

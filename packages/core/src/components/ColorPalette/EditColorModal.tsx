@@ -195,7 +195,7 @@ export function EditColorModal({
     }
 
     const additionalVariants = defaultColorShadesToTokens(
-      generateDefaultColorShades(base)
+      generateDefaultColorShades({ primary: base })
     )
 
     onClose({

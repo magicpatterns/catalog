@@ -10,7 +10,6 @@ import {
   Tooltip,
 } from '@chakra-ui/react'
 import { TNamedToken } from '@core/types'
-import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { BsSliders2 } from 'react-icons/bs'
 import {

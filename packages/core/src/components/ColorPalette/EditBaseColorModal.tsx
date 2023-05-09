@@ -49,7 +49,7 @@ export function EditBaseColorModal({
 
     let additionalVariants: TTokenGroup = {}
     additionalVariants = defaultColorShadesToTokens(
-      generateDefaultColorShades(variant.token.value)
+      generateDefaultColorShades({ primary: variant.token.value })
     )
 
     try {
