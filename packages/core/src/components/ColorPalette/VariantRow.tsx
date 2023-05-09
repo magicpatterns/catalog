@@ -18,6 +18,7 @@ import {
   MdOutlineRadioButtonUnchecked,
 } from 'react-icons/md'
 import tinycolor from 'tinycolor2'
+import { Input } from '@chakra-ui/react'
 
 function MirrorfulSlider({
   label,
@@ -39,15 +40,24 @@ function MirrorfulSlider({
           <span style={{ fontWeight: 700 }}>{label}</span>
           {`:`}
         </Text>
-        <Text fontSize={12} ml={1} mr={1}>
-          {sliderValue}
-        </Text>
+        <Input
+          width={10}
+          height={3}
+          padding={0}
+          fontSize={10}
+          ml={1}
+          mr={1}
+          mt={1}
+          value={sliderValue}
+          onChange={(e) => onSlide(Number(e.target.value))}
+        />
       </Flex>
       <Slider
         min={min}
         max={max}
         colorScheme={'gray.700'}
         aria-label="slider"
+        value={sliderValue}
         onChange={(val: number) => onSlide(val)}
         size="lg"
       >
