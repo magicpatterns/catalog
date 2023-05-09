@@ -8,7 +8,7 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 
@@ -38,6 +38,15 @@ function DropdownInput({
     `rgba(${tinycolor(val).toRgb().r},${tinycolor(val).toRgb().g},${
       tinycolor(val).toRgb().b
     },${Math.round(tinycolor(val).toRgb().a * 100) + '%'})`
+
+  const [hexInputValue, setHexInputValue] = useState<string>(
+    tinycolor(colorPickerColor).toHexString()
+  )
+
+  useEffect(() => {
+    setHexInputValue(tinycolor(colorPickerColor).toHexString())
+  }, [colorPickerColor])
+
   return (
     <Box
       css={{
@@ -68,10 +77,10 @@ function DropdownInput({
           isDisabled={true}
           type="text"
           css={{ width: '100%', height: '100%', minHeight: '2.5rem' }}
-          value={tinycolor(colorPickerColor).toString()}
+          value={hexInputValue}
           onChange={(e) => {
-            console.log(e.target.value)
-            onChange(tinycolor(e.target.value).toString())
+            setHexInputValue(e.target.value)
+            onChange(e.target.value)
           }}
         />
       )}

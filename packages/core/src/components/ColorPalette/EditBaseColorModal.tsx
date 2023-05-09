@@ -108,7 +108,6 @@ export function EditBaseColorModal({
               >
                 <ColorPicker
                   onChange={(colorPickerColor) => {
-                    console.log('colorPickerColor', colorPickerColor)
                     const name = nameThatColor(
                       tinycolor(colorPickerColor).toHsl()
                     )

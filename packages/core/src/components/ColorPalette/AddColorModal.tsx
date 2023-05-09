@@ -11,6 +11,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  Text,
 } from '@chakra-ui/react'
 import { TNamedTokenGroup } from '@core/types'
 import { useState } from 'react'
@@ -33,7 +34,7 @@ export function AddColorModal({
   onClose: (newColor?: TNamedTokenGroup) => void
 }) {
   const [name, setName] = useState<string>('')
-
+  const [error, setError] = useState<string>('')
   const [colorPickerColor, setColorPickerColor] = useState<AnyColor>(
     INITIAL_COLOR_PICKER_COLOR
   )
@@ -110,11 +111,23 @@ export function AddColorModal({
             <FormControl>
               <ColorPicker
                 onChange={(colorPickerColor) => {
-                  const color = getColor(colorPickerColor)
-                  setColorPickerColor(color)
+                  setError('')
+                  if (tinycolor(colorPickerColor).isValid()) {
+                    const color = getColor(colorPickerColor)
+                    setColorPickerColor(color)
+                  }
                 }}
                 colorPickerColor={colorPickerColor}
               />{' '}
+              {error && (
+                <Text
+                  css={{ alignSelf: 'flex-start', marginTop: '8px' }}
+                  color="red.500"
+                  fontWeight="medium"
+                >
+                  {error}
+                </Text>
+              )}
               <Box mt={5} style={{ width: '100%' }}>
                 <VariantRow
                   defaultNamedToken={namedToken}

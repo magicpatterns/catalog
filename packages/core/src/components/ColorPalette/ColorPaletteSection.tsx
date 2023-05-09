@@ -121,8 +121,8 @@ export function ColorPaletteSection({
         isOpen={isOpen}
         onClose={(newColor?: TNamedTokenGroup) => {
           if (newColor) {
-            const newColors = { ...colors }
-            newColors[newColor.name] = newColor.group
+            // ensure the new key is first
+            const newColors = { [newColor.name]: newColor.group, ...colors }
             onUpdateColors(newColors)
           }
           onClose()
