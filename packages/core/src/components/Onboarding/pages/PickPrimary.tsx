@@ -83,7 +83,7 @@ export function PickPrimary({
       </Box>
       <Box
         css={{
-          width: '50%',
+          width: '60%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

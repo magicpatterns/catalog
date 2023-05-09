@@ -70,7 +70,7 @@ export function ImportInstructions({
             {`The last step is integrating your new theme with your app.`}
           </Text>
         </Box>
-        <Box css={{ paddingBottom: '32px' }}>
+        <Box css={{ paddingBottom: '32px', display: 'flex' }}>
           <Button
             size="lg"
             onClick={() => {

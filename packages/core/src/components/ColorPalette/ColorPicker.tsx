@@ -34,6 +34,10 @@ function DropdownInput({
   format: TFormat
   onSetFormat: (format: TFormat) => void
 }) {
+  const getRgbaFormat = (val: string) =>
+    `rgba(${tinycolor(val).toRgb().r},${tinycolor(val).toRgb().g},${
+      tinycolor(val).toRgb().b
+    },${Math.round(tinycolor(val).toRgb().a * 100) + '%'})`
   return (
     <Box
       css={{
@@ -83,15 +87,7 @@ function DropdownInput({
               paddingRight: '0.5rem',
             }}
             value={tinycolor(colorPickerColor).toRgb().r}
-            onChange={(e) =>
-              onChange(
-                `rgba(${tinycolor(e.target.value).toRgb().r},${
-                  tinycolor(e.target.value).toRgb().g
-                },${tinycolor(e.target.value).toRgb().b},${
-                  tinycolor(e.target.value).toRgb().a * 100 + '%'
-                })`
-              )
-            }
+            onChange={(e) => onChange(`rgba(${getRgbaFormat(e.target.value)})`)}
           />
           <Input
             isDisabled={true}
@@ -103,15 +99,7 @@ function DropdownInput({
               paddingRight: '0.5rem',
             }}
             value={tinycolor(colorPickerColor).toRgb().g}
-            onChange={(e) =>
-              onChange(
-                `rgba(${tinycolor(e.target.value).toRgb().r},${
-                  tinycolor(e.target.value).toRgb().g
-                },${tinycolor(e.target.value).toRgb().b},${
-                  tinycolor(e.target.value).toRgb().a * 100 + '%'
-                })`
-              )
-            }
+            onChange={(e) => onChange(`rgba(${getRgbaFormat(e.target.value)})`)}
           />
           <Input
             isDisabled={true}
@@ -123,15 +111,7 @@ function DropdownInput({
               paddingRight: '0.5rem',
             }}
             value={tinycolor(colorPickerColor).toRgb().b}
-            onChange={(e) =>
-              onChange(
-                `rgba(${tinycolor(e.target.value).toRgb().r},${
-                  tinycolor(e.target.value).toRgb().g
-                },${tinycolor(e.target.value).toRgb().b},${
-                  tinycolor(e.target.value).toRgb().a * 100 + '%'
-                })`
-              )
-            }
+            onChange={(e) => onChange(`rgba(${getRgbaFormat(e.target.value)})`)}
           />
           <Input
             isDisabled={true}
@@ -140,16 +120,10 @@ function DropdownInput({
               paddingLeft: '0.5rem',
               paddingRight: '0.5rem',
             }}
-            value={tinycolor(colorPickerColor).toRgb().a * 100 + '%'}
-            onChange={(e) =>
-              onChange(
-                `rgba(${tinycolor(e.target.value).toRgb().r},${
-                  tinycolor(e.target.value).toRgb().g
-                },${tinycolor(e.target.value).toRgb().b},${
-                  tinycolor(e.target.value).toRgb().a * 100 + '%'
-                })`
-              )
+            value={
+              Math.round(tinycolor(colorPickerColor).toRgb().a * 100) + '%'
             }
+            onChange={(e) => onChange(`rgba(${getRgbaFormat(e.target.value)})`)}
           />
         </>
       )}

@@ -63,7 +63,7 @@ export function Onboarding({
     paletteGroupTokens: TTokenGroup
   ) => {
     const primaryColorTokenGroup: TTokenGroup = {
-      base: {
+      DEFAULT: {
         id: uuidv4(),
         value: primaryColorHex,
         type: 'color',
@@ -149,7 +149,7 @@ export function Onboarding({
             const color = newPalette[colorName]
             if (assertToken(color)) {
               newPalette[colorName] = {
-                base: {
+                DEFAULT: {
                   ...newPalette[colorName],
                 },
                 ...defaultColorShadesToTokens(
