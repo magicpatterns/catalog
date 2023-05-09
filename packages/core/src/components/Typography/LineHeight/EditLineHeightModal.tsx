@@ -18,7 +18,7 @@ import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken, TUnits, Units } from '@core/types'
 import { parseUnit } from '@core/utils/parseUnit'
-import { useEffect, useState } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 export function EditLineHeightModal({
@@ -61,25 +61,34 @@ export function EditLineHeightModal({
   )
 
   const [error, setError] = useState<string | null>(null)
+  const variantNameRef = useRef() as MutableRefObject<HTMLInputElement>
+  const variantValueRef = useRef() as MutableRefObject<HTMLInputElement>
 
   const handleSave = () => {
     setError(null)
     if (variantName === '' || variantValue === '') {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      variantName === ''
+        ? variantNameRef.current.focus()
+        : variantValueRef.current.focus()
       setError('Please fill out all fields.')
       return
     }
 
     if (isNaN(Number(variantValue))) {
+      variantValueRef.current.focus()
       setError('Value must be a number.')
       return
     }
 
     if (Number(variantValue) !== 0 && !Number(variantValue)) {
+      variantValueRef.current.focus()
       setError('Please fill out all fields.')
       return
     }
 
     if (Number(variantValue) < 0) {
+      variantValueRef.current.focus()
       setError('Minimum value of line height can be 0.')
       return
     }
@@ -136,6 +145,7 @@ export function EditLineHeightModal({
               <FormControl>
                 <FormLabel>Variant Name</FormLabel>
                 <Input
+                  ref={variantNameRef}
                   value={variantName}
                   onChange={(e) => setVariantName(e.target.value)}
                 />
@@ -144,6 +154,7 @@ export function EditLineHeightModal({
               <FormControl css={{ marginTop: '32px' }}>
                 <FormLabel>Variant Value</FormLabel>
                 <Input
+                  ref={variantValueRef}
                   value={variantValue}
                   onChange={(e) => setVariantValue(e.target.value)}
                   type="number"
