@@ -82,6 +82,7 @@ export default function RootLayout({
   useEffect(() => {
     // on initial load
     fetchStoredData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

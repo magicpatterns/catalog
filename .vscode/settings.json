@@ -11,7 +11,15 @@
     "**/dist": true,
     "**/yarn.lock": true
   },
-  "cSpell.words": ["Chakra", "infisical", "Mirrorful", "posthog"],
+  "cSpell.words": [
+    "Chakra",
+    "Danilowicz",
+    "infisical",
+    "Mirrorful",
+    "multipler",
+    "posthog",
+    "tinycolor"
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   }

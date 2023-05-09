@@ -2,7 +2,6 @@ import { TTokenGroup } from '@core/types'
 import tinycolor, { Instance } from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
-// https://chir.ag/projects/ntc/ntc.js was the source of these...
 const colorNames = [
   ['000000', 'Black'],
   ['000080', 'Navy Blue'],
@@ -1673,11 +1672,14 @@ export function generatePalette(
       h: hslColor.h + Math.random() * 50 - 25,
     }
 
-    const hex = tinycolor(modifiedHsl).toHexString()
+    const val =
+      typeof color === 'string' && color.includes('#')
+        ? tinycolor(modifiedHsl).toHexString()
+        : tinycolor(modifiedHsl).toRgbString()
 
     randomizedColors[nameThatColor(modifiedHsl)] = {
       id: uuidv4(),
-      value: hex,
+      value: val,
       type: 'color',
     }
   })

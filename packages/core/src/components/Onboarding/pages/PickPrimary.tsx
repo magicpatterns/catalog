@@ -1,8 +1,9 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
+import ColorPicker from '@core/components/ColorPalette/ColorPicker'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
-import { ColorResult, SketchPicker } from '@hello-pangea/color-picker'
+import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
@@ -13,12 +14,12 @@ export function PickPrimary({
   onUpdatePrimaryColor,
   platform,
 }: {
-  primaryColor: string
+  primaryColor: AnyColor
   onUpdatePage: (page: number) => void
-  onUpdatePrimaryColor: (newColor: string) => void
+  onUpdatePrimaryColor: (newColor: AnyColor) => void
   platform: TPlatform
 }) {
-  const shades = generateDefaultColorShades(primaryColor)
+  const shades = generateDefaultColorShades({ primary: primaryColor })
 
   return (
     <Box css={{ display: 'flex', height: '100%' }} as="form">
@@ -82,19 +83,16 @@ export function PickPrimary({
       </Box>
       <Box
         css={{
-          width: '50%',
+          width: '60%',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '64px',
+          padding: '24px',
         }}
       >
-        <SketchPicker
-          width="100%"
-          color={primaryColor}
-          onChange={(color: ColorResult) => {
-            onUpdatePrimaryColor(color.hex)
-          }}
+        <ColorPicker
+          colorPickerColor={primaryColor}
+          onChange={onUpdatePrimaryColor}
         />
       </Box>
     </Box>

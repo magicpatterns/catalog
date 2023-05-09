@@ -27,7 +27,7 @@ export function Referral({
   const [isOtherChecked, setIsOtherChecked] = useState<boolean>(false)
   const [isHackerNewsChecked, setIsHackerNewsChecked] = useState<boolean>(false)
 
-  const shades = generateDefaultColorShades(primaryColor)
+  const shades = generateDefaultColorShades({ primary: primaryColor })
 
   return (
     <Box css={{ display: 'flex', height: '100%' }} as="form">

@@ -1,9 +1,8 @@
-import { InfoIcon } from '@chakra-ui/icons'
 import {
+  Box,
   Button,
   Flex,
   FormControl,
-  FormLabel,
   Input,
   Modal,
   ModalBody,
@@ -12,8 +11,9 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Tooltip,
+  Text,
 } from '@chakra-ui/react'
+import { TNamedToken } from '@core/types'
 import { useState } from 'react'
 
 export function EditColorNameModal({
@@ -21,7 +21,9 @@ export function EditColorNameModal({
   onClose,
   initialColorName,
   onUpdateColorName,
+  defaultNamedToken,
 }: {
+  defaultNamedToken: TNamedToken
   isOpen: boolean
   onClose: () => void
   initialColorName: string
@@ -38,7 +40,7 @@ export function EditColorNameModal({
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Edit Color</ModalHeader>
+        <ModalHeader>Edit Color Name</ModalHeader>
         <ModalCloseButton />
         <ModalBody
           css={{
@@ -48,16 +50,18 @@ export function EditColorNameModal({
           }}
         >
           <FormControl>
-            <Flex>
-              <FormLabel>Color Name</FormLabel>
-              <Tooltip
-                placement="right"
-                closeDelay={500}
-                hasArrow
-                label={"Variable names don't need a hyphen."}
-              >
-                <InfoIcon css={{ marginTop: '5px', marginLeft: '-6px' }} />
-              </Tooltip>
+            <Flex alignItems={'center'} mb="2">
+              <Text style={{ fontWeight: 500 }}>Color Name</Text>
+              <Box
+                css={{
+                  width: '1rem',
+                  height: '1rem',
+                  backgroundColor: defaultNamedToken.token.value,
+                  marginLeft: '10px',
+                  border: '1px solid black',
+                  borderRadius: '20%',
+                }}
+              />
             </Flex>
             <Input
               value={colorName}
