@@ -45,10 +45,10 @@ export function EditLineHeightModal({
   const [variantName, setVariantName] = useState<string>(
     initialLineHeightVariant?.name ?? ''
   )
-  const [variantValue, setVariantValue] = useState<number>(
+  const [variantValue, setVariantValue] = useState<string>(
     initialLineHeightVariant?.token
-      ? parseUnit(initialLineHeightVariant.token.value).rawValue
-      : 0
+      ? `${parseUnit(initialLineHeightVariant.token.value).rawValue}`
+      : ''
   )
 
   const [id, setId] = useState<string>(
@@ -64,17 +64,22 @@ export function EditLineHeightModal({
 
   const handleSave = () => {
     setError(null)
-    if (variantName === '') {
+    if (variantName === '' || variantValue === '') {
       setError('Please fill out all fields.')
       return
     }
 
-    if (variantValue !== 0 && !variantValue) {
+    if (isNaN(Number(variantValue))) {
+      setError('Value must be a number.')
+      return
+    }
+
+    if (Number(variantValue) !== 0 && !Number(variantValue)) {
       setError('Please fill out all fields.')
       return
     }
 
-    if (variantValue < 0) {
+    if (Number(variantValue) < 0) {
       setError('Minimum value of line height can be 0.')
       return
     }
@@ -100,8 +105,8 @@ export function EditLineHeightModal({
       setVariantName(initialLineHeightVariant?.name ?? '')
       setVariantValue(
         initialLineHeightVariant?.token
-          ? parseUnit(initialLineHeightVariant.token.value).rawValue
-          : 0
+          ? `${parseUnit(initialLineHeightVariant.token.value).rawValue}`
+          : ''
       )
       setVariantUnit(
         initialLineHeightVariant?.token
@@ -140,7 +145,7 @@ export function EditLineHeightModal({
                 <FormLabel>Variant Value</FormLabel>
                 <Input
                   value={variantValue}
-                  onChange={(e) => setVariantValue(Number(e.target.value))}
+                  onChange={(e) => setVariantValue(e.target.value)}
                   type="number"
                 />
               </FormControl>
