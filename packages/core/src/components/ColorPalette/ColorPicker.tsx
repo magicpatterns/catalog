@@ -8,7 +8,7 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/react'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 

@@ -9,6 +9,7 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react'
+import { Input } from '@chakra-ui/react'
 import { TNamedToken } from '@core/types'
 import { useEffect, useState } from 'react'
 import { BsSliders2 } from 'react-icons/bs'
@@ -17,7 +18,6 @@ import {
   MdOutlineRadioButtonUnchecked,
 } from 'react-icons/md'
 import tinycolor from 'tinycolor2'
-import { Input } from '@chakra-ui/react'
 
 function MirrorfulSlider({
   label,
@@ -291,7 +291,7 @@ export function VariantRow({
               min: 0,
               max: 100,
             },
-          ].map((obj, i) => {
+          ].map((obj) => {
             return <MirrorfulSlider key={obj.label} {...obj} />
           })}
         </Flex>
