@@ -287,7 +287,6 @@ export function EditShadowModal({
     return function (e: React.MouseEvent<HTMLButtonElement>) {
       e.stopPropagation()
       if (newInitialValues.length == 1) {
-        // not allow to delete if there is only on element
         return
       }
 
