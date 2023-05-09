@@ -73,7 +73,19 @@ Simple design systems also speed up development — even early-stage projects! O
 Mirrorful is a NPM package intended to be installed as dev dependency.
 
 ```console
-npm i -D mirrorful # or yarn -D mirrorful; or pnpm i -D mirrorful
+npm i -D mirrorful
+```
+
+or
+
+```console
+yarn add -D mirrorful
+```
+
+or
+
+```console
+pnpm add -D mirrorful
 ```
 
 ## ✨ Usage
