@@ -6,6 +6,7 @@ import { useState } from 'react'
 export function ThemesPage() {
   const [theme, setTheme] = useState<TTheme>(defaultTheme)
 
+  console.log(theme)
   return (
     <Box>
       <Text>{theme.name}</Text>

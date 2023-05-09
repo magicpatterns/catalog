@@ -1,11 +1,16 @@
 import {
   Box,
   Icon,
+  Menu,
+  MenuDivider,
+  MenuItem,
+  MenuList,
   Stack,
   Text,
   Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
+import useMirrorfulStore from '@core/store/useMirrorfulStore'
 import {
   assertToken,
   assertTokenGroup,
@@ -18,33 +23,100 @@ import { useState } from 'react'
 import { FiChevronDown, FiChevronRight, FiPlusCircle } from 'react-icons/fi'
 
 import { EditTokenModal } from './EditTokenModal'
-import { addTokenToThemeColors } from './themeUtils'
+import {
+  addTokenToThemeColors,
+  deleteTokenFromThemeColors,
+  editTokenInThemeColors,
+  resolveTokenValue,
+} from './themeUtils'
 
-function TokenCircle({ name, color }: { name: string; color: string }) {
+function TokenCircle({
+  name,
+  value,
+  path,
+  onEditToken,
+  onDeleteToken,
+}: {
+  name: string
+  value: string
+  path: string
+  onEditToken: (token: { path: string; value: string }) => void
+  onDeleteToken: () => void
+}) {
+  const { colors } = useMirrorfulStore()
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [contextCoords, setContextCoords] = useState<{ x: number; y: number }>()
+  const color = resolveTokenValue({ value, colors })
+
+  const handleCopyName = async () => {
+    await navigator.clipboard.writeText(name)
+  }
+
+  const handleCopyValue = async () => {
+    await navigator.clipboard.writeText(value)
+  }
+
   return (
-    <Tooltip
-      label={
-        <Box>
-          {name}
-          <br />
-          {color}
-        </Box>
-      }
-      hasArrow
-    >
-      <Box
-        css={{
-          height: '30px',
-          width: '30px',
-          backgroundColor: color,
-          borderRadius: '50%',
-          alignSelf: 'center',
-          border: '1px solid lightgray',
-          cursor: 'pointer',
-        }}
-        _hover={{ border: '1px solid gray' }}
+    <>
+      <Tooltip
+        label={
+          <Box>
+            {name}
+            <br />
+            {value}
+          </Box>
+        }
+        hasArrow
+        isDisabled={contextCoords !== undefined}
+      >
+        <Box
+          css={{
+            height: '30px',
+            width: '30px',
+            backgroundColor: color,
+            borderRadius: '50%',
+            alignSelf: 'center',
+            border: '1px solid lightgray',
+            cursor: 'pointer',
+          }}
+          _hover={{ border: '1px solid gray' }}
+          onContextMenu={(e) => {
+            e.preventDefault()
+
+            setContextCoords({
+              x: e.pageX,
+              y: e.pageY,
+            })
+          }}
+        />
+      </Tooltip>
+      <Menu
+        isOpen={!!contextCoords}
+        onClose={() => setContextCoords(undefined)}
+      >
+        <MenuList
+          css={{
+            position: 'absolute',
+            top: contextCoords?.y ?? -500,
+            left: contextCoords?.x ?? -500,
+          }}
+        >
+          <MenuItem onClick={onOpen}>Edit</MenuItem>
+          <MenuItem onClick={handleCopyName}>Copy Name</MenuItem>
+          <MenuItem onClick={handleCopyValue}>Copy Value</MenuItem>
+          <MenuDivider />
+          <MenuItem onClick={onDeleteToken}>Delete</MenuItem>
+        </MenuList>
+      </Menu>
+      <EditTokenModal
+        isOpen={isOpen}
+        onClose={onClose}
+        initialValue={value}
+        initialPath={path}
+        onEditToken={onEditToken}
       />
-    </Tooltip>
+    </>
   )
 }
 export function TokenGroupRow({
@@ -149,7 +221,30 @@ export function TokenGroupRow({
         >
           <Stack direction="row" spacing={1}>
             {namedTokens.map((t) => (
-              <TokenCircle key={t.name} name={t.name} color={t.token.value} />
+              <TokenCircle
+                key={t.name}
+                name={t.name}
+                value={t.token.value}
+                path={`${currentPath}.${t.name}`}
+                onEditToken={(token) => {
+                  const updatedTheme = editTokenInThemeColors({
+                    originalPath: `${currentPath}.${t.name}`,
+                    updatedPath: token.path,
+                    tokenValue: token.value,
+                    tokenType: 'color',
+                    theme,
+                  })
+
+                  onUpdateTheme(updatedTheme)
+                }}
+                onDeleteToken={() => {
+                  const updatedTheme = deleteTokenFromThemeColors({
+                    path: `${currentPath}.${t.name}`,
+                    theme,
+                  })
+                  onUpdateTheme(updatedTheme)
+                }}
+              />
             ))}
           </Stack>
           <Stack direction="column" spacing={4} css={{ marginTop: '8px' }}>
@@ -160,7 +255,9 @@ export function TokenGroupRow({
                 token={g.group}
                 theme={theme}
                 onUpdateTheme={onUpdateTheme}
-                currentPath={`${currentPath}.${g.name}`}
+                currentPath={
+                  currentPath.length === 0 ? g.name : `${currentPath}.${g.name}`
+                }
               />
             ))}
           </Stack>
@@ -169,7 +266,7 @@ export function TokenGroupRow({
       <EditTokenModal
         isOpen={isOpen}
         onClose={onClose}
-        initialPath={''}
+        initialPath={`${currentPath}.`}
         onEditToken={handleAddNewToken}
       />
     </Box>

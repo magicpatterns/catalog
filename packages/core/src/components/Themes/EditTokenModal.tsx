@@ -18,16 +18,20 @@ import { TokenValueInput } from './TokenValueInput'
 export function EditTokenModal({
   isOpen,
   onClose,
+  initialValue,
   initialPath,
   onEditToken,
 }: {
   isOpen: boolean
   onClose: () => void
+  initialValue?: string
   initialPath: string
   onEditToken: (token: { path: string; value: string }) => void
 }) {
+  const isAdding = initialValue === undefined
+
   const [path, setPath] = useState<string>(initialPath)
-  const [tokenValue, setTokenValue] = useState<string>('')
+  const [tokenValue, setTokenValue] = useState<string>(initialValue ?? '')
 
   const handleSave = () => {
     onEditToken({
@@ -41,7 +45,7 @@ export function EditTokenModal({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add New Token</ModalHeader>
+        <ModalHeader>{isAdding ? 'Add New Token' : 'Edit Token'}</ModalHeader>
         <ModalCloseButton />
         <ModalBody
           css={{

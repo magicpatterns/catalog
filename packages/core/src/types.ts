@@ -134,22 +134,22 @@ export const defaultTheme: TTheme = {
       button: {
         primary: {
           bg: {
-            value: '{primary}',
+            value: '#ffffff',
             type: 'color',
             id: 'default-button-primary-bg-id',
           },
           bgHover: {
-            value: '{primaryAccent}',
+            value: '#ffffff',
             type: 'color',
             id: 'default-button-primary-accent-bg-id',
           },
           bgActive: {
-            value: '{primaryAccent}',
+            value: '#ffffff',
             type: 'color',
             id: 'default-button-primary-accent-bg-active-id',
           },
           text: {
-            value: '#ffffff',
+            value: '{Emerald.500}',
             type: 'color',
             id: 'default-button-primary-text-id',
           },
