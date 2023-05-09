@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CloseButton,
   FormControl,
   FormLabel,
   Icon,
@@ -94,7 +95,6 @@ export function EditShadowModal({
           },
         ]
   )
-
   const [color, setColor] = useState(
     presetColor[0] ? presetColor?.map((i: string) => i) : ['rgba(1, 1, 1, 0.4)']
   )
@@ -283,6 +283,34 @@ export function EditShadowModal({
     }
   }, [isOpen, initialShadowVariant])
 
+  function handleDelete(indexToDelete: number) {
+    return function (e: React.MouseEvent<HTMLButtonElement>) {
+      e.stopPropagation()
+      if (newInitialValues.length == 1) {
+        // not allow to delete if there is only on element
+        return
+      }
+
+      const updatedInitialValues = newInitialValues.filter(
+        (_, i) => i !== indexToDelete
+      )
+      const updatedColor = color.filter((_, i) => i !== indexToDelete)
+      const updatedBlur = blur.filter((_, i) => i !== indexToDelete)
+      const updatedVOffset = vOffset.filter((_, i) => i !== indexToDelete)
+      const updatedHOffset = hOffset.filter((_, i) => i !== indexToDelete)
+      const updatedSpread = spread.filter((_, i) => i !== indexToDelete)
+      const updatedCodeResult = codeResult.filter((_, i) => i !== indexToDelete)
+      setNewInitialValues(updatedInitialValues)
+      setColor(updatedColor)
+      sethOffset(updatedHOffset)
+      setVOffset(updatedVOffset)
+      setBlur(updatedBlur)
+      setSpread(updatedSpread)
+      setCodeResult(updatedCodeResult)
+      setShadowIndex(indexToDelete - 1 > 0 ? indexToDelete - 1 : indexToDelete)
+    }
+  }
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
@@ -335,10 +363,14 @@ export function EditShadowModal({
                       color: index === shadowIndex ? 'black' : 'gray',
                       width: '65px',
                       margin: '10px',
+                      position: 'relative',
                     }}
                     onClick={() => setShadowIndex(index)}
                   >
                     {index + 1}
+                    <Box position="absolute" top="-5px" right="-5px">
+                      <CloseButton size="sm" onClick={handleDelete(index)} />
+                    </Box>
                   </Button>
                 ))}
 
