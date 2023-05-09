@@ -46,7 +46,6 @@ export function Onboarding({
 
   const colorParsed = tinycolor(primaryColor)
   const colorStringified = colorParsed.toString()
-  const colorHexStringified = colorParsed.toHexString()
 
   const updatePrimaryColor = (newColor: AnyColor) => {
     // set the color in state
@@ -58,18 +57,18 @@ export function Onboarding({
   }
 
   const handleExport = async (
-    primaryColorHex: string,
+    primaryColorStringified: string,
     primaryColorName: string,
     paletteGroupTokens: TTokenGroup
   ) => {
     const primaryColorTokenGroup: TTokenGroup = {
       DEFAULT: {
         id: uuidv4(),
-        value: primaryColorHex,
+        value: primaryColorStringified,
         type: 'color',
       },
       ...defaultColorShadesToTokens(
-        generateDefaultColorShades(primaryColorHex)
+        generateDefaultColorShades(primaryColorStringified)
       ),
     }
 
@@ -161,7 +160,7 @@ export function Onboarding({
           setPalette(newPalette)
 
           if (platform === 'web') {
-            handleExport(colorHexStringified, primaryName, newPalette)
+            handleExport(colorStringified, primaryName, newPalette)
           }
         }}
         primaryColor={colorStringified}
@@ -177,7 +176,7 @@ export function Onboarding({
         fileTypes={fileTypes}
         onUpdateFileTypes={setFileTypes}
         onExport={() => {
-          handleExport(colorHexStringified, primaryName, palette)
+          handleExport(colorStringified, primaryName, palette)
         }}
         onUpdatePage={setPage}
         platform={platform}

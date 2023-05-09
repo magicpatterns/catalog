@@ -29,31 +29,64 @@ export const newShade = (hexColor: string, magnitude: number) => {
 const scaleDiff = 7
 
 export const generateDefaultColorShades = (primary: AnyColor) => {
-  return {
-    50: tinycolor(primary)
-      .lighten(scaleDiff * 4.8)
-      .toHexString(),
-    100: tinycolor(primary)
-      .lighten(scaleDiff * 3.8)
-      .toHexString(),
-    200: tinycolor(primary)
-      .lighten(scaleDiff * 2.8)
-      .toHexString(),
-    300: tinycolor(primary)
-      .lighten(scaleDiff * 1.8)
-      .toHexString(),
-    400: tinycolor(primary).lighten(scaleDiff).toHexString(),
-    500: tinycolor(primary).toHexString(),
-    600: tinycolor(primary).darken(scaleDiff).toHexString(),
-    700: tinycolor(primary)
-      .darken(scaleDiff * 2.8)
-      .toHexString(),
-    800: tinycolor(primary)
-      .darken(scaleDiff * 3.8)
-      .toHexString(),
-    900: tinycolor(primary)
-      .darken(scaleDiff * 4.8)
-      .toHexString(),
+  const format =
+    typeof primary === 'string' && primary.includes('#') ? 'HEX' : 'RGBA'
+
+  // TODO(Danilowicz): I recognize this could be shorter/cleaner
+  if (format === 'HEX') {
+    return {
+      50: tinycolor(primary)
+        .lighten(scaleDiff * 4.8)
+        .toHexString(),
+      100: tinycolor(primary)
+        .lighten(scaleDiff * 3.8)
+        .toHexString(),
+      200: tinycolor(primary)
+        .lighten(scaleDiff * 2.8)
+        .toHexString(),
+      300: tinycolor(primary)
+        .lighten(scaleDiff * 1.8)
+        .toHexString(),
+      400: tinycolor(primary).lighten(scaleDiff).toHexString(),
+      500: tinycolor(primary).toHexString(),
+      600: tinycolor(primary).darken(scaleDiff).toHexString(),
+      700: tinycolor(primary)
+        .darken(scaleDiff * 2.8)
+        .toHexString(),
+      800: tinycolor(primary)
+        .darken(scaleDiff * 3.8)
+        .toHexString(),
+      900: tinycolor(primary)
+        .darken(scaleDiff * 4.8)
+        .toHexString(),
+    }
+  } else {
+    return {
+      50: tinycolor(primary)
+        .lighten(scaleDiff * 4.8)
+        .toRgbString(),
+      100: tinycolor(primary)
+        .lighten(scaleDiff * 3.8)
+        .toRgbString(),
+      200: tinycolor(primary)
+        .lighten(scaleDiff * 2.8)
+        .toRgbString(),
+      300: tinycolor(primary)
+        .lighten(scaleDiff * 1.8)
+        .toRgbString(),
+      400: tinycolor(primary).lighten(scaleDiff).toRgbString(),
+      500: tinycolor(primary).toRgbString(),
+      600: tinycolor(primary).darken(scaleDiff).toRgbString(),
+      700: tinycolor(primary)
+        .darken(scaleDiff * 2.8)
+        .toRgbString(),
+      800: tinycolor(primary)
+        .darken(scaleDiff * 3.8)
+        .toRgbString(),
+      900: tinycolor(primary)
+        .darken(scaleDiff * 4.8)
+        .toRgbString(),
+    }
   }
 }
 

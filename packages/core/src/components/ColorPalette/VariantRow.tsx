@@ -167,7 +167,7 @@ export function VariantRow({
           css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
         >
           <Tooltip
-            label="Copied Hex to Clipboard"
+            label="Copied to Clipboard"
             hasArrow
             isDisabled={!hasCopiedHexCode}
             isOpen={hasCopiedHexCode}
@@ -179,7 +179,7 @@ export function VariantRow({
               _hover={{
                 cursor: 'pointer',
                 backgroundColor: textColor,
-                color: color,
+                color: textColor === 'white' ? 'black' : 'white',
                 borderRadius: 8,
                 paddingInline: 2,
               }}

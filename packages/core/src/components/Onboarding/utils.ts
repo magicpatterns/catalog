@@ -1673,11 +1673,14 @@ export function generatePalette(
       h: hslColor.h + Math.random() * 50 - 25,
     }
 
-    const hex = tinycolor(modifiedHsl).toHexString()
+    const val =
+      typeof color === 'string' && color.includes('#')
+        ? tinycolor(modifiedHsl).toHexString()
+        : tinycolor(modifiedHsl).toRgbString()
 
     randomizedColors[nameThatColor(modifiedHsl)] = {
       id: uuidv4(),
-      value: hex,
+      value: val,
       type: 'color',
     }
   })
@@ -1691,5 +1694,6 @@ export function generatePalette(
     }
   })
 
+  console.log(randomizedColors)
   return randomizedColors
 }

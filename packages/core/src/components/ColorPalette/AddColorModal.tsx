@@ -111,7 +111,6 @@ export function AddColorModal({
               <ColorPicker
                 onChange={(colorPickerColor) => {
                   const color = getColor(colorPickerColor)
-
                   setColorPickerColor(color)
                 }}
                 colorPickerColor={colorPickerColor}
