@@ -1,6 +1,3 @@
-import 'react-bootstrap-typeahead/css/Typeahead.css'
-import 'react-bootstrap-typeahead/css/Typeahead.bs5.css'
-
 import { Box } from '@chakra-ui/react'
 import useMirrorfulStore from '@core/store/useMirrorfulStore'
 import { assertToken, assertTokenGroup, TToken, TTokenGroup } from '@core/types'

@@ -283,15 +283,6 @@ export function Sidebar({
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
-            <SidebarLink
-              key="sidebar-spacing"
-              label="Spacing"
-              link="/spacing"
-              icon={CgSpaceBetween}
-              isComingSoon
-              isDisabled={isDisabled}
-              isCollapsed={isCollapsed}
-            />
           </SidebarSection>
 
           <SidebarSection

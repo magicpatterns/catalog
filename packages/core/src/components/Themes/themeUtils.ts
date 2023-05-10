@@ -4,38 +4,30 @@ import {
   TTheme,
   TToken,
   TTokenGroup,
-  TTokenType,
 } from '@core/types'
-import { v4 as uuidv4 } from 'uuid'
 
-export const addTokenToThemeColors = ({
+export const addTokenOrGroupToTheme = ({
   path,
-  tokenValue,
-  tokenType,
+  target,
   theme,
 }: {
   path: string
-  tokenValue: string
-  tokenType: TTokenType
+  target: TTokenGroup | TToken
   theme: TTheme
 }): TTheme => {
-  const updatedTheme = structuredClone(theme.tokens.colors)
+  const updatedTokens = structuredClone(theme.tokens)
 
-  if (!assertTokenGroup(updatedTheme)) {
+  if (!assertTokenGroup(updatedTokens)) {
     throw new Error(`Theme colors are not a token group.`)
   }
 
   const keys = path.split('.')
 
-  let currentObject: TTokenGroup = updatedTheme
+  let currentObject: TTokenGroup = updatedTokens
 
   keys.forEach((key, index) => {
     if (index === keys.length - 1) {
-      currentObject[key] = {
-        id: uuidv4(),
-        value: tokenValue,
-        type: tokenType,
-      }
+      currentObject[key] = target
     } else {
       const nextObj = currentObject[key]
 
@@ -54,38 +46,32 @@ export const addTokenToThemeColors = ({
   return {
     id: theme.id,
     name: theme.name,
-    tokens: {
-      ...theme.tokens,
-      colors: updatedTheme,
-    },
+    tokens: updatedTokens,
   }
 }
 
-export const editTokenInThemeColors = ({
+export const editTokenOrGroupInTheme = ({
   originalPath,
   updatedPath,
-  tokenValue,
-  tokenType,
+  target,
   theme,
 }: {
   originalPath: string
   updatedPath: string
-  tokenValue: string
-  tokenType: TTokenType
+  target: TTokenGroup | TToken
   theme: TTheme
 }): TTheme => {
   let updatedTheme = structuredClone(theme)
 
   try {
-    updatedTheme = deleteTokenFromThemeColors({
+    updatedTheme = deleteTokenOrGroupFromTheme({
       path: originalPath,
       theme,
     })
 
-    updatedTheme = addTokenToThemeColors({
+    updatedTheme = addTokenOrGroupToTheme({
       path: updatedPath,
-      tokenValue,
-      tokenType,
+      target,
       theme: updatedTheme,
     })
   } catch (e) {
@@ -95,22 +81,21 @@ export const editTokenInThemeColors = ({
   return updatedTheme
 }
 
-export const deleteTokenFromThemeColors = ({
+export const deleteTokenOrGroupFromTheme = ({
   path,
   theme,
 }: {
   path: string
   theme: TTheme
 }): TTheme => {
-  const updatedTheme = structuredClone(theme.tokens.colors)
-
-  if (!assertTokenGroup(updatedTheme)) {
+  const updatedTokens = structuredClone(theme.tokens)
+  if (!assertTokenGroup(updatedTokens)) {
     throw new Error(`Theme colors are not a token group.`)
   }
 
   const keys = path.split('.')
 
-  let currentObject: TTokenGroup = updatedTheme
+  let currentObject: TTokenGroup = updatedTokens
   keys.forEach((key, index) => {
     if (index === keys.length - 1) {
       delete currentObject[key]
@@ -118,9 +103,7 @@ export const deleteTokenFromThemeColors = ({
       const nextObj = currentObject[key]
 
       if (!nextObj) {
-        const newGroup: TTokenGroup = {}
-        currentObject[key] = newGroup
-        currentObject = newGroup
+        throw new Error(`Non-existent path.`)
       } else if (assertTokenGroup(nextObj)) {
         currentObject = nextObj
       } else {
@@ -132,10 +115,7 @@ export const deleteTokenFromThemeColors = ({
   return {
     id: theme.id,
     name: theme.name,
-    tokens: {
-      ...theme.tokens,
-      colors: updatedTheme,
-    },
+    tokens: updatedTokens,
   }
 }
 
@@ -177,7 +157,6 @@ const resolveReference = ({
     }
   })
   if (!assertToken(currentReference)) {
-    console.log('not a token???')
     throw new Error('This reference is not a valid token.')
   }
 

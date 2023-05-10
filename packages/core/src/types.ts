@@ -132,28 +132,28 @@ export const defaultTheme: TTheme = {
           id: 'default-bg-300-id',
         },
       },
-      button: {
-        primary: {
-          bg: {
-            value: '#ffffff',
-            type: 'color',
-            id: 'default-button-primary-bg-id',
-          },
-          bgHover: {
-            value: '#ffffff',
-            type: 'color',
-            id: 'default-button-primary-accent-bg-id',
-          },
-          bgActive: {
-            value: '#ffffff',
-            type: 'color',
-            id: 'default-button-primary-accent-bg-active-id',
-          },
-          text: {
-            value: '{Emerald.500}',
-            type: 'color',
-            id: 'default-button-primary-text-id',
-          },
+    },
+    button: {
+      primary: {
+        bg: {
+          value: '#ffffff',
+          type: 'color',
+          id: 'default-button-primary-bg-id',
+        },
+        bgHover: {
+          value: '#ffffff',
+          type: 'color',
+          id: 'default-button-primary-accent-bg-id',
+        },
+        bgActive: {
+          value: '#ffffff',
+          type: 'color',
+          id: 'default-button-primary-accent-bg-active-id',
+        },
+        text: {
+          value: '{Emerald.500}',
+          type: 'color',
+          id: 'default-button-primary-text-id',
         },
       },
     },

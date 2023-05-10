@@ -1,10 +1,10 @@
-import { Box, Heading, Icon, Link } from '@chakra-ui/react'
-import { EditableHeader } from '@core/components/EditableHeader'
+import { Box, Icon, Link } from '@chakra-ui/react'
+import { EditableContent } from '@core/components/EditableContent'
 import { TokenGroupRow } from '@core/components/Themes/TokenGroupRow'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { TTheme, TTokenGroup } from '@core/types'
+import { assertTokenGroup, TTheme } from '@core/types'
 import { TMirrorfulStore } from '@core/types'
 import { FiChevronLeft } from 'react-icons/fi'
 
@@ -46,9 +46,10 @@ export function ThemeEditorPage({
         }}
       >
         <Icon as={FiChevronLeft} css={{ marginRight: '4px' }} />
-        BACK TO THEMES
+        Back to Themes
       </Link>
-      <EditableHeader
+      <EditableContent
+        type="heading"
         text={selectedTheme.name}
         onUpdateText={(updatedText: string) => {
           const updatedThemes = [...themes]
@@ -61,24 +62,42 @@ export function ThemeEditorPage({
 
           handleUpdateThemes(updatedThemes)
         }}
+        css={{
+          marginTop: '24px',
+          fontSize: '2rem',
+          fontWeight: 'bold',
+          padding: '4px 8px',
+        }}
       />
-      <Box css={{ maxWidth: '500px' }}>
-        <TokenGroupRow
-          tokenKey={'colors'}
-          token={selectedTheme.tokens.colors as TTokenGroup}
-          theme={selectedTheme}
-          onUpdateTheme={(updatedTheme) => {
-            const updatedThemes = [...themes]
+      <Box css={{ maxWidth: '500px', marginTop: '24px' }}>
+        {Object.keys(selectedTheme.tokens).map((tokenKey) => {
+          const currentValue = selectedTheme.tokens[tokenKey]
 
-            const updatedThemeIndex = updatedThemes.findIndex(
-              (t) => t.id === updatedTheme.id
+          if (assertTokenGroup(currentValue)) {
+            return (
+              <TokenGroupRow
+                key={tokenKey}
+                tokenKey={tokenKey}
+                token={currentValue}
+                theme={selectedTheme}
+                onUpdateTheme={(updatedTheme) => {
+                  const updatedThemes = [...themes]
+
+                  const updatedThemeIndex = updatedThemes.findIndex(
+                    (t) => t.id === updatedTheme.id
+                  )
+
+                  updatedThemes[updatedThemeIndex] = updatedTheme
+
+                  handleUpdateThemes(updatedThemes)
+                }}
+                currentPath={tokenKey}
+              />
             )
+          }
 
-            updatedThemes[updatedThemeIndex] = updatedTheme
-
-            handleUpdateThemes(updatedThemes)
-          }}
-        />
+          return null
+        })}
       </Box>
     </Box>
   )

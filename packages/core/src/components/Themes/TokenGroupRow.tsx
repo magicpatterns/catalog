@@ -6,7 +6,6 @@ import {
   MenuItem,
   MenuList,
   Stack,
-  Text,
   Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -20,13 +19,22 @@ import {
   TTokenGroup,
 } from '@core/types'
 import { useState } from 'react'
-import { FiChevronDown, FiChevronRight, FiPlusCircle } from 'react-icons/fi'
+import {
+  FiChevronDown,
+  FiChevronRight,
+  FiCopy,
+  FiEdit2,
+  FiPlus,
+  FiTrash,
+} from 'react-icons/fi'
+import { v4 as uuidv4 } from 'uuid'
 
+import { EditableContent } from '../EditableContent'
 import { EditTokenModal } from './EditTokenModal'
 import {
-  addTokenToThemeColors,
-  deleteTokenFromThemeColors,
-  editTokenInThemeColors,
+  addTokenOrGroupToTheme,
+  deleteTokenOrGroupFromTheme,
+  editTokenOrGroupInTheme,
   resolveTokenValue,
 } from './themeUtils'
 
@@ -69,6 +77,10 @@ function TokenCircle({
         }
         hasArrow
         isDisabled={contextCoords !== undefined}
+        css={{
+          borderRadius: 8,
+          padding: '6px 12px',
+        }}
       >
         <Box
           css={{
@@ -102,11 +114,19 @@ function TokenCircle({
             left: contextCoords?.x ?? -500,
           }}
         >
-          <MenuItem onClick={onOpen}>Edit</MenuItem>
-          <MenuItem onClick={handleCopyName}>Copy Name</MenuItem>
-          <MenuItem onClick={handleCopyValue}>Copy Value</MenuItem>
+          <MenuItem icon={<FiEdit2 />} onClick={onOpen}>
+            Edit
+          </MenuItem>
+          <MenuItem icon={<FiCopy />} onClick={handleCopyName}>
+            Copy Name
+          </MenuItem>
+          <MenuItem icon={<FiCopy />} onClick={handleCopyValue}>
+            Copy Value
+          </MenuItem>
           <MenuDivider />
-          <MenuItem onClick={onDeleteToken}>Delete</MenuItem>
+          <MenuItem icon={<FiTrash />} onClick={onDeleteToken}>
+            Delete
+          </MenuItem>
         </MenuList>
       </Menu>
       <EditTokenModal
@@ -155,10 +175,13 @@ export function TokenGroupRow({
     )
 
   const handleAddNewToken = (newToken: { path: string; value: string }) => {
-    const newTheme = addTokenToThemeColors({
+    const newTheme = addTokenOrGroupToTheme({
       path: newToken.path,
-      tokenType: 'color',
-      tokenValue: newToken.value,
+      target: {
+        id: uuidv4(),
+        value: newToken.value,
+        type: 'color',
+      },
       theme,
     })
 
@@ -177,22 +200,86 @@ export function TokenGroupRow({
         onMouseLeave={() => setIsHoveringTitle(false)}
       >
         <Box
-          css={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-          onClick={() => setIsCollapsed(!isCollapsed)}
+          css={{
+            display: 'flex',
+            alignItems: 'center',
+            color: '#454647',
+          }}
         >
           <Icon
             as={isCollapsed ? FiChevronRight : FiChevronDown}
-            css={{ marginRight: '4px' }}
+            css={{ marginRight: '4px', cursor: 'pointer' }}
+            onClick={() => setIsCollapsed(!isCollapsed)}
           />
-          <Text>{tokenKey}</Text>
+          <EditableContent
+            type="text"
+            text={tokenKey}
+            onUpdateText={(updatedText: string) => {
+              const pieces = currentPath.split('.')
+              pieces.pop()
+              pieces.push(updatedText)
+              const newPath = pieces.join('.')
+
+              const updatedTheme = editTokenOrGroupInTheme({
+                originalPath: currentPath,
+                updatedPath: newPath,
+                target: token,
+                theme,
+              })
+
+              onUpdateTheme(updatedTheme)
+            }}
+            css={{
+              fontWeight: 'bold',
+              fontSize: '18px',
+              padding: '2px 8px',
+            }}
+          />
         </Box>
-        {isHoveringTitle && (
-          <Icon
-            as={FiPlusCircle}
-            css={{ cursor: 'pointer' }}
-            onClick={() => onOpen()}
-          />
-        )}
+        <Stack
+          css={{ display: 'flex', alignItems: 'center' }}
+          direction="row"
+          spacing={4}
+        >
+          <Tooltip
+            label={'Add new Token to Group'}
+            hasArrow
+            css={{
+              borderRadius: 8,
+              padding: '6px 12px',
+            }}
+          >
+            <span>
+              <Icon
+                as={FiPlus}
+                css={{ cursor: 'pointer' }}
+                onClick={() => onOpen()}
+              />
+            </span>
+          </Tooltip>
+          <Tooltip
+            label={'Delete Token Group'}
+            hasArrow
+            css={{
+              borderRadius: 8,
+              padding: '6px 12px',
+            }}
+          >
+            <span>
+              <Icon
+                as={FiTrash}
+                css={{ cursor: 'pointer' }}
+                onClick={() => {
+                  const updatedTheme = deleteTokenOrGroupFromTheme({
+                    path: currentPath,
+                    theme,
+                  })
+                  onUpdateTheme(updatedTheme)
+                }}
+              />
+            </span>
+          </Tooltip>
+        </Stack>
       </Box>
       <Box
         css={{
@@ -200,13 +287,14 @@ export function TokenGroupRow({
           marginTop: '8px',
           height: isCollapsed ? 0 : 'auto',
           overflow: 'hidden',
+          paddingLeft: '6px',
         }}
       >
         <Box
           css={{
             width: '5px',
-            borderLeft: '1px solid gray',
-            borderBottom: '1px solid gray',
+            borderLeft: '1px solid #454647',
+            borderBottom: '1px solid #454647',
             borderBottomLeftRadius: '7px',
             marginBottom: '20px',
           }}
@@ -227,18 +315,21 @@ export function TokenGroupRow({
                 value={t.token.value}
                 path={`${currentPath}.${t.name}`}
                 onEditToken={(token) => {
-                  const updatedTheme = editTokenInThemeColors({
+                  const updatedTheme = editTokenOrGroupInTheme({
                     originalPath: `${currentPath}.${t.name}`,
                     updatedPath: token.path,
-                    tokenValue: token.value,
-                    tokenType: 'color',
+                    target: {
+                      id: t.token.id,
+                      value: token.value,
+                      type: 'color',
+                    },
                     theme,
                   })
 
                   onUpdateTheme(updatedTheme)
                 }}
                 onDeleteToken={() => {
-                  const updatedTheme = deleteTokenFromThemeColors({
+                  const updatedTheme = deleteTokenOrGroupFromTheme({
                     path: `${currentPath}.${t.name}`,
                     theme,
                   })

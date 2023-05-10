@@ -1,22 +1,26 @@
-import { Heading } from '@chakra-ui/react'
+import { Heading, Text } from '@chakra-ui/react'
+import { CSSProperties } from 'react'
 
-export function EditableHeader({
+export function EditableContent({
   text,
+  type,
   onUpdateText,
+  css,
 }: {
   text: string
+  type: 'heading' | 'text'
   onUpdateText: (updatedText: string) => void
+  css?: CSSProperties
 }) {
+  const ComponentToUse = type === 'heading' ? Heading : Text
+
   return (
-    <Heading
-      fontSize={'2rem'}
-      fontWeight="bold"
+    <ComponentToUse
       css={{
-        marginTop: '24px',
         display: 'flex',
         transition: 'background-color 200ms ease-in-out',
         borderRadius: 8,
-        padding: '4px 8px',
+        ...css,
       }}
       contentEditable
       onBlur={(e) => {
@@ -27,6 +31,6 @@ export function EditableHeader({
       }}
     >
       {text}
-    </Heading>
+    </ComponentToUse>
   )
 }

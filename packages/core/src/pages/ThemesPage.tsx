@@ -3,7 +3,7 @@ import { ThemeCard } from '@core/components/Themes/ThemeCard'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { TTheme } from '@core/types'
+import { defaultTheme, TTheme } from '@core/types'
 import { TMirrorfulStore } from '@core/types'
 import { useRouter } from 'next/navigation'
 import { v4 as uuidv4 } from 'uuid'
@@ -30,9 +30,7 @@ export function ThemesPage({
     const newTheme = {
       id: uuidv4(),
       name: 'Untitled Theme',
-      tokens: {
-        colors: {},
-      },
+      tokens: defaultTheme.tokens,
     }
 
     handleUpdateThemes([...themes, newTheme])
@@ -61,6 +59,21 @@ export function ThemesPage({
               theme={theme}
               onSelectTheme={() => {
                 router.push(`/themes/${theme.id}`)
+              }}
+              contextMenuActions={{
+                onDuplicateTheme: () => {
+                  const newTheme = structuredClone(theme)
+                  newTheme.id = uuidv4()
+                  newTheme.name = `${theme.name} Copy`
+
+                  handleUpdateThemes([...themes, newTheme])
+                },
+                onDeleteTheme: () => {
+                  const updatedThemes = [...themes].filter(
+                    (t) => t.id !== theme.id
+                  )
+                  handleUpdateThemes(updatedThemes)
+                },
               }}
             />
           ))}

@@ -68,7 +68,7 @@ export const toCss = (
     content.push(`html[data-theme='${theme.name}'] {`)
 
     // Recursively iterate through the theme
-    const themeTokens = theme.tokens.colors
+    const themeTokens = theme.tokens
 
     const addNode = (node: TTokenGroup | TToken, path: string) => {
       if (assertTokenGroup(node)) {
