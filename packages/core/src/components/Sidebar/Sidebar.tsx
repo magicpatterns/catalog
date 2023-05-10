@@ -303,7 +303,7 @@ export function Sidebar({
               label="Themes"
               link="/themes"
               icon={TbColorSwatch}
-              isActive={activeTab === '/themes'}
+              isActive={activeTab.includes('/themes')}
               onSelect={() => onSelectTab('/themes')}
               isCollapsed={isCollapsed}
             />

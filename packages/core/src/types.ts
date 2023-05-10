@@ -101,6 +101,7 @@ export const defaultTypographyV2: TPrimitivesTypography = {
 }
 
 export const defaultTheme: TTheme = {
+  id: 'default-theme-1',
   name: 'Light',
   tokens: {
     colors: {
@@ -165,7 +166,7 @@ export const defaultConfigV2: TMirrorfulStore = {
     typography: defaultTypographyV2,
     shadows: defaultShadowsV2,
   },
-  themes: [],
+  themes: [defaultTheme],
   files: defaultFiles,
 }
 
@@ -196,6 +197,7 @@ export type ThemeStore = {
 
 // Each theme, e.g. "Dark Theme"
 export type TTheme = {
+  id: string
   name: string
   tokens: TTokenGroup
 }

@@ -266,7 +266,7 @@ export function TokenGroupRow({
       <EditTokenModal
         isOpen={isOpen}
         onClose={onClose}
-        initialPath={`${currentPath}.`}
+        initialPath={currentPath.length > 0 ? `${currentPath}.` : ''}
         onEditToken={handleAddNewToken}
       />
     </Box>

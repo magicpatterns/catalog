@@ -18,7 +18,7 @@ export const addTokenToThemeColors = ({
   tokenValue: string
   tokenType: TTokenType
   theme: TTheme
-}) => {
+}): TTheme => {
   const updatedTheme = structuredClone(theme.tokens.colors)
 
   if (!assertTokenGroup(updatedTheme)) {
@@ -52,6 +52,7 @@ export const addTokenToThemeColors = ({
   })
 
   return {
+    id: theme.id,
     name: theme.name,
     tokens: {
       ...theme.tokens,
@@ -72,7 +73,7 @@ export const editTokenInThemeColors = ({
   tokenValue: string
   tokenType: TTokenType
   theme: TTheme
-}) => {
+}): TTheme => {
   let updatedTheme = structuredClone(theme)
 
   try {
@@ -129,6 +130,7 @@ export const deleteTokenFromThemeColors = ({
   })
 
   return {
+    id: theme.id,
     name: theme.name,
     tokens: {
       ...theme.tokens,
@@ -180,4 +182,33 @@ const resolveReference = ({
   }
 
   return currentReference.value
+}
+
+export const flattenTheme = ({
+  theme,
+  colors,
+}: {
+  theme: TTheme
+  colors: TTokenGroup
+}) => {
+  const colorValues: string[] = []
+
+  const addNode = (node: TTokenGroup | TToken) => {
+    if (assertTokenGroup(node)) {
+      Object.keys(node).forEach((key) => {
+        addNode(node[key])
+      })
+    } else if (assertToken(node)) {
+      const resolvedValue = resolveTokenValue({
+        value: node.value,
+        colors,
+      })
+
+      colorValues.push(resolvedValue)
+    }
+  }
+
+  addNode(theme.tokens)
+
+  return colorValues
 }

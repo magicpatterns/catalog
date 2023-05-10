@@ -11,7 +11,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { TokenValueInput } from './TokenValueInput'
 
@@ -40,6 +40,13 @@ export function EditTokenModal({
     })
     onClose()
   }
+
+  useEffect(() => {
+    if (!isOpen) {
+      setPath(initialPath)
+      setTokenValue(initialValue ?? '')
+    }
+  }, [isOpen])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

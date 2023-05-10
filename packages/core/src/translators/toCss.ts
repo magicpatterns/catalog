@@ -1,8 +1,19 @@
-import { assertToken, assertTokenGroup, TPrimitives } from '@core/types'
+import { resolveTokenValue } from '@core/components/Themes/themeUtils'
+import {
+  assertToken,
+  assertTokenGroup,
+  TPrimitives,
+  TTheme,
+  TToken,
+  TTokenGroup,
+} from '@core/types'
 
 import { sanitizeName } from './sanitizeName'
 
-export const toCss = ({ colors, typography, shadows }: TPrimitives): string => {
+export const toCss = (
+  { colors, typography, shadows }: TPrimitives,
+  themes: TTheme[]
+): string => {
   const content = [':root {']
 
   Object.keys(colors).forEach((colorName) => {
@@ -51,6 +62,33 @@ export const toCss = ({ colors, typography, shadows }: TPrimitives): string => {
   })
 
   content.push(`}`)
+  content.push('')
+
+  themes.forEach((theme) => {
+    content.push(`html[data-theme='${theme.name}'] {`)
+
+    // Recursively iterate through the theme
+    const themeTokens = theme.tokens.colors
+
+    const addNode = (node: TTokenGroup | TToken, path: string) => {
+      if (assertTokenGroup(node)) {
+        Object.keys(node).forEach((key) => {
+          addNode(node[key], path.length > 0 ? `${path}-${key}` : key)
+        })
+      } else if (assertToken(node)) {
+        const resolvedValue = resolveTokenValue({
+          value: node.value,
+          colors,
+        })
+
+        content.push(`  --${path}: ${resolvedValue};`)
+      }
+    }
+
+    addNode(themeTokens, '')
+
+    content.push('}')
+  })
 
   return content.join('\n')
 }

@@ -7,6 +7,7 @@ import {
 jest.mock('uuid', () => ({ v4: () => 'mockid' }))
 
 const MOCK_THEME_DATA = {
+  id: 'mockid',
   name: 'Light',
   tokens: {
     colors: {
@@ -32,6 +33,7 @@ const MOCK_THEME_DATA = {
 } as const
 
 const MOCK_NESTED_THEME_DATA = {
+  id: 'mockid',
   name: 'Light',
   tokens: {
     colors: {
