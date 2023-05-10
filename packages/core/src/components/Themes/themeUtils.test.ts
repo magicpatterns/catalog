@@ -1,7 +1,7 @@
 import {
-  addTokenToThemeColors,
-  deleteTokenFromThemeColors,
-  editTokenInThemeColors,
+  addTokenOrGroupToTheme,
+  deleteTokenOrGroupFromTheme,
+  editTokenOrGroupInTheme,
 } from './themeUtils'
 
 jest.mock('uuid', () => ({ v4: () => 'mockid' }))
@@ -58,12 +58,15 @@ const MOCK_NESTED_THEME_DATA = {
   },
 } as const
 
-describe('addTokenToThemeColors', () => {
+describe('addTokenOrGroupToTheme', () => {
   test('add to top level', () => {
-    const result = addTokenToThemeColors({
+    const result = addTokenOrGroupToTheme({
       path: 'button',
-      tokenValue: '#f3f3f3',
-      tokenType: 'color',
+      target: {
+        id: 'mockid',
+        value: '#f3f3f3',
+        type: 'color',
+      },
       theme: MOCK_THEME_DATA,
     })
 
@@ -99,10 +102,13 @@ describe('addTokenToThemeColors', () => {
   })
 
   test('add to nested path', () => {
-    const result = addTokenToThemeColors({
+    const result = addTokenOrGroupToTheme({
       path: 'button.primary.bg',
-      tokenValue: '#f3f3f3',
-      tokenType: 'color',
+      target: {
+        id: 'mockid',
+        value: '#f3f3f3',
+        type: 'color',
+      },
       theme: MOCK_THEME_DATA,
     })
 
@@ -142,10 +148,13 @@ describe('addTokenToThemeColors', () => {
   })
 
   test('add to existing nested path', () => {
-    const result = addTokenToThemeColors({
+    const result = addTokenOrGroupToTheme({
       path: 'header.bg',
-      tokenValue: '#f3f3f3',
-      tokenType: 'color',
+      target: {
+        id: 'mockid',
+        value: '#f3f3f3',
+        type: 'color',
+      },
       theme: MOCK_THEME_DATA,
     })
 
@@ -181,9 +190,9 @@ describe('addTokenToThemeColors', () => {
   })
 })
 
-describe('deleteTokenFromThemeColors', () => {
+describe('deleteTokenOrGroupFromTheme', () => {
   test('delete existing token', () => {
-    const result = deleteTokenFromThemeColors({
+    const result = deleteTokenOrGroupFromTheme({
       path: 'button.bg',
       theme: MOCK_NESTED_THEME_DATA,
     })
@@ -210,13 +219,16 @@ describe('deleteTokenFromThemeColors', () => {
   })
 })
 
-describe('editTokenFromThemeColors', () => {
+describe('editTokenOrGroupInTheme', () => {
   test('change existing path', () => {
-    const result = editTokenInThemeColors({
+    const result = editTokenOrGroupInTheme({
       originalPath: 'button.bgHover',
       updatedPath: 'button.primary.bgHover',
-      tokenValue: '#ffffff',
-      tokenType: 'color',
+      target: {
+        id: 'mockid',
+        value: '#ffffff',
+        type: 'color',
+      },
       theme: MOCK_NESTED_THEME_DATA,
     })
 
@@ -249,11 +261,14 @@ describe('editTokenFromThemeColors', () => {
   })
 
   test('change existing value', () => {
-    const result = editTokenInThemeColors({
+    const result = editTokenOrGroupInTheme({
       originalPath: 'button.bgHover',
       updatedPath: 'button.bgHover',
-      tokenValue: '#abc123',
-      tokenType: 'color',
+      target: {
+        id: 'mockid',
+        value: '#abc123',
+        type: 'color',
+      },
       theme: MOCK_NESTED_THEME_DATA,
     })
 
