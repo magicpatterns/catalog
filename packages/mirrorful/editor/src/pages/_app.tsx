@@ -68,6 +68,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     // only initial render assign pathname
     oldPathname.current = pathname
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
