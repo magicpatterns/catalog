@@ -66,11 +66,14 @@ export function EditLineHeightModal({
 
   const handleSave = () => {
     setError(null)
-    if (variantName === '' || variantValue === '') {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      variantName === ''
-        ? variantNameRef.current.focus()
-        : variantValueRef.current.focus()
+    if (variantName === '') {
+      variantNameRef.current.focus()
+      setError('Please fill out all fields.')
+      return
+    }
+
+    if (variantValue === '') {
+      variantValueRef.current.focus()
       setError('Please fill out all fields.')
       return
     }
