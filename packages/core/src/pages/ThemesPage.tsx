@@ -34,6 +34,7 @@ export function ThemesPage({
     }
 
     handleUpdateThemes([...themes, newTheme])
+    router.push(`/themes/${newTheme.id}`)
   }
 
   return (
