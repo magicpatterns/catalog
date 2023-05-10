@@ -345,7 +345,7 @@ function WebModalBody({
                 language="css"
                 text={`/* For example, create a mirrorful.css file \n and use it throughout your project */\n\n${toCss(
                   primitives,
-                  []
+                  themes
                 )}`}
               />
             </TabPanel>
@@ -354,7 +354,7 @@ function WebModalBody({
                 language="scss"
                 text={`/* For example, create a mirrorful.scss file \n and use it throughout your project */\n\n${toScss(
                   primitives,
-                  []
+                  themes
                 )}`}
               />
             </TabPanel>
