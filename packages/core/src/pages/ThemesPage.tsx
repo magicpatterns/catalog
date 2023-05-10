@@ -1,5 +1,5 @@
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
-import { ThemeCard } from '@core/components/Themes/ThemeCard'
+import { CreateThemeCard, ThemeCard } from '@core/components/Themes/ThemeCard'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
@@ -52,7 +52,7 @@ export function ThemesPage({
         </Text>
       </Box>
       <Box css={{ marginTop: '24px' }}>
-        <Stack direction="row" spacing={8}>
+        <Stack direction="row" spacing={8} flexWrap="wrap">
           {themes.map((theme) => (
             <ThemeCard
               key={theme.id}
@@ -77,20 +77,7 @@ export function ThemesPage({
               }}
             />
           ))}
-          <ThemeCard
-            theme={{
-              id: 'create-new-theme',
-              name: 'Create New Theme',
-              tokens: {
-                colors: {
-                  id: '1',
-                  value: '#abcdef',
-                  type: 'color',
-                },
-              },
-            }}
-            onSelectTheme={handleCreateNewTheme}
-          />
+          <CreateThemeCard onCreateTheme={handleCreateNewTheme} />
         </Stack>
       </Box>
     </>
