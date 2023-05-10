@@ -1,4 +1,5 @@
 import { TTokenGroup } from '@core/types'
+import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -27,33 +28,84 @@ export const newShade = (hexColor: string, magnitude: number) => {
 
 const scaleDiff = 7
 
-export const generateDefaultColorShades = (primary: string) => {
-  return {
-    50: tinycolor(primary)
-      .lighten(scaleDiff * 4.8)
-      .toHexString(),
-    100: tinycolor(primary)
-      .lighten(scaleDiff * 3.8)
-      .toHexString(),
-    200: tinycolor(primary)
-      .lighten(scaleDiff * 2.8)
-      .toHexString(),
-    300: tinycolor(primary)
-      .lighten(scaleDiff * 1.8)
-      .toHexString(),
-    400: tinycolor(primary).lighten(scaleDiff).toHexString(),
-    500: tinycolor(primary).toHexString(),
-    600: tinycolor(primary).darken(scaleDiff).toHexString(),
-    700: tinycolor(primary)
-      .darken(scaleDiff * 2.8)
-      .toHexString(),
-    800: tinycolor(primary)
-      .darken(scaleDiff * 3.8)
-      .toHexString(),
-    900: tinycolor(primary)
-      .darken(scaleDiff * 4.8)
-      .toHexString(),
+interface Shades {
+  50: string
+  100: string
+  200: string
+  300: string
+  400: string
+  500: string
+  600: string
+  700: string
+  800: string
+  900: string
+}
+export type ShadeStop = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+export const generateDefaultColorShades = ({
+  primary,
+  baseStop = 500,
+}: {
+  primary: AnyColor
+  baseStop?: ShadeStop
+}) => {
+  const format =
+    typeof primary === 'string' && primary.includes('#') ? 'HEX' : 'RGBA'
+
+  const shades: Shades = {
+    50: '#fff',
+    100: '#fff',
+    200: '#fff',
+    300: '#fff',
+    400: '#fff',
+    500: '#fff',
+    600: '#fff',
+    700: '#fff',
+    800: '#fff',
+    900: '#fff',
   }
+
+  const multiplierDelta: Record<number, number> = {
+    0: 1,
+    50: 1,
+    100: 1.2,
+    150: 1.4,
+    200: 1.8,
+    250: 2.2,
+    300: 2.8,
+    350: 3.4,
+    400: 3.8,
+    450: 4.2,
+    500: 4.8,
+    550: 5.2,
+    600: 5.8,
+    650: 6.2,
+    700: 6.8,
+    750: 7.2,
+    800: 7.8,
+    850: 8.2,
+  }
+
+  Object.keys(shades).forEach((key) => {
+    // If the key is the basestop, leave it alone
+    let v = tinycolor(primary)
+
+    const delta = Math.abs(Number(key) - baseStop)
+
+    const multiplier = multiplierDelta[delta] ?? 1
+    console.log('key', key, multiplier)
+
+    if (Number(key) < baseStop) {
+      // if it's less than the baseStop, lighten it
+      v = tinycolor(primary).lighten(scaleDiff * multiplier)
+    } else if (Number(key) > baseStop) {
+      // if it's greater than the baseStop, darken it
+      v = tinycolor(primary).darken(scaleDiff * multiplier)
+    }
+    shades[Number(key) as ShadeStop] =
+      format === 'HEX' ? v.toHexString() : v.toRgbString()
+  })
+
+  return shades
 }
 
 export const defaultColorShadesToTokens = (shades: {

@@ -17,8 +17,6 @@
     "@types/node": "18.15.5",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
-    "eslint": "8.36.0",
-    "eslint-config-next": "13.2.4",
     "framer-motion": "^10.6.1",
     "next": "13.2.4",
     "react": "18.2.0",
@@ -29,9 +27,10 @@
     "@mirrorful/eslint-config": "file:../../packages/eslint-config",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
-    "eslint": "^8.36.0",
+    "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-simple-import-sort": "^10.0.0"
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-config-next": "13.2.4"
   }
 }
