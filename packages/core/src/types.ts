@@ -104,56 +104,73 @@ export const defaultTheme: TTheme = {
   id: 'default-theme-1',
   name: 'Light',
   tokens: {
-    colors: {
-      primary: {
-        value: '#ffffff',
+    background: {
+      base: {
+        id: 'default-background-base',
+        value: '#F7FAFC',
         type: 'color',
-        id: 'default-primary-id',
       },
-      primaryAccent: {
-        value: '#ffffff',
+    },
+    neutrals: {
+      100: {
+        id: 'default-neutrals-100',
+        value: '#EDF2F7',
         type: 'color',
-        id: 'default-primary-accent-id',
       },
-      bg: {
-        100: {
-          value: '#ffffff',
-          type: 'color',
-          id: 'default-bg-100-id',
-        },
-        200: {
-          value: '#ffffff',
-          type: 'color',
-          id: 'default-bg-200-id',
-        },
-        300: {
-          value: '#ffffff',
-          type: 'color',
-          id: 'default-bg-300-id',
-        },
+      200: {
+        id: 'default-neutrals-200',
+        value: '#E2E8F0',
+        type: 'color',
+      },
+      300: {
+        id: 'default-neutrals-300',
+        value: '#CBD5E0',
+        type: 'color',
       },
     },
     button: {
       primary: {
         bg: {
-          value: '#ffffff',
+          value: '#805AD5',
           type: 'color',
           id: 'default-button-primary-bg-id',
         },
         bgHover: {
-          value: '#ffffff',
+          value: '#9F7AEA',
           type: 'color',
           id: 'default-button-primary-accent-bg-id',
         },
         bgActive: {
-          value: '#ffffff',
+          value: '#9F7AEA',
           type: 'color',
           id: 'default-button-primary-accent-bg-active-id',
         },
         text: {
-          value: '{Emerald.500}',
+          value: '#FFFFFF',
           type: 'color',
           id: 'default-button-primary-text-id',
+        },
+      },
+      secondary: {
+        bg: {
+          id: 'default-button-secondary-bg-id',
+          value: '#718096',
+          type: 'color',
+        },
+        bgHover: {
+          id: 'default-button-secondary-bg-hover-id',
+          value: '#A0AEC0',
+          type: 'color',
+        },
+        bgActive: {
+          id: 'default-button-secondary-bg-active-id',
+          value: '#A0AEC0',
+          type: 'color',
+        },
+        text: {
+          id: 'default-button-secondary-text-id',
+          value: '#FFFFFF',
+          type: 'color',
         },
       },
     },
