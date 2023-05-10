@@ -93,6 +93,7 @@ function TokenCircle({
             cursor: 'pointer',
           }}
           _hover={{ border: '1px solid gray' }}
+          onClick={() => onOpen()}
           onContextMenu={(e) => {
             e.preventDefault()
 
