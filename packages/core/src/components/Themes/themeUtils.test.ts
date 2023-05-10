@@ -61,7 +61,7 @@ const MOCK_NESTED_THEME_DATA = {
 describe('addTokenOrGroupToTheme', () => {
   test('add to top level', () => {
     const result = addTokenOrGroupToTheme({
-      path: 'button',
+      path: 'colors.button',
       target: {
         id: 'mockid',
         value: '#f3f3f3',
@@ -71,6 +71,7 @@ describe('addTokenOrGroupToTheme', () => {
     })
 
     expect(result).toEqual({
+      id: 'mockid',
       name: 'Light',
       tokens: {
         colors: {
@@ -103,7 +104,7 @@ describe('addTokenOrGroupToTheme', () => {
 
   test('add to nested path', () => {
     const result = addTokenOrGroupToTheme({
-      path: 'button.primary.bg',
+      path: 'colors.button.primary.bg',
       target: {
         id: 'mockid',
         value: '#f3f3f3',
@@ -113,6 +114,7 @@ describe('addTokenOrGroupToTheme', () => {
     })
 
     expect(result).toEqual({
+      id: 'mockid',
       name: 'Light',
       tokens: {
         colors: {
@@ -149,7 +151,7 @@ describe('addTokenOrGroupToTheme', () => {
 
   test('add to existing nested path', () => {
     const result = addTokenOrGroupToTheme({
-      path: 'header.bg',
+      path: 'colors.header.bg',
       target: {
         id: 'mockid',
         value: '#f3f3f3',
@@ -159,6 +161,7 @@ describe('addTokenOrGroupToTheme', () => {
     })
 
     expect(result).toEqual({
+      id: 'mockid',
       name: 'Light',
       tokens: {
         colors: {
@@ -193,11 +196,12 @@ describe('addTokenOrGroupToTheme', () => {
 describe('deleteTokenOrGroupFromTheme', () => {
   test('delete existing token', () => {
     const result = deleteTokenOrGroupFromTheme({
-      path: 'button.bg',
+      path: 'colors.button.bg',
       theme: MOCK_NESTED_THEME_DATA,
     })
 
     expect(result).toEqual({
+      id: 'mockid',
       name: 'Light',
       tokens: {
         colors: {
@@ -222,8 +226,8 @@ describe('deleteTokenOrGroupFromTheme', () => {
 describe('editTokenOrGroupInTheme', () => {
   test('change existing path', () => {
     const result = editTokenOrGroupInTheme({
-      originalPath: 'button.bgHover',
-      updatedPath: 'button.primary.bgHover',
+      originalPath: 'colors.button.bgHover',
+      updatedPath: 'colors.button.primary.bgHover',
       target: {
         id: 'mockid',
         value: '#ffffff',
@@ -233,6 +237,7 @@ describe('editTokenOrGroupInTheme', () => {
     })
 
     expect(result).toEqual({
+      id: 'mockid',
       name: 'Light',
       tokens: {
         colors: {
@@ -262,8 +267,8 @@ describe('editTokenOrGroupInTheme', () => {
 
   test('change existing value', () => {
     const result = editTokenOrGroupInTheme({
-      originalPath: 'button.bgHover',
-      updatedPath: 'button.bgHover',
+      originalPath: 'colors.button.bgHover',
+      updatedPath: 'colors.button.bgHover',
       target: {
         id: 'mockid',
         value: '#abc123',
@@ -273,6 +278,7 @@ describe('editTokenOrGroupInTheme', () => {
     })
 
     expect(result).toEqual({
+      id: 'mockid',
       name: 'Light',
       tokens: {
         colors: {
