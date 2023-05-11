@@ -14,6 +14,7 @@ import tinycolor from 'tinycolor2'
 
 import HexPicker from './HexPicker'
 import RgbaPicker from './RgbaPicker'
+import { parseColorIntensity, parseColorOpacity } from './utils'
 
 const formats = ['HEX', 'RGBA'] as const
 type TFormat = 'HEX' | 'RGBA'
@@ -34,13 +35,20 @@ function DropdownInput({
   format: TFormat
   onSetFormat: (format: TFormat) => void
 }) {
-  const getRgbaFormat = (val: string) =>
-    `rgba(${tinycolor(val).toRgb().r},${tinycolor(val).toRgb().g},${
-      tinycolor(val).toRgb().b
-    },${Math.round(tinycolor(val).toRgb().a * 100) + '%'})`
-
   const [hexInputValue, setHexInputValue] = useState<string>(
     tinycolor(colorPickerColor).toHexString()
+  )
+  const [rValue, setRValue] = useState<string>(
+    `${tinycolor(colorPickerColor).toRgb().r}`
+  )
+  const [gValue, setGValue] = useState<string>(
+    `${tinycolor(colorPickerColor).toRgb().g}`
+  )
+  const [bValue, setBValue] = useState<string>(
+    `${tinycolor(colorPickerColor).toRgb().b}`
+  )
+  const [aValue, setAValue] = useState<string>(
+    `${tinycolor(colorPickerColor).toRgb().a * 100}%`
   )
 
   useEffect(() => {
@@ -87,7 +95,6 @@ function DropdownInput({
       {format === 'RGBA' && (
         <>
           <Input
-            isDisabled={true}
             type="number"
             min={0}
             max={255}
@@ -95,11 +102,15 @@ function DropdownInput({
               paddingLeft: '0.5rem',
               paddingRight: '0.5rem',
             }}
-            value={tinycolor(colorPickerColor).toRgb().r}
-            onChange={(e) => onChange(`rgba(${getRgbaFormat(e.target.value)})`)}
+            value={rValue}
+            onChange={(e) => setRValue(e.target.value)}
+            onBlur={() => {
+              const parsedRValue = parseColorIntensity(rValue)
+              setRValue(`${parsedRValue}`)
+              onChange(`rgba(${parsedRValue},${gValue},${bValue},${aValue})`)
+            }}
           />
           <Input
-            isDisabled={true}
             type="number"
             min={0}
             max={255}
@@ -107,11 +118,15 @@ function DropdownInput({
               paddingLeft: '0.5rem',
               paddingRight: '0.5rem',
             }}
-            value={tinycolor(colorPickerColor).toRgb().g}
-            onChange={(e) => onChange(`rgba(${getRgbaFormat(e.target.value)})`)}
+            value={gValue}
+            onChange={(e) => setGValue(e.target.value)}
+            onBlur={() => {
+              const parsedGValue = parseColorIntensity(gValue)
+              setGValue(`${parsedGValue}`)
+              onChange(`rgba(${rValue},${parsedGValue},${bValue},${aValue})`)
+            }}
           />
           <Input
-            isDisabled={true}
             type="number"
             min={0}
             max={255}
@@ -119,20 +134,30 @@ function DropdownInput({
               paddingLeft: '0.5rem',
               paddingRight: '0.5rem',
             }}
-            value={tinycolor(colorPickerColor).toRgb().b}
-            onChange={(e) => onChange(`rgba(${getRgbaFormat(e.target.value)})`)}
+            value={bValue}
+            onChange={(e) => setBValue(e.target.value)}
+            onBlur={() => {
+              const parsedBValue = parseColorIntensity(bValue)
+              setBValue(`${parsedBValue}`)
+              onChange(`rgba(${rValue},${gValue},${parsedBValue},${aValue})`)
+            }}
           />
           <Input
-            isDisabled={true}
             type="text"
             css={{
               paddingLeft: '0.5rem',
               paddingRight: '0.5rem',
             }}
-            value={
-              Math.round(tinycolor(colorPickerColor).toRgb().a * 100) + '%'
-            }
-            onChange={(e) => onChange(`rgba(${getRgbaFormat(e.target.value)})`)}
+            value={aValue}
+            onChange={(e) => setAValue(e.target.value)}
+            onBlur={() => {
+              const parsedOpacity = parseColorOpacity(
+                aValue,
+                tinycolor(colorPickerColor).toRgb().a
+              )
+              setAValue(`${parsedOpacity * 100}%`)
+              onChange(`rgba(${rValue},${gValue},${bValue},${parsedOpacity})`)
+            }}
           />
         </>
       )}
@@ -171,6 +196,7 @@ export default function ColorPicker({ colorPickerColor, onChange }: Props) {
         <RgbaPicker colorPickerColor={colorPickerColor} onChange={onChange} />
       )}
       <DropdownInput
+        key={tinycolor(colorPickerColor).toString()} // To reset the state variables when format is changed
         format={format}
         onSetFormat={(format: TFormat) => onSetFormat(format)}
         onChange={onChange}

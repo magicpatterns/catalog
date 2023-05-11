@@ -174,6 +174,54 @@ export const defaultColorShadesToTokens = (shades: {
   }
 }
 
+export const parseColorIntensity = (intensityString: string) => {
+  if (intensityString === '') {
+    return 0
+  }
+
+  const intensity = Math.round(parseFloat(intensityString))
+  if (intensity > 255) {
+    return 255
+  } else if (intensity < 0) {
+    return 0
+  }
+
+  return intensity
+}
+
+export const parseColorOpacity = (opacityString: string, fallback: number) => {
+  /* First we trim all spaces */
+  opacityString = opacityString.trim()
+
+  /* If the string is empty, we return the opacity as 100% by default */
+  if (opacityString === '') {
+    return 1
+  }
+
+  const opacityStringLength = opacityString.length
+
+  /* If there's an '%' at the end, we first remove that */
+  if (opacityString[opacityStringLength - 1] === '%') {
+    opacityString = opacityString.substring(0, opacityStringLength - 1)
+  }
+
+  let opacity = Math.round(parseFloat(opacityString))
+  /* If the string is not a number, we return the fallback value */
+  if (isNaN(opacity)) {
+    return fallback
+  }
+
+  /* We also ensure that the opacity is between 0 and 100 */
+  if (opacity > 100) {
+    opacity = Number(100)
+  } else if (opacity < 0) {
+    opacity = Number(0)
+  }
+
+  /* Otherwise we return the opacity rounded to hundredth's place */
+  return opacity / 100
+}
+
 export const handleInvalidColor = (input: string) => {
   const sanitizedInput = input.replace(/ /g, '')
 
