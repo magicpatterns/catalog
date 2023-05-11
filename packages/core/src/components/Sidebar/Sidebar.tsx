@@ -8,6 +8,7 @@ import {
   Spacer,
   Stack,
   Text,
+  useColorMode,
 } from '@chakra-ui/react'
 import { VERSION } from '@core/utils/constants'
 import { motion } from 'framer-motion'
@@ -24,7 +25,9 @@ import {
   FiUpload,
 } from 'react-icons/fi'
 import { MdOutlineColorLens } from 'react-icons/md'
+import { RiBookLine } from 'react-icons/ri'
 import { RxComponent1, RxShadow } from 'react-icons/rx'
+import { SlSupport } from 'react-icons/sl'
 import { TbColorSwatch } from 'react-icons/tb'
 
 import { TPlatform, TTab } from '../Layout'
@@ -167,6 +170,8 @@ export function Sidebar({
   isCollapsed: boolean
   onToggleCollapsed: () => void
 }) {
+  const { colorMode, toggleColorMode } = useColorMode()
+
   return (
     <Box
       css={{
@@ -331,8 +336,7 @@ export function Sidebar({
             )}
           </SidebarSection>
 
-          <Box>
-            <SidebarSection
+          {/* <SidebarSection
               header={<SidebarHeader label="Resources" />}
               isCollapsed={isCollapsed}
             >
@@ -357,11 +361,60 @@ export function Sidebar({
                 }
                 isCollapsed={isCollapsed}
               />
-            </SidebarSection>
-            <Box css={{ marginTop: '32px', height: '2rem' }}>
+            </SidebarSection> */}
+
+          <Stack
+            css={{ color: 'gray' }}
+            direction={isCollapsed ? 'column' : 'row'}
+            flexWrap="wrap"
+            spacing={isCollapsed ? 4 : 8}
+          >
+            <Icon
+              as={RiBookLine}
+              css={{
+                width: '1.2rem',
+                height: '1.2rem',
+                transition: 'color 200ms ease-in-out',
+              }}
+              _hover={{ color: 'black', cursor: 'pointer' }}
+              onClick={() => {
+                window.open('https://mirrorful.com/docs', '_blank')
+              }}
+            />
+            <Icon
+              as={FiGithub}
+              css={{
+                width: '1.2rem',
+                height: '1.2rem',
+                transition: 'color 200ms ease-in-out',
+              }}
+              _hover={{ color: 'black', cursor: 'pointer' }}
+              onClick={() => {
+                window.open('https://github.com/Mirrorful/mirrorful', '_blank')
+              }}
+            />
+            <Icon
+              as={SlSupport}
+              css={{
+                width: '1.2rem',
+                height: '1.2rem',
+                transition: 'color 200ms ease-in-out',
+              }}
+              _hover={{ color: 'black', cursor: 'pointer' }}
+              onClick={() => {
+                window.open('https://mirrorful.com/contact', '_blank')
+              }}
+            />
+          </Stack>
+          {/* <Box css={{ marginTop: '32px', height: '2rem' }}>
               {!isCollapsed && (
                 <Flex>
-                  <Text fontWeight="bold" color="gray.400" fontSize={'0.8rem'}>
+                  <Text
+                    fontWeight="bold"
+                    color="gray.400"
+                    fontSize={'0.8rem'}
+                    onClick={toggleColorMode}
+                  >
                     {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
                   </Text>
                   <Spacer />
@@ -376,8 +429,7 @@ export function Sidebar({
                   )}
                 </Flex>
               )}
-            </Box>
-          </Box>
+            </Box> */}
         </Box>
       </Box>
     </Box>

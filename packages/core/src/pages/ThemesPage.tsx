@@ -49,7 +49,7 @@ export function ThemesPage({
           color="gray.600"
           css={{ marginTop: '12px' }}
         >
-          {`Map colors to how they should be used within your components.`}
+          {`Manage the colors and mappings in your themes.`}
         </Text>
       </Box>
       <Box css={{ marginTop: '24px' }}>
