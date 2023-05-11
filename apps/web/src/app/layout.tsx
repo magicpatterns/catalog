@@ -1,6 +1,7 @@
 'use client'
 import './globals.css'
 import './atom-one-dark.css'
+import '@blocks/index.css'
 
 import { CacheProvider } from '@chakra-ui/next-js'
 import { Onboarding } from '@core/components/Onboarding'

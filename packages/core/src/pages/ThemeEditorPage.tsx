@@ -40,7 +40,7 @@ export function ThemeEditorPage({
         css={{
           fontWeight: 'bold',
           fontSize: '12px',
-          color: 'gray',
+          color: 'var(--text-color-secondary)',
           display: 'flex',
           alignItems: 'center',
         }}

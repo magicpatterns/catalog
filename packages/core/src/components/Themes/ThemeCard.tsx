@@ -50,7 +50,7 @@ export function ThemeCard({
           ...SHARED_STYLES,
         }}
         _hover={{
-          boxShadow: '0 0 20px 1px lightgray',
+          boxShadow: '0 0 20px 1px var(--color-shadow)',
         }}
         onContextMenu={(e) => {
           e.preventDefault()
@@ -215,7 +215,7 @@ export function CreateThemeCard({
           ...SHARED_STYLES,
         }}
         _hover={{
-          boxShadow: '0 0 20px 1px lightgray',
+          boxShadow: '0 0 20px 1px var(--color-shadow)',
         }}
         onMouseOver={() => {
           startColoring()

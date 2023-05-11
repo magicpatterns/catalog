@@ -18,13 +18,17 @@ export function TypographySection({
   )
   return (
     <Box>
-      <Heading fontSize={'2.5rem'} fontWeight="black">
+      <Heading
+        fontSize={'2.5rem'}
+        fontWeight="black"
+        color="var(--text-color-primary)"
+      >
         Typography
       </Heading>
       <Text
         fontSize={'1.2rem'}
         fontWeight="medium"
-        color="gray.600"
+        color="var(--text-color-secondary)"
         css={{ marginTop: '12px' }}
       >
         {`Add and edit the fonts in your theme. `}

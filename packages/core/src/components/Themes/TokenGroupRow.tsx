@@ -89,10 +89,10 @@ function TokenCircle({
             backgroundColor: color,
             borderRadius: '50%',
             alignSelf: 'center',
-            border: '1px solid lightgray',
+            border: '1px solid var(--border-color)',
             cursor: 'pointer',
           }}
-          _hover={{ border: '1px solid gray' }}
+          _hover={{ border: '1px solid var(--border-hover-color)' }}
           onClick={() => onOpen()}
           onContextMenu={(e) => {
             e.preventDefault()
@@ -209,7 +209,11 @@ export function TokenGroupRow({
         >
           <Icon
             as={isCollapsed ? FiChevronRight : FiChevronDown}
-            css={{ marginRight: '4px', cursor: 'pointer' }}
+            css={{
+              marginRight: '4px',
+              cursor: 'pointer',
+              color: 'var(--border-color)',
+            }}
             onClick={() => setIsCollapsed(!isCollapsed)}
           />
           <EditableContent
@@ -234,6 +238,7 @@ export function TokenGroupRow({
               fontWeight: 'bold',
               fontSize: '18px',
               padding: '2px 8px',
+              color: 'var(--text-color-primary)',
             }}
           />
         </Box>
@@ -294,8 +299,8 @@ export function TokenGroupRow({
         <Box
           css={{
             width: '5px',
-            borderLeft: '1px solid #454647',
-            borderBottom: '1px solid #454647',
+            borderLeft: '1px solid var(--border-color)',
+            borderBottom: '1px solid var(--border-color)',
             borderBottomLeftRadius: '7px',
             marginBottom: '20px',
           }}

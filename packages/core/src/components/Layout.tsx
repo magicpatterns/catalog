@@ -125,7 +125,10 @@ export default function Layout({
           }}
         />
         <Box
-          css={{ backgroundColor: 'white', flexGrow: 1 }}
+          css={{
+            backgroundColor: 'var(--background-color-primary)',
+            flexGrow: 1,
+          }}
           padding={{
             base: '24px 48px',
             md: '36px 72px',
@@ -145,7 +148,11 @@ export default function Layout({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <Spinner size="xl" color="blue.500" borderWidth="3px" />
+                <Spinner
+                  size="xl"
+                  color="var(--primary-color)"
+                  borderWidth="3px"
+                />
               </motion.div>
             ) : (
               <>{children}</>
