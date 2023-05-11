@@ -9,6 +9,9 @@ import Select, {
   OptionProps,
   SingleValue,
 } from 'react-select'
+import tinycolor from 'tinycolor2'
+
+import ColorPicker from '../ColorPalette/ColorPicker'
 
 type TTokenOption = {
   id: string
@@ -123,11 +126,12 @@ export function TokenValueInput({
       </Box>
       {showColorPicker && (
         <Box>
-          <SketchPicker
-            color={colorValue}
-            onChange={(colorPickerColor) => {
-              setColorValue(colorPickerColor.hex)
-              onValueChange(colorPickerColor.hex)
+          <ColorPicker
+            colorPickerColor={colorValue}
+            onChange={(color) => {
+              const hex = tinycolor(color).toString()
+              setColorValue(hex)
+              onValueChange(hex)
             }}
           />
         </Box>
