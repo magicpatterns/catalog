@@ -128,6 +128,7 @@ export default function Layout({
           css={{
             backgroundColor: 'var(--background-color-primary)',
             flexGrow: 1,
+            transition: 'background-color 200ms',
           }}
           padding={{
             base: '24px 48px',

@@ -2,6 +2,13 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import React from 'react'
 
 const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        bg: 'var(--background-color-primary)',
+      },
+    },
+  },
   components: {
     Menu: {
       baseStyle: {
@@ -16,6 +23,9 @@ const theme = extendTheme({
         },
       },
     },
+  },
+  config: {
+    disableTransitionOnChange: false,
   },
 })
 

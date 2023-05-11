@@ -220,6 +220,7 @@ export function Sidebar({
           height: '100%',
           width: '100%',
           backgroundColor: 'var(--background-color-secondary)',
+          transition: 'background-color 200ms',
         }}
       >
         <Box
