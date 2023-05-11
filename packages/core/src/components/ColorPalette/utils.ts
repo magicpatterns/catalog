@@ -24,6 +24,44 @@ export const newShade = (hexColor: string, magnitude: number) => {
     return hexColor
   }
 }
+
+/* convert a text string to a valid hexcolor string. If no valid hexcolor string
+  is available, we return the fallback color */
+export const parseHexString = (hexString: string, fallback: string) => {
+  /* First if the string has a '#' at the start we remove it */
+  if (hexString[0] === '#') {
+    hexString = hexString.substring(1)
+  }
+
+  const hexStringLength = hexString.length
+  /* Then we convert the string to 6 characters by trimming or adding characters */
+  if (hexStringLength < 6) {
+    hexString += new Array(6 - hexStringLength).fill(0).join('')
+  }
+  hexString = hexString.substring(0, 6)
+
+  /* Now we check if the hexString has any non-hex characters, if it has we cannot parse it
+    and we return the fallback color */
+  if (!isHexString(hexString)) {
+    return fallback
+  }
+
+  /* Since the hex representation expects a '#' at the start, we add it back. This will also allow user
+    to input numbers without the hash prefix – we auto add the hash.
+  */
+  hexString = '#' + hexString
+
+  return hexString
+}
+
+const isHexString = (str: string) => {
+  const regexp = /^[0-9a-fA-F]+$/
+  if (regexp.test(str)) {
+    return true
+  }
+  return false
+}
+
 /* eslint-enable @typescript-eslint/no-unused-expressions */
 
 const scaleDiff = 7
@@ -172,6 +210,54 @@ export const defaultColorShadesToTokens = (shades: {
       type: 'color',
     },
   }
+}
+
+export const parseColorIntensity = (intensityString: string) => {
+  if (intensityString === '') {
+    return 0
+  }
+
+  const intensity = Math.round(parseFloat(intensityString))
+  if (intensity > 255) {
+    return 255
+  } else if (intensity < 0) {
+    return 0
+  }
+
+  return intensity
+}
+
+export const parseColorOpacity = (opacityString: string, fallback: number) => {
+  /* First we trim all spaces */
+  opacityString = opacityString.trim()
+
+  /* If the string is empty, we return the opacity as 100% by default */
+  if (opacityString === '') {
+    return 1
+  }
+
+  const opacityStringLength = opacityString.length
+
+  /* If there's an '%' at the end, we first remove that */
+  if (opacityString[opacityStringLength - 1] === '%') {
+    opacityString = opacityString.substring(0, opacityStringLength - 1)
+  }
+
+  let opacity = Math.round(parseFloat(opacityString))
+  /* If the string is not a number, we return the fallback value */
+  if (isNaN(opacity)) {
+    return fallback
+  }
+
+  /* We also ensure that the opacity is between 0 and 100 */
+  if (opacity > 100) {
+    opacity = Number(100)
+  } else if (opacity < 0) {
+    opacity = Number(0)
+  }
+
+  /* Otherwise we return the opacity rounded to hundredth's place */
+  return opacity / 100
 }
 
 export const handleInvalidColor = (input: string) => {
