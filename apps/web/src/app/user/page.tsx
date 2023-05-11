@@ -1,8 +1,5 @@
-import {
-  useLogoutFunction,
-  useRedirectFunctions,
-  withAuthInfo,
-} from '@propelauth/react'
+'use client'
+import { withAuthInfo } from '@propelauth/react'
 import { useState } from 'react'
 
 function whoAmI(accessToken: string | null) {
@@ -18,6 +15,7 @@ const User = withAuthInfo((props) => {
   const [serverResponse, setServerResponse] = useState(undefined)
 
   const fetchWhoAmI = () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     whoAmI(props.accessToken).then(setServerResponse)
   }

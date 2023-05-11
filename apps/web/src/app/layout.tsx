@@ -10,6 +10,7 @@ import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
 import { defaultShadowsV2, TMirrorfulStore } from '@core/types'
+import { AuthProvider } from '@propelauth/react'
 import { LayoutWrapper } from '@web/components/LayoutWrapper'
 import { useFetchStoreData } from '@web/hooks/useFetchStoreData'
 import { usePostStoreData } from '@web/hooks/usePostStoreData'
@@ -103,23 +104,30 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CacheProvider>
-          <MirrorfulThemeProvider>
-            {isLoading && <SplashScreen></SplashScreen>}
-            {!shouldForceSkipOnboarding && showOnBoarding ? (
-              <Onboarding
-                postStoreData={handleOnboardingSubmit}
-                onFinishOnboarding={() => {
-                  setShowOnBoarding(false)
-                  setShouldForceSkipOnboarding(true)
-                }}
-                platform={'web'}
-              />
-            ) : (
-              <LayoutWrapper>{children}</LayoutWrapper>
-            )}
-          </MirrorfulThemeProvider>
-        </CacheProvider>
+        <AuthProvider
+          authUrl={
+            (process.env.NEXT_PUBLIC_AUTH_URL as string) ||
+            'https://607430308.propelauthtest.com'
+          }
+        >
+          <CacheProvider>
+            <MirrorfulThemeProvider>
+              {isLoading && <SplashScreen></SplashScreen>}
+              {!shouldForceSkipOnboarding && showOnBoarding ? (
+                <Onboarding
+                  postStoreData={handleOnboardingSubmit}
+                  onFinishOnboarding={() => {
+                    setShowOnBoarding(false)
+                    setShouldForceSkipOnboarding(true)
+                  }}
+                  platform={'web'}
+                />
+              ) : (
+                <LayoutWrapper>{children}</LayoutWrapper>
+              )}
+            </MirrorfulThemeProvider>
+          </CacheProvider>
+        </AuthProvider>
       </body>
     </html>
   )
