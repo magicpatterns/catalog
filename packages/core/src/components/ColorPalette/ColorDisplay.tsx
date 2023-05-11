@@ -2,23 +2,23 @@ import {
   Box,
   Icon,
   IconButton,
+  Input,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
   Stack,
-  Text,
   useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { IconType } from 'react-icons'
 import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
 import { EditBaseColorModal } from './EditBaseColorModal'
-import { EditColorNameModal } from './EditColorNameModal'
 import {
   defaultColorShadesToTokens,
   generateDefaultColorShades,
@@ -73,16 +73,12 @@ export function ColorDisplay({
   } = useDisclosure()
 
   const {
-    isOpen: isColorNameModalOpen,
-    onOpen: onColorNameModalOpen,
-    onClose: onColorNameModalClose,
-  } = useDisclosure()
-
-  const {
     isOpen: isAlertDialogOpen,
     onOpen: onDeleteAlertDialogOpen,
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
+
+  const [colorNamee, setColorName] = useState<string>(colorName)
 
   const namedTokens = Object.keys(colorData)
     .map((key) => ({
@@ -124,7 +120,25 @@ export function ColorDisplay({
         mb={5}
         style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
       >
-        <Text style={{ fontWeight: 600, fontSize: '1.5rem' }}>{colorName}</Text>
+        <Input
+          style={{
+            border: 'none',
+          }}
+          padding={1}
+          fontSize={'1.5rem'}
+          ml={1}
+          mr={1}
+          mt={1}
+          value={colorNamee}
+          onChange={(e) => {
+            setColorName(e.target.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              onUpdateColorName(colorNamee.trim())
+            }
+          }}
+        />
         <Menu>
           <Box style={{ marginLeft: '4px' }}>
             <MirrorfulMenuButton icon={FiEdit} />
@@ -132,9 +146,6 @@ export function ColorDisplay({
           <MenuList>
             <MenuItem onClick={() => onBaseModalOpen()}>
               Edit Base Color
-            </MenuItem>
-            <MenuItem onClick={() => onColorNameModalOpen()}>
-              Edit Color Name
             </MenuItem>
             <MenuItem onClick={() => onDeleteAlertDialogOpen()}>
               Delete
@@ -216,16 +227,6 @@ export function ColorDisplay({
         baseColorToken={baseColorToken}
         onUpdateBaseColor={(updatedColorData: TTokenGroup, newName: string) => {
           onUpdateColorData(updatedColorData, newName)
-        }}
-      />
-
-      <EditColorNameModal
-        defaultNamedToken={defaultNamedToken}
-        isOpen={isColorNameModalOpen}
-        onClose={onColorNameModalClose}
-        initialColorName={colorName}
-        onUpdateColorName={(newName: string) => {
-          onUpdateColorName(newName)
         }}
       />
 
