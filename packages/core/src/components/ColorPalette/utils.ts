@@ -24,6 +24,44 @@ export const newShade = (hexColor: string, magnitude: number) => {
     return hexColor
   }
 }
+
+/* convert a text string to a valid hexcolor string. If no valid hexcolor string
+  is available, we return the fallback color */
+export const parseHexString = (hexString: string, fallback: string) => {
+  /* First if the string has a '#' at the start we remove it */
+  if (hexString[0] === '#') {
+    hexString = hexString.substring(1)
+  }
+
+  const hexStringLength = hexString.length
+  /* Then we convert the string to 6 characters by trimming or adding characters */
+  if (hexStringLength < 6) {
+    hexString += new Array(6 - hexStringLength).fill(0).join('')
+  }
+  hexString = hexString.substring(0, 6)
+
+  /* Now we check if the hexString has any non-hex characters, if it has we cannot parse it
+    and we return the fallback color */
+  if (!isHexString(hexString)) {
+    return fallback
+  }
+
+  /* Since the hex representation expects a '#' at the start, we add it back. This will also allow user
+    to input numbers without the hash prefix – we auto add the hash.
+  */
+  hexString = '#' + hexString
+
+  return hexString
+}
+
+const isHexString = (str: string) => {
+  const regexp = /^[0-9a-fA-F]+$/
+  if (regexp.test(str)) {
+    return true
+  }
+  return false
+}
+
 /* eslint-enable @typescript-eslint/no-unused-expressions */
 
 const scaleDiff = 7
