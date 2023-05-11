@@ -78,7 +78,7 @@ export function ColorDisplay({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [colorNamee, setColorName] = useState<string>(colorName)
+  const [colourName, setColorName] = useState<string>(colorName)
 
   const namedTokens = Object.keys(colorData)
     .map((key) => ({
@@ -129,14 +129,17 @@ export function ColorDisplay({
           ml={1}
           mr={1}
           mt={1}
-          value={colorNamee}
+          value={colourName}
           onChange={(e) => {
             setColorName(e.target.value)
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              onUpdateColorName(colorNamee.trim())
+              onUpdateColorName(colourName.trim())
             }
+          }}
+          onBlur={() => {
+            onUpdateColorName(colourName.trim())
           }}
         />
         <Menu>
