@@ -29,11 +29,13 @@ function DropdownInput({
   colorPickerColor,
   format,
   onSetFormat,
+  shadow,
 }: {
   colorPickerColor: AnyColor
   onChange: (color: AnyColor) => void
   format: TFormat
   onSetFormat: (format: TFormat) => void
+  shadow: boolean
 }) {
   const [hexInputValue, setHexInputValue] = useState<string>(
     tinycolor(colorPickerColor).toHexString()
@@ -60,13 +62,16 @@ function DropdownInput({
       css={{
         display: 'flex',
         alignItems: 'center',
-        columnGap: '1rem',
+        columnGap: shadow ? '0.2rem' : '1rem',
         marginTop: '1rem',
       }}
     >
       <Menu>
         <MenuButton
-          css={{ minWidth: '100px' }}
+          css={{
+            minWidth: shadow ? '70px' : '100px',
+            padding: shadow ? '0.2rem' : '0.5rem',
+          }}
           as={Button}
           rightIcon={<ChevronDownIcon />}
         >
@@ -172,7 +177,11 @@ function DropdownInput({
   )
 }
 
-export default function ColorPicker({ colorPickerColor, onChange }: Props) {
+export default function ColorPicker({
+  colorPickerColor,
+  onChange,
+  shadow,
+}: Props & { shadow: boolean }) {
   const initialFormat =
     typeof colorPickerColor === 'string' && colorPickerColor.includes('#')
       ? 'HEX'
@@ -188,6 +197,7 @@ export default function ColorPicker({ colorPickerColor, onChange }: Props) {
       setFormat('RGBA')
     }
   }
+  console.log(shadow)
   return (
     <Box
       css={{
@@ -208,6 +218,7 @@ export default function ColorPicker({ colorPickerColor, onChange }: Props) {
         onSetFormat={(format: TFormat) => onSetFormat(format)}
         onChange={onChange}
         colorPickerColor={colorPickerColor}
+        shadow={shadow}
       />
     </Box>
   )
