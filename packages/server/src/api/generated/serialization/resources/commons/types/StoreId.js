@@ -26,15 +26,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LibraryDoesNotExistError = void 0;
-const errors = __importStar(require("../../../../errors"));
-class LibraryDoesNotExistError extends errors.MirrorfulApiError {
-    constructor() {
-        super("LibraryDoesNotExistError");
-        Object.setPrototypeOf(this, LibraryDoesNotExistError.prototype);
-    }
-    async send(res) {
-        res.sendStatus(404);
-    }
-}
-exports.LibraryDoesNotExistError = LibraryDoesNotExistError;
+exports.StoreId = void 0;
+const core = __importStar(require("../../../../core"));
+exports.StoreId = core.serialization.string();

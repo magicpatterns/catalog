@@ -33,4 +33,3 @@ exports.registry = __importStar(require("./registry"));
 __exportStar(require("./registry/types"), exports);
 __exportStar(require("./registry/service/requests"), exports);
 __exportStar(require("./commons/errors"), exports);
-__exportStar(require("./registry/errors"), exports);

@@ -4,4 +4,3 @@ export * as registry from "./registry";
 export * from "./registry/types";
 export * from "./registry/service/requests";
 export * from "./commons/errors";
-export * from "./registry/errors";
