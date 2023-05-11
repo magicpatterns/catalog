@@ -66,7 +66,9 @@ export function getRegistryService(): RegistryService {
           files,
         },
         { upsert: true, new: true }
-      )
+      ).lean()
+      console.log('WATERMELON SUNDAE', resultDoc)
+      console.log('resultDoc', resultDoc)
       return res.send(resultDoc)
     },
   })

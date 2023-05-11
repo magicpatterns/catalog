@@ -27,9 +27,9 @@ const themeSchema = new mongoose.Schema<TTheme>({
 
 const storeSchema = new mongoose.Schema<TMirrorfulStore & { id: string }>({
   id: { type: String, default: uuidv4() },
-  primitives: { type: primitivesSchema },
-  themes: { type: [themeSchema] },
-  files: { type: [String] }, // 'css' | 'scss' | 'js' | 'cjs' | 'ts' | 'json'
+  primitives: { type: primitivesSchema, _id: false },
+  themes: { type: [themeSchema], _id: false },
+  files: { type: [String], _id: false }, // 'css' | 'scss' | 'js' | 'cjs' | 'ts' | 'json'
 })
 
 export const Store = mongoose.model('Store', storeSchema)
