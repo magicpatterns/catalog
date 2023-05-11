@@ -36,7 +36,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const pathname = usePathname()
   const oldPathname = useRef<string>('')
 
-  const { setColors, setTypography, setShadows, setFileTypes } =
+  const { setColors, setTypography, setShadows, setFileTypes, setThemes } =
     useMirrorfulStore((state: MirrorfulState) => state)
 
   // to fetch data
@@ -51,6 +51,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         return
       }
 
+      setThemes(data.themes ?? [])
       setColors(data.primitives.colors ?? {})
       setTypography(data.primitives.typography)
       setShadows(data.primitives.shadows ?? defaultShadowsV2)
@@ -87,6 +88,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     router.prefetch('/colors')
     router.prefetch('/typography')
     router.prefetch('/shadows')
+    router.prefetch('/themes')
     router.prefetch('/components')
   }, [router])
 

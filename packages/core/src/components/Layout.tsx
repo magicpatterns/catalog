@@ -17,7 +17,7 @@ export type TTab =
   | '/colors'
   | '/typography'
   | '/shadows'
-  | '/theme_manager'
+  | '/themes'
   | '/components'
 
 export default function Layout({
@@ -44,6 +44,7 @@ export default function Layout({
     setShadows,
     fileTypes,
     setFileTypes,
+    themes,
   } = useMirrorfulStore((state: MirrorfulState) => state)
   const {
     isOpen: isExportSuccessModalOpen,
@@ -156,6 +157,7 @@ export default function Layout({
           isOpen={isExportSuccessModalOpen}
           onClose={onExportSuccessModalClose}
           primitives={{ colors, typography, shadows }}
+          themes={themes}
         />
         {platform === 'web' && (
           <AlertDialogDelete

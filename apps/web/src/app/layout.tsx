@@ -39,7 +39,7 @@ export default function RootLayout({
   const [showOnBoarding, setShowOnBoarding] = useState(false)
   const router = useRouter()
 
-  const { setColors, setTypography, setShadows, setFileTypes } =
+  const { setColors, setTypography, setShadows, setFileTypes, setThemes } =
     useMirrorfulStore((state: MirrorfulState) => state)
 
   const [fetchStoreData] = useFetchStoreData()
@@ -60,6 +60,7 @@ export default function RootLayout({
         return
       }
 
+      setThemes(data.themes ?? [])
       setColors(data.primitives.colors ?? {})
       setTypography(data.primitives.typography)
       setShadows(data.primitives.shadows ?? defaultShadowsV2)
@@ -72,6 +73,7 @@ export default function RootLayout({
       }, 1250)
     }
   }, [
+    setThemes,
     fetchStoreData,
     setColors,
     setFileTypes,
@@ -90,6 +92,7 @@ export default function RootLayout({
     router.prefetch('/colors')
     router.prefetch('/typography')
     router.prefetch('/shadows')
+    router.prefetch('/themes')
     router.prefetch('/components')
   }, [router])
 

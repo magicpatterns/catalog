@@ -24,6 +24,8 @@ import {
   FiUpload,
 } from 'react-icons/fi'
 import { MdOutlineColorLens } from 'react-icons/md'
+import { RxComponent1, RxShadow } from 'react-icons/rx'
+import { TbColorSwatch } from 'react-icons/tb'
 
 import { TPlatform, TTab } from '../Layout'
 
@@ -33,7 +35,7 @@ function SidebarHeader({ label }: { label: string }) {
       css={{
         whiteSpace: 'nowrap',
         fontWeight: 900,
-        fontSize: '0.9rem',
+        fontSize: '0.8rem',
         color: 'gray',
       }}
     >
@@ -63,8 +65,8 @@ function SidebarLink({
 }) {
   const [isHovering, setIsHovering] = useState<boolean>(false)
 
-  const fontSize = '1.1rem'
-  const iconSize = '1.3rem'
+  const fontSize = '1rem'
+  const iconSize = '1.2rem'
 
   const isActiveState = !isDisabled && (isHovering || isActive)
 
@@ -137,7 +139,7 @@ export function SidebarSection({
   return (
     <Box>
       <Box css={{ height: '2rem' }}>{!isCollapsed && header}</Box>
-      <Stack spacing={'12px'} marginTop={'12px'}>
+      <Stack spacing={'12px'} marginTop={'2px'}>
         {children}
       </Stack>
     </Box>
@@ -276,30 +278,37 @@ export function Sidebar({
               key="sidebar-shadows"
               label="Shadows"
               link="/shadows"
-              icon={FiLayers}
+              icon={RxShadow}
               isActive={activeTab === '/shadows'}
               onSelect={() => onSelectTab('/shadows')}
               isDisabled={isDisabled}
               isCollapsed={isCollapsed}
             />
+          </SidebarSection>
+
+          <SidebarSection
+            header={<SidebarHeader label="LIBRARY" />}
+            isCollapsed={isCollapsed}
+          >
             <SidebarLink
-              key="sidebar-spacing"
-              label="Spacing"
-              link="/spacing"
-              icon={CgSpaceBetween}
-              isComingSoon
-              isDisabled={isDisabled}
+              key="themes"
+              label="Themes"
+              link="/themes"
+              icon={TbColorSwatch}
+              isActive={activeTab.includes('/themes')}
+              onSelect={() => onSelectTab('/themes')}
+              isCollapsed={isCollapsed}
+            />
+            <SidebarLink
+              key="components"
+              label="Components"
+              link="/components"
+              icon={RxComponent1}
+              isActive={activeTab.includes('/components')}
+              onSelect={() => onSelectTab('/components')}
               isCollapsed={isCollapsed}
             />
           </SidebarSection>
-
-          {/* <SidebarSection header={<SidebarHeader label="Themes" />}>
-            <SidebarLink
-              label="Theme Manager"
-              icon={TbColorSwatch}
-              onSelect={() => onSelectTab('theme_manager')}
-            />
-          </SidebarSection> */}
 
           <SidebarSection
             header={<SidebarHeader label="Export" />}

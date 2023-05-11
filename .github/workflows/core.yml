@@ -35,6 +35,12 @@ jobs:
           dir: packages/core
           cmd: build # will run `yarn build` command in packages/core
 
+      - name: test packages/core
+        uses: borales/actions-yarn@v4
+        with:
+          dir: packages/core
+          cmd: test
+
       - name: lint packages/core
         uses: borales/actions-yarn@v4
         with:

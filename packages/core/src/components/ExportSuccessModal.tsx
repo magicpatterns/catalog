@@ -33,7 +33,7 @@ import { toJs } from '@core/translators/toJs'
 import { toJson } from '@core/translators/toJson'
 import { toScss } from '@core/translators/toScss'
 import { toTailwind } from '@core/translators/toTailwind'
-import { TPrimitives } from '@core/types'
+import { TPrimitives, TTheme } from '@core/types'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
 import { FaReact } from 'react-icons/fa'
@@ -315,7 +315,13 @@ function TokenTab({
   )
 }
 
-function WebModalBody({ primitives }: { primitives: TPrimitives }) {
+function WebModalBody({
+  primitives,
+  themes,
+}: {
+  primitives: TPrimitives
+  themes: TTheme[]
+}) {
   return (
     <>
       <Text css={{ marginBottom: '8px', fontSize: '1rem' }}>
@@ -338,7 +344,8 @@ function WebModalBody({ primitives }: { primitives: TPrimitives }) {
               <CodePreview
                 language="css"
                 text={`/* For example, create a mirrorful.css file \n and use it throughout your project */\n\n${toCss(
-                  primitives
+                  primitives,
+                  themes
                 )}`}
               />
             </TabPanel>
@@ -346,7 +353,8 @@ function WebModalBody({ primitives }: { primitives: TPrimitives }) {
               <CodePreview
                 language="scss"
                 text={`/* For example, create a mirrorful.scss file \n and use it throughout your project */\n\n${toScss(
-                  primitives
+                  primitives,
+                  themes
                 )}`}
               />
             </TabPanel>
@@ -520,12 +528,14 @@ export function ExportSuccessModal({
   isOpen,
   onClose,
   primitives,
+  themes,
 }: {
   platform: TPlatform
   // primaryName: string
   isOpen: boolean
   onClose: () => void
   primitives: TPrimitives
+  themes: TTheme[]
 }) {
   return (
     <Modal
@@ -553,7 +563,9 @@ export function ExportSuccessModal({
           {platform === 'package' && (
             <PackageModalBody primitives={primitives} />
           )}
-          {platform === 'web' && <WebModalBody primitives={primitives} />}
+          {platform === 'web' && (
+            <WebModalBody primitives={primitives} themes={themes} />
+          )}
         </ModalBody>
 
         <ModalFooter>
