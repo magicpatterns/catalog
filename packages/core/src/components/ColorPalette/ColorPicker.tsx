@@ -14,6 +14,7 @@ import tinycolor from 'tinycolor2'
 
 import HexPicker from './HexPicker'
 import RgbaPicker from './RgbaPicker'
+import { parseHexString } from './utils'
 
 const formats = ['HEX', 'RGBA'] as const
 type TFormat = 'HEX' | 'RGBA'
@@ -74,13 +75,20 @@ function DropdownInput({
       </Menu>
       {format === 'HEX' && (
         <Input
-          isDisabled={true}
           type="text"
           css={{ width: '100%', height: '100%', minHeight: '2.5rem' }}
           value={hexInputValue}
           onChange={(e) => {
             setHexInputValue(e.target.value)
-            onChange(e.target.value)
+          }}
+          onBlur={() => {
+            /* Since the user may not have entered a valid hexcolor string, we parse it to convert it to a valid hexcolor string */
+            const parsedHexString = parseHexString(
+              hexInputValue,
+              tinycolor(colorPickerColor).toHexString()
+            )
+            setHexInputValue(parsedHexString)
+            onChange(parsedHexString)
           }}
         />
       )}
