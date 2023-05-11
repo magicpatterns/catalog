@@ -88,6 +88,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     router.prefetch('/colors')
     router.prefetch('/typography')
     router.prefetch('/shadows')
+    router.prefetch('/themes')
     router.prefetch('/components')
   }, [router])
 
