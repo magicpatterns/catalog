@@ -41,6 +41,5 @@ export function MirrorfulThemeProvider({
 }: {
   children: React.ReactNode
 }) {
-  console.log('hi')
   return <ChakraProvider theme={theme}>{children}</ChakraProvider>
 }
