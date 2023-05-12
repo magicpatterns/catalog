@@ -13,6 +13,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
+import React from 'react'
 import { IconType } from 'react-icons'
 import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
@@ -53,7 +54,7 @@ function MirrorfulMenuButton({
   )
 }
 
-export function ColorDisplay({
+export function ColorsDisplay({
   colorName,
   colorData,
   onUpdateColorData,
@@ -253,3 +254,7 @@ export function ColorDisplay({
     </Box>
   )
 }
+
+export const ColorDisplay = React.memo(ColorsDisplay, (prev, next) => {
+  return prev.colorData === next.colorData
+})
