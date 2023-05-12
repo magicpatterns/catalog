@@ -26,15 +26,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FileDoesNotExistError = void 0;
+exports.ObjectDoesNotExistError = void 0;
 const errors = __importStar(require("../../../../errors"));
-class FileDoesNotExistError extends errors.MirrorfulApiError {
+class ObjectDoesNotExistError extends errors.MirrorfulApiError {
     constructor() {
-        super("FileDoesNotExistError");
-        Object.setPrototypeOf(this, FileDoesNotExistError.prototype);
+        super("ObjectDoesNotExistError");
+        Object.setPrototypeOf(this, ObjectDoesNotExistError.prototype);
     }
     async send(res) {
         res.sendStatus(404);
     }
 }
-exports.FileDoesNotExistError = FileDoesNotExistError;
+exports.ObjectDoesNotExistError = ObjectDoesNotExistError;

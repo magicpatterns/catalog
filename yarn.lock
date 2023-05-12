@@ -3624,6 +3624,17 @@
     js-base64 "3.7.2"
     url-join "4.0.1"
 
+"@mirrorful-fern/api-client@0.0.523":
+  version "0.0.523"
+  resolved "https://npm.buildwithfern.com/@mirrorful-fern/api-client/-/api-client-0.0.523.tgz#7adb339c8e5e679f640cd03049975270dcf00769"
+  integrity sha512-f9oXvOFDLPkL0+8lZi0eRGTvY3A7cFGTsORYEXaRSWjyQGXt8PgKHuKjC5XUG35tJxqkrJwXAvzlQLKnER2Dbg==
+  dependencies:
+    "@types/url-join" "4.0.1"
+    "@ungap/url-search-params" "0.2.2"
+    axios "0.27.2"
+    js-base64 "3.7.2"
+    url-join "4.0.1"
+
 "@mirrorful/eslint-config@file:packages/eslint-config":
   version "1.0.0"
 
@@ -3836,6 +3847,34 @@
   version "2.11.7"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.7.tgz#ccab5c8f7dc557a52ca3288c10075c9ccd37fff7"
   integrity sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==
+
+"@propelauth/express@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@propelauth/express/-/express-2.1.0.tgz#06a3eeab1c56a44db12d12c1457b88f531b0cbc6"
+  integrity sha512-V/5mgXy9ZgHIVUmmr5ef607sGtmX/IXDxf8lKJF/EHB35fBBEhRD8LFLrwXVZg93i4tRXTZFcJz23b3yGZYcXA==
+  dependencies:
+    "@propelauth/node" "^2.1.0"
+
+"@propelauth/javascript@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@propelauth/javascript/-/javascript-2.0.5.tgz#716bdf31929a097b484c800fbdd35cc46e4e1870"
+  integrity sha512-AI9rhrfCYjA9iENSZIPBztdSr91a2aZj4HX8l4z+L6bAu4gTjN5F8tu1IetFjBLWNOK7DGcaANfHqTyfSv+TcA==
+
+"@propelauth/node@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@propelauth/node/-/node-2.1.0.tgz#c2651508cd23cb2c101a42c48ff04d09de8bd5e4"
+  integrity sha512-PK1C7+qQCkHWUIl69ovdMdbqrfnrq5LBYyKeAXE9bsvt9LxJxxSho3/cXytCDGosjQLQwUABq/uHsK9KRHGcAg==
+  dependencies:
+    jsonwebtoken "^9.0.0"
+
+"@propelauth/react@^2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@propelauth/react/-/react-2.0.7.tgz#98cffe4753dda27c21a477502c0b604d68c3ece3"
+  integrity sha512-XRzHGPU8mZy6ezutPmVPgrKESeqKCwZ5zK/f4h3am2V2pMCKfDrbZiGEhPlAM1KABXMbrPyKSkA82XGT+GzZhQ==
+  dependencies:
+    "@propelauth/javascript" "^2.0.5"
+    hoist-non-react-statics "^3.3.2"
+    utility-types "^3.10.0"
 
 "@remix-run/router@1.6.1":
   version "1.6.1"
@@ -6566,6 +6605,11 @@ buffer-crc32@~0.2.3:
   resolved "https://registry.yarnpkg.com/buffer-crc32/-/buffer-crc32-0.2.13.tgz#0d333e3f00eac50aa1454abd30ef8c2a5d9a7242"
   integrity sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ==
 
+buffer-equal-constant-time@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
+  integrity sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==
+
 buffer-from@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.2.tgz#2b146a6fd72e80b4f55d255f35ed59a3a9a41bd5"
@@ -7637,6 +7681,13 @@ duplexify@^3.5.0, duplexify@^3.6.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
+
+ecdsa-sig-formatter@1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz#ae0f0fa2d85045ef14a817daa3ce9acd0489e5bf"
+  integrity sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==
+  dependencies:
+    safe-buffer "^5.0.1"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -9166,7 +9217,7 @@ highlight.js@^10.5.0:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
   integrity sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==
 
-hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1:
+hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -10341,6 +10392,16 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
+jsonwebtoken@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-9.0.0.tgz#d0faf9ba1cc3a56255fe49c0961a67e520c1926d"
+  integrity sha512-tuGfYXxkQGDPnLJ7SibiQgVgeDgfbPq2k2ICcbgqW8WxWLBAxKQM/ZCu/IT8SOSwmaYl4dpTFCW5xZv7YbbWUw==
+  dependencies:
+    jws "^3.2.2"
+    lodash "^4.17.21"
+    ms "^2.1.1"
+    semver "^7.3.8"
+
 "jsx-ast-utils@^2.4.1 || ^3.0.0", jsx-ast-utils@^3.3.3:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-3.3.3.tgz#76b3e6e6cece5c69d49a5792c3d01bd1a0cdc7ea"
@@ -10348,6 +10409,23 @@ jsonfile@^6.0.1:
   dependencies:
     array-includes "^3.1.5"
     object.assign "^4.1.3"
+
+jwa@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/jwa/-/jwa-1.4.1.tgz#743c32985cb9e98655530d53641b66c8645b039a"
+  integrity sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==
+  dependencies:
+    buffer-equal-constant-time "1.0.1"
+    ecdsa-sig-formatter "1.0.11"
+    safe-buffer "^5.0.1"
+
+jws@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/jws/-/jws-3.2.2.tgz#001099f3639468c9414000e99995fa52fb478304"
+  integrity sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==
+  dependencies:
+    jwa "^1.4.1"
+    safe-buffer "^5.0.1"
 
 kareem@2.5.1:
   version "2.5.1"
@@ -11117,7 +11195,7 @@ next@13.2.4:
     "@next/swc-win32-ia32-msvc" "13.2.4"
     "@next/swc-win32-x64-msvc" "13.2.4"
 
-next@^13.3.1:
+next@^13.3.1, next@^13.4.1:
   version "13.4.1"
   resolved "https://registry.yarnpkg.com/next/-/next-13.4.1.tgz#8d23f94c81b3f9cc8b34165ad528457e5befd726"
   integrity sha512-JBw2kAIyhKDpjhEWvNVoFeIzNp9xNxg8wrthDOtMctfn3EpqGCmW0FSviNyGgOSOSn6zDaX48pmvbdf6X2W9xA==
@@ -13966,6 +14044,11 @@ utila@~0.4:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/utila/-/utila-0.4.0.tgz#8a16a05d445657a3aea5eecc5b12a4fa5379772c"
   integrity sha512-Z0DbgELS9/L/75wZbro8xAnT50pBVFQZ+hUEueGDU5FN51YSCYM+jdxsfCiHjwNP/4LCDD0i/graKpeBnOXKRA==
+
+utility-types@^3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-3.10.0.tgz#ea4148f9a741015f05ed74fd615e1d20e6bed82b"
+  integrity sha512-O11mqxmi7wMKCo6HKFt5AhO4BwY3VV68YU07tgxfz8zJTIxr4BpsezN49Ffwy9j3ZpwwJp4fkRwjRzq3uWE6Rg==
 
 utils-merge@1.0.1:
   version "1.0.1"
