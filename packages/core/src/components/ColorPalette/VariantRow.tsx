@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
 import { TNamedToken } from '@core/types'
+import React from 'react'
 import { useEffect, useState } from 'react'
 import { BsSliders2 } from 'react-icons/bs'
 import {
@@ -76,7 +77,7 @@ function MirrorfulSlider({
   )
 }
 
-export function VariantRow({
+export function VariantRowDisplay({
   defaultNamedToken,
   variant,
   onUpdateVariant,
@@ -296,3 +297,13 @@ export function VariantRow({
     </Flex>
   )
 }
+
+export const VariantRow = React.memo(
+  VariantRowDisplay,
+  (prevProps, nextProps) => {
+    return (
+      prevProps.variant.token.value === nextProps.variant.token.value &&
+      prevProps.variant.token.type === nextProps.variant.token.type
+    )
+  }
+)
