@@ -1,0 +1,14 @@
+# none of these files are needed by heroku
+
+README.md
+docs
+i18n
+LICENSE.md
+apps/
+examples/
+integrations/
+assets/
+packages/blocks
+packages/mirrorful
+packages/core
+packages/postman
