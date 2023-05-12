@@ -70,18 +70,30 @@ veya
 yarn add mirrorful -D
 ```
 
+veya
+
+```bash
+pnpm add mirrorful -D
+```
+
 ## ✨ Kullanım
 
 Aşağıdaki komutlar, yerel bir düzenleyiciyi `localhost:5050` adresinde başlatacaktır.
 
-```
+```bash
 yarn run mirrorful
 ```
 
 veya
 
-```
+```bash
 npx mirrorful editor
+```
+
+veya
+
+```bash
+pnpm mirrorful editor
 ```
 
 ## 💿 Dışa Aktarma Biçimleri
@@ -109,7 +121,7 @@ Editörde temanızı yapılandırdıktan sonra, uygulamanızda kullanmak için d
 Örnek:
 
 ```javascript
-<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
+<button backgroundColor={{ Tokens.colors.primary  }}>Click here</button>
 ```
 
 ## 🤝 Bağımsız Bileşen Kütüphanesi

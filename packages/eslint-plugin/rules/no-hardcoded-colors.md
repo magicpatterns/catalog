@@ -27,7 +27,7 @@ Examples of **correct** code for this rule:
 ```js
 ;<Button
   style={{
-    backgroundColor: Tokens.primary.base,
+    backgroundColor: Tokens.colors.primary,
     fontWeight: 600,
     color: Tokens.black.base,
   }}

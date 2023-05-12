@@ -168,7 +168,6 @@ export function EditShadowModal({
   }
 
   function handleVOffset(e: number, i: number) {
-    // console.log(e)
     const nextVOffset = [...vOffset]
     nextVOffset[i] = e
     setVOffset(nextVOffset)

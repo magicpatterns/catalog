@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   defaultFiles,
   TPrimitives,
+  TToken,
   TTokenGroup,
 } from '@mirrorful/core/lib/types'
 import Conf from 'conf'
@@ -82,6 +84,61 @@ export const ZeroPointZeroFiveMigration = (store: Conf<any>) => {
 
   updatedTokens.typography = {}
   store.set('tokens', updatedTokens)
+}
+
+export const ZeroPointZeroSevenMigration = (store: Conf<any>) => {
+  const primitives = store.get('primitives')
+
+  const colorsObj = primitives['colors']
+
+  const newColors: { [x: string]: { [x: string]: TToken } } = {}
+
+  Object.keys(colorsObj).forEach((key) => {
+    // key is the color name
+    const namedColor = colorsObj[key]
+    // example of namedColor: { 500: TToken, 600: TToken } }
+    const newNamedColor: { [x: string]: TToken } = {}
+    let has500 = false
+    Object.keys(namedColor).forEach((key) => {
+      // ex: key would be "400"
+
+      // rename to DEFAULT
+      if (key === 'base') {
+        delete Object.assign(newNamedColor, namedColor, {
+          ['DEFAULT']: namedColor['base'],
+        })['base']
+      } else if (key === 'BASE') {
+        delete Object.assign(newNamedColor, namedColor, {
+          ['DEFAULT']: namedColor['BASE'],
+        })['BASE']
+      } else if (key === '500') {
+        has500 = true
+        delete Object.assign(newNamedColor, namedColor, {
+          ['DEFAULT']: namedColor['500'],
+        })['500']
+      }
+    })
+    if (has500) {
+      // 500 is special case, we just want to duplicate it
+      newNamedColor['500'] = newNamedColor['DEFAULT']
+    }
+
+    // if we didn't rename key in algo, then just choose middle one
+    if (newNamedColor['DEFAULT'] === undefined) {
+      const arr = Object.keys(namedColor)
+      const middleKey = arr[(arr.length / 2) | 0]
+      Object.assign(newNamedColor, namedColor)
+      newNamedColor['DEFAULT'] = namedColor[middleKey]
+    }
+    newColors[key] = newNamedColor
+  })
+
+  const newPrimitives: TPrimitives = {
+    ...primitives,
+    colors: newColors,
+  }
+
+  store.set('primitives', newPrimitives)
 }
 
 export const ZeroPointZeroSixMigration = (anyStore: Conf<any>) => {

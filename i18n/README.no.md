@@ -82,18 +82,30 @@ eller
 yarn add mirrorful -D
 ```
 
+eller
+
+```bash
+pnpm add mirrorful -D
+```
+
 ## ✨ Bruk
 
 Følgende kommando kommer til å starte en lokal editor på `localhost:5050`
 
-```
+```bash
 yarn run mirrorful
 ```
 
 eller
 
-```
+```bash
 npx mirrorful editor
+```
+
+eller
+
+```bash
+pnpm mirrorful editor
 ```
 
 ## 💿 Eksporter Formater
@@ -121,7 +133,7 @@ Eksempel:
 Exempel:
 
 ```javascript
-<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
+<button backgroundColor={{ Tokens.colors.primary  }}>Click here</button>
 ```
 
 ## 🤝 Komponentbibliotek-agnostisk

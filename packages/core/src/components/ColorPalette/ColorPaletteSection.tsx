@@ -10,9 +10,9 @@ import {
 import { motion } from 'framer-motion'
 
 import { TNamedTokenGroup, TTokenGroup } from '../../types'
+import { AddColorModal } from './AddColorModal'
 import { AddColorSkeleton } from './AddColorSkeleton'
 import { ColorDisplay } from './ColorDisplay'
-import { EditColorModal } from './EditColorModal'
 
 export function ColorPaletteSection({
   colors,
@@ -79,16 +79,28 @@ export function ColorPaletteSection({
 
                   onUpdateColors(newColors)
                 }}
-                onUpdateColorData={(updatedColorData: TTokenGroup) => {
-                  const newColors = { ...colors }
-                  newColors[name] = updatedColorData
-
-                  onUpdateColors(newColors)
+                onUpdateColorData={(
+                  updatedColorData: TTokenGroup,
+                  newColorName?: string
+                ) => {
+                  if (newColorName) {
+                    // Rename the color while retaining the order of the keys
+                    const newColors = Object.keys(colors).reduce((acc, key) => {
+                      if (key !== name) acc[key] = colors[key]
+                      else acc[newColorName] = colors[key]
+                      return acc
+                    }, {} as TTokenGroup)
+                    newColors[newColorName] = updatedColorData
+                    onUpdateColors(newColors)
+                  } else {
+                    const newColors = { ...colors }
+                    newColors[name] = updatedColorData
+                    onUpdateColors(newColors)
+                  }
                 }}
                 onDeleteColorData={() => {
                   const newColors = { ...colors }
                   delete newColors[name]
-
                   onUpdateColors(newColors)
                 }}
               />
@@ -105,14 +117,12 @@ export function ColorPaletteSection({
           <AddColorSkeleton numberOfMockVariants={4} />
         </Box>
       </Box>
-      <EditColorModal
+      <AddColorModal
         isOpen={isOpen}
         onClose={(newColor?: TNamedTokenGroup) => {
           if (newColor) {
-            const newColors = { ...colors }
-
-            newColors[newColor.name] = newColor.group
-
+            // ensure the new key is first
+            const newColors = { [newColor.name]: newColor.group, ...colors }
             onUpdateColors(newColors)
           }
           onClose()
