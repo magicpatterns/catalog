@@ -70,18 +70,30 @@ veya
 yarn add mirrorful -D
 ```
 
+veya
+
+```bash
+pnpm add mirrorful -D
+```
+
 ## ✨ Kullanım
 
 Aşağıdaki komutlar, yerel bir düzenleyiciyi `localhost:5050` adresinde başlatacaktır.
 
-```
+```bash
 yarn run mirrorful
 ```
 
 veya
 
-```
+```bash
 npx mirrorful editor
+```
+
+veya
+
+```bash
+pnpm mirrorful editor
 ```
 
 ## 💿 Dışa Aktarma Biçimleri
