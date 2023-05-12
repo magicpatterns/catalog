@@ -46,7 +46,7 @@ export function OnboardingContainer({
 
       <Box
         css={{
-          backgroundColor: 'white',
+          backgroundColor: 'var(--background-color-primary)',
           padding: '64px 128px',
           borderRadius: 8,
           height: '50%',
