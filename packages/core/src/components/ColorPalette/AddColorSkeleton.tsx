@@ -51,7 +51,12 @@ export function AddColorSkeleton({
           width: '100%',
         }}
       >
-        <Button fontSize="1rem" fontWeight={600} color="black" height="3rem">
+        <Button
+          fontSize="1rem"
+          fontWeight={600}
+          color="var(--text-color-primary)"
+          height="3rem"
+        >
           Add New Color
         </Button>
       </Box>

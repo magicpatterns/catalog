@@ -2,28 +2,29 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import {
   Badge,
   Box,
-  Flex,
   Icon,
   Link,
-  Spacer,
   Stack,
+  Switch,
   Text,
+  useColorMode,
 } from '@chakra-ui/react'
 import { VERSION } from '@core/utils/constants'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
-import { CgSpaceBetween } from 'react-icons/cg'
 import {
-  FiBookOpen,
   FiFolder,
   FiGithub,
-  FiLayers,
-  FiSettings,
+  FiLifeBuoy,
+  FiMoon,
+  FiSun,
+  FiTrash2,
   FiUnderline,
   FiUpload,
 } from 'react-icons/fi'
 import { MdOutlineColorLens } from 'react-icons/md'
+import { RiBookLine } from 'react-icons/ri'
 import { RxComponent1, RxShadow } from 'react-icons/rx'
 import { TbColorSwatch } from 'react-icons/tb'
 
@@ -36,7 +37,7 @@ function SidebarHeader({ label }: { label: string }) {
         whiteSpace: 'nowrap',
         fontWeight: 900,
         fontSize: '0.8rem',
-        color: 'gray',
+        color: 'var(--text-color-secondary)',
       }}
     >
       {label.toUpperCase()}
@@ -75,7 +76,9 @@ function SidebarLink({
       css={{
         display: 'flex',
         alignItems: 'center',
-        color: isActiveState ? 'black' : 'gray',
+        color: isActiveState
+          ? 'var(--text-color-primary)'
+          : 'var(--text-color-secondary)',
         cursor: isComingSoon ? 'initial' : 'pointer',
         transition: '200ms',
         height: '1.5rem',
@@ -167,6 +170,8 @@ export function Sidebar({
   isCollapsed: boolean
   onToggleCollapsed: () => void
 }) {
+  const { colorMode, toggleColorMode } = useColorMode()
+
   return (
     <Box
       css={{
@@ -191,7 +196,7 @@ export function Sidebar({
             width: '25px',
             height: '40px',
             border: '1px solid lightgray',
-            backgroundColor: 'white',
+            backgroundColor: 'var(--background-color-primary)',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -200,7 +205,7 @@ export function Sidebar({
             cursor: 'pointer',
           }}
           _hover={{
-            backgroundColor: '#F2F2F2',
+            backgroundColor: 'var(--background-color-secondary)',
           }}
           onClick={onToggleCollapsed}
         >
@@ -214,7 +219,8 @@ export function Sidebar({
           padding: isCollapsed ? '36px 12px' : '36px 24px',
           height: '100%',
           width: '100%',
-          backgroundColor: '#F2F2F2',
+          backgroundColor: 'var(--background-color-secondary)',
+          transition: 'background-color 200ms',
         }}
       >
         <Box
@@ -235,7 +241,14 @@ export function Sidebar({
                 <img src="/simple_logo.png" style={{ width: '150px' }} />
               </motion.div>
             ) : (
-              <img src="/mirrorful_logo.png" style={{ width: '150px' }} />
+              <img
+                src={
+                  colorMode === 'dark'
+                    ? '/mirrorful_logo_white.png'
+                    : '/mirrorful_logo.png'
+                }
+                style={{ width: '150px' }}
+              />
             )}
           </Box>
         </Box>
@@ -332,51 +345,136 @@ export function Sidebar({
           </SidebarSection>
 
           <Box>
-            <SidebarSection
-              header={<SidebarHeader label="Resources" />}
-              isCollapsed={isCollapsed}
+            <Box
+              css={{ borderTop: '1px solid lightgray', marginBottom: '18px' }}
+            />
+            <Stack
+              css={{ color: 'var(--text-color-secondary)' }}
+              direction={isCollapsed ? 'column' : 'row'}
+              flexWrap="wrap"
+              spacing={isCollapsed ? 4 : 8}
             >
-              <SidebarLink
-                label="Documentation"
-                link="https://mirrorful.com/docs"
-                icon={FiBookOpen}
-                onSelect={() =>
+              <Icon
+                as={RiBookLine}
+                css={{
+                  width: '1.2rem',
+                  height: '1.2rem',
+                  transition: 'color 200ms ease-in-out',
+                }}
+                _hover={{
+                  color: 'var(--text-color-primary)',
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
                   window.open('https://mirrorful.com/docs', '_blank')
-                }
-                isCollapsed={isCollapsed}
+                }}
               />
-              <SidebarLink
-                label="Github"
-                link="https://github.com/Mirrorful/mirrorful"
-                icon={FiGithub}
-                onSelect={() =>
+              <Icon
+                as={FiGithub}
+                css={{
+                  width: '1.2rem',
+                  height: '1.2rem',
+                  transition: 'color 200ms ease-in-out',
+                }}
+                _hover={{
+                  color: 'var(--text-color-primary)',
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
                   window.open(
                     'https://github.com/Mirrorful/mirrorful',
                     '_blank'
                   )
-                }
-                isCollapsed={isCollapsed}
+                }}
               />
-            </SidebarSection>
-            <Box css={{ marginTop: '32px', height: '2rem' }}>
-              {!isCollapsed && (
-                <Flex>
-                  <Text fontWeight="bold" color="gray.400" fontSize={'0.8rem'}>
-                    {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
-                  </Text>
-                  <Spacer />
-                  {platform === 'web' && (
-                    <SidebarLink
-                      key="sidebar-delete"
-                      icon={FiSettings}
-                      onSelect={() => onDelete()}
-                      isCollapsed={isCollapsed}
-                      isDisabled={isDisabled}
-                    />
-                  )}
-                </Flex>
+              <Icon
+                as={FiLifeBuoy}
+                css={{
+                  width: '1.2rem',
+                  height: '1.2rem',
+                  transition: 'color 200ms ease-in-out',
+                }}
+                _hover={{
+                  color: 'var(--text-color-primary)',
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  window.open('https://mirrorful.com/contact', '_blank')
+                }}
+              />
+              <Icon
+                as={FiTrash2}
+                css={{
+                  width: '1.2rem',
+                  height: '1.2rem',
+                  transition: 'color 200ms ease-in-out',
+                }}
+                _hover={{
+                  color: 'var(--text-color-primary)',
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  onDelete()
+                }}
+              />
+            </Stack>
+
+            <Box
+              css={{
+                display: 'flex',
+                marginTop: '32px',
+                color: 'var(--text-color-secondary)',
+                alignItems: 'center',
+              }}
+            >
+              {!isCollapsed ? (
+                <>
+                  <Icon
+                    as={FiMoon}
+                    css={{ width: '1.2rem', height: '1.2rem' }}
+                  />
+                  <Switch
+                    colorScheme="gray"
+                    css={{ margin: '0 8px' }}
+                    isChecked={colorMode === 'light'}
+                    onChange={() => {
+                      toggleColorMode()
+                    }}
+                  />
+                  <Icon
+                    as={FiSun}
+                    css={{ width: '1.2rem', height: '1.2rem' }}
+                  />
+                </>
+              ) : (
+                <Icon
+                  as={colorMode === 'dark' ? FiMoon : FiSun}
+                  css={{
+                    width: '1.2rem',
+                    height: '1.2rem',
+                    cursor: 'pointer',
+                    transition: '200ms',
+                  }}
+                  onClick={() => {
+                    toggleColorMode()
+                  }}
+                  _hover={{
+                    color: 'var(--text-color-primary)',
+                  }}
+                />
               )}
             </Box>
+            {!isCollapsed && (
+              <Text
+                css={{ marginTop: '16px' }}
+                fontWeight="bold"
+                color="var(--text-color-secondary)"
+                fontSize={'0.6rem'}
+                onClick={toggleColorMode}
+              >
+                {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
+              </Text>
+            )}
           </Box>
         </Box>
       </Box>

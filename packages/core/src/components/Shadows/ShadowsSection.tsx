@@ -147,13 +147,17 @@ export function ShadowsSection({
 
   return (
     <Box>
-      <Heading fontSize={'2.5rem'} fontWeight="black">
+      <Heading
+        fontSize={'2.5rem'}
+        fontWeight="black"
+        color="var(--text-color-primary)"
+      >
         Shadows
       </Heading>
       <Text
         fontSize={'1.2rem'}
         fontWeight="medium"
-        color="gray.600"
+        color="var(--text-color-secondary)"
         css={{ marginTop: '12px' }}
       >
         {`Add and edit the shadows in your theme. `}

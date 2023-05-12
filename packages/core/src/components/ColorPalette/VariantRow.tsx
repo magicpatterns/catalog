@@ -158,7 +158,7 @@ export function VariantRow({
           justifyContent: 'space-between',
           padding: '0px 24px',
           borderRadius: 8,
-          border: '1px solid black',
+          border: '1px solid var(--border-color)',
         }}
         role="group"
       >

@@ -26,7 +26,7 @@ import {
 } from './utils'
 import { VariantRow } from './VariantRow'
 
-export function MirrorfulMenuButton({
+function MirrorfulMenuButton({
   color,
   icon = FiMoreHorizontal,
 }: {
@@ -127,7 +127,22 @@ export function ColorDisplay({
         <Text style={{ fontWeight: 600, fontSize: '1.5rem' }}>{colorName}</Text>
         <Menu>
           <Box style={{ marginLeft: '4px' }}>
-            <MirrorfulMenuButton icon={FiEdit} />
+            <MenuButton
+              variant="outline"
+              as={IconButton}
+              icon={<Icon as={FiEdit} />}
+              color="var(--text-color-primary)"
+              _hover={{
+                backgroundColor: 'rgba(235, 235, 235, 0.3)',
+              }}
+              _active={{
+                backgroundColor: 'rgba(235, 235, 235, 0.3)',
+              }}
+              size="sm"
+              css={{
+                border: 'none',
+              }}
+            />
           </Box>
           <MenuList>
             <MenuItem onClick={() => onBaseModalOpen()}>
