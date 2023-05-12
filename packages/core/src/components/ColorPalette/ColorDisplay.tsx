@@ -154,7 +154,6 @@ export function ColorDisplay({
             onBlur={() => {
               setIsEditing(false)
               onUpdateColorName(colourName.trim())
-              console.log(colourName.trim().length)
             }}
             autoFocus
           />
@@ -163,7 +162,6 @@ export function ColorDisplay({
             padding={1}
             style={{ fontWeight: 600, fontSize: '1.5rem' }}
             onDoubleClick={() => {
-              console.log(colourName.trim().length)
               setIsEditing(true)
             }}
           >
