@@ -79,18 +79,30 @@ eller
 yarn add mirrorful -D
 ```
 
+eller
+
+```bash
+pnpm add mirrorful -D
+```
+
 ## ✨ Användning
 
 Följande kommandon kommer att starta en lokal redigerare på `localhost:5050`
 
-```
+```bash
 yarn run mirrorful
 ```
 
 eller
 
-```
+```bash
 npx mirrorful editor
+```
+
+eller
+
+```bash
+pnpm mirrorful editor
 ```
 
 ## 💿 Exportera Format
