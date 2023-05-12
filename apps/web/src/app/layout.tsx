@@ -109,7 +109,7 @@ export default function RootLayout({
       <body>
         <AuthProvider
           authUrl={
-            (process.env.NEXT_PUBLIC_AUTH_URL as string) ||
+            process.env.NEXT_PUBLIC_AUTH_URL ??
             'https://607430308.propelauthtest.com'
           }
         >

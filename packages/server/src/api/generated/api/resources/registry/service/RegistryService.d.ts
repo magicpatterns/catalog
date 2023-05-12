@@ -28,22 +28,6 @@ export interface RegistryServiceMethods {
         cookie: (cookie: string, value: string, options?: express.CookieOptions) => void;
         locals: any;
     }): void | Promise<void>;
-    getStore(req: express.Request<{
-        orgId: serializers.OrgId.Raw;
-        storeId: serializers.StoreId.Raw;
-    }, MirrorfulApi.MirrorfulStore, never, never>, res: {
-        send: (responseBody: MirrorfulApi.MirrorfulStore) => Promise<void>;
-        cookie: (cookie: string, value: string, options?: express.CookieOptions) => void;
-        locals: any;
-    }): void | Promise<void>;
-    updateStore(req: express.Request<{
-        orgId: serializers.OrgId.Raw;
-        storeId: serializers.StoreId.Raw;
-    }, MirrorfulApi.MirrorfulStore, MirrorfulApi.MirrorfulStore, never>, res: {
-        send: (responseBody: MirrorfulApi.MirrorfulStore) => Promise<void>;
-        cookie: (cookie: string, value: string, options?: express.CookieOptions) => void;
-        locals: any;
-    }): void | Promise<void>;
 }
 export declare class RegistryService {
     private readonly methods;

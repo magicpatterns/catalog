@@ -2,6 +2,7 @@ import { register } from './api/generated'
 import cors from 'cors'
 
 import { getRegistryService } from './services/registry'
+import { getStoreService } from './services/store'
 import express from 'express'
 import * as Sentry from '@sentry/node'
 import mongoose from 'mongoose'
@@ -40,20 +41,9 @@ app.get('/', function mainHandler(req, res) {
   res.send('Hello world, this is the Mirrorful Server')
 })
 
-const auth = require('./propelauth')
-// requireUser is a middleware which validates the access token
-app.get('/api/whoami', auth.requireUser, (req, res) => {
-  // @ts-ignore
-  if (req && req.user) {
-    // @ts-ignore
-    res.send('Hello user with ID ' + req.user.userId)
-  } else {
-    res.send('Hello anonymous')
-  }
-})
-
 register(app, {
   registry: getRegistryService(),
+  store: getStoreService(),
 })
 
 app.listen(PORT)

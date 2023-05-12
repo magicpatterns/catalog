@@ -10,15 +10,16 @@ import {
 } from '@propelauth/react'
 import { useState } from 'react'
 
-async function testApiUpdateCall() {
+async function testApiUpdateCall({ accessToken }: { accessToken: string }) {
   const environment =
     process.env.NODE_ENV === 'production'
       ? MirrorfulApiEnvironment.Production
       : MirrorfulApiEnvironment.Development
   const client = new MirrorfulApiClient({
     environment,
+    token: `${accessToken}`,
   })
-  const response = await client.registry.updateStore('123', '123', {
+  const response = await client.store.updateStore('123', '123', {
     primitives: {
       colors: { primary: 'red' },
       typography: {
@@ -34,15 +35,17 @@ async function testApiUpdateCall() {
   console.log('response of updateStore', response)
 }
 
-async function testApiGetCall() {
+async function testApiGetCall({ accessToken }: { accessToken: string }) {
+  console.log('accessToken', accessToken)
   const environment =
     process.env.NODE_ENV === 'production'
       ? MirrorfulApiEnvironment.Production
       : MirrorfulApiEnvironment.Development
   const client = new MirrorfulApiClient({
     environment,
+    token: `${accessToken}`,
   })
-  const response = await client.registry.getStore('123', '123')
+  const response = await client.store.getStore('123', '123')
   console.log('response of getStore', response)
 }
 
@@ -71,17 +74,27 @@ const User = withAuthInfo((props) => {
     <div>
       <button onClick={fetchWhoAmI}>Fetch WhoAmi</button>
       <br />
-      <button onClick={testApiUpdateCall}>Test Api Update Call</button>
+      <button
+        onClick={() =>
+          testApiUpdateCall({ accessToken: props.accessToken ?? '' })
+        }
+      >
+        Test Api Update Call
+      </button>
       <br />
-      <button onClick={testApiGetCall}>Test Api Get Call</button>
+      <button
+        onClick={() => testApiGetCall({ accessToken: props.accessToken ?? '' })}
+      >
+        Test Api Get Call
+      </button>
       <br />
       {props.isLoggedIn ? (
         <>
           <p>You are logged in as {props.user.email}</p>
           <br />
-          <button onClick={redirectToAccountPage}>Account</button>
+          <button onClick={() => redirectToAccountPage()}>Account</button>
           <br />
-          <button onClick={() => logoutFunction}>Logout</button>
+          <button onClick={() => logoutFunction(false)}>Logout</button>
           <br />
         </>
       ) : (
@@ -91,7 +104,7 @@ const User = withAuthInfo((props) => {
           <br />
           <button onClick={() => redirectToLoginPage()}>Login</button>
           <br />
-          <button onClick={() => redirectToSignupPage}>Signup</button>
+          <button onClick={() => redirectToSignupPage()}>Signup</button>
           <br />
         </>
       )}

@@ -3624,10 +3624,10 @@
     js-base64 "3.7.2"
     url-join "4.0.1"
 
-"@mirrorful-fern/api-client@0.0.513":
-  version "0.0.513"
-  resolved "https://npm.buildwithfern.com/@mirrorful-fern/api-client/-/api-client-0.0.513.tgz#a4c8d22d7b2a98049682df80b2ad6e3122f960ef"
-  integrity sha512-cFDiOP+85YFZuFSHsIezVh+vSflpaeEVQCoajfj1sd3gAEPdtro6m1KB5exY5orSCqf4OsMPZYfT8aIn/BMnjw==
+"@mirrorful-fern/api-client@0.0.523":
+  version "0.0.523"
+  resolved "https://npm.buildwithfern.com/@mirrorful-fern/api-client/-/api-client-0.0.523.tgz#7adb339c8e5e679f640cd03049975270dcf00769"
+  integrity sha512-f9oXvOFDLPkL0+8lZi0eRGTvY3A7cFGTsORYEXaRSWjyQGXt8PgKHuKjC5XUG35tJxqkrJwXAvzlQLKnER2Dbg==
   dependencies:
     "@types/url-join" "4.0.1"
     "@ungap/url-search-params" "0.2.2"

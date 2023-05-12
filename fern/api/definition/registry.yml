@@ -38,29 +38,7 @@ service:
         fileId: commons.FileId
       response: fileResponse
 
-    getStore:
-      method: GET
-      path: /store/{storeId}
-      path-parameters:
-        storeId: commons.StoreId
-      response: mirrorfulStore
-
-    updateStore:
-      method: POST
-      path: /store/{storeId}
-      path-parameters:
-        storeId: commons.StoreId
-      response: mirrorfulStore
-      request:
-        name: updateStoreRequest
-        body: mirrorfulStore
-
 types:
-  mirrorfulStore:
-    properties:
-      primitives: unknown # object
-      themes: unknown # array of objects
-      files: unknown # array of strings
   createLibraryResponse:
     properties:
       signedS3UploadUrl: string

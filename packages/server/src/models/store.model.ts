@@ -25,7 +25,11 @@ const themeSchema = new mongoose.Schema<TTheme>({
   tokens: { type: Map, of: Object }, // tokens is really TTokenGroup, but the keys are dynamic... so we let is be free-form
 })
 
-const storeSchema = new mongoose.Schema<TMirrorfulStore & { id: string }>({
+const storeSchema = new mongoose.Schema<
+  TMirrorfulStore & { id: string; orgId: string; lastUpdatedBy: string }
+>({
+  lastUpdatedBy: { type: String }, // links to propelauth user
+  orgId: { type: String },
   id: { type: String, default: uuidv4() },
   primitives: { type: primitivesSchema, _id: false },
   themes: { type: [themeSchema], _id: false },

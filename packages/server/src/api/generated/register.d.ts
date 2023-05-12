@@ -3,6 +3,8 @@
  */
 import express from "express";
 import { RegistryService } from "./api/resources/registry/service/RegistryService";
+import { StoreService } from "./api/resources/store/service/StoreService";
 export declare function register(expressApp: express.Express | express.Router, services: {
     registry: RegistryService;
+    store: StoreService;
 }): void;

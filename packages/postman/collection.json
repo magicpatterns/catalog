@@ -152,7 +152,14 @@
             "body": null
           },
           "response": []
-        },
+        }
+      ]
+    },
+    {
+      "_type": "container",
+      "description": null,
+      "name": "Store",
+      "item": [
         {
           "_type": "endpoint",
           "name": "Get Store",

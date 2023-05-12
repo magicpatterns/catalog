@@ -26,10 +26,12 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registry = exports.commons = void 0;
+exports.store = exports.registry = exports.commons = void 0;
 exports.commons = __importStar(require("./commons"));
 __exportStar(require("./commons/types"), exports);
 exports.registry = __importStar(require("./registry"));
 __exportStar(require("./registry/types"), exports);
+exports.store = __importStar(require("./store"));
+__exportStar(require("./store/types"), exports);
 __exportStar(require("./registry/service/requests"), exports);
 __exportStar(require("./commons/errors"), exports);

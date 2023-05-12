@@ -3,7 +3,6 @@ import { RegistryService } from '../api/generated/api/resources/registry/service
 import { Library } from '../models/library.model'
 import { File } from '../models/file.model'
 import { createPresignedUrlWithClient } from '../utils/s3util'
-import { Store } from '../models/store.model'
 
 export function getRegistryService(): RegistryService {
   return new RegistryService({
@@ -46,30 +45,6 @@ export function getRegistryService(): RegistryService {
         fileId: resultDoc.id,
         code: resultDoc.code,
       })
-    },
-    getStore: async (req, res) => {
-      const { storeId } = req.params
-      const resultDoc = await Store.findOne({ id: storeId }).lean()
-      if (!resultDoc) {
-        throw new MirrorfulApi.ObjectDoesNotExistError()
-      }
-      return res.send(resultDoc)
-    },
-    updateStore: async (req, res) => {
-      const { storeId } = req.params
-      const { primitives, themes, files } = req.body
-      const resultDoc = await Store.findOneAndUpdate(
-        { id: storeId },
-        {
-          primitives,
-          themes,
-          files,
-        },
-        { upsert: true, new: true }
-      ).lean()
-      console.log('WATERMELON SUNDAE', resultDoc)
-      console.log('resultDoc', resultDoc)
-      return res.send(resultDoc)
     },
   })
 }
