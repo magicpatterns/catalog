@@ -169,29 +169,33 @@ export function ShadowsSection({
               token: shadows[key],
             }))
             .filter((value): value is TNamedToken => assertToken(value.token))
-            .map((data) => (
-              <ShadowRow
-                key={data.name}
-                shadowData={data}
-                onUpdateShadowVariant={(updatedShadowVariant: TNamedToken) => {
-                  const newShadowData = { ...shadows }
+            .map((data) => {
+              return (
+                <ShadowRow
+                  key={data.name}
+                  shadowData={data}
+                  onUpdateShadowVariant={(
+                    updatedShadowVariant: TNamedToken
+                  ) => {
+                    const newShadowData = { ...shadows }
 
-                  if (data.name !== updatedShadowVariant.name) {
+                    if (data.name !== updatedShadowVariant.name) {
+                      delete newShadowData[data.name]
+                    }
+
+                    newShadowData[updatedShadowVariant.name] =
+                      updatedShadowVariant.token
+
+                    onUpdateShadowData(newShadowData)
+                  }}
+                  onDeleteShadowVariant={() => {
+                    const newShadowData = { ...shadows }
                     delete newShadowData[data.name]
-                  }
-
-                  newShadowData[updatedShadowVariant.name] =
-                    updatedShadowVariant.token
-
-                  onUpdateShadowData(newShadowData)
-                }}
-                onDeleteShadowVariant={() => {
-                  const newShadowData = { ...shadows }
-                  delete newShadowData[data.name]
-                  onUpdateShadowData(newShadowData)
-                }}
-              />
-            ))}
+                    onUpdateShadowData(newShadowData)
+                  }}
+                />
+              )
+            })}
           <Button
             css={{ height: '50px', fontSize: '18px', fontWeight: 'bold' }}
             onClick={() => onAddVariantModalOpen()}

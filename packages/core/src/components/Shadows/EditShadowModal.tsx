@@ -98,6 +98,7 @@ export function EditShadowModal({
   const [color, setColor] = useState(
     presetColor[0] ? presetColor?.map((i: string) => i) : ['rgba(1, 1, 1, 0.4)']
   )
+
   const [hOffset, sethOffset] = useState(
     initialValues
       ? initialValues?.map((i: { hOffset: number }) => i.hOffset)
@@ -167,7 +168,7 @@ export function EditShadowModal({
   }
 
   function handleVOffset(e: number, i: number) {
-    console.log(e)
+    // console.log(e)
     const nextVOffset = [...vOffset]
     nextVOffset[i] = e
     setVOffset(nextVOffset)
@@ -287,6 +288,7 @@ export function EditShadowModal({
     return function (e: React.MouseEvent<HTMLButtonElement>) {
       e.stopPropagation()
       if (newInitialValues.length == 1) {
+        // not allow to delete if there is only on element
         return
       }
 
@@ -306,10 +308,10 @@ export function EditShadowModal({
       setBlur(updatedBlur)
       setSpread(updatedSpread)
       setCodeResult(updatedCodeResult)
-      setShadowIndex(indexToDelete - 1 > 0 ? indexToDelete - 1 : indexToDelete)
+      const updatedShadowIndex = indexToDelete == 0 ? 0 : indexToDelete - 1
+      setShadowIndex(updatedShadowIndex)
     }
   }
-
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
@@ -355,23 +357,39 @@ export function EditShadowModal({
                   width: '510px',
                 }}
               >
-                {newInitialValues?.map((_arg: ShadowValue, index: number) => (
-                  <Button
-                    key={index}
-                    style={{
-                      color: index === shadowIndex ? 'black' : 'gray',
-                      width: '65px',
-                      margin: '10px',
-                      position: 'relative',
-                    }}
-                    onClick={() => setShadowIndex(index)}
-                  >
-                    {index + 1}
-                    <Box position="absolute" top="-5px" right="-5px">
-                      <CloseButton size="sm" onClick={handleDelete(index)} />
-                    </Box>
-                  </Button>
-                ))}
+                {newInitialValues?.map((_arg: ShadowValue, index: number) => {
+                  return (
+                    <Button
+                      key={index}
+                      style={{
+                        color: index === shadowIndex ? 'black' : 'gray',
+                        width: '65px',
+                        margin: '10px',
+                        position: 'relative',
+                      }}
+                      onClick={() => setShadowIndex(index)}
+                    >
+                      {index + 1}
+                      <Box
+                        _hover={{ fontWeight: 'bold' }}
+                        position="absolute"
+                        top="-5px"
+                        right="-5px"
+                      >
+                        <CloseButton
+                          _hover={{
+                            '& > svg': {
+                              stroke: 'black',
+                              strokeWidth: '2',
+                            },
+                          }}
+                          size="sm"
+                          onClick={handleDelete(index)}
+                        />
+                      </Box>
+                    </Button>
+                  )
+                })}
 
                 <Button
                   style={{
@@ -405,6 +423,7 @@ export function EditShadowModal({
                     <>
                       {shadowIndex === index && (
                         <ShadowColorPicker
+                          key={index}
                           blur={blur[index]}
                           spread={spread[index]}
                           hOffset={hOffset[index]}
