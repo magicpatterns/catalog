@@ -15,10 +15,10 @@ import { AuthProvider } from '@propelauth/react'
 import { LayoutWrapper } from '@web/components/LayoutWrapper'
 import { useFetchStoreData } from '@web/hooks/useFetchStoreData'
 import { usePostStoreData } from '@web/hooks/usePostStoreData'
+import Head from 'next/head'
 import { useRouter } from 'next/navigation'
 import posthog from 'posthog-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import Head from 'next/head'
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready
