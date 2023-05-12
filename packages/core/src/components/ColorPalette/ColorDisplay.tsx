@@ -136,7 +136,8 @@ export function ColorDisplay({
             }}
             padding={1}
             fontSize={'1.5rem'}
-            width={`${colourName.length * 15}px`}
+            width={`${colourName.length * 12}px`}
+            minWidth={200}
             ml={1}
             mr={1}
             mt={1}
