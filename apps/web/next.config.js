@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
     externalDir: true,
   },
-  transpilePackages: ['@mirrorful/core'],
+  transpilePackages: ['@mirrorful/core', '@mirrorful/blocks'],
 }
 
 module.exports = nextConfig

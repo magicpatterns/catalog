@@ -1,9 +1,9 @@
-import { assertToken, assertTokenGroup, TPrimitives } from '@core/types'
+import { assertToken, assertTokenGroup, TPrimitives, TTheme } from '@core/types'
 
 import { sanitizeName } from './sanitizeName'
 import { toCss } from './toCss'
 
-export const toScss = (primitives: TPrimitives): string => {
+export const toScss = (primitives: TPrimitives, themes: TTheme[]): string => {
   const { colors, typography, shadows } = primitives
   const content: string[] = []
 
@@ -48,7 +48,7 @@ export const toScss = (primitives: TPrimitives): string => {
     }
   })
 
-  content.push('', toCss(primitives))
+  content.push('', toCss(primitives, themes))
 
   return content.join('\n')
 }

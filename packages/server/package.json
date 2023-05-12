@@ -1,6 +1,7 @@
 {
   "name": "server",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "start": "node lib/server.js",
@@ -13,6 +14,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.315.0",
     "@aws-sdk/s3-request-presigner": "^3.315.0",
+    "@propelauth/express": "^2.1.0",
     "@sentry/node": "^7.48.0",
     "aws-sdk": "^2.1360.0",
     "cors": "^2.8.5",
