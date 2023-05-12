@@ -136,7 +136,9 @@ export function EditBaseColorModal({
                   <VariantRow
                     defaultNamedToken={baseColorToken}
                     variant={variant}
-                    onUpdateVariant={() => console.log('not needed')}
+                    onUpdateVariant={() => {
+                      return null
+                    }}
                     hideIcons
                   />
                 </Box>

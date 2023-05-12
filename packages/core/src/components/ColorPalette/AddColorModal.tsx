@@ -132,7 +132,9 @@ export function AddColorModal({
                 <VariantRow
                   defaultNamedToken={namedToken}
                   variant={namedToken}
-                  onUpdateVariant={() => console.log('not needed')}
+                  onUpdateVariant={() => {
+                    return null
+                  }}
                   hideIcons
                 />
                 <FormControl

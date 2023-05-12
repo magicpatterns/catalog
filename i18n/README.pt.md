@@ -80,18 +80,30 @@ ou
 yarn add mirrorful -D
 ```
 
+ou
+
+```bash
+pnpm add mirrorful -D
+```
+
 ## ✨ Utilização
 
 Os seguintes comandos iniciarão um editor local em `localhost:5050`.
 
-```
+```bash
 yarn run mirrorful
 ```
 
 ou
 
-```
+```bash
 npx mirrorful editor
+```
+
+ou
+
+```bash
+pnpm mirrorful editor
 ```
 
 ## 💿 Formatos de Exportação
