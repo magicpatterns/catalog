@@ -75,9 +75,9 @@ export function EditFontWeightModal({
       return
     }
 
-    if (Number(variant.token.value) < 1 || Number(variant.token.value) > 1000) {
+    if (Number(variant.token.value) < 1 || Number(variant.token.value) > 900) {
       variantValueRef.current.focus()
-      setError('Font weight must be between 1 and 1000.')
+      setError('Font weight must be between 1 and 900.')
       return
     }
 

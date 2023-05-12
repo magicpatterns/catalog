@@ -130,7 +130,6 @@ export const generateDefaultColorShades = ({
     const delta = Math.abs(Number(key) - baseStop)
 
     const multiplier = multiplierDelta[delta] ?? 1
-    console.log('key', key, multiplier)
 
     if (Number(key) < baseStop) {
       // if it's less than the baseStop, lighten it

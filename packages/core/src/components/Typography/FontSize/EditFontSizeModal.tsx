@@ -118,11 +118,6 @@ export function EditFontSizeModal({
     }
   }, [isOpen, initialFontSizeVariant])
 
-  if (initialFontSizeVariant) {
-    console.log(initialFontSizeVariant)
-    console.log(parseUnit(initialFontSizeVariant?.token.value))
-  }
-
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
