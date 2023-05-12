@@ -10,6 +10,11 @@ const theme = extendTheme({
     },
   },
   components: {
+    Modal: {
+      dialog: {
+        bg: 'var(--background-color-primary)',
+      },
+    },
     Menu: {
       baseStyle: {
         list: {
@@ -25,6 +30,8 @@ const theme = extendTheme({
     },
   },
   config: {
+    initialColorMode: 'dark',
+    useSystemColorMode: true,
     disableTransitionOnChange: false,
   },
 })
@@ -34,5 +41,6 @@ export function MirrorfulThemeProvider({
 }: {
   children: React.ReactNode
 }) {
+  console.log('hi')
   return <ChakraProvider theme={theme}>{children}</ChakraProvider>
 }
