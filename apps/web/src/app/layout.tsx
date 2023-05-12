@@ -40,8 +40,21 @@ export default function RootLayout({
   const [showOnBoarding, setShowOnBoarding] = useState(false)
   const router = useRouter()
 
-  const { setColors, setTypography, setShadows, setFileTypes, setThemes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const setColors = useMirrorfulStore(
+    (state: MirrorfulState) => state.setColors
+  )
+  const setTypography = useMirrorfulStore(
+    (state: MirrorfulState) => state.setTypography
+  )
+  const setShadows = useMirrorfulStore(
+    (state: MirrorfulState) => state.setShadows
+  )
+  const setFileTypes = useMirrorfulStore(
+    (state: MirrorfulState) => state.setFileTypes
+  )
+  const setThemes = useMirrorfulStore(
+    (state: MirrorfulState) => state.setThemes
+  )
 
   const [fetchStoreData] = useFetchStoreData()
   const [postStoreData] = usePostStoreData()
