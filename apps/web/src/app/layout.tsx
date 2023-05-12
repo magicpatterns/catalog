@@ -18,6 +18,7 @@ import { usePostStoreData } from '@web/hooks/usePostStoreData'
 import { useRouter } from 'next/navigation'
 import posthog from 'posthog-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import Head from 'next/head'
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready
@@ -108,6 +109,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Head>
+          <title>Mirrorful Editor</title>
+          <meta content="width=device-width, initial-scale=1" name="viewport" />
+          <meta
+            name="description"
+            content="Create, edit, and manage your app's theme."
+          />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="preload" href="/components_graphic_dark.png" />
+          <link rel="preload" href="/components_graphic_light.png" />
+        </Head>
         <AuthProvider
           authUrl={
             process.env.NEXT_PUBLIC_AUTH_URL ??
