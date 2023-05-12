@@ -50,6 +50,7 @@ export const addTokenOrGroupToTheme = ({
   }
 }
 
+// TODO(teddy): Need algorithm here to maintain order
 export const editTokenOrGroupInTheme = ({
   originalPath,
   updatedPath,

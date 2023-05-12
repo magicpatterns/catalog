@@ -1,5 +1,6 @@
 import '../main.css'
 import '../atom-one-dark.css'
+import '../blocks.css'
 
 import { Onboarding } from '@mirrorful/core/lib/components/Onboarding'
 import SplashScreen from '@mirrorful/core/lib/components/SplashScreen'
