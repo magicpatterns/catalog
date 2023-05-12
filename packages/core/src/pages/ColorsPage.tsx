@@ -9,8 +9,18 @@ export function ColorsPage({
 }: {
   postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
-  const { colors, typography, shadows, fileTypes, setColors, themes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const setColors = useMirrorfulStore(
+    (state: MirrorfulState) => state.setColors
+  )
+  const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
+  const typography = useMirrorfulStore(
+    (state: MirrorfulState) => state.typography
+  )
+  const shadows = useMirrorfulStore((state: MirrorfulState) => state.shadows)
+  const fileTypes = useMirrorfulStore(
+    (state: MirrorfulState) => state.fileTypes
+  )
+  const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
 
   const handleUpdateColors = async (data: TTokenGroup) => {
     setColors(data)
