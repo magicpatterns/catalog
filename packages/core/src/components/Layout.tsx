@@ -35,17 +35,28 @@ export default function Layout({
   const pathname = usePathname()
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
-  const {
-    colors,
-    setColors,
-    typography,
-    setTypography,
-    shadows,
-    setShadows,
-    fileTypes,
-    setFileTypes,
-    themes,
-  } = useMirrorfulStore((state: MirrorfulState) => state)
+  const setColors = useMirrorfulStore(
+    (state: MirrorfulState) => state.setColors
+  )
+  const setTypography = useMirrorfulStore(
+    (state: MirrorfulState) => state.setTypography
+  )
+  const setShadows = useMirrorfulStore(
+    (state: MirrorfulState) => state.setShadows
+  )
+  const setFileTypes = useMirrorfulStore(
+    (state: MirrorfulState) => state.setFileTypes
+  )
+  const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
+  const typography = useMirrorfulStore(
+    (state: MirrorfulState) => state.typography
+  )
+  const shadows = useMirrorfulStore((state: MirrorfulState) => state.shadows)
+  const fileTypes = useMirrorfulStore(
+    (state: MirrorfulState) => state.fileTypes
+  )
+  const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
+
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
