@@ -14,9 +14,19 @@ export function ThemesPage({
   postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
   const router = useRouter()
-  const { typography, colors, shadows, fileTypes, themes, setThemes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
 
+  const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
+  const typography = useMirrorfulStore(
+    (state: MirrorfulState) => state.typography
+  )
+  const shadows = useMirrorfulStore((state: MirrorfulState) => state.shadows)
+  const fileTypes = useMirrorfulStore(
+    (state: MirrorfulState) => state.fileTypes
+  )
+  const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
+  const setThemes = useMirrorfulStore(
+    (state: MirrorfulState) => state.setThemes
+  )
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)
     await postStoreData({
