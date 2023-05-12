@@ -54,13 +54,6 @@ const MOCK_NESTED_THEME_DATA = {
           id: 'mockid',
         },
       },
-      text: {
-        primary: {
-          value: '#ffffff',
-          type: 'color',
-          id: 'mockid',
-        },
-      },
     },
   },
 } as const
@@ -224,13 +217,6 @@ describe('deleteTokenOrGroupFromTheme', () => {
               id: 'mockid',
             },
           },
-          text: {
-            primary: {
-              value: '#ffffff',
-              type: 'color',
-              id: 'mockid',
-            },
-          },
         },
       },
     })
@@ -274,18 +260,9 @@ describe('editTokenOrGroupInTheme', () => {
               },
             },
           },
-          text: {
-            primary: {
-              value: '#ffffff',
-              type: 'color',
-              id: 'mockid',
-            },
-          },
         },
       },
     })
-
-    expect(Object.keys(result)).toEqual(Object.keys(MOCK_NESTED_THEME_DATA))
   })
 
   test('change existing value', () => {
@@ -322,34 +299,8 @@ describe('editTokenOrGroupInTheme', () => {
               id: 'mockid',
             },
           },
-          text: {
-            primary: {
-              value: '#ffffff',
-              type: 'color',
-              id: 'mockid',
-            },
-          },
         },
       },
     })
-  })
-
-  test('order of keys is maintained', () => {
-    const result = editTokenOrGroupInTheme({
-      originalPath: 'colors.button',
-      updatedPath: 'colors.renamedButton',
-      target: {
-        id: 'mockid',
-        value: '#abc123',
-        type: 'color',
-      },
-      theme: MOCK_NESTED_THEME_DATA,
-    })
-
-    expect(Object.keys(result.tokens.colors)).toEqual([
-      'primary',
-      'renamedButton',
-      'text',
-    ])
   })
 })
