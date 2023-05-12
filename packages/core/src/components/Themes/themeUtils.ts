@@ -64,6 +64,49 @@ export const editTokenOrGroupInTheme = ({
 }): TTheme => {
   let updatedTheme = structuredClone(theme)
 
+  const originalKeys = originalPath.split('.')
+  const updatedKeys = updatedPath.split('.')
+
+  const updatedTokens: TTokenGroup = {}
+
+  // Reconstruct the object while adding the new key in the same position as the old key
+  const handleNode = ({
+    currentOriginal,
+    currentUpdated,
+    pathIndex,
+  }: {
+    currentOriginal: TTokenGroup
+    currentUpdated: TTokenGroup
+    pathIndex: number
+  }) => {
+    Object.keys(currentOriginal).forEach((key) => {
+      if (key === originalKeys[pathIndex]) {
+        if (key === updatedKeys[pathIndex]) {
+          const nextNode = currentOriginal[key]
+
+          if (assertToken(nextNode)) {
+            currentUpdated[key] = currentOriginal[key]
+          } else {
+            const nextUpdated: TTokenGroup = {}
+            currentUpdated[key] = nextUpdated
+            // Keep traversing until we find the breakpoint.
+            handleNode({
+              currentOriginal: nextNode,
+              currentUpdated: nextUpdated,
+              pathIndex: pathIndex + 1,
+            })
+          }
+        } else {
+          // We found the breakpoint — add the original and new key.
+          currentUpdated[key] = currentOriginal[key]
+        }
+      } else {
+        // This is an unaffected path
+        currentUpdated[key] = currentOriginal[key]
+      }
+    })
+  }
+
   try {
     updatedTheme = deleteTokenOrGroupFromTheme({
       path: originalPath,
@@ -77,6 +120,13 @@ export const editTokenOrGroupInTheme = ({
     })
   } catch (e) {
     throw e
+  }
+
+  if (originalPath !== updatedPath) {
+    deleteTokenOrGroupFromTheme({
+      path: originalPath,
+      theme,
+    })
   }
 
   return updatedTheme
