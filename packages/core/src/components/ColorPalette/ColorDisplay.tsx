@@ -148,11 +148,13 @@ export function ColorDisplay({
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 setIsEditing(false)
+                setColorName(colourName.trim())
                 onUpdateColorName(colourName.trim())
               }
             }}
             onBlur={() => {
               setIsEditing(false)
+              setColorName(colourName.trim())
               onUpdateColorName(colourName.trim())
             }}
             autoFocus
