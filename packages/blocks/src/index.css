@@ -16,4 +16,64 @@
   --button-secondary-bg-color: var(--secondary-color);
   --button-secondary-bg-color-accent: var(--secondary-color-accent);
   --button-secondary-text-color: white;
+
+  --background-color-primary: #ffffff;
+  --background-color-secondary: #ffffff;
+  --text-color-primary: #ffffff;
+  --text-color-secondary: #ffffff;
+  --border-color: #303030;
+  --color-shadow: #d3d3d3;
+}
+
+/* TODO: Migrate this to Mirrorful Themes */
+html[data-theme='light'] {
+  --primary-color: var(--color-violet-500);
+  --primary-color-accent: var(--color-violet-700);
+
+  --secondary-color: var(--color-space-500);
+  --secondary-color-accent: var(--color-space-700);
+
+  /* Primary Button */
+  --button-primary-bg-color: var(--primary-color);
+  --button-primary-bg-color-accent: var(--primary-color-accent);
+  --button-primary-text-color: white;
+
+  /* Secondary Button */
+  --button-secondary-bg-color: var(--secondary-color);
+  --button-secondary-bg-color-accent: var(--secondary-color-accent);
+  --button-secondary-text-color: white;
+
+  --background-color-primary: #ffffff;
+  --background-color-secondary: #f5f5f5;
+  --text-color-primary: #000000;
+  --text-color-secondary: #808080;
+  --border-color: #303030;
+  --border-hover-color: #030303;
+  --color-shadow: #d3d3d3;
+}
+
+html[data-theme='dark'] {
+  --primary-color: var(--color-violet-500);
+  --primary-color-accent: var(--color-violet-700);
+
+  --secondary-color: var(--color-space-500);
+  --secondary-color-accent: var(--color-space-700);
+
+  /* Primary Button */
+  --button-primary-bg-color: var(--primary-color);
+  --button-primary-bg-color-accent: var(--primary-color-accent);
+  --button-primary-text-color: white;
+
+  /* Secondary Button */
+  --button-secondary-bg-color: var(--secondary-color);
+  --button-secondary-bg-color-accent: var(--secondary-color-accent);
+  --button-secondary-text-color: white;
+
+  --background-color-primary: #10121c;
+  --background-color-secondary: #171a22;
+  --text-color-primary: #ffffff;
+  --text-color-secondary: #b0b0b0;
+  --border-color: #c0c0c0;
+  --border-hover-color: #ffffff;
+  --color-shadow: #6f6f6f;
 }

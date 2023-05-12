@@ -9,13 +9,13 @@ export function TypographyPage({
 }: {
   postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
-  const { typography, colors, shadows, setTypography, fileTypes } =
+  const { typography, colors, shadows, setTypography, fileTypes, themes } =
     useMirrorfulStore((state: MirrorfulState) => state)
   const handleUpdateTypography = async (data: TPrimitivesTypography) => {
     setTypography(data)
     await postStoreData({
       primitives: { colors, typography: data, shadows },
-      themes: [],
+      themes,
       files: fileTypes,
     })
   }

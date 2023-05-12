@@ -1,7 +1,33 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import React from 'react'
 
-const theme = extendTheme({})
+const theme = extendTheme({
+  styles: {
+    global: {
+      body: {
+        bg: 'var(--background-color-primary)',
+      },
+    },
+  },
+  components: {
+    Menu: {
+      baseStyle: {
+        list: {
+          backgroundColor: 'var(--background-color-secondary)',
+        },
+        item: {
+          backgroundColor: 'var(--background-color-secondary)',
+          _hover: {
+            backgroundColor: 'var(--background-color-primary)',
+          },
+        },
+      },
+    },
+  },
+  config: {
+    disableTransitionOnChange: false,
+  },
+})
 
 export function MirrorfulThemeProvider({
   children,

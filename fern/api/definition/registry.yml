@@ -42,16 +42,9 @@ types:
   createLibraryResponse:
     properties:
       signedS3UploadUrl: string
-      libraryId: LibraryId
+      libraryId: commons.LibraryId
       name: string
   fileResponse:
     properties:
       fileId: commons.FileId
       code: string
-  LibraryId:
-    type: string
-    docs: This should be the Library Id
-
-errors:
-  FileDoesNotExistError:
-    status-code: 404

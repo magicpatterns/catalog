@@ -2,6 +2,7 @@ import { register } from './api/generated'
 import cors from 'cors'
 
 import { getRegistryService } from './services/registry'
+import { getStoreService } from './services/store'
 import express from 'express'
 import * as Sentry from '@sentry/node'
 import mongoose from 'mongoose'
@@ -42,6 +43,7 @@ app.get('/', function mainHandler(req, res) {
 
 register(app, {
   registry: getRegistryService(),
+  store: getStoreService(),
 })
 
 app.listen(PORT)

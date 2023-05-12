@@ -102,12 +102,11 @@ or
 yarn run mirrorful editor
 ```
 
-or 
+or
 
 ```bash
 pnpm mirrorful editor
 ```
-
 
 ## 📚 Documentation
 
