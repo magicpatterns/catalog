@@ -10,8 +10,19 @@ export function ShadowsPage({
 }: {
   postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
-  const { typography, colors, shadows, setShadows, fileTypes, themes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const setShadows = useMirrorfulStore(
+    (state: MirrorfulState) => state.setShadows
+  )
+
+  const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
+  const typography = useMirrorfulStore(
+    (state: MirrorfulState) => state.typography
+  )
+  const shadows = useMirrorfulStore((state: MirrorfulState) => state.shadows)
+  const fileTypes = useMirrorfulStore(
+    (state: MirrorfulState) => state.fileTypes
+  )
+  const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
 
   const handleUpdateShadows = async (data: TTokenGroup) => {
     setShadows(data)
