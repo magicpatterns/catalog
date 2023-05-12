@@ -1,7 +1,7 @@
-import { TExportFileType, TPrimitives } from '@core/types'
+import { TExportFileType, TPrimitives, TTheme } from '@core/types'
 
 export type Translator = {
-  toContent: (primitives: TPrimitives) => string
+  toContent: (primitives: TPrimitives, themes: TTheme[]) => string
   extension: string
 }
 

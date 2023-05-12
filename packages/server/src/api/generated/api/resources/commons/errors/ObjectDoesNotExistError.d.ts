@@ -3,7 +3,7 @@
  */
 import * as errors from "../../../../errors";
 import express from "express";
-export declare class LibraryDoesNotExistError extends errors.MirrorfulApiError {
+export declare class ObjectDoesNotExistError extends errors.MirrorfulApiError {
     constructor();
     send(res: express.Response): Promise<void>;
 }

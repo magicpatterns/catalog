@@ -100,13 +100,90 @@ export const defaultTypographyV2: TPrimitivesTypography = {
   lineHeights: defaultLineHeightsV2,
 }
 
+export const defaultTheme: TTheme = {
+  id: 'default-theme-1',
+  name: 'Light',
+  tokens: {
+    background: {
+      base: {
+        id: 'default-background-base',
+        value: '#F7FAFC',
+        type: 'color',
+      },
+    },
+    neutrals: {
+      100: {
+        id: 'default-neutrals-100',
+        value: '#EDF2F7',
+        type: 'color',
+      },
+      200: {
+        id: 'default-neutrals-200',
+        value: '#E2E8F0',
+        type: 'color',
+      },
+      300: {
+        id: 'default-neutrals-300',
+        value: '#CBD5E0',
+        type: 'color',
+      },
+    },
+    button: {
+      primary: {
+        bg: {
+          value: '#805AD5',
+          type: 'color',
+          id: 'default-button-primary-bg-id',
+        },
+        bgHover: {
+          value: '#9F7AEA',
+          type: 'color',
+          id: 'default-button-primary-accent-bg-id',
+        },
+        bgActive: {
+          value: '#9F7AEA',
+          type: 'color',
+          id: 'default-button-primary-accent-bg-active-id',
+        },
+        text: {
+          value: '#FFFFFF',
+          type: 'color',
+          id: 'default-button-primary-text-id',
+        },
+      },
+      secondary: {
+        bg: {
+          id: 'default-button-secondary-bg-id',
+          value: '#718096',
+          type: 'color',
+        },
+        bgHover: {
+          id: 'default-button-secondary-bg-hover-id',
+          value: '#A0AEC0',
+          type: 'color',
+        },
+        bgActive: {
+          id: 'default-button-secondary-bg-active-id',
+          value: '#A0AEC0',
+          type: 'color',
+        },
+        text: {
+          id: 'default-button-secondary-text-id',
+          value: '#FFFFFF',
+          type: 'color',
+        },
+      },
+    },
+  },
+}
+
 export const defaultConfigV2: TMirrorfulStore = {
   primitives: {
     colors: defaultColorsV2,
     typography: defaultTypographyV2,
     shadows: defaultShadowsV2,
   },
-  themes: [],
+  themes: [defaultTheme],
   files: defaultFiles,
 }
 
@@ -137,6 +214,7 @@ export type ThemeStore = {
 
 // Each theme, e.g. "Dark Theme"
 export type TTheme = {
+  id: string
   name: string
   tokens: TTokenGroup
 }
@@ -146,10 +224,17 @@ export type TTokenGroup = {
   [key: string]: TTokenGroup | TToken
 }
 
+export type TTokenType =
+  | 'color'
+  | 'fontSize'
+  | 'fontWeight'
+  | 'lineHeight'
+  | 'boxShadow'
+
 export type TToken = {
   id: string
   value: string
-  type: 'color' | 'fontSize' | 'fontWeight' | 'lineHeight' | 'boxShadow'
+  type: TTokenType
   ref?: string // means that this token itself is a reference to another token
 }
 
