@@ -1,18 +1,24 @@
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
+import SplashScreen from '@core/components/SplashScreen'
 import { CreateThemeCard, ThemeCard } from '@core/components/Themes/ThemeCard'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { defaultTheme, TTheme } from '@core/types'
-import { TMirrorfulStore } from '@core/types'
+import { defaultTheme, PostStoreData, TTheme } from '@core/types'
+import { useAuthInfo } from '@propelauth/react'
 import { useRouter } from 'next/navigation'
 import { v4 as uuidv4 } from 'uuid'
 
 export function ThemesPage({
   postStoreData,
 }: {
-  postStoreData: (data: TMirrorfulStore) => Promise<void>
+  postStoreData: ({
+    newData,
+    authInfo,
+    storeId,
+  }: PostStoreData) => Promise<void>
 }) {
+  const authInfo = useAuthInfo()
   const router = useRouter()
   const { typography, colors, shadows, fileTypes, themes, setThemes } =
     useMirrorfulStore((state: MirrorfulState) => state)
@@ -20,9 +26,13 @@ export function ThemesPage({
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)
     await postStoreData({
-      primitives: { colors, typography, shadows },
-      themes: data,
-      files: fileTypes,
+      newData: {
+        primitives: { colors, typography, shadows },
+        themes: data,
+        files: fileTypes,
+      },
+      authInfo: authInfo,
+      storeId: '456',
     })
   }
 

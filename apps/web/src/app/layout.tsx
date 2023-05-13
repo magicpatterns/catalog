@@ -142,7 +142,7 @@ export default function RootLayout({
         >
           <CacheProvider>
             <MirrorfulThemeProvider>
-              {isLoading && <SplashScreen></SplashScreen>}
+              {isLoading && <SplashScreen />}
               {!shouldForceSkipOnboarding && showOnBoarding ? (
                 <Onboarding
                   postStoreData={handleOnboardingSubmit}

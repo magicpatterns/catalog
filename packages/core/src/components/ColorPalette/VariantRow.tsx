@@ -77,13 +77,11 @@ function MirrorfulSlider({
 }
 
 export function VariantRow({
-  defaultNamedToken,
   variant,
   onUpdateVariant,
   hideIcons = false,
   isBase = false,
 }: {
-  defaultNamedToken: TNamedToken
   hideIcons?: boolean
   isBase?: boolean
   variant: TNamedToken
