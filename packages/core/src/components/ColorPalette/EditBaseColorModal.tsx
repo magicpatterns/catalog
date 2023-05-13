@@ -134,7 +134,6 @@ export function EditBaseColorModal({
                 />
                 <Box style={{ width: '100%' }}>
                   <VariantRow
-                    defaultNamedToken={baseColorToken}
                     variant={variant}
                     onUpdateVariant={() => {
                       return null
