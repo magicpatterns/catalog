@@ -1,7 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import useMirrorfulStore from '@core/store/useMirrorfulStore'
 import { assertToken, assertTokenGroup, TToken, TTokenGroup } from '@core/types'
-import { SketchPicker } from '@hello-pangea/color-picker'
 import { useMemo, useState } from 'react'
 import Select, {
   components,
@@ -120,6 +119,10 @@ export function TokenValueInput({
             input: (styles) => ({
               ...styles,
               width: '100%',
+            }),
+            option: (styles) => ({
+              ...styles,
+              backgroundColor: 'var(--background-color-primary)',
             }),
           }}
         />
