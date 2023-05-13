@@ -1,7 +1,7 @@
 import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
-import { TMirrorfulStore } from '@core/types'
+import { postStoreData } from '@core/api/postStoreData'
+import { useAuthInfo } from '@propelauth/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import Head from 'next/head'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -24,12 +24,10 @@ export default function Layout({
   children,
   isLoading = false,
   platform = 'package',
-  postStoreData,
 }: {
   children: React.ReactNode
   isLoading?: boolean
   platform?: TPlatform
-  postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
   const router = useRouter()
   const pathname = usePathname()
@@ -46,6 +44,7 @@ export default function Layout({
     setFileTypes,
     themes,
   } = useMirrorfulStore((state: MirrorfulState) => state)
+  const authInfo = useAuthInfo()
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
@@ -66,9 +65,13 @@ export default function Layout({
 
   const handleExport = async () => {
     await postStoreData({
-      primitives: { colors, typography, shadows },
-      themes: [],
-      files: fileTypes,
+      newData: {
+        primitives: { colors, typography, shadows },
+        themes: [],
+        files: fileTypes,
+      },
+      authInfo: authInfo,
+      storeId: '456',
     })
 
     onExportSuccessModalOpen()
@@ -80,13 +83,17 @@ export default function Layout({
     setTypography({ fontSizes: {}, fontWeights: {}, lineHeights: {} })
     setShadows({})
     await postStoreData({
-      primitives: {
-        colors: {},
-        typography: { fontSizes: {}, fontWeights: {}, lineHeights: {} },
-        shadows: {},
+      newData: {
+        primitives: {
+          colors: {},
+          typography: { fontSizes: {}, fontWeights: {}, lineHeights: {} },
+          shadows: {},
+        },
+        themes: [],
+        files: fileTypes,
       },
-      themes: [],
-      files: fileTypes,
+      authInfo,
+      storeId: '456',
     })
   }
 

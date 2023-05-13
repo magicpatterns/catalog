@@ -1,23 +1,15 @@
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
-import SplashScreen from '@core/components/SplashScreen'
+import { postStoreData } from '@core/api/postStoreData'
 import { CreateThemeCard, ThemeCard } from '@core/components/Themes/ThemeCard'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { defaultTheme, PostStoreData, TTheme } from '@core/types'
+import { defaultTheme, TTheme } from '@core/types'
 import { useAuthInfo } from '@propelauth/react'
 import { useRouter } from 'next/navigation'
 import { v4 as uuidv4 } from 'uuid'
 
-export function ThemesPage({
-  postStoreData,
-}: {
-  postStoreData: ({
-    newData,
-    authInfo,
-    storeId,
-  }: PostStoreData) => Promise<void>
-}) {
+export function ThemesPage() {
   const authInfo = useAuthInfo()
   const router = useRouter()
   const { typography, colors, shadows, fileTypes, themes, setThemes } =

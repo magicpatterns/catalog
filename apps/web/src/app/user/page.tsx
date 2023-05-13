@@ -10,6 +10,8 @@ import {
 } from '@propelauth/react'
 import { useState } from 'react'
 
+// TODO DELETE THIS PAGE
+
 async function testApiUpdateCall({ accessToken }: { accessToken: string }) {
   const environment =
     process.env.NODE_ENV === 'production'
