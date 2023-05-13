@@ -1,7 +1,7 @@
 'use client'
+import '@blocks/index.css'
 import './globals.css'
 import './atom-one-dark.css'
-import '@blocks/index.css'
 
 import { CacheProvider } from '@chakra-ui/next-js'
 import { Onboarding } from '@core/components/Onboarding'
@@ -15,6 +15,7 @@ import { AuthProvider } from '@propelauth/react'
 import { LayoutWrapper } from '@web/components/LayoutWrapper'
 import { useFetchStoreData } from '@web/hooks/useFetchStoreData'
 import { usePostStoreData } from '@web/hooks/usePostStoreData'
+import Head from 'next/head'
 import { useRouter } from 'next/navigation'
 import posthog from 'posthog-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -121,6 +122,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Head>
+          <title>Mirrorful Editor</title>
+          <meta content="width=device-width, initial-scale=1" name="viewport" />
+          <meta
+            name="description"
+            content="Create, edit, and manage your app's theme."
+          />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="preload" href="/components_graphic_dark.png" />
+          <link rel="preload" href="/components_graphic_light.png" />
+        </Head>
         <AuthProvider
           authUrl={
             process.env.NEXT_PUBLIC_AUTH_URL ??

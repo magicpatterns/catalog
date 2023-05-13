@@ -225,14 +225,16 @@ export function TokenGroupRow({
               pieces.push(updatedText)
               const newPath = pieces.join('.')
 
-              const updatedTheme = editTokenOrGroupInTheme({
-                originalPath: currentPath,
-                updatedPath: newPath,
-                target: token,
-                theme,
-              })
+              if (currentPath !== newPath) {
+                const updatedTheme = editTokenOrGroupInTheme({
+                  originalPath: currentPath,
+                  updatedPath: newPath,
+                  target: token,
+                  theme,
+                })
 
-              onUpdateTheme(updatedTheme)
+                onUpdateTheme(updatedTheme)
+              }
             }}
             css={{
               fontWeight: 'bold',
