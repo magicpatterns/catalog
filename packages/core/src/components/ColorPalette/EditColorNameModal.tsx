@@ -80,11 +80,7 @@ export function EditColorNameModal({
           </FormControl>
         </ModalBody>
         {isError && (
-          <Text
-            color="red.500"
-            style={{ fontWeight: 800 }}
-            css={{ padding: '0px 32px 0 32px' }}
-          >
+          <Text color="red.500" css={{ padding: '0px 32px 0 32px' }}>
             {isError}
           </Text>
         )}
