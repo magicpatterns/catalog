@@ -2,6 +2,7 @@ import {
   Box,
   Icon,
   IconButton,
+  Input,
   Menu,
   MenuButton,
   MenuItem,
@@ -13,6 +14,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { IconType } from 'react-icons'
 import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
@@ -84,6 +86,9 @@ export function ColorDisplay({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
+  const [colourName, setColorName] = useState<string>(colorName)
+  const [isEditing, setIsEditing] = useState<boolean>(false)
+
   const namedTokens = Object.keys(colorData)
     .map((key) => ({
       name: key,
@@ -124,7 +129,47 @@ export function ColorDisplay({
         mb={5}
         style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
       >
-        <Text style={{ fontWeight: 600, fontSize: '1.5rem' }}>{colorName}</Text>
+        {isEditing ? (
+          <Input
+            style={{
+              border: 'none',
+            }}
+            padding={1}
+            fontSize={'1.5rem'}
+            width={`${colourName.length * 12}px`}
+            minWidth={200}
+            ml={1}
+            mr={1}
+            mt={1}
+            value={colourName}
+            onChange={(e) => {
+              setColorName(e.target.value)
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                setIsEditing(false)
+                setColorName(colourName.trim())
+                onUpdateColorName(colourName.trim())
+              }
+            }}
+            onBlur={() => {
+              setIsEditing(false)
+              setColorName(colourName.trim())
+              onUpdateColorName(colourName.trim())
+            }}
+            autoFocus
+          />
+        ) : (
+          <Text
+            padding={1}
+            style={{ fontWeight: 600, fontSize: '1.5rem' }}
+            onDoubleClick={() => {
+              setIsEditing(true)
+            }}
+          >
+            {colourName}
+          </Text>
+        )}
         <Menu>
           <Box style={{ marginLeft: '4px' }}>
             <MenuButton
