@@ -9,9 +9,6 @@ import {
   SliderTrack,
   Text,
 } from '@chakra-ui/react'
-import { SketchPicker } from '@hello-pangea/color-picker'
-import { useState } from 'react'
-import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 
 import ColorPicker from '../ColorPalette/ColorPicker'
@@ -43,20 +40,6 @@ export function ShadowColorPicker({
   handleVOffset: (e: number, index: number) => void
   handleColor: (e: { r: number; g: number; b: number }, index: number) => void
 }) {
-  const INITIAL_COLOR_PICKER_COLOR = color
-  const [error, setError] = useState<string>('')
-  const [colorPickerColor, setColorPickerColor] = useState<AnyColor>(
-    INITIAL_COLOR_PICKER_COLOR
-  )
-
-  const getColor = (color: AnyColor) => {
-    return typeof color === 'string' && color.includes('#')
-      ? tinycolor(color).toHexString()
-      : tinycolor(color).toRgbString()
-  }
-
-  //console.log('colorPickerColor', tinycolor(colorPickerColor).toRgb())
-
   return (
     <Box
       sx={{
@@ -70,27 +53,13 @@ export function ShadowColorPicker({
       <FormLabel>Color of Shadow {index + 1}</FormLabel>
 
       <Flex justifyContent={'space-between'}>
-        {/* <Box width="45%">
-          <SketchPicker
-            width="100%"
-            color={color}
-            onChange={(e) => {
-              handleColor(e.rgb, index)
-            }}
-          />
-        </Box> */}
         <Box width="50%">
           <ColorPicker
             onChange={(colorPickerColor) => {
               handleColor(tinycolor(colorPickerColor).toRgb(), index)
-              setError('')
-              if (tinycolor(colorPickerColor).isValid()) {
-                const color = getColor(colorPickerColor)
-                setColorPickerColor(color)
-              }
             }}
             shadow={true}
-            colorPickerColor={colorPickerColor}
+            colorPickerColor={color}
           />
         </Box>
         <Box>

@@ -200,6 +200,7 @@ export function EditVariantModal({
                         },
                       })
                     }}
+                    shadow={false}
                     colorPickerColor={variantColorRaw}
                   />
                 </Box>

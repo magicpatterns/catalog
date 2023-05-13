@@ -197,7 +197,7 @@ export default function ColorPicker({
       setFormat('RGBA')
     }
   }
-  console.log(shadow)
+
   return (
     <Box
       css={{

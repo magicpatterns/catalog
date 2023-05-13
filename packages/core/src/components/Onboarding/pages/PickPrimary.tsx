@@ -91,6 +91,7 @@ export function PickPrimary({
         }}
       >
         <ColorPicker
+          shadow={false}
           colorPickerColor={primaryColor}
           onChange={onUpdatePrimaryColor}
         />
