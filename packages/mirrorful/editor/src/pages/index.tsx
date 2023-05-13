@@ -8,10 +8,12 @@ export default function Editor() {
     router.replace('/colors')
   }, [router])
 
+  // Note: the local editor is using pages dir, while web is using app dir
+  // So we have a <Head> here, but not in web.
   return (
     <>
       <Head>
-        <title>Mirrorful</title>
+        <title>Mirrorful Editor</title>
         <meta property="og:title" content="Mirrorful" key="title" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta
