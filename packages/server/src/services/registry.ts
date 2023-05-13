@@ -39,9 +39,8 @@ export function getRegistryService(): RegistryService {
       const { orgId, fileId } = req.params
       const resultDoc = await File.findOne({ orgId, id: fileId }).lean()
       if (!resultDoc) {
-        throw new MirrorfulApi.FileDoesNotExistError()
+        throw new MirrorfulApi.ObjectDoesNotExistError()
       }
-
       return res.send({
         fileId: resultDoc.id,
         code: resultDoc.code,

@@ -7,14 +7,18 @@ import { PrimaryLink } from './sample/PrimaryLink'
 export function ComponentsSection() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <Heading fontSize={'2.5rem'} fontWeight="black">
+      <Heading
+        fontSize={'2.5rem'}
+        fontWeight="black"
+        color="var(--text-color-primary)"
+      >
         Component Library
       </Heading>
       <Box display="flex" justifyContent="space-between">
         <Text
           fontSize={'1.2rem'}
           fontWeight="medium"
-          color="gray.600"
+          color="var(--text-color-secondary)"
           css={{ marginTop: '12px' }}
         >
           {`Add and edit your component library`}

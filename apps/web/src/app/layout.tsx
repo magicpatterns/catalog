@@ -1,4 +1,5 @@
 'use client'
+import '@blocks/index.css'
 import './globals.css'
 import './atom-one-dark.css'
 
@@ -10,6 +11,7 @@ import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
 import { defaultShadowsV2, TMirrorfulStore } from '@core/types'
+import { AuthProvider } from '@propelauth/react'
 import { LayoutWrapper } from '@web/components/LayoutWrapper'
 import { useFetchStoreData } from '@web/hooks/useFetchStoreData'
 import { usePostStoreData } from '@web/hooks/usePostStoreData'
@@ -38,7 +40,7 @@ export default function RootLayout({
   const [showOnBoarding, setShowOnBoarding] = useState(false)
   const router = useRouter()
 
-  const { setColors, setTypography, setShadows, setFileTypes } =
+  const { setColors, setTypography, setShadows, setFileTypes, setThemes } =
     useMirrorfulStore((state: MirrorfulState) => state)
 
   const [fetchStoreData] = useFetchStoreData()
@@ -59,6 +61,7 @@ export default function RootLayout({
         return
       }
 
+      setThemes(data.themes ?? [])
       setColors(data.primitives.colors ?? {})
       setTypography(data.primitives.typography)
       setShadows(data.primitives.shadows ?? defaultShadowsV2)
@@ -71,6 +74,7 @@ export default function RootLayout({
       }, 1250)
     }
   }, [
+    setThemes,
     fetchStoreData,
     setColors,
     setFileTypes,
@@ -89,6 +93,7 @@ export default function RootLayout({
     router.prefetch('/colors')
     router.prefetch('/typography')
     router.prefetch('/shadows')
+    router.prefetch('/themes')
     router.prefetch('/components')
   }, [router])
 
@@ -102,24 +107,57 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <title>Mirrorful Editor</title>
+        <meta property="og:title" content="Mirrorful" key="title" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta
+          property="og:image"
+          content="https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/components_graphic_dark.png"
+        />
+        <meta
+          property="og:description"
+          content="Create, edit, and manage your app's theme."
+        />
+        <meta
+          name="description"
+          content="Create, edit, and manage your app's theme."
+        />
+        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="preload"
+          href="https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/components_graphic_dark.png"
+        />
+        <link
+          rel="preload"
+          href="https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/components_graphic_light.png"
+        />
+      </head>
       <body>
-        <CacheProvider>
-          <MirrorfulThemeProvider>
-            {isLoading && <SplashScreen></SplashScreen>}
-            {!shouldForceSkipOnboarding && showOnBoarding ? (
-              <Onboarding
-                postStoreData={handleOnboardingSubmit}
-                onFinishOnboarding={() => {
-                  setShowOnBoarding(false)
-                  setShouldForceSkipOnboarding(true)
-                }}
-                platform={'web'}
-              />
-            ) : (
-              <LayoutWrapper>{children}</LayoutWrapper>
-            )}
-          </MirrorfulThemeProvider>
-        </CacheProvider>
+        <AuthProvider
+          authUrl={
+            process.env.NEXT_PUBLIC_AUTH_URL ??
+            'https://607430308.propelauthtest.com'
+          }
+        >
+          <CacheProvider>
+            <MirrorfulThemeProvider>
+              {isLoading && <SplashScreen></SplashScreen>}
+              {!shouldForceSkipOnboarding && showOnBoarding ? (
+                <Onboarding
+                  postStoreData={handleOnboardingSubmit}
+                  onFinishOnboarding={() => {
+                    setShowOnBoarding(false)
+                    setShouldForceSkipOnboarding(true)
+                  }}
+                  platform={'web'}
+                />
+              ) : (
+                <LayoutWrapper>{children}</LayoutWrapper>
+              )}
+            </MirrorfulThemeProvider>
+          </CacheProvider>
+        </AuthProvider>
       </body>
     </html>
   )

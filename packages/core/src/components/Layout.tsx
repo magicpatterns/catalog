@@ -17,7 +17,7 @@ export type TTab =
   | '/colors'
   | '/typography'
   | '/shadows'
-  | '/theme_manager'
+  | '/themes'
   | '/components'
 
 export default function Layout({
@@ -44,6 +44,7 @@ export default function Layout({
     setShadows,
     fileTypes,
     setFileTypes,
+    themes,
   } = useMirrorfulStore((state: MirrorfulState) => state)
   const {
     isOpen: isExportSuccessModalOpen,
@@ -91,15 +92,6 @@ export default function Layout({
 
   return (
     <>
-      <Head>
-        <title>Mirrorful Editor</title>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta
-          name="description"
-          content="Local editor for your design system"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
         <motion.div
           animate={{
@@ -124,7 +116,11 @@ export default function Layout({
           }}
         />
         <Box
-          css={{ backgroundColor: 'white', flexGrow: 1 }}
+          css={{
+            backgroundColor: 'var(--background-color-primary)',
+            flexGrow: 1,
+            transition: 'background-color 200ms',
+          }}
           padding={{
             base: '24px 48px',
             md: '36px 72px',
@@ -144,7 +140,11 @@ export default function Layout({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <Spinner size="xl" color="blue.500" borderWidth="3px" />
+                <Spinner
+                  size="xl"
+                  color="var(--primary-color)"
+                  borderWidth="3px"
+                />
               </motion.div>
             ) : (
               <>{children}</>
@@ -156,6 +156,7 @@ export default function Layout({
           isOpen={isExportSuccessModalOpen}
           onClose={onExportSuccessModalClose}
           primitives={{ colors, typography, shadows }}
+          themes={themes}
         />
         {platform === 'web' && (
           <AlertDialogDelete

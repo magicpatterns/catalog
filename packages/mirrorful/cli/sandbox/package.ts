@@ -2,7 +2,6 @@ import { execSync } from 'child_process'
 
 import fs from 'fs'
 import chalk from 'chalk'
-import { createLibrary } from '../api'
 
 const logProgress = (message: string) => {
   console.log(chalk.cyan(message))
@@ -32,13 +31,12 @@ export async function packageLibrary() {
 
   fs.rmdirSync(`${__dirname}/module`, { recursive: true })
 
-  logProgress('Forming package.json...')
-  // TODO: Generate a package json to put inside of dist
+  // logProgress('Forming package.json...')
+  // // TODO: Generate a package json to put inside of dist
 
-  logProgress('Syncing files...')
-  // TODO(Danilowicz): Upload files to S3
-  // await createLibrary()
+  // logProgress('Syncing files...')
+  // // TODO: Upload files
 
-  logProgress('Publishing...')
-  // TODO: Run npm publish INSIDE OF dist
+  // logProgress('Publishing...')
+  // // TODO: Run npm publish INSIDE OF dist
 }

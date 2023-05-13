@@ -154,6 +154,95 @@
           "response": []
         }
       ]
+    },
+    {
+      "_type": "container",
+      "description": null,
+      "name": "Store",
+      "item": [
+        {
+          "_type": "endpoint",
+          "name": "Get Store",
+          "request": {
+            "description": null,
+            "url": {
+              "raw": "{{baseUrl}}/orgs/:orgId/store/:storeId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orgs",
+                ":orgId",
+                "store",
+                ":storeId"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "orgId",
+                  "value": "",
+                  "description": null
+                },
+                {
+                  "key": "storeId",
+                  "value": "",
+                  "description": null
+                }
+              ]
+            },
+            "header": [],
+            "method": "GET",
+            "auth": null,
+            "body": null
+          },
+          "response": []
+        },
+        {
+          "_type": "endpoint",
+          "name": "Update Store",
+          "request": {
+            "description": null,
+            "url": {
+              "raw": "{{baseUrl}}/orgs/:orgId/store/:storeId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orgs",
+                ":orgId",
+                "store",
+                ":storeId"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "key": "orgId",
+                  "value": "",
+                  "description": null
+                },
+                {
+                  "key": "storeId",
+                  "value": "",
+                  "description": null
+                }
+              ]
+            },
+            "header": [],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"primitives\": \"UNKNOWN\",\n    \"themes\": \"UNKNOWN\",\n    \"files\": \"UNKNOWN\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }

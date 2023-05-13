@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
+
+imports:
+  commons: commons.yml
+
+service:
+  base-path: /orgs/{orgId}
+  auth: true
+  path-parameters:
+    orgId: commons.OrgId
+  endpoints:
+    getStore:
+      method: GET
+      path: /store/{storeId}
+      path-parameters:
+        storeId: commons.StoreId
+      response: mirrorfulStore
+
+    updateStore:
+      method: POST
+      path: /store/{storeId}
+      path-parameters:
+        storeId: commons.StoreId
+      response: mirrorfulStore
+      request:
+        name: updateStoreRequest
+        body: mirrorfulStore
+
+types:
+  mirrorfulStore:
+    properties:
+      primitives: unknown # object
+      themes: unknown # array of objects
+      files: unknown # array of strings

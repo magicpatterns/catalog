@@ -22,7 +22,7 @@ export default async function handler(
     const translator = translators[fileType as TExportFileType]
 
     const fileName = `${rootPath}/theme${translator.extension}`
-    const content = translator.toContent(config.primitives)
+    const content = translator.toContent(config.primitives, config.themes)
 
     fs.writeFileSync(fileName, content)
   }

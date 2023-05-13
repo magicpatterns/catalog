@@ -26,15 +26,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UnauthorizedError = void 0;
-const errors = __importStar(require("../../../../errors"));
-class UnauthorizedError extends errors.MirrorfulApiError {
-    constructor() {
-        super("UnauthorizedError");
-        Object.setPrototypeOf(this, UnauthorizedError.prototype);
-    }
-    async send(res) {
-        res.sendStatus(401);
-    }
-}
-exports.UnauthorizedError = UnauthorizedError;
+exports.MirrorfulStore = void 0;
+const core = __importStar(require("../../../../core"));
+exports.MirrorfulStore = core.serialization.object({
+    primitives: core.serialization.unknown(),
+    themes: core.serialization.unknown(),
+    files: core.serialization.unknown(),
+});
