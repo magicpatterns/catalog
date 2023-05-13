@@ -149,7 +149,13 @@ function CustomInput(props: InputProps<TTokenOption, false>) {
 
 function CustomOption(props: OptionProps<TTokenOption, false>) {
   return (
-    <Box css={{ display: 'flex', alignItems: 'center' }}>
+    <Box
+      css={{
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: 'var(--background-color-primary)',
+      }}
+    >
       <Box
         css={{
           padding: '12px',
