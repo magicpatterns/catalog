@@ -2,19 +2,35 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import React from 'react'
 
 const theme = extendTheme({
-  components: {
-    Input: {
-      defaultProps: {
-        focusBorderColor: 'red.500',
-      },
-    },
-    Select: {
-      defaultProps: {
-        focusBorderColor: 'red.500',
+  styles: {
+    global: {
+      body: {
+        bg: 'var(--background-color-primary)',
       },
     },
   },
+  components: {
+    Menu: {
+      baseStyle: {
+        list: {
+          backgroundColor: 'var(--background-color-secondary)',
+        },
+        item: {
+          backgroundColor: 'var(--background-color-secondary)',
+          _hover: {
+            backgroundColor: 'var(--background-color-primary)',
+          },
+        },
+      },
+    },
+  },
+  config: {
+    initialColorMode: 'dark',
+    useSystemColorMode: true,
+    disableTransitionOnChange: false,
+  },
 })
+
 export function MirrorfulThemeProvider({
   children,
 }: {
