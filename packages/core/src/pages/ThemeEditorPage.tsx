@@ -1,6 +1,13 @@
-import { Box, Icon, Link } from '@chakra-ui/react'
+import { Box, Button, Icon, Link } from '@chakra-ui/react'
 import { EditableContent } from '@core/components/EditableContent'
-import { TokenGroupRow } from '@core/components/Themes/TokenGroupRow'
+import {
+  deleteTokenOrGroupFromTheme,
+  editTokenOrGroupInTheme,
+} from '@core/components/Themes/themeUtils'
+import {
+  TokenCircle,
+  TokenGroupRow,
+} from '@core/components/Themes/TokenGroupRow'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
@@ -69,35 +76,109 @@ export function ThemeEditorPage({
           padding: '4px 8px',
         }}
       />
-      <Box css={{ maxWidth: '500px', marginTop: '24px' }}>
-        {Object.keys(selectedTheme.tokens).map((tokenKey) => {
-          const currentValue = selectedTheme.tokens[tokenKey]
+      <Box css={{ maxWidth: '500px', marginTop: '36px' }}>
+        {Object.keys(selectedTheme.tokens)
+          .sort((tokenKey) => {
+            const currentValue = selectedTheme.tokens[tokenKey]
 
-          if (assertTokenGroup(currentValue)) {
-            return (
-              <TokenGroupRow
-                key={tokenKey}
-                tokenKey={tokenKey}
-                token={currentValue}
-                theme={selectedTheme}
-                onUpdateTheme={(updatedTheme) => {
-                  const updatedThemes = [...themes]
+            if (assertTokenGroup(currentValue)) {
+              return 1
+            } else {
+              return -1
+            }
+          })
+          .map((tokenKey) => {
+            const currentValue = selectedTheme.tokens[tokenKey]
 
-                  const updatedThemeIndex = updatedThemes.findIndex(
-                    (t) => t.id === updatedTheme.id
-                  )
+            if (assertTokenGroup(currentValue)) {
+              return (
+                <TokenGroupRow
+                  key={tokenKey}
+                  tokenKey={tokenKey}
+                  token={currentValue}
+                  theme={selectedTheme}
+                  onUpdateTheme={(updatedTheme) => {
+                    const updatedThemes = [...themes]
 
-                  updatedThemes[updatedThemeIndex] = updatedTheme
+                    const updatedThemeIndex = updatedThemes.findIndex(
+                      (t) => t.id === updatedTheme.id
+                    )
 
-                  handleUpdateThemes(updatedThemes)
-                }}
-                currentPath={tokenKey}
-              />
+                    updatedThemes[updatedThemeIndex] = updatedTheme
+
+                    handleUpdateThemes(updatedThemes)
+                  }}
+                  currentPath={tokenKey}
+                />
+              )
+            } else {
+              return (
+                <Box css={{ marginBottom: '16px' }} key={tokenKey}>
+                  <TokenCircle
+                    name={tokenKey}
+                    value={currentValue.value}
+                    path={`${tokenKey}.${tokenKey}`}
+                    onEditToken={(token) => {
+                      const updatedTheme = editTokenOrGroupInTheme({
+                        originalPath: `${tokenKey}.${tokenKey}`,
+                        updatedPath: token.path,
+                        target: {
+                          id: currentValue.id,
+                          value: token.value,
+                          type: 'color',
+                        },
+                        theme: selectedTheme,
+                      })
+
+                      const updatedThemes = [...themes]
+
+                      const updatedThemeIndex = updatedThemes.findIndex(
+                        (t) => t.id === updatedTheme.id
+                      )
+
+                      updatedThemes[updatedThemeIndex] = updatedTheme
+
+                      handleUpdateThemes(updatedThemes)
+                    }}
+                    onDeleteToken={() => {
+                      const updatedTheme = deleteTokenOrGroupFromTheme({
+                        path: `${tokenKey}.${tokenKey}`,
+                        theme: selectedTheme,
+                      })
+                      const updatedThemes = [...themes]
+
+                      const updatedThemeIndex = updatedThemes.findIndex(
+                        (t) => t.id === updatedTheme.id
+                      )
+
+                      updatedThemes[updatedThemeIndex] = updatedTheme
+
+                      handleUpdateThemes(updatedThemes)
+                    }}
+                  />
+                </Box>
+              )
+            }
+
+            return null
+          })}
+      </Box>
+      <Box css={{ marginTop: '36px' }}>
+        <Button
+          onClick={() => {
+            const updatedThemes = [...themes]
+
+            const updatedThemeIndex = updatedThemes.findIndex(
+              (t) => t.id === selectedTheme.id
             )
-          }
 
-          return null
-        })}
+            updatedThemes[updatedThemeIndex].tokens['UntitledGroup'] = {}
+
+            handleUpdateThemes(updatedThemes)
+          }}
+        >
+          Create New Group
+        </Button>
       </Box>
     </Box>
   )
