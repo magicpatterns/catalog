@@ -140,13 +140,6 @@ export function EditFontWeightModal({
             )}
           </ModalBody>
           <ModalFooter>
-            <Button
-              onClick={handleSave}
-              css={{ marginRight: '12px' }}
-              colorScheme="green"
-            >
-              Save Variant
-            </Button>
             {onDeleteFontWeightVariant && (
               <>
                 <Button
@@ -163,6 +156,9 @@ export function EditFontWeightModal({
                 />
               </>
             )}
+            <Button onClick={handleSave} css={{ marginLeft: '12px' }}>
+              Save Variant
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
