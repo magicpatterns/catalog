@@ -82,10 +82,10 @@ export function ColorPaletteSection({
                 isErrorOnUpdateColorName={(newName: string) => {
                   const isDuplicateName = Object.keys(colors).includes(newName)
                   if (newName == '') {
-                    return "Name can't be emtpy"
+                    return "Color name can't be empty"
                   }
                   if (isDuplicateName) {
-                    return 'Name already present'
+                    return 'Color name already present'
                   }
                   return null
                 }}
