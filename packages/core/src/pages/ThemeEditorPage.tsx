@@ -76,24 +76,7 @@ export function ThemeEditorPage({
           padding: '4px 8px',
         }}
       />
-      <Box css={{ marginTop: '24px' }}>
-        <Button
-          onClick={() => {
-            const updatedThemes = [...themes]
-
-            const updatedThemeIndex = updatedThemes.findIndex(
-              (t) => t.id === selectedTheme.id
-            )
-
-            updatedThemes[updatedThemeIndex].tokens['UntitledGroup'] = {}
-
-            handleUpdateThemes(updatedThemes)
-          }}
-        >
-          Create New Group
-        </Button>
-      </Box>
-      <Box css={{ maxWidth: '500px', marginTop: '24px' }}>
+      <Box css={{ maxWidth: '500px', marginTop: '36px' }}>
         {Object.keys(selectedTheme.tokens)
           .sort((tokenKey) => {
             const currentValue = selectedTheme.tokens[tokenKey]
@@ -130,54 +113,72 @@ export function ThemeEditorPage({
               )
             } else {
               return (
-                <TokenCircle
-                  key={tokenKey}
-                  name={tokenKey}
-                  value={currentValue.value}
-                  path={`${tokenKey}.${tokenKey}`}
-                  onEditToken={(token) => {
-                    const updatedTheme = editTokenOrGroupInTheme({
-                      originalPath: `${tokenKey}.${tokenKey}`,
-                      updatedPath: token.path,
-                      target: {
-                        id: currentValue.id,
-                        value: token.value,
-                        type: 'color',
-                      },
-                      theme: selectedTheme,
-                    })
+                <Box css={{ marginBottom: '16px' }} key={tokenKey}>
+                  <TokenCircle
+                    name={tokenKey}
+                    value={currentValue.value}
+                    path={`${tokenKey}.${tokenKey}`}
+                    onEditToken={(token) => {
+                      const updatedTheme = editTokenOrGroupInTheme({
+                        originalPath: `${tokenKey}.${tokenKey}`,
+                        updatedPath: token.path,
+                        target: {
+                          id: currentValue.id,
+                          value: token.value,
+                          type: 'color',
+                        },
+                        theme: selectedTheme,
+                      })
 
-                    const updatedThemes = [...themes]
+                      const updatedThemes = [...themes]
 
-                    const updatedThemeIndex = updatedThemes.findIndex(
-                      (t) => t.id === updatedTheme.id
-                    )
+                      const updatedThemeIndex = updatedThemes.findIndex(
+                        (t) => t.id === updatedTheme.id
+                      )
 
-                    updatedThemes[updatedThemeIndex] = updatedTheme
+                      updatedThemes[updatedThemeIndex] = updatedTheme
 
-                    handleUpdateThemes(updatedThemes)
-                  }}
-                  onDeleteToken={() => {
-                    const updatedTheme = deleteTokenOrGroupFromTheme({
-                      path: `${tokenKey}.${tokenKey}`,
-                      theme: selectedTheme,
-                    })
-                    const updatedThemes = [...themes]
+                      handleUpdateThemes(updatedThemes)
+                    }}
+                    onDeleteToken={() => {
+                      const updatedTheme = deleteTokenOrGroupFromTheme({
+                        path: `${tokenKey}.${tokenKey}`,
+                        theme: selectedTheme,
+                      })
+                      const updatedThemes = [...themes]
 
-                    const updatedThemeIndex = updatedThemes.findIndex(
-                      (t) => t.id === updatedTheme.id
-                    )
+                      const updatedThemeIndex = updatedThemes.findIndex(
+                        (t) => t.id === updatedTheme.id
+                      )
 
-                    updatedThemes[updatedThemeIndex] = updatedTheme
+                      updatedThemes[updatedThemeIndex] = updatedTheme
 
-                    handleUpdateThemes(updatedThemes)
-                  }}
-                />
+                      handleUpdateThemes(updatedThemes)
+                    }}
+                  />
+                </Box>
               )
             }
 
             return null
           })}
+      </Box>
+      <Box css={{ marginTop: '36px' }}>
+        <Button
+          onClick={() => {
+            const updatedThemes = [...themes]
+
+            const updatedThemeIndex = updatedThemes.findIndex(
+              (t) => t.id === selectedTheme.id
+            )
+
+            updatedThemes[updatedThemeIndex].tokens['UntitledGroup'] = {}
+
+            handleUpdateThemes(updatedThemes)
+          }}
+        >
+          Create New Group
+        </Button>
       </Box>
     </Box>
   )
