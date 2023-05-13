@@ -83,6 +83,17 @@ export function ColorPaletteSection({
 
                   onUpdateColors(newColors)
                 }}
+                isErrorOnUpdateColorName={(newName: string) => {
+                  if (newName === '') return 'Colour Name cannot be empty.'
+                  if (newName.toLowerCase() !== name.trim().toLowerCase()) {
+                    const isNamePresent = Object.keys(colors).some(
+                      (colorName) =>
+                        colorName.trim().toLowerCase() === newName.toLowerCase()
+                    )
+                    if (isNamePresent) return 'Colour Name already exists.'
+                  }
+                  return null
+                }}
                 onUpdateColorData={(
                   updatedColorData: TTokenGroup,
                   newColorName?: string

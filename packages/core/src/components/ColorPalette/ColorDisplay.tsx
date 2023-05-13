@@ -14,7 +14,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { MutableRefObject, useReducer, useRef } from 'react'
 import { IconType } from 'react-icons'
 import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
@@ -60,11 +60,13 @@ export function ColorDisplay({
   colorData,
   onUpdateColorData,
   onUpdateColorName,
+  isErrorOnUpdateColorName,
   onDeleteColorData,
 }: {
   colorName: string
   colorData: TTokenGroup
   onUpdateColorName: (newColorName: string) => void
+  isErrorOnUpdateColorName: (newColor: string) => string | null
   onUpdateColorData: (colorData: TTokenGroup, newName?: string) => void
   onDeleteColorData: () => void
 }) {
@@ -86,8 +88,54 @@ export function ColorDisplay({
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [colourName, setColorName] = useState<string>(colorName)
-  const [isEditing, setIsEditing] = useState<boolean>(false)
+  const INITIAL_STATE = {
+    colourName: colorName,
+    isEditing: false,
+    error: null,
+  }
+
+  const reducer = (
+    state: any,
+    action: { type: string; payload: string | boolean | null }
+  ) => {
+    switch (action.type) {
+      case 'SET_COLOUR_NAME':
+        return {
+          ...state,
+          colourName: action.payload,
+        }
+      case 'SET_IS_EDITING':
+        return {
+          ...state,
+          isEditing: action.payload,
+        }
+      case 'SET_ERROR':
+        return {
+          ...state,
+          error: action.payload,
+        }
+      default:
+        return state
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
+  const colorNameRef = useRef() as MutableRefObject<HTMLInputElement>
+
+  const handleSave = () => {
+    const error = isErrorOnUpdateColorName(state.colourName.trim())
+    if (error) {
+      colorNameRef.current.focus()
+      dispatch({ type: 'SET_ERROR', payload: error })
+      return
+    }
+
+    dispatch({ type: 'SET_ERROR', payload: null })
+    dispatch({ type: 'SET_IS_EDITING', payload: false })
+    dispatch({ type: 'SET_COLOUR_NAME', payload: state.colourName.trim() })
+
+    onUpdateColorName(state.colourName.trim())
+  }
 
   const namedTokens = Object.keys(colorData)
     .map((key) => ({
@@ -126,36 +174,33 @@ export function ColorDisplay({
       }}
     >
       <Box
-        mb={5}
+        mb={state.error ? 0 : 5}
         style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
       >
-        {isEditing ? (
+        {state.isEditing ? (
           <Input
             style={{
               border: 'none',
             }}
             padding={1}
             fontSize={'1.5rem'}
-            width={`${colourName.length * 12}px`}
+            width={`${state.colourName.length * 12}px`}
             minWidth={200}
             ml={1}
             mr={1}
             mt={1}
-            value={colourName}
+            ref={colorNameRef}
+            value={state.colourName}
             onChange={(e) => {
-              setColorName(e.target.value)
+              dispatch({ type: 'SET_COLOUR_NAME', payload: e.target.value })
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                setIsEditing(false)
-                setColorName(colourName.trim())
-                onUpdateColorName(colourName.trim())
+                handleSave()
               }
             }}
             onBlur={() => {
-              setIsEditing(false)
-              setColorName(colourName.trim())
-              onUpdateColorName(colourName.trim())
+              handleSave()
             }}
             autoFocus
           />
@@ -164,10 +209,10 @@ export function ColorDisplay({
             padding={1}
             style={{ fontWeight: 600, fontSize: '1.5rem' }}
             onDoubleClick={() => {
-              setIsEditing(true)
+              dispatch({ type: 'SET_IS_EDITING', payload: true })
             }}
           >
-            {colourName}
+            {state.colourName}
           </Text>
         )}
         <Menu>
@@ -202,6 +247,11 @@ export function ColorDisplay({
           </MenuList>
         </Menu>
       </Box>
+      {state.error && (
+        <Text color="red.500" mb={5}>
+          {state.error}
+        </Text>
+      )}
       <Stack spacing={'8px'}>
         {namedTokens
           .filter((variant) => variant.name !== 'DEFAULT')
