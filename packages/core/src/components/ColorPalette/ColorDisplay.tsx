@@ -59,12 +59,14 @@ export function ColorDisplay({
   onUpdateColorData,
   onUpdateColorName,
   onDeleteColorData,
+  isErrorOnUpdateColorName,
 }: {
   colorName: string
   colorData: TTokenGroup
   onUpdateColorName: (newColorName: string) => void
   onUpdateColorData: (colorData: TTokenGroup, newName?: string) => void
   onDeleteColorData: () => void
+  isErrorOnUpdateColorName: (newColorName: string) => string | null
 }) {
   const {
     isOpen: isBaseModalOpen,
@@ -224,6 +226,7 @@ export function ColorDisplay({
         isOpen={isColorNameModalOpen}
         onClose={onColorNameModalClose}
         initialColorName={colorName}
+        isErrorOnUpdateColorName={isErrorOnUpdateColorName}
         onUpdateColorName={(newName: string) => {
           onUpdateColorName(newName)
         }}

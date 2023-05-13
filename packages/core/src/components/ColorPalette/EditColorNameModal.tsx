@@ -22,7 +22,9 @@ export function EditColorNameModal({
   initialColorName,
   onUpdateColorName,
   defaultNamedToken,
+  isErrorOnUpdateColorName,
 }: {
+  isErrorOnUpdateColorName: (newName: string) => string | null
   defaultNamedToken: TNamedToken
   isOpen: boolean
   onClose: () => void
@@ -30,8 +32,15 @@ export function EditColorNameModal({
   onUpdateColorName: (newName: string) => void
 }) {
   const [colorName, setColorName] = useState<string>(initialColorName)
+  const [isError, setIsError] = useState<string | null>(null)
 
   const handleSave = () => {
+    const error = isErrorOnUpdateColorName(colorName)
+    if (error) {
+      setIsError(error)
+      return
+    }
+    setIsError(null)
     onUpdateColorName(colorName)
     onClose()
   }
@@ -64,11 +73,21 @@ export function EditColorNameModal({
               />
             </Flex>
             <Input
+              isInvalid={isError ? true : false}
               value={colorName}
               onChange={(e) => setColorName(e.target.value)}
             />
           </FormControl>
         </ModalBody>
+        {isError && (
+          <Text
+            color="red.500"
+            style={{ fontWeight: 800 }}
+            css={{ padding: '0px 32px 0 32px' }}
+          >
+            {isError}
+          </Text>
+        )}
         <ModalFooter>
           <Button onClick={handleSave}>Save</Button>
         </ModalFooter>

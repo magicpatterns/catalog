@@ -79,6 +79,16 @@ export function ColorPaletteSection({
 
                   onUpdateColors(newColors)
                 }}
+                isErrorOnUpdateColorName={(newName: string) => {
+                  const isDuplicateName = Object.keys(colors).includes(newName)
+                  if (newName == '') {
+                    return "Name can't be emtpy"
+                  }
+                  if (isDuplicateName) {
+                    return 'Name already present'
+                  }
+                  return null
+                }}
                 onUpdateColorData={(
                   updatedColorData: TTokenGroup,
                   newColorName?: string
