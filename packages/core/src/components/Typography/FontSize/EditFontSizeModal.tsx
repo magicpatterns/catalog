@@ -18,7 +18,7 @@ import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken, TUnits, Units } from '@core/types'
 import { parseUnit } from '@core/utils/parseUnit'
-import { useEffect, useState } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 export function EditFontSizeModal({
@@ -45,10 +45,10 @@ export function EditFontSizeModal({
   const [variantName, setVariantName] = useState<string>(
     initialFontSizeVariant?.name ?? ''
   )
-  const [variantValue, setVariantValue] = useState<number>(
+  const [variantValue, setVariantValue] = useState<string>(
     initialFontSizeVariant?.token
-      ? parseUnit(initialFontSizeVariant.token.value).rawValue
-      : 0
+      ? `${parseUnit(initialFontSizeVariant.token.value).rawValue}`
+      : ''
   )
   const [id, setId] = useState<string>(
     initialFontSizeVariant?.token.id ?? uuidv4()
@@ -60,15 +60,31 @@ export function EditFontSizeModal({
   )
 
   const [error, setError] = useState<string | null>(null)
+  const variantNameRef = useRef() as MutableRefObject<HTMLInputElement>
+  const variantValueRef = useRef() as MutableRefObject<HTMLInputElement>
 
   const handleSave = () => {
     setError(null)
     if (variantName === '') {
+      variantNameRef.current.focus()
       setError('Please fill out all fields.')
       return
     }
 
-    if (variantValue < 0 || variantValue > 10000) {
+    if (variantValue === '') {
+      variantValueRef.current.focus()
+      setError('Please fill out all fields.')
+      return
+    }
+
+    if (isNaN(Number(variantValue))) {
+      variantValueRef.current.focus()
+      setError('Value must be a number')
+      return
+    }
+
+    if (Number(variantValue) < 0 || Number(variantValue) > 10000) {
+      variantValueRef.current.focus()
       setError('Value must be greater than or equal to 0')
       return
     }
@@ -89,8 +105,8 @@ export function EditFontSizeModal({
       setVariantName(initialFontSizeVariant?.name ?? '')
       setVariantValue(
         initialFontSizeVariant?.token
-          ? parseUnit(initialFontSizeVariant.token.value).rawValue
-          : 0
+          ? `${parseUnit(initialFontSizeVariant.token.value).rawValue}`
+          : ''
       )
       setVariantUnit(
         initialFontSizeVariant?.token
@@ -120,6 +136,7 @@ export function EditFontSizeModal({
               <FormControl>
                 <FormLabel>Variant Name</FormLabel>
                 <Input
+                  ref={variantNameRef}
                   value={variantName}
                   onChange={(e) => setVariantName(e.target.value)}
                 />
@@ -128,8 +145,9 @@ export function EditFontSizeModal({
               <FormControl css={{ marginTop: '32px' }}>
                 <FormLabel>Variant Value</FormLabel>
                 <Input
+                  ref={variantValueRef}
                   value={variantValue}
-                  onChange={(e) => setVariantValue(Number(e.target.value))}
+                  onChange={(e) => setVariantValue(e.target.value)}
                   type="number"
                 />
               </FormControl>
