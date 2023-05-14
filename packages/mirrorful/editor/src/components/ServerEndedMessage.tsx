@@ -5,7 +5,7 @@ import { CopyIcon } from '@chakra-ui/icons'
 
 export default function ServerEndedMessage() {
   return (
-    <Grid placeContent={'center'} minHeight="100svh" backgroundColor="#F2F2F2">
+    <Grid placeContent={'center'} minHeight="100svh">
       <Text css={{ textAlign: 'center', fontSize: '5rem' }}>
         Your{' '}
         <Text
