@@ -16,6 +16,7 @@ export function TypographySection({
   const [placeholderText, setPlaceholderText] = useState<string>(
     'Lorem ipsum dolor sit amet.'
   )
+
   return (
     <Box>
       <Heading
@@ -56,7 +57,7 @@ export function TypographySection({
       <br />
       <FontWeightSection
         fontWeightData={typography.fontWeights}
-        placeholder={placeholderText}
+        placeholder={placeholderText || 'Lorem ipsum dolor sit amet.'}
         onUpdateFontPropertyData={(newFontWeightData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,
@@ -68,7 +69,7 @@ export function TypographySection({
       <br />
       <LineHeightSection
         lineHeightData={typography.lineHeights}
-        placeholder={placeholderText}
+        placeholder={placeholderText || 'Lorem ipsum dolor sit amet.'}
         onUpdateFontPropertyData={(newLineHeightData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,

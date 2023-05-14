@@ -22,8 +22,8 @@ export function ComponentsPage() {
         <img
           src={
             colorMode === 'dark'
-              ? '/components_graphic_dark.png'
-              : '/components_graphic_light.png'
+              ? 'https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/components_graphic_dark.png'
+              : 'https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/components_graphic_light.png'
           }
         />
         <Button

@@ -16,7 +16,7 @@ import {
 import { useDisclosure } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { TNamedToken } from '@core/types'
-import { useEffect, useState } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 export function EditFontWeightModal({
@@ -52,25 +52,31 @@ export function EditFontWeightModal({
   )
 
   const [error, setError] = useState<string | null>(null)
+  const variantNameRef = useRef() as MutableRefObject<HTMLInputElement>
+  const variantValueRef = useRef() as MutableRefObject<HTMLInputElement>
 
   const handleSave = () => {
     setError(null)
     if (variant.name === '') {
+      variantNameRef.current.focus()
       setError('Please fill out all fields.')
       return
     }
 
     if (isNaN(Number(variant.token.value))) {
+      variantValueRef.current.focus()
       setError('Please enter a valid number.')
       return
     }
 
     if (Number(variant.token.value) !== 0 && !Number(variant.token.value)) {
+      variantValueRef.current.focus()
       setError('Please fill out all fields.')
       return
     }
 
     if (Number(variant.token.value) < 1 || Number(variant.token.value) > 900) {
+      variantValueRef.current.focus()
       setError('Font weight must be between 1 and 900.')
       return
     }
@@ -113,6 +119,7 @@ export function EditFontWeightModal({
               <FormControl>
                 <FormLabel>Variant Name</FormLabel>
                 <Input
+                  ref={variantNameRef}
                   value={variant.name}
                   onChange={(e) =>
                     setVariant({ ...variant, name: e.target.value })
@@ -123,6 +130,7 @@ export function EditFontWeightModal({
               <FormControl css={{ marginTop: '32px' }}>
                 <FormLabel>Variant Weight</FormLabel>
                 <Input
+                  ref={variantValueRef}
                   value={variant.token.value}
                   onChange={(e) =>
                     setVariant({
@@ -140,13 +148,6 @@ export function EditFontWeightModal({
             )}
           </ModalBody>
           <ModalFooter>
-            <Button
-              onClick={handleSave}
-              css={{ marginRight: '12px' }}
-              colorScheme="green"
-            >
-              Save Variant
-            </Button>
             {onDeleteFontWeightVariant && (
               <>
                 <Button
@@ -163,6 +164,9 @@ export function EditFontWeightModal({
                 />
               </>
             )}
+            <Button onClick={handleSave} css={{ marginLeft: '12px' }}>
+              Save Variant
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

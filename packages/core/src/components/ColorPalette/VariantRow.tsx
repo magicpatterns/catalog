@@ -35,7 +35,7 @@ function MirrorfulSlider({
 }) {
   return (
     <Flex>
-      <Flex mr={2} style={{ minWidth: '40px' }}>
+      <Flex mr={2} style={{ minWidth: '60px' }}>
         <Text fontSize={12}>
           <span style={{ fontWeight: 700 }}>{label}</span>
           {`:`}

@@ -38,7 +38,7 @@ import {
   resolveTokenValue,
 } from './themeUtils'
 
-function TokenCircle({
+export function TokenCircle({
   name,
   value,
   path,
