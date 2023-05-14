@@ -14,7 +14,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { IconType } from 'react-icons'
 import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
@@ -224,7 +224,7 @@ export function ColorsDisplay({
             }
             return (
               <motion.div
-                key={variant.name}
+                key={variant.name + variant.token.value}
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
