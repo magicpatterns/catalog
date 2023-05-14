@@ -418,27 +418,28 @@ export function EditShadowModal({
               </Box>
               <FormControl>
                 <Box>
-                  {newInitialValues?.map((_arg: ShadowValue, index: number) => (
-                    <>
-                      {shadowIndex === index && (
-                        <ShadowColorPicker
-                          key={index}
-                          blur={blur[index]}
-                          spread={spread[index]}
-                          hOffset={hOffset[index]}
-                          vOffset={vOffset[index]}
-                          handleColor={handleColor}
-                          handleBlur={handleBlur}
-                          handleSpread={handleSpread}
-                          handleHOffset={handleHOffset}
-                          handleVOffset={handleVOffset}
-                          color={color[index]}
-                          index={index}
-                          codeResult={codeResult}
-                        />
-                      )}
-                    </>
-                  ))}
+                  {newInitialValues
+                    ?.filter(
+                      (_arg: ShadowValue, index: number) =>
+                        shadowIndex === index
+                    )
+                    .map((_arg: ShadowValue, index: number) => (
+                      <ShadowColorPicker
+                        key={index}
+                        blur={blur[index]}
+                        spread={spread[index]}
+                        hOffset={hOffset[index]}
+                        vOffset={vOffset[index]}
+                        handleColor={handleColor}
+                        handleBlur={handleBlur}
+                        handleSpread={handleSpread}
+                        handleHOffset={handleHOffset}
+                        handleVOffset={handleVOffset}
+                        color={color[index]}
+                        index={index}
+                        codeResult={codeResult}
+                      />
+                    ))}
                 </Box>
               </FormControl>
 
