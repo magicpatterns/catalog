@@ -56,24 +56,39 @@ export function TokenValueInput({
   const [colorValue, setColorValue] = useState<string>('')
   const [selectedOption, setSelectedOption] =
     useState<SingleValue<TTokenOption> | null>(null)
-  const [isFocused, setIsFocused] = useState<boolean>(false)
+  const [isHover, setIsHover] = useState<boolean>(false)
+  const [isFocus, setIsFocus] = useState<boolean>(false)
   const options = useMemo(() => getTokenOptions(colors), [colors])
+
+  let borderColor = 'var(--color-input-border)'
+  if (isFocus) {
+    borderColor = 'var(--color-input-border-focus)'
+  } else if (isHover) {
+    borderColor = 'var(--color-input-border-hover)'
+  }
 
   return (
     <Box css={{ width: '400px' }}>
-      <Box css={{ display: 'flex', alignItems: 'center' }}>
+      <Box
+        css={{
+          display: 'flex',
+          alignItems: 'center',
+          border: `1px solid ${borderColor}`,
+          borderRadius: 8,
+          transition: 'border 200ms ease-in-out',
+        }}
+        onMouseOver={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+      >
         <Box
           css={{
             width: '38px',
             height: '38px',
             backgroundColor: colorValue,
-            // border: isFocused ? '1px solid lightgray' : '2px solid blue',
-            border: '1px solid lightgray',
-
-            borderRadius: '8px 0 0 8px',
+            borderRight: `1px solid ${borderColor}`,
+            transition: 'border 200ms ease-in-out',
             cursor: 'pointer',
           }}
-          _hover={{ border: '1px solid gray' }}
           onClick={() => setShowColorPicker(!showColorPicker)}
         />
 
@@ -102,8 +117,8 @@ export function TokenValueInput({
             Input: CustomInput,
             Option: CustomOption,
           }}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
           styles={{
             container: (styles) => ({
               ...styles,
@@ -111,18 +126,27 @@ export function TokenValueInput({
             }),
             control: (styles) => ({
               ...styles,
-              borderRadius: '0 8px 8px 0',
-              borderColor: 'lightgray',
-              borderLeft: 'none',
               outline: 'none',
+              backgroundColor: 'var(--background-color-secondary)',
+              boxShadow: 'none',
+              border: 'none',
             }),
             input: (styles) => ({
               ...styles,
               width: '100%',
+              backgroundColor: 'var(--background-color-secondary)',
+              color: 'var(--text-color-primary)',
             }),
-            option: (styles) => ({
+            menu: (styles) => ({
               ...styles,
               backgroundColor: 'var(--background-color-primary)',
+            }),
+            option: (styles, state) => ({
+              ...styles,
+              cursor: 'pointer',
+              backgroundColor: state.isFocused
+                ? 'var(--background-color-secondary)'
+                : 'var(--background-color-primary)',
             }),
           }}
         />
@@ -153,15 +177,20 @@ function CustomOption(props: OptionProps<TTokenOption, false>) {
       css={{
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: 'var(--background-color-primary)',
+        backgroundColor: props.isFocused
+          ? 'var(--background-color-secondary)'
+          : 'var(--background-color-primary)',
       }}
     >
       <Box
         css={{
+          marginLeft: '12px',
           padding: '12px',
           width: '25px',
           height: '25px',
+          borderRadius: '50%',
           backgroundColor: props.data.value,
+          border: '1px solid var(--border-color)',
         }}
       />
       <components.Option {...props} />

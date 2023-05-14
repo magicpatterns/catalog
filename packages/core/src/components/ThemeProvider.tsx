@@ -23,6 +23,29 @@ const theme = extendTheme({
         },
       },
     },
+    Modal: {
+      baseStyle: {
+        dialog: {
+          backgroundColor: 'var(--background-color-secondary)',
+        },
+      },
+    },
+    Input: {
+      variants: {
+        outline: {
+          field: {
+            borderColor: 'var(--color-input-border)',
+            _hover: {
+              borderColor: 'var(--color-input-border-hover)',
+            },
+            _focusVisible: {
+              borderColor: 'var(--color-input-border-focus)',
+              boxShadow: `none`,
+            },
+          },
+        },
+      },
+    },
   },
   config: {
     initialColorMode: 'dark',
