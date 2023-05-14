@@ -93,9 +93,8 @@ export function VariantRowDisplay({
   const [showSlider, setShowSlider] = useState(false)
   const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
   const { name, token } = variant
-  const color = `${token.value}`
-  const c = token.value
-  const hsl = tinycolor(c).toHsl()
+  const [color, setColor] = useState(token.value)
+  const hsl = tinycolor(color).toHsl()
   const [h, setH] = useState<number>(Math.round(hsl.h))
   const [s, setS] = useState<number>(Math.round(hsl.s * 100))
   const [l, setL] = useState<number>(Math.round(hsl.l * 100))
@@ -111,6 +110,31 @@ export function VariantRowDisplay({
 
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedHexCode])
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined = undefined
+
+    if (timer) clearTimeout(timer)
+
+    if (color !== token.value) {
+      timer = setTimeout(() => {
+        onUpdateVariant(
+          {
+            ...variant,
+            token: {
+              ...variant.token,
+
+              value: color,
+            },
+          },
+          isBase
+        )
+      }, 500)
+    }
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [color])
 
   const onHSLSlide = ({
     val,
@@ -140,7 +164,8 @@ export function VariantRowDisplay({
       ...variant.token,
       value: newColor,
     }
-    onUpdateVariant({ ...variant, token: newToken }, isBase)
+    setColor(newToken.value)
+    // onUpdateVariant({ ...variant, token: newToken }, isBase)
   }
 
   const textColor =
@@ -153,7 +178,7 @@ export function VariantRowDisplay({
         css={{
           height: '3rem',
           width: '100%',
-          backgroundColor: `${token.value}`,
+          backgroundColor: `${color}`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -303,7 +328,9 @@ export const VariantRow = React.memo(
   (prevProps, nextProps) => {
     return (
       prevProps.variant.token.value === nextProps.variant.token.value &&
-      prevProps.variant.token.type === nextProps.variant.token.type
+      prevProps.variant.name === nextProps.variant.name &&
+      prevProps.defaultNamedToken.token.value ===
+        nextProps.defaultNamedToken.token.value
     )
   }
 )
