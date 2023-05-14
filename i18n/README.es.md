@@ -75,18 +75,30 @@ o
 yarn add mirrorful -D
 ```
 
+o
+
+```bash
+pnpm add mirrorful -D
+```
+
 ## ✨ Uso
 
 Los siguientes comandos iniciaran un editor local en el `localhost:5050`.
 
-```
+```bash
 yarn run mirrorful
 ```
 
 o
 
-```
+```bash
 npx mirrorful editor
+```
+
+o
+
+```bash
+pnpm mirrorful editor
 ```
 
 ## 💿 Formatos de exportación
@@ -114,7 +126,7 @@ Ejemplo:
 Ejemplo:
 
 ```javascript
-<button backgroundColor={{ Tokens.primary.base }}>Click here</button>
+<button backgroundColor={{ Tokens.colors.primary  }}>Click here</button>
 ```
 
 ## 🤝 Librería de componentes agnóstica

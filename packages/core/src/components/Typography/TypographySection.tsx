@@ -16,15 +16,20 @@ export function TypographySection({
   const [placeholderText, setPlaceholderText] = useState<string>(
     'Lorem ipsum dolor sit amet.'
   )
+
   return (
     <Box>
-      <Heading fontSize={'2.5rem'} fontWeight="black">
+      <Heading
+        fontSize={'2.5rem'}
+        fontWeight="black"
+        color="var(--text-color-primary)"
+      >
         Typography
       </Heading>
       <Text
         fontSize={'1.2rem'}
         fontWeight="medium"
-        color="gray.600"
+        color="var(--text-color-secondary)"
         css={{ marginTop: '12px' }}
       >
         {`Add and edit the fonts in your theme. `}
@@ -52,7 +57,7 @@ export function TypographySection({
       <br />
       <FontWeightSection
         fontWeightData={typography.fontWeights}
-        placeholder={placeholderText}
+        placeholder={placeholderText || 'Lorem ipsum dolor sit amet.'}
         onUpdateFontPropertyData={(newFontWeightData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,
@@ -64,7 +69,7 @@ export function TypographySection({
       <br />
       <LineHeightSection
         lineHeightData={typography.lineHeights}
-        placeholder={placeholderText}
+        placeholder={placeholderText || 'Lorem ipsum dolor sit amet.'}
         onUpdateFontPropertyData={(newLineHeightData: TTokenGroup) => {
           onUpdateTypography({
             ...typography,

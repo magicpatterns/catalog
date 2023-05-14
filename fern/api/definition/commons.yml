@@ -1,13 +1,11 @@
 types:
   OrgId: string
   FileId: string
+  StoreId: string
+  LibraryId:
+    type: string
+    docs: This should be the Library Id
 
 errors:
-  LibraryDoesNotExistError:
+  ObjectDoesNotExistError:
     status-code: 404
-
-  UserNotInOrgError:
-    status-code: 403
-
-  UnauthorizedError:
-    status-code: 401

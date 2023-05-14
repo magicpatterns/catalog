@@ -1,5 +1,5 @@
 name: api
-auth: bearer # not used yet
+auth: bearer
 error-discrimination:
   strategy: status-code
 environments:

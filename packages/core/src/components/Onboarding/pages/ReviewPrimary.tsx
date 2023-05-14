@@ -31,7 +31,7 @@ export function ReviewPrimary({
   primaryColor: string
   platform: TPlatform
 }) {
-  const shades = generateDefaultColorShades(primaryColor)
+  const shades = generateDefaultColorShades({ primary: primaryColor })
 
   return (
     <Box css={{ display: 'flex', height: '100%' }} as="form">

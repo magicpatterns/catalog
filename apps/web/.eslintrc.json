@@ -22,6 +22,7 @@
     "react/display-name": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "warn",
+    "no-console": ["warn", { "allow": ["error"] }],
     "prettier/prettier": [
       "error",
       {

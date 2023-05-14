@@ -1,4 +1,5 @@
 import { TTokenGroup } from '@core/types'
+import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -23,37 +24,125 @@ export const newShade = (hexColor: string, magnitude: number) => {
     return hexColor
   }
 }
+
+/* convert a text string to a valid hexcolor string. If no valid hexcolor string
+  is available, we return the fallback color */
+export const parseHexString = (hexString: string, fallback: string) => {
+  /* First if the string has a '#' at the start we remove it */
+  if (hexString[0] === '#') {
+    hexString = hexString.substring(1)
+  }
+
+  const hexStringLength = hexString.length
+  /* Then we convert the string to 6 characters by trimming or adding characters */
+  if (hexStringLength < 6) {
+    hexString += new Array(6 - hexStringLength).fill(0).join('')
+  }
+  hexString = hexString.substring(0, 6)
+
+  /* Now we check if the hexString has any non-hex characters, if it has we cannot parse it
+    and we return the fallback color */
+  if (!isHexString(hexString)) {
+    return fallback
+  }
+
+  /* Since the hex representation expects a '#' at the start, we add it back. This will also allow user
+    to input numbers without the hash prefix – we auto add the hash.
+  */
+  hexString = '#' + hexString
+
+  return hexString
+}
+
+const isHexString = (str: string) => {
+  const regexp = /^[0-9a-fA-F]+$/
+  if (regexp.test(str)) {
+    return true
+  }
+  return false
+}
+
 /* eslint-enable @typescript-eslint/no-unused-expressions */
 
 const scaleDiff = 7
 
-export const generateDefaultColorShades = (primary: string) => {
-  return {
-    50: tinycolor(primary)
-      .lighten(scaleDiff * 4.8)
-      .toHexString(),
-    100: tinycolor(primary)
-      .lighten(scaleDiff * 3.8)
-      .toHexString(),
-    200: tinycolor(primary)
-      .lighten(scaleDiff * 2.8)
-      .toHexString(),
-    300: tinycolor(primary)
-      .lighten(scaleDiff * 1.8)
-      .toHexString(),
-    400: tinycolor(primary).lighten(scaleDiff).toHexString(),
-    500: tinycolor(primary).toHexString(),
-    600: tinycolor(primary).darken(scaleDiff).toHexString(),
-    700: tinycolor(primary)
-      .darken(scaleDiff * 2.8)
-      .toHexString(),
-    800: tinycolor(primary)
-      .darken(scaleDiff * 3.8)
-      .toHexString(),
-    900: tinycolor(primary)
-      .darken(scaleDiff * 4.8)
-      .toHexString(),
+interface Shades {
+  50: string
+  100: string
+  200: string
+  300: string
+  400: string
+  500: string
+  600: string
+  700: string
+  800: string
+  900: string
+}
+export type ShadeStop = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
+export const generateDefaultColorShades = ({
+  primary,
+  baseStop = 500,
+}: {
+  primary: AnyColor
+  baseStop?: ShadeStop
+}) => {
+  const format =
+    typeof primary === 'string' && primary.includes('#') ? 'HEX' : 'RGBA'
+
+  const shades: Shades = {
+    50: '#fff',
+    100: '#fff',
+    200: '#fff',
+    300: '#fff',
+    400: '#fff',
+    500: '#fff',
+    600: '#fff',
+    700: '#fff',
+    800: '#fff',
+    900: '#fff',
   }
+
+  const multiplierDelta: Record<number, number> = {
+    0: 1,
+    50: 1,
+    100: 1.2,
+    150: 1.4,
+    200: 1.8,
+    250: 2.2,
+    300: 2.8,
+    350: 3.4,
+    400: 3.8,
+    450: 4.2,
+    500: 4.8,
+    550: 5.2,
+    600: 5.8,
+    650: 6.2,
+    700: 6.8,
+    750: 7.2,
+    800: 7.8,
+    850: 8.2,
+  }
+
+  Object.keys(shades).forEach((key) => {
+    // If the key is the basestop, leave it alone
+    let v = tinycolor(primary)
+
+    const delta = Math.abs(Number(key) - baseStop)
+
+    const multiplier = multiplierDelta[delta] ?? 1
+
+    if (Number(key) < baseStop) {
+      // if it's less than the baseStop, lighten it
+      v = tinycolor(primary).lighten(scaleDiff * multiplier)
+    } else if (Number(key) > baseStop) {
+      // if it's greater than the baseStop, darken it
+      v = tinycolor(primary).darken(scaleDiff * multiplier)
+    }
+    shades[Number(key) as ShadeStop] =
+      format === 'HEX' ? v.toHexString() : v.toRgbString()
+  })
+
+  return shades
 }
 
 export const defaultColorShadesToTokens = (shades: {
@@ -120,6 +209,54 @@ export const defaultColorShadesToTokens = (shades: {
       type: 'color',
     },
   }
+}
+
+export const parseColorIntensity = (intensityString: string) => {
+  if (intensityString === '') {
+    return 0
+  }
+
+  const intensity = Math.round(parseFloat(intensityString))
+  if (intensity > 255) {
+    return 255
+  } else if (intensity < 0) {
+    return 0
+  }
+
+  return intensity
+}
+
+export const parseColorOpacity = (opacityString: string, fallback: number) => {
+  /* First we trim all spaces */
+  opacityString = opacityString.trim()
+
+  /* If the string is empty, we return the opacity as 100% by default */
+  if (opacityString === '') {
+    return 1
+  }
+
+  const opacityStringLength = opacityString.length
+
+  /* If there's an '%' at the end, we first remove that */
+  if (opacityString[opacityStringLength - 1] === '%') {
+    opacityString = opacityString.substring(0, opacityStringLength - 1)
+  }
+
+  let opacity = Math.round(parseFloat(opacityString))
+  /* If the string is not a number, we return the fallback value */
+  if (isNaN(opacity)) {
+    return fallback
+  }
+
+  /* We also ensure that the opacity is between 0 and 100 */
+  if (opacity > 100) {
+    opacity = Number(100)
+  } else if (opacity < 0) {
+    opacity = Number(0)
+  }
+
+  /* Otherwise we return the opacity rounded to hundredth's place */
+  return opacity / 100
 }
 
 export const handleInvalidColor = (input: string) => {

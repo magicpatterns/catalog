@@ -12,7 +12,8 @@
     "release:minor": "yarn build && cp package.json lib && npm version minor && npm publish ./lib;",
     "release:major": "yarn build && cp package.json lib && npm version major && npm publish ./lib;",
     "lint": "eslint --ext .ts,.tsx src",
-    "lint:fix": "eslint --fix --ext .ts,.tsx src"
+    "lint:fix": "eslint --fix --ext .ts,.tsx src",
+    "test": "jest"
   },
   "publishConfig": {
     "access": "public",
@@ -35,15 +36,18 @@
     "next": "13.2.4",
     "posthog-js": "^1.51.3",
     "react": "^18.2.0",
+    "react-colorful": "^5.6.1",
     "react-dom": "^18.2.0",
     "react-highlight": "^0.15.0",
     "react-icons": "^4.8.0",
+    "react-select": "^5.7.3",
     "tinycolor2": "^1.6.0",
     "typescript": "^4.9.5",
     "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@mirrorful/eslint-config": "file:../eslint-config",
+    "@types/jest": "^29.5.1",
     "@types/json5": "^2.2.0",
     "@types/node": "^18.15.3",
     "@types/react": "^18.0.28",
@@ -57,8 +61,10 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "jest": "^29.5.0",
     "prettier": "^2.8.4",
     "run-script-os": "^1.1.6",
+    "ts-jest": "^29.1.0",
     "tsc-alias": "^1.8.3"
   }
 }

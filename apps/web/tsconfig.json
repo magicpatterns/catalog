@@ -23,7 +23,9 @@
     "paths": {
       "@web/*": ["./src/*"],
       "@core/*": ["../../packages/core/src/*"],
-      "@mirrorful/core/*": ["../../packages/core/src/*"]
+      "@mirrorful/core/*": ["../../packages/core/src/*"],
+      "@blocks/*": ["../../packages/blocks/src/*"],
+      "@mirrorful/blocks/*": ["../../packages/blocks/src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

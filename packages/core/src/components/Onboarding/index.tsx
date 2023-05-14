@@ -12,6 +12,7 @@ import {
   TTokenGroup,
 } from '@core/types'
 import { useState } from 'react'
+import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -36,14 +37,17 @@ export function Onboarding({
   onFinishOnboarding: () => void
   platform: TPlatform
 }) {
-  const [primaryColor, setPrimaryColor] = useState<string>('#9F7AEA')
+  const [primaryColor, setPrimaryColor] = useState<AnyColor>('#9F7AEA')
   const [primaryName, setPrimaryName] = useState<string>('')
   const [palette, setPalette] = useState<TTokenGroup>({})
   const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
 
   const [page, setPage] = useState<number>(platform === 'web' ? 1 : 0)
 
-  const updatePrimaryColor = (newColor: string) => {
+  const colorParsed = tinycolor(primaryColor)
+  const colorStringified = colorParsed.toString()
+
+  const updatePrimaryColor = (newColor: AnyColor) => {
     // set the color in state
     setPrimaryColor(newColor)
 
@@ -53,18 +57,18 @@ export function Onboarding({
   }
 
   const handleExport = async (
-    primaryColorHex: string,
+    primaryColorStringified: string,
     primaryColorName: string,
     paletteGroupTokens: TTokenGroup
   ) => {
     const primaryColorTokenGroup: TTokenGroup = {
-      base: {
+      DEFAULT: {
         id: uuidv4(),
-        value: primaryColorHex,
+        value: primaryColorStringified,
         type: 'color',
       },
       ...defaultColorShadesToTokens(
-        generateDefaultColorShades(primaryColorHex)
+        generateDefaultColorShades({ primary: primaryColorStringified })
       ),
     }
 
@@ -98,7 +102,7 @@ export function Onboarding({
       <PickPrimary
         primaryColor={primaryColor}
         onUpdatePage={setPage}
-        onUpdatePrimaryColor={(newColor: string) =>
+        onUpdatePrimaryColor={(newColor: AnyColor) =>
           updatePrimaryColor(newColor)
         }
         platform={platform}
@@ -111,7 +115,7 @@ export function Onboarding({
       <PickPrimary
         primaryColor={primaryColor}
         onUpdatePage={setPage}
-        onUpdatePrimaryColor={(newColor: string) =>
+        onUpdatePrimaryColor={(newColor: AnyColor) =>
           updatePrimaryColor(newColor)
         }
         platform={platform}
@@ -122,7 +126,7 @@ export function Onboarding({
       <NamePrimary
         initialName={primaryName}
         onUpdatePage={setPage}
-        primaryColor={primaryColor}
+        primaryColor={colorStringified}
         onUpdatePrimaryName={(newName: string) => setPrimaryName(newName)}
         platform={platform}
       />
@@ -130,7 +134,7 @@ export function Onboarding({
   } else if (page === 3) {
     content = (
       <ReviewPrimary
-        primaryColor={primaryColor}
+        primaryColor={colorStringified}
         onUpdatePage={setPage}
         platform={platform}
       />
@@ -144,11 +148,11 @@ export function Onboarding({
             const color = newPalette[colorName]
             if (assertToken(color)) {
               newPalette[colorName] = {
-                base: {
+                DEFAULT: {
                   ...newPalette[colorName],
                 },
                 ...defaultColorShadesToTokens(
-                  generateDefaultColorShades(`${color.value}`)
+                  generateDefaultColorShades({ primary: `${color.value}` })
                 ),
               }
             }
@@ -156,10 +160,10 @@ export function Onboarding({
           setPalette(newPalette)
 
           if (platform === 'web') {
-            handleExport(primaryColor, primaryName, newPalette)
+            handleExport(colorStringified, primaryName, newPalette)
           }
         }}
-        primaryColor={primaryColor}
+        primaryColor={colorStringified}
         primaryName={primaryName}
         onUpdatePage={setPage}
         platform={platform}
@@ -168,11 +172,11 @@ export function Onboarding({
   } else if (page === 5) {
     content = (
       <ExportSettings
-        primaryColor={primaryColor}
+        primaryColor={colorStringified}
         fileTypes={fileTypes}
         onUpdateFileTypes={setFileTypes}
         onExport={() => {
-          handleExport(primaryColor, primaryName, palette)
+          handleExport(colorStringified, primaryName, palette)
         }}
         onUpdatePage={setPage}
         platform={platform}
@@ -181,7 +185,7 @@ export function Onboarding({
   } else if (page === 6) {
     content = (
       <ImportInstructions
-        primaryColor={primaryColor}
+        primaryColor={colorStringified}
         primaryName={primaryName}
         onUpdatePage={setPage}
         platform={platform}
@@ -190,7 +194,7 @@ export function Onboarding({
   } else if (page === 7) {
     content = (
       <Referral
-        primaryColor={primaryColor}
+        primaryColor={colorStringified}
         onFinish={() => {
           onFinishOnboarding()
         }}
@@ -200,7 +204,7 @@ export function Onboarding({
   }
 
   return (
-    <OnboardingContainer primaryColor={primaryColor}>
+    <OnboardingContainer primaryColor={colorStringified}>
       {content}
     </OnboardingContainer>
   )
