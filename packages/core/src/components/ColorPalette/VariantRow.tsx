@@ -129,7 +129,7 @@ export function VariantRowDisplay({
           },
           isBase
         )
-      }, 500)
+      }, 250)
     }
     return () => {
       clearTimeout(timer)
