@@ -54,7 +54,7 @@ function MirrorfulMenuButton({
     />
   )
 }
-
+const MotionRow = motion(VariantRow)
 export function ColorsDisplay({
   colorName,
   colorData,
@@ -223,7 +223,7 @@ export function ColorsDisplay({
               isBase = false
             }
             return (
-              <motion.div
+              <MotionRow
                 key={variant.name + variant.token.value}
                 initial={{ opacity: 0 }}
                 animate={{
@@ -233,38 +233,77 @@ export function ColorsDisplay({
                   duration: 0.5,
                   delay: 0.08 * index,
                 }}
-              >
-                <VariantRow
-                  defaultNamedToken={defaultNamedToken}
-                  variant={variant}
-                  isBase={isBase}
-                  onUpdateVariant={(
-                    newVariant: TNamedToken,
-                    updateDefault: boolean
-                  ) => {
-                    const updatedColorData = { ...colorData }
-                    if (updateDefault) {
-                      let additionalVariants: TTokenGroup = {}
-                      additionalVariants = defaultColorShadesToTokens(
-                        generateDefaultColorShades({
-                          primary: newVariant.token.value,
-                          baseStop: Number.isNaN(Number(newVariant.name))
-                            ? 500
-                            : (Number(newVariant.name) as ShadeStop),
-                        })
-                      )
-                      const colorTokenGroup: TTokenGroup = {
-                        DEFAULT: newVariant.token,
-                        ...additionalVariants,
-                      }
-                      onUpdateColorData(colorTokenGroup)
-                    } else {
-                      updatedColorData[newVariant.name] = newVariant.token
-                      onUpdateColorData(updatedColorData)
+                defaultNamedToken={defaultNamedToken}
+                variant={variant}
+                isBase={isBase}
+                onUpdateVariant={(
+                  newVariant: TNamedToken,
+                  updateDefault: boolean
+                ) => {
+                  const updatedColorData = { ...colorData }
+                  if (updateDefault) {
+                    let additionalVariants: TTokenGroup = {}
+                    additionalVariants = defaultColorShadesToTokens(
+                      generateDefaultColorShades({
+                        primary: newVariant.token.value,
+                        baseStop: Number.isNaN(Number(newVariant.name))
+                          ? 500
+                          : (Number(newVariant.name) as ShadeStop),
+                      })
+                    )
+                    const colorTokenGroup: TTokenGroup = {
+                      DEFAULT: newVariant.token,
+                      ...additionalVariants,
                     }
-                  }}
-                />
-              </motion.div>
+                    onUpdateColorData(colorTokenGroup)
+                  } else {
+                    updatedColorData[newVariant.name] = newVariant.token
+                    onUpdateColorData(updatedColorData)
+                  }
+                }}
+              />
+              // <motion.div
+              //   key={variant.name + variant.token.value}
+              //   initial={{ opacity: 0 }}
+              //   animate={{
+              //     opacity: 1,
+              //   }}
+              //   transition={{
+              //     duration: 0.5,
+              //     delay: 0.08 * index,
+              //   }}
+              // >
+              //   <VariantRow
+              //     defaultNamedToken={defaultNamedToken}
+              //     variant={variant}
+              //     isBase={isBase}
+              //     onUpdateVariant={(
+              //       newVariant: TNamedToken,
+              //       updateDefault: boolean
+              //     ) => {
+              //       const updatedColorData = { ...colorData }
+              //       if (updateDefault) {
+              //         let additionalVariants: TTokenGroup = {}
+              //         additionalVariants = defaultColorShadesToTokens(
+              //           generateDefaultColorShades({
+              //             primary: newVariant.token.value,
+              //             baseStop: Number.isNaN(Number(newVariant.name))
+              //               ? 500
+              //               : (Number(newVariant.name) as ShadeStop),
+              //           })
+              //         )
+              //         const colorTokenGroup: TTokenGroup = {
+              //           DEFAULT: newVariant.token,
+              //           ...additionalVariants,
+              //         }
+              //         onUpdateColorData(colorTokenGroup)
+              //       } else {
+              //         updatedColorData[newVariant.name] = newVariant.token
+              //         onUpdateColorData(updatedColorData)
+              //       }
+              //     }}
+              //   />
+              // </motion.div>
             )
           })}
       </Stack>
