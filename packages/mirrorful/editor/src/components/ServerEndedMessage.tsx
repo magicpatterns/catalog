@@ -1,7 +1,7 @@
+import { CopyIcon } from '@chakra-ui/icons'
 import { Code, Grid, Text, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { useCopied } from 'src/hooks/useCopied'
-import { CopyIcon } from '@chakra-ui/icons'
 
 export default function ServerEndedMessage() {
   return (
