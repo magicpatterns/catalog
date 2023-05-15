@@ -84,7 +84,7 @@ export function ColorPaletteSection({
                   onUpdateColors(newColors)
                 }}
                 isErrorOnUpdateColorName={(newName: string) => {
-                  if (newName === '') return 'Colour Name cannot be empty.'
+                  if (newName === '') return 'Color name cannot be empty.'
                   if (newName.toLowerCase() !== name.trim().toLowerCase()) {
                     const isNamePresent = Object.keys(colors).some(
                       (colorName) =>
