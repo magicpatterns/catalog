@@ -1,4 +1,6 @@
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
+import { ONBOARDING_IDS } from '@core/components/ProductOnboardings/constants'
+import { ThemeOnboarding } from '@core/components/ProductOnboardings/ThemeOnboarding'
 import { CreateThemeCard, ThemeCard } from '@core/components/Themes/ThemeCard'
 import useMirrorfulStore, {
   MirrorfulState,
@@ -6,6 +8,7 @@ import useMirrorfulStore, {
 import { defaultTheme, TTheme } from '@core/types'
 import { TMirrorfulStore } from '@core/types'
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 export function ThemesPage({
@@ -23,6 +26,7 @@ export function ThemesPage({
     setThemes,
     metadata,
   } = useMirrorfulStore((state: MirrorfulState) => state)
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
 
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)
@@ -44,6 +48,12 @@ export function ThemesPage({
     handleUpdateThemes([...themes, newTheme])
     router.push(`/themes/${newTheme.id}`)
   }
+
+  useEffect(() => {
+    if (!metadata.completedOnboardings.includes(ONBOARDING_IDS.THEMES)) {
+      setShowOnboarding(true)
+    }
+  }, [])
 
   return (
     <>
@@ -93,6 +103,10 @@ export function ThemesPage({
           <CreateThemeCard onCreateTheme={handleCreateNewTheme} />
         </Stack>
       </Box>
+      <ThemeOnboarding
+        isOpen={showOnboarding}
+        onClose={() => setShowOnboarding(false)}
+      />
     </>
   )
 }
