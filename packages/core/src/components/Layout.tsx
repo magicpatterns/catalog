@@ -39,6 +39,7 @@ export default function Layout({
     colors,
     setColors,
     typography,
+    metadata,
     setTypography,
     shadows,
     setShadows,
@@ -69,6 +70,7 @@ export default function Layout({
       primitives: { colors, typography, shadows },
       themes: [],
       files: fileTypes,
+      metadata,
     })
 
     onExportSuccessModalOpen()
@@ -87,6 +89,9 @@ export default function Layout({
       },
       themes: [],
       files: fileTypes,
+      metadata: {
+        completedOnboardings: [],
+      },
     })
   }
 

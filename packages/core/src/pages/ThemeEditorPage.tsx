@@ -22,8 +22,15 @@ export function ThemeEditorPage({
   themeId: string
   postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
-  const { typography, colors, shadows, fileTypes, themes, setThemes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const {
+    typography,
+    colors,
+    shadows,
+    fileTypes,
+    themes,
+    setThemes,
+    metadata,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
 
   const selectedTheme = themes.find((t) => t.id === themeId)
 
@@ -37,6 +44,7 @@ export function ThemeEditorPage({
       primitives: { colors, typography, shadows },
       themes: data,
       files: fileTypes,
+      metadata,
     })
   }
 
