@@ -15,45 +15,16 @@ import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
 import { MutableRefObject, useReducer, useRef } from 'react'
-import { IconType } from 'react-icons'
-import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
+import { FiEdit } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
 import { EditBaseColorModal } from './EditBaseColorModal'
-import { EditColorNameModal } from './EditColorNameModal'
 import {
   defaultColorShadesToTokens,
   generateDefaultColorShades,
   ShadeStop,
 } from './utils'
 import { VariantRow } from './VariantRow'
-
-function MirrorfulMenuButton({
-  color,
-  icon = FiMoreHorizontal,
-}: {
-  color?: string
-  icon?: IconType
-}) {
-  return (
-    <MenuButton
-      variant="outline"
-      as={IconButton}
-      icon={<Icon as={icon} />}
-      color={color ? (tinycolor(color).isDark() ? 'white' : 'black') : 'black'}
-      _hover={{
-        backgroundColor: 'rgba(235, 235, 235, 0.3)',
-      }}
-      _active={{
-        backgroundColor: 'rgba(235, 235, 235, 0.3)',
-      }}
-      size="sm"
-      css={{
-        border: 'none',
-      }}
-    />
-  )
-}
 
 export function ColorDisplay({
   colorName,
@@ -77,12 +48,6 @@ export function ColorDisplay({
   } = useDisclosure()
 
   const {
-    isOpen: isColorNameModalOpen,
-    onOpen: onColorNameModalOpen,
-    onClose: onColorNameModalClose,
-  } = useDisclosure()
-
-  const {
     isOpen: isAlertDialogOpen,
     onOpen: onDeleteAlertDialogOpen,
     onClose: onDeleteAlertDialogClose,
@@ -102,7 +67,11 @@ export function ColorDisplay({
   } as const
 
   const reducer = (
-    state: any,
+    state: {
+      colourName?: string
+      isEditing?: boolean
+      error?: string | null
+    },
     action: {
       type: string
       payload: {
@@ -143,7 +112,7 @@ export function ColorDisplay({
   const colorNameRef = useRef() as MutableRefObject<HTMLInputElement>
 
   const handleSave = () => {
-    const error = isErrorOnUpdateColorName(state.colourName.trim())
+    const error = isErrorOnUpdateColorName(state.colourName?.trim() as string)
     if (error) {
       colorNameRef.current.focus()
       dispatch({ type: ACTIONS.SET_ERROR, payload: { errorMessage: error } })
@@ -155,11 +124,11 @@ export function ColorDisplay({
       payload: {
         errorMessage: null,
         isEditing: false,
-        colourName: state.colourName.trim() as string,
+        colourName: state.colourName?.trim() as string,
       },
     })
 
-    onUpdateColorName(state.colourName.trim())
+    onUpdateColorName(state.colourName?.trim() as string)
   }
 
   const namedTokens = Object.keys(colorData)
@@ -209,7 +178,7 @@ export function ColorDisplay({
             }}
             padding={1}
             fontSize={'1.5rem'}
-            width={`${state.colourName.length * 12}px`}
+            width={`${(state.colourName as string).length * 12}px`}
             minWidth={200}
             ml={1}
             mr={1}
@@ -269,9 +238,9 @@ export function ColorDisplay({
             <MenuItem onClick={() => onBaseModalOpen()}>
               Edit Base Color
             </MenuItem>
-            <MenuItem onClick={() => onColorNameModalOpen()}>
+            {/* <MenuItem onClick={() => onColorNameModalOpen()}>
               Edit Color Name
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={() => onDeleteAlertDialogOpen()}>
               Delete
             </MenuItem>
@@ -357,16 +326,6 @@ export function ColorDisplay({
         baseColorToken={baseColorToken}
         onUpdateBaseColor={(updatedColorData: TTokenGroup, newName: string) => {
           onUpdateColorData(updatedColorData, newName)
-        }}
-      />
-
-      <EditColorNameModal
-        defaultNamedToken={defaultNamedToken}
-        isOpen={isColorNameModalOpen}
-        onClose={onColorNameModalClose}
-        initialColorName={colorName}
-        onUpdateColorName={(newName: string) => {
-          onUpdateColorName(newName)
         }}
       />
 
