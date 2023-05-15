@@ -77,264 +77,255 @@ function MirrorfulSlider({
   )
 }
 
-export const VariantRowDisplay = React.forwardRef(
-  (
-    {
-      defaultNamedToken,
-      variant,
-      onUpdateVariant,
-      hideIcons = false,
-      isBase = false,
-    }: {
-      defaultNamedToken: TNamedToken
-      hideIcons?: boolean
-      isBase?: boolean
-      variant: TNamedToken
-      onUpdateVariant: (newVariant: TNamedToken, updateDefault: boolean) => void
-    },
-    ref
-  ) => {
-    const [showSlider, setShowSlider] = useState(false)
-    const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
-    const { name, token } = variant
-    const [color, setColor] = useState(token.value)
-    const hsl = tinycolor(color).toHsl()
-    const [h, setH] = useState<number>(Math.round(hsl.h))
-    const [s, setS] = useState<number>(Math.round(hsl.s * 100))
-    const [l, setL] = useState<number>(Math.round(hsl.l * 100))
+export function VariantRowDisplay({
+  defaultNamedToken,
+  variant,
+  onUpdateVariant,
+  hideIcons = false,
+  isBase = false,
+}: {
+  defaultNamedToken: TNamedToken
+  hideIcons?: boolean
+  isBase?: boolean
+  variant: TNamedToken
+  onUpdateVariant: (newVariant: TNamedToken, updateDefault: boolean) => void
+}) {
+  const [showSlider, setShowSlider] = useState(false)
+  const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
+  const { name, token } = variant
+  const [color, setColor] = useState(token.value)
+  const hsl = tinycolor(color).toHsl()
+  const [h, setH] = useState<number>(Math.round(hsl.h))
+  const [s, setS] = useState<number>(Math.round(hsl.s * 100))
+  const [l, setL] = useState<number>(Math.round(hsl.l * 100))
 
-    useEffect(() => {
-      let copiedTimeout: NodeJS.Timeout
+  useEffect(() => {
+    let copiedTimeout: NodeJS.Timeout
 
-      if (hasCopiedHexCode) {
-        copiedTimeout = setTimeout(() => {
-          setHasCopiedHexCode(false)
-        }, 1500)
-      }
-
-      return () => clearTimeout(copiedTimeout)
-    }, [hasCopiedHexCode])
-
-    useEffect(() => {
-      let timer: NodeJS.Timeout | undefined = undefined
-
-      if (timer) clearTimeout(timer)
-
-      if (color !== token.value) {
-        timer = setTimeout(() => {
-          onUpdateVariant(
-            {
-              ...variant,
-              token: {
-                ...variant.token,
-
-                value: color,
-              },
-            },
-            isBase
-          )
-        }, 250)
-      }
-      return () => {
-        clearTimeout(timer)
-      }
-    }, [color])
-
-    const onHSLSlide = ({
-      val,
-      type,
-    }: {
-      val: number
-      type: 'h' | 's' | 'l'
-    }) => {
-      let newColor = ''
-      if (type === 'h') {
-        newColor = tinycolor({
-          h: val,
-          s: s / 100,
-          l: l / 100,
-        }).toHexString()
-      } else if (type === 's') {
-        newColor = tinycolor({ h, s: s / 100, l: l / 100 }).toHexString()
-      } else {
-        newColor = tinycolor({
-          h,
-          s: val / 100,
-          l: val / 100,
-        }).toHexString()
-      }
-
-      const newToken = {
-        ...variant.token,
-        value: newColor,
-      }
-      setColor(newToken.value)
-      // onUpdateVariant({ ...variant, token: newToken }, isBase)
+    if (hasCopiedHexCode) {
+      copiedTimeout = setTimeout(() => {
+        setHasCopiedHexCode(false)
+      }, 1500)
     }
 
-    const textColor =
-      tinycolor(color).isDark() && tinycolor(color).getAlpha() > 0.5
-        ? 'white'
-        : 'black'
-    return (
-      <Flex>
+    return () => clearTimeout(copiedTimeout)
+  }, [hasCopiedHexCode])
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined = undefined
+
+    if (timer) clearTimeout(timer)
+
+    if (color !== token.value) {
+      timer = setTimeout(() => {
+        onUpdateVariant(
+          {
+            ...variant,
+            token: {
+              ...variant.token,
+
+              value: color,
+            },
+          },
+          isBase
+        )
+      }, 250)
+    }
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [color])
+
+  const onHSLSlide = ({
+    val,
+    type,
+  }: {
+    val: number
+    type: 'h' | 's' | 'l'
+  }) => {
+    let newColor = ''
+    if (type === 'h') {
+      newColor = tinycolor({
+        h: val,
+        s: s / 100,
+        l: l / 100,
+      }).toHexString()
+    } else if (type === 's') {
+      newColor = tinycolor({ h, s: s / 100, l: l / 100 }).toHexString()
+    } else {
+      newColor = tinycolor({
+        h,
+        s: val / 100,
+        l: val / 100,
+      }).toHexString()
+    }
+
+    const newToken = {
+      ...variant.token,
+      value: newColor,
+    }
+    setColor(newToken.value)
+    // onUpdateVariant({ ...variant, token: newToken }, isBase)
+  }
+
+  const textColor =
+    tinycolor(color).isDark() && tinycolor(color).getAlpha() > 0.5
+      ? 'white'
+      : 'black'
+  return (
+    <Flex>
+      <Box
+        css={{
+          height: '3rem',
+          width: '100%',
+          backgroundColor: `${color}`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0px 24px',
+          borderRadius: 8,
+          border: '1px solid var(--border-color)',
+        }}
+        role="group"
+      >
+        <Text
+          fontSize="1rem"
+          fontWeight={isBase || hideIcons ? 800 : 400}
+          color={textColor}
+        >
+          {name} {(isBase || hideIcons) && '[BASE]'}
+        </Text>
         <Box
           css={{
-            height: '3rem',
-            width: '100%',
-            backgroundColor: `${color}`,
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0px 24px',
-            borderRadius: 8,
-            border: '1px solid var(--border-color)',
+            position: 'relative',
           }}
-          role="group"
         >
-          <Text
-            fontSize="1rem"
-            fontWeight={isBase || hideIcons ? 800 : 400}
-            color={textColor}
+          <Tooltip
+            label="Copied to Clipboard"
+            hasArrow
+            isDisabled={!hasCopiedHexCode}
+            isOpen={hasCopiedHexCode}
           >
-            {name} {(isBase || hideIcons) && '[BASE]'}
-          </Text>
-          <Box
-            css={{
-              display: 'flex',
-              alignItems: 'center',
-              position: 'relative',
-            }}
-          >
-            <Tooltip
-              label="Copied to Clipboard"
-              hasArrow
-              isDisabled={!hasCopiedHexCode}
-              isOpen={hasCopiedHexCode}
+            <Text
+              fontSize="1rem"
+              fontWeight={600}
+              color={textColor}
+              _hover={{
+                cursor: 'pointer',
+                backgroundColor: textColor,
+                color: textColor === 'white' ? 'black' : 'white',
+                borderRadius: 8,
+                paddingInline: 2,
+              }}
+              onClick={() => {
+                navigator.clipboard.writeText(color)
+                setHasCopiedHexCode(true)
+              }}
             >
-              <Text
-                fontSize="1rem"
-                fontWeight={600}
+              {color}
+            </Text>
+          </Tooltip>
+          {!hideIcons && (
+            <>
+              <IconButton
+                disabled={isBase}
+                onClick={() => {
+                  onUpdateVariant(variant, true)
+                }}
+                style={{ marginLeft: '24px' }}
+                variant="outline"
                 color={textColor}
                 _hover={{
-                  cursor: 'pointer',
-                  backgroundColor: textColor,
-                  color: textColor === 'white' ? 'black' : 'white',
-                  borderRadius: 8,
-                  paddingInline: 2,
+                  backgroundColor: isBase ? 'none' : 'rgba(235, 235, 235, 0.3)',
                 }}
-                onClick={() => {
-                  navigator.clipboard.writeText(color)
-                  setHasCopiedHexCode(true)
+                _active={{
+                  backgroundColor: isBase ? 'none' : 'rgba(235, 235, 235, 0.3)',
                 }}
-              >
-                {color}
-              </Text>
-            </Tooltip>
-            {!hideIcons && (
-              <>
-                <IconButton
-                  disabled={isBase}
-                  onClick={() => {
-                    onUpdateVariant(variant, true)
-                  }}
-                  style={{ marginLeft: '24px' }}
-                  variant="outline"
-                  color={textColor}
-                  _hover={{
-                    backgroundColor: isBase
-                      ? 'none'
-                      : 'rgba(235, 235, 235, 0.3)',
-                  }}
-                  _active={{
-                    backgroundColor: isBase
-                      ? 'none'
-                      : 'rgba(235, 235, 235, 0.3)',
-                  }}
-                  size="sm"
-                  css={{
-                    border: 'none',
-                  }}
-                  aria-label="Select as base"
-                  icon={
-                    isBase ? (
-                      <MdOutlineRadioButtonChecked />
-                    ) : (
-                      <MdOutlineRadioButtonUnchecked />
-                    )
-                  }
-                />
-                <IconButton
-                  isActive={showSlider}
-                  onClick={() => setShowSlider(!showSlider)}
-                  variant="outline"
-                  color={textColor}
-                  _hover={{
-                    backgroundColor: 'rgba(235, 235, 235, 0.3)',
-                  }}
-                  _active={{
-                    backgroundColor: 'rgba(235, 235, 235, 0.3)',
-                  }}
-                  size="sm"
-                  css={{
-                    border: 'none',
-                  }}
-                  aria-label="Show sliders"
-                  icon={<BsSliders2 />}
-                />
-              </>
-            )}
-          </Box>
+                size="sm"
+                css={{
+                  border: 'none',
+                }}
+                aria-label="Select as base"
+                icon={
+                  isBase ? (
+                    <MdOutlineRadioButtonChecked />
+                  ) : (
+                    <MdOutlineRadioButtonUnchecked />
+                  )
+                }
+              />
+              <IconButton
+                isActive={showSlider}
+                onClick={() => setShowSlider(!showSlider)}
+                variant="outline"
+                color={textColor}
+                _hover={{
+                  backgroundColor: 'rgba(235, 235, 235, 0.3)',
+                }}
+                _active={{
+                  backgroundColor: 'rgba(235, 235, 235, 0.3)',
+                }}
+                size="sm"
+                css={{
+                  border: 'none',
+                }}
+                aria-label="Show sliders"
+                icon={<BsSliders2 />}
+              />
+            </>
+          )}
         </Box>
-        {showSlider && (
-          <Flex
-            ml={4}
-            style={{
-              width: '30%',
-              flexDirection: 'column',
-              height: '3rem',
-            }}
-          >
-            {[
-              {
-                label: 'H',
-                onSlide: (h: number) => {
-                  setH(h)
-                  onHSLSlide({ val: h, type: 'h' })
-                },
-                sliderValue: h,
-                min: 0,
-                max: 360,
+      </Box>
+      {showSlider && (
+        <Flex
+          ml={4}
+          style={{
+            width: '30%',
+            flexDirection: 'column',
+            height: '3rem',
+          }}
+        >
+          {[
+            {
+              label: 'H',
+              onSlide: (h: number) => {
+                setH(h)
+                onHSLSlide({ val: h, type: 'h' })
               },
-              {
-                label: 'S',
-                onSlide: (s: number) => {
-                  setS(s)
-                  onHSLSlide({ val: s, type: 's' })
-                },
-                sliderValue: s,
-                min: 0,
-                max: 100,
+              sliderValue: h,
+              min: 0,
+              max: 360,
+            },
+            {
+              label: 'S',
+              onSlide: (s: number) => {
+                setS(s)
+                onHSLSlide({ val: s, type: 's' })
               },
-              {
-                label: 'L',
-                onSlide: (l: number) => {
-                  setL(l)
-                  onHSLSlide({ val: l, type: 'l' })
-                },
-                sliderValue: l,
-                min: 0,
-                max: 100,
+              sliderValue: s,
+              min: 0,
+              max: 100,
+            },
+            {
+              label: 'L',
+              onSlide: (l: number) => {
+                setL(l)
+                onHSLSlide({ val: l, type: 'l' })
               },
-            ].map((obj) => {
-              return <MirrorfulSlider key={obj.label} {...obj} />
-            })}
-          </Flex>
-        )}
-      </Flex>
-    )
-  }
-)
+              sliderValue: l,
+              min: 0,
+              max: 100,
+            },
+          ].map((obj) => {
+            return <MirrorfulSlider key={obj.label} {...obj} />
+          })}
+        </Flex>
+      )}
+    </Flex>
+  )
+}
 
 export const VariantRow = React.memo(
   VariantRowDisplay,
