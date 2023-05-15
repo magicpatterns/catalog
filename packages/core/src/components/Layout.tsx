@@ -37,6 +37,7 @@ export default function Layout({
     colors,
     setColors,
     typography,
+    metadata,
     setTypography,
     shadows,
     setShadows,

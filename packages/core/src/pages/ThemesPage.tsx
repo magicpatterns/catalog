@@ -12,8 +12,15 @@ import { v4 as uuidv4 } from 'uuid'
 export function ThemesPage() {
   const authInfo = useAuthInfo()
   const router = useRouter()
-  const { typography, colors, shadows, fileTypes, themes, setThemes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const {
+    typography,
+    colors,
+    shadows,
+    fileTypes,
+    themes,
+    setThemes,
+    metadata,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
 
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)
