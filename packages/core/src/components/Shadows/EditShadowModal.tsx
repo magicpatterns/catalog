@@ -357,19 +357,28 @@ export function EditShadowModal({
                 }}
               >
                 {newInitialValues?.map((_arg: ShadowValue, index: number) => {
+                  const opacity = index === shadowIndex ? '1' : '0.4'
                   return (
                     <Button
                       key={index}
                       style={{
-                        color: index === shadowIndex ? 'black' : 'gray',
                         width: '65px',
                         margin: '10px',
                         position: 'relative',
                       }}
                       onClick={() => setShadowIndex(index)}
                     >
-                      {index + 1}
+                      <span
+                        style={{
+                          opacity: opacity,
+                        }}
+                      >
+                        {index + 1}
+                      </span>
                       <Box
+                        style={{
+                          opacity: opacity,
+                        }}
                         _hover={{ fontWeight: 'bold' }}
                         position="absolute"
                         top="-5px"
@@ -378,7 +387,7 @@ export function EditShadowModal({
                         <CloseButton
                           _hover={{
                             '& > svg': {
-                              stroke: 'black',
+                              stroke: 'var(--text-color-primary)',
                               strokeWidth: '2',
                             },
                           }}
