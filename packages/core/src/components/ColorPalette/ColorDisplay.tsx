@@ -224,7 +224,7 @@ export function ColorsDisplay({
             }
             return (
               <motion.div
-                key={`${variant.name}-${variant.token.value}`}
+                key={`${colorName}-${variant.name}`}
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
