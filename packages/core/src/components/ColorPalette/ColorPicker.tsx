@@ -35,7 +35,7 @@ function DropdownInput({
   onChange: (color: AnyColor) => void
   format: TFormat
   onSetFormat: (format: TFormat) => void
-  shadow: boolean
+  shadow?: boolean
 }) {
   const [hexInputValue, setHexInputValue] = useState<string>(
     tinycolor(colorPickerColor).toHexString()
