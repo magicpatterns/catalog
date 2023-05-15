@@ -90,7 +90,7 @@ export function ColorPaletteSection({
                       (colorName) =>
                         colorName.trim().toLowerCase() === newName.toLowerCase()
                     )
-                    if (isNamePresent) return 'Colour Name already exists.'
+                    if (isNamePresent) return 'Color name already exists.'
                   }
                   return null
                 }}
