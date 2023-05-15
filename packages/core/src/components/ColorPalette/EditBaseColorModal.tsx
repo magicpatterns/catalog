@@ -130,6 +130,7 @@ export function EditBaseColorModal({
                       },
                     })
                   }}
+                  shadow={false}
                   colorPickerColor={`${variant.token.value}`}
                 />
                 <Box style={{ width: '100%' }}>

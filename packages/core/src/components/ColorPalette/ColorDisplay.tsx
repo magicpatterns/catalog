@@ -14,13 +14,11 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { IconType } from 'react-icons'
-import { FiEdit, FiMoreHorizontal } from 'react-icons/fi'
+import { MutableRefObject, useReducer, useRef } from 'react'
+import { FiEdit } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
 import { EditBaseColorModal } from './EditBaseColorModal'
-import { EditColorNameModal } from './EditColorNameModal'
 import {
   defaultColorShadesToTokens,
   generateDefaultColorShades,
@@ -28,43 +26,18 @@ import {
 } from './utils'
 import { VariantRow } from './VariantRow'
 
-function MirrorfulMenuButton({
-  color,
-  icon = FiMoreHorizontal,
-}: {
-  color?: string
-  icon?: IconType
-}) {
-  return (
-    <MenuButton
-      variant="outline"
-      as={IconButton}
-      icon={<Icon as={icon} />}
-      color={color ? (tinycolor(color).isDark() ? 'white' : 'black') : 'black'}
-      _hover={{
-        backgroundColor: 'rgba(235, 235, 235, 0.3)',
-      }}
-      _active={{
-        backgroundColor: 'rgba(235, 235, 235, 0.3)',
-      }}
-      size="sm"
-      css={{
-        border: 'none',
-      }}
-    />
-  )
-}
-
 export function ColorDisplay({
   colorName,
   colorData,
   onUpdateColorData,
   onUpdateColorName,
+  isErrorOnUpdateColorName,
   onDeleteColorData,
 }: {
   colorName: string
   colorData: TTokenGroup
   onUpdateColorName: (newColorName: string) => void
+  isErrorOnUpdateColorName: (newColor: string) => string | null
   onUpdateColorData: (colorData: TTokenGroup, newName?: string) => void
   onDeleteColorData: () => void
 }) {
@@ -75,19 +48,88 @@ export function ColorDisplay({
   } = useDisclosure()
 
   const {
-    isOpen: isColorNameModalOpen,
-    onOpen: onColorNameModalOpen,
-    onClose: onColorNameModalClose,
-  } = useDisclosure()
-
-  const {
     isOpen: isAlertDialogOpen,
     onOpen: onDeleteAlertDialogOpen,
     onClose: onDeleteAlertDialogClose,
   } = useDisclosure()
 
-  const [colourName, setColorName] = useState<string>(colorName)
-  const [isEditing, setIsEditing] = useState<boolean>(false)
+  const INITIAL_STATE = {
+    colourName: colorName,
+    isEditing: false,
+    error: null,
+  }
+
+  const ACTIONS = {
+    SET_COLOUR_NAME: 'SET_COLOUR_NAME',
+    SET_IS_EDITING: 'SET_IS_EDITING',
+    SET_ERROR: 'SET_ERROR',
+    ON_SAVE: 'ON_SAVE',
+  } as const
+
+  const reducer = (
+    state: {
+      colourName?: string
+      isEditing?: boolean
+      error?: string | null
+    },
+    action: {
+      type: string
+      payload: {
+        colourName?: string
+        isEditing?: boolean
+        errorMessage?: string | null
+      }
+    }
+  ) => {
+    switch (action.type) {
+      case ACTIONS.SET_COLOUR_NAME:
+        return {
+          ...state,
+          colourName: action.payload.colourName,
+        }
+      case ACTIONS.SET_IS_EDITING:
+        return {
+          ...state,
+          isEditing: action.payload.isEditing,
+        }
+      case ACTIONS.SET_ERROR:
+        return {
+          ...state,
+          error: action.payload.errorMessage,
+        }
+      case ACTIONS.ON_SAVE:
+        return {
+          error: action.payload.errorMessage,
+          isEditing: action.payload.isEditing,
+          colourName: action.payload.colourName,
+        }
+      default:
+        return state
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
+  const colorNameRef = useRef() as MutableRefObject<HTMLInputElement>
+
+  const handleSave = () => {
+    const error = isErrorOnUpdateColorName(state.colourName?.trim() as string)
+    if (error) {
+      colorNameRef.current.focus()
+      dispatch({ type: ACTIONS.SET_ERROR, payload: { errorMessage: error } })
+      return
+    }
+
+    dispatch({
+      type: ACTIONS.ON_SAVE,
+      payload: {
+        errorMessage: null,
+        isEditing: false,
+        colourName: state.colourName?.trim() as string,
+      },
+    })
+
+    onUpdateColorName(state.colourName?.trim() as string)
+  }
 
   const namedTokens = Object.keys(colorData)
     .map((key) => ({
@@ -126,36 +168,36 @@ export function ColorDisplay({
       }}
     >
       <Box
-        mb={5}
+        mb={state.error ? 0 : 5}
         style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
       >
-        {isEditing ? (
+        {state.isEditing ? (
           <Input
             style={{
               border: 'none',
             }}
             padding={1}
             fontSize={'1.5rem'}
-            width={`${colourName.length * 12}px`}
+            width={`${(state.colourName as string).length * 12}px`}
             minWidth={200}
             ml={1}
             mr={1}
             mt={1}
-            value={colourName}
+            ref={colorNameRef}
+            value={state.colourName}
             onChange={(e) => {
-              setColorName(e.target.value)
+              dispatch({
+                type: ACTIONS.SET_COLOUR_NAME,
+                payload: { colourName: e.target.value },
+              })
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                setIsEditing(false)
-                setColorName(colourName.trim())
-                onUpdateColorName(colourName.trim())
+                handleSave()
               }
             }}
             onBlur={() => {
-              setIsEditing(false)
-              setColorName(colourName.trim())
-              onUpdateColorName(colourName.trim())
+              handleSave()
             }}
             autoFocus
           />
@@ -164,10 +206,13 @@ export function ColorDisplay({
             padding={1}
             style={{ fontWeight: 600, fontSize: '1.5rem' }}
             onDoubleClick={() => {
-              setIsEditing(true)
+              dispatch({
+                type: ACTIONS.SET_IS_EDITING,
+                payload: { isEditing: true },
+              })
             }}
           >
-            {colourName}
+            {state.colourName}
           </Text>
         )}
         <Menu>
@@ -193,15 +238,20 @@ export function ColorDisplay({
             <MenuItem onClick={() => onBaseModalOpen()}>
               Edit Base Color
             </MenuItem>
-            <MenuItem onClick={() => onColorNameModalOpen()}>
+            {/* <MenuItem onClick={() => onColorNameModalOpen()}>
               Edit Color Name
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={() => onDeleteAlertDialogOpen()}>
               Delete
             </MenuItem>
           </MenuList>
         </Menu>
       </Box>
+      {state.error && (
+        <Text color="red.500" mb={5}>
+          {state.error}
+        </Text>
+      )}
       <Stack spacing={'8px'}>
         {namedTokens
           .filter((variant) => variant.name !== 'DEFAULT')
@@ -275,16 +325,6 @@ export function ColorDisplay({
         baseColorToken={baseColorToken}
         onUpdateBaseColor={(updatedColorData: TTokenGroup, newName: string) => {
           onUpdateColorData(updatedColorData, newName)
-        }}
-      />
-
-      <EditColorNameModal
-        defaultNamedToken={defaultNamedToken}
-        isOpen={isColorNameModalOpen}
-        onClose={onColorNameModalClose}
-        initialColorName={colorName}
-        onUpdateColorName={(newName: string) => {
-          onUpdateColorName(newName)
         }}
       />
 

@@ -117,6 +117,7 @@ export function AddColorModal({
                     setColorPickerColor(color)
                   }
                 }}
+                shadow={false}
                 colorPickerColor={colorPickerColor}
               />{' '}
               {error && (

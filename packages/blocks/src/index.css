@@ -23,6 +23,11 @@
   --text-color-secondary: #ffffff;
   --border-color: #303030;
   --color-shadow: #d3d3d3;
+
+  /* Inputs */
+  --color-input-border: rgba(0, 0, 0, 0.16);
+  --color-input-border-hover: rgba(0, 0, 0, 0.32);
+  --color-input-border-focus: rgba(0, 0, 0, 0.48);
 }
 
 /* TODO: Migrate this to Mirrorful Themes */
@@ -50,6 +55,11 @@ html[data-theme='light'] {
   --border-color: #303030;
   --border-hover-color: #030303;
   --color-shadow: #d3d3d3;
+
+  /* Inputs */
+  --color-input-border: rgba(0, 0, 0, 0.16);
+  --color-input-border-hover: rgba(0, 0, 0, 0.26);
+  --color-input-border-focus: rgba(0, 0, 0, 0.36);
 }
 
 html[data-theme='dark'] {
@@ -76,4 +86,9 @@ html[data-theme='dark'] {
   --border-color: #c0c0c0;
   --border-hover-color: #ffffff;
   --color-shadow: #6f6f6f;
+
+  /* Inputs */
+  --color-input-border: rgba(255, 255, 255, 0.16);
+  --color-input-border-hover: rgba(255, 255, 255, 0.32);
+  --color-input-border-focus: rgba(255, 255, 255, 0.48);
 }
