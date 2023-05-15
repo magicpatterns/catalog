@@ -1,4 +1,4 @@
-import { Heading, Text } from '@chakra-ui/react'
+import { Heading, Text, useColorMode } from '@chakra-ui/react'
 import { CSSProperties } from 'react'
 
 export function EditableContent({
@@ -12,6 +12,7 @@ export function EditableContent({
   onUpdateText: (updatedText: string) => void
   css?: CSSProperties
 }) {
+  const { colorMode } = useColorMode()
   const ComponentToUse = type === 'heading' ? Heading : Text
 
   return (
@@ -27,7 +28,8 @@ export function EditableContent({
         onUpdateText(e.target.innerHTML)
       }}
       _hover={{
-        backgroundColor: 'rgba(0,0,0,0.05)',
+        backgroundColor:
+          colorMode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)',
       }}
     >
       {text}
