@@ -2,6 +2,7 @@ types:
   OrgId: string
   FileId: string
   StoreId: string
+  UserId: string
   LibraryId:
     type: string
     docs: This should be the Library Id
@@ -9,3 +10,5 @@ types:
 errors:
   ObjectDoesNotExistError:
     status-code: 404
+  Unauthorized:
+    status-code: 401

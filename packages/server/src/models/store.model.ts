@@ -26,9 +26,9 @@ const themeSchema = new mongoose.Schema<TTheme>({
 })
 
 const storeSchema = new mongoose.Schema<
-  TMirrorfulStore & { id: string; orgId: string; lastUpdatedBy: string }
+  TMirrorfulStore & { id: string; orgId: string; lastUpdatedByUserId: string }
 >({
-  lastUpdatedBy: { type: String }, // links to propelauth user
+  lastUpdatedByUserId: { type: String }, // links to propelauth user
   orgId: { type: String },
   id: { type: String, default: uuidv4() },
   primitives: { type: primitivesSchema, _id: false },

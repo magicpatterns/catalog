@@ -47,7 +47,7 @@ class StoreService {
     toRouter() {
         this.router.get("/store/:storeId", async (req, res, next) => {
             try {
-                await this.methods.getStore(req, {
+                await this.methods.getStoreByLoggedInUserId(req, {
                     send: async (responseBody) => {
                         res.json(await serializers.MirrorfulStore.jsonOrThrow(responseBody, {
                             unrecognizedObjectKeys: "strip",
@@ -61,7 +61,7 @@ class StoreService {
             catch (error) {
                 console.error(error);
                 if (error instanceof errors.MirrorfulApiError) {
-                    console.warn(`Endpoint 'getStore' unexpectedly threw ${error.constructor.name}.` +
+                    console.warn(`Endpoint 'getStoreByLoggedInUserId' unexpectedly threw ${error.constructor.name}.` +
                         ` If this was intentional, please add ${error.constructor.name} to` +
                         " the endpoint's errors list in your Fern Definition.");
                     await error.send(res);

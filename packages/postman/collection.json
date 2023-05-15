@@ -162,7 +162,7 @@
       "item": [
         {
           "_type": "endpoint",
-          "name": "Get Store",
+          "name": "Get Store By Logged In User Id",
           "request": {
             "description": null,
             "url": {
