@@ -112,8 +112,9 @@ export function VariantRowDisplay({
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedHexCode])
 
-  let timer: NodeJS.Timeout | undefined = undefined
   useEffect(() => {
+    let timer: NodeJS.Timeout | undefined = undefined
+
     if (timer) clearTimeout(timer)
 
     if (color !== token.value) {
