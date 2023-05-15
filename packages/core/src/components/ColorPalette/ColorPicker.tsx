@@ -181,7 +181,7 @@ export default function ColorPicker({
   colorPickerColor,
   onChange,
   shadow,
-}: Props & { shadow: boolean }) {
+}: Props & { shadow?: boolean }) {
   const initialFormat =
     typeof colorPickerColor === 'string' && colorPickerColor.includes('#')
       ? 'HEX'

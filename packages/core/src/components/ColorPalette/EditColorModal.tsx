@@ -253,7 +253,6 @@ export function EditColorModal({
                 setBase(tinycolor(colorPickerColor).toHexString())
                 setColorPickerColor(colorPickerColor)
               }}
-              shadow={false}
               colorPickerColor={colorPickerColor}
             />
           </Box>
