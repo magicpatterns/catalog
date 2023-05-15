@@ -29,7 +29,7 @@ function DropdownInput({
   colorPickerColor,
   format,
   onSetFormat,
-  shadow,
+  shadow = false,
 }: {
   colorPickerColor: AnyColor
   onChange: (color: AnyColor) => void
