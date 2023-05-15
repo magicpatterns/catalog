@@ -19,6 +19,8 @@ const SHARED_STYLES: CSSProperties = {
   transition: 'box-shadow 0.2s ease-in-out',
 }
 
+const NUMBER_OF_SQUARES = 130
+
 export function ThemeCard({
   theme,
   onSelectTheme,
@@ -34,7 +36,12 @@ export function ThemeCard({
   const { colors } = useMirrorfulStore()
   const [contextCoords, setContextCoords] = useState<{ x: number; y: number }>()
 
-  const colorValues = flattenTheme({ theme, colors })
+  const preliminaryColorValues = flattenTheme({ theme, colors })
+  const colorValues = []
+
+  for (let i = 0; i < NUMBER_OF_SQUARES; i++) {
+    colorValues.push(preliminaryColorValues[i % preliminaryColorValues.length])
+  }
 
   return (
     <motion.div
@@ -63,7 +70,14 @@ export function ThemeCard({
           }
         }}
       >
-        <Box css={{ height: '150px', display: 'flex' }}>
+        <Box
+          css={{
+            height: '150px',
+            width: '195px',
+            display: 'flex',
+            flexWrap: 'wrap',
+          }}
+        >
           {colorValues.map((color, index) => (
             <Box
               key={`${index}-${color}`}
@@ -128,7 +142,7 @@ export function CreateThemeCard({
   onCreateTheme: () => void
 }) {
   const [coloredSqs, setColoredSqs] = useState<string[]>(
-    new Array(130).fill('#ffffff')
+    new Array(NUMBER_OF_SQUARES).fill('var(--background-color-primary)')
   )
   const [colorIntervalId, setColorIntervalId] = useState<NodeJS.Timer | null>(
     null
@@ -139,7 +153,7 @@ export function CreateThemeCard({
   const colorSquare = (prev: string[]) => {
     const candidates: number[] = []
     prev.forEach((sq, index) => {
-      if (sq === '#ffffff') {
+      if (sq === 'var(--background-color-primary)') {
         candidates.push(index)
       }
     })
@@ -158,7 +172,7 @@ export function CreateThemeCard({
   const uncolorSquare = (prev: string[]) => {
     const candidates: number[] = []
     prev.forEach((sq, index) => {
-      if (sq !== '#ffffff') {
+      if (sq !== 'var(--background-color-primary)') {
         candidates.push(index)
       }
     })
@@ -167,7 +181,7 @@ export function CreateThemeCard({
       candidates[Math.floor(Math.random() * candidates.length)]
 
     const newColoredSqs = [...prev]
-    newColoredSqs[indexToUpdate] = `#ffffff`
+    newColoredSqs[indexToUpdate] = `var(--background-color-primary)`
 
     return newColoredSqs
   }
