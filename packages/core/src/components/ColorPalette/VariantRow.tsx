@@ -94,7 +94,8 @@ export function VariantRowDisplay({
   const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
   const { name, token } = variant
   const [color, setColor] = useState(token.value)
-  const hsl = tinycolor(color).toHsl()
+  const [changing, setChanging] = useState(false)
+  const hsl = tinycolor(token.value).toHsl()
   const [h, setH] = useState<number>(Math.round(hsl.h))
   const [s, setS] = useState<number>(Math.round(hsl.s * 100))
   const [l, setL] = useState<number>(Math.round(hsl.l * 100))
@@ -111,19 +112,18 @@ export function VariantRowDisplay({
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedHexCode])
 
+  let timer: NodeJS.Timeout | undefined = undefined
   useEffect(() => {
-    let timer: NodeJS.Timeout | undefined = undefined
-
     if (timer) clearTimeout(timer)
 
     if (color !== token.value) {
       timer = setTimeout(() => {
+        setChanging(false)
         onUpdateVariant(
           {
             ...variant,
             token: {
               ...variant.token,
-
               value: color,
             },
           },
@@ -159,17 +159,14 @@ export function VariantRowDisplay({
         l: val / 100,
       }).toHexString()
     }
-
-    const newToken = {
-      ...variant.token,
-      value: newColor,
-    }
-    setColor(newToken.value)
+    setColor(() => newColor)
+    setChanging(true)
     // onUpdateVariant({ ...variant, token: newToken }, isBase)
   }
 
   const textColor =
-    tinycolor(color).isDark() && tinycolor(color).getAlpha() > 0.5
+    tinycolor(variant.token.value).isDark() &&
+    tinycolor(variant.token.value).getAlpha() > 0.5
       ? 'white'
       : 'black'
   return (
@@ -178,7 +175,7 @@ export function VariantRowDisplay({
         css={{
           height: '3rem',
           width: '100%',
-          backgroundColor: `${color}`,
+          backgroundColor: `${changing ? color : variant.token.value}`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
