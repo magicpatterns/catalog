@@ -94,25 +94,45 @@ export function ColorDisplay({
     error: null,
   }
 
+  const ACTIONS = {
+    SET_COLOUR_NAME: 'SET_COLOUR_NAME',
+    SET_IS_EDITING: 'SET_IS_EDITING',
+    SET_ERROR: 'SET_ERROR',
+    ON_SAVE: 'ON_SAVE',
+  } as const
+
   const reducer = (
     state: any,
-    action: { type: string; payload: string | boolean | null }
+    action: {
+      type: string
+      payload: {
+        colourName?: string
+        isEditing?: boolean
+        errorMessage?: string | null
+      }
+    }
   ) => {
     switch (action.type) {
-      case 'SET_COLOUR_NAME':
+      case ACTIONS.SET_COLOUR_NAME:
         return {
           ...state,
-          colourName: action.payload,
+          colourName: action.payload.colourName,
         }
-      case 'SET_IS_EDITING':
+      case ACTIONS.SET_IS_EDITING:
         return {
           ...state,
-          isEditing: action.payload,
+          isEditing: action.payload.isEditing,
         }
-      case 'SET_ERROR':
+      case ACTIONS.SET_ERROR:
         return {
           ...state,
-          error: action.payload,
+          error: action.payload.errorMessage,
+        }
+      case ACTIONS.ON_SAVE:
+        return {
+          error: action.payload.errorMessage,
+          isEditing: action.payload.isEditing,
+          colourName: action.payload.colourName,
         }
       default:
         return state
@@ -126,13 +146,18 @@ export function ColorDisplay({
     const error = isErrorOnUpdateColorName(state.colourName.trim())
     if (error) {
       colorNameRef.current.focus()
-      dispatch({ type: 'SET_ERROR', payload: error })
+      dispatch({ type: ACTIONS.SET_ERROR, payload: { errorMessage: error } })
       return
     }
 
-    dispatch({ type: 'SET_ERROR', payload: null })
-    dispatch({ type: 'SET_IS_EDITING', payload: false })
-    dispatch({ type: 'SET_COLOUR_NAME', payload: state.colourName.trim() })
+    dispatch({
+      type: ACTIONS.ON_SAVE,
+      payload: {
+        errorMessage: null,
+        isEditing: false,
+        colourName: state.colourName.trim() as string,
+      },
+    })
 
     onUpdateColorName(state.colourName.trim())
   }
@@ -192,7 +217,10 @@ export function ColorDisplay({
             ref={colorNameRef}
             value={state.colourName}
             onChange={(e) => {
-              dispatch({ type: 'SET_COLOUR_NAME', payload: e.target.value })
+              dispatch({
+                type: ACTIONS.SET_COLOUR_NAME,
+                payload: { colourName: e.target.value },
+              })
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
@@ -209,7 +237,10 @@ export function ColorDisplay({
             padding={1}
             style={{ fontWeight: 600, fontSize: '1.5rem' }}
             onDoubleClick={() => {
-              dispatch({ type: 'SET_IS_EDITING', payload: true })
+              dispatch({
+                type: ACTIONS.SET_IS_EDITING,
+                payload: { isEditing: true },
+              })
             }}
           >
             {state.colourName}
