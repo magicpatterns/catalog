@@ -25,7 +25,7 @@ import {
   FiFolder,
   FiGithub,
   FiLifeBuoy,
-  FiLogin,
+  FiLogIn,
   FiLogOut,
   FiMoon,
   FiSun,
@@ -534,12 +534,12 @@ export function Sidebar({
                     cursor: 'pointer',
                   }}
                   onClick={() => {
-                    logoutFn()
+                    logoutFn(true)
                   }}
                 />
               ) : (
                 <Icon
-                  as={FiLogin}
+                  as={FiLogIn}
                   css={{
                     width: '1.2rem',
                     height: '1.2rem',

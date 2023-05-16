@@ -1,12 +1,13 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Box, Icon, Text } from '@chakra-ui/react'
-import { useRedirectFunctions } from '@propelauth/react'
+import { useAuthInfo, useRedirectFunctions } from '@propelauth/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { FiAlertTriangle } from 'react-icons/fi'
 
 export function LoginAlert() {
   const { redirectToLoginPage } = useRedirectFunctions()
+  const authInfo = useAuthInfo()
 
   const [isHovering, setIsHovering] = useState<boolean>(false)
 
