@@ -68,8 +68,9 @@ export default function Layout({
     await postStoreData({
       newData: {
         primitives: { colors, typography, shadows },
-        themes: [],
+        themes,
         files: fileTypes,
+        metadata,
       },
       authInfo: authInfo,
       storeId: '456',
@@ -92,6 +93,9 @@ export default function Layout({
         },
         themes: [],
         files: fileTypes,
+        metadata: {
+          completedOnboardings: [],
+        },
       },
       authInfo,
       storeId: '456',

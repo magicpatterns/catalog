@@ -33,6 +33,7 @@ export function ThemesPage() {
         primitives: { colors, typography, shadows },
         themes: data,
         files: fileTypes,
+        metadata,
       },
       authInfo: authInfo,
       storeId: '456',

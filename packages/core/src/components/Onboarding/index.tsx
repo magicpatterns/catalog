@@ -92,6 +92,9 @@ export function Onboarding({
         },
         themes: [],
         files: fileTypes,
+        metadata: {
+          completedOnboardings: [],
+        },
       },
       authInfo
     )

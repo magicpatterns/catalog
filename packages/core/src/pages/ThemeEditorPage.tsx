@@ -18,8 +18,15 @@ import { FiChevronLeft } from 'react-icons/fi'
 
 export function ThemeEditorPage({ themeId }: { themeId: string }) {
   const authInfo = useAuthInfo()
-  const { typography, colors, shadows, fileTypes, themes, setThemes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const {
+    typography,
+    colors,
+    shadows,
+    fileTypes,
+    themes,
+    setThemes,
+    metadata,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
 
   const selectedTheme = themes.find((t) => t.id === themeId)
 
@@ -34,6 +41,7 @@ export function ThemeEditorPage({ themeId }: { themeId: string }) {
         primitives: { colors, typography, shadows },
         themes: data,
         files: fileTypes,
+        metadata,
       },
       authInfo: authInfo,
       storeId: '456',
