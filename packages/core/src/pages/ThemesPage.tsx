@@ -13,7 +13,11 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-export function ThemesPage() {
+export function ThemesPage({
+  fetchStoreId,
+}: {
+  fetchStoreId: () => Promise<string>
+}) {
   const authInfo = useAuthInfo()
   const router = useRouter()
   const {
@@ -30,6 +34,7 @@ export function ThemesPage() {
 
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)
+    const storeId = await fetchStoreId()
     await postStoreData({
       newData: {
         primitives: { colors, typography, shadows },
@@ -38,11 +43,10 @@ export function ThemesPage() {
         metadata,
       },
       authInfo: authInfo,
-      storeId: '456',
+      storeId,
     })
   }
   const handleCloseThemeOnboarding = async () => {
-    setShowOnboarding(false)
     const updatedMetadata = {
       ...metadata,
       completedOnboardings: [
@@ -50,8 +54,10 @@ export function ThemesPage() {
         ONBOARDING_IDS.THEMES,
       ],
     }
+    setShowOnboarding(false)
     setMetadata(updatedMetadata)
 
+    const storeId = await fetchStoreId()
     await postStoreData({
       newData: {
         primitives: { colors, typography, shadows },
@@ -59,8 +65,8 @@ export function ThemesPage() {
         files: fileTypes,
         metadata: updatedMetadata,
       },
-      authInfo: authInfo,
-      storeId: '456',
+      authInfo,
+      storeId,
     })
   }
 

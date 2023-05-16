@@ -9,7 +9,7 @@ service:
   path-parameters:
     orgId: commons.OrgId
   endpoints:
-    getStoreByLoggedInUserId:
+    getStore:
       method: GET
       path: /store/{storeId}
       path-parameters:

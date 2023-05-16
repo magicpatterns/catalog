@@ -1,6 +1,6 @@
 'use client'
 
-import { getStoreByLoggedInUserId, postStoreData } from '@core/client/store'
+import { getStore, postStoreData } from '@core/client/store'
 import { Onboarding } from '@core/components/Onboarding'
 import SplashScreen from '@core/components/SplashScreen'
 import useMirrorfulStore, {
@@ -10,34 +10,41 @@ import { defaultShadowsV2, TMirrorfulStore } from '@core/types'
 import { useAuthInfo } from '@propelauth/react'
 import { UseAuthInfoProps } from '@propelauth/react/dist/types/useAuthInfo'
 import { LayoutWrapper } from '@web/components/LayoutWrapper'
+import { useFetchStoreId } from '@web/hooks/useFetchStoreId'
+import { usePostStoreIdToLocalStorage } from '@web/hooks/usePostStoreIdToLocalStorage'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-export default function MirrorfulStoreProvider({
+export default function MirrorfulWebWrapper({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const [postStoreIdToLocalStorage] = usePostStoreIdToLocalStorage()
   const authInfo = useAuthInfo()
   const [isLoading, setIsLoading] = useState(true)
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
     useState(false)
   const [showOnBoarding, setShowOnBoarding] = useState(false)
   const router = useRouter()
+  const [fetchStoreId] = useFetchStoreId()
 
   const { setColors, setTypography, setShadows, setFileTypes, setThemes } =
     useMirrorfulStore((state: MirrorfulState) => state)
+
+  const [storeId, setStoreId] = useState<string>('')
 
   // to fetch data
   const timeout = useRef<NodeJS.Timeout | null>(null)
   const fetchStoredData = useCallback(async () => {
     try {
       setIsLoading(true)
-      const data = await getStoreByLoggedInUserId({
+      const storeId = await fetchStoreId()
+      setStoreId(storeId)
+      const data = await getStore({
         authInfo: authInfo,
-        storeId: '123',
+        storeId: storeId,
       })
-      console.log('data', data)
       if (
         !data ||
         Object.keys(data).length === 0 ||
@@ -64,21 +71,26 @@ export default function MirrorfulStoreProvider({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       setFileTypes(data.files)
+
+      setStoreId(storeId)
+
+      await postStoreIdToLocalStorage(storeId)
     } catch (e) {
-      // TODO: Handle error
+      throw e
     } finally {
       timeout.current = setTimeout(() => {
         setIsLoading(false)
       }, 1250)
     }
   }, [
+    authInfo,
+    fetchStoreId,
     setThemes,
     setColors,
-    setFileTypes,
-    setShowOnBoarding,
-    setShadows,
     setTypography,
-    authInfo,
+    setShadows,
+    setFileTypes,
+    postStoreIdToLocalStorage,
   ])
 
   useEffect(() => {
@@ -97,9 +109,12 @@ export default function MirrorfulStoreProvider({
 
   const handleOnboardingSubmit = async (
     data: TMirrorfulStore,
-    authInfo: UseAuthInfoProps
+    authInfo: UseAuthInfoProps,
+    storeId: string
   ) => {
-    postStoreData({ newData: data, authInfo: authInfo, storeId: '456' })
+    setStoreId(storeId)
+    postStoreIdToLocalStorage(storeId)
+    postStoreData({ newData: data, authInfo: authInfo, storeId })
     setColors(data.primitives.colors)
     setShadows(data.primitives.shadows)
     setTypography(data.primitives.typography)
@@ -108,9 +123,10 @@ export default function MirrorfulStoreProvider({
 
   return (
     <>
-      {isLoading && <SplashScreen />}
+      {(isLoading || authInfo.loading) && <SplashScreen />}
       {!shouldForceSkipOnboarding && showOnBoarding ? (
         <Onboarding
+          postStoreIdToLocalStorage={postStoreIdToLocalStorage}
           postStore={handleOnboardingSubmit}
           onFinishOnboarding={() => {
             setShowOnBoarding(false)
@@ -119,7 +135,7 @@ export default function MirrorfulStoreProvider({
           platform={'web'}
         />
       ) : (
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <LayoutWrapper storeId={storeId}>{children}</LayoutWrapper>
       )}
     </>
   )

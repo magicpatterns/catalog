@@ -8,7 +8,7 @@ import { MirrorfulThemeProvider } from '@core/components/ThemeProvider'
 import { AuthProvider } from '@propelauth/react'
 import posthog from 'posthog-js'
 
-import MirrorfulStoreProvider from '../components/MirrorfulStoreProvider'
+import MirrorfulStoreProvider from '../components/MirrorfulWebWrapper'
 
 if (typeof window !== 'undefined') {
   // This ensures that as long as we are client-side, posthog is always ready

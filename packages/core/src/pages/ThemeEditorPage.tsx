@@ -17,7 +17,13 @@ import { assertTokenGroup, TTheme } from '@core/types'
 import { useAuthInfo } from '@propelauth/react'
 import { FiChevronLeft } from 'react-icons/fi'
 
-export function ThemeEditorPage({ themeId }: { themeId: string }) {
+export function ThemeEditorPage({
+  themeId,
+  fetchStoreId,
+}: {
+  themeId: string
+  fetchStoreId: () => Promise<string>
+}) {
   const authInfo = useAuthInfo()
   const {
     typography,
@@ -37,6 +43,7 @@ export function ThemeEditorPage({ themeId }: { themeId: string }) {
 
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)
+    const storeId = await fetchStoreId()
     await postStoreData({
       newData: {
         primitives: { colors, typography, shadows },
@@ -45,7 +52,7 @@ export function ThemeEditorPage({ themeId }: { themeId: string }) {
         metadata,
       },
       authInfo: authInfo,
-      storeId: '456',
+      storeId,
     })
   }
 

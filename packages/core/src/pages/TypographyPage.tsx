@@ -8,7 +8,11 @@ import useMirrorfulStore, {
 import { TPrimitivesTypography } from '@core/types'
 import { useAuthInfo } from '@propelauth/react'
 
-export function TypographyPage() {
+export function TypographyPage({
+  fetchStoreId,
+}: {
+  fetchStoreId: () => Promise<string>
+}) {
   const authInfo = useAuthInfo()
 
   const {
@@ -22,6 +26,7 @@ export function TypographyPage() {
   } = useMirrorfulStore((state: MirrorfulState) => state)
   const handleUpdateTypography = async (data: TPrimitivesTypography) => {
     setTypography(data)
+    const storeId = await fetchStoreId()
     await postStoreData({
       newData: {
         primitives: { colors, typography: data, shadows },
@@ -30,7 +35,7 @@ export function TypographyPage() {
         metadata,
       },
       authInfo: authInfo,
-      storeId: '456',
+      storeId,
     })
   }
   return (

@@ -10,21 +10,24 @@ const environment =
     ? MirrorfulApiEnvironment.Production
     : MirrorfulApiEnvironment.Development
 
-export async function getStoreByLoggedInUserId({
+const orgId = '123'
+
+export async function getStore({
   storeId,
   authInfo,
 }: {
   storeId: string
   authInfo: UseAuthInfoProps
 }) {
-  if (!authInfo.loading && authInfo.isLoggedIn) {
-    const orgId = '123'
-    const accessToken = authInfo.accessToken
-    const client = new MirrorfulApiClient({
-      environment,
-      token: `${accessToken}`,
-    })
-    return await client.store.getStoreByLoggedInUserId(orgId, storeId)
+  const accessToken = authInfo.accessToken
+  const client = new MirrorfulApiClient({
+    environment,
+    token: `${accessToken}`,
+  })
+  try {
+    return await client.store.getStore(orgId, storeId)
+  } catch (e) {
+    return null
   }
 }
 
@@ -37,16 +40,10 @@ export async function postStoreData({
   authInfo: UseAuthInfoProps
   storeId: string
 }) {
-  if (!authInfo.loading && authInfo.isLoggedIn) {
-    const orgId = '123'
-    const accessToken = authInfo.accessToken
-    const client = new MirrorfulApiClient({
-      environment,
-      token: `${accessToken}`,
-    })
-    await client.store.updateStore(orgId, storeId, newData)
-  } else {
-    // TODO(Danilowicz) if this is called when not logged in
-    // pop up alert? Perhaps thats handled in the component
-  }
+  const accessToken = authInfo.accessToken
+  const client = new MirrorfulApiClient({
+    environment,
+    token: `${accessToken}`,
+  })
+  await client.store.updateStore(orgId, storeId, newData)
 }

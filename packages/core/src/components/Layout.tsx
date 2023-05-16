@@ -21,10 +21,12 @@ export type TTab =
   | '/components'
 
 export default function Layout({
+  storeId,
   children,
   isLoading = false,
   platform = 'package',
 }: {
+  storeId: string
   children: React.ReactNode
   isLoading?: boolean
   platform?: TPlatform
@@ -73,7 +75,7 @@ export default function Layout({
         metadata,
       },
       authInfo: authInfo,
-      storeId: '456',
+      storeId,
     })
 
     onExportSuccessModalOpen()
@@ -98,7 +100,7 @@ export default function Layout({
         },
       },
       authInfo,
-      storeId: '456',
+      storeId,
     })
   }
 

@@ -3613,10 +3613,10 @@
   resolved "https://registry.yarnpkg.com/@microsoft/tsdoc/-/tsdoc-0.14.2.tgz#c3ec604a0b54b9a9b87e9735dfc59e1a5da6a5fb"
   integrity sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug==
 
-"@mirrorful-fern/api-client@0.0.544":
-  version "0.0.544"
-  resolved "https://npm.buildwithfern.com/@mirrorful-fern/api-client/-/api-client-0.0.544.tgz#39b488dd4a174da18b99f86081e3b4b537281173"
-  integrity sha512-RoyKYPFRYinmCS5i0hq4SSR+W/drY9SisVWjZpZThk9hGid9jdS97JBICCU5jkzih3Pc4iqAOxKlHFu0SDpWog==
+"@mirrorful-fern/api-client@0.0.560":
+  version "0.0.560"
+  resolved "https://npm.buildwithfern.com/@mirrorful-fern/api-client/-/api-client-0.0.560.tgz#bea4138e9ade4ed56fbc521f329b8776bf53de21"
+  integrity sha512-jci9jS69XCwMHEkQwnYc6+8HPcJsS32Z6/3ltlGWDACFTjI8w6aZSYSwCNVu7hYH3Kd2bQAupRSJ9HQoofIePw==
   dependencies:
     "@types/url-join" "4.0.1"
     "@ungap/url-search-params" "0.2.2"

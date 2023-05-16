@@ -7,7 +7,11 @@ import useMirrorfulStore, {
 import { TTokenGroup } from '@core/types'
 import { useAuthInfo } from '@propelauth/react'
 
-export function ColorsPage() {
+export function ColorsPage({
+  fetchStoreId,
+}: {
+  fetchStoreId: () => Promise<string>
+}) {
   const authInfo = useAuthInfo()
 
   const {
@@ -23,6 +27,7 @@ export function ColorsPage() {
   const handleUpdateColors = async (data: TTokenGroup) => {
     setColors(data)
 
+    const storeId = await fetchStoreId()
     await postStoreData({
       newData: {
         primitives: {
@@ -35,7 +40,7 @@ export function ColorsPage() {
         metadata,
       },
       authInfo: authInfo,
-      storeId: '456',
+      storeId: storeId,
     })
   }
   return (
