@@ -35,7 +35,7 @@ export default function Layout({
   const pathname = usePathname()
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
-        
+
   const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
   const setColors = useMirrorfulStore(
     (state: MirrorfulState) => state.setColors
@@ -43,9 +43,7 @@ export default function Layout({
   const typography = useMirrorfulStore(
     (state: MirrorfulState) => state.typography
   )
-  const metadata = useMirrorfulStore(
-     (state: MirrorfulState) => state.metadata
-  )
+  const metadata = useMirrorfulStore((state: MirrorfulState) => state.metadata)
   const setTypography = useMirrorfulStore(
     (state: MirrorfulState) => state.setTypography
   )
@@ -62,7 +60,7 @@ export default function Layout({
   const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
 
   const authInfo = useAuthInfo()
-          
+
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
