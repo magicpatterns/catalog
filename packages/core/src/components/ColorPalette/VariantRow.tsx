@@ -35,7 +35,7 @@ function MirrorfulSlider({
   return (
     <Flex>
       <Flex mr={2} style={{ minWidth: '60px' }}>
-        <Text fontSize={12}>
+        <Text fontSize={{ base: '2.3rem', md: '2.5rem' }}>
           <span style={{ fontWeight: 700 }}>{label}</span>
           {`:`}
         </Text>
@@ -46,7 +46,7 @@ function MirrorfulSlider({
           width={10}
           height={3}
           padding={1}
-          fontSize={10}
+          fontSize={{ base: '8px', md: '10px' }}
           ml={1}
           mr={1}
           mt={1}
@@ -161,7 +161,7 @@ export function VariantRow({
         role="group"
       >
         <Text
-          fontSize="1rem"
+          fontSize={{ base: '0.8rem', md: '1rem' }}
           fontWeight={isBase || hideIcons ? 800 : 400}
           color={textColor}
         >
@@ -177,9 +177,10 @@ export function VariantRow({
             isOpen={hasCopiedHexCode}
           >
             <Text
-              fontSize="1rem"
+              fontSize={{ base: '0.8rem', md: '1rem' }}
               fontWeight={600}
               color={textColor}
+              paddingLeft={3}
               _hover={{
                 cursor: 'pointer',
                 backgroundColor: textColor,
