@@ -2,6 +2,7 @@ import { Box, Divider, Heading, Input, Text } from '@chakra-ui/react'
 import { TPrimitivesTypography, TTokenGroup } from '@core/types'
 import { useState } from 'react'
 
+import { LoginAlert } from '../LoginAlert'
 import { FontSizesSection } from './FontSize/FontSizesSection'
 import { FontWeightSection } from './FontWeight/FontWeightSection'
 import { LineHeightSection } from './LineHeight/LineHeightSection'
@@ -19,6 +20,7 @@ export function TypographySection({
 
   return (
     <Box>
+      <LoginAlert />
       <Heading
         fontSize={'2.5rem'}
         fontWeight="black"
