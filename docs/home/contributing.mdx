@@ -1,50 +1,48 @@
 ---
-title: '🛠️ Contributing'
-description: "Whether it's big or small, we love contributions. The maintainers of this repo have built open-source projects before and love it. Welcome!"
+title: 'Contributing'
+description: "Whether it's big or small, we welcome you!"
 ---
 
-Not sure where to get started? You can:
+## Community
 
-- [Book a free, non-pressure pairing sessions with one of our teammates](https://usemotion.com/meet/teddyni/meet?d=15!)
+Community is core to what makes Mirrorful special. All types of contributions are encouraged and valued. Come join our growing [Slack community](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA). We promise you'll have fun!
 
-- Join our [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) and ask us any questions there.
+## Bugs and Issues
 
-No matter the PR, all the Github avatars of contributors will be added to the Mirrorful README with their permission.
+If you have a bug or an idea, browse the open issues before opening a new one. If you're ready to tackle some open issues, [we've collected some good first issues for you](https://github.com/Mirrorful/mirrorful/contribute).
 
-## Running Mirrorful Locally
+## Local Development Guide
 
-Mirrorful runs as a set of packages in a monorepo in order to share common logic across multiple channels.
+<Info>
+  If you run into an issue, join our [Slack
+  community](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA)
+  and we'll help you out!
+</Info>
 
-Mirrorful's core logic lives in `packages/core`. This logic is then consumed in our NPM package, located in `packages/mirrorful`.
+Mirrorful has a `web` app and `server` project. Mirrorful's core logic lives in `packages/core`.
 
-First, we will need to build Mirrorful's core library, `@mirrorful/core`. In `packages/core`, run:
-
-```bash
-# In `packages/core`
-cd packages/core;
-
-# Install packages
-yarn;
-
-# Tell Yarn to reference this local build instead of the published package
-yarn link;
-
-# Build and hot reload the core library
-yarn build:watch;
-```
-
-Now, in a separate terminal window, we can run Mirrorful as a package. In `packages/mirrorful/editor`, run:
+After cloing the repo, we can install all dependencies and run the web app:
 
 ```bash
-# In `packages/mirrorful/editor`
-cd packages/mirrorful/editor;
-
-# Install packages
-yarn;
-
-# Tell Yarn to reference the local build instead of the published package
-yarn link @mirrorful/core;
-
-# Run Mirrorful
-yarn dev;
+# In project root
+cd apps/web; yarn; yarn dev;
 ```
+
+Now, in a separate terminal window, we can run the Mirrorful server.
+
+```bash
+# In project root
+cd packages/server; yarn; yarn dev;
+```
+
+## How else can I help?
+
+- Star the project
+
+- Tweet about it
+
+- Refer this project in your project's README
+
+- Mention the project at local meetups and tell your friends/colleagues
+
+Got any questions? Please reach out to [alex@mirrorful.io](mailto:alex@mirrorful.io) for more info. Thank you!
