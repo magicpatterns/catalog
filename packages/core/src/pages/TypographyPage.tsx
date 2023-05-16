@@ -1,3 +1,5 @@
+'use client'
+
 import { postStoreData } from '@core/client/store'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import useMirrorfulStore, {

@@ -1,3 +1,5 @@
+'use client'
+
 import { postStoreData } from '@core/client/store'
 import { ShadowsSection } from '@core/components/Shadows/ShadowsSection'
 import useMirrorfulStore, {

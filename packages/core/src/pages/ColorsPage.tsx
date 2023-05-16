@@ -1,3 +1,4 @@
+'use client'
 import { postStoreData } from '@core/client/store'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
 import useMirrorfulStore, {

@@ -47,9 +47,8 @@ export function ThemesPage() {
       name: 'Untitled Theme',
       tokens: initWithDefaults ? defaultTheme.tokens : {},
     }
-
-    handleUpdateThemes([...themes, newTheme])
     router.push(`/themes/${newTheme.id}`)
+    handleUpdateThemes([...themes, newTheme])
   }
 
   useEffect(() => {

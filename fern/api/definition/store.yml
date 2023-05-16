@@ -15,6 +15,9 @@ service:
       path-parameters:
         storeId: commons.StoreId
       response: mirrorfulStore
+      errors:
+        - ObjectDoesNotExistError
+        - Unauthorized
 
     updateStore:
       method: POST
@@ -25,6 +28,9 @@ service:
       request:
         name: updateStoreRequest
         body: mirrorfulStore
+      errors:
+        - ObjectDoesNotExistError
+        - Unauthorized
 
 types:
   mirrorfulStore:

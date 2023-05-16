@@ -1,4 +1,3 @@
-'use client'
 import { ShadowsPage } from '@core/pages/ShadowsPage'
 import React from 'react'
 
