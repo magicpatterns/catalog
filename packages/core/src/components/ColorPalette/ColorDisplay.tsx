@@ -14,11 +14,9 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
-
-import React, { useState } from 'react'
+import React from 'react'
 import { MutableRefObject, useReducer, useRef } from 'react'
 import { FiEdit } from 'react-icons/fi'
-        
 import tinycolor from 'tinycolor2'
 
 import { EditBaseColorModal } from './EditBaseColorModal'
