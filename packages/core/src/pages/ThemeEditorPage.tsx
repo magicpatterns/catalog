@@ -2,6 +2,7 @@
 import { Box, Button, Icon, Link } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
 import { EditableContent } from '@core/components/EditableContent'
+import { LoginAlert } from '@core/components/LoginAlert'
 import {
   deleteTokenOrGroupFromTheme,
   editTokenOrGroupInTheme,
@@ -58,6 +59,7 @@ export function ThemeEditorPage({
 
   return (
     <Box>
+      <LoginAlert />
       <Link
         href="/themes"
         css={{

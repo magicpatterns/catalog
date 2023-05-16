@@ -1,6 +1,7 @@
 'use client'
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
+import { LoginAlert } from '@core/components/LoginAlert'
 import { ONBOARDING_IDS } from '@core/components/ProductOnboardings/constants'
 import { ThemeOnboarding } from '@core/components/ProductOnboardings/ThemeOnboarding'
 import { CreateThemeCard, ThemeCard } from '@core/components/Themes/ThemeCard'
@@ -88,6 +89,7 @@ export function ThemesPage({
 
   return (
     <>
+      <LoginAlert />
       <Heading
         fontSize={'2.5rem'}
         fontWeight="black"
