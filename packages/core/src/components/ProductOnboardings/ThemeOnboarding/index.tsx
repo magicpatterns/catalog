@@ -6,17 +6,20 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 
 import { Introduction } from './steps/Introduction'
+import { SemanticTokens } from './steps/SemanticTokens'
+import { Start } from './steps/Start'
 
 export function ThemeOnboarding({
   isOpen,
+  onStart,
   onClose,
 }: {
   isOpen: boolean
+  onStart: (arg0: 'template' | 'scratch') => void
   onClose: () => void
 }) {
   const [page, setPage] = useState<number>(0)
@@ -30,16 +33,18 @@ export function ThemeOnboarding({
         onFinish={onClose}
       />
     )
+  } else if (page === 1) {
+    content = (
+      <SemanticTokens
+        onUpdatePage={(newPage) => setPage(newPage)}
+        onFinish={onClose}
+      />
+    )
+  } else if (page === 2) {
+    content = (
+      <Start onUpdatePage={(newPage) => setPage(newPage)} onStart={onStart} />
+    )
   }
-
-  //   else if (page === 1) {
-  //     content = (
-  //       <SemanticTokens
-  //         onUPdatePage={(newPage) => setPage(newPage)}
-  //         onFinish={onClose}
-  //       />
-  //     )
-  //   }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">

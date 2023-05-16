@@ -38,11 +38,11 @@ export function ThemesPage({
     })
   }
 
-  const handleCreateNewTheme = async () => {
+  const handleCreateNewTheme = async (initWithDefaults?: boolean) => {
     const newTheme = {
       id: uuidv4(),
       name: 'Untitled Theme',
-      tokens: defaultTheme.tokens,
+      tokens: initWithDefaults ? defaultTheme.tokens : {},
     }
 
     handleUpdateThemes([...themes, newTheme])
@@ -100,12 +100,20 @@ export function ThemesPage({
               }}
             />
           ))}
-          <CreateThemeCard onCreateTheme={handleCreateNewTheme} />
+          <CreateThemeCard onCreateTheme={() => handleCreateNewTheme(false)} />
         </Stack>
       </Box>
       <ThemeOnboarding
         isOpen={showOnboarding}
         onClose={() => setShowOnboarding(false)}
+        onStart={(type: 'template' | 'scratch') => {
+          if (type === 'template') {
+            handleCreateNewTheme(true)
+          } else {
+            handleCreateNewTheme(false)
+          }
+          setShowOnboarding(false)
+        }}
       />
     </>
   )

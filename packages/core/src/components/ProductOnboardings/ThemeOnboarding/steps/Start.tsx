@@ -1,12 +1,13 @@
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
+import { ArrowBackIcon } from '@chakra-ui/icons'
+import { Box, Button, Heading, Icon, Stack, Text } from '@chakra-ui/react'
+import { FiArchive, FiSquare } from 'react-icons/fi'
 
-export function Introduction({
+export function Start({
   onUpdatePage,
-  onFinish,
+  onStart,
 }: {
   onUpdatePage: (newPage: number) => void
-  onFinish: () => void
+  onStart: (arg0: 'template' | 'scratch') => void
 }) {
   return (
     <Box css={{ display: 'flex', height: '100%' }} as="form">
@@ -21,7 +22,7 @@ export function Introduction({
         <Box>
           <Stack spacing={1} direction={'row'}>
             <Text color="gray.500" fontWeight="black" fontSize={16}>
-              01
+              03
             </Text>
             <Text color="gray.500" fontWeight="bold" fontSize={16}>
               of
@@ -32,7 +33,7 @@ export function Introduction({
           </Stack>
 
           <Heading fontWeight="black" css={{ marginTop: '12px' }} fontSize={32}>
-            Introducing Themes
+            Ready?
           </Heading>
           <Text
             css={{ marginTop: '24px' }}
@@ -40,22 +41,38 @@ export function Introduction({
             color="var(--text-color-secondary)"
             fontWeight="bold"
           >
-            Define multiple themes for light/dark mode and effortlessly export
-            them directly to code.
+            Get started by creating your first theme. Start from a template or
+            from scratch.
           </Text>
-          <Box css={{ marginTop: '12px' }}>
-            <img src="/themes_graphic.png" />
-          </Box>
         </Box>
+        <Stack
+          css={{ marginTop: '24px', display: 'flex' }}
+          direction="column"
+          spacing={6}
+        >
+          <Button
+            leftIcon={<Icon as={FiArchive} />}
+            size="lg"
+            onClick={() => onStart('template')}
+          >
+            Start from a Template
+          </Button>
+          <Button
+            leftIcon={<Icon as={FiSquare} />}
+            size="lg"
+            onClick={() => onStart('scratch')}
+          >
+            Start from Scratch
+          </Button>
+        </Stack>
         <Box
           css={{
             display: 'flex',
             justifyContent: 'space-between',
-            marginTop: '48px',
+            marginTop: '64px',
           }}
         >
-          <Box />
-          {/* <Button
+          <Button
             size="lg"
             onClick={() => {
               onUpdatePage(1)
@@ -63,8 +80,8 @@ export function Introduction({
             css={{ marginRight: '16px' }}
           >
             <ArrowBackIcon />
-          </Button> */}
-          <Button
+          </Button>
+          {/* <Button
             padding={'8px 36px'}
             size="lg"
             rightIcon={<ArrowForwardIcon />}
@@ -75,7 +92,7 @@ export function Introduction({
             type="submit"
           >
             Next
-          </Button>
+          </Button> */}
         </Box>
       </Box>
     </Box>
