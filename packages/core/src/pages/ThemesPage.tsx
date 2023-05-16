@@ -30,6 +30,7 @@ export function ThemesPage({
     setThemes,
     metadata,
     setMetadata,
+    isLoaded,
   } = useMirrorfulStore((state: MirrorfulState) => state)
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
 
@@ -82,10 +83,12 @@ export function ThemesPage({
   }
 
   useEffect(() => {
-    if (!metadata.completedOnboardings.includes(ONBOARDING_IDS.THEMES)) {
-      setShowOnboarding(true)
+    if (isLoaded) {
+      if (!metadata.completedOnboardings.includes(ONBOARDING_IDS.THEMES)) {
+        setShowOnboarding(true)
+      }
     }
-  }, [])
+  }, [isLoaded])
 
   return (
     <>
