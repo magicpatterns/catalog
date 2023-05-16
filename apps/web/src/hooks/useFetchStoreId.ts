@@ -1,7 +1,6 @@
-import { useLocalStorage } from './useLocalStorage'
+import { STORE_ID_LOCAL_STORAGE_KEY, useLocalStorage } from './useLocalStorage'
 
 export function useFetchStoreId() {
-  const STORE_ID_LOCAL_STORAGE_KEY = 'storeIdMirrorfulV1'
   const [data] = useLocalStorage<string>(STORE_ID_LOCAL_STORAGE_KEY, '')
 
   const fetchStoreId = async () => {

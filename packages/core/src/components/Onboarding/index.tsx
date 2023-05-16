@@ -33,6 +33,7 @@ import { nameThatColor } from './utils'
 export function Onboarding({
   postStore,
   onFinishOnboarding,
+  postStoreIdToLocalStorage,
   platform,
 }: {
   postStore: (
@@ -41,6 +42,7 @@ export function Onboarding({
     storeId: string
   ) => Promise<void>
   onFinishOnboarding: () => void
+  postStoreIdToLocalStorage: (storeId: string) => Promise<void>
   platform: TPlatform
 }) {
   const authInfo = useAuthInfo()
@@ -70,6 +72,7 @@ export function Onboarding({
   ) => {
     // create a brand new store for first time
     const storeId = uuidv4()
+    postStoreIdToLocalStorage(storeId)
     const primaryColorTokenGroup: TTokenGroup = {
       DEFAULT: {
         id: uuidv4(),

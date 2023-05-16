@@ -11,6 +11,7 @@ import { useAuthInfo } from '@propelauth/react'
 import { UseAuthInfoProps } from '@propelauth/react/dist/types/useAuthInfo'
 import { LayoutWrapper } from '@web/components/LayoutWrapper'
 import { useFetchStoreId } from '@web/hooks/useFetchStoreId'
+import { usePostStoreIdToLocalStorage } from '@web/hooks/usePostStoreIdToLocalStorage'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -19,6 +20,7 @@ export default function MirrorfulWebWrapper({
 }: {
   children: React.ReactNode
 }) {
+  const [postStoreIdToLocalStorage] = usePostStoreIdToLocalStorage()
   const authInfo = useAuthInfo()
   const [isLoading, setIsLoading] = useState(true)
   const [shouldForceSkipOnboarding, setShouldForceSkipOnboarding] =
@@ -69,6 +71,10 @@ export default function MirrorfulWebWrapper({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       setFileTypes(data.files)
+
+      setStoreId(storeId)
+
+      await postStoreIdToLocalStorage(storeId)
     } catch (e) {
       throw e
     } finally {
@@ -77,14 +83,14 @@ export default function MirrorfulWebWrapper({
       }, 1250)
     }
   }, [
+    authInfo,
     fetchStoreId,
     setThemes,
     setColors,
-    setFileTypes,
-    setShowOnBoarding,
-    setShadows,
     setTypography,
-    authInfo,
+    setShadows,
+    setFileTypes,
+    postStoreIdToLocalStorage,
   ])
 
   useEffect(() => {
@@ -107,6 +113,7 @@ export default function MirrorfulWebWrapper({
     storeId: string
   ) => {
     setStoreId(storeId)
+    postStoreIdToLocalStorage(storeId)
     postStoreData({ newData: data, authInfo: authInfo, storeId })
     setColors(data.primitives.colors)
     setShadows(data.primitives.shadows)
@@ -116,9 +123,10 @@ export default function MirrorfulWebWrapper({
 
   return (
     <>
-      {isLoading && <SplashScreen />}
+      {(isLoading || authInfo.loading) && <SplashScreen />}
       {!shouldForceSkipOnboarding && showOnBoarding ? (
         <Onboarding
+          postStoreIdToLocalStorage={postStoreIdToLocalStorage}
           postStore={handleOnboardingSubmit}
           onFinishOnboarding={() => {
             setShowOnBoarding(false)

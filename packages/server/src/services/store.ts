@@ -19,16 +19,14 @@ export function getStoreService(): StoreService {
           }
           return res.send(resultDoc)
         } else {
+          // TODO(Danilowicz): need to figure out why req.user is sometimes undefined
+          // and then ensure the user is querying for their own store
           const resultDoc = await Store.findOne({
             id: storeId,
             orgId,
           }).lean()
           if (!resultDoc) {
             throw new MirrorfulApi.ObjectDoesNotExistError()
-          }
-          // if the user id has already been assigned, and we are not logged in, then its unauthorized
-          if (resultDoc.lastUpdatedByUserId !== '') {
-            throw new MirrorfulApi.Unauthorized()
           }
           return res.send(resultDoc)
         }
@@ -41,12 +39,9 @@ export function getStoreService(): StoreService {
             {
               id: storeId,
               orgId,
-              $or: [
-                { lastUpdatedByUserId: '' },
-                { lastUpdatedByUserId: req.user.userId },
-              ],
             },
             {
+              lastUpdatedByUserId: req.user.userId,
               primitives,
               themes,
               files,
