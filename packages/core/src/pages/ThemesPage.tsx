@@ -20,7 +20,7 @@ export function ThemesPage({
 }) {
   const authInfo = useAuthInfo()
   const router = useRouter()
-  
+
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
 
   const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
@@ -35,11 +35,9 @@ export function ThemesPage({
   const setThemes = useMirrorfulStore(
     (state: MirrorfulState) => state.setThemes
   )
-  const metadata = useMirrorfulStore(
-     (state: MirrorfulState) => state.metadata
-  )
+  const metadata = useMirrorfulStore((state: MirrorfulState) => state.metadata)
   const setMetadata = useMirrorfulStore(
-     (state: MirrorfulState) => state.setMetadata
+    (state: MirrorfulState) => state.setMetadata
   )
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)

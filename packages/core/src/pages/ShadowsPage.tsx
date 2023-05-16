@@ -13,7 +13,6 @@ export function ShadowsPage({
 }: {
   fetchStoreId: () => Promise<string>
 }) {
-
   const setShadows = useMirrorfulStore(
     (state: MirrorfulState) => state.setShadows
   )
@@ -27,9 +26,7 @@ export function ShadowsPage({
     (state: MirrorfulState) => state.fileTypes
   )
   const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
-  const metadata = useMirrorfulStore(
-     (state: MirrorfulState) => state.metadata
-  )
+  const metadata = useMirrorfulStore((state: MirrorfulState) => state.metadata)
 
   const authInfo = useAuthInfo()
 

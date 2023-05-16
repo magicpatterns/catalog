@@ -12,7 +12,6 @@ export function ColorsPage({
 }: {
   fetchStoreId: () => Promise<string>
 }) {
-
   const setColors = useMirrorfulStore(
     (state: MirrorfulState) => state.setColors
   )
@@ -25,9 +24,7 @@ export function ColorsPage({
     (state: MirrorfulState) => state.fileTypes
   )
   const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
-  const metadata = useMirrorfulStore(
-     (state: MirrorfulState) => state.metadata
-  )
+  const metadata = useMirrorfulStore((state: MirrorfulState) => state.metadata)
 
   const authInfo = useAuthInfo()
 

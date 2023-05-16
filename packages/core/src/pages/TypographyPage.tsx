@@ -13,7 +13,6 @@ export function TypographyPage({
 }: {
   fetchStoreId: () => Promise<string>
 }) {
-
   const setTypography = useMirrorfulStore(
     (state: MirrorfulState) => state.setTypography
   )
@@ -26,9 +25,7 @@ export function TypographyPage({
     (state: MirrorfulState) => state.fileTypes
   )
   const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
-  const metadata = useMirrorfulStore(
-     (state: MirrorfulState) => state.metadata
-  )
+  const metadata = useMirrorfulStore((state: MirrorfulState) => state.metadata)
 
   const authInfo = useAuthInfo()
 

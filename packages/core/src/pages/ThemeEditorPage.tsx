@@ -24,7 +24,6 @@ export function ThemeEditorPage({
   themeId: string
   fetchStoreId: () => Promise<string>
 }) {
-
   const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
   const typography = useMirrorfulStore(
     (state: MirrorfulState) => state.typography
@@ -37,9 +36,7 @@ export function ThemeEditorPage({
   const setThemes = useMirrorfulStore(
     (state: MirrorfulState) => state.setThemes
   )
-  const metadata = useMirrorfulStore(
-     (state: MirrorfulState) => state.metadata
-  )
+  const metadata = useMirrorfulStore((state: MirrorfulState) => state.metadata)
 
   const authInfo = useAuthInfo()
 
