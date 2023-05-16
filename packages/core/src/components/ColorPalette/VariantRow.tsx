@@ -337,9 +337,7 @@ export const VariantRow = React.memo(
   (prevProps, nextProps) => {
     return (
       prevProps.variant.token.value === nextProps.variant.token.value &&
-      prevProps.variant.name === nextProps.variant.name &&
-      prevProps.defaultNamedToken.token.value ===
-        nextProps.defaultNamedToken.token.value
+      prevProps.variant.name === nextProps.variant.name
     )
   }
 )
