@@ -86,8 +86,20 @@ Whether it's big or small, we love contributions. Check out our **[contributing 
 
 ### Acknowledgements
 
-No matter the PR, all the avatars of contributors will be added to this section as a thank you. We are so appreciative of everyone who makes Mirrorful special. Be part of the movement! Join us on **[Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA)**.
+The avatars of all contributors will be added to this section as a thank you. We are so appreciative of everyone who makes Mirrorful special. Be part of the movement! Join us on **[Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA)** and try out **[Mirrorful Cloud](app.mirrorful.com)**.
 
-<a href="https://github.com/mirrorful/mirrorful/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=mirrorful/mirrorful" />
-</a>
+<a href="https://github.com/alexdanilowicz"><img src="https://avatars.githubusercontent.com/u/29822597?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/teddarific"><img src="https://avatars.githubusercontent.com/u/16343600" width="50" height="50" alt=""/></a> <a href="https://github.com/isabellytubao"><img src="https://avatars.githubusercontent.com/u/113177368" width="50" height="50" alt=""/></a> <a href="https://github.com/gfang200"><img src="https://avatars.githubusercontent.com/u/13005240?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/sallyxu"><img src="https://avatars.githubusercontent.com/u/1229627" width="50" height="50" alt=""/></a> <a href="https://github.com/zachsnoek"><img src="https://avatars.githubusercontent.com/u/26049962" width="50" height="50" alt=""/></a>
+<a href="https://github.com/tobiasdossinger"><img src="https://avatars.githubusercontent.com/u/33021996?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/lagneshthakur"><img src="https://avatars.githubusercontent.com/u/13376802?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/Pranav2612000"><img src="https://avatars.githubusercontent.com/u/20909078?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/joelcmk"><img src="https://avatars.githubusercontent.com/u/57118300?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/karanvirsb"><img src="https://avatars.githubusercontent.com/u/71354242?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/ktra99"><img src="https://avatars.githubusercontent.com/u/82717216?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/Bismay5467"><img src="https://avatars.githubusercontent.com/u/54050465?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/dsinghvi"><img src="https://avatars.githubusercontent.com/u/10870189?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/sonylomo"><img src="https://avatars.githubusercontent.com/u/49971500?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/semijacks"><img src="https://avatars.githubusercontent.com/u/42486498?v=4" width="50" height="50" alt=""/></a>
+
+<div align="center">
+  <img width="350" src="./assets/Community.png" alt="Community">
+</div>
