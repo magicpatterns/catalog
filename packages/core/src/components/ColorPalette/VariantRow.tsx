@@ -26,12 +26,16 @@ function MirrorfulSlider({
   sliderValue,
   min,
   max,
+  onChangeStartCB,
+  onChangeEndCB,
 }: {
   label: string
   onSlide: (v: number) => void
   sliderValue: number
   min: number
   max: number
+  onChangeStartCB?: () => void
+  onChangeEndCB?: () => void
 }) {
   return (
     <Flex>
@@ -63,8 +67,14 @@ function MirrorfulSlider({
         colorScheme={'gray.700'}
         aria-label="slider"
         value={sliderValue}
+        onChangeStart={() => {
+          if (onChangeStartCB) onChangeStartCB()
+        }}
         onChange={(val: number) => {
           onSlide(val)
+        }}
+        onChangeEnd={() => {
+          if (onChangeEndCB) onChangeEndCB()
         }}
         size="lg"
       >
@@ -113,29 +123,19 @@ export function VariantRowDisplay({
   }, [hasCopiedHexCode])
 
   useEffect(() => {
-    let timer: NodeJS.Timeout | undefined = undefined
-
-    if (timer) clearTimeout(timer)
-
-    if (color !== token.value) {
-      timer = setTimeout(() => {
-        setChanging(false)
-        onUpdateVariant(
-          {
-            ...variant,
-            token: {
-              ...variant.token,
-              value: color,
-            },
+    if (color !== token.value && !changing) {
+      onUpdateVariant(
+        {
+          ...variant,
+          token: {
+            ...variant.token,
+            value: color,
           },
-          isBase
-        )
-      }, 250)
+        },
+        isBase
+      )
     }
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [color])
+  }, [color, changing])
 
   const onHSLSlide = ({
     val,
@@ -160,9 +160,7 @@ export function VariantRowDisplay({
         l: val / 100,
       }).toHexString()
     }
-    setColor(() => newColor)
-    setChanging(true)
-    // onUpdateVariant({ ...variant, token: newToken }, isBase)
+    setColor(newColor)
   }
 
   const textColor =
@@ -317,7 +315,18 @@ export function VariantRowDisplay({
               max: 100,
             },
           ].map((obj) => {
-            return <MirrorfulSlider key={obj.label} {...obj} />
+            return (
+              <MirrorfulSlider
+                key={obj.label}
+                {...obj}
+                onChangeStartCB={() => {
+                  setChanging(true)
+                }}
+                onChangeEndCB={() => {
+                  setChanging(false)
+                }}
+              />
+            )
           })}
         </Flex>
       )}
