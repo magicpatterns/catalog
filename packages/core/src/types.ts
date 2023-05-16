@@ -177,6 +177,10 @@ export const defaultTheme: TTheme = {
   },
 }
 
+export type TMetadata = {
+  completedOnboardings: string[]
+}
+
 export const defaultConfigV2: TMirrorfulStore = {
   primitives: {
     colors: defaultColorsV2,
@@ -185,6 +189,9 @@ export const defaultConfigV2: TMirrorfulStore = {
   },
   themes: [defaultTheme],
   files: defaultFiles,
+  metadata: {
+    completedOnboardings: [],
+  },
 }
 
 // The top level object for everything
@@ -192,6 +199,7 @@ export type TMirrorfulStore = {
   primitives: TPrimitives
   themes: TTheme[]
   files: TExportFileType[]
+  metadata: TMetadata
 }
 
 export type TPrimitivesTypography = {

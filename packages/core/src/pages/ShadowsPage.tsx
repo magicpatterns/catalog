@@ -14,8 +14,15 @@ export function ShadowsPage({
   fetchStoreId: () => Promise<string>
 }) {
   const authInfo = useAuthInfo()
-  const { typography, colors, shadows, setShadows, fileTypes, themes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const {
+    typography,
+    colors,
+    shadows,
+    setShadows,
+    fileTypes,
+    themes,
+    metadata,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
 
   const handleUpdateShadows = async (data: TTokenGroup) => {
     setShadows(data)
@@ -25,6 +32,7 @@ export function ShadowsPage({
         primitives: { colors: colors, typography, shadows: data },
         themes,
         files: fileTypes,
+        metadata,
       },
       authInfo: authInfo,
       storeId,

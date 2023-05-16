@@ -15,8 +15,15 @@ export function TypographyPage({
 }) {
   const authInfo = useAuthInfo()
 
-  const { typography, colors, shadows, setTypography, fileTypes, themes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const {
+    typography,
+    colors,
+    shadows,
+    setTypography,
+    fileTypes,
+    themes,
+    metadata,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
   const handleUpdateTypography = async (data: TPrimitivesTypography) => {
     setTypography(data)
     const storeId = await fetchStoreId()
@@ -25,6 +32,7 @@ export function TypographyPage({
         primitives: { colors, typography: data, shadows },
         themes,
         files: fileTypes,
+        metadata,
       },
       authInfo: authInfo,
       storeId,

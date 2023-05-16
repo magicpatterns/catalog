@@ -14,8 +14,15 @@ export function ColorsPage({
 }) {
   const authInfo = useAuthInfo()
 
-  const { colors, typography, shadows, fileTypes, setColors, themes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const {
+    colors,
+    typography,
+    shadows,
+    fileTypes,
+    setColors,
+    themes,
+    metadata,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
 
   const handleUpdateColors = async (data: TTokenGroup) => {
     setColors(data)
@@ -30,6 +37,7 @@ export function ColorsPage({
         },
         themes,
         files: fileTypes,
+        metadata,
       },
       authInfo: authInfo,
       storeId: storeId,
