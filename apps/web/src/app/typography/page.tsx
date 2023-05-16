@@ -1,5 +1,3 @@
-'use client'
-
 import { TypographyPage } from '@core/pages/TypographyPage'
 import React from 'react'
 

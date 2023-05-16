@@ -1,4 +1,3 @@
-'use client'
 import { ThemeEditorPage } from '@core/pages/ThemeEditorPage'
 import React from 'react'
 

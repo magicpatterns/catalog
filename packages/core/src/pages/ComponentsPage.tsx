@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Button, Heading, Text, useColorMode } from '@chakra-ui/react'
 
 export function ComponentsPage() {

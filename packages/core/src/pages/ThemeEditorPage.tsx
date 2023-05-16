@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Button, Icon, Link } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
 import { EditableContent } from '@core/components/EditableContent'

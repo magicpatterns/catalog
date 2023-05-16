@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
 import { CreateThemeCard, ThemeCard } from '@core/components/Themes/ThemeCard'
@@ -34,9 +36,8 @@ export function ThemesPage() {
       name: 'Untitled Theme',
       tokens: defaultTheme.tokens,
     }
-
-    handleUpdateThemes([...themes, newTheme])
     router.push(`/themes/${newTheme.id}`)
+    handleUpdateThemes([...themes, newTheme])
   }
 
   return (

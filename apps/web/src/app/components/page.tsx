@@ -1,4 +1,3 @@
-'use client'
 import { ComponentsPage } from '@core/pages/ComponentsPage'
 import React from 'react'
 
