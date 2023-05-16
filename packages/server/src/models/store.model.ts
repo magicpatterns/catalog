@@ -15,7 +15,7 @@ const typographyPrimitivesSchema = new mongoose.Schema<TPrimitivesTypography>({
 
 const primitivesSchema = new mongoose.Schema<TPrimitives>({
   colors: { type: Map, of: Object }, // colors is really TTokenGroup, but the keys are dynamic... so we let is be free-form
-  typography: { types: typographyPrimitivesSchema },
+  typography: { type: typographyPrimitivesSchema, _id: false },
   shadows: { type: Map, of: Object }, // shadows is really TTokenGroup, but the keys are dynamic... so we let is be free-form
 })
 
