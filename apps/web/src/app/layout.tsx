@@ -52,6 +52,8 @@ export default function RootLayout({
           rel="preload"
           href="https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/components_graphic_light.png"
         />
+        <link rel="preload" href="/semantic_tokens_graphic.png" />
+        <link rel="preload" href="/themes_graphic.png" />
       </head>
       <body>
         <AuthProvider
