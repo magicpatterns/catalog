@@ -95,14 +95,15 @@ export default function MirrorfulWebWrapper({
       }, 1250)
     }
   }, [
-    authInfo,
     fetchStoreId,
+    authInfo,
     setThemes,
     setColors,
     setTypography,
     setShadows,
     setFileTypes,
     setMetadata,
+    onLoad,
     postStoreIdToLocalStorage,
   ])
 

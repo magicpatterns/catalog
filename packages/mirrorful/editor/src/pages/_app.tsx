@@ -9,6 +9,7 @@ import useMirrorfulStore, {
   MirrorfulState,
 } from '@mirrorful/core/lib/store/useMirrorfulStore'
 import { defaultShadowsV2 } from '@mirrorful/core/lib/types'
+import { AuthProvider } from '@propelauth/react'
 import type { AppProps } from 'next/app'
 import { usePathname, useRouter } from 'next/navigation'
 import posthog from 'posthog-js'
@@ -107,22 +108,29 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, [fetchStoredData, shouldForceSkipOnboarding, showOnBoarding])
 
   return (
-    <MirrorfulThemeProvider>
-      {isLoading && <SplashScreen />}
-      {!shouldForceSkipOnboarding && showOnBoarding ? (
-        <Onboarding
-          postStoreData={postStoreData}
-          onFinishOnboarding={() => {
-            setShowOnBoarding(false)
-            setShouldForceSkipOnboarding(true)
-          }}
-          platform={'package'}
-        />
-      ) : (
-        <LayoutWrapper>
-          <Component {...pageProps} />
-        </LayoutWrapper>
-      )}
-    </MirrorfulThemeProvider>
+    <AuthProvider
+      authUrl={
+        process.env.NEXT_PUBLIC_AUTH_URL ??
+        'https://607430308.propelauthtest.com'
+      }
+    >
+      <MirrorfulThemeProvider>
+        {isLoading && <SplashScreen />}
+        {!shouldForceSkipOnboarding && showOnBoarding ? (
+          <Onboarding
+            postNextJsStore={postStoreData}
+            onFinishOnboarding={() => {
+              setShowOnBoarding(false)
+              setShouldForceSkipOnboarding(true)
+            }}
+            platform={'package'}
+          />
+        ) : (
+          <LayoutWrapper postNextJsStore={postStoreData}>
+            <Component {...pageProps} />
+          </LayoutWrapper>
+        )}
+      </MirrorfulThemeProvider>
+    </AuthProvider>
   )
 }

@@ -1,5 +1,6 @@
 import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
+import { TMirrorfulStore } from '@core/types'
 import { useAuthInfo } from '@propelauth/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
@@ -20,13 +21,18 @@ export type TTab =
   | '/themes'
   | '/components'
 
+// This is messed up
+// If Platform is web, you must also pass storeId
+// If Platform is package, you must also pass postNextJsStore
 export default function Layout({
   storeId,
   children,
   isLoading = false,
   platform = 'package',
+  postNextJsStore,
 }: {
-  storeId: string
+  postNextJsStore?: (data: TMirrorfulStore) => Promise<void>
+  storeId?: string
   children: React.ReactNode
   isLoading?: boolean
   platform?: TPlatform
@@ -67,16 +73,21 @@ export default function Layout({
   } = useDisclosure()
 
   const handleExport = async () => {
-    await postStoreData({
-      newData: {
-        primitives: { colors, typography, shadows },
-        themes,
-        files: fileTypes,
-        metadata,
-      },
-      authInfo: authInfo,
-      storeId,
-    })
+    const newData = {
+      primitives: { colors, typography, shadows },
+      themes,
+      files: fileTypes,
+      metadata,
+    }
+    if (platform === 'web' && storeId) {
+      await postStoreData({
+        newData: newData,
+        authInfo: authInfo,
+        storeId,
+      })
+    } else if (postNextJsStore) {
+      postNextJsStore(newData)
+    }
 
     onExportSuccessModalOpen()
   }
@@ -86,22 +97,27 @@ export default function Layout({
     setColors({})
     setTypography({ fontSizes: {}, fontWeights: {}, lineHeights: {} })
     setShadows({})
-    await postStoreData({
-      newData: {
-        primitives: {
-          colors: {},
-          typography: { fontSizes: {}, fontWeights: {}, lineHeights: {} },
-          shadows: {},
-        },
-        themes: [],
-        files: fileTypes,
-        metadata: {
-          completedOnboardings: [],
-        },
+    const newData = {
+      primitives: {
+        colors: {},
+        typography: { fontSizes: {}, fontWeights: {}, lineHeights: {} },
+        shadows: {},
       },
-      authInfo,
-      storeId,
-    })
+      themes: [],
+      files: fileTypes,
+      metadata: {
+        completedOnboardings: [],
+      },
+    }
+    if (platform === 'web' && storeId) {
+      await postStoreData({
+        newData,
+        authInfo,
+        storeId,
+      })
+    } else if (postNextJsStore) {
+      postNextJsStore(newData)
+    }
   }
 
   return (

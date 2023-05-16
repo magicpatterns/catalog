@@ -30,19 +30,24 @@ import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
 import { nameThatColor } from './utils'
 
+// This is so messed up
+// If Platform is web, you must also pass postStore and postStoreIdToLocalStorage
+// If Platform is package, you must also pass postNextJsStore
 export function Onboarding({
+  postNextJsStore,
   postStore,
   onFinishOnboarding,
   postStoreIdToLocalStorage,
   platform,
 }: {
-  postStore: (
+  postNextJsStore?: (data: TMirrorfulStore) => Promise<void>
+  postStore?: (
     data: TMirrorfulStore,
     authInfo: UseAuthInfoProps,
     storeId: string
   ) => Promise<void>
   onFinishOnboarding: () => void
-  postStoreIdToLocalStorage: (storeId: string) => Promise<void>
+  postStoreIdToLocalStorage?: (storeId: string) => Promise<void>
   platform: TPlatform
 }) {
   const authInfo = useAuthInfo()
@@ -72,7 +77,6 @@ export function Onboarding({
   ) => {
     // create a brand new store for first time
     const storeId = uuidv4()
-    postStoreIdToLocalStorage(storeId)
     const primaryColorTokenGroup: TTokenGroup = {
       DEFAULT: {
         id: uuidv4(),
@@ -89,8 +93,26 @@ export function Onboarding({
       ...paletteGroupTokens,
     }
 
-    await postStore(
-      {
+    if (platform === 'web' && postStore && postStoreIdToLocalStorage) {
+      postStoreIdToLocalStorage(storeId)
+      await postStore(
+        {
+          primitives: {
+            colors,
+            typography: defaultTypographyV2,
+            shadows: defaultShadowsV2,
+          },
+          themes: [],
+          files: fileTypes,
+          metadata: {
+            completedOnboardings: [],
+          },
+        },
+        authInfo,
+        storeId
+      )
+    } else if (postNextJsStore) {
+      await postNextJsStore({
         primitives: {
           colors,
           typography: defaultTypographyV2,
@@ -101,10 +123,8 @@ export function Onboarding({
         metadata: {
           completedOnboardings: [],
         },
-      },
-      authInfo,
-      storeId
-    )
+      })
+    }
   }
 
   let content
