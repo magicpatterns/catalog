@@ -82,6 +82,8 @@ This repo is entirely MIT licensed.
 
 We are working hard to make Mirrorful more extensive. Need any integrations or want a new feature? Feel free to [create an issue](https://github.com/Mirrorful/mirrorful/issues) or contribute directly to the repository. _(The first draft of this README was made by a contributor!)_
 
+To learn more, please visit our [pricing page](https://www.mirrorful.com/pricing).
+
 ## 🛠️ Contributing
 
 Whether it's big or small, we love contributions. Check out our [contributing guide](https://mirrorful.com/docs/home/contributing).
