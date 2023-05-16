@@ -24,6 +24,7 @@ export function ThemesPage() {
     themes,
     setThemes,
     metadata,
+    setMetadata,
   } = useMirrorfulStore((state: MirrorfulState) => state)
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
 
@@ -35,6 +36,28 @@ export function ThemesPage() {
         themes: data,
         files: fileTypes,
         metadata,
+      },
+      authInfo: authInfo,
+      storeId: '456',
+    })
+  }
+  const handleCloseThemeOnboarding = async () => {
+    setShowOnboarding(false)
+    const updatedMetadata = {
+      ...metadata,
+      completedOnboardings: [
+        ...metadata.completedOnboardings,
+        ONBOARDING_IDS.THEMES,
+      ],
+    }
+    setMetadata(updatedMetadata)
+
+    await postStoreData({
+      newData: {
+        primitives: { colors, typography, shadows },
+        themes,
+        files: fileTypes,
+        metadata: updatedMetadata,
       },
       authInfo: authInfo,
       storeId: '456',
@@ -107,14 +130,14 @@ export function ThemesPage() {
       </Box>
       <ThemeOnboarding
         isOpen={showOnboarding}
-        onClose={() => setShowOnboarding(false)}
+        onClose={() => handleCloseThemeOnboarding()}
         onStart={(type: 'template' | 'scratch') => {
           if (type === 'template') {
             handleCreateNewTheme(true)
           } else {
             handleCreateNewTheme(false)
           }
-          setShowOnboarding(false)
+          handleCloseThemeOnboarding()
         }}
       />
     </>
