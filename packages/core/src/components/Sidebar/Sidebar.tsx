@@ -439,6 +439,7 @@ export function Sidebar({
                       '_blank'
                     )
                   }}
+                  shadow="md"
                 >
                   Upgrade
                 </Button>
