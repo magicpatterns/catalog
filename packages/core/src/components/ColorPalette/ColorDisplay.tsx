@@ -300,5 +300,7 @@ export function ColorsDisplay({
 }
 
 export const ColorDisplay = React.memo(ColorsDisplay, (prev, next) => {
-  return prev.colorData === next.colorData
+  return Object.entries(prev.colorData).every(
+    (color) => color[1].value === next.colorData[color[0]].value
+  )
 })
