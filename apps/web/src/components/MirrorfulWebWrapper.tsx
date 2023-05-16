@@ -29,8 +29,15 @@ export default function MirrorfulWebWrapper({
   const router = useRouter()
   const [fetchStoreId] = useFetchStoreId()
 
-  const { setColors, setTypography, setShadows, setFileTypes, setThemes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const {
+    setColors,
+    setTypography,
+    setShadows,
+    setFileTypes,
+    setThemes,
+    setMetadata,
+    onLoad,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
 
   const [storeId, setStoreId] = useState<string>('')
 
@@ -71,8 +78,12 @@ export default function MirrorfulWebWrapper({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       setFileTypes(data.files)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      setMetadata(data.metadata)
 
       setStoreId(storeId)
+      onLoad()
 
       await postStoreIdToLocalStorage(storeId)
     } catch (e) {
@@ -80,6 +91,7 @@ export default function MirrorfulWebWrapper({
     } finally {
       timeout.current = setTimeout(() => {
         setIsLoading(false)
+        onLoad()
       }, 1250)
     }
   }, [
@@ -90,6 +102,7 @@ export default function MirrorfulWebWrapper({
     setTypography,
     setShadows,
     setFileTypes,
+    setMetadata,
     postStoreIdToLocalStorage,
   ])
 
