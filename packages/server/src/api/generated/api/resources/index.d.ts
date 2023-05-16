@@ -5,4 +5,4 @@ export * from "./registry/types";
 export * as store from "./store";
 export * from "./store/types";
 export * from "./registry/service/requests";
-export * from "./commons/errors";
+export * from "./store/errors";

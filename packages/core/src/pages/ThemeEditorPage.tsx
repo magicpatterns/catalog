@@ -1,4 +1,6 @@
+'use client'
 import { Box, Button, Icon, Link } from '@chakra-ui/react'
+import { postStoreData } from '@core/client/store'
 import { EditableContent } from '@core/components/EditableContent'
 import {
   deleteTokenOrGroupFromTheme,
@@ -12,16 +14,17 @@ import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
 import { assertTokenGroup, TTheme } from '@core/types'
-import { TMirrorfulStore } from '@core/types'
+import { useAuthInfo } from '@propelauth/react'
 import { FiChevronLeft } from 'react-icons/fi'
 
 export function ThemeEditorPage({
   themeId,
-  postStoreData,
+  fetchStoreId,
 }: {
   themeId: string
-  postStoreData: (data: TMirrorfulStore) => Promise<void>
+  fetchStoreId: () => Promise<string>
 }) {
+
   const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
   const typography = useMirrorfulStore(
     (state: MirrorfulState) => state.typography
@@ -34,6 +37,12 @@ export function ThemeEditorPage({
   const setThemes = useMirrorfulStore(
     (state: MirrorfulState) => state.setThemes
   )
+  const metadata = useMirrorfulStore(
+     (state: MirrorfulState) => state.metadata
+  )
+
+  const authInfo = useAuthInfo()
+
   const selectedTheme = themes.find((t) => t.id === themeId)
 
   if (!selectedTheme) {
@@ -42,10 +51,16 @@ export function ThemeEditorPage({
 
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)
+    const storeId = await fetchStoreId()
     await postStoreData({
-      primitives: { colors, typography, shadows },
-      themes: data,
-      files: fileTypes,
+      newData: {
+        primitives: { colors, typography, shadows },
+        themes: data,
+        files: fileTypes,
+        metadata,
+      },
+      authInfo: authInfo,
+      storeId,
     })
   }
 

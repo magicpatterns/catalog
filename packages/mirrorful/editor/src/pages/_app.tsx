@@ -77,7 +77,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         setIsLoading(false)
       }, 1250)
     }
-  }, [setColors, setFileTypes, setShadows, setShowOnBoarding, setTypography])
+  }, [
+    setColors,
+    setFileTypes,
+    setShadows,
+    setShowOnBoarding,
+    setTypography,
+    setThemes,
+  ])
 
   useEffect(() => {
     // only initial render assign pathname

@@ -1,19 +1,27 @@
+'use client'
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
+import { postStoreData } from '@core/client/store'
+import { ONBOARDING_IDS } from '@core/components/ProductOnboardings/constants'
+import { ThemeOnboarding } from '@core/components/ProductOnboardings/ThemeOnboarding'
 import { CreateThemeCard, ThemeCard } from '@core/components/Themes/ThemeCard'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
 import { defaultTheme, TTheme } from '@core/types'
-import { TMirrorfulStore } from '@core/types'
+import { useAuthInfo } from '@propelauth/react'
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 export function ThemesPage({
-  postStoreData,
+  fetchStoreId,
 }: {
-  postStoreData: (data: TMirrorfulStore) => Promise<void>
+  fetchStoreId: () => Promise<string>
 }) {
+  const authInfo = useAuthInfo()
   const router = useRouter()
+  
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
 
   const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
   const typography = useMirrorfulStore(
@@ -27,25 +35,65 @@ export function ThemesPage({
   const setThemes = useMirrorfulStore(
     (state: MirrorfulState) => state.setThemes
   )
+  const metadata = useMirrorfulStore(
+     (state: MirrorfulState) => state.metadata
+  )
+  const setMetadata = useMirrorfulStore(
+     (state: MirrorfulState) => state.setMetadata
+  )
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)
+    const storeId = await fetchStoreId()
     await postStoreData({
-      primitives: { colors, typography, shadows },
-      themes: data,
-      files: fileTypes,
+      newData: {
+        primitives: { colors, typography, shadows },
+        themes: data,
+        files: fileTypes,
+        metadata,
+      },
+      authInfo: authInfo,
+      storeId,
+    })
+  }
+  const handleCloseThemeOnboarding = async () => {
+    const updatedMetadata = {
+      ...metadata,
+      completedOnboardings: [
+        ...metadata.completedOnboardings,
+        ONBOARDING_IDS.THEMES,
+      ],
+    }
+    setShowOnboarding(false)
+    setMetadata(updatedMetadata)
+
+    const storeId = await fetchStoreId()
+    await postStoreData({
+      newData: {
+        primitives: { colors, typography, shadows },
+        themes,
+        files: fileTypes,
+        metadata: updatedMetadata,
+      },
+      authInfo,
+      storeId,
     })
   }
 
-  const handleCreateNewTheme = async () => {
+  const handleCreateNewTheme = async (initWithDefaults?: boolean) => {
     const newTheme = {
       id: uuidv4(),
       name: 'Untitled Theme',
-      tokens: defaultTheme.tokens,
+      tokens: initWithDefaults ? defaultTheme.tokens : {},
     }
-
-    handleUpdateThemes([...themes, newTheme])
     router.push(`/themes/${newTheme.id}`)
+    handleUpdateThemes([...themes, newTheme])
   }
+
+  useEffect(() => {
+    if (!metadata.completedOnboardings.includes(ONBOARDING_IDS.THEMES)) {
+      setShowOnboarding(true)
+    }
+  }, [])
 
   return (
     <>
@@ -92,9 +140,21 @@ export function ThemesPage({
               }}
             />
           ))}
-          <CreateThemeCard onCreateTheme={handleCreateNewTheme} />
+          <CreateThemeCard onCreateTheme={() => handleCreateNewTheme(false)} />
         </Stack>
       </Box>
+      <ThemeOnboarding
+        isOpen={showOnboarding}
+        onClose={() => handleCloseThemeOnboarding()}
+        onStart={(type: 'template' | 'scratch') => {
+          if (type === 'template') {
+            handleCreateNewTheme(true)
+          } else {
+            handleCreateNewTheme(false)
+          }
+          handleCloseThemeOnboarding()
+        }}
+      />
     </>
   )
 }

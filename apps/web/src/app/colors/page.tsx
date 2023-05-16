@@ -1,9 +1,9 @@
 'use client'
 import { ColorsPage } from '@core/pages/ColorsPage'
-import { usePostStoreData } from '@web/hooks/usePostStoreData'
+import { useFetchStoreId } from '@web/hooks/useFetchStoreId'
 import React from 'react'
 
 export default function Colors() {
-  const [postStoreData] = usePostStoreData()
-  return <ColorsPage postStoreData={postStoreData} />
+  const [fetchStoreId] = useFetchStoreId()
+  return <ColorsPage fetchStoreId={fetchStoreId} />
 }

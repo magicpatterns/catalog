@@ -1,14 +1,18 @@
+'use client'
+import { postStoreData } from '@core/client/store'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { TMirrorfulStore, TTokenGroup } from '@core/types'
+import { TTokenGroup } from '@core/types'
+import { useAuthInfo } from '@propelauth/react'
 
 export function ColorsPage({
-  postStoreData,
+  fetchStoreId,
 }: {
-  postStoreData: (data: TMirrorfulStore) => Promise<void>
+  fetchStoreId: () => Promise<string>
 }) {
+
   const setColors = useMirrorfulStore(
     (state: MirrorfulState) => state.setColors
   )
@@ -21,17 +25,29 @@ export function ColorsPage({
     (state: MirrorfulState) => state.fileTypes
   )
   const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
+  const metadata = useMirrorfulStore(
+     (state: MirrorfulState) => state.metadata
+  )
+
+  const authInfo = useAuthInfo()
 
   const handleUpdateColors = async (data: TTokenGroup) => {
     setColors(data)
+
+    const storeId = await fetchStoreId()
     await postStoreData({
-      primitives: {
-        colors: data,
-        typography,
-        shadows,
+      newData: {
+        primitives: {
+          colors: data,
+          typography,
+          shadows,
+        },
+        themes,
+        files: fileTypes,
+        metadata,
       },
-      themes,
-      files: fileTypes,
+      authInfo: authInfo,
+      storeId: storeId,
     })
   }
   return (

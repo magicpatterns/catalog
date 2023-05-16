@@ -23,6 +23,7 @@ export function EditableContent({
         borderRadius: 8,
         ...css,
       }}
+      suppressContentEditableWarning={true}
       contentEditable
       onBlur={(e) => {
         onUpdateText(e.target.innerHTML)

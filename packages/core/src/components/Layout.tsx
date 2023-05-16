@@ -1,7 +1,7 @@
 import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
-import { TMirrorfulStore } from '@core/types'
+import { postStoreData } from '@core/client/store'
+import { useAuthInfo } from '@propelauth/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import Head from 'next/head'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -21,42 +21,48 @@ export type TTab =
   | '/components'
 
 export default function Layout({
+  storeId,
   children,
   isLoading = false,
   platform = 'package',
-  postStoreData,
 }: {
+  storeId: string
   children: React.ReactNode
   isLoading?: boolean
   platform?: TPlatform
-  postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
   const router = useRouter()
   const pathname = usePathname()
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
+        
+  const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
   const setColors = useMirrorfulStore(
     (state: MirrorfulState) => state.setColors
+  )
+  const typography = useMirrorfulStore(
+    (state: MirrorfulState) => state.typography
+  )
+  const metadata = useMirrorfulStore(
+     (state: MirrorfulState) => state.metadata
   )
   const setTypography = useMirrorfulStore(
     (state: MirrorfulState) => state.setTypography
   )
+  const shadows = useMirrorfulStore((state: MirrorfulState) => state.shadows)
   const setShadows = useMirrorfulStore(
     (state: MirrorfulState) => state.setShadows
+  )
+  const fileTypes = useMirrorfulStore(
+    (state: MirrorfulState) => state.fileTypes
   )
   const setFileTypes = useMirrorfulStore(
     (state: MirrorfulState) => state.setFileTypes
   )
-  const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
-  const typography = useMirrorfulStore(
-    (state: MirrorfulState) => state.typography
-  )
-  const shadows = useMirrorfulStore((state: MirrorfulState) => state.shadows)
-  const fileTypes = useMirrorfulStore(
-    (state: MirrorfulState) => state.fileTypes
-  )
   const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
 
+  const authInfo = useAuthInfo()
+          
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
@@ -77,9 +83,14 @@ export default function Layout({
 
   const handleExport = async () => {
     await postStoreData({
-      primitives: { colors, typography, shadows },
-      themes: [],
-      files: fileTypes,
+      newData: {
+        primitives: { colors, typography, shadows },
+        themes,
+        files: fileTypes,
+        metadata,
+      },
+      authInfo: authInfo,
+      storeId,
     })
 
     onExportSuccessModalOpen()
@@ -91,13 +102,20 @@ export default function Layout({
     setTypography({ fontSizes: {}, fontWeights: {}, lineHeights: {} })
     setShadows({})
     await postStoreData({
-      primitives: {
-        colors: {},
-        typography: { fontSizes: {}, fontWeights: {}, lineHeights: {} },
-        shadows: {},
+      newData: {
+        primitives: {
+          colors: {},
+          typography: { fontSizes: {}, fontWeights: {}, lineHeights: {} },
+          shadows: {},
+        },
+        themes: [],
+        files: fileTypes,
+        metadata: {
+          completedOnboardings: [],
+        },
       },
-      themes: [],
-      files: fileTypes,
+      authInfo,
+      storeId,
     })
   }
 

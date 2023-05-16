@@ -288,7 +288,6 @@ export function ColorsDisplay({
                 }}
               >
                 <VariantRow
-                  defaultNamedToken={defaultNamedToken}
                   variant={variant}
                   isBase={isBase}
                   onUpdateVariant={(

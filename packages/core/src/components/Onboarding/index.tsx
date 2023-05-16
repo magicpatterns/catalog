@@ -11,6 +11,8 @@ import {
   TMirrorfulStore,
   TTokenGroup,
 } from '@core/types'
+import { useAuthInfo } from '@propelauth/react'
+import type { UseAuthInfoProps } from '@propelauth/react/dist/types/useAuthInfo'
 import { useState } from 'react'
 import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
@@ -29,14 +31,21 @@ import { Welcome } from './pages/Welcome'
 import { nameThatColor } from './utils'
 
 export function Onboarding({
-  postStoreData,
+  postStore,
   onFinishOnboarding,
+  postStoreIdToLocalStorage,
   platform,
 }: {
-  postStoreData: (data: TMirrorfulStore) => Promise<void>
+  postStore: (
+    data: TMirrorfulStore,
+    authInfo: UseAuthInfoProps,
+    storeId: string
+  ) => Promise<void>
   onFinishOnboarding: () => void
+  postStoreIdToLocalStorage: (storeId: string) => Promise<void>
   platform: TPlatform
 }) {
+  const authInfo = useAuthInfo()
   const [primaryColor, setPrimaryColor] = useState<AnyColor>('#9F7AEA')
   const [primaryName, setPrimaryName] = useState<string>('')
   const [palette, setPalette] = useState<TTokenGroup>({})
@@ -61,6 +70,9 @@ export function Onboarding({
     primaryColorName: string,
     paletteGroupTokens: TTokenGroup
   ) => {
+    // create a brand new store for first time
+    const storeId = uuidv4()
+    postStoreIdToLocalStorage(storeId)
     const primaryColorTokenGroup: TTokenGroup = {
       DEFAULT: {
         id: uuidv4(),
@@ -77,15 +89,22 @@ export function Onboarding({
       ...paletteGroupTokens,
     }
 
-    await postStoreData({
-      primitives: {
-        colors,
-        typography: defaultTypographyV2,
-        shadows: defaultShadowsV2,
+    await postStore(
+      {
+        primitives: {
+          colors,
+          typography: defaultTypographyV2,
+          shadows: defaultShadowsV2,
+        },
+        themes: [],
+        files: fileTypes,
+        metadata: {
+          completedOnboardings: [],
+        },
       },
-      themes: [],
-      files: fileTypes,
-    })
+      authInfo,
+      storeId
+    )
   }
 
   let content

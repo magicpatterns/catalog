@@ -2,6 +2,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import {
   Badge,
   Box,
+  Flex,
   Icon,
   Link,
   Stack,
@@ -10,6 +11,11 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import { VERSION } from '@core/utils/constants'
+import {
+  useAuthInfo,
+  useLogoutFunction,
+  useRedirectFunctions,
+} from '@propelauth/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
@@ -23,7 +29,12 @@ import {
   FiUnderline,
   FiUpload,
 } from 'react-icons/fi'
-import { MdOutlineColorLens } from 'react-icons/md'
+import {
+  MdOutlineColorLens,
+  MdOutlineLogin,
+  MdOutlineLogout,
+  MdOutlineVerified,
+} from 'react-icons/md'
 import { RiBookLine } from 'react-icons/ri'
 import { RxComponent1, RxShadow } from 'react-icons/rx'
 import { TbColorSwatch } from 'react-icons/tb'
@@ -170,7 +181,10 @@ export function Sidebar({
   isCollapsed: boolean
   onToggleCollapsed: () => void
 }) {
+  const logoutFn = useLogoutFunction()
+  const authInfo = useAuthInfo()
   const { colorMode, toggleColorMode } = useColorMode()
+  const { redirectToLoginPage, redirectToAccountPage } = useRedirectFunctions()
 
   return (
     <Box
@@ -241,14 +255,16 @@ export function Sidebar({
                 <img src="/simple_logo.png" style={{ width: '150px' }} />
               </motion.div>
             ) : (
-              <img
-                src={
-                  colorMode === 'dark'
-                    ? '/mirrorful_logo_white.png'
-                    : '/mirrorful_logo.png'
-                }
-                style={{ width: '150px' }}
-              />
+              <>
+                <img
+                  src={
+                    colorMode === 'dark'
+                      ? '/mirrorful_logo_white.png'
+                      : '/mirrorful_logo.png'
+                  }
+                  style={{ width: '150px' }}
+                />
+              </>
             )}
           </Box>
         </Box>
@@ -344,14 +360,52 @@ export function Sidebar({
             )}
           </SidebarSection>
 
+          <SidebarSection
+            header={<SidebarHeader label="Account" />}
+            isCollapsed={isCollapsed}
+          >
+            <SidebarLink
+              key="sidebar-upgrade"
+              label={'Upgrade'}
+              icon={MdOutlineVerified}
+              isDisabled={isDisabled}
+              isCollapsed={isCollapsed}
+              onSelect={() => {
+                window.open(
+                  'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
+                  '_blank'
+                )
+              }}
+            />
+            <SidebarLink
+              key="sidebar-log-out"
+              label={authInfo.isLoggedIn ? 'Log Out' : 'Log In'}
+              icon={authInfo.isLoggedIn ? MdOutlineLogout : MdOutlineLogin}
+              isDisabled={isDisabled}
+              isCollapsed={isCollapsed}
+              onSelect={() => {
+                if (authInfo.isLoggedIn) {
+                  logoutFn(true)
+                } else {
+                  redirectToLoginPage()
+                }
+              }}
+            />
+          </SidebarSection>
+
           <Box>
             <Box
-              css={{ borderTop: '1px solid lightgray', marginBottom: '18px' }}
+              css={{
+                borderTop: '1px solid lightgray',
+                marginBottom: '18px',
+                marginTop: isCollapsed ? '18px' : '0px',
+              }}
             />
             <Stack
               css={{ color: 'var(--text-color-secondary)' }}
               direction={isCollapsed ? 'column' : 'row'}
               flexWrap="wrap"
+              justifyContent={'space-between'}
               spacing={isCollapsed ? 4 : 8}
             >
               <Icon
@@ -419,58 +473,75 @@ export function Sidebar({
               />
             </Stack>
 
-            <Box
-              css={{
-                display: 'flex',
-                marginTop: '32px',
-                color: 'var(--text-color-secondary)',
-                alignItems: 'center',
-              }}
+            <Flex
+              mt="32px"
+              flexDirection={isCollapsed ? 'column' : 'row'}
+              alignItems="center"
+              justifyContent="space-between"
             >
-              {!isCollapsed ? (
-                <>
+              <Box
+                css={{
+                  display: 'flex',
+                  color: 'var(--text-color-secondary)',
+                  alignItems: 'center',
+                }}
+              >
+                {!isCollapsed ? (
+                  <>
+                    <Icon
+                      as={FiMoon}
+                      css={{ width: '1.2rem', height: '1.2rem' }}
+                    />
+                    <Switch
+                      colorScheme="gray"
+                      css={{ margin: '0 8px' }}
+                      isChecked={colorMode === 'light'}
+                      onChange={() => {
+                        toggleColorMode()
+                      }}
+                    />
+                    <Icon
+                      as={FiSun}
+                      css={{ width: '1.2rem', height: '1.2rem' }}
+                    />
+                  </>
+                ) : (
                   <Icon
-                    as={FiMoon}
-                    css={{ width: '1.2rem', height: '1.2rem' }}
-                  />
-                  <Switch
-                    colorScheme="gray"
-                    css={{ margin: '0 8px' }}
-                    isChecked={colorMode === 'light'}
-                    onChange={() => {
+                    as={colorMode === 'dark' ? FiMoon : FiSun}
+                    css={{
+                      width: '1.2rem',
+                      height: '1.2rem',
+                      cursor: 'pointer',
+                      transition: '200ms',
+                    }}
+                    onClick={() => {
                       toggleColorMode()
                     }}
+                    _hover={{
+                      color: 'var(--text-color-primary)',
+                    }}
                   />
-                  <Icon
-                    as={FiSun}
-                    css={{ width: '1.2rem', height: '1.2rem' }}
-                  />
-                </>
-              ) : (
-                <Icon
-                  as={colorMode === 'dark' ? FiMoon : FiSun}
-                  css={{
-                    width: '1.2rem',
-                    height: '1.2rem',
-                    cursor: 'pointer',
-                    transition: '200ms',
-                  }}
-                  onClick={() => {
-                    toggleColorMode()
-                  }}
-                  _hover={{
-                    color: 'var(--text-color-primary)',
-                  }}
-                />
-              )}
-            </Box>
+                )}
+              </Box>
+
+              <img
+                onClick={() => redirectToAccountPage()}
+                src={authInfo.user?.pictureUrl}
+                style={{
+                  marginTop: isCollapsed ? '10px' : '0px',
+                  width: '30px',
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                }}
+              />
+            </Flex>
+
             {!isCollapsed && (
               <Text
-                css={{ marginTop: '16px' }}
+                css={{ marginTop: '16px', cursor: 'default' }}
                 fontWeight="bold"
                 color="var(--text-color-secondary)"
                 fontSize={'0.6rem'}
-                onClick={toggleColorMode}
               >
                 {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
               </Text>

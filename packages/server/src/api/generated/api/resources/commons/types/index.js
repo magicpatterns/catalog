@@ -17,4 +17,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./OrgId"), exports);
 __exportStar(require("./FileId"), exports);
 __exportStar(require("./StoreId"), exports);
+__exportStar(require("./UserId"), exports);
 __exportStar(require("./LibraryId"), exports);

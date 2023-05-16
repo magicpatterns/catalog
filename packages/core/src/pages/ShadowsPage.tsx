@@ -1,15 +1,19 @@
+'use client'
+
+import { postStoreData } from '@core/client/store'
 import { ShadowsSection } from '@core/components/Shadows/ShadowsSection'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { TMirrorfulStore, TTokenGroup } from '@core/types'
-import React from 'react'
+import { TTokenGroup } from '@core/types'
+import { useAuthInfo } from '@propelauth/react'
 
 export function ShadowsPage({
-  postStoreData,
+  fetchStoreId,
 }: {
-  postStoreData: (data: TMirrorfulStore) => Promise<void>
+  fetchStoreId: () => Promise<string>
 }) {
+
   const setShadows = useMirrorfulStore(
     (state: MirrorfulState) => state.setShadows
   )
@@ -23,13 +27,24 @@ export function ShadowsPage({
     (state: MirrorfulState) => state.fileTypes
   )
   const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
+  const metadata = useMirrorfulStore(
+     (state: MirrorfulState) => state.metadata
+  )
+
+  const authInfo = useAuthInfo()
 
   const handleUpdateShadows = async (data: TTokenGroup) => {
     setShadows(data)
+    const storeId = await fetchStoreId()
     await postStoreData({
-      primitives: { colors: colors, typography, shadows: data },
-      themes,
-      files: fileTypes,
+      newData: {
+        primitives: { colors: colors, typography, shadows: data },
+        themes,
+        files: fileTypes,
+        metadata,
+      },
+      authInfo: authInfo,
+      storeId,
     })
   }
   return (
