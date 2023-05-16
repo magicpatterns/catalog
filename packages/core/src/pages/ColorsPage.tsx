@@ -1,4 +1,4 @@
-import { postStoreData } from '@core/api/postStoreData'
+import { postStoreData } from '@core/client/store'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
 import useMirrorfulStore, {
   MirrorfulState,

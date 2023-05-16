@@ -34,4 +34,4 @@ __exportStar(require("./registry/types"), exports);
 exports.store = __importStar(require("./store"));
 __exportStar(require("./store/types"), exports);
 __exportStar(require("./registry/service/requests"), exports);
-__exportStar(require("./commons/errors"), exports);
+__exportStar(require("./store/errors"), exports);

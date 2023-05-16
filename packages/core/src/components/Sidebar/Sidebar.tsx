@@ -10,6 +10,7 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import { VERSION } from '@core/utils/constants'
+import { useAuthInfo } from '@propelauth/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
@@ -170,6 +171,7 @@ export function Sidebar({
   isCollapsed: boolean
   onToggleCollapsed: () => void
 }) {
+  const authInfo = useAuthInfo()
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
@@ -466,13 +468,21 @@ export function Sidebar({
             </Box>
             {!isCollapsed && (
               <Text
-                css={{ marginTop: '16px' }}
+                css={{ marginTop: '16px', cursor: 'default' }}
                 fontWeight="bold"
                 color="var(--text-color-secondary)"
                 fontSize={'0.6rem'}
-                onClick={toggleColorMode}
               >
                 {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
+              </Text>
+            )}
+            {authInfo.isLoggedIn && (
+              <Text
+                css={{ cursor: 'default' }}
+                fontSize={'0.8rem'}
+                color="var(--text-color-secondary)"
+              >
+                {authInfo.user.email}
               </Text>
             )}
           </Box>

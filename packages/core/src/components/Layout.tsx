@@ -1,5 +1,5 @@
 import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
-import { postStoreData } from '@core/api/postStoreData'
+import { postStoreData } from '@core/client/store'
 import { useAuthInfo } from '@propelauth/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'

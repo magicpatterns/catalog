@@ -1,4 +1,4 @@
-import { postStoreData } from '@core/api/postStoreData'
+import { postStoreData } from '@core/client/store'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import useMirrorfulStore, {
   MirrorfulState,

@@ -1,5 +1,5 @@
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
-import { postStoreData } from '@core/api/postStoreData'
+import { postStoreData } from '@core/client/store'
 import { CreateThemeCard, ThemeCard } from '@core/components/Themes/ThemeCard'
 import useMirrorfulStore, {
   MirrorfulState,

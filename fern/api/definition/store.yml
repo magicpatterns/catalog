@@ -32,3 +32,9 @@ types:
       primitives: unknown # object
       themes: unknown # array of objects
       files: unknown # array of strings
+
+errors:
+  ObjectDoesNotExistError:
+    status-code: 404
+  Unauthorized:
+    status-code: 401

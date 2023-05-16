@@ -1,11 +1,3 @@
-import { UseAuthInfoProps } from '@propelauth/react/dist/types/useAuthInfo'
-
-export type PostStoreData = {
-  newData: TMirrorfulStore
-  authInfo: UseAuthInfoProps
-  storeId: string
-}
-
 export type TExportFileType = 'css' | 'scss' | 'js' | 'cjs' | 'ts' | 'json'
 
 export const defaultFiles: TExportFileType[] = [

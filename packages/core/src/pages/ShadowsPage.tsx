@@ -1,4 +1,4 @@
-import { postStoreData } from '@core/api/postStoreData'
+import { postStoreData } from '@core/client/store'
 import { ShadowsSection } from '@core/components/Shadows/ShadowsSection'
 import useMirrorfulStore, {
   MirrorfulState,

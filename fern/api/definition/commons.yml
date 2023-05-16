@@ -6,9 +6,3 @@ types:
   LibraryId:
     type: string
     docs: This should be the Library Id
-
-errors:
-  ObjectDoesNotExistError:
-    status-code: 404
-  Unauthorized:
-    status-code: 401
