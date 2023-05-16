@@ -1,3 +1,4 @@
+'use client'
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
 import { ONBOARDING_IDS } from '@core/components/ProductOnboardings/constants'
