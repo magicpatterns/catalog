@@ -14,7 +14,7 @@
     "@chakra-ui/react": "^2.5.5",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@mirrorful-fern/api-client": "0.0.278",
+    "@mirrorful-fern/api-client": "0.0.560",
     "@monaco-editor/react": "^4.5.0",
     "@types/react-icons": "^3.0.0",
     "console-feed": "^3.5.0",

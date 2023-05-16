@@ -131,7 +131,6 @@ export function AddColorModal({
               )}
               <Box mt={5} style={{ width: '100%' }}>
                 <VariantRow
-                  defaultNamedToken={namedToken}
                   variant={namedToken}
                   onUpdateVariant={() => {
                     return null

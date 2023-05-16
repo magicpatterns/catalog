@@ -61,9 +61,15 @@ class StoreService {
             catch (error) {
                 console.error(error);
                 if (error instanceof errors.MirrorfulApiError) {
-                    console.warn(`Endpoint 'getStore' unexpectedly threw ${error.constructor.name}.` +
-                        ` If this was intentional, please add ${error.constructor.name} to` +
-                        " the endpoint's errors list in your Fern Definition.");
+                    switch (error.errorName) {
+                        case "ObjectDoesNotExistError":
+                        case "Unauthorized":
+                            break;
+                        default:
+                            console.warn(`Endpoint 'getStore' unexpectedly threw ${error.constructor.name}.` +
+                                ` If this was intentional, please add ${error.constructor.name} to` +
+                                " the endpoint's errors list in your Fern Definition.");
+                    }
                     await error.send(res);
                 }
                 else {
@@ -91,9 +97,15 @@ class StoreService {
                 catch (error) {
                     console.error(error);
                     if (error instanceof errors.MirrorfulApiError) {
-                        console.warn(`Endpoint 'updateStore' unexpectedly threw ${error.constructor.name}.` +
-                            ` If this was intentional, please add ${error.constructor.name} to` +
-                            " the endpoint's errors list in your Fern Definition.");
+                        switch (error.errorName) {
+                            case "ObjectDoesNotExistError":
+                            case "Unauthorized":
+                                break;
+                            default:
+                                console.warn(`Endpoint 'updateStore' unexpectedly threw ${error.constructor.name}.` +
+                                    ` If this was intentional, please add ${error.constructor.name} to` +
+                                    " the endpoint's errors list in your Fern Definition.");
+                        }
                         await error.send(res);
                     }
                     else {

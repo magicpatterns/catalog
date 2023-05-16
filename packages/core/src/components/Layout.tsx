@@ -1,7 +1,7 @@
 import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
-import { TMirrorfulStore } from '@core/types'
+import { postStoreData } from '@core/client/store'
+import { useAuthInfo } from '@propelauth/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import Head from 'next/head'
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -21,15 +21,15 @@ export type TTab =
   | '/components'
 
 export default function Layout({
+  storeId,
   children,
   isLoading = false,
   platform = 'package',
-  postStoreData,
 }: {
+  storeId: string
   children: React.ReactNode
   isLoading?: boolean
   platform?: TPlatform
-  postStoreData: (data: TMirrorfulStore) => Promise<void>
 }) {
   const router = useRouter()
   const pathname = usePathname()
@@ -39,6 +39,7 @@ export default function Layout({
     colors,
     setColors,
     typography,
+    metadata,
     setTypography,
     shadows,
     setShadows,
@@ -46,6 +47,7 @@ export default function Layout({
     setFileTypes,
     themes,
   } = useMirrorfulStore((state: MirrorfulState) => state)
+  const authInfo = useAuthInfo()
   const {
     isOpen: isExportSuccessModalOpen,
     onOpen: onExportSuccessModalOpen,
@@ -66,9 +68,14 @@ export default function Layout({
 
   const handleExport = async () => {
     await postStoreData({
-      primitives: { colors, typography, shadows },
-      themes: [],
-      files: fileTypes,
+      newData: {
+        primitives: { colors, typography, shadows },
+        themes,
+        files: fileTypes,
+        metadata,
+      },
+      authInfo: authInfo,
+      storeId,
     })
 
     onExportSuccessModalOpen()
@@ -80,13 +87,20 @@ export default function Layout({
     setTypography({ fontSizes: {}, fontWeights: {}, lineHeights: {} })
     setShadows({})
     await postStoreData({
-      primitives: {
-        colors: {},
-        typography: { fontSizes: {}, fontWeights: {}, lineHeights: {} },
-        shadows: {},
+      newData: {
+        primitives: {
+          colors: {},
+          typography: { fontSizes: {}, fontWeights: {}, lineHeights: {} },
+          shadows: {},
+        },
+        themes: [],
+        files: fileTypes,
+        metadata: {
+          completedOnboardings: [],
+        },
       },
-      themes: [],
-      files: fileTypes,
+      authInfo,
+      storeId,
     })
   }
 

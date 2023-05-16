@@ -15,6 +15,9 @@ service:
       path-parameters:
         storeId: commons.StoreId
       response: mirrorfulStore
+      errors:
+        - ObjectDoesNotExistError
+        - Unauthorized
 
     updateStore:
       method: POST
@@ -25,6 +28,9 @@ service:
       request:
         name: updateStoreRequest
         body: mirrorfulStore
+      errors:
+        - ObjectDoesNotExistError
+        - Unauthorized
 
 types:
   mirrorfulStore:
@@ -32,3 +38,9 @@ types:
       primitives: unknown # object
       themes: unknown # array of objects
       files: unknown # array of strings
+
+errors:
+  ObjectDoesNotExistError:
+    status-code: 404
+  Unauthorized:
+    status-code: 401

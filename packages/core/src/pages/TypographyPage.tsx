@@ -1,22 +1,41 @@
+'use client'
+
+import { postStoreData } from '@core/client/store'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import useMirrorfulStore, {
   MirrorfulState,
 } from '@core/store/useMirrorfulStore'
-import { TMirrorfulStore, TPrimitivesTypography } from '@core/types'
+import { TPrimitivesTypography } from '@core/types'
+import { useAuthInfo } from '@propelauth/react'
 
 export function TypographyPage({
-  postStoreData,
+  fetchStoreId,
 }: {
-  postStoreData: (data: TMirrorfulStore) => Promise<void>
+  fetchStoreId: () => Promise<string>
 }) {
-  const { typography, colors, shadows, setTypography, fileTypes, themes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const authInfo = useAuthInfo()
+
+  const {
+    typography,
+    colors,
+    shadows,
+    setTypography,
+    fileTypes,
+    themes,
+    metadata,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
   const handleUpdateTypography = async (data: TPrimitivesTypography) => {
     setTypography(data)
+    const storeId = await fetchStoreId()
     await postStoreData({
-      primitives: { colors, typography: data, shadows },
-      themes,
-      files: fileTypes,
+      newData: {
+        primitives: { colors, typography: data, shadows },
+        themes,
+        files: fileTypes,
+        metadata,
+      },
+      authInfo: authInfo,
+      storeId,
     })
   }
   return (

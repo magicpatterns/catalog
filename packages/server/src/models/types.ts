@@ -6,6 +6,7 @@ export type TMirrorfulStore = {
   primitives: TPrimitives
   themes: TTheme[]
   files: TExportFileType[]
+  metadata: TMetadata
 }
 
 // Top level object for storing primitives
@@ -48,3 +49,7 @@ export type TTokenType =
   | 'fontWeight'
   | 'lineHeight'
   | 'boxShadow'
+
+export type TMetadata = {
+  completedOnboardings: string[]
+}

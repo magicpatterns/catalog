@@ -1,9 +1,9 @@
 'use client'
 import { ShadowsPage } from '@core/pages/ShadowsPage'
-import { usePostStoreData } from '@web/hooks/usePostStoreData'
+import { useFetchStoreId } from '@web/hooks/useFetchStoreId'
 import React from 'react'
 
 export default function Shadows() {
-  const [postStoreData] = usePostStoreData()
-  return <ShadowsPage postStoreData={postStoreData} />
+  const [fetchStoreId] = useFetchStoreId()
+  return <ShadowsPage fetchStoreId={fetchStoreId} />
 }

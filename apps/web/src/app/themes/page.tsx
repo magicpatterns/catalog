@@ -1,10 +1,10 @@
 'use client'
 import { ThemesPage } from '@core/pages/ThemesPage'
-import { usePostStoreData } from '@web/hooks/usePostStoreData'
+import { useFetchStoreId } from '@web/hooks/useFetchStoreId'
 import React from 'react'
 
 export default function Themes() {
-  const [postStoreData] = usePostStoreData()
+  const [fetchStoreId] = useFetchStoreId()
 
-  return <ThemesPage postStoreData={postStoreData} />
+  return <ThemesPage fetchStoreId={fetchStoreId} />
 }
