@@ -232,7 +232,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"primitives\": \"UNKNOWN\",\n    \"themes\": \"UNKNOWN\",\n    \"files\": \"UNKNOWN\"\n}",
+              "raw": "{\n    \"primitives\": \"UNKNOWN\",\n    \"themes\": \"UNKNOWN\",\n    \"files\": \"UNKNOWN\",\n    \"metadata\": \"UNKNOWN\"\n}",
               "options": {
                 "raw": {
                   "language": "json"

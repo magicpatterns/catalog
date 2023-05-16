@@ -33,7 +33,7 @@ export function getStoreService(): StoreService {
       },
       updateStore: async (req, res) => {
         const { storeId, orgId } = req.params
-        const { primitives, themes, files } = req.body
+        const { primitives, themes, files, metadata } = req.body
         if (req.user && req.user.userId) {
           const resultDoc = await Store.findOneAndUpdate(
             {
@@ -45,6 +45,7 @@ export function getStoreService(): StoreService {
               primitives,
               themes,
               files,
+              metadata,
             },
             { upsert: true, new: true }
           ).lean()
@@ -61,6 +62,7 @@ export function getStoreService(): StoreService {
               primitives,
               themes,
               files,
+              metadata,
             },
             { upsert: true, new: true }
           ).lean()
