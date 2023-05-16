@@ -476,15 +476,6 @@ export function Sidebar({
                 {platform === 'web' ? 'WEB' : 'PACKAGE'} BETA {VERSION}
               </Text>
             )}
-            {authInfo.isLoggedIn && (
-              <Text
-                css={{ cursor: 'default' }}
-                fontSize={'0.8rem'}
-                color="var(--text-color-secondary)"
-              >
-                {authInfo.user.email}
-              </Text>
-            )}
           </Box>
         </Box>
       </Box>
