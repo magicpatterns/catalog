@@ -5,7 +5,7 @@ import * as serializers from "../../../../serialization";
 import { MirrorfulApi } from "../../../..";
 import express from "express";
 export interface StoreServiceMethods {
-    getStoreByLoggedInUserId(req: express.Request<{
+    getStore(req: express.Request<{
         orgId: serializers.OrgId.Raw;
         storeId: serializers.StoreId.Raw;
     }, MirrorfulApi.MirrorfulStore, never, never>, res: {

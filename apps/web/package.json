@@ -14,7 +14,7 @@
     "@chakra-ui/react": "^2.5.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@mirrorful-fern/api-client": "0.0.544",
+    "@mirrorful-fern/api-client": "0.0.560",
     "@propelauth/react": "^2.0.7",
     "@types/node": "18.15.5",
     "@types/react": "18.0.28",

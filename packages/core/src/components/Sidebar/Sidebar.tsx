@@ -33,9 +33,7 @@ import {
   MdOutlineColorLens,
   MdOutlineLogin,
   MdOutlineLogout,
-  MdOutlineUpgrade,
   MdOutlineVerified,
-  MdOutlineVerifiedUser,
 } from 'react-icons/md'
 import { RiBookLine } from 'react-icons/ri'
 import { RxComponent1, RxShadow } from 'react-icons/rx'
@@ -266,17 +264,6 @@ export function Sidebar({
                   }
                   style={{ width: '150px' }}
                 />
-                {/* {authInfo.isLoggedIn && (
-                  <Text
-                    mt={1}
-                    css={{
-                      color: 'var(--text-color-primary)',
-                      fontSize: '0.8rem',
-                    }}
-                  >
-                    {authInfo.user.email}
-                  </Text>
-                )} */}
               </>
             )}
           </Box>

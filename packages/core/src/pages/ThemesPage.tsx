@@ -11,7 +11,11 @@ import { useAuthInfo } from '@propelauth/react'
 import { useRouter } from 'next/navigation'
 import { v4 as uuidv4 } from 'uuid'
 
-export function ThemesPage() {
+export function ThemesPage({
+  fetchStoreId,
+}: {
+  fetchStoreId: () => Promise<string>
+}) {
   const authInfo = useAuthInfo()
   const router = useRouter()
   const { typography, colors, shadows, fileTypes, themes, setThemes } =
@@ -19,6 +23,7 @@ export function ThemesPage() {
 
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)
+    const storeId = await fetchStoreId()
     await postStoreData({
       newData: {
         primitives: { colors, typography, shadows },
@@ -26,7 +31,7 @@ export function ThemesPage() {
         files: fileTypes,
       },
       authInfo: authInfo,
-      storeId: '456',
+      storeId,
     })
   }
 

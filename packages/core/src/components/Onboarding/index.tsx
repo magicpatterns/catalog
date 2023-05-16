@@ -37,7 +37,8 @@ export function Onboarding({
 }: {
   postStore: (
     data: TMirrorfulStore,
-    authInfo: UseAuthInfoProps
+    authInfo: UseAuthInfoProps,
+    storeId: string
   ) => Promise<void>
   onFinishOnboarding: () => void
   platform: TPlatform
@@ -67,6 +68,8 @@ export function Onboarding({
     primaryColorName: string,
     paletteGroupTokens: TTokenGroup
   ) => {
+    // create a brand new store for first time
+    const storeId = uuidv4()
     const primaryColorTokenGroup: TTokenGroup = {
       DEFAULT: {
         id: uuidv4(),
@@ -93,7 +96,8 @@ export function Onboarding({
         themes: [],
         files: fileTypes,
       },
-      authInfo
+      authInfo,
+      storeId
     )
   }
 

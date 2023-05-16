@@ -8,13 +8,18 @@ import useMirrorfulStore, {
 import { TTokenGroup } from '@core/types'
 import { useAuthInfo } from '@propelauth/react'
 
-export function ShadowsPage() {
+export function ShadowsPage({
+  fetchStoreId,
+}: {
+  fetchStoreId: () => Promise<string>
+}) {
   const authInfo = useAuthInfo()
   const { typography, colors, shadows, setShadows, fileTypes, themes } =
     useMirrorfulStore((state: MirrorfulState) => state)
 
   const handleUpdateShadows = async (data: TTokenGroup) => {
     setShadows(data)
+    const storeId = await fetchStoreId()
     await postStoreData({
       newData: {
         primitives: { colors: colors, typography, shadows: data },
@@ -22,7 +27,7 @@ export function ShadowsPage() {
         files: fileTypes,
       },
       authInfo: authInfo,
-      storeId: '456',
+      storeId,
     })
   }
   return (

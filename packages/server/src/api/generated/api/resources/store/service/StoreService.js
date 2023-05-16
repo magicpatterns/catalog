@@ -47,7 +47,7 @@ class StoreService {
     toRouter() {
         this.router.get("/store/:storeId", async (req, res, next) => {
             try {
-                await this.methods.getStoreByLoggedInUserId(req, {
+                await this.methods.getStore(req, {
                     send: async (responseBody) => {
                         res.json(await serializers.MirrorfulStore.jsonOrThrow(responseBody, {
                             unrecognizedObjectKeys: "strip",
@@ -66,7 +66,7 @@ class StoreService {
                         case "Unauthorized":
                             break;
                         default:
-                            console.warn(`Endpoint 'getStoreByLoggedInUserId' unexpectedly threw ${error.constructor.name}.` +
+                            console.warn(`Endpoint 'getStore' unexpectedly threw ${error.constructor.name}.` +
                                 ` If this was intentional, please add ${error.constructor.name} to` +
                                 " the endpoint's errors list in your Fern Definition.");
                     }
