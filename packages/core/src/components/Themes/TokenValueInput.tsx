@@ -144,6 +144,7 @@ export function TokenValueInput({
             option: (styles, state) => ({
               ...styles,
               cursor: 'pointer',
+              color: 'var(--text-color-primary)',
               backgroundColor: state.isFocused
                 ? 'var(--background-color-secondary)'
                 : 'var(--background-color-primary)',

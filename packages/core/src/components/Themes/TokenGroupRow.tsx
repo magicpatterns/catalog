@@ -298,15 +298,15 @@ export function TokenGroupRow({
           paddingLeft: '6px',
         }}
       >
-        <Box
-          css={{
-            width: '5px',
-            borderLeft: '1px solid var(--border-color)',
-            borderBottom: '1px solid var(--border-color)',
-            borderBottomLeftRadius: '7px',
-            marginBottom: '20px',
-          }}
-        />
+        {/* <Box
+            css={{
+              width: '5px',
+              borderLeft: '1px solid var(--border-color)',
+              borderBottom: '1px solid var(--border-color)',
+              borderBottomLeftRadius: '7px',
+              marginBottom: '20px',
+            }}
+          /> */}
         <Box
           css={{
             display: 'flex',

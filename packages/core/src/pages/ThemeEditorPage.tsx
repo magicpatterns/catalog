@@ -177,8 +177,6 @@ export function ThemeEditorPage({
                 </Box>
               )
             }
-
-            return null
           })}
       </Box>
       <Box css={{ marginTop: '36px' }}>
