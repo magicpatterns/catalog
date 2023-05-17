@@ -32,7 +32,6 @@ if (process.env.NODE_ENV === 'production') {
 /*******************************/
 
 /******* MONGO STUFF **********/
-// TODO(Danilowicz): set up localhost for mongo
 const connectionString =
   process.env.MIRRORFUL_MONGO_DB_URI || 'mongodb://127.0.0.1:27017/mirrorful'
 
