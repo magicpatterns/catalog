@@ -350,7 +350,7 @@ export function Sidebar({
             isCollapsed={isCollapsed}
           >
             <SidebarLink
-              label="Export Tokens"
+              label="Export to Code"
               icon={FiUpload}
               onSelect={() => onExport()}
               isCollapsed={isCollapsed}
@@ -578,18 +578,28 @@ export function Sidebar({
                     <Icon
                       as={FiMoon}
                       css={{ width: '1.2rem', height: '1.2rem' }}
+                      onClick={() => {
+                        toggleColorMode()
+                      }}
                     />
                     <Switch
                       colorScheme="gray"
                       css={{ margin: '0 8px' }}
                       isChecked={colorMode === 'light'}
                       onChange={() => {
-                        toggleColorMode()
+                        if (colorMode === 'light') {
+                          toggleColorMode()
+                        }
                       }}
                     />
                     <Icon
                       as={FiSun}
                       css={{ width: '1.2rem', height: '1.2rem' }}
+                      onClick={() => {
+                        if (colorMode === 'dark') {
+                          toggleColorMode()
+                        }
+                      }}
                     />
                   </>
                 ) : (

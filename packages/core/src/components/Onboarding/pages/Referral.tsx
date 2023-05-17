@@ -43,7 +43,7 @@ export function Referral({
         <Box css={{ paddingTop: '32px' }}>
           <Stack spacing={1} direction={'row'}>
             <Text color="gray.500" fontWeight="black" fontSize={18}>
-              {platform === 'web' ? '05' : '07'}
+              {getNumberOfStepsInOnboardingFlow(platform)}
             </Text>
             <Text color="gray.500" fontWeight="bold" fontSize={18}>
               of

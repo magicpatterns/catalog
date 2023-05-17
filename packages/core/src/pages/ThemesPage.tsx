@@ -78,7 +78,6 @@ export function ThemesPage({
       name: 'Untitled Theme',
       tokens: initWithDefaults ? defaultTheme.tokens : {},
     }
-    router.push(`/themes/${newTheme.id}`)
     handleUpdateThemes([...themes, newTheme])
   }
 
