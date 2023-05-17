@@ -27,11 +27,11 @@ import {
   FiGithub,
   FiLifeBuoy,
   FiLogIn,
-  FiLogOut,
   FiMoon,
   FiSun,
   FiUnderline,
   FiUpload,
+  FiUser,
 } from 'react-icons/fi'
 import { MdOutlineColorLens } from 'react-icons/md'
 import { RiBookLine } from 'react-icons/ri'
@@ -527,7 +527,7 @@ export function Sidebar({
               /> */}
               {authInfo.isLoggedIn ? (
                 <Icon
-                  as={FiLogOut}
+                  as={FiUser}
                   css={{
                     width: '1.2rem',
                     height: '1.2rem',
@@ -538,7 +538,7 @@ export function Sidebar({
                     cursor: 'pointer',
                   }}
                   onClick={() => {
-                    logoutFn(true)
+                    redirectToAccountPage()
                   }}
                 />
               ) : (
@@ -611,16 +611,19 @@ export function Sidebar({
                 )}
               </Box>
 
-              {/* <img
-                onClick={() => redirectToAccountPage()}
-                src={authInfo.user?.pictureUrl}
-                style={{
-                  marginTop: isCollapsed ? '10px' : '0px',
-                  width: '30px',
-                  borderRadius: '50%',
-                  cursor: 'pointer',
-                }}
-              /> */}
+              {/* {authInfo.user?.pictureUrl && !isCollapsed && (
+                <Image
+                  alt="Profile Picture"
+                  onClick={() => redirectToAccountPage()}
+                  src={authInfo.user?.pictureUrl}
+                  width={30}
+                  height={30}
+                  style={{
+                    borderRadius: '50%',
+                    cursor: 'pointer',
+                  }}
+                />
+              )} */}
             </Flex>
 
             {!isCollapsed && (

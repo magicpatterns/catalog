@@ -131,7 +131,7 @@ export function UpgradeModal({
     <Modal isOpen={isOpen} onClose={onClose} size="3xl">
       <ModalOverlay />
       <ModalContent>
-        <ModalCloseButton />
+        <ModalCloseButton onClick={onClose} />
 
         <ModalBody>
           <Box css={{ display: 'flex', height: '100%', position: 'relative' }}>
