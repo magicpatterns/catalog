@@ -28,7 +28,14 @@ After cloing the repo, we can install all dependencies and run the web app:
 cd apps/web; yarn; yarn dev;
 ```
 
-Now, in a separate terminal window, we can run the Mirrorful server.
+Before running the server, in a seperate terminal window, you'll need to install `mongodb` and run it in the background:
+
+```bash
+# In project root
+cd packages/server; brew tap mongodb/brew; brew install mongodb-community@6.0; mongod --dbpath ./db/data
+```
+
+Finally, in a separate terminal window, run the Mirrorful server:
 
 ```bash
 # In project root
