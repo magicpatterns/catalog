@@ -62,6 +62,13 @@ git clone https://github.com/Mirrorful/mirrorful.git; cd mirrorful; cd apps/web;
 
 Visit `localhost:3000`. In a separate window, run the server at `localhost:8080`:
 
+Before running the server, you'll need to install `mongodb` and run it in the background:
+
+```bash
+# from project root
+cd packages/server; brew tap mongodb/brew; brew install mongodb-community@6.0; mongod --dbpath ./db/data
+```
+
 ```bash
 # from project root
 cd packages/server; yarn; yarn dev
