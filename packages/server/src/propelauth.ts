@@ -2,9 +2,12 @@ import { AuthOptions, initAuth } from '@propelauth/express'
 
 //@ts-ignore
 let obj: AuthOptions = {}
+
 if (process.env.NODE_ENV !== 'production') {
-  const manualTokenVerificationMetadata = {
-    verifierKey: `-----BEGIN PUBLIC KEY-----
+  // if we have an api key in dev, use that
+  if (!process.env.PROPEL_AUTH_API_KEY) {
+    const manualTokenVerificationMetadata = {
+      verifierKey: `-----BEGIN PUBLIC KEY-----
     MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5JcoTz1xT0EDqB3TvjT3
     G3fCB5L/Vx/JYiZBGVp/EbiRzNVLJR18bnwll9/P8WRFQZ90+Pq40WhsYMW/8Ugt
     1XkaMcPWKSMi9qNOMGY5Xl49HMeraLoQjVwySjZu8hOFB2/fMI8T25ZJjJIwaNIC
@@ -14,29 +17,29 @@ if (process.env.NODE_ENV !== 'production') {
     iQIDAQAB
     -----END PUBLIC KEY-----
     `,
-    issuer: 'https://607430308.propelauthtest.com',
-  }
-  obj = {
-    // If true, error messages returned to the user will be detailed.
-    // It's useful for debugging, but a good idea to turn off in production.
-    debugMode: process.env.NODE_ENV !== 'production',
-    // You can find your Auth URL and API key under the Backend Integration
-    //   section for your project at https://app.propelauth.com.
-    authUrl:
-      process.env.PROPEL_AUTH_URL ?? 'https://607430308.propelauthtest.com',
-    apiKey: process.env.PROPEL_AUTH_API_KEY ?? 'NO-KEY-FOUND',
-    manualTokenVerificationMetadata: manualTokenVerificationMetadata,
+      issuer: 'https://607430308.propelauthtest.com',
+    }
+    obj = {
+      debugMode: true,
+      authUrl: 'https://607430308.propelauthtest.com',
+      apiKey: process.env.PROPEL_AUTH_API_KEY ?? 'NO-KEY-FOUND',
+      manualTokenVerificationMetadata: manualTokenVerificationMetadata,
+    }
+  } else {
+    obj = {
+      debugMode: true,
+      authUrl: 'https://607430308.propelauthtest.com',
+      apiKey: process.env.PROPEL_AUTH_API_KEY ?? 'NO-KEY-FOUND',
+    }
   }
 } else {
+  if (!process.env.PROPEL_AUTH_URL || !process.env.PROPEL_AUTH_API_KEY) {
+    throw Error('Missing Propel Auth URL or API Key in production')
+  }
   obj = {
-    // If true, error messages returned to the user will be detailed.
-    // It's useful for debugging, but a good idea to turn off in production.
-    debugMode: process.env.NODE_ENV !== 'production',
-    // You can find your Auth URL and API key under the Backend Integration
-    //   section for your project at https://app.propelauth.com.
-    authUrl:
-      process.env.PROPEL_AUTH_URL ?? 'https://607430308.propelauthtest.com',
-    apiKey: process.env.PROPEL_AUTH_API_KEY ?? 'NO-KEY-FOUND',
+    debugMode: false,
+    authUrl: process.env.PROPEL_AUTH_URL,
+    apiKey: process.env.PROPEL_AUTH_API_KEY,
   }
 }
 

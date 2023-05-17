@@ -7,10 +7,6 @@ import express from 'express'
 import * as Sentry from '@sentry/node'
 import mongoose from 'mongoose'
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-
 const PORT = process.env.PORT || 8080
 const app = express()
 

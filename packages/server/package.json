@@ -30,7 +30,6 @@
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
-    "dotenv": "^16.0.3",
     "eslint": "^8.33.0",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.3",
