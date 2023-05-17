@@ -1,3 +1,4 @@
+'use client'
 import { ThemeEditorPage } from '@core/pages/ThemeEditorPage'
 import { useFetchStoreId } from '@web/hooks/useFetchStoreId'
 import React from 'react'
