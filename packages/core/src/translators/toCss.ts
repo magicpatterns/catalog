@@ -1,4 +1,4 @@
-import { resolveTokenValue } from '@core/components/Themes/themeUtils'
+import { resolveTokenValueForGeneration } from '@core/components/Themes/themeUtils'
 import {
   assertToken,
   assertTokenGroup,
@@ -65,7 +65,7 @@ export const toCss = (
   content.push('')
 
   themes.forEach((theme) => {
-    content.push(`html[data-theme='${theme.name}'] {`)
+    content.push(`html[data-theme='${sanitizeName(theme.name)}'] {`)
 
     // Recursively iterate through the theme
     const themeTokens = theme.tokens
@@ -76,9 +76,8 @@ export const toCss = (
           addNode(node[key], path.length > 0 ? `${path}-${key}` : key)
         })
       } else if (assertToken(node)) {
-        const resolvedValue = resolveTokenValue({
+        const resolvedValue = resolveTokenValueForGeneration({
           value: node.value,
-          colors,
         })
 
         content.push(`  --${path}: ${resolvedValue};`)

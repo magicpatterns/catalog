@@ -32,4 +32,5 @@ exports.MirrorfulStore = core.serialization.object({
     primitives: core.serialization.unknown(),
     themes: core.serialization.unknown(),
     files: core.serialization.unknown(),
+    metadata: core.serialization.unknown(),
 });

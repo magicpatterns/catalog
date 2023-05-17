@@ -2,6 +2,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import {
   Badge,
   Box,
+  Button,
   Drawer,
   DrawerCloseButton,
   DrawerContent,
@@ -14,6 +15,7 @@ import {
   Switch,
   Text,
   useColorMode,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { VERSION } from '@core/utils/constants'
 import {
@@ -25,15 +27,18 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { IconType } from 'react-icons'
 import {
+  FiCloudLightning,
   FiFolder,
   FiGithub,
   FiLifeBuoy,
+  FiLogIn,
   FiMenu,
   FiMoon,
   FiSun,
   FiTrash2,
   FiUnderline,
   FiUpload,
+  FiUser,
 } from 'react-icons/fi'
 import {
   MdOutlineColorLens,
@@ -46,6 +51,7 @@ import { RxComponent1, RxShadow } from 'react-icons/rx'
 import { TbColorSwatch } from 'react-icons/tb'
 
 import { TPlatform, TTab } from '../Layout'
+import { UpgradeModal } from './UpgradeModal'
 
 function SidebarHeader({ label }: { label: string }) {
   return (
@@ -166,14 +172,21 @@ export function SidebarSection({
   )
 }
 
-const MobileNav = ({ onOpen }: { onOpen: () => void }) => {
+const MobileNav = ({
+  onOpen,
+  colorMode,
+}: {
+  onOpen: () => void
+  colorMode: string
+}) => {
   return (
     <Box
       px="4"
       height="20"
       width={'100vw'}
       alignItems="center"
-      bg={'#F2F2F2'}
+      backgroundColor={'var(--background-color-secondary)'}
+      transition={'background-color 200ms'}
       borderBottom="1px solid lightgray"
       justifyContent="flex-start"
       display={{ base: 'flex', sm: 'none' }}
@@ -185,7 +198,14 @@ const MobileNav = ({ onOpen }: { onOpen: () => void }) => {
         icon={<FiMenu />}
       />
       <Box ml="8">
-        <img src="/mirrorful_logo.png" style={{ width: '150px' }} />
+        <img
+          src={
+            colorMode === 'dark'
+              ? '/mirrorful_logo_white.png'
+              : '/mirrorful_logo.png'
+          }
+          style={{ width: '150px' }}
+        />
       </Box>
     </Box>
   )
@@ -217,6 +237,11 @@ export function Sidebar({
   const { colorMode, toggleColorMode } = useColorMode()
   const { redirectToLoginPage, redirectToAccountPage } = useRedirectFunctions()
 
+  const {
+    isOpen: isUpgradeOpen,
+    onOpen: onUpgradeOpen,
+    onClose: onUpgradeClose,
+  } = useDisclosure()
   return (
     <>
       <Show above="sm">
@@ -270,7 +295,13 @@ export function Sidebar({
               transition: 'background-color 200ms',
             }}
           >
-            <Box display="flex" justifyContent="space-between" height="5rem">
+            <Box
+              css={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                height: '5rem',
+              }}
+            >
               <Box>
                 {isCollapsed ? (
                   <motion.div
@@ -282,7 +313,7 @@ export function Sidebar({
                     <img src="/simple_logo.png" style={{ width: '150px' }} />
                   </motion.div>
                 ) : (
-                  <Box>
+                  <>
                     <img
                       src={
                         colorMode === 'dark'
@@ -291,7 +322,7 @@ export function Sidebar({
                       }
                       style={{ width: '150px' }}
                     />
-                  </Box>
+                  </>
                 )}
               </Box>
             </Box>
@@ -367,7 +398,7 @@ export function Sidebar({
               </SidebarSection>
 
               <SidebarSection
-                header={<SidebarHeader label="Export" />}
+                header={<SidebarHeader label="PUBLISH" />}
                 isCollapsed={isCollapsed}
               >
                 <SidebarLink
@@ -387,40 +418,88 @@ export function Sidebar({
                 )}
               </SidebarSection>
 
-              <SidebarSection
-                header={<SidebarHeader label="Account" />}
-                isCollapsed={isCollapsed}
-              >
-                <SidebarLink
-                  key="sidebar-upgrade"
-                  label={'Upgrade'}
-                  icon={MdOutlineVerified}
-                  isDisabled={isDisabled}
-                  isCollapsed={isCollapsed}
-                  onSelect={() => {
-                    window.open(
-                      'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
-                      '_blank'
-                    )
-                  }}
-                />
-                <SidebarLink
-                  key="sidebar-log-out"
-                  label={authInfo.isLoggedIn ? 'Log Out' : 'Log In'}
-                  icon={authInfo.isLoggedIn ? MdOutlineLogout : MdOutlineLogin}
-                  isDisabled={isDisabled}
-                  isCollapsed={isCollapsed}
-                  onSelect={() => {
-                    if (authInfo.isLoggedIn) {
-                      logoutFn(true)
-                    } else {
-                      redirectToLoginPage()
-                    }
-                  }}
-                />
-              </SidebarSection>
+              {/* <SidebarSection
+            header={<SidebarHeader label="Account" />}
+            isCollapsed={isCollapsed}
+          >
+            <SidebarLink
+              key="sidebar-upgrade"
+              label={'Upgrade'}
+              icon={MdOutlineVerified}
+              isDisabled={isDisabled}
+              isCollapsed={isCollapsed}
+              onSelect={() => {
+                window.open(
+                  'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
+                  '_blank'
+                )
+              }}
+            />
+            <SidebarLink
+              key="sidebar-log-out"
+              label={authInfo.isLoggedIn ? 'Log Out' : 'Log In'}
+              icon={authInfo.isLoggedIn ? MdOutlineLogout : MdOutlineLogin}
+              isDisabled={isDisabled}
+              isCollapsed={isCollapsed}
+              onSelect={() => {
+                if (authInfo.isLoggedIn) {
+                  logoutFn(true)
+                } else {
+                  redirectToLoginPage()
+                }
+              }}
+            />
+          </SidebarSection> */}
 
               <Box>
+                <Box css={{ marginBottom: '24px' }}>
+                  {isCollapsed ? (
+                    <Icon
+                      as={FiCloudLightning}
+                      color="#805AD5"
+                      _hover={{
+                        color: '#553C9A',
+                      }}
+                      css={{
+                        width: '1.2rem',
+                        height: '1.2rem',
+                        transition: 'color 200ms ease-in-out',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => {
+                        window.open(
+                          'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
+                          '_blank'
+                        )
+                      }}
+                    />
+                  ) : (
+                    <Button
+                      leftIcon={<Icon as={FiCloudLightning} />}
+                      backgroundImage={`linear-gradient(to bottom right, #805AD5, #553C9A)`}
+                      _hover={{
+                        backgroundImage: `linear-gradient(to bottom right, #553C9A, #805AD5)`,
+                      }}
+                      _active={{
+                        backgroundImage: `linear-gradient(to bottom right, #553C9A, #805AD5)`,
+                      }}
+                      color={`white`}
+                      css={{
+                        height: '32px',
+                        fontSize: '16px',
+                        padding: '0 24px',
+                        lineHeight: 1.2,
+                        width: '100%',
+                      }}
+                      onClick={() => {
+                        onUpgradeOpen()
+                      }}
+                      shadow="md"
+                    >
+                      Upgrade
+                    </Button>
+                  )}
+                </Box>
                 <Box
                   css={{
                     borderTop: '1px solid lightgray',
@@ -483,21 +562,54 @@ export function Sidebar({
                       window.open('https://mirrorful.com/contact', '_blank')
                     }}
                   />
-                  <Icon
-                    as={FiTrash2}
-                    css={{
-                      width: '1.2rem',
-                      height: '1.2rem',
-                      transition: 'color 200ms ease-in-out',
-                    }}
-                    _hover={{
-                      color: 'var(--text-color-primary)',
-                      cursor: 'pointer',
-                    }}
-                    onClick={() => {
-                      onDelete()
-                    }}
-                  />
+                  {/* <Icon
+                as={FiTrash2}
+                css={{
+                  width: '1.2rem',
+                  height: '1.2rem',
+                  transition: 'color 200ms ease-in-out',
+                }}
+                _hover={{
+                  color: 'var(--text-color-primary)',
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  onDelete()
+                }}
+              /> */}
+                  {authInfo.isLoggedIn ? (
+                    <Icon
+                      as={FiUser}
+                      css={{
+                        width: '1.2rem',
+                        height: '1.2rem',
+                        transition: 'color 200ms ease-in-out',
+                      }}
+                      _hover={{
+                        color: 'var(--text-color-primary)',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => {
+                        redirectToAccountPage()
+                      }}
+                    />
+                  ) : (
+                    <Icon
+                      as={FiLogIn}
+                      css={{
+                        width: '1.2rem',
+                        height: '1.2rem',
+                        transition: 'color 200ms ease-in-out',
+                      }}
+                      _hover={{
+                        color: 'var(--text-color-primary)',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => {
+                        redirectToLoginPage()
+                      }}
+                    />
+                  )}
                 </Stack>
 
                 <Flex
@@ -551,16 +663,19 @@ export function Sidebar({
                     )}
                   </Box>
 
-                  <img
-                    onClick={() => redirectToAccountPage()}
-                    src={authInfo.user?.pictureUrl}
-                    style={{
-                      marginTop: isCollapsed ? '10px' : '0px',
-                      width: '30px',
-                      borderRadius: '50%',
-                      cursor: 'pointer',
-                    }}
-                  />
+                  {/* {authInfo.user?.pictureUrl && !isCollapsed && (
+                <Image
+                  alt="Profile Picture"
+                  onClick={() => redirectToAccountPage()}
+                  src={authInfo.user?.pictureUrl}
+                  width={30}
+                  height={30}
+                  style={{
+                    borderRadius: '50%',
+                    cursor: 'pointer',
+                  }}
+                />
+              )} */}
                 </Flex>
 
                 {!isCollapsed && (
@@ -576,11 +691,12 @@ export function Sidebar({
               </Box>
             </Box>
           </Box>
+          <UpgradeModal isOpen={isUpgradeOpen} onClose={onUpgradeClose} />
         </Box>
       </Show>
 
-      {/* Mobile Nav */}
-      <MobileNav onOpen={onToggleCollapsed} />
+      {/* Mobile View */}
+      <MobileNav onOpen={onToggleCollapsed} colorMode={colorMode} />
 
       <Show below="sm">
         <Drawer
@@ -599,7 +715,8 @@ export function Sidebar({
                 padding: '36px 24px',
                 height: '100%',
                 width: '100%',
-                backgroundColor: '#F2F2F2',
+                backgroundColor: 'var(--background-color-secondary)',
+                transition: 'background-color 200ms',
               }}
             >
               <Box
@@ -674,7 +791,7 @@ export function Sidebar({
                 </SidebarSection>
 
                 <SidebarSection
-                  header={<SidebarHeader label="Export" />}
+                  header={<SidebarHeader label="PUBLISH" />}
                   isCollapsed={isCollapsed}
                 >
                   <SidebarLink
@@ -694,42 +811,88 @@ export function Sidebar({
                   )}
                 </SidebarSection>
 
-                <SidebarSection
-                  header={<SidebarHeader label="Account" />}
-                  isCollapsed={isCollapsed}
-                >
-                  <SidebarLink
-                    key="sidebar-upgrade"
-                    label={'Upgrade'}
-                    icon={MdOutlineVerified}
-                    isDisabled={isDisabled}
-                    isCollapsed={isCollapsed}
-                    onSelect={() => {
-                      window.open(
-                        'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
-                        '_blank'
-                      )
-                    }}
-                  />
-                  <SidebarLink
-                    key="sidebar-log-out"
-                    label={authInfo.isLoggedIn ? 'Log Out' : 'Log In'}
-                    icon={
-                      authInfo.isLoggedIn ? MdOutlineLogout : MdOutlineLogin
-                    }
-                    isDisabled={isDisabled}
-                    isCollapsed={isCollapsed}
-                    onSelect={() => {
-                      if (authInfo.isLoggedIn) {
-                        logoutFn(true)
-                      } else {
-                        redirectToLoginPage()
-                      }
-                    }}
-                  />
-                </SidebarSection>
+                {/* <SidebarSection
+            header={<SidebarHeader label="Account" />}
+            isCollapsed={isCollapsed}
+          >
+            <SidebarLink
+              key="sidebar-upgrade"
+              label={'Upgrade'}
+              icon={MdOutlineVerified}
+              isDisabled={isDisabled}
+              isCollapsed={isCollapsed}
+              onSelect={() => {
+                window.open(
+                  'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
+                  '_blank'
+                )
+              }}
+            />
+            <SidebarLink
+              key="sidebar-log-out"
+              label={authInfo.isLoggedIn ? 'Log Out' : 'Log In'}
+              icon={authInfo.isLoggedIn ? MdOutlineLogout : MdOutlineLogin}
+              isDisabled={isDisabled}
+              isCollapsed={isCollapsed}
+              onSelect={() => {
+                if (authInfo.isLoggedIn) {
+                  logoutFn(true)
+                } else {
+                  redirectToLoginPage()
+                }
+              }}
+            />
+          </SidebarSection> */}
 
                 <Box>
+                  <Box css={{ marginBottom: '24px' }}>
+                    {isCollapsed ? (
+                      <Icon
+                        as={FiCloudLightning}
+                        color="#805AD5"
+                        _hover={{
+                          color: '#553C9A',
+                        }}
+                        css={{
+                          width: '1.2rem',
+                          height: '1.2rem',
+                          transition: 'color 200ms ease-in-out',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => {
+                          window.open(
+                            'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
+                            '_blank'
+                          )
+                        }}
+                      />
+                    ) : (
+                      <Button
+                        leftIcon={<Icon as={FiCloudLightning} />}
+                        backgroundImage={`linear-gradient(to bottom right, #805AD5, #553C9A)`}
+                        _hover={{
+                          backgroundImage: `linear-gradient(to bottom right, #553C9A, #805AD5)`,
+                        }}
+                        _active={{
+                          backgroundImage: `linear-gradient(to bottom right, #553C9A, #805AD5)`,
+                        }}
+                        color={`white`}
+                        css={{
+                          height: '32px',
+                          fontSize: '16px',
+                          padding: '0 24px',
+                          lineHeight: 1.2,
+                          width: '100%',
+                        }}
+                        onClick={() => {
+                          onUpgradeOpen()
+                        }}
+                        shadow="md"
+                      >
+                        Upgrade
+                      </Button>
+                    )}
+                  </Box>
                   <Box
                     css={{
                       borderTop: '1px solid lightgray',
@@ -792,21 +955,54 @@ export function Sidebar({
                         window.open('https://mirrorful.com/contact', '_blank')
                       }}
                     />
-                    <Icon
-                      as={FiTrash2}
-                      css={{
-                        width: '1.2rem',
-                        height: '1.2rem',
-                        transition: 'color 200ms ease-in-out',
-                      }}
-                      _hover={{
-                        color: 'var(--text-color-primary)',
-                        cursor: 'pointer',
-                      }}
-                      onClick={() => {
-                        onDelete()
-                      }}
-                    />
+                    {/* <Icon
+                as={FiTrash2}
+                css={{
+                  width: '1.2rem',
+                  height: '1.2rem',
+                  transition: 'color 200ms ease-in-out',
+                }}
+                _hover={{
+                  color: 'var(--text-color-primary)',
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  onDelete()
+                }}
+              /> */}
+                    {authInfo.isLoggedIn ? (
+                      <Icon
+                        as={FiUser}
+                        css={{
+                          width: '1.2rem',
+                          height: '1.2rem',
+                          transition: 'color 200ms ease-in-out',
+                        }}
+                        _hover={{
+                          color: 'var(--text-color-primary)',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => {
+                          redirectToAccountPage()
+                        }}
+                      />
+                    ) : (
+                      <Icon
+                        as={FiLogIn}
+                        css={{
+                          width: '1.2rem',
+                          height: '1.2rem',
+                          transition: 'color 200ms ease-in-out',
+                        }}
+                        _hover={{
+                          color: 'var(--text-color-primary)',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => {
+                          redirectToLoginPage()
+                        }}
+                      />
+                    )}
                   </Stack>
 
                   <Flex
@@ -860,16 +1056,19 @@ export function Sidebar({
                       )}
                     </Box>
 
-                    <img
-                      onClick={() => redirectToAccountPage()}
-                      src={authInfo.user?.pictureUrl}
-                      style={{
-                        marginTop: isCollapsed ? '10px' : '0px',
-                        width: '30px',
-                        borderRadius: '50%',
-                        cursor: 'pointer',
-                      }}
-                    />
+                    {/* {authInfo.user?.pictureUrl && !isCollapsed && (
+                <Image
+                  alt="Profile Picture"
+                  onClick={() => redirectToAccountPage()}
+                  src={authInfo.user?.pictureUrl}
+                  width={30}
+                  height={30}
+                  style={{
+                    borderRadius: '50%',
+                    cursor: 'pointer',
+                  }}
+                />
+              )} */}
                   </Flex>
 
                   {!isCollapsed && (
@@ -885,6 +1084,7 @@ export function Sidebar({
                 </Box>
               </Box>
             </Box>
+            <UpgradeModal isOpen={isUpgradeOpen} onClose={onUpgradeClose} />
           </DrawerContent>
         </Drawer>
       </Show>

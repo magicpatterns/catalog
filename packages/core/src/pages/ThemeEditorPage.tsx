@@ -2,6 +2,7 @@
 import { Box, Button, Icon, Link } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
 import { EditableContent } from '@core/components/EditableContent'
+import { LoginAlert } from '@core/components/LoginAlert'
 import {
   deleteTokenOrGroupFromTheme,
   editTokenOrGroupInTheme,
@@ -15,6 +16,7 @@ import useMirrorfulStore, {
 } from '@core/store/useMirrorfulStore'
 import { assertTokenGroup, TTheme } from '@core/types'
 import { useAuthInfo } from '@propelauth/react'
+import { useRouter } from 'next/navigation'
 import { FiChevronLeft } from 'react-icons/fi'
 
 export function ThemeEditorPage({
@@ -24,6 +26,7 @@ export function ThemeEditorPage({
   themeId: string
   fetchStoreId: () => Promise<string>
 }) {
+  const router = useRouter()
   const authInfo = useAuthInfo()
   const {
     typography,
@@ -58,14 +61,17 @@ export function ThemeEditorPage({
 
   return (
     <Box>
+      <LoginAlert />
       <Link
-        href="/themes"
         css={{
           fontWeight: 'bold',
           fontSize: '12px',
           color: 'var(--text-color-secondary)',
           display: 'flex',
           alignItems: 'center',
+        }}
+        onClick={() => {
+          router.push('/themes')
         }}
       >
         <Icon as={FiChevronLeft} css={{ marginRight: '4px' }} />
@@ -175,8 +181,6 @@ export function ThemeEditorPage({
                 </Box>
               )
             }
-
-            return null
           })}
       </Box>
       <Box css={{ marginTop: '36px' }}>

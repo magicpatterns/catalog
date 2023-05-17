@@ -38,6 +38,7 @@ types:
       primitives: unknown # object
       themes: unknown # array of objects
       files: unknown # array of strings
+      metadata: unknown # object
 
 errors:
   ObjectDoesNotExistError:

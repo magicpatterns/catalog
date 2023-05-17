@@ -10,5 +10,6 @@ export declare namespace MirrorfulStore {
         primitives?: unknown;
         themes?: unknown;
         files?: unknown;
+        metadata?: unknown;
     }
 }

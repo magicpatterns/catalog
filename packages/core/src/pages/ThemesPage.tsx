@@ -1,6 +1,7 @@
 'use client'
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
+import { LoginAlert } from '@core/components/LoginAlert'
 import { ONBOARDING_IDS } from '@core/components/ProductOnboardings/constants'
 import { ThemeOnboarding } from '@core/components/ProductOnboardings/ThemeOnboarding'
 import { CreateThemeCard, ThemeCard } from '@core/components/Themes/ThemeCard'
@@ -29,6 +30,7 @@ export function ThemesPage({
     setThemes,
     metadata,
     setMetadata,
+    isLoaded,
   } = useMirrorfulStore((state: MirrorfulState) => state)
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
 
@@ -81,13 +83,16 @@ export function ThemesPage({
   }
 
   useEffect(() => {
-    if (!metadata.completedOnboardings.includes(ONBOARDING_IDS.THEMES)) {
-      setShowOnboarding(true)
+    if (isLoaded) {
+      if (!metadata.completedOnboardings.includes(ONBOARDING_IDS.THEMES)) {
+        setShowOnboarding(true)
+      }
     }
-  }, [])
+  }, [isLoaded])
 
   return (
     <>
+      <LoginAlert />
       <Heading
         fontSize={'2.5rem'}
         fontWeight="black"
@@ -105,34 +110,32 @@ export function ThemesPage({
           {`Manage the colors and mappings in your themes.`}
         </Text>
       </Box>
-      <Box css={{ marginTop: '24px' }}>
-        <Stack direction="row" spacing={8} flexWrap="wrap">
-          {themes.map((theme) => (
-            <ThemeCard
-              key={theme.id}
-              theme={theme}
-              onSelectTheme={() => {
-                router.push(`/themes/${theme.id}`)
-              }}
-              contextMenuActions={{
-                onDuplicateTheme: () => {
-                  const newTheme = structuredClone(theme)
-                  newTheme.id = uuidv4()
-                  newTheme.name = `${theme.name} Copy`
+      <Box css={{ marginTop: '24px', display: 'flex', flexWrap: 'wrap' }}>
+        {themes.map((theme) => (
+          <ThemeCard
+            key={theme.id}
+            theme={theme}
+            onSelectTheme={() => {
+              router.push(`/themes/${theme.id}`)
+            }}
+            contextMenuActions={{
+              onDuplicateTheme: () => {
+                const newTheme = structuredClone(theme)
+                newTheme.id = uuidv4()
+                newTheme.name = `${theme.name} Copy`
 
-                  handleUpdateThemes([...themes, newTheme])
-                },
-                onDeleteTheme: () => {
-                  const updatedThemes = [...themes].filter(
-                    (t) => t.id !== theme.id
-                  )
-                  handleUpdateThemes(updatedThemes)
-                },
-              }}
-            />
-          ))}
-          <CreateThemeCard onCreateTheme={() => handleCreateNewTheme(false)} />
-        </Stack>
+                handleUpdateThemes([...themes, newTheme])
+              },
+              onDeleteTheme: () => {
+                const updatedThemes = [...themes].filter(
+                  (t) => t.id !== theme.id
+                )
+                handleUpdateThemes(updatedThemes)
+              },
+            }}
+          />
+        ))}
+        <CreateThemeCard onCreateTheme={() => handleCreateNewTheme(false)} />
       </Box>
       <ThemeOnboarding
         isOpen={showOnboarding}

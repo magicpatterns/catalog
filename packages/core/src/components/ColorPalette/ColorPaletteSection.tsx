@@ -10,6 +10,7 @@ import {
 import { motion } from 'framer-motion'
 
 import { TNamedTokenGroup, TTokenGroup } from '../../types'
+import { LoginAlert } from '../LoginAlert'
 import { AddColorModal } from './AddColorModal'
 import { AddColorSkeleton } from './AddColorSkeleton'
 import { ColorDisplay } from './ColorDisplay'
@@ -30,6 +31,7 @@ export function ColorPaletteSection({
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <LoginAlert />
       <Heading
         fontSize={{ base: '2.3rem', md: '2.5rem' }}
         fontWeight="black"
