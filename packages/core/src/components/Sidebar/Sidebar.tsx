@@ -29,10 +29,8 @@ import {
   FiLogOut,
   FiMoon,
   FiSun,
-  FiTrash2,
   FiUnderline,
   FiUpload,
-  FiUser,
 } from 'react-icons/fi'
 import { MdOutlineColorLens } from 'react-icons/md'
 import { RiBookLine } from 'react-icons/ri'
