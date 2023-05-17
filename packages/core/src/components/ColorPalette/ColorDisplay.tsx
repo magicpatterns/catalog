@@ -9,7 +9,7 @@ import {
   MenuList,
   Stack,
   Text,
-  useDisclosure
+  useDisclosure,
 } from '@chakra-ui/react'
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
@@ -22,7 +22,7 @@ import { EditBaseColorModal } from './EditBaseColorModal'
 import {
   defaultColorShadesToTokens,
   generateDefaultColorShades,
-  ShadeStop
+  ShadeStop,
 } from './utils'
 import { VariantRow } from './VariantRow'
 
