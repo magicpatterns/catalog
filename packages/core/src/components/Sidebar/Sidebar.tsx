@@ -10,6 +10,7 @@ import {
   Switch,
   Text,
   useColorMode,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { VERSION } from '@core/utils/constants'
 import {
@@ -40,6 +41,7 @@ import { RxComponent1, RxShadow } from 'react-icons/rx'
 import { TbColorSwatch } from 'react-icons/tb'
 
 import { TPlatform, TTab } from '../Layout'
+import { UpgradeModal } from './UpgradeModal'
 
 function SidebarHeader({ label }: { label: string }) {
   return (
@@ -185,6 +187,12 @@ export function Sidebar({
   const authInfo = useAuthInfo()
   const { colorMode, toggleColorMode } = useColorMode()
   const { redirectToLoginPage, redirectToAccountPage } = useRedirectFunctions()
+
+  const {
+    isOpen: isUpgradeOpen,
+    onOpen: onUpgradeOpen,
+    onClose: onUpgradeClose,
+  } = useDisclosure()
 
   return (
     <Box
@@ -427,17 +435,14 @@ export function Sidebar({
                   }}
                   color={`white`}
                   css={{
-                    height: '36px',
+                    height: '32px',
                     fontSize: '16px',
                     padding: '0 24px',
                     lineHeight: 1.2,
                     width: '100%',
                   }}
                   onClick={() => {
-                    window.open(
-                      'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
-                      '_blank'
-                    )
+                    onUpgradeOpen()
                   }}
                   shadow="md"
                 >
@@ -633,6 +638,7 @@ export function Sidebar({
           </Box>
         </Box>
       </Box>
+      <UpgradeModal isOpen={isUpgradeOpen} onClose={onUpgradeClose} />
     </Box>
   )
 }
