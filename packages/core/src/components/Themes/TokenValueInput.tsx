@@ -11,6 +11,7 @@ import Select, {
 import tinycolor from 'tinycolor2'
 
 import ColorPicker from '../ColorPalette/ColorPicker'
+import { resolveTokenValue } from './themeUtils'
 
 type TTokenOption = {
   id: string
@@ -53,7 +54,9 @@ export function TokenValueInput({
   const { colors } = useMirrorfulStore()
 
   const [showColorPicker, setShowColorPicker] = useState<boolean>(false)
-  const [colorValue, setColorValue] = useState<string>('')
+  const [colorValue, setColorValue] = useState<string>(
+    resolveTokenValue({ value, colors })
+  )
   const [selectedOption, setSelectedOption] =
     useState<SingleValue<TTokenOption> | null>(null)
   const [isHover, setIsHover] = useState<boolean>(false)
