@@ -140,7 +140,7 @@ function PackageModalBody({ primitives }: { primitives: TPrimitives }) {
         </Link>
         .
       </Text>
-      <Text css={{ marginTop: '8px' }}>
+      {/* <Text css={{ marginTop: '8px' }}>
         Check out our{' '}
         <Link
           isExternal
@@ -150,7 +150,7 @@ function PackageModalBody({ primitives }: { primitives: TPrimitives }) {
           examples:
         </Link>{' '}
       </Text>
-      <ExternalExamples />
+      <ExternalExamples /> */}
     </>
   )
 }
@@ -403,7 +403,7 @@ function WebModalBody({
           </Link>
           .
         </Text>
-        <Text css={{ marginTop: '8px' }}>
+        {/* <Text css={{ marginTop: '8px' }}>
           Check out our{' '}
           <Link
             isExternal
@@ -413,7 +413,7 @@ function WebModalBody({
             examples:
           </Link>
         </Text>
-        <ExternalExamples />
+        <ExternalExamples /> */}
       </Box>
     </>
   )
@@ -555,7 +555,7 @@ export function ExportSuccessModal({
               color="green.400"
               css={{ marginRight: 8 }}
             />
-            Your Tokens are Ready!
+            Your Code is Ready!
           </Box>
         </ModalHeader>
         <ModalCloseButton />

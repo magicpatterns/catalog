@@ -26,7 +26,6 @@ import { NamePrimary } from './pages/NamePrimary'
 import { OtherColors } from './pages/OtherColors'
 import { PickPrimary } from './pages/PickPrimary'
 import { Referral } from './pages/Referral'
-import { ReviewPrimary } from './pages/ReviewPrimary'
 import { Welcome } from './pages/Welcome'
 import { nameThatColor } from './utils'
 
@@ -152,14 +151,6 @@ export function Onboarding({
     )
   } else if (page === 3) {
     content = (
-      <ReviewPrimary
-        primaryColor={colorStringified}
-        onUpdatePage={setPage}
-        platform={platform}
-      />
-    )
-  } else if (page === 4) {
-    content = (
       <OtherColors
         initialPalette={palette}
         onUpdatePalette={(newPalette: TTokenGroup) => {
@@ -188,7 +179,7 @@ export function Onboarding({
         platform={platform}
       />
     )
-  } else if (page === 5) {
+  } else if (page === 4) {
     content = (
       <ExportSettings
         primaryColor={colorStringified}
@@ -201,7 +192,7 @@ export function Onboarding({
         platform={platform}
       />
     )
-  } else if (page === 6) {
+  } else if (page === 5) {
     content = (
       <ImportInstructions
         primaryColor={colorStringified}
@@ -210,7 +201,7 @@ export function Onboarding({
         platform={platform}
       />
     )
-  } else if (page === 7) {
+  } else if (page === 6) {
     content = (
       <Referral
         primaryColor={colorStringified}

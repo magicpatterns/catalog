@@ -32,7 +32,7 @@ export function SemanticTokens({
           </Stack>
 
           <Heading fontWeight="black" css={{ marginTop: '12px' }} fontSize={32}>
-            Semantic Tokens
+            Design Tokens
           </Heading>
           <Text
             css={{ marginTop: '24px' }}
@@ -40,8 +40,8 @@ export function SemanticTokens({
             color="var(--text-color-secondary)"
             fontWeight="bold"
           >
-            Define tokens based on how they are used for consistency, clarity,
-            and simplicity.
+            Design tokens are a single source of truth to name and store design
+            decisions for your product.
           </Text>
           <Text
             css={{ marginTop: '24px' }}

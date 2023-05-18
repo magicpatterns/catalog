@@ -59,7 +59,6 @@ export function TokenValueInput({
   const [isHover, setIsHover] = useState<boolean>(false)
   const [isFocus, setIsFocus] = useState<boolean>(false)
   const options = useMemo(() => getTokenOptions(colors), [colors])
-
   let borderColor = 'var(--color-input-border)'
   if (isFocus) {
     borderColor = 'var(--color-input-border-focus)'
@@ -88,6 +87,8 @@ export function TokenValueInput({
             borderRight: `1px solid ${borderColor}`,
             transition: 'border 200ms ease-in-out',
             cursor: 'pointer',
+            borderTopLeftRadius: 7,
+            borderBottomLeftRadius: 7,
           }}
           onClick={() => setShowColorPicker(!showColorPicker)}
         />
