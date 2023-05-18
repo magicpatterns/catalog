@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 
@@ -32,8 +33,36 @@ export function EditTokenModal({
 
   const [path, setPath] = useState<string>(initialPath)
   const [tokenValue, setTokenValue] = useState<string>(initialValue ?? '')
+  const [error, setError] = useState<string | null>(null)
+
+  const validateInput = () => {
+    setError(null)
+
+    if (path === '') {
+      setError('Please enter a valid token name.')
+      return false
+    }
+
+    const keys = path.split('.')
+
+    if (keys.filter((key) => key === '').length > 0) {
+      setError('Cannot have empty token or group name.')
+      return false
+    }
+
+    if (tokenValue === '') {
+      setError('Please enter a valid token value.')
+      return false
+    }
+
+    return true
+  }
 
   const handleSave = () => {
+    if (!validateInput()) {
+      return
+    }
+
     onEditToken({
       path,
       value: tokenValue,
@@ -71,6 +100,11 @@ export function EditTokenModal({
             <FormLabel>Color</FormLabel>
             <TokenValueInput value={tokenValue} onValueChange={setTokenValue} />
           </FormControl>
+          {error && (
+            <Text color="red.500" css={{ marginTop: '16px' }}>
+              {error}
+            </Text>
+          )}
         </ModalBody>
         <ModalFooter>
           <Button onClick={handleSave}>Save</Button>

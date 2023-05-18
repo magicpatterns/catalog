@@ -54,7 +54,7 @@ export function OtherColors({
         <Box css={{ paddingTop: '32px' }}>
           <Stack spacing={1} direction={'row'}>
             <Text color="gray.500" fontWeight="black" fontSize={18}>
-              04
+              03
             </Text>
             <Text color="gray.500" fontWeight="bold" fontSize={18}>
               of
@@ -80,7 +80,7 @@ export function OtherColors({
           <Button
             size="lg"
             onClick={() => {
-              onUpdatePage(3)
+              onUpdatePage(2)
             }}
             css={{ marginRight: '16px' }}
           >
@@ -103,9 +103,9 @@ export function OtherColors({
               onUpdatePalette(palette)
 
               if (platform === 'web') {
-                onUpdatePage(7)
+                onUpdatePage(6)
               } else {
-                onUpdatePage(5)
+                onUpdatePage(4)
               }
             }}
             type="submit"
@@ -147,13 +147,17 @@ export function OtherColors({
             />
           </Box>
           <hr />
-          <Stack spacing={8}>
+          <Stack spacing={6}>
             {Object.keys(palette).map((colorName) => {
               const color = palette[colorName]
 
               return (
                 <Box
-                  css={{ display: 'flex', alignItems: 'center' }}
+                  css={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    minHeight: '72px',
+                  }}
                   key={colorName}
                 >
                   <Box
@@ -163,7 +167,7 @@ export function OtherColors({
                       width: '150px',
                     }}
                   >
-                    <Text fontSize={24} fontWeight="black">
+                    <Text fontSize={22} fontWeight="black">
                       {colorName}
                     </Text>
                   </Box>

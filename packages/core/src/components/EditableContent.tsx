@@ -15,6 +15,13 @@ export function EditableContent({
   const { colorMode } = useColorMode()
   const ComponentToUse = type === 'heading' ? Heading : Text
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      onUpdateText(e.currentTarget.textContent || '')
+    }
+  }
+
   return (
     <ComponentToUse
       css={{
@@ -28,6 +35,7 @@ export function EditableContent({
       onBlur={(e) => {
         onUpdateText(e.target.innerHTML)
       }}
+      onKeyDown={handleKeyDown}
       _hover={{
         backgroundColor:
           colorMode === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)',
