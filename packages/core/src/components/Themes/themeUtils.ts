@@ -164,6 +164,36 @@ const resolveReference = ({
   return currentReference.value
 }
 
+export const resolveTokenValueForGeneration = ({
+  value,
+}: {
+  value: string
+}) => {
+  if (value.startsWith('{') && value.endsWith('}')) {
+    let referencedValue = ''
+    try {
+      referencedValue = resolveReferenceAsVariable({ path: value }).cssVariable
+    } catch (e) {
+      referencedValue = '!ERROR'
+    }
+    return referencedValue
+  }
+
+  return value
+}
+
+const resolveReferenceAsVariable = ({ path }: { path: string }) => {
+  const keys = path
+    .substring(1, path.length - 1)
+    .split('.')
+    .map((key) => key.toLowerCase())
+
+  const cssVariable = `var(--color-${keys.join('-')}))`
+  return {
+    cssVariable,
+  }
+}
+
 export const flattenTheme = ({
   theme,
   colors,

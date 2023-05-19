@@ -11,6 +11,7 @@ import Select, {
 import tinycolor from 'tinycolor2'
 
 import ColorPicker from '../ColorPalette/ColorPicker'
+import { resolveTokenValue } from './themeUtils'
 
 type TTokenOption = {
   id: string
@@ -53,13 +54,14 @@ export function TokenValueInput({
   const { colors } = useMirrorfulStore()
 
   const [showColorPicker, setShowColorPicker] = useState<boolean>(false)
-  const [colorValue, setColorValue] = useState<string>('')
+  const [colorValue, setColorValue] = useState<string>(
+    resolveTokenValue({ value, colors })
+  )
   const [selectedOption, setSelectedOption] =
     useState<SingleValue<TTokenOption> | null>(null)
   const [isHover, setIsHover] = useState<boolean>(false)
   const [isFocus, setIsFocus] = useState<boolean>(false)
   const options = useMemo(() => getTokenOptions(colors), [colors])
-
   let borderColor = 'var(--color-input-border)'
   if (isFocus) {
     borderColor = 'var(--color-input-border-focus)'
@@ -88,6 +90,8 @@ export function TokenValueInput({
             borderRight: `1px solid ${borderColor}`,
             transition: 'border 200ms ease-in-out',
             cursor: 'pointer',
+            borderTopLeftRadius: 7,
+            borderBottomLeftRadius: 7,
           }}
           onClick={() => setShowColorPicker(!showColorPicker)}
         />
@@ -144,6 +148,7 @@ export function TokenValueInput({
             option: (styles, state) => ({
               ...styles,
               cursor: 'pointer',
+              color: 'var(--text-color-primary)',
               backgroundColor: state.isFocused
                 ? 'var(--background-color-secondary)'
                 : 'var(--background-color-primary)',

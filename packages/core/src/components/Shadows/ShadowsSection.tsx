@@ -11,6 +11,7 @@ import {
 import { assertToken, TNamedToken, TTokenGroup } from '@core/types'
 import { useEffect, useState } from 'react'
 
+import { LoginAlert } from '../LoginAlert'
 import { EditShadowModal } from './EditShadowModal'
 
 export function ShadowRow({
@@ -147,6 +148,7 @@ export function ShadowsSection({
 
   return (
     <Box>
+      <LoginAlert />
       <Heading
         fontSize={'2.5rem'}
         fontWeight="black"

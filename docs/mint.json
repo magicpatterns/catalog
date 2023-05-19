@@ -18,16 +18,26 @@
     "type": "github",
     "url": "https://github.com/Mirrorful/mirrorful"
   },
+  "topbarLinks": [
+    {
+      "name": "Sign up",
+      "url": "https://app.mirrorful.com"
+    },
+    {
+      "name": "Login",
+      "url": "https://app.mirrorful.com"
+    }
+  ],
   "anchors": [
     {
-      "name": "Slack",
+      "name": "Community",
       "icon": "slack",
       "url": "https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA"
     },
     {
-      "name": "NPM Package",
-      "icon": "npm",
-      "url": "https://www.npmjs.com/package/mirrorful"
+      "name": "Github",
+      "icon": "github",
+      "url": "https://github.com/Mirrorful/mirrorful"
     }
   ],
   "navigation": [
@@ -36,9 +46,9 @@
       "pages": [
         "home/intropage",
         "home/why",
-        "home/get-started",
+        "home/community-support",
         {
-          "group": "💿 Export Formats",
+          "group": "Export Formats",
           "pages": [
             "home/export-formats/introduction",
             "home/export-formats/colors",
@@ -47,10 +57,8 @@
           ]
         },
         "home/eslint-plugin",
-        "home/examples",
         "home/showcase",
-        "home/component-library",
-        "home/community-support",
+        "home/examples",
         "home/open-source-vs-paid",
         "home/security",
         "home/contributing"

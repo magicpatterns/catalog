@@ -50,6 +50,10 @@ export function ThemeCard({
       transition={{
         duration: 0.1,
       }}
+      style={{
+        marginRight: '24px',
+        marginBottom: '24px',
+      }}
     >
       <Box
         onClick={onSelectTheme}
@@ -221,6 +225,10 @@ export function CreateThemeCard({
       animate={{ opacity: 1 }}
       transition={{
         duration: 0.1,
+      }}
+      style={{
+        marginRight: '24px',
+        marginBottom: '24px',
       }}
     >
       <Box
