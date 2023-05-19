@@ -21,7 +21,7 @@ export function ThemesPage({
 }) {
   const authInfo = useAuthInfo()
   const router = useRouter()
-  
+
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
 
   const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
