@@ -40,7 +40,6 @@ export function ThemeEditorPage({
   )
   const metadata = useMirrorfulStore((state: MirrorfulState) => state.metadata)
 
-
   const router = useRouter()
   const authInfo = useAuthInfo()
 
