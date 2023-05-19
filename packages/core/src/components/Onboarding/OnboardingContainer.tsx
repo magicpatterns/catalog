@@ -16,6 +16,10 @@ export function OnboardingContainer({
         justifyContent: 'center',
         alignItems: 'center',
       }}
+      minHeight={{
+        base: '896px',
+        md: 'unset',
+      }}
     >
       <Box
         css={{
