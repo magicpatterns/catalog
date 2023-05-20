@@ -22,14 +22,14 @@ export function TypographySection({
     <Box>
       <LoginAlert />
       <Heading
-        fontSize={'2.5rem'}
+        fontSize={{ base: '2.3rem', sm: '2.5rem' }}
         fontWeight="black"
         color="var(--text-color-primary)"
       >
         Typography
       </Heading>
       <Text
-        fontSize={'1.2rem'}
+        fontSize={{ base: '1rem', md: '1.2rem' }}
         fontWeight="medium"
         color="var(--text-color-secondary)"
         css={{ marginTop: '12px' }}

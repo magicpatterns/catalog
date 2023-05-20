@@ -30,32 +30,11 @@ export function FontPropertyRow({
   return (
     <Box>
       <Stack
-        css={{ alignItems: 'center', width: '100%' }}
+        width={'100%'}
+        alignItems={{ base: 'left', sm: 'centerƒ' }}
         spacing={8}
-        direction="row"
+        direction={{ base: 'column', sm: 'row' }}
       >
-        <Box
-          css={{
-            padding: '12px',
-            border: '1px dashed black',
-            borderRadius: 8,
-            width: 100,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Text
-            css={{
-              fontWeight: 'bold',
-              width: 50,
-              textAlign: 'center',
-            }}
-            noOfLines={1}
-          >
-            {fontPropertyData.name}
-          </Text>
-        </Box>
         {fontProperty === 'fontSize' && (
           <FontSizeRow
             fontSizeData={fontPropertyData}
