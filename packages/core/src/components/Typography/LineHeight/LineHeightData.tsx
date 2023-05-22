@@ -51,7 +51,6 @@ export function LineHeightData({
           lineHeight: lineHeightData.token.value,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
         }}
       >
         <Text>
