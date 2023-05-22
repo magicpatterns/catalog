@@ -313,7 +313,7 @@ export function EditShadowModal({
   }
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'xs', sm: 'xl' }}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
@@ -452,12 +452,12 @@ export function EditShadowModal({
 
               <Box
                 css={{
-                  marginTop: '1em',
                   width: '100%',
                   display: 'flex',
                   justifyContent: 'center',
                   flexDirection: 'column',
                 }}
+                marginTop={{ base: '2em', sm: '1em' }}
               >
                 <Text style={{ marginBottom: '.5em' }}>
                   <FormLabel>Value of Shadow {shadowIndex + 1}</FormLabel>

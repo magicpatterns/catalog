@@ -52,8 +52,11 @@ export function ShadowColorPicker({
     >
       <FormLabel>Color of Shadow {index + 1}</FormLabel>
 
-      <Flex justifyContent={'space-between'}>
-        <Box width="50%">
+      <Flex
+        justifyContent={'space-between'}
+        flexDirection={{ base: 'column', sm: 'row' }}
+      >
+        <Box width={{ base: '100%', sm: '50%' }}>
           <ColorPicker
             onChange={(colorPickerColor) => {
               handleColor(tinycolor(colorPickerColor).toRgb(), index)
@@ -62,7 +65,7 @@ export function ShadowColorPicker({
             colorPickerColor={color}
           />
         </Box>
-        <Box>
+        <Box marginTop={{ base: '5%', sm: '0' }}>
           <Text>Horizontal Offset</Text>
           <Flex>
             <Slider
@@ -164,7 +167,10 @@ export function ShadowColorPicker({
               }}
             />
           </Flex>
-          <Text style={{ marginBottom: '.5em' }}>
+          <Text
+            style={{ marginBottom: '.5em' }}
+            marginTop={{ base: '5%', sm: '0' }}
+          >
             Preview of Composite Shadows
           </Text>
           <Box
