@@ -41,10 +41,20 @@ export function OtherColors({
   }, [palette, handleGeneratePalette])
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }} as="form">
+    <Box
+      css={{ display: 'flex', height: '100%' }}
+      flexDirection={{
+        base: 'column',
+        md: 'row',
+      }}
+      as="form"
+    >
       <Box
+        width={{
+          base: '100%',
+          md: '50%',
+        }}
         css={{
-          width: '50%',
           padding: '12px',
           display: 'flex',
           flexDirection: 'column',
@@ -76,7 +86,17 @@ export function OtherColors({
             {`You can always fine-tune these later!`}
           </Text>
         </Box>
-        <Box css={{ paddingBottom: '32px' }}>
+        <Box
+          css={{ paddingBottom: '32px' }}
+          position={{
+            base: 'absolute',
+            md: 'static',
+          }}
+          bottom={{
+            base: '0px',
+            md: 'unset',
+          }}
+        >
           <Button
             size="lg"
             onClick={() => {
@@ -115,16 +135,24 @@ export function OtherColors({
         </Box>
       </Box>
       <Box
+        width={{
+          base: '100%',
+          md: '60%',
+        }}
+        padding={{
+          base: '0px',
+          md: '64px 32px',
+        }}
+        marginLeft={{
+          md: '10px',
+        }}
         css={{
-          width: '50%',
-          marginLeft: '10px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          padding: '64px 32px',
         }}
       >
-        <Stack spacing={4}>
+        <Stack spacing={4} width={{ base: '100%', md: 'auto' }}>
           <Box css={{ display: 'flex', alignItems: 'center' }}>
             <Box
               css={{ display: 'flex', flexDirection: 'column', width: '150px' }}
