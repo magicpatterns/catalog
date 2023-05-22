@@ -177,13 +177,12 @@ export function UpgradeModal({
                 >
                   <PlanCard
                     icon={FiCloud}
-                    title="Hobby"
-                    price="$25/mo"
+                    title="Team"
+                    price="$50/mo"
                     features={[
                       'Multiple Projects',
                       'Publish NPM Package',
                       'Static asset CDN',
-                      'Figma Integration',
                     ]}
                     cta="Get Early Access"
                     onClick={() => {
@@ -204,6 +203,7 @@ export function UpgradeModal({
                       'Figma Integration',
                       'Organizational Access',
                       'Custom CI/CD Pipeline',
+                      'SAML/SSO',
                     ]}
                     cta="Contact Us"
                     onClick={() => {
