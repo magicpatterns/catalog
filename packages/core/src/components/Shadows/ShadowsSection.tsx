@@ -42,92 +42,78 @@ export function ShadowRow({
   }, [hasCopiedShadowValue])
 
   return (
-    <Box css={{ width: '60vw' }}>
+    <Box width={{ base: '80vw', sm: '60vw' }}>
       <Stack
-        css={{
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%',
-        }}
-        spacing={8}
-        direction="row"
+        spacing={{ base: 4, sm: 8 }}
+        alignItems={{ base: 'flex-start', sm: 'center' }}
+        direction={{ base: 'column', sm: 'row' }}
       >
-        <Box css={{ display: 'flex', alignItems: 'center' }}>
-          <Box
-            css={{
-              padding: '12px',
-              border: '1px dashed black',
-              borderRadius: 8,
-              width: 100,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+        <Box
+          css={{
+            padding: '12px',
+            border: '1px dashed black',
+            borderRadius: 8,
+            minWidth: 100,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text css={{ fontWeight: 'bold' }} noOfLines={1}>
+            {shadowData.name}
+          </Text>
+        </Box>
+        <Box width={'80%'}>
+          <Tooltip
+            label="Copied Shadow to Clipboard"
+            hasArrow
+            isDisabled={!hasCopiedShadowValue}
+            isOpen={hasCopiedShadowValue}
           >
-            <Text css={{ fontWeight: 'bold' }} noOfLines={1}>
-              {shadowData.name}
-            </Text>
-          </Box>
-          <Box>
-            <Tooltip
-              label="Copied Shadow to Clipboard"
-              hasArrow
-              isDisabled={!hasCopiedShadowValue}
-              isOpen={hasCopiedShadowValue}
+            <Text
+              css={{
+                fontWeight: 'bold',
+                paddingInline: 2,
+                fontSize: '1rem',
+              }}
+              _hover={{
+                cursor: 'pointer',
+                backgroundColor: 'black',
+                color: 'white',
+                borderRadius: 8,
+              }}
+              onClick={() => {
+                navigator.clipboard.writeText(shadowData.token.value)
+                setHasCopiedShadowValue(true)
+              }}
             >
-              <Text
-                css={{
-                  fontWeight: 'bold',
-                  paddingInline: 2,
-                  fontSize: '1rem',
-                  marginLeft: '12px',
-                }}
-                _hover={{
-                  cursor: 'pointer',
-                  backgroundColor: 'black',
-                  color: 'white',
-                  borderRadius: 8,
-                }}
-                fontSize={18}
-                onClick={() => {
-                  navigator.clipboard.writeText(shadowData.token.value)
-                  setHasCopiedShadowValue(true)
-                }}
-              >
-                {shadowData.token.value}
-              </Text>
-            </Tooltip>
-          </Box>
+              {shadowData.token.value}
+            </Text>
+          </Tooltip>
         </Box>
 
-        <Box css={{ display: 'flex', alignItems: 'center' }}>
-          <Box
-            css={{
-              width: 100,
-              height: 50,
-              backgroundColor: '#F3F3F3',
-              border: '1px solid #D3D3D3',
-              boxShadow: shadowData.token.value,
-              padding: '24px',
-              borderRadius: 8,
-            }}
-          />
-          <Box css={{ justifySelf: 'flex-end' }}>
-            <Button
-              css={{ marginLeft: 32 }}
-              onClick={() => onEditVariantModalOpen()}
-            >
-              Edit Variant
-            </Button>
-          </Box>
-          <EditShadowModal
-            isOpen={isEditVariantModalOpen}
-            onClose={onEditVariantModalClose}
-            initialShadowVariant={shadowData}
-            onUpdateShadowVariant={onUpdateShadowVariant}
-            onDeleteShadowVariant={onDeleteShadowVariant}
-          />
+        <Box
+          css={{
+            minWidth: 100,
+            height: 50,
+            backgroundColor: '#F3F3F3',
+            border: '1px solid #D3D3D3',
+            boxShadow: shadowData.token.value,
+            padding: '24px',
+            borderRadius: 8,
+          }}
+        />
+
+        <Box alignItems="center" justifyContent={'flex-end'}>
+          <Button onClick={() => onEditVariantModalOpen()}>Edit Variant</Button>
         </Box>
+        <EditShadowModal
+          isOpen={isEditVariantModalOpen}
+          onClose={onEditVariantModalClose}
+          initialShadowVariant={shadowData}
+          onUpdateShadowVariant={onUpdateShadowVariant}
+          onDeleteShadowVariant={onDeleteShadowVariant}
+        />
       </Stack>
     </Box>
   )
