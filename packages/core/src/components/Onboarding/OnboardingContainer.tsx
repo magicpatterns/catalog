@@ -16,6 +16,10 @@ export function OnboardingContainer({
         justifyContent: 'center',
         alignItems: 'center',
       }}
+      minHeight={{
+        base: '896px',
+        md: 'unset',
+      }}
     >
       <Box
         css={{
@@ -47,9 +51,7 @@ export function OnboardingContainer({
       <Box
         css={{
           backgroundColor: 'var(--background-color-primary)',
-          padding: '64px 128px',
           borderRadius: 8,
-          height: '50%',
         }}
         shadow="2xl"
         width={{
@@ -57,15 +59,23 @@ export function OnboardingContainer({
           md: '80%',
           lg: '75%',
         }}
+        height={{
+          base: '100%',
+          md: '50%',
+        }}
         minHeight={'600px'}
-        minWidth={'700px'}
+        minWidth={{
+          md: '700px',
+        }}
         maxWidth={'1000px'}
         padding={{
           base: '24px',
-          md: '64px 64px',
+          md: '64px 128px',
           //   lg: '64px 128px',
         }}
-        maxHeight={'700px'}
+        maxHeight={{
+          md: '700px',
+        }}
       >
         {children}
       </Box>

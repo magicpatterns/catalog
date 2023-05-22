@@ -26,10 +26,20 @@ export function NamePrimary({
   const shades = generateDefaultColorShades({ primary: primaryColor })
 
   return (
-    <Box css={{ display: 'flex', height: '100%' }} as="form">
+    <Box
+      css={{ display: 'flex', height: '100%' }}
+      flexDirection={{
+        base: 'column',
+        md: 'row',
+      }}
+      as="form"
+    >
       <Box
+        width={{
+          base: '100%',
+          md: '50%',
+        }}
         css={{
-          width: '50%',
           padding: '12px',
           display: 'flex',
           flexDirection: 'column',
@@ -62,7 +72,17 @@ export function NamePrimary({
             simple names like {'"Blue"'} or {'"Light Green."'}
           </Text>
         </Box>
-        <Box css={{ paddingBottom: '32px' }}>
+        <Box
+          css={{ paddingBottom: '32px' }}
+          position={{
+            base: 'absolute',
+            md: 'static',
+          }}
+          bottom={{
+            base: '0px',
+            md: 'unset',
+          }}
+        >
           <Button
             size="lg"
             onClick={() => {
@@ -101,12 +121,18 @@ export function NamePrimary({
         </Box>
       </Box>
       <Box
+        width={{
+          base: '100%',
+          md: '60%',
+        }}
+        padding={{
+          base: '0px',
+          md: '64px 32px',
+        }}
         css={{
-          width: '50%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          padding: '64px 32px',
         }}
       >
         <Box
