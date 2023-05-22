@@ -31,7 +31,7 @@ export function FontPropertyRow({
     <Box>
       <Stack
         width={'100%'}
-        alignItems={{ base: 'left', sm: 'centerƒ' }}
+        alignItems={{ base: 'left', sm: 'center' }}
         spacing={8}
         direction={{ base: 'column', sm: 'row' }}
       >
