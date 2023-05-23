@@ -99,14 +99,13 @@ export function VariantRowDisplay({
   isBase?: boolean
   variant: TNamedToken
   onUpdateVariant: () => void
-  updateBaseVariant: (newVariant: TNamedToken, updateDefault: boolean) => void
+  updateBaseVariant: (newVariant: TNamedToken) => void
   onChangeColors: (newVariant: TNamedToken, updateDefault: boolean) => void
 }) {
   const [showSlider, setShowSlider] = useState(false)
   const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
   const { name, token } = variant
-  const [color, setColor] = useState(token.value)
-  const [changing, setChanging] = useState(false)
+
   const hsl = tinycolor(token.value).toHsl()
   const [h, setH] = useState<number>(Math.round(hsl.h))
   const [s, setS] = useState<number>(Math.round(hsl.s * 100))
@@ -147,7 +146,6 @@ export function VariantRowDisplay({
         l: val / 100,
       }).toHexString()
     }
-    setColor(newColor)
     onChangeColors(
       {
         ...variant,
@@ -171,7 +169,7 @@ export function VariantRowDisplay({
         css={{
           height: '3rem',
           width: '100%',
-          backgroundColor: `${changing ? color : variant.token.value}`,
+          backgroundColor: `${variant.token.value}`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -214,11 +212,11 @@ export function VariantRowDisplay({
                 paddingInline: 2,
               }}
               onClick={() => {
-                navigator.clipboard.writeText(color)
+                navigator.clipboard.writeText(variant.token.value)
                 setHasCopiedHexCode(true)
               }}
             >
-              {color}
+              {variant.token.value}
             </Text>
           </Tooltip>
           {!hideIcons && (
@@ -226,7 +224,7 @@ export function VariantRowDisplay({
               <IconButton
                 disabled={isBase}
                 onClick={() => {
-                  updateBaseVariant(variant, true)
+                  updateBaseVariant(variant)
                 }}
                 style={{ marginLeft: '24px' }}
                 variant="outline"
@@ -318,10 +316,10 @@ export function VariantRowDisplay({
                 key={obj.label}
                 {...obj}
                 onChangeStartCB={() => {
-                  setChanging(true)
+                  // setChanging(true)
                 }}
                 onChangeEndCB={() => {
-                  setChanging(false)
+                  // setChanging(false)
 
                   onUpdateVariant()
                 }}
