@@ -2,6 +2,7 @@ import { Box, Menu, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import useMirrorfulStore from '@core/store/useMirrorfulStore'
 import { TTheme } from '@core/types'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { CSSProperties, useState } from 'react'
 import { FiCopy, FiTrash } from 'react-icons/fi'
 
@@ -55,13 +56,10 @@ export function ThemeCard({
         marginBottom: '24px',
       }}
     >
-      <Box
-        onClick={onSelectTheme}
-        css={{
+      <Link
+        href={`/themes/${theme.id}`}
+        style={{
           ...SHARED_STYLES,
-        }}
-        _hover={{
-          boxShadow: '0 0 20px 1px var(--color-shadow)',
         }}
         onContextMenu={(e) => {
           e.preventDefault()
@@ -75,34 +73,40 @@ export function ThemeCard({
         }}
       >
         <Box
-          css={{
-            height: '150px',
-            width: '195px',
-            display: 'flex',
-            flexWrap: 'wrap',
+          _hover={{
+            boxShadow: '0 0 20px 1px var(--color-shadow)',
           }}
         >
-          {colorValues.map((color, index) => (
-            <Box
-              key={`${index}-${color}`}
-              css={{ width: '15px', height: '15px', backgroundColor: color }}
-            />
-          ))}
+          <Box
+            css={{
+              height: '150px',
+              width: '195px',
+              display: 'flex',
+              flexWrap: 'wrap',
+            }}
+          >
+            {colorValues.map((color, index) => (
+              <Box
+                key={`${index}-${color}`}
+                css={{ width: '15px', height: '15px', backgroundColor: color }}
+              />
+            ))}
+          </Box>
+          <Box
+            css={{
+              height: '50px',
+              padding: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              borderTop: '1px solid gray',
+            }}
+          >
+            <Text fontSize="md" fontWeight="bold">
+              {theme.name}
+            </Text>
+          </Box>
         </Box>
-        <Box
-          css={{
-            height: '50px',
-            padding: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            borderTop: '1px solid gray',
-          }}
-        >
-          <Text fontSize="md" fontWeight="bold">
-            {theme.name}
-          </Text>
-        </Box>
-      </Box>
+      </Link>
       <Menu
         isOpen={!!contextCoords}
         onClose={() => setContextCoords(undefined)}

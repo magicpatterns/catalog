@@ -1,22 +1,34 @@
-import { ArrowForwardIcon } from '@chakra-ui/icons'
-import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
-import ColorPicker from '@core/components/ColorPalette/ColorPicker'
+import {
+  ArrowBackIcon,
+  ArrowForwardIcon,
+  BellIcon,
+  CheckCircleIcon,
+  MoonIcon,
+} from '@chakra-ui/icons'
+import {
+  Badge,
+  Box,
+  Button,
+  Code,
+  Heading,
+  Input,
+  Spinner,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
-import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
 
-export function PickPrimary({
-  primaryColor,
+export function ReviewPrimary({
   onUpdatePage,
-  onUpdatePrimaryColor,
+  primaryColor,
   platform,
 }: {
-  primaryColor: AnyColor
   onUpdatePage: (page: number) => void
-  onUpdatePrimaryColor: (newColor: AnyColor) => void
+  primaryColor: string
   platform: TPlatform
 }) {
   const shades = generateDefaultColorShades({ primary: primaryColor })
@@ -45,7 +57,7 @@ export function PickPrimary({
         <Box css={{ paddingTop: '32px' }}>
           <Stack spacing={1} direction={'row'}>
             <Text color="gray.500" fontWeight="black" fontSize={18}>
-              01
+              03
             </Text>
             <Text color="gray.500" fontWeight="bold" fontSize={18}>
               of
@@ -56,7 +68,7 @@ export function PickPrimary({
           </Stack>
 
           <Heading fontWeight="black" css={{ marginTop: '12px' }} fontSize={36}>
-            Pick a Primary color, <br /> any color.
+            Great Choice!
           </Heading>
           <Text
             css={{ marginTop: '32px' }}
@@ -64,7 +76,10 @@ export function PickPrimary({
             color="gray.500"
             fontWeight="bold"
           >
-            This will be the main color of your theme. You can change it later.
+            {`Here's a quick little preview of what your primary color looks like in action.`}
+            <br />
+            <br />
+            This is only a preview, you can always change it later.
           </Text>
         </Box>
         <Box
@@ -79,6 +94,15 @@ export function PickPrimary({
           }}
         >
           <Button
+            size="lg"
+            onClick={() => {
+              onUpdatePage(2)
+            }}
+            css={{ marginRight: '16px' }}
+          >
+            <ArrowBackIcon />
+          </Button>
+          <Button
             bgColor={shades['500']}
             color={tinycolor(primaryColor).isDark() ? 'white' : 'black'}
             _hover={{
@@ -92,8 +116,7 @@ export function PickPrimary({
             rightIcon={<ArrowForwardIcon />}
             onClick={(e) => {
               e.preventDefault()
-              onUpdatePrimaryColor(primaryColor)
-              onUpdatePage(2)
+              onUpdatePage(4)
             }}
             type="submit"
           >
@@ -107,19 +130,52 @@ export function PickPrimary({
           md: '60%',
         }}
         padding={{
-          base: '0px',
-          md: '24px',
+          base: '0px 24px',
+          md: '0px',
         }}
         css={{
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
           alignItems: 'center',
         }}
       >
-        <ColorPicker
-          colorPickerColor={primaryColor}
-          onChange={onUpdatePrimaryColor}
-        />
+        <Stack
+          spacing={4}
+          width={{
+            base: '100%',
+            md: 'auto',
+          }}
+        >
+          <Button
+            bgColor={shades['500']}
+            color={tinycolor(primaryColor).isDark() ? 'white' : 'black'}
+            _hover={{
+              bgColor: shades['700'],
+            }}
+            _active={{
+              bgColor: shades['800'],
+            }}
+            padding={'8px 36px'}
+            size="lg"
+          >
+            Button
+          </Button>
+          <Input focusBorderColor={primaryColor} placeholder="Input" />
+          <Badge color={primaryColor}>Primary Color</Badge>
+          <Heading fontWeight="bold" color={primaryColor}>
+            A Heading
+          </Heading>
+          <Text color={primaryColor}>Some Text</Text>
+          <Spinner color={primaryColor} />
+          <Stack direction="row">
+            <CheckCircleIcon color={primaryColor} width={8} height={8} />
+            <BellIcon color={primaryColor} width={8} height={8} />
+            <MoonIcon color={primaryColor} width={8} height={8} />
+          </Stack>
+          <Box>
+            <Code color={primaryColor}>Code Snippet</Code>
+          </Box>
+        </Stack>
       </Box>
     </Box>
   )
