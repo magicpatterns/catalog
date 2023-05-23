@@ -14,7 +14,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { MutableRefObject, useReducer, useRef } from 'react'
 import { FiEdit } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
@@ -111,7 +111,6 @@ export function ColorsDisplay({
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
   const [colors, setColors] = useState<TTokenGroup>(colorData)
-  const [changingVariants, setChangingVariant] = useState(false)
 
   const colorNameRef = useRef() as MutableRefObject<HTMLInputElement>
 
@@ -322,10 +321,7 @@ export function ColorsDisplay({
                       setColors(updatedColorData)
                     }
                   }}
-                  updateBaseVariant={(
-                    newVariant: TNamedToken,
-                    updateDefault: boolean
-                  ) => {
+                  updateBaseVariant={(newVariant: TNamedToken) => {
                     const updatedColorData = { ...colors }
                     const additionalVariants: TTokenGroup =
                       defaultColorShadesToTokens(
