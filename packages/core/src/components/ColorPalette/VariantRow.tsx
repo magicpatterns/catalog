@@ -333,10 +333,7 @@ export const VariantRow = React.memo(
     return (
       prevProps.variant.token.value === nextProps.variant.token.value &&
       prevProps.variant.name === nextProps.variant.name &&
-      prevProps.isBase === nextProps.isBase &&
-      prevProps.onChangeColors === nextProps.onChangeColors &&
-      prevProps.onUpdateVariant === nextProps.onUpdateVariant &&
-      prevProps.updateBaseVariant === nextProps.updateBaseVariant
+      prevProps.isBase === nextProps.isBase
     )
   }
 )
