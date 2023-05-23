@@ -315,12 +315,7 @@ export function VariantRowDisplay({
               <MirrorfulSlider
                 key={obj.label}
                 {...obj}
-                onChangeStartCB={() => {
-                  // setChanging(true)
-                }}
                 onChangeEndCB={() => {
-                  // setChanging(false)
-
                   onUpdateVariant()
                 }}
               />
