@@ -35,17 +35,11 @@ import {
   FiMenu,
   FiMoon,
   FiSun,
-  FiTrash2,
   FiUnderline,
   FiUpload,
   FiUser,
 } from 'react-icons/fi'
-import {
-  MdOutlineColorLens,
-  MdOutlineLogin,
-  MdOutlineLogout,
-  MdOutlineVerified,
-} from 'react-icons/md'
+import { MdOutlineColorLens } from 'react-icons/md'
 import { RiBookLine } from 'react-icons/ri'
 import { RxComponent1, RxShadow } from 'react-icons/rx'
 import { TbColorSwatch } from 'react-icons/tb'
@@ -217,7 +211,6 @@ export function Sidebar({
   onSelectTab,
   onOpenSettings,
   onExport,
-  onDelete,
   isDisabled,
   isCollapsed,
   onToggleCollapsed,
@@ -227,12 +220,10 @@ export function Sidebar({
   onSelectTab: (tab: TTab) => void
   onOpenSettings: () => void
   onExport: () => void
-  onDelete: () => void
   isDisabled?: boolean
   isCollapsed: boolean
   onToggleCollapsed: () => void
 }) {
-  const logoutFn = useLogoutFunction()
   const authInfo = useAuthInfo()
   const { colorMode, toggleColorMode } = useColorMode()
   const { redirectToLoginPage, redirectToAccountPage } = useRedirectFunctions()
@@ -418,39 +409,6 @@ export function Sidebar({
                 )}
               </SidebarSection>
 
-              {/* <SidebarSection
-            header={<SidebarHeader label="Account" />}
-            isCollapsed={isCollapsed}
-          >
-            <SidebarLink
-              key="sidebar-upgrade"
-              label={'Upgrade'}
-              icon={MdOutlineVerified}
-              isDisabled={isDisabled}
-              isCollapsed={isCollapsed}
-              onSelect={() => {
-                window.open(
-                  'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
-                  '_blank'
-                )
-              }}
-            />
-            <SidebarLink
-              key="sidebar-log-out"
-              label={authInfo.isLoggedIn ? 'Log Out' : 'Log In'}
-              icon={authInfo.isLoggedIn ? MdOutlineLogout : MdOutlineLogin}
-              isDisabled={isDisabled}
-              isCollapsed={isCollapsed}
-              onSelect={() => {
-                if (authInfo.isLoggedIn) {
-                  logoutFn(true)
-                } else {
-                  redirectToLoginPage()
-                }
-              }}
-            />
-          </SidebarSection> */}
-
               <Box>
                 <Box css={{ marginBottom: '24px' }}>
                   {isCollapsed ? (
@@ -562,21 +520,7 @@ export function Sidebar({
                       window.open('https://mirrorful.com/contact', '_blank')
                     }}
                   />
-                  {/* <Icon
-                as={FiTrash2}
-                css={{
-                  width: '1.2rem',
-                  height: '1.2rem',
-                  transition: 'color 200ms ease-in-out',
-                }}
-                _hover={{
-                  color: 'var(--text-color-primary)',
-                  cursor: 'pointer',
-                }}
-                onClick={() => {
-                  onDelete()
-                }}
-              /> */}
+
                   {authInfo.isLoggedIn ? (
                     <Icon
                       as={FiUser}
@@ -629,7 +573,11 @@ export function Sidebar({
                       <>
                         <Icon
                           as={FiMoon}
-                          css={{ width: '1.2rem', height: '1.2rem' }}
+                          css={{
+                            width: '1.2rem',
+                            height: '1.2rem',
+                            cursor: 'pointer',
+                          }}
                           onClick={() => {
                             toggleColorMode()
                           }}
@@ -639,18 +587,18 @@ export function Sidebar({
                           css={{ margin: '0 8px' }}
                           isChecked={colorMode === 'light'}
                           onChange={() => {
-                            if (colorMode === 'light') {
-                              toggleColorMode()
-                            }
+                            toggleColorMode()
                           }}
                         />
                         <Icon
                           as={FiSun}
-                          css={{ width: '1.2rem', height: '1.2rem' }}
+                          css={{
+                            width: '1.2rem',
+                            height: '1.2rem',
+                            cursor: 'pointer',
+                          }}
                           onClick={() => {
-                            if (colorMode === 'dark') {
-                              toggleColorMode()
-                            }
+                            toggleColorMode()
                           }}
                         />
                       </>
@@ -672,20 +620,6 @@ export function Sidebar({
                       />
                     )}
                   </Box>
-
-                  {/* {authInfo.user?.pictureUrl && !isCollapsed && (
-                <Image
-                  alt="Profile Picture"
-                  onClick={() => redirectToAccountPage()}
-                  src={authInfo.user?.pictureUrl}
-                  width={30}
-                  height={30}
-                  style={{
-                    borderRadius: '50%',
-                    cursor: 'pointer',
-                  }}
-                />
-              )} */}
                 </Flex>
 
                 {!isCollapsed && (
@@ -821,39 +755,6 @@ export function Sidebar({
                   )}
                 </SidebarSection>
 
-                {/* <SidebarSection
-            header={<SidebarHeader label="Account" />}
-            isCollapsed={isCollapsed}
-          >
-            <SidebarLink
-              key="sidebar-upgrade"
-              label={'Upgrade'}
-              icon={MdOutlineVerified}
-              isDisabled={isDisabled}
-              isCollapsed={isCollapsed}
-              onSelect={() => {
-                window.open(
-                  'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
-                  '_blank'
-                )
-              }}
-            />
-            <SidebarLink
-              key="sidebar-log-out"
-              label={authInfo.isLoggedIn ? 'Log Out' : 'Log In'}
-              icon={authInfo.isLoggedIn ? MdOutlineLogout : MdOutlineLogin}
-              isDisabled={isDisabled}
-              isCollapsed={isCollapsed}
-              onSelect={() => {
-                if (authInfo.isLoggedIn) {
-                  logoutFn(true)
-                } else {
-                  redirectToLoginPage()
-                }
-              }}
-            />
-          </SidebarSection> */}
-
                 <Box>
                   <Box css={{ marginBottom: '24px' }}>
                     {isCollapsed ? (
@@ -965,21 +866,7 @@ export function Sidebar({
                         window.open('https://mirrorful.com/contact', '_blank')
                       }}
                     />
-                    {/* <Icon
-                as={FiTrash2}
-                css={{
-                  width: '1.2rem',
-                  height: '1.2rem',
-                  transition: 'color 200ms ease-in-out',
-                }}
-                _hover={{
-                  color: 'var(--text-color-primary)',
-                  cursor: 'pointer',
-                }}
-                onClick={() => {
-                  onDelete()
-                }}
-              /> */}
+
                     {authInfo.isLoggedIn ? (
                       <Icon
                         as={FiUser}
@@ -1020,6 +907,9 @@ export function Sidebar({
                     flexDirection={isCollapsed ? 'column' : 'row'}
                     alignItems="center"
                     justifyContent="space-between"
+                    onClick={() => {
+                      toggleColorMode()
+                    }}
                   >
                     <Box
                       css={{
@@ -1030,32 +920,42 @@ export function Sidebar({
                     >
                       {!isCollapsed ? (
                         <>
-                          <Icon
-                            as={FiMoon}
-                            css={{ width: '1.2rem', height: '1.2rem' }}
+                          <Box
+                            cursor={'pointer'}
                             onClick={() => {
                               toggleColorMode()
                             }}
-                          />
+                          >
+                            <Icon
+                              as={FiMoon}
+                              css={{
+                                width: '1.2rem',
+                                height: '1.2rem',
+                              }}
+                            />
+                          </Box>
                           <Switch
                             colorScheme="gray"
-                            css={{ margin: '0 8px' }}
-                            isChecked={colorMode === 'light'}
+                            css={{ margin: '0 8px', cursor: 'pointer' }}
                             onChange={() => {
-                              if (colorMode === 'light') {
-                                toggleColorMode()
-                              }
+                              toggleColorMode()
                             }}
+                            isChecked={colorMode === 'light'}
                           />
-                          <Icon
-                            as={FiSun}
-                            css={{ width: '1.2rem', height: '1.2rem' }}
+                          <Box
+                            cursor={'pointer'}
                             onClick={() => {
-                              if (colorMode === 'dark') {
-                                toggleColorMode()
-                              }
+                              toggleColorMode()
                             }}
-                          />
+                          >
+                            <Icon
+                              as={FiSun}
+                              css={{
+                                width: '1.2rem',
+                                height: '1.2rem',
+                              }}
+                            />
+                          </Box>
                         </>
                       ) : (
                         <Icon
@@ -1075,20 +975,6 @@ export function Sidebar({
                         />
                       )}
                     </Box>
-
-                    {/* {authInfo.user?.pictureUrl && !isCollapsed && (
-                <Image
-                  alt="Profile Picture"
-                  onClick={() => redirectToAccountPage()}
-                  src={authInfo.user?.pictureUrl}
-                  width={30}
-                  height={30}
-                  style={{
-                    borderRadius: '50%',
-                    cursor: 'pointer',
-                  }}
-                />
-              )} */}
                   </Flex>
 
                   {!isCollapsed && (
