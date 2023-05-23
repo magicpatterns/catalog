@@ -111,6 +111,7 @@ export function ColorsDisplay({
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
   const [colors, setColors] = useState<TTokenGroup>(colorData)
+  const [changingVariants, setChangingVariant] = useState(false)
 
   const colorNameRef = useRef() as MutableRefObject<HTMLInputElement>
 
@@ -309,7 +310,7 @@ export function ColorsDisplay({
                               : (Number(newVariant.name) as ShadeStop),
                           })
                         )
-                      Object.keys(additionalVariants).map((variants) => {
+                      Object.keys(additionalVariants).forEach((variants) => {
                         updatedColorData[variants].value =
                           additionalVariants[variants].value
                       })
@@ -335,7 +336,7 @@ export function ColorsDisplay({
                             : (Number(newVariant.name) as ShadeStop),
                         })
                       )
-                    Object.keys(additionalVariants).map((variants) => {
+                    Object.keys(additionalVariants).forEach((variants) => {
                       updatedColorData[variants].value =
                         additionalVariants[variants].value
                     })
@@ -344,12 +345,10 @@ export function ColorsDisplay({
                     //   ...additionalVariants,
                     //   DEFAULT: newVariant.token,
                     // }
-                    console.log(colors, updatedColorData)
                     setColors(updatedColorData)
                     onUpdateColorData(updatedColorData)
                   }}
                   onUpdateVariant={() => {
-                    console.log('updating')
                     onUpdateColorData(colors)
                   }}
                 />
