@@ -120,7 +120,7 @@ export function EditFontSizeModal({
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'xs', sm: 'xl' }}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>

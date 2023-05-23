@@ -178,7 +178,7 @@ export function ColorsDisplay({
               border: 'none',
             }}
             padding={1}
-            fontSize={'1.5rem'}
+            fontSize={{ base: '1.3rem', md: '1.5rem' }}
             width={`${(state.colourName as string).length * 12}px`}
             minWidth={200}
             ml={1}
@@ -205,7 +205,8 @@ export function ColorsDisplay({
         ) : (
           <Text
             padding={1}
-            style={{ fontWeight: 600, fontSize: '1.5rem' }}
+            fontWeight={600}
+            fontSize={{ base: '1.3rem', md: '1.5rem' }}
             onDoubleClick={() => {
               dispatch({
                 type: ACTIONS.SET_IS_EDITING,

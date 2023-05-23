@@ -1,4 +1,4 @@
-import { Box, Spinner, useDisclosure } from '@chakra-ui/react'
+import { Box, Spinner, useDisclosure, useMediaQuery } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
 import { useAuthInfo } from '@propelauth/react'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -117,14 +117,25 @@ export default function Layout({
     })
   }
 
+  const [isMobileView] = useMediaQuery('(max-width: 480px)')
+
   return (
     <>
-      <Box css={{ width: '100%', minHeight: '100vh', display: 'flex' }}>
+      <Box
+        css={{ width: '100%', minHeight: '100vh', display: 'flex' }}
+        flexDirection={{ base: 'column', sm: 'row' }}
+      >
         <motion.div
-          animate={{
-            width: isSidebarCollapsed ? '50px' : '250px',
-            position: 'fixed',
-          }}
+          animate={
+            isMobileView
+              ? {
+                  width: isSidebarCollapsed ? '50px' : '250px',
+                }
+              : {
+                  width: isSidebarCollapsed ? '50px' : '250px',
+                  position: 'fixed',
+                }
+          }
         >
           <Sidebar
             platform={platform}

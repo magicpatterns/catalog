@@ -313,7 +313,7 @@ export function EditShadowModal({
   }
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={onClose} size={{ base: 'xs', sm: 'xl' }}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
@@ -427,39 +427,37 @@ export function EditShadowModal({
               </Box>
               <FormControl>
                 <Box>
-                  {newInitialValues
-                    ?.filter(
-                      (_arg: ShadowValue, index: number) =>
-                        shadowIndex === index
-                    )
-                    .map((_arg: ShadowValue, index: number) => (
-                      <ShadowColorPicker
-                        key={index}
-                        blur={blur[index]}
-                        spread={spread[index]}
-                        hOffset={hOffset[index]}
-                        vOffset={vOffset[index]}
-                        handleColor={handleColor}
-                        handleBlur={handleBlur}
-                        handleSpread={handleSpread}
-                        handleHOffset={handleHOffset}
-                        handleVOffset={handleVOffset}
-                        color={color[index]}
-                        index={index}
-                        codeResult={codeResult}
-                      />
-                    ))}
+                  {newInitialValues?.map((_arg: ShadowValue, index: number) => (
+                    <Box key={index}>
+                      {shadowIndex === index && (
+                        <ShadowColorPicker
+                          blur={blur[index]}
+                          spread={spread[index]}
+                          hOffset={hOffset[index]}
+                          vOffset={vOffset[index]}
+                          handleColor={handleColor}
+                          handleBlur={handleBlur}
+                          handleSpread={handleSpread}
+                          handleHOffset={handleHOffset}
+                          handleVOffset={handleVOffset}
+                          color={color[index]}
+                          index={index}
+                          codeResult={codeResult}
+                        />
+                      )}
+                    </Box>
+                  ))}
                 </Box>
               </FormControl>
 
               <Box
                 css={{
-                  marginTop: '1em',
                   width: '100%',
                   display: 'flex',
                   justifyContent: 'center',
                   flexDirection: 'column',
                 }}
+                marginTop={{ base: '2em', sm: '1em' }}
               >
                 <Text style={{ marginBottom: '.5em' }}>
                   <FormLabel>Value of Shadow {shadowIndex + 1}</FormLabel>

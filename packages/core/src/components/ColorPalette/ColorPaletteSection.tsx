@@ -33,15 +33,19 @@ export function ColorPaletteSection({
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <LoginAlert />
       <Heading
-        fontSize={'2.5rem'}
+        fontSize={{ base: '2.3rem', md: '2.5rem' }}
         fontWeight="black"
         color="var(--text-color-primary)"
       >
         Color Palette
       </Heading>
-      <Box display="flex" justifyContent="space-between">
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        flexDirection={{ base: 'column', md: 'row' }}
+      >
         <Text
-          fontSize={'1.2rem'}
+          fontSize={{ base: '1rem', md: '1.2rem' }}
           fontWeight="medium"
           color="var(--text-color-secondary)"
           css={{ marginTop: '12px' }}
@@ -50,7 +54,12 @@ export function ColorPaletteSection({
         </Text>
         {totalVariants > 5 && (
           <>
-            <Button width="160px" variant="outline" onClick={() => onOpen()}>
+            <Button
+              width="160px"
+              variant="outline"
+              onClick={() => onOpen()}
+              marginTop={{ base: '12px', md: '0' }}
+            >
               Add New Color
             </Button>
           </>
