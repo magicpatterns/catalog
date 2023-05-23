@@ -92,11 +92,15 @@ export function VariantRowDisplay({
   onUpdateVariant,
   hideIcons = false,
   isBase = false,
+  onChangeColors,
+  updateBaseVariant,
 }: {
   hideIcons?: boolean
   isBase?: boolean
   variant: TNamedToken
-  onUpdateVariant: (newVariant: TNamedToken, updateDefault: boolean) => void
+  onUpdateVariant: () => void
+  updateBaseVariant: (newVariant: TNamedToken, updateDefault: boolean) => void
+  onChangeColors: (newVariant: TNamedToken, updateDefault: boolean) => void
 }) {
   const [showSlider, setShowSlider] = useState(false)
   const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
@@ -122,16 +126,7 @@ export function VariantRowDisplay({
 
   useEffect(() => {
     if (color !== token.value && !changing) {
-      onUpdateVariant(
-        {
-          ...variant,
-          token: {
-            ...variant.token,
-            value: color,
-          },
-        },
-        isBase
-      )
+      onUpdateVariant()
     }
   }, [color, changing])
 
@@ -159,6 +154,16 @@ export function VariantRowDisplay({
       }).toHexString()
     }
     setColor(newColor)
+    onChangeColors(
+      {
+        ...variant,
+        token: {
+          ...variant.token,
+          value: newColor,
+        },
+      },
+      isBase
+    )
   }
 
   const textColor =
@@ -226,7 +231,7 @@ export function VariantRowDisplay({
               <IconButton
                 disabled={isBase}
                 onClick={() => {
-                  onUpdateVariant(variant, true)
+                  updateBaseVariant(variant, true)
                 }}
                 style={{ marginLeft: '24px' }}
                 variant="outline"
@@ -337,7 +342,8 @@ export const VariantRow = React.memo(
   (prevProps, nextProps) => {
     return (
       prevProps.variant.token.value === nextProps.variant.token.value &&
-      prevProps.variant.name === nextProps.variant.name
+      prevProps.variant.name === nextProps.variant.name &&
+      prevProps.isBase === nextProps.isBase
     )
   }
 )
