@@ -139,6 +139,12 @@ export function EditBaseColorModal({
                     onUpdateVariant={() => {
                       return null
                     }}
+                    onChangeColors={() => {
+                      return null
+                    }}
+                    updateBaseVariant={() => {
+                      return null
+                    }}
                     hideIcons
                   />
                 </Box>

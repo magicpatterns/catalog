@@ -135,6 +135,12 @@ export function AddColorModal({
                   onUpdateVariant={() => {
                     return null
                   }}
+                  onChangeColors={() => {
+                    return null
+                  }}
+                  updateBaseVariant={() => {
+                    return null
+                  }}
                   hideIcons
                 />
                 <FormControl
