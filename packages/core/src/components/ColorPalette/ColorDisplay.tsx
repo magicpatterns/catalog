@@ -14,7 +14,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { MutableRefObject, useReducer, useRef } from 'react'
 import { FiEdit } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
@@ -110,6 +110,8 @@ export function ColorsDisplay({
   }
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
+  const [colors, setColors] = useState<TTokenGroup>(colorData)
+
   const colorNameRef = useRef() as MutableRefObject<HTMLInputElement>
 
   const handleSave = () => {
@@ -132,16 +134,18 @@ export function ColorsDisplay({
     onUpdateColorName(state.colourName?.trim() as string)
   }
 
-  const namedTokens = Object.keys(colorData)
-    .map((key) => ({
-      name: key,
-      token: colorData[key],
-    }))
-    .filter((value): value is TNamedToken => assertToken(value.token))
+  const namedTokens = useMemo(() => {
+    return Object.keys(colors)
+      .map((key) => ({
+        name: key,
+        token: colors[key],
+      }))
+      .filter((value): value is TNamedToken => assertToken(value.token))
+  }, [colors])
 
   const defaultNamedToken: TNamedToken = {
     name: 'DEFAULT',
-    token: colorData['DEFAULT'] as TToken,
+    token: colors['DEFAULT'] as TToken,
   }
 
   let baseColorToken = defaultNamedToken
@@ -160,6 +164,7 @@ export function ColorsDisplay({
 
   let alreadySetBase = false
   let isBase = false
+
   return (
     <Box
       css={{
@@ -288,14 +293,36 @@ export function ColorsDisplay({
                 <VariantRow
                   variant={variant}
                   isBase={isBase}
-                  onUpdateVariant={(
+                  onChangeColors={(
                     newVariant: TNamedToken,
                     updateDefault: boolean
                   ) => {
-                    const updatedColorData = { ...colorData }
+                    const updatedColorData = structuredClone(colors)
                     if (updateDefault) {
-                      let additionalVariants: TTokenGroup = {}
-                      additionalVariants = defaultColorShadesToTokens(
+                      const additionalVariants: TTokenGroup =
+                        defaultColorShadesToTokens(
+                          generateDefaultColorShades({
+                            primary: newVariant.token.value,
+                          })
+                        )
+
+                      const colorTokenGroup: TTokenGroup = {
+                        ...additionalVariants,
+                        DEFAULT: newVariant.token,
+                      }
+                      setColors(colorTokenGroup)
+                    } else {
+                      updatedColorData[newVariant.name] = newVariant.token
+
+                      setColors(updatedColorData)
+                    }
+                  }}
+                  updateBaseVariant={(
+                    newVariant: TNamedToken,
+                    updateDefault: boolean
+                  ) => {
+                    const additionalVariants: TTokenGroup =
+                      defaultColorShadesToTokens(
                         generateDefaultColorShades({
                           primary: newVariant.token.value,
                           baseStop: Number.isNaN(Number(newVariant.name))
@@ -303,15 +330,15 @@ export function ColorsDisplay({
                             : (Number(newVariant.name) as ShadeStop),
                         })
                       )
-                      const colorTokenGroup: TTokenGroup = {
-                        DEFAULT: newVariant.token,
-                        ...additionalVariants,
-                      }
-                      onUpdateColorData(colorTokenGroup)
-                    } else {
-                      updatedColorData[newVariant.name] = newVariant.token
-                      onUpdateColorData(updatedColorData)
+                    const colorTokenGroup: TTokenGroup = {
+                      ...additionalVariants,
+                      DEFAULT: newVariant.token,
                     }
+                    setColors(colorTokenGroup)
+                    onUpdateColorData(colorTokenGroup)
+                  }}
+                  onUpdateVariant={() => {
+                    onUpdateColorData(colors)
                   }}
                 />
               </motion.div>
@@ -341,6 +368,9 @@ export function ColorsDisplay({
 
 export const ColorDisplay = React.memo(ColorsDisplay, (prev, next) => {
   return Object.keys(prev.colorData).every(
-    (color) => prev.colorData[color].value === next.colorData[color].value
+    (color) =>
+      prev.colorData[color].value === next.colorData[color].value &&
+      prev.colorData[color].id === next.colorData[color].id &&
+      prev.colorData['DEFAULT'] === next.colorData['DEFAULT']
   )
 })
