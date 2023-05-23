@@ -187,7 +187,7 @@ export function UpgradeModal({
                     cta="Get Early Access"
                     onClick={() => {
                       window.open(
-                        'https://docs.google.com/forms/d/e/1FAIpQLSdW4119bYcyGzwbNbarSwA437N9AAnJzAy6jl-XTjZybouk0g/viewform?usp=sf_link',
+                        'https://docs.google.com/forms/d/e/1FAIpQLSc8qMWDSUTHMT8f6KNYBOuNItfxtSrvxqTmlIB8030Gtfx1yw/viewform',
                         '_blank'
                       )
                     }}

@@ -143,7 +143,6 @@ export default function Layout({
             onSelectTab={(newTab: TTab) => router.push(newTab)}
             onOpenSettings={() => onExportSettingsModalOpen()}
             onExport={handleExport}
-            onDelete={onDeleteAlertDialogOpen}
             isCollapsed={isSidebarCollapsed}
             onToggleCollapsed={() => setIsSidebarCollapsed((prev) => !prev)}
           />
