@@ -292,7 +292,7 @@ export function ColorsDisplay({
                 }}
               >
                 <VariantRow
-                  variant={variant}
+                  variant={structuredClone(variant)}
                   isBase={isBase}
                   onChangeColors={(
                     newVariant: TNamedToken,
