@@ -124,12 +124,6 @@ export function VariantRowDisplay({
     return () => clearTimeout(copiedTimeout)
   }, [hasCopiedHexCode])
 
-  useEffect(() => {
-    if (color !== token.value && !changing) {
-      onUpdateVariant()
-    }
-  }, [color, changing])
-
   const onHSLSlide = ({
     val,
     type,
@@ -328,6 +322,8 @@ export function VariantRowDisplay({
                 }}
                 onChangeEndCB={() => {
                   setChanging(false)
+
+                  onUpdateVariant()
                 }}
               />
             )
