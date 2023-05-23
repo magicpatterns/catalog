@@ -298,20 +298,23 @@ export function ColorsDisplay({
                     newVariant: TNamedToken,
                     updateDefault: boolean
                   ) => {
-                    const updatedColorData = structuredClone(colors)
+                    const updatedColorData = { ...colors }
                     if (updateDefault) {
                       const additionalVariants: TTokenGroup =
                         defaultColorShadesToTokens(
                           generateDefaultColorShades({
                             primary: newVariant.token.value,
+                            baseStop: Number.isNaN(Number(newVariant.name))
+                              ? 500
+                              : (Number(newVariant.name) as ShadeStop),
                           })
                         )
-
-                      const colorTokenGroup: TTokenGroup = {
-                        ...additionalVariants,
-                        DEFAULT: newVariant.token,
-                      }
-                      setColors(colorTokenGroup)
+                      Object.keys(additionalVariants).map((variants) => {
+                        updatedColorData[variants].value =
+                          additionalVariants[variants].value
+                      })
+                      updatedColorData['DEFAULT'] = newVariant.token
+                      setColors(updatedColorData)
                     } else {
                       updatedColorData[newVariant.name] = newVariant.token
 
@@ -322,6 +325,7 @@ export function ColorsDisplay({
                     newVariant: TNamedToken,
                     updateDefault: boolean
                   ) => {
+                    const updatedColorData = { ...colors }
                     const additionalVariants: TTokenGroup =
                       defaultColorShadesToTokens(
                         generateDefaultColorShades({
@@ -331,14 +335,21 @@ export function ColorsDisplay({
                             : (Number(newVariant.name) as ShadeStop),
                         })
                       )
-                    const colorTokenGroup: TTokenGroup = {
-                      ...additionalVariants,
-                      DEFAULT: newVariant.token,
-                    }
-                    setColors(colorTokenGroup)
-                    onUpdateColorData(colorTokenGroup)
+                    Object.keys(additionalVariants).map((variants) => {
+                      updatedColorData[variants].value =
+                        additionalVariants[variants].value
+                    })
+                    updatedColorData['DEFAULT'] = newVariant.token
+                    // const colorTokenGroup: TTokenGroup = {
+                    //   ...additionalVariants,
+                    //   DEFAULT: newVariant.token,
+                    // }
+                    console.log(colors, updatedColorData)
+                    setColors(updatedColorData)
+                    onUpdateColorData(updatedColorData)
                   }}
                   onUpdateVariant={() => {
+                    console.log('updating')
                     onUpdateColorData(colors)
                   }}
                 />
@@ -368,10 +379,13 @@ export function ColorsDisplay({
 }
 
 export const ColorDisplay = React.memo(ColorsDisplay, (prev, next) => {
-  return Object.keys(prev.colorData).every(
-    (color) =>
-      prev.colorData[color].value === next.colorData[color].value &&
-      prev.colorData[color].id === next.colorData[color].id &&
-      prev.colorData['DEFAULT'] === next.colorData['DEFAULT']
+  return (
+    Object.keys(prev.colorData).every(
+      (color) =>
+        prev.colorData[color].value === next.colorData[color].value &&
+        prev.colorData[color].id === next.colorData[color].id
+    ) &&
+    prev.colorData['DEFAULT'].id === next.colorData['DEFAULT'].id &&
+    prev.colorData['DEFAULT'].value === next.colorData['DEFAULT'].value
   )
 })
