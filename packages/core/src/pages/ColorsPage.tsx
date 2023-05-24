@@ -1,4 +1,5 @@
 'use client'
+import { Box } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
 import { ColorPaletteSection } from '@core/components/ColorPalette/ColorPaletteSection'
 import useMirrorfulStore, {
@@ -44,6 +45,17 @@ export function ColorsPage({
     })
   }
   return (
-    <ColorPaletteSection colors={colors} onUpdateColors={handleUpdateColors} />
+    <Box
+      padding={{
+        base: '24px 48px',
+        md: '36px 72px',
+        lg: '48px 96px',
+      }}
+    >
+      <ColorPaletteSection
+        colors={colors}
+        onUpdateColors={handleUpdateColors}
+      />
+    </Box>
   )
 }

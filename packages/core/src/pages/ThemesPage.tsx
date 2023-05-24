@@ -90,7 +90,13 @@ export function ThemesPage({
   }, [isLoaded])
 
   return (
-    <>
+    <Box
+      padding={{
+        base: '24px 48px',
+        md: '36px 72px',
+        lg: '48px 96px',
+      }}
+    >
       <LoginAlert />
       <Heading
         fontSize={'2.5rem'}
@@ -148,6 +154,6 @@ export function ThemesPage({
           handleCloseThemeOnboarding()
         }}
       />
-    </>
+    </Box>
   )
 }

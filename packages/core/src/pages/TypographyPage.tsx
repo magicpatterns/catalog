@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
 import { TypographySection } from '@core/components/Typography/TypographySection'
 import useMirrorfulStore, {
@@ -39,13 +40,21 @@ export function TypographyPage({
     })
   }
   return (
-    <TypographySection
-      typography={{
-        fontSizes: typography.fontSizes,
-        fontWeights: typography.fontWeights,
-        lineHeights: typography.lineHeights,
+    <Box
+      padding={{
+        base: '24px 48px',
+        md: '36px 72px',
+        lg: '48px 96px',
       }}
-      onUpdateTypography={handleUpdateTypography}
-    />
+    >
+      <TypographySection
+        typography={{
+          fontSizes: typography.fontSizes,
+          fontWeights: typography.fontWeights,
+          lineHeights: typography.lineHeights,
+        }}
+        onUpdateTypography={handleUpdateTypography}
+      />
+    </Box>
   )
 }

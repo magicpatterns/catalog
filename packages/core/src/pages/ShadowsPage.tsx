@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
 import { ShadowsSection } from '@core/components/Shadows/ShadowsSection'
 import useMirrorfulStore, {
@@ -39,9 +40,17 @@ export function ShadowsPage({
     })
   }
   return (
-    <ShadowsSection
-      shadows={shadows}
-      onUpdateShadowData={handleUpdateShadows}
-    />
+    <Box
+      padding={{
+        base: '24px 48px',
+        md: '36px 72px',
+        lg: '48px 96px',
+      }}
+    >
+      <ShadowsSection
+        shadows={shadows}
+        onUpdateShadowData={handleUpdateShadows}
+      />
+    </Box>
   )
 }

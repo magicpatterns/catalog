@@ -127,7 +127,12 @@ export default function Layout({
           <Sidebar
             platform={platform}
             activeTab={pathname}
-            onSelectTab={(newTab: TTab) => router.push(newTab)}
+            onSelectTab={(newTab: TTab) => {
+              if (newTab === '/components') {
+                setIsSidebarCollapsed(true)
+              }
+              router.push(newTab)
+            }}
             onOpenSettings={() => onExportSettingsModalOpen()}
             onExport={handleExport}
             isCollapsed={isSidebarCollapsed}
@@ -136,7 +141,7 @@ export default function Layout({
         </motion.div>
         <motion.div
           animate={{
-            minWidth: isSidebarCollapsed ? ' 100px' : '250px',
+            minWidth: isSidebarCollapsed ? ' 50px' : '250px',
           }}
         />
         <Box
@@ -144,11 +149,6 @@ export default function Layout({
             backgroundColor: 'var(--background-color-primary)',
             flexGrow: 1,
             transition: 'background-color 200ms',
-          }}
-          padding={{
-            base: '24px 48px',
-            md: '36px 72px',
-            lg: '48px 96px',
           }}
         >
           <AnimatePresence>
