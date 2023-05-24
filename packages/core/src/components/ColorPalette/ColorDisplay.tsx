@@ -14,7 +14,6 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
-import React, { useMemo, useState } from 'react'
 import { MutableRefObject, useReducer, useRef } from 'react'
 import { FiEdit } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
@@ -27,7 +26,7 @@ import {
 } from './utils'
 import { VariantRow } from './VariantRow'
 
-export function ColorsDisplay({
+export function ColorDisplay({
   colorName,
   colorData,
   onUpdateColorData,
@@ -110,8 +109,6 @@ export function ColorsDisplay({
   }
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
-  const [colors, setColors] = useState<TTokenGroup>(colorData)
-
   const colorNameRef = useRef() as MutableRefObject<HTMLInputElement>
 
   const handleSave = () => {
@@ -134,18 +131,16 @@ export function ColorsDisplay({
     onUpdateColorName(state.colourName?.trim() as string)
   }
 
-  const namedTokens = useMemo(() => {
-    return Object.keys(colors)
-      .map((key) => ({
-        name: key,
-        token: colors[key],
-      }))
-      .filter((value): value is TNamedToken => assertToken(value.token))
-  }, [colors])
+  const namedTokens = Object.keys(colorData)
+    .map((key) => ({
+      name: key,
+      token: colorData[key],
+    }))
+    .filter((value): value is TNamedToken => assertToken(value.token))
 
   const defaultNamedToken: TNamedToken = {
     name: 'DEFAULT',
-    token: colors['DEFAULT'] as TToken,
+    token: colorData['DEFAULT'] as TToken,
   }
 
   let baseColorToken = defaultNamedToken
@@ -164,7 +159,6 @@ export function ColorsDisplay({
 
   let alreadySetBase = false
   let isBase = false
-
   return (
     <Box
       css={{
@@ -281,7 +275,7 @@ export function ColorsDisplay({
             }
             return (
               <motion.div
-                key={`${colorName}-${variant.name}`}
+                key={variant.name}
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
@@ -292,39 +286,16 @@ export function ColorsDisplay({
                 }}
               >
                 <VariantRow
-                  variant={structuredClone(variant)}
+                  variant={variant}
                   isBase={isBase}
-                  onChangeColors={(
+                  onUpdateVariant={(
                     newVariant: TNamedToken,
                     updateDefault: boolean
                   ) => {
-                    const updatedColorData = { ...colors }
+                    const updatedColorData = { ...colorData }
                     if (updateDefault) {
-                      const additionalVariants: TTokenGroup =
-                        defaultColorShadesToTokens(
-                          generateDefaultColorShades({
-                            primary: newVariant.token.value,
-                            baseStop: Number.isNaN(Number(newVariant.name))
-                              ? 500
-                              : (Number(newVariant.name) as ShadeStop),
-                          })
-                        )
-                      Object.keys(additionalVariants).forEach((variants) => {
-                        updatedColorData[variants].value =
-                          additionalVariants[variants].value
-                      })
-                      updatedColorData['DEFAULT'] = newVariant.token
-                      setColors(updatedColorData)
-                    } else {
-                      updatedColorData[newVariant.name] = newVariant.token
-
-                      setColors(updatedColorData)
-                    }
-                  }}
-                  updateBaseVariant={(newVariant: TNamedToken) => {
-                    const updatedColorData = { ...colors }
-                    const additionalVariants: TTokenGroup =
-                      defaultColorShadesToTokens(
+                      let additionalVariants: TTokenGroup = {}
+                      additionalVariants = defaultColorShadesToTokens(
                         generateDefaultColorShades({
                           primary: newVariant.token.value,
                           baseStop: Number.isNaN(Number(newVariant.name))
@@ -332,20 +303,15 @@ export function ColorsDisplay({
                             : (Number(newVariant.name) as ShadeStop),
                         })
                       )
-                    Object.keys(additionalVariants).forEach((variants) => {
-                      updatedColorData[variants].value =
-                        additionalVariants[variants].value
-                    })
-                    updatedColorData['DEFAULT'] = newVariant.token
-                    // const colorTokenGroup: TTokenGroup = {
-                    //   ...additionalVariants,
-                    //   DEFAULT: newVariant.token,
-                    // }
-                    setColors(updatedColorData)
-                    onUpdateColorData(updatedColorData)
-                  }}
-                  onUpdateVariant={() => {
-                    onUpdateColorData(colors)
+                      const colorTokenGroup: TTokenGroup = {
+                        DEFAULT: newVariant.token,
+                        ...additionalVariants,
+                      }
+                      onUpdateColorData(colorTokenGroup)
+                    } else {
+                      updatedColorData[newVariant.name] = newVariant.token
+                      onUpdateColorData(updatedColorData)
+                    }
                   }}
                 />
               </motion.div>
@@ -372,15 +338,3 @@ export function ColorsDisplay({
     </Box>
   )
 }
-
-export const ColorDisplay = React.memo(ColorsDisplay, (prev, next) => {
-  return (
-    Object.keys(prev.colorData).every(
-      (color) =>
-        prev.colorData[color].value === next.colorData[color].value &&
-        prev.colorData[color].id === next.colorData[color].id
-    ) &&
-    prev.colorData['DEFAULT'].id === next.colorData['DEFAULT'].id &&
-    prev.colorData['DEFAULT'].value === next.colorData['DEFAULT'].value
-  )
-})

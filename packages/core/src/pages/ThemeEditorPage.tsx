@@ -26,22 +26,17 @@ export function ThemeEditorPage({
   themeId: string
   fetchStoreId: () => Promise<string>
 }) {
-  const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
-  const typography = useMirrorfulStore(
-    (state: MirrorfulState) => state.typography
-  )
-  const shadows = useMirrorfulStore((state: MirrorfulState) => state.shadows)
-  const fileTypes = useMirrorfulStore(
-    (state: MirrorfulState) => state.fileTypes
-  )
-  const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
-  const setThemes = useMirrorfulStore(
-    (state: MirrorfulState) => state.setThemes
-  )
-  const metadata = useMirrorfulStore((state: MirrorfulState) => state.metadata)
-
   const router = useRouter()
   const authInfo = useAuthInfo()
+  const {
+    typography,
+    colors,
+    shadows,
+    fileTypes,
+    themes,
+    setThemes,
+    metadata,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
 
   const selectedTheme = themes.find((t) => t.id === themeId)
 
