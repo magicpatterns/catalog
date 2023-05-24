@@ -279,7 +279,7 @@ export function Sidebar({
             css={{
               display: 'flex',
               flexDirection: 'column',
-              padding: isCollapsed ? '16px 12px' : '16px 24px',
+              padding: isCollapsed ? '36px 12px' : '36px 24px',
               height: '100%',
               width: '100%',
               backgroundColor: 'var(--background-color-secondary)',

@@ -1,97 +1,42 @@
 'use client'
 
-import { Box, Heading, Link, Stack, Text } from '@chakra-ui/react'
-import { useState } from 'react'
-
-type TComponent = 'button'
+import { Box, Button, Heading, Text, useColorMode } from '@chakra-ui/react'
 
 export function ComponentsPage() {
-  const [selectedComponent, setSelectedComponent] =
-    useState<TComponent>('button')
+  const { colorMode } = useColorMode()
 
   return (
-    <Box
-      css={{
-        display: 'grid',
-        gridTemplateColumns: '250px auto',
-        gridTemplateRows: '70px auto',
-        gridColumnGap: '0px',
-        gridRowGap: '0px',
-        backgroundColor: 'blue',
-        height: '100%',
-      }}
-    >
-      {/* Header */}
-      <Box css={{ gridArea: '1 / 1 / 2 / 6', backgroundColor: 'red' }}>
-        <Stack
-          direction="row"
-          css={{ alignItems: 'center', padding: '0 24px', height: '100%' }}
-          bgColor="var(--background-color-tertiary)"
-        >
-          <Box
-            fontWeight="black"
-            color="var(--text-color-primary)"
-            fontSize="1.5rem"
-            width="250px"
-          >
-            Components
-          </Box>
-          <Box>Edit Variants</Box>
-        </Stack>
-      </Box>
-      {/* Sidebar */}
-      <Box
-        css={{ gridArea: '2 / 1 / 6 / 2', padding: '12px 24px' }}
-        bgColor="var(--background-color-tertiary)"
-      >
-        <Heading
-          fontWeight="bold"
-          fontSize={'0.8rem'}
+    <Box>
+      <Heading fontSize={'2.5rem'} fontWeight="black">
+        Components
+      </Heading>
+      <Box display="flex" justifyContent="space-between">
+        <Text
+          fontSize={'1.2rem'}
+          fontWeight="medium"
           color="var(--text-color-secondary)"
+          css={{ marginTop: '12px' }}
         >
-          ATOMS
-        </Heading>
-        <Box
-          css={{
-            borderLeft: '1px solid gray',
-            paddingLeft: '14px',
-            marginTop: '8px',
-          }}
-          fontSize="1rem"
-        >
-          <Stack
-            direction="column"
-            spacing={1}
-            color="var(--text-color-secondary)"
-          >
-            <Link
-              fontWeight={500}
-              _hover={{ color: 'var(--text-color-primary)' }}
-            >
-              Avatar
-            </Link>
-            <Link
-              fontWeight={500}
-              _hover={{ color: 'var(--text-color-primary)' }}
-            >
-              Badge
-            </Link>
-            <Link
-              fontWeight={500}
-              _hover={{ color: 'var(--text-color-primary)' }}
-            >
-              Button
-            </Link>
-          </Stack>
-        </Box>
+          {`Mirrorful Components is in early alpha — get early access!`}
+        </Text>
       </Box>
-      {/* Body */}
-      <Box
-        css={{
-          gridArea: '2 / 2 / 6 / 6',
-          backgroundColor: 'var(--background-color-primary)',
-        }}
-      ></Box>
+      <Box css={{ width: '60%', marginTop: '80px' }}>
+        <img
+          src={
+            colorMode === 'dark'
+              ? 'https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/components_graphic_dark.png'
+              : 'https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/components_graphic_light.png'
+          }
+        />
+        <Button
+          css={{ marginTop: '64px' }}
+          onClick={() => {
+            window.open('https://forms.gle/tidLkuXsScz1Edj28', '_blank')
+          }}
+        >
+          Get Early Access
+        </Button>
+      </Box>
     </Box>
   )
 }

@@ -18,8 +18,7 @@
   --button-secondary-text-color: white;
 
   --background-color-primary: #ffffff;
-  --background-color-secondary: #f5f5f5;
-  --background-color-tertiary: #e0e0e0;
+  --background-color-secondary: #ffffff;
   --color-background-accent: rgba(240, 240, 240, 0.5);
   --color-background-accent-hover: rgba(240, 240, 240, 0.8);
   --text-color-primary: #ffffff;
@@ -55,7 +54,6 @@ html[data-theme='light'] {
 
   --background-color-primary: #ffffff;
   --background-color-secondary: #f5f5f5;
-  --background-color-tertiary: #e0e0e0;
   --color-background-accent: rgba(240, 240, 240, 0.5);
   --color-background-accent-hover: rgba(240, 240, 240, 0.8);
   --text-color-primary: #000000;
@@ -91,7 +89,6 @@ html[data-theme='dark'] {
 
   --background-color-primary: #10121c;
   --background-color-secondary: #171a22;
-  --background-color-tertiary: #1b1c29;
   --color-background-accent: rgba(0, 0, 0, 0.5);
   --color-background-accent-hover: rgba(0, 0, 0, 0.8);
 
