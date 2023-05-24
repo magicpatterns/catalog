@@ -65,7 +65,13 @@ export function ThemeEditorPage({
   }
 
   return (
-    <Box>
+    <Box
+      padding={{
+        base: '24px 48px',
+        md: '36px 72px',
+        lg: '48px 96px',
+      }}
+    >
       <LoginAlert />
       <Link
         css={{
