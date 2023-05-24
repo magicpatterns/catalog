@@ -1,5 +1,5 @@
 'use client'
-import { Box, Heading, Text } from '@chakra-ui/react'
+import { Box, Heading, Stack, Text } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
 import { LoginAlert } from '@core/components/LoginAlert'
 import { ONBOARDING_IDS } from '@core/components/ProductOnboardings/constants'
@@ -21,26 +21,19 @@ export function ThemesPage({
 }) {
   const authInfo = useAuthInfo()
   const router = useRouter()
-
+  const {
+    typography,
+    colors,
+    shadows,
+    fileTypes,
+    themes,
+    setThemes,
+    metadata,
+    setMetadata,
+    isLoaded,
+  } = useMirrorfulStore((state: MirrorfulState) => state)
   const [showOnboarding, setShowOnboarding] = useState<boolean>(false)
 
-  const colors = useMirrorfulStore((state: MirrorfulState) => state.colors)
-  const typography = useMirrorfulStore(
-    (state: MirrorfulState) => state.typography
-  )
-  const shadows = useMirrorfulStore((state: MirrorfulState) => state.shadows)
-  const fileTypes = useMirrorfulStore(
-    (state: MirrorfulState) => state.fileTypes
-  )
-  const themes = useMirrorfulStore((state: MirrorfulState) => state.themes)
-  const setThemes = useMirrorfulStore(
-    (state: MirrorfulState) => state.setThemes
-  )
-  const metadata = useMirrorfulStore((state: MirrorfulState) => state.metadata)
-  const setMetadata = useMirrorfulStore(
-    (state: MirrorfulState) => state.setMetadata
-  )
-  const isLoaded = useMirrorfulStore((state: MirrorfulState) => state.isLoaded)
   const handleUpdateThemes = async (data: TTheme[]) => {
     setThemes(data)
     const storeId = await fetchStoreId()
