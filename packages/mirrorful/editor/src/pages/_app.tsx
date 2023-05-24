@@ -37,8 +37,21 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const pathname = usePathname()
   const oldPathname = useRef<string>('')
 
-  const { setColors, setTypography, setShadows, setFileTypes, setThemes } =
-    useMirrorfulStore((state: MirrorfulState) => state)
+  const setColors = useMirrorfulStore(
+    (state: MirrorfulState) => state.setColors
+  )
+  const setTypography = useMirrorfulStore(
+    (state: MirrorfulState) => state.setTypography
+  )
+  const setShadows = useMirrorfulStore(
+    (state: MirrorfulState) => state.setShadows
+  )
+  const setFileTypes = useMirrorfulStore(
+    (state: MirrorfulState) => state.setFileTypes
+  )
+  const setThemes = useMirrorfulStore(
+    (state: MirrorfulState) => state.setThemes
+  )
 
   // to fetch data
   const timeout = useRef<NodeJS.Timeout | null>(null)

@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { Input } from '@chakra-ui/react'
 import { TNamedToken } from '@core/types'
+import React from 'react'
 import { useEffect, useState } from 'react'
 import { BsSliders2 } from 'react-icons/bs'
 import {
@@ -25,18 +26,22 @@ function MirrorfulSlider({
   sliderValue,
   min,
   max,
+  onChangeStartCB,
+  onChangeEndCB,
 }: {
   label: string
   onSlide: (v: number) => void
   sliderValue: number
   min: number
   max: number
+  onChangeStartCB?: () => void
+  onChangeEndCB?: () => void
 }) {
   return (
     <Flex>
-      <Flex mr={2} style={{ minWidth: '60px' }}>
-        <Text fontSize={{ base: '2.3rem', md: '2.5rem' }}>
-          <span style={{ fontWeight: 700 }}>{label}</span>
+      <Flex mr={2} style={{ minWidth: '60px' }} alignItems="center">
+        <Text fontWeight={800} fontSize={{ base: '10px' }}>
+          <span>{label}</span>
           {`:`}
         </Text>
         <Input
@@ -46,10 +51,9 @@ function MirrorfulSlider({
           width={10}
           height={3}
           padding={1}
-          fontSize={{ base: '8px', md: '10px' }}
+          fontSize={{ base: '10px' }}
           ml={1}
           mr={1}
-          mt={1}
           value={sliderValue}
           onChange={(e) => {
             onSlide(Number(e.target.value))
@@ -62,8 +66,14 @@ function MirrorfulSlider({
         colorScheme={'gray.700'}
         aria-label="slider"
         value={sliderValue}
+        onChangeStart={() => {
+          if (onChangeStartCB) onChangeStartCB()
+        }}
         onChange={(val: number) => {
           onSlide(val)
+        }}
+        onChangeEnd={() => {
+          if (onChangeEndCB) onChangeEndCB()
         }}
         size="lg"
       >
@@ -76,23 +86,26 @@ function MirrorfulSlider({
   )
 }
 
-export function VariantRow({
+export function VariantRowDisplay({
   variant,
   onUpdateVariant,
   hideIcons = false,
   isBase = false,
+  onChangeColors,
+  updateBaseVariant,
 }: {
   hideIcons?: boolean
   isBase?: boolean
   variant: TNamedToken
-  onUpdateVariant: (newVariant: TNamedToken, updateDefault: boolean) => void
+  onUpdateVariant: () => void
+  updateBaseVariant: (newVariant: TNamedToken) => void
+  onChangeColors: (newVariant: TNamedToken, updateDefault: boolean) => void
 }) {
   const [showSlider, setShowSlider] = useState(false)
   const [hasCopiedHexCode, setHasCopiedHexCode] = useState(false)
   const { name, token } = variant
-  const color = `${token.value}`
-  const c = token.value
-  const hsl = tinycolor(c).toHsl()
+
+  const hsl = tinycolor(token.value).toHsl()
   const [h, setH] = useState<number>(Math.round(hsl.h))
   const [s, setS] = useState<number>(Math.round(hsl.s * 100))
   const [l, setL] = useState<number>(Math.round(hsl.l * 100))
@@ -132,16 +145,21 @@ export function VariantRow({
         l: val / 100,
       }).toHexString()
     }
-
-    const newToken = {
-      ...variant.token,
-      value: newColor,
-    }
-    onUpdateVariant({ ...variant, token: newToken }, isBase)
+    onChangeColors(
+      {
+        ...variant,
+        token: {
+          ...variant.token,
+          value: newColor,
+        },
+      },
+      isBase
+    )
   }
 
   const textColor =
-    tinycolor(color).isDark() && tinycolor(color).getAlpha() > 0.5
+    tinycolor(variant.token.value).isDark() &&
+    tinycolor(variant.token.value).getAlpha() > 0.5
       ? 'white'
       : 'black'
   return (
@@ -150,7 +168,7 @@ export function VariantRow({
         css={{
           height: '3rem',
           width: '100%',
-          backgroundColor: `${token.value}`,
+          backgroundColor: `${variant.token.value}`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -168,7 +186,11 @@ export function VariantRow({
           {name} {(isBase || hideIcons) && '[BASE]'}
         </Text>
         <Box
-          css={{ display: 'flex', alignItems: 'center', position: 'relative' }}
+          css={{
+            display: 'flex',
+            alignItems: 'center',
+            position: 'relative',
+          }}
         >
           <Tooltip
             label="Copied to Clipboard"
@@ -189,11 +211,11 @@ export function VariantRow({
                 paddingInline: 2,
               }}
               onClick={() => {
-                navigator.clipboard.writeText(color)
+                navigator.clipboard.writeText(variant.token.value)
                 setHasCopiedHexCode(true)
               }}
             >
-              {color}
+              {variant.token.value}
             </Text>
           </Tooltip>
           {!hideIcons && (
@@ -201,7 +223,7 @@ export function VariantRow({
               <IconButton
                 disabled={isBase}
                 onClick={() => {
-                  onUpdateVariant(variant, true)
+                  updateBaseVariant(variant)
                 }}
                 style={{ marginLeft: '24px' }}
                 variant="outline"
@@ -288,10 +310,29 @@ export function VariantRow({
               max: 100,
             },
           ].map((obj) => {
-            return <MirrorfulSlider key={obj.label} {...obj} />
+            return (
+              <MirrorfulSlider
+                key={obj.label}
+                {...obj}
+                onChangeEndCB={() => {
+                  onUpdateVariant()
+                }}
+              />
+            )
           })}
         </Flex>
       )}
     </Flex>
   )
 }
+
+export const VariantRow = React.memo(
+  VariantRowDisplay,
+  (prevProps, nextProps) => {
+    return (
+      prevProps.variant.token.value === nextProps.variant.token.value &&
+      prevProps.variant.name === nextProps.variant.name &&
+      prevProps.isBase === nextProps.isBase
+    )
+  }
+)
