@@ -1,22 +1,42 @@
 'use client'
 
-import { Box, Heading } from '@chakra-ui/react'
-import { faCheckCircle } from '@fortawesome/free-regular-svg-icons'
-
-import { LocalizeButton } from './../localizeComponents/LocalizeButton'
+import { Box, Button, Heading, Text, useColorMode } from '@chakra-ui/react'
 
 export function ComponentsPage() {
+  const { colorMode } = useColorMode()
+
   return (
     <Box>
       <Heading fontSize={'2.5rem'} fontWeight="black">
         Components
       </Heading>
-      <LocalizeButton
-        label={'Success'}
-        size="lg"
-        variant="success"
-        rightIcon={faCheckCircle}
-      />
+      <Box display="flex" justifyContent="space-between">
+        <Text
+          fontSize={'1.2rem'}
+          fontWeight="medium"
+          color="var(--text-color-secondary)"
+          css={{ marginTop: '12px' }}
+        >
+          {`Mirrorful Components is in early alpha — get early access!`}
+        </Text>
+      </Box>
+      <Box css={{ width: '60%', marginTop: '80px' }}>
+        <img
+          src={
+            colorMode === 'dark'
+              ? 'https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/components_graphic_dark.png'
+              : 'https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/components_graphic_light.png'
+          }
+        />
+        <Button
+          css={{ marginTop: '64px' }}
+          onClick={() => {
+            window.open('https://forms.gle/tidLkuXsScz1Edj28', '_blank')
+          }}
+        >
+          Get Early Access
+        </Button>
+      </Box>
     </Box>
   )
 }
