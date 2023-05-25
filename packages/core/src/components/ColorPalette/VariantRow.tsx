@@ -34,8 +34,8 @@ function MirrorfulSlider({
 }) {
   return (
     <Flex>
-      <Flex mr={2} style={{ minWidth: '60px' }}>
-        <Text fontSize={{ base: '2.3rem', md: '2.5rem' }}>
+      <Flex mr={2} style={{ minWidth: '60px' }} alignItems="center">
+        <Text fontSize={{ base: '10px' }}>
           <span style={{ fontWeight: 700 }}>{label}</span>
           {`:`}
         </Text>
@@ -46,10 +46,9 @@ function MirrorfulSlider({
           width={10}
           height={3}
           padding={1}
-          fontSize={{ base: '8px', md: '10px' }}
+          fontSize={{ base: '10px' }}
           ml={1}
           mr={1}
-          mt={1}
           value={sliderValue}
           onChange={(e) => {
             onSlide(Number(e.target.value))
