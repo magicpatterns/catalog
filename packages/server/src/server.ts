@@ -29,14 +29,9 @@ if (process.env.NODE_ENV === 'production') {
 
 /******* MONGO STUFF **********/
 const connectionString =
-  process.env.MIRRORFUL_MONGO_DB_URI || 'mongodb://127.0.0.1:27017/mirrorful'
+  process.env.MIRRORFUL_MONGO_DB_URI || 'mongodb://127.0.0.1:27017'
 
-if (process.env.NODE_ENV === 'production') {
-  mongoose.connect(connectionString, { dbName: 'mirrorful' })
-} else {
-  mongoose.connect(connectionString)
-}
-
+mongoose.connect(connectionString, { dbName: 'mirrorful' })
 /****************************************/
 
 app.use(cors())
