@@ -152,7 +152,6 @@ export function ColorsDisplay({
   const onChangeColors = useCallback(
     (newVariant: TNamedToken, updateDefault: boolean) => {
       setColors((prev) => {
-        const updatedColorData = { ...prev }
         if (updateDefault) {
           const additionalVariants: TTokenGroup = defaultColorShadesToTokens(
             generateDefaultColorShades({
@@ -162,15 +161,14 @@ export function ColorsDisplay({
                 : (Number(newVariant.name) as ShadeStop),
             })
           )
-          Object.keys(additionalVariants).forEach((variants) => {
-            updatedColorData[variants].value =
-              additionalVariants[variants].value
-          })
-          updatedColorData['DEFAULT'] = newVariant.token
+          additionalVariants[newVariant.name] = newVariant.token
+          additionalVariants['DEFAULT'] = newVariant.token
+          return additionalVariants
         } else {
+          const updatedColorData = { ...prev }
           updatedColorData[newVariant.name] = newVariant.token
+          return updatedColorData
         }
-        return updatedColorData
       })
     },
     []
