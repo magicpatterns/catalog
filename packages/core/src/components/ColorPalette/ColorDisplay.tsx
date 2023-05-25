@@ -346,10 +346,6 @@ export function ColorsDisplay({
                         additionalVariants[variants].value
                     })
                     updatedColorData['DEFAULT'] = newVariant.token
-                    // const colorTokenGroup: TTokenGroup = {
-                    //   ...additionalVariants,
-                    //   DEFAULT: newVariant.token,
-                    // }
                     setColors(updatedColorData)
                     onUpdateColorData(updatedColorData)
                   }}
