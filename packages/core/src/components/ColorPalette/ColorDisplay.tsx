@@ -14,7 +14,7 @@ import {
 import { AlertDialogDelete } from '@core/components/AlertDialogDelete'
 import { assertToken, TNamedToken, TToken, TTokenGroup } from '@core/types'
 import { motion } from 'framer-motion'
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { MutableRefObject, useReducer, useRef } from 'react'
 import { FiEdit } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
@@ -100,6 +100,7 @@ export function ColorsDisplay({
         }
       case ACTIONS.ON_SAVE:
         return {
+          ...state,
           error: action.payload.errorMessage,
           isEditing: action.payload.isEditing,
           colourName: action.payload.colourName,
@@ -148,6 +149,33 @@ export function ColorsDisplay({
     token: colors['DEFAULT'] as TToken,
   }
 
+  const onChangeColors = useCallback(
+    (newVariant: TNamedToken, updateDefault: boolean) => {
+      setColors((prev) => {
+        const updatedColorData = { ...prev }
+        if (updateDefault) {
+          const additionalVariants: TTokenGroup = defaultColorShadesToTokens(
+            generateDefaultColorShades({
+              primary: newVariant.token.value,
+              baseStop: Number.isNaN(Number(newVariant.name))
+                ? 500
+                : (Number(newVariant.name) as ShadeStop),
+            })
+          )
+          Object.keys(additionalVariants).forEach((variants) => {
+            updatedColorData[variants].value =
+              additionalVariants[variants].value
+          })
+          updatedColorData['DEFAULT'] = newVariant.token
+        } else {
+          updatedColorData[newVariant.name] = newVariant.token
+        }
+        return updatedColorData
+      })
+    },
+    []
+  )
+
   let baseColorToken = defaultNamedToken
   try {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -164,6 +192,10 @@ export function ColorsDisplay({
 
   let alreadySetBase = false
   let isBase = false
+
+  useEffect(() => {
+    setColors(colorData)
+  }, [colorData])
 
   return (
     <Box
@@ -298,28 +330,7 @@ export function ColorsDisplay({
                     newVariant: TNamedToken,
                     updateDefault: boolean
                   ) => {
-                    const updatedColorData = { ...colors }
-                    if (updateDefault) {
-                      const additionalVariants: TTokenGroup =
-                        defaultColorShadesToTokens(
-                          generateDefaultColorShades({
-                            primary: newVariant.token.value,
-                            baseStop: Number.isNaN(Number(newVariant.name))
-                              ? 500
-                              : (Number(newVariant.name) as ShadeStop),
-                          })
-                        )
-                      Object.keys(additionalVariants).forEach((variants) => {
-                        updatedColorData[variants].value =
-                          additionalVariants[variants].value
-                      })
-                      updatedColorData['DEFAULT'] = newVariant.token
-                      setColors(updatedColorData)
-                    } else {
-                      updatedColorData[newVariant.name] = newVariant.token
-
-                      setColors(updatedColorData)
-                    }
+                    onChangeColors(newVariant, updateDefault)
                   }}
                   updateBaseVariant={(newVariant: TNamedToken) => {
                     const updatedColorData = { ...colors }
