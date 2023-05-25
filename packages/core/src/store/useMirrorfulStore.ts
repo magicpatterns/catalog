@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { devtools } from 'zustand/middleware'
 
 import { ColorsSlice, createColorsSlice } from './colorsSlice'
 import { createFileTypesSlice, FileTypesSlice } from './fileTypesSlice'
@@ -17,14 +18,19 @@ export interface MirrorfulState
     FileTypesSlice,
     InternalSlice {}
 
-const useMirrorfulStore = create<MirrorfulState>()((...state) => ({
-  ...createColorsSlice(...state),
-  ...createTypographySlice(...state),
-  ...createShadowsSlice(...state),
-  ...createFileTypesSlice(...state),
-  ...createThemesSlice(...state),
-  ...createMetadataSlice(...state),
-  ...createInternalSlice(...state),
-}))
+const useMirrorfulStore = create<MirrorfulState>()(
+  devtools(
+    (...state) => ({
+      ...createColorsSlice(...state),
+      ...createTypographySlice(...state),
+      ...createShadowsSlice(...state),
+      ...createFileTypesSlice(...state),
+      ...createThemesSlice(...state),
+      ...createMetadataSlice(...state),
+      ...createInternalSlice(...state),
+    }),
+    { enabled: process.env.NODE_ENV !== 'production' }
+  )
+)
 
 export default useMirrorfulStore
