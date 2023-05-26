@@ -907,9 +907,6 @@ export function Sidebar({
                     flexDirection={isCollapsed ? 'column' : 'row'}
                     alignItems="center"
                     justifyContent="space-between"
-                    onClick={() => {
-                      toggleColorMode()
-                    }}
                   >
                     <Box
                       css={{
@@ -937,10 +934,10 @@ export function Sidebar({
                           <Switch
                             colorScheme="gray"
                             css={{ margin: '0 8px', cursor: 'pointer' }}
+                            isChecked={colorMode === 'light'}
                             onChange={() => {
                               toggleColorMode()
                             }}
-                            isChecked={colorMode === 'light'}
                           />
                           <Box
                             cursor={'pointer'}
