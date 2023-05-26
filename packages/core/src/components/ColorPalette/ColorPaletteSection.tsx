@@ -34,35 +34,36 @@ export function ColorPaletteSection({
 
   const onUpdateColorData = useCallback(
     (updatedColorData: TTokenGroup, name: string, newColorName?: string) => {
+      let newColors: TTokenGroup = {}
       setColorsData((prev) => {
         if (newColorName) {
           // Rename the color while retaining the order of the keys
-          const newColors = Object.keys(prev).reduce((acc, key) => {
+          newColors = Object.keys(prev).reduce((acc, key) => {
             if (key !== name) acc[key] = prev[key]
             else acc[newColorName] = prev[key]
             return acc
           }, {} as TTokenGroup)
           newColors[newColorName] = updatedColorData
-          onUpdateColors(newColors)
           return newColors
         } else {
-          const newColors = structuredClone(prev)
+          newColors = structuredClone(prev)
           newColors[name] = updatedColorData
-          onUpdateColors(newColors)
           return newColors
         }
       })
+      onUpdateColors(newColors)
     },
     []
   )
 
   const onDeleteColorData = useCallback((name: string) => {
+    let newColors: TTokenGroup = {}
     setColorsData((prev) => {
-      const newColors = { ...prev }
+      newColors = { ...prev }
       delete newColors[name]
-      onUpdateColors(newColors)
       return prev
     })
+    onUpdateColors(newColors)
   }, [])
 
   useEffect(() => {
