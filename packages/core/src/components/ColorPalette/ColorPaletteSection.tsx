@@ -56,6 +56,21 @@ export function ColorPaletteSection({
     []
   )
 
+  const onUpdateColorName = useCallback((newName: string, name: string) => {
+    let newColors: TTokenGroup = {}
+    setColorsData((prev) => {
+      newColors = Object.keys(prev).reduce((acc, key) => {
+        if (key !== name) acc[key] = prev[key]
+        else acc[newName] = prev[key]
+        return acc
+      }, {} as TTokenGroup)
+      return newColors
+    })
+    // Rename the color while retaining the order of the keys
+
+    onUpdateColors(newColors)
+  }, [])
+
   const onDeleteColorData = useCallback((name: string) => {
     let newColors: TTokenGroup = {}
     setColorsData((prev) => {
@@ -127,17 +142,7 @@ export function ColorPaletteSection({
                   colorName={name}
                   colorData={colorsData[name] as TTokenGroup}
                   onUpdateColorName={(newName: string) => {
-                    // Rename the color while retaining the order of the keys
-                    const newColors = Object.keys(colorsData).reduce(
-                      (acc, key) => {
-                        if (key !== name) acc[key] = colorsData[key]
-                        else acc[newName] = colorsData[key]
-                        return acc
-                      },
-                      {} as TTokenGroup
-                    )
-
-                    onUpdateColors(newColors)
+                    onUpdateColorName(newName, name)
                   }}
                   isErrorOnUpdateColorName={(newName: string) => {
                     if (newName === '') return 'Color name cannot be empty.'
