@@ -19,8 +19,10 @@ export function LoginAlert() {
     <>
       <Box
         css={{
-          position: 'fixed',
+          position: 'sticky',
+          top: '24px',
           display: 'flex',
+          justifyContent: 'space-between',
           alignItems: 'center',
           padding: '8px 24px',
           borderRadius: 8,
@@ -33,6 +35,7 @@ export function LoginAlert() {
           backdropFilter: 'blur(4px)',
           transition: 'all 200ms ease-in-out',
           cursor: 'pointer',
+          maxWidth: '768px',
         }}
         _hover={{
           border: `1px solid var(--text-color-primary)`,
