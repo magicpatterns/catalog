@@ -57,6 +57,15 @@ function DropdownInput({
     setHexInputValue(tinycolor(colorPickerColor).toHexString())
   }, [colorPickerColor])
 
+  const updatePrimaryColorToValidColor = () => {
+    const parsedHexString = parseHexString(
+      hexInputValue,
+      tinycolor(colorPickerColor).toHexString()
+    )
+    setHexInputValue(parsedHexString)
+    onChange(parsedHexString)
+  }
+
   return (
     <Box
       css={{
@@ -95,12 +104,12 @@ function DropdownInput({
           }}
           onBlur={() => {
             /* Since the user may not have entered a valid hexcolor string, we parse it to convert it to a valid hexcolor string */
-            const parsedHexString = parseHexString(
-              hexInputValue,
-              tinycolor(colorPickerColor).toHexString()
-            )
-            setHexInputValue(parsedHexString)
-            onChange(parsedHexString)
+            updatePrimaryColorToValidColor()
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              updatePrimaryColorToValidColor()
+            }
           }}
         />
       )}
