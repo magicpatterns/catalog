@@ -7,6 +7,7 @@ import { CacheProvider } from '@chakra-ui/next-js'
 import { MirrorfulThemeProvider } from '@core/components/ThemeProvider'
 import { AuthProvider } from '@propelauth/react'
 import posthog from 'posthog-js'
+import { ReactNode } from 'react'
 
 import MirrorfulStoreProvider from '../components/MirrorfulWebWrapper'
 
@@ -20,11 +21,7 @@ if (typeof window !== 'undefined') {
   })
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
