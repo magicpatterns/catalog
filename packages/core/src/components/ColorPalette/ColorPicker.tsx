@@ -22,18 +22,15 @@ type TFormat = 'HEX' | 'RGBA'
 interface Props {
   colorPickerColor: AnyColor
   onChange: (color: AnyColor) => void
-  onUpdatePage: (page: number) => void
 }
 
 function DropdownInput({
-  onUpdatePage,
   onChange,
   colorPickerColor,
   format,
   onSetFormat,
   shadow = false,
 }: {
-  onUpdatePage: (page: number) => void
   colorPickerColor: AnyColor
   onChange: (color: AnyColor) => void
   format: TFormat
@@ -111,9 +108,7 @@ function DropdownInput({
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              e.preventDefault()
               updatePrimaryColorToValidColor()
-              onUpdatePage(2)
             }
           }}
         />
@@ -195,7 +190,6 @@ export default function ColorPicker({
   colorPickerColor,
   onChange,
   shadow,
-  onUpdatePage,
 }: Props & { shadow?: boolean }) {
   const initialFormat =
     typeof colorPickerColor === 'string' && colorPickerColor.includes('#')
@@ -234,7 +228,6 @@ export default function ColorPicker({
         onChange={onChange}
         colorPickerColor={colorPickerColor}
         shadow={shadow}
-        onUpdatePage={onUpdatePage}
       />
     </Box>
   )

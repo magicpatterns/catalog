@@ -117,7 +117,6 @@ export function PickPrimary({
         }}
       >
         <ColorPicker
-          onUpdatePage={onUpdatePage}
           colorPickerColor={primaryColor}
           onChange={onUpdatePrimaryColor}
         />
