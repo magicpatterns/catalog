@@ -13,12 +13,12 @@ import { LayoutWrapper } from '@web/components/LayoutWrapper'
 import { useFetchStoreId } from '@web/hooks/useFetchStoreId'
 import { usePostStoreIdToLocalStorage } from '@web/hooks/usePostStoreIdToLocalStorage'
 import { useRouter } from 'next/navigation'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 
 export default function MirrorfulWebWrapper({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   const [postStoreIdToLocalStorage] = usePostStoreIdToLocalStorage()
   const authInfo = useAuthInfo()
