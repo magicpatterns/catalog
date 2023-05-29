@@ -47,7 +47,7 @@ export function Toolbar({ code, onRun }: { code: string; onRun: () => void }) {
   const [copyText, setCopyText] = useState<'Copy' | 'Copied'>('Copy')
   const [isFocused, setIsFocused] = useState<boolean>(false)
   const URL = `${window.location.origin}/${orgId}/${fileId}`
-  const queryOpts = { name: 'clipboard-read', allowWithoutGesture: false }
+  const permissionName = 'clipboard-read' as PermissionName
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -60,7 +60,9 @@ export function Toolbar({ code, onRun }: { code: string; onRun: () => void }) {
   }, [])
 
   async function onCopy() {
-    const permissionStatus = await navigator.permissions.query(queryOpts)
+    const permissionStatus = await navigator.permissions.query({
+      name: permissionName,
+    })
     // TODO(Danilowicz): there's a race condition here...
     // We are assuming the navigate has already happened
     setIsFocused(true)
@@ -79,7 +81,9 @@ export function Toolbar({ code, onRun }: { code: string; onRun: () => void }) {
   }
 
   async function getPermission() {
-    const permissionStatus = await navigator.permissions.query(queryOpts)
+    const permissionStatus = await navigator.permissions.query({
+      name: permissionName,
+    })
 
     if (permissionStatus.state === 'prompt') {
       navigator.clipboard.writeText('')

@@ -1,7 +1,9 @@
-const queryOpts = { name: 'clipboard-read', allowWithoutGesture: false }
+const permissionName = 'clipboard-read' as PermissionName
 
 export async function getPermission() {
-  const permissionStatus = await navigator.permissions.query(queryOpts)
+  const permissionStatus = await navigator.permissions.query({
+    name: permissionName,
+  })
 
   if (permissionStatus.state === 'prompt') {
     navigator.clipboard.writeText('')
@@ -9,7 +11,9 @@ export async function getPermission() {
 }
 
 export async function onCopy(text: string) {
-  const permissionStatus = await navigator.permissions.query(queryOpts)
+  const permissionStatus = await navigator.permissions.query({
+    name: permissionName,
+  })
 
   if (permissionStatus.state === 'granted') {
     await navigator.clipboard.writeText(text)
