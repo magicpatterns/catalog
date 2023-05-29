@@ -33,6 +33,7 @@ export default function Layout({
   platform?: TPlatform
 }) {
   useEffect(() => {
+    // eslint-disable-next-line prefer-const
     let timer = setTimeout(() => {
       void getPermission()
     }, 200)
