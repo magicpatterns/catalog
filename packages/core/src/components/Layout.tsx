@@ -34,7 +34,7 @@ export default function Layout({
   const router = useRouter()
   const pathname = usePathname()
 
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true)
   const {
     colors,
     setColors,
