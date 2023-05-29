@@ -63,8 +63,7 @@ export function Toolbar({ code, onRun }: { code: string; onRun: () => void }) {
     const permissionStatus = await navigator.permissions.query({
       name: permissionName,
     })
-    // TODO(Danilowicz): there's a race condition here...
-    // We are assuming the navigate has already happened
+
     setIsFocused(true)
 
     if (permissionStatus.state === 'granted') {

@@ -32,8 +32,7 @@ export function CodePreview({
           }}
           cursor={'pointer'}
           onClick={async () => {
-            await onCopy(text)
-            setTooltip('Copied')
+            await onCopy(text).then((res) => res && setTooltip('Copied'))
             setTimeout(() => {
               setTooltip('Copy')
             }, 1000)

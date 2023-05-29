@@ -189,8 +189,7 @@ export function VariantRow({
                 paddingInline: 2,
               }}
               onClick={() => {
-                onCopy(color)
-                setHasCopiedHexCode(true)
+                onCopy(color).then((res) => res && setHasCopiedHexCode(true))
               }}
             >
               {color}

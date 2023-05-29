@@ -17,7 +17,9 @@ export async function onCopy(text: string) {
 
   if (permissionStatus.state === 'granted') {
     await navigator.clipboard.writeText(text)
+    return true
   } else if (permissionStatus.state === 'denied') {
     alert('Your clipboard permission is blocked, enable it to copy text.')
+    return false
   }
 }

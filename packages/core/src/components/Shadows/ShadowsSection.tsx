@@ -84,8 +84,9 @@ export function ShadowRow({
                 borderRadius: 8,
               }}
               onClick={() => {
-                onCopy(shadowData.token.value)
-                setHasCopiedShadowValue(true)
+                onCopy(shadowData.token.value).then(
+                  (res) => res && setHasCopiedShadowValue(true)
+                )
               }}
             >
               {shadowData.token.value}
