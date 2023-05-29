@@ -18,6 +18,7 @@ import {
   TTheme,
   TTokenGroup,
 } from '@core/types'
+import { onCopy } from '@core/utils/onCopy'
 import { useState } from 'react'
 import {
   FiChevronDown,
@@ -58,11 +59,11 @@ export function TokenCircle({
   const color = resolveTokenValue({ value, colors })
 
   const handleCopyName = async () => {
-    await navigator.clipboard.writeText(name)
+    await onCopy(name)
   }
 
   const handleCopyValue = async () => {
-    await navigator.clipboard.writeText(value)
+    await onCopy(value)
   }
 
   return (

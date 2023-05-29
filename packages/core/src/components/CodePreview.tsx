@@ -1,5 +1,6 @@
 import { CopyIcon } from '@chakra-ui/icons'
 import { Tooltip } from '@chakra-ui/react'
+import { onCopy } from '@core/utils/onCopy'
 import { useState } from 'react'
 import Highlight from 'react-highlight'
 
@@ -31,7 +32,7 @@ export function CodePreview({
           }}
           cursor={'pointer'}
           onClick={async () => {
-            await navigator.clipboard.writeText(text)
+            await onCopy(text)
             setTooltip('Copied')
             setTimeout(() => {
               setTooltip('Copy')

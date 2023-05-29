@@ -2,6 +2,7 @@ import {
   Box,
   Flex,
   IconButton,
+  Input,
   Slider,
   SliderFilledTrack,
   SliderThumb,
@@ -9,8 +10,8 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react'
-import { Input } from '@chakra-ui/react'
 import { TNamedToken } from '@core/types'
+import { onCopy } from '@core/utils/onCopy'
 import { useEffect, useState } from 'react'
 import { BsSliders2 } from 'react-icons/bs'
 import {
@@ -188,7 +189,7 @@ export function VariantRow({
                 paddingInline: 2,
               }}
               onClick={() => {
-                navigator.clipboard.writeText(color)
+                onCopy(color)
                 setHasCopiedHexCode(true)
               }}
             >

@@ -1,9 +1,10 @@
 import { Box, Spinner, useDisclosure, useMediaQuery } from '@chakra-ui/react'
 import { postStoreData } from '@core/client/store'
+import { getPermission } from '@core/utils/onCopy'
 import { useAuthInfo } from '@propelauth/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ExportSettingsModal } from '../components/ExportSettingsModal'
 import { ExportSuccessModal } from '../components/ExportSuccessModal'
@@ -31,6 +32,16 @@ export default function Layout({
   isLoading?: boolean
   platform?: TPlatform
 }) {
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      void getPermission()
+    }, 200)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [])
+
   const router = useRouter()
   const pathname = usePathname()
 

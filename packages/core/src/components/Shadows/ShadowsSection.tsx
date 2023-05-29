@@ -9,6 +9,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { assertToken, TNamedToken, TTokenGroup } from '@core/types'
+import { onCopy } from '@core/utils/onCopy'
 import { useEffect, useState } from 'react'
 
 import { LoginAlert } from '../LoginAlert'
@@ -83,7 +84,7 @@ export function ShadowRow({
                 borderRadius: 8,
               }}
               onClick={() => {
-                navigator.clipboard.writeText(shadowData.token.value)
+                onCopy(shadowData.token.value)
                 setHasCopiedShadowValue(true)
               }}
             >

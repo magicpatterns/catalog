@@ -28,7 +28,7 @@ import {
   MirrorfulApiEnvironment,
 } from '@mirrorful-fern/api-client'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { generateRandomId } from '../utils/generateId'
 import { LIBRARY_CONTEXT } from '../utils/constants'
@@ -47,17 +47,43 @@ export function Toolbar({ code, onRun }: { code: string; onRun: () => void }) {
   const [copyText, setCopyText] = useState<'Copy' | 'Copied'>('Copy')
   const [isFocused, setIsFocused] = useState<boolean>(false)
   const URL = `${window.location.origin}/${orgId}/${fileId}`
+  const queryOpts = { name: 'clipboard-read', allowWithoutGesture: false }
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      void getPermission()
+    }, 200)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [])
 
   async function onCopy() {
+    const permissionStatus = await navigator.permissions.query(queryOpts)
     // TODO(Danilowicz): there's a race condition here...
     // We are assuming the navigate has already happened
     setIsFocused(true)
-    await navigator.clipboard.writeText(URL)
-    setCopyText('Copied')
-    setTimeout(() => {
-      setCopyText('Copy')
-      setIsFocused(false)
-    }, 3000)
+
+    if (permissionStatus.state === 'granted') {
+      await navigator.clipboard.writeText(URL)
+
+      setCopyText('Copied')
+      setTimeout(() => {
+        setCopyText('Copy')
+        setIsFocused(false)
+      }, 3000)
+    } else if (permissionStatus.state === 'denied') {
+      alert('Your clipboard permission is blocked, enable it to copy text.')
+    }
+  }
+
+  async function getPermission() {
+    const permissionStatus = await navigator.permissions.query(queryOpts)
+
+    if (permissionStatus.state === 'prompt') {
+      navigator.clipboard.writeText('')
+    }
   }
 
   async function onShare() {
