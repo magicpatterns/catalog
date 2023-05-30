@@ -3,7 +3,7 @@ import { postStoreData } from '@core/client/store'
 import { useAuthInfo } from '@propelauth/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ExportSettingsModal } from '../components/ExportSettingsModal'
 import { ExportSuccessModal } from '../components/ExportSuccessModal'
@@ -33,8 +33,9 @@ export default function Layout({
 }) {
   const router = useRouter()
   const pathname = usePathname()
-
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true)
+  
+  const [isMobileView] = useMediaQuery('(max-width: 480px)')
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const {
     colors,
     setColors,
@@ -53,7 +54,7 @@ export default function Layout({
     onOpen: onExportSuccessModalOpen,
     onClose: onExportSuccessModalClose,
   } = useDisclosure()
-
+  
   const {
     isOpen: isExportSettingsModalOpen,
     onOpen: onExportSettingsModalOpen,
@@ -103,8 +104,12 @@ export default function Layout({
       storeId,
     })
   }
+  console.log({isSidebarCollapsed})
 
-  const [isMobileView] = useMediaQuery('(max-width: 480px)')
+
+  useEffect(() => {
+    setIsSidebarCollapsed(isMobileView)
+  }, [isMobileView, setIsSidebarCollapsed])
 
   return (
     <>
