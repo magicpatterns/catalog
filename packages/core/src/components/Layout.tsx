@@ -104,8 +104,6 @@ export default function Layout({
       storeId,
     })
   }
-  console.log({isSidebarCollapsed})
-
 
   useEffect(() => {
     setIsSidebarCollapsed(isMobileView)
