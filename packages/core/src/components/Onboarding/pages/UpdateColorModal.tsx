@@ -13,16 +13,11 @@ import {
  ModalOverlay,
  Text,
 } from '@chakra-ui/react'
-import { TNamedTokenGroup, TToken, TTokenGroup } from '@core/types'
+import { TToken } from '@core/types'
 import { useEffect, useState } from 'react'
 import { AnyColor } from 'react-colorful/dist/types'
-import tinycolor from 'tinycolor2'
-import { v4 as uuidv4 } from 'uuid'
 
-import { nameThatColor } from '../utils'
 import ColorPicker from '../../ColorPalette/ColorPicker'
-import { defaultColorShadesToTokens, generateDefaultColorShades } from '../../ColorPalette/utils'
-import { VariantRow } from '../../ColorPalette/VariantRow'
 
 const INITIAL_COLOR_PICKER_COLOR = '#008EC8'
 
