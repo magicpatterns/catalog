@@ -21,6 +21,7 @@ function getPaletteListFromPalette(group: TTokenGroup) {
 
 export function OtherColors({
   initialPalette,
+  onUpdatePalette,
   onUpdatePage,
   primaryColor,
   primaryName,
@@ -133,6 +134,13 @@ export function OtherColors({
             rightIcon={<ArrowForwardIcon />}
             onClick={(e) => {
               e.preventDefault()
+
+              let colors: TTokenGroup = {}
+              palette.forEach(paletteItem => {
+                colors[paletteItem.name] = paletteItem.color
+              })
+
+              onUpdatePalette(colors)
 
               if (platform === 'web') {
                 onUpdatePage(6)
