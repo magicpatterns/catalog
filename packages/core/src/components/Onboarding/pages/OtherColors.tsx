@@ -240,8 +240,8 @@ export function OtherColors({
                             name,
                             color: {
                               ...currentPaletteItem.color,
-                              value: newColor as any
-                            }
+                              value: newColor
+                            } as TToken
                           }
                         }
 
