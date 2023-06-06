@@ -410,7 +410,7 @@ export function Sidebar({
               </SidebarSection>
 
               <Box>
-                <Box css={{ marginBottom: '24px' }}>
+                {/* <Box css={{ marginBottom: '24px' }}>
                   {isCollapsed ? (
                     <Icon
                       as={FiCloudLightning}
@@ -457,7 +457,7 @@ export function Sidebar({
                       Upgrade
                     </Button>
                   )}
-                </Box>
+                </Box> */}
                 <Box
                   css={{
                     borderTop: '1px solid lightgray',
@@ -757,7 +757,7 @@ export function Sidebar({
 
                 <Box>
                   <Box css={{ marginBottom: '24px' }}>
-                    {isCollapsed ? (
+                    {/* {isCollapsed ? (
                       <Icon
                         as={FiCloudLightning}
                         color="#805AD5"
@@ -802,7 +802,7 @@ export function Sidebar({
                       >
                         Upgrade
                       </Button>
-                    )}
+                    )} */}
                   </Box>
                   <Box
                     css={{
