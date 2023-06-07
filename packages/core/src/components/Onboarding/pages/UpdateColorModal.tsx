@@ -19,13 +19,13 @@ import { AnyColor } from 'react-colorful/dist/types'
 import tinycolor from 'tinycolor2'
 import { v4 as uuidv4 } from 'uuid'
 
-import { nameThatColor } from '../utils'
 import ColorPicker from '../../ColorPalette/ColorPicker'
 import {
   defaultColorShadesToTokens,
   generateDefaultColorShades,
 } from '../../ColorPalette/utils'
 import { VariantRow } from '../../ColorPalette/VariantRow'
+import { nameThatColor } from '../utils'
 
 const INITIAL_COLOR_PICKER_COLOR = '#008EC8'
 
