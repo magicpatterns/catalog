@@ -33,7 +33,7 @@ export default function Layout({
 }) {
   const router = useRouter()
   const pathname = usePathname()
-  
+
   const [isMobileView] = useMediaQuery('(max-width: 480px)')
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const {
@@ -54,7 +54,7 @@ export default function Layout({
     onOpen: onExportSuccessModalOpen,
     onClose: onExportSuccessModalClose,
   } = useDisclosure()
-  
+
   const {
     isOpen: isExportSettingsModalOpen,
     onOpen: onExportSettingsModalOpen,

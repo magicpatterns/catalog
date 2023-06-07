@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import {
   Box,
   Button,
@@ -7,7 +8,6 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
 
 import { TNamedTokenGroup, TTokenGroup } from '../../types'
 import { LoginAlert } from '../LoginAlert'

@@ -1,17 +1,17 @@
 import {
- Box,
- Button,
- Flex,
- FormControl,
- FormLabel,
- Input,
- Modal,
- ModalBody,
- ModalCloseButton,
- ModalContent,
- ModalHeader,
- ModalOverlay,
- Text,
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Text,
 } from '@chakra-ui/react'
 import { TNamedTokenGroup, TToken, TTokenGroup } from '@core/types'
 import { useEffect, useState } from 'react'
@@ -21,7 +21,10 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { nameThatColor } from '../utils'
 import ColorPicker from '../../ColorPalette/ColorPicker'
-import { defaultColorShadesToTokens, generateDefaultColorShades } from '../../ColorPalette/utils'
+import {
+  defaultColorShadesToTokens,
+  generateDefaultColorShades,
+} from '../../ColorPalette/utils'
 import { VariantRow } from '../../ColorPalette/VariantRow'
 
 const INITIAL_COLOR_PICKER_COLOR = '#008EC8'
@@ -34,22 +37,34 @@ interface UpdateColorModalProps {
   name: string | null
 }
 
-export function UpdateColorModal({ isOpen, color, onClose, name: defaultName, onUpdate }: UpdateColorModalProps){
+export function UpdateColorModal({
+  isOpen,
+  color,
+  onClose,
+  name: defaultName,
+  onUpdate,
+}: UpdateColorModalProps) {
   const [colorPickerColor, setColorPickerColor] = useState<AnyColor>(
     color?.value || INITIAL_COLOR_PICKER_COLOR
   )
   const [name, setName] = useState<string>(defaultName || '')
 
-  useEffect(function () {
-    setColorPickerColor(color?.value || INITIAL_COLOR_PICKER_COLOR)
-  }, [color])
+  useEffect(
+    function () {
+      setColorPickerColor(color?.value || INITIAL_COLOR_PICKER_COLOR)
+    },
+    [color]
+  )
 
-  useEffect(function () {
-    setName(defaultName || '')
-  }, [defaultName])
+  useEffect(
+    function () {
+      setName(defaultName || '')
+    },
+    [defaultName]
+  )
 
- return (
-  <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} size="2xl">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Update Color</ModalHeader>
@@ -106,9 +121,12 @@ export function UpdateColorModal({ isOpen, color, onClose, name: defaultName, on
                     justifyContent: 'flex-end',
                   }}
                 >
-                  <Button mt={5} onClick={function () {
-                    onUpdate(name, colorPickerColor as string)
-                  }}>
+                  <Button
+                    mt={5}
+                    onClick={function () {
+                      onUpdate(name, colorPickerColor as string)
+                    }}
+                  >
                     Update
                   </Button>
                 </FormControl>
@@ -118,5 +136,5 @@ export function UpdateColorModal({ isOpen, color, onClose, name: defaultName, on
         </ModalBody>
       </ModalContent>
     </Modal>
- )
+  )
 }
