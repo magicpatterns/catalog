@@ -1,11 +1,11 @@
-import tinycolor from 'tinycolor2'
-import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ArrowBackIcon, ArrowForwardIcon, RepeatIcon } from '@chakra-ui/icons'
 import { Badge, Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
 import { UpdateColorModal } from '@core/components/Onboarding/pages/UpdateColorModal'
 import { TToken, TTokenGroup } from '@core/types'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import tinycolor from 'tinycolor2'
 
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
 import { generatePalette } from '../utils'
@@ -140,7 +140,7 @@ export function OtherColors({
             onClick={(e) => {
               e.preventDefault()
 
-              let colors: TTokenGroup = {}
+              const colors: TTokenGroup = {}
               palette.forEach((paletteItem) => {
                 colors[paletteItem.name] = paletteItem.color
               })
