@@ -1,21 +1,21 @@
+import tinycolor from 'tinycolor2'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ArrowBackIcon, ArrowForwardIcon, RepeatIcon } from '@chakra-ui/icons'
 import { Badge, Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
 import { generateDefaultColorShades } from '@core/components/ColorPalette/utils'
 import { TPlatform } from '@core/components/Layout'
+import { UpdateColorModal } from '@core/components/Onboarding/pages/UpdateColorModal'
 import { TToken, TTokenGroup } from '@core/types'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import tinycolor from 'tinycolor2'
 
 import { getNumberOfStepsInOnboardingFlow } from '../constants'
 import { generatePalette } from '../utils'
-import { UpdateColorModal } from '@core/components/Onboarding/pages/UpdateColorModal'
 
-type PaletteListItem = {name: string, color: TTokenGroup| TToken}
+type PaletteListItem = { name: string; color: TTokenGroup | TToken }
 
 function getPaletteListFromPalette(group: TTokenGroup) {
-  return Object.keys(group).map(colorName => ({
+  return Object.keys(group).map((colorName) => ({
     name: colorName,
-    color: group[colorName]
+    color: group[colorName],
   }))
 }
 
@@ -34,7 +34,9 @@ export function OtherColors({
   primaryName: string
   platform: TPlatform
 }) {
-  const [palette, setPalette] = useState<PaletteListItem[]>(getPaletteListFromPalette(initialPalette))
+  const [palette, setPalette] = useState<PaletteListItem[]>(
+    getPaletteListFromPalette(initialPalette)
+  )
   const [selectedColor, setSelectedColor] = useState<string | null>(null)
   const shades = generateDefaultColorShades({ primary: primaryColor })
 
@@ -50,9 +52,12 @@ export function OtherColors({
     }
   }, [palette, handleGeneratePalette])
 
-  const selectedPaletteColor = useMemo(function () {
-    return palette.find(color => color.name === selectedColor)
-  }, [selectedColor])
+  const selectedPaletteColor = useMemo(
+    function () {
+      return palette.find((color) => color.name === selectedColor)
+    },
+    [selectedColor]
+  )
 
   return (
     <Box
@@ -136,7 +141,7 @@ export function OtherColors({
               e.preventDefault()
 
               let colors: TTokenGroup = {}
-              palette.forEach(paletteItem => {
+              palette.forEach((paletteItem) => {
                 colors[paletteItem.name] = paletteItem.color
               })
 
@@ -196,67 +201,71 @@ export function OtherColors({
           </Box>
           <hr />
           <Stack spacing={6}>
-            {palette.map(color => (
+            {palette.map((color) => (
               <Box
+                css={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  minHeight: '72px',
+                }}
+                key={color.name}
+              >
+                <Box
                   css={{
                     display: 'flex',
-                    alignItems: 'center',
-                    minHeight: '72px',
+                    flexDirection: 'column',
+                    width: '150px',
                   }}
-                  key={color.name}
                 >
-                  <Box
-                    css={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      width: '150px',
-                    }}
-                  >
-                    <Text fontSize={22} fontWeight="black">
-                      {color.name}
-                    </Text>
-                  </Box>
-                  <Box
-                    css={{
-                      height: '40px',
-                      width: '120px',
-                      backgroundColor: `${color.color.value}`,
-                      marginLeft: '16px',
-                      borderRadius: 8,
-                      cursor: 'pointer',
-                    }}
-                    onClick={function () {
-                      setSelectedColor(color.name)
-                    }}
-                  />
-                  <UpdateColorModal
-                    name={selectedColor}
-                    onUpdate={function (name, newColor) {
-                      if (! selectedColor) {return}
+                  <Text fontSize={22} fontWeight="black">
+                    {color.name}
+                  </Text>
+                </Box>
+                <Box
+                  css={{
+                    height: '40px',
+                    width: '120px',
+                    backgroundColor: `${color.color.value}`,
+                    marginLeft: '16px',
+                    borderRadius: 8,
+                    cursor: 'pointer',
+                  }}
+                  onClick={function () {
+                    setSelectedColor(color.name)
+                  }}
+                />
+                <UpdateColorModal
+                  name={selectedColor}
+                  onUpdate={function (name, newColor) {
+                    if (!selectedColor) {
+                      return
+                    }
 
-                      setPalette(currentPalette => currentPalette.map(currentPaletteItem => {
+                    setPalette((currentPalette) =>
+                      currentPalette.map((currentPaletteItem) => {
                         if (currentPaletteItem.name === selectedColor) {
                           return {
                             name,
                             color: {
                               ...currentPaletteItem.color,
-                              value: newColor
-                            } as TToken
+                              value: newColor,
+                            } as TToken,
                           }
                         }
 
                         return currentPaletteItem
-                      }))
+                      })
+                    )
 
-                      setSelectedColor(null)
-                    }}
-                    color={selectedPaletteColor?.color as TToken || null}
-                    isOpen={selectedColor !== null}
-                    onClose={function () {
-                      setSelectedColor(null)
-                    }}
-                  />
-                </Box>
+                    setSelectedColor(null)
+                  }}
+                  color={(selectedPaletteColor?.color as TToken) || null}
+                  isOpen={selectedColor !== null}
+                  onClose={function () {
+                    setSelectedColor(null)
+                  }}
+                />
+              </Box>
             ))}
             <Button onClick={handleGeneratePalette} leftIcon={<RepeatIcon />}>
               Regenerate
