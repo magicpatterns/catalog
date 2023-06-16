@@ -1643,7 +1643,8 @@ const shuffleArray = (array: unknown[]) => {
 
 export function generatePalette(
   color: string,
-  primaryName: string
+  primaryName: string,
+  opacity: number
 ): TTokenGroup {
   let colors: Array<Instance> = []
 
@@ -1669,6 +1670,7 @@ export function generatePalette(
 
     const modifiedHsl = {
       ...hslColor,
+      a: opacity,
       h: hslColor.h + Math.random() * 50 - 25,
     }
 

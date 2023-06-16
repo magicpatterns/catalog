@@ -47,6 +47,7 @@ export function Onboarding({
   const authInfo = useAuthInfo()
   const [primaryColor, setPrimaryColor] = useState<AnyColor>('#9F7AEA')
   const [primaryName, setPrimaryName] = useState<string>('')
+  const [opacity, setOpacity] = useState<number>(1)
   const [palette, setPalette] = useState<TTokenGroup>({})
   const [fileTypes, setFileTypes] = useState<TExportFileType[]>(defaultFiles)
 
@@ -61,6 +62,8 @@ export function Onboarding({
 
     const hslColor = tinycolor(newColor).toHsl()
     const name = nameThatColor(hslColor)
+
+    setOpacity(hslColor.a)
     setPrimaryName(name)
   }
 
@@ -156,6 +159,7 @@ export function Onboarding({
         onUpdatePalette={(newPalette: TTokenGroup) => {
           Object.keys(newPalette).map((colorName) => {
             const color = newPalette[colorName]
+
             if (assertToken(color)) {
               newPalette[colorName] = {
                 DEFAULT: {
@@ -177,6 +181,7 @@ export function Onboarding({
         primaryName={primaryName}
         onUpdatePage={setPage}
         platform={platform}
+        opacity={opacity}
       />
     )
   } else if (page === 4) {

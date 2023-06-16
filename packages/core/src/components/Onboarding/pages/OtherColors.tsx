@@ -16,6 +16,7 @@ export function OtherColors({
   primaryColor,
   primaryName,
   platform,
+  opacity,
 }: {
   initialPalette: TTokenGroup
   onUpdatePalette: (newPalette: TTokenGroup) => void
@@ -23,13 +24,18 @@ export function OtherColors({
   primaryColor: string
   primaryName: string
   platform: TPlatform
+  opacity: number
 }) {
   const [palette, setPalette] = useState<TTokenGroup>(initialPalette)
 
   const shades = generateDefaultColorShades({ primary: primaryColor })
 
   const handleGeneratePalette = useCallback(() => {
-    const alternativeColors = generatePalette(primaryColor, primaryName)
+    const alternativeColors = generatePalette(
+      primaryColor,
+      primaryName,
+      opacity
+    )
 
     setPalette(alternativeColors)
   }, [primaryColor, primaryName])
