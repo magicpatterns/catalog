@@ -19,6 +19,7 @@ import { FiEdit } from 'react-icons/fi'
 import tinycolor from 'tinycolor2'
 
 import { EditBaseColorModal } from './EditBaseColorModal'
+import { EditColorNameModal } from './EditColorNameModal'
 import {
   defaultColorShadesToTokens,
   generateDefaultColorShades,
@@ -45,6 +46,12 @@ export function ColorDisplay({
     isOpen: isBaseModalOpen,
     onOpen: onBaseModalOpen,
     onClose: onBaseModalClose,
+  } = useDisclosure()
+
+  const {
+    isOpen: isColorNameModalOpen,
+    onOpen: onColorNameModalOpen,
+    onClose: onColorNameModalClose,
   } = useDisclosure()
 
   const {
@@ -239,9 +246,9 @@ export function ColorDisplay({
             <MenuItem onClick={() => onBaseModalOpen()}>
               Edit Base Color
             </MenuItem>
-            {/* <MenuItem onClick={() => onColorNameModalOpen()}>
+            <MenuItem onClick={() => onColorNameModalOpen()}>
               Edit Color Name
-            </MenuItem> */}
+            </MenuItem>
             <MenuItem onClick={() => onDeleteAlertDialogOpen()}>
               Delete
             </MenuItem>
@@ -326,6 +333,16 @@ export function ColorDisplay({
         baseColorToken={baseColorToken}
         onUpdateBaseColor={(updatedColorData: TTokenGroup, newName: string) => {
           onUpdateColorData(updatedColorData, newName)
+        }}
+      />
+
+      <EditColorNameModal
+        defaultNamedToken={defaultNamedToken}
+        isOpen={isColorNameModalOpen}
+        onClose={onColorNameModalClose}
+        initialColorName={colorName}
+        onUpdateColorName={(newName: string) => {
+          onUpdateColorName(newName)
         }}
       />
 
