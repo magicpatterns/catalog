@@ -1,0 +1,10 @@
+{
+  "dashboard_title": "Tablero del Editor de Mirrorful",
+  "new_project_button": "Nuevo Proyecto",
+  "open_project_button": "Abrir Proyecto",
+  "save_project_button": "Guardar Proyecto",
+  "export_project_button": "Exportar Proyecto",
+  "settings_button": "Configuraciones",
+  "help_button": "Ayuda",
+  "logout_button": "Cerrar Sesión"
+}
