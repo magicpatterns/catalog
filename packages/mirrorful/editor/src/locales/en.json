@@ -1,0 +1,10 @@
+{
+  "dashboard_title": "Mirrorful Editor Dashboard",
+  "new_project_button": "New Project",
+  "open_project_button": "Open Project",
+  "save_project_button": "Save Project",
+  "export_project_button": "Export Project",
+  "settings_button": "Settings",
+  "help_button": "Help",
+  "logout_button": "Logout"
+}
