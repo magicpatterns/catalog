@@ -47,21 +47,7 @@
         "home/intropage",
         "home/why",
         "home/community-support",
-        {
-          "group": "Export Formats",
-          "pages": [
-            "home/export-formats/introduction",
-            "home/export-formats/colors",
-            "home/export-formats/font-sizes",
-            "home/export-formats/shadows"
-          ]
-        },
-        "home/eslint-plugin",
-        "home/showcase",
-        "home/examples",
-        "home/open-source-vs-paid",
-        "home/security",
-        "home/contributing"
+        "home/showcase"
       ]
     }
   ],

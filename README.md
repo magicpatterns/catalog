@@ -3,7 +3,7 @@
   <img width="300" src="./assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
 </h1>
 <p align="center">
-  <p align="center">The open-source design system framework built for the future.</p>
+  <p align="center">Production-ready, customizable React components powered by a no-code editor.</p>
 </p>
 
 <h4 align="center">
@@ -19,9 +19,6 @@
   <a href="https://github.com/">
     <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen" alt="PRs welcome!" />
   </a>
-  <a href="https://github.com/Mirrorful/mirrorful/issues">
-    <img src="https://img.shields.io/github/commit-activity/m/Mirrorful/mirrorful" alt="git commit activity" />
-  </a>
   <a href="https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA">
     <img src="https://img.shields.io/badge/chat-on%20Slack-blueviolet" alt="Slack community channel" />
   </a>
@@ -34,19 +31,17 @@
 
 ## Introduction
 
-**[Mirrorful](https://mirrorful.com)** is an open-source design system framework that teams use to create and manage the building blocks of their app. Get started for free with **[Mirrorful Cloud](https://app.mirrorful.com)**.
+Get started for free with [Mirrorful Cloud](https://app.mirrorful.com). Book a [call](https://calendly.com/alex-danilowicz) to learn more.
 
 ## ✨ Features
 
+- **[Production-ready components](www.mirrorful.com)** — production-ready, customizable React components powered by a no-code editor.
 - **[Design tokens](https://www.mirrorful.com/docs/home/export-formats/introduction)** — a single source of truth for your tokens.
 - **[Theme generation](https://app.mirrorful.com)** — generate dark mode instantly.
-- **[Component library agnostic](https://www.mirrorful.com/docs/home/examples)** — whether you’re a third-party or your in-house library, Mirrorful hooks right in.
+- **[Component library agnostic](https://www.mirrorful.com/docs/home/examples)** — whether you’re using a third-party or your in-house library, Mirrorful hooks right in.
 - **[Eslint rules](/packages/eslint-plugin/)** — detect hard-coded color strings throughout your project and help you convert them to the Mirrorful theme.
-- **[Components](https://forms.gle/tidLkuXsScz1Edj28)** — _coming soon_ 👀
 
 ## ☁️ Get started
-
-Check out our **[quickstart guide](https://www.mirrorful.com/docs/home/intropage)**.
 
 ### Mirrorful Cloud
 
@@ -66,7 +61,7 @@ Before running the server, you'll need to install `mongodb` and run it in the ba
 
 ```bash
 # from project root
-cd packages/server; brew tap mongodb/brew; brew install mongodb-community@6.0; mongod --dbpath ./db/data
+brew tap mongodb/brew; brew install mongodb-community@6.0; cd packages/server; mongod --dbpath ./db/data
 ```
 
 ```bash
