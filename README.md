@@ -3,12 +3,13 @@
   <img width="300" src="./assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
 </h1>
 <p align="center">
-  <p align="center">Production-ready, customizable React components powered by a no-code editor.</p>
+  <p align="center">Mirrorful UI is a free, customizable, production-ready React component library.  With <a href="https://app.mirrorful.com/">Mirrorful Cloud</a>, you can generate your theme, customize the components with a no-code editor, and document your design system with your team.
+</p>
 </p>
 
 <h4 align="center">
   <a href="https://app.mirrorful.com/">Mirrorful Cloud</a> |
-  <a href="https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA">Slack</a> |
+  <a href="https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA">Community Slack</a> |
   <a href="https://mirrorful.com/">Website</a> | <a href="https://www.mirrorful.com/docs/home/intropage">Documentation</a>
 </h4>
 
@@ -27,81 +28,46 @@
   </a>
 </h4>
 
-<img src="./assets/Asset.png" width="100%" alt="Mirrorful Dashboard" />
+<img src="./assets/Asset2.png" width="100%" alt="Mirrorful" />
 
-## Introduction
+## Features
 
-Get started for free with [Mirrorful Cloud](https://app.mirrorful.com). Book a [call](https://calendly.com/alex-danilowicz) to learn more.
+- **[Easily Customizable](https://app.mirrorful.com)** — production-ready, customizable React components powered by a no-code editor.
+- **[Your Team, Your Documention](https://app.mirrorful.com)** — document your design system, streamline design and development handoffs.
+- **[Theme Generation](https://app.mirrorful.com)** — generate dark mode instantly.
+- **[Eslint Rules](/packages/eslint-plugin/)** — detect hard-coded color strings throughout your project and help you convert them to the Mirrorful theme.
 
-## ✨ Features
+## Installation
 
-- **[Production-ready components](www.mirrorful.com)** — production-ready, customizable React components powered by a no-code editor.
-- **[Design tokens](https://www.mirrorful.com/docs/home/export-formats/introduction)** — a single source of truth for your tokens.
-- **[Theme generation](https://app.mirrorful.com)** — generate dark mode instantly.
-- **[Component library agnostic](https://www.mirrorful.com/docs/home/examples)** — whether you’re using a third-party or your in-house library, Mirrorful hooks right in.
-- **[Eslint rules](/packages/eslint-plugin/)** — detect hard-coded color strings throughout your project and help you convert them to the Mirrorful theme.
+The fastest way to get started with Mirrorful is with **[Mirrorful Cloud](https://mirrorful.com)**. Alternatively, you can install the `@mirrorful` package and its peer dependencies.
 
-## ☁️ Get started
-
-### Mirrorful Cloud
-
-The fastest way to get started with Mirrorful is with **[Mirrorful Cloud](https://mirrorful.com)**.
-
-### Alternatively, run Mirrorful locally:
-
-To run Mirrorful locally, you need to run both the `web` project and the `server`.
-
-```bash
-git clone https://github.com/Mirrorful/mirrorful.git; cd mirrorful; cd apps/web; yarn; yarn dev
+```sh
+npm install @fortawesome/fontawesome-svg-core @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @radix-ui/react-popover classnames dayzed react-transition-group
 ```
 
-Visit `localhost:3000`. In a separate window, run the server at `localhost:8080`:
+## Open-source vs. paid
 
-Before running the server, you'll need to install `mongodb` and run it in the background:
+If you are interested in using Mirrorful for your team, take a look at [our website](https://mirrorful.com/) or [book a meeting with us](https://calendly.com/alex-danilowicz):
 
-```bash
-# from project root
-brew tap mongodb/brew; brew install mongodb-community@6.0; cd packages/server; mongod --dbpath ./db/data
-```
+<a href="https://calendly.com/alex-danilowicz"><img alt="Schedule a meeting" src="https://cal.com/book-with-cal-dark.svg" /></a>
 
-```bash
-# from project root
-cd packages/server; yarn; yarn dev
-```
+## Join the Mirrorful community
 
-## ⭐ Open-source vs. paid
+Join our [Slack community](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) of frontend engineers and designers.
 
-This repo is entirely MIT licensed. Need any integrations or want a new feature? Feel free to [create an issue](https://github.com/Mirrorful/mirrorful/issues) or contribute directly to the repository. The first draft of this README was made by a contributor!
-
-To learn more, please visit our [pricing page](https://www.mirrorful.com/pricing).
-
-## 🛠️ Contributing
-
-Whether it's big or small, we love contributions. Check out our **[contributing guide](https://mirrorful.com/docs/home/contributing)**.
-
-### Community & Support
-
-- [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) join our growing community!
-- [Issues](https://github.com/Mirrorful/mirrorful/issues) report any bugs you encounter using Mirrorful.
-- [YouTube](https://www.youtube.com/channel/UCcwtacSuKB8itMDMIfkkuHQ) watch content about coding and design systems.
-- [Docs](https://www.mirrorful.com/) read our documentation.
-
-### Acknowledgements
-
-The avatars of all contributors will be added here as a thank you. We are so appreciative of everyone who makes Mirrorful special. Be part of the movement! Join us on **[Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA)** and try out **[Mirrorful Cloud](app.mirrorful.com)**.
-
-<a href="https://github.com/teddarific"><img src="https://avatars.githubusercontent.com/u/16343600" width="50" height="50" alt=""/></a> <a href="https://github.com/isabellytubao"><img src="https://avatars.githubusercontent.com/u/113177368" width="50" height="50" alt=""/></a> <a href="https://github.com/gfang200"><img src="https://avatars.githubusercontent.com/u/13005240?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/sallyxu"><img src="https://avatars.githubusercontent.com/u/1229627" width="50" height="50" alt=""/></a> <a href="https://github.com/zachsnoek"><img src="https://avatars.githubusercontent.com/u/26049962" width="50" height="50" alt=""/></a>
-<a href="https://github.com/tobiasdossinger"><img src="https://avatars.githubusercontent.com/u/33021996?v=4" width="50" height="50" alt=""/></a>
-<a href="https://github.com/lagneshthakur"><img src="https://avatars.githubusercontent.com/u/13376802?v=4" width="50" height="50" alt=""/></a>
-<a href="https://github.com/Pranav2612000"><img src="https://avatars.githubusercontent.com/u/20909078?v=4" width="50" height="50" alt=""/></a>
-<a href="https://github.com/joelcmk"><img src="https://avatars.githubusercontent.com/u/57118300?v=4" width="50" height="50" alt=""/></a>
-<a href="https://github.com/karanvirsb"><img src="https://avatars.githubusercontent.com/u/71354242?v=4" width="50" height="50" alt=""/></a>
-<a href="https://github.com/ktra99"><img src="https://avatars.githubusercontent.com/u/82717216?v=4" width="50" height="50" alt=""/></a>
-<a href="https://github.com/Bismay5467"><img src="https://avatars.githubusercontent.com/u/54050465?v=4" width="50" height="50" alt=""/></a>
-<a href="https://github.com/dsinghvi"><img src="https://avatars.githubusercontent.com/u/10870189?v=4" width="50" height="50" alt=""/></a>
-<a href="https://github.com/sonylomo"><img src="https://avatars.githubusercontent.com/u/49971500?v=4" width="50" height="50" alt=""/></a>
-<a href="https://github.com/semijacks"><img src="https://avatars.githubusercontent.com/u/42486498?v=4" width="50" height="50" alt=""/></a>
+- [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) — join our growing community!
+- [Issues](https://github.com/Mirrorful/mirrorful/issues) — report any bugs you encounter using Mirrorful UI or Mirrorful Cloud.
+- [YouTube](https://www.youtube.com/channel/UCcwtacSuKB8itMDMIfkkuHQ) — watch content about coding and design systems.
+- [Docs](https://www.mirrorful.com/) — read our documentation.
 
 <div align="center">
   <img width="500" src="./assets/Community.png" alt="Community">
 </div>
+
+## Testimonials
+
+> “As a CTO, I've seen our UI development 5x, and collaboration with designers is now a seamless, integrated experience. Mirrorful is not just a component library; it's the catalyst that streamlines building out UI.” — George Fang, CTO of Canopy
+
+> "Mirrorful Cloud is an essential part of my design toolkit. It has bridged the gap between my designs and our engineering team. Saved us countless hours." — Zach Zimbler, Founder of Swishjam
+
+> "It translates my designs into workable code with such precision, it's like having an additional team member who speaks both design and engineering fluently. I can't imagine going back to our old way of working.” — Brandon Strittmatter, Founder of Outerbase

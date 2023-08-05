@@ -1,8 +1,0 @@
-types:
-  OrgId: string
-  FileId: string
-  StoreId: string
-  UserId: string
-  LibraryId:
-    type: string
-    docs: This should be the Library Id
