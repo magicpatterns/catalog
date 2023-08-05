@@ -51,7 +51,7 @@ If you are interested in using Mirrorful for your team, take a look at [our webs
 
 <a href="https://calendly.com/alex-danilowicz"><img alt="Schedule a meeting" src="https://cal.com/book-with-cal-dark.svg" /></a>
 
-## Join the Mirrorful community
+## Join our community of designers and engineers!
 
 Join our [Slack community](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) of frontend engineers and designers.
 
@@ -71,3 +71,19 @@ Join our [Slack community](https://join.slack.com/t/mirrorful/shared_invite/zt-1
 > "Mirrorful Cloud is an essential part of my design toolkit. It has bridged the gap between my designs and our engineering team. Saved us countless hours." — Zach Zimbler, Founder of Swishjam
 
 > "It translates my designs into workable code with such precision, it's like having an additional team member who speaks both design and engineering fluently. I can't imagine going back to our old way of working.” — Brandon Strittmatter, Founder of Outerbase
+
+## Acknowledgements
+
+Thanks to all our contributors!
+
+<a href="https://github.com/teddarific"><img src="https://avatars.githubusercontent.com/u/16343600" width="50" height="50" alt=""/></a> <a href="https://github.com/isabellytubao"><img src="https://avatars.githubusercontent.com/u/113177368" width="50" height="50" alt=""/></a> <a href="https://github.com/gfang200"><img src="https://avatars.githubusercontent.com/u/13005240?v=4" width="50" height="50" alt=""/></a> <a href="https://github.com/sallyxu"><img src="https://avatars.githubusercontent.com/u/1229627" width="50" height="50" alt=""/></a> <a href="https://github.com/zachsnoek"><img src="https://avatars.githubusercontent.com/u/26049962" width="50" height="50" alt=""/></a>
+<a href="https://github.com/tobiasdossinger"><img src="https://avatars.githubusercontent.com/u/33021996?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/lagneshthakur"><img src="https://avatars.githubusercontent.com/u/13376802?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/Pranav2612000"><img src="https://avatars.githubusercontent.com/u/20909078?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/joelcmk"><img src="https://avatars.githubusercontent.com/u/57118300?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/karanvirsb"><img src="https://avatars.githubusercontent.com/u/71354242?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/ktra99"><img src="https://avatars.githubusercontent.com/u/82717216?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/Bismay5467"><img src="https://avatars.githubusercontent.com/u/54050465?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/dsinghvi"><img src="https://avatars.githubusercontent.com/u/10870189?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/sonylomo"><img src="https://avatars.githubusercontent.com/u/49971500?v=4" width="50" height="50" alt=""/></a>
+<a href="https://github.com/semijacks"><img src="https://avatars.githubusercontent.com/u/42486498?v=4" width="50" height="50" alt=""/></a>
