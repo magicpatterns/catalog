@@ -1,0 +1,266 @@
+
+.mirrorful-input {
+    position: relative;
+  
+    .mirrorful-input-icon-container {
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 2px;
+      left: 2px;
+      position: absolute;
+
+  
+      .mirrorful-input-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .mirrorful-input-icon-container ~ .mirrorful-input-input {
+      padding-left: 52px;
+    }
+  
+    .mirrorful-input-input {
+      padding: 12px;
+      transition: all 200ms ease-in-out;
+      font-size: 14px;
+      height: 44px;
+      width: 245px;
+      outline: none;
+      box-shadow: none;
+    }
+  
+    .mirrorful-input-input {
+    }
+  
+    .mirrorful-input-input:hover:not(:disabled) {
+    }
+  
+    .mirrorful-input-input:disabled {
+    }
+
+    .mirrorful-input-input:focus:not(:disabled) {
+    }
+  
+    .mirrorful-input-error {
+    }
+  
+    .mirrorful-input-action-icon {
+      transition: all 100ms ease-in-out;
+      cursor: pointer;
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .mirrorful-input-action-icon-clickable {
+      &:hover {
+      }
+    }
+  
+    .mirrorful-input-error-icon {
+      cursor: pointer;
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      width: 16px;
+      height: 16px;
+    }
+  
+    .mirrorful-input-action-icon-disabled {
+      cursor: default;
+    }
+  }
+
+
+.mirrorful-input-variant-primary {
+    position: relative;
+  
+    .mirrorful-input-icon-container {
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 2px;
+      left: 2px;
+      position: absolute;
+
+      border-right-color: var(--mirrorful-primary-200);
+  
+      .mirrorful-input-icon {
+        width: 16px;
+        height: 16px;
+        color: var(--mirrorful-neutral-300);
+      }
+    }
+
+    .mirrorful-input-icon-container ~ .mirrorful-input-input {
+      padding-left: 52px;
+    }
+  
+    .mirrorful-input-input {
+      border-width: 2px;
+      border-color: var(--mirrorful-primary-200);
+      border-radius: 4px;
+      padding: 12px;
+      transition: all 200ms ease-in-out;
+      font-size: 14px;
+      height: 44px;
+      width: 245px;
+      outline: none;
+      box-shadow: none;
+    }
+  
+    .mirrorful-input-input {
+      background-color: transparent;
+    }
+  
+    .mirrorful-input-input:hover:not(:disabled) {
+      background-color: var(--mirrorful-neutral-50);
+    }
+  
+    .mirrorful-input-input:disabled {
+      background-color: var(--mirrorful-neutral-100);
+    }
+
+    .mirrorful-input-input:focus:not(:disabled) {
+      border-color: var(--mirrorful-primary-500);
+      background-color: transparent;
+    }
+  
+    .mirrorful-input-error {
+      border-color: var(--mirrorful-color-red-500) !important;
+    }
+  
+    .mirrorful-input-action-icon {
+      transition: all 100ms ease-in-out;
+      color: var(--mirrorful-neutral-300);
+      cursor: pointer;
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .mirrorful-input-action-icon-clickable {
+      &:hover {
+        color: gray;
+      }
+    }
+  
+    .mirrorful-input-error-icon {
+      color: var(--mirrorful-color-red-500);
+      cursor: pointer;
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      width: 16px;
+      height: 16px;
+    }
+  
+    .mirrorful-input-action-icon-disabled {
+      cursor: default;
+    }
+  }
+
+
+.mirrorful-input-variant-secondary {
+    position: relative;
+  
+    .mirrorful-input-icon-container {
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 2px;
+      left: 2px;
+      position: absolute;
+
+      border-right-width: 2px;
+      border-right-color: var(--mirrorful-neutral-200);
+      background-color: var(--mirrorful-neutral-50);
+  
+      .mirrorful-input-icon {
+        width: 16px;
+        height: 16px;
+        color: var(--mirrorful-neutral-300);
+      }
+    }
+
+    .mirrorful-input-icon-container ~ .mirrorful-input-input {
+      padding-left: 52px;
+    }
+  
+    .mirrorful-input-input {
+      border-width: 2px;
+      border-color: var(--mirrorful-neutral-200);
+      border-radius: 4px;
+      padding: 12px;
+      transition: all 200ms ease-in-out;
+      font-size: 14px;
+      height: 44px;
+      width: 245px;
+      outline: none;
+      box-shadow: none;
+    }
+  
+    .mirrorful-input-input {
+      background-color: transparent;
+    }
+  
+    .mirrorful-input-input:hover:not(:disabled) {
+      background-color: var(--mirrorful-neutral-50);
+    }
+  
+    .mirrorful-input-input:disabled {
+      background-color: var(--mirrorful-neutral-100);
+    }
+
+    .mirrorful-input-input:focus:not(:disabled) {
+      border-color: var(--mirrorful-primary-500);
+      background-color: transparent;
+    }
+  
+    .mirrorful-input-error {
+      border-color: var(--mirrorful-error-500) !important;
+    }
+  
+    .mirrorful-input-action-icon {
+      transition: all 100ms ease-in-out;
+      color: var(--mirrorful-neutral-300);
+      cursor: pointer;
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .mirrorful-input-action-icon-clickable {
+      &:hover {
+        color: gray;
+      }
+    }
+  
+    .mirrorful-input-error-icon {
+      color: var(--mirrorful-error-500);
+      cursor: pointer;
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      width: 16px;
+      height: 16px;
+    }
+  
+    .mirrorful-input-action-icon-disabled {
+      cursor: default;
+    }
+  }

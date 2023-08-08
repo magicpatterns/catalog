@@ -1,0 +1,96 @@
+:root {
+  /* Primitives */
+  --mirrorful-color-violet-50: #d4c2f9;
+  --mirrorful-color-violet-100: #cbb5f8;
+  --mirrorful-color-violet-200: #b594f5;
+  --mirrorful-color-violet-300: #9e74f2;
+  --mirrorful-color-violet-400: #9060f0;
+  --mirrorful-color-violet-500: #7539ec;
+  --mirrorful-color-violet-600: #5b16e4;
+  --mirrorful-color-violet-700: #5314d1;
+  --mirrorful-color-violet-800: #4611b0;
+  --mirrorful-color-violet-900: #390e90;
+
+  --mirrorful-color-gray-50: #f9fafb;
+  --mirrorful-color-gray-100: #f1f5f9;
+  --mirrorful-color-gray-200: #e2e8f0;
+  --mirrorful-color-gray-300: #cbd5e1;
+  --mirrorful-color-gray-400: #94a3b8;
+  --mirrorful-color-gray-500: #64748b;
+  --mirrorful-color-gray-600: #475569;
+  --mirrorful-color-gray-700: #334155;
+  --mirrorful-color-gray-800: #1e293b;
+  --mirrorful-color-gray-900: #0f172a;
+
+  --mirrorful-color-green-50: #ecfdf5;
+  --mirrorful-color-green-100: #d1fae5;
+  --mirrorful-color-green-200: #a7f3d0;
+  --mirrorful-color-green-300: #6ee7b7;
+  --mirrorful-color-green-400: #34d399;
+  --mirrorful-color-green-500: #10b981;
+  --mirrorful-color-green-600: #059669;
+  --mirrorful-color-green-700: #047857;
+  --mirrorful-color-green-800: #065f46;
+  --mirrorful-color-green-900: #064e3b;
+
+  --mirrorful-color-red-50: #efbac1;
+  --mirrorful-color-red-100: #ecaeb6;
+  --mirrorful-color-red-200: #e6919c;
+  --mirrorful-color-red-300: #df7482;
+  --mirrorful-color-red-400: #db6372;
+  --mirrorful-color-red-500: #d34053;
+  --mirrorful-color-red-600: #bd2b3e;
+  --mirrorful-color-red-700: #ab2738;
+  --mirrorful-color-red-800: #8e212f;
+  --mirrorful-color-red-900: #711a25;
+
+  /* Semantic Colors */
+  --mirrorful-primary-50: var(--mirrorful-color-violet-50);
+  --mirrorful-primary-100: var(--mirrorful-color-violet-100);
+  --mirrorful-primary-200: var(--mirrorful-color-violet-200);
+  --mirrorful-primary-300: var(--mirrorful-color-violet-300);
+  --mirrorful-primary-400: var(--mirrorful-color-violet-400);
+  --mirrorful-primary-500: var(--mirrorful-color-violet-500);
+  --mirrorful-primary-600: var(--mirrorful-color-violet-600);
+  --mirrorful-primary-700: var(--mirrorful-color-violet-700);
+  --mirrorful-primary-800: var(--mirrorful-color-violet-800);
+  --mirrorful-primary-900: var(--mirrorful-color-violet-900);
+
+  --mirrorful-neutral-50: var(--mirrorful-color-gray-50);
+  --mirrorful-neutral-100: var(--mirrorful-color-gray-100);
+  --mirrorful-neutral-200: var(--mirrorful-color-gray-200);
+  --mirrorful-neutral-300: var(--mirrorful-color-gray-300);
+  --mirrorful-neutral-400: var(--mirrorful-color-gray-400);
+  --mirrorful-neutral-500: var(--mirrorful-color-gray-500);
+  --mirrorful-neutral-600: var(--mirrorful-color-gray-600);
+  --mirrorful-neutral-700: var(--mirrorful-color-gray-700);
+  --mirrorful-neutral-800: var(--mirrorful-color-gray-800);
+  --mirrorful-neutral-900: var(--mirrorful-color-gray-900);
+
+  --mirrorful-error-50: var(--mirrorful-color-red-50);
+  --mirrorful-error-100: var(--mirrorful-color-red-100);
+  --mirrorful-error-200: var(--mirrorful-color-red-200);
+  --mirrorful-error-300: var(--mirrorful-color-red-300);
+  --mirrorful-error-400: var(--mirrorful-color-red-400);
+  --mirrorful-error-500: var(--mirrorful-color-red-500);
+  --mirrorful-error-600: var(--mirrorful-color-red-600);
+  --mirrorful-error-700: var(--mirrorful-color-red-700);
+  --mirrorful-error-800: var(--mirrorful-color-red-800);
+  --mirrorful-error-900: var(--mirrorful-color-red-900);
+
+  --mirrorful-success-50: var(--mirrorful-color-green-50);
+  --mirrorful-success-100: var(--mirrorful-color-green-100);
+  --mirrorful-success-200: var(--mirrorful-color-green-200);
+  --mirrorful-success-300: var(--mirrorful-color-green-300);
+  --mirrorful-success-400: var(--mirrorful-color-green-400);
+  --mirrorful-success-500: var(--mirrorful-color-green-500);
+  --mirrorful-success-600: var(--mirrorful-color-green-600);
+  --mirrorful-success-700: var(--mirrorful-color-green-700);
+  --mirrorful-success-800: var(--mirrorful-color-green-800);
+  --mirrorful-success-900: var(--mirrorful-color-green-900);
+}
+
+html[data-theme='untitled-theme'] {
+}
+html[data-theme='untitled-theme'] {
+}
