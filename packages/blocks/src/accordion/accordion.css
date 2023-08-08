@@ -1,0 +1,107 @@
+.mirrorful-accordion {
+  width: 100%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2), 0px 0px 1px rgba(26, 45, 73, 0.25);
+  border-radius: 2px;
+  overflow: hidden;
+  border-width: 1px;
+  border-color: var(--mirrorful-neutral-200);
+}
+
+.mirrorful-accordion-body {
+  width: 100%;
+  transition: max-height 200ms ease-in-out;
+  overflow: hidden;
+  background-color: var(--mirrorful-neutral-50);
+}
+
+.mirrorful-accordion-content {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: var(--mirrorful-neutral-50);
+}
+
+.mirrorful-accordion-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  width: 100%;
+  background-color: transparent;
+}
+
+.mirrorful-accordion-footer-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--mirrorful-primary-400);
+  cursor: pointer;
+}
+
+.mirrorful-accordion-footer-text:hover {
+  text-decoration: underline;
+}
+
+.mirrorful-accordion {
+  .mirrorful-accordion-footer {
+    border-top-width: 1px;
+    border-top-color: var(--mirrorful-neutral-200);
+    border-top-style: solid;
+  }
+}
+
+.mirrorful-accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 12px 12px 16px;
+  border-left-width: 4px;
+  border-left-color: transparent;
+  cursor: pointer;
+}
+
+.mirrorful-accordion-header-border {
+  border-left-color: var(--mirrorful-primary-400);
+}
+
+.mirrorful-accordion-header-content {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.mirrorful-accordion-header-left-icon {
+  width: 14px;
+  height: 14px;
+  margin-left: 9px;
+  color: var(--mirrorful-primary-400);
+}
+
+.mirrorful-accordion-header-right-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 9px;
+  color: var(--mirrorful-neutral-200);
+}
+
+.mirrorful-accordion-header-expand-icon {
+  width: 14px;
+  height: 14px;
+  transition: rotate 200ms ease-in-out;
+}
+
+.mirrorful-accordion-header-expanded {
+  .mirrorful-accordion-content {
+    color: var(--mirrorful-primary-400);
+  }
+
+  .mirrorful-accordion-header-expand-icon {
+    rotate: 180deg;
+  }
+}
+
+.mirrorful-accordion {
+  .mirrorful-accordion-header {
+    border-bottom-width: 1px;
+    border-bottom-color: var(--mirrorful-neutral-200);
+    border-bottom-style: solid;
+  }
+}

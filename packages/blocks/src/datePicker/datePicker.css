@@ -1,0 +1,62 @@
+
+.mirrorful-datePicker-button {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-width: 1px;
+    border-color: var(--mirrorful-neutral-200);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+
+    .mirrorful-datePicker-button-icon {
+        margin-right: 8px;
+    }
+}
+
+.mirrorful-datePicker-button:hover {
+    border-color: gray;
+}
+
+.mirrorful-datePicker-content {
+    display: flex;
+    background-color: white;
+
+    .mirrorful-datePicker-content-presets {
+        width: 150px;
+        border-right: 1px solid var(--mirrorful-neutral-200);
+    }
+
+    .mirrorful-datePicker-content-calendar {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.mirrorful-datePicker-range-button {
+    width: 100%;
+    text-align: left;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: transparent;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.mirrorful-datePicker-range-button:hover {
+    background-color: gray;
+    color: #000000;
+}
+
+.mirrorful-datePicker-range-button-selected {
+    background-color: var(--mirrorful-primary-500) !important;
+    color: #ffffff !important;
+}
