@@ -58,7 +58,7 @@ Join our [Slack community](https://join.slack.com/t/mirrorful/shared_invite/zt-1
 - [Slack](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) — join our growing community!
 - [Issues](https://github.com/Mirrorful/mirrorful/issues) — report any bugs you encounter using Mirrorful UI or Mirrorful Cloud.
 - [YouTube](https://www.youtube.com/channel/UCcwtacSuKB8itMDMIfkkuHQ) — watch content about coding and design systems.
-- [Docs](https://www.mirrorful.com/) — read our documentation.
+- [Docs](https://www.mirrorful.com/docs/home/intropage) — read our documentation.
 
 <div align="center">
   <img width="500" src="./assets/Community.png" alt="Community">
