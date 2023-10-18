@@ -1,6 +1,5 @@
 <h1 align="center">
-  <img width="300" src="./assets/logo-light-mode.png#gh-light-mode-only" alt="Mirrorful">
-  <img width="300" src="./assets/logo-dark-mode.png#gh-dark-mode-only" alt="Mirrorful">
+  <img width="300" src="./assets/logo-light-mode.png" alt="Mirrorful">
 </h1>
 <p align="center">
   <p align="center">Mirrorful UI is a free, customizable, production-ready React component library.  With <a href="https://app.mirrorful.com/">Mirrorful Cloud</a>, you can generate your theme, customize the components with a no-code editor, and document your design system with your team.
