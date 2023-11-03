@@ -35,7 +35,7 @@
 
 ## Installation
 
-The fastest way to get started with Mirrorful is with **[Mirrorful Cloud](https://mirrorful.com)**. Alternatively, you can install the `@mirrorful` package and its peer dependencies.
+You can install the `@mirrorful` package and its peer dependencies.
 
 ```sh
 npm install @fortawesome/fontawesome-svg-core @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @radix-ui/react-popover classnames dayzed react-transition-group
@@ -43,7 +43,7 @@ npm install @fortawesome/fontawesome-svg-core @fortawesome/free-regular-svg-icon
 
 ## Open-source vs. paid
 
-If you are interested in learning more, feel free to [book a meeting with us]([https://cal.com/alexdanilowicz](https://cal.com/adanilowicz/generating-custom-ui-with-patterns):
+If you are interested in learning more, feel free to [book a meeting with us](https://cal.com/adanilowicz/generating-custom-ui-with-patterns):
 
 <a href="https://cal.com/adanilowicz/generating-custom-ui-with-patterns"><img alt="Schedule a meeting" src="https://cal.com/book-with-cal-dark.svg" /></a>
 
@@ -51,7 +51,7 @@ If you are interested in learning more, feel free to [book a meeting with us]([h
 
 Join our [Slack community](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) of frontend engineers and designers.
 
-- [Slack]([https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA](https://join.slack.com/t/magic-patterns/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) — join our growing community!
+- [Slack](https://join.slack.com/t/magic-patterns/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) — join our growing community!
 - [Issues](https://github.com/Mirrorful/mirrorful/issues) — report any bugs you encounter using Mirrorful UI
 - [YouTube](https://www.youtube.com/channel/UCcwtacSuKB8itMDMIfkkuHQ) — watch content about coding and design systems.
 
