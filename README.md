@@ -8,7 +8,7 @@
 
 <h4 align="center">
   <a href="https://www.magicpatterns.com/">Magic Patterns</a> |
-  <a href="https://join.slack.com/t/magic-patterns/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA">Community Slack</a> |
+  <a href="https://join.slack.com/t/magic-patterns/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA">Community Slack</a>
 </h4>
 
 <h4 align="center">
@@ -41,9 +41,9 @@ You can install the `@mirrorful` package and its peer dependencies.
 npm install @fortawesome/fontawesome-svg-core @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @radix-ui/react-popover classnames dayzed react-transition-group
 ```
 
-## Open-source vs. paid
+## Generating Custom UI with Magic Patterns
 
-If you are interested in learning more, feel free to [book a meeting with us](https://cal.com/adanilowicz/generating-custom-ui-with-patterns):
+If you are interested in learning more about generating custom UI from your design system, feel free to [book a meeting with us](https://cal.com/adanilowicz/generating-custom-ui-with-patterns):
 
 <a href="https://cal.com/adanilowicz/generating-custom-ui-with-patterns"><img alt="Schedule a meeting" src="https://cal.com/book-with-cal-dark.svg" /></a>
 
