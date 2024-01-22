@@ -1,0 +1,11 @@
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.radio:focus-visible,
+.radio[data-focus-visible] {
+  outline: 2px solid hsl(204 100% 40%);
+  outline-offset: 2px;
+}
