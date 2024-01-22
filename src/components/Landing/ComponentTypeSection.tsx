@@ -71,7 +71,7 @@ export function ComponentTypeSection() {
           </ComponentTypeCard>
           <ComponentTypeCard name="Selects" href="/type/selects">
             <Select.Root>
-              <Select.Trigger placeholder="Select a fruit…" />
+              <Select.Trigger />
               <Select.Content>
                 <Select.Item value="orange">Orange</Select.Item>
                 <Select.Item value="apple">Apple</Select.Item>

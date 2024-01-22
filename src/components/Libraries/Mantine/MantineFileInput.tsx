@@ -7,7 +7,7 @@ import { MantineWrapper } from './MantineWrapper'
 export function MantineFileInput() {
   return (
     <MantineWrapper>
-      <FileInput placeholder="Pick file" label="Your resume" withAsterisk />
+      <FileInput label="Your resume" withAsterisk />
     </MantineWrapper>
   )
 }

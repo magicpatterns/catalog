@@ -8,7 +8,7 @@ export function RadixSelect() {
   return (
     <RadixWrapper>
       <Select.Root>
-        <Select.Trigger placeholder="Select a fruit…" />
+        <Select.Trigger />
         <Select.Content>
           <Select.Group>
             <Select.Label>Fruits</Select.Label>
