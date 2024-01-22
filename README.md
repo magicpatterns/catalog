@@ -2,7 +2,7 @@
   <img width="300" src="./public/magicpatterns_logo_light.svg" alt="Magic_Patterns">
 </h1>
 <p align="center">
-  <p align="center">Find the perfect component from a variety of design systems with the <a href="https://www.magicpatterns.com/">Magic Patterns</a> Catalog.
+  <p align="center">Find the perfect component from a variety of design systems with our <a href="https://www.catalog.magicpatterns.com/">Catalog</a>. The Catalog is the open-source work of the company behind <a href="https://www.magicpatterns.com/">Magic Patterns</a>/
 </p>
 </p>
 
