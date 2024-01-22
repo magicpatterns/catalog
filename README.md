@@ -43,7 +43,3 @@ If you are interested in learning more about generating custom UI from your desi
 - [YouTube](https://www.youtube.com/channel/UCcwtacSuKB8itMDMIfkkuHQ) — watch content about coding and design systems.
 - [X](https://twitter.com/magicpatterns) - follow our latest updates on X.
 
-<div align="center">
-  <img width="500" src="./public/Community.png" alt="Community">
-</div>
-
