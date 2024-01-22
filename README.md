@@ -39,7 +39,7 @@ If you are interested in learning more about generating custom UI from your desi
 
 ## Join our community of designers and engineers!
 
-Join our [Slack community](https://join.slack.com/t/mirrorful/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA](https://join.slack.com/t/magic-patterns/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) of frontend engineers and designers.
+Join our [Slack community](https://join.slack.com/t/magic-patterns/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) of frontend engineers and designers.
 
 - [Slack](https://join.slack.com/t/magic-patterns/shared_invite/zt-1ps2xtxh0-2NaixFfFzSKZbr5gw_AHfA) — join our growing community!
 - [YouTube](https://www.youtube.com/channel/UCcwtacSuKB8itMDMIfkkuHQ) — watch content about coding and design systems.
