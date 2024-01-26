@@ -161,6 +161,7 @@ function SystemStatus({ parentIsHovered }: { parentIsHovered?: boolean }) {
 
 export function Footer() {
   const [isHovered, setIsHovered] = useState(false)
+  const router = useRouter()
   const handleMouseEnter = () => {
     setIsHovered(true)
   }
@@ -174,7 +175,12 @@ export function Footer() {
           <Separator size="4" />
           <Flex justify="between" direction={{ initial: 'column', sm: 'row' }}>
             <Flex direction="column">
-              <Flex py="2" align="center">
+              <Flex
+                py="2"
+                align="center"
+                style={{ cursor: 'pointer' }}
+                onClick={() => router.push('/')}
+              >
                 <img
                   src="/patterns_logo_gs.svg"
                   style={{
