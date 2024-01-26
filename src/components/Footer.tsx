@@ -13,6 +13,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { AppContainer } from './Ai/AppContainer'
+import GitHubButton from 'react-github-btn'
 
 const FooterColumnHeader = ({ text }: { text: string }) => {
   return (
@@ -266,10 +267,19 @@ export function Footer() {
               <FooterNavItems />
             </Flex>
           </Flex>
-          <Flex justify="center" mt="5">
-            <Text size="2" style={{ color: 'var(--gray-8)' }}>
-              © North Park Labs 2024
-            </Text>
+          <Flex justify="center" mt="2">
+            <Flex direction={'column'} align={'center'} gap="2">
+              <GitHubButton
+                data-size="large"
+                data-show-count={true}
+                href="https://github.com/magicpatterns/catalog"
+              >
+                Star
+              </GitHubButton>
+              <Text size="2" style={{ color: 'var(--gray-8)' }}>
+                © North Park Labs 2024
+              </Text>
+            </Flex>
           </Flex>
         </Box>
       </AppContainer>

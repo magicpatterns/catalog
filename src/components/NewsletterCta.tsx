@@ -85,7 +85,7 @@ export function NewsletterCta() {
                 style={{ width: '100px', marginRight: '20px' }}
               />
               <Box>
-                <Heading size="6">Join the Patterns Newsletter</Heading>
+                <Heading size="6">Join the Magic Patterns Newsletter</Heading>
                 <Text size="3" mt="1">
                   Get updated on the latest UI/UX trends once a month. No spam,
                   we promise.

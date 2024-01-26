@@ -1,3 +1,4 @@
+'use client'
 import {
   Avatar,
   Box,
@@ -7,6 +8,7 @@ import {
   Heading,
   Text,
 } from '@radix-ui/themes'
+import GitHubButton from 'react-github-btn'
 
 import { LIBRARY_LOGOS } from '@/types'
 
@@ -50,6 +52,39 @@ function DesignSystemCard({
 export function DesignSystemSection() {
   return (
     <DefaultContainer>
+      <Flex
+        gap="9"
+        justify={'center'}
+        align={'center'}
+        direction={'row'}
+        mt={{
+          initial: '4',
+          lg: '8',
+        }}
+      >
+        <a
+          href="https://www.producthunt.com/posts/patterns-5?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-patterns&#0045;5"
+          target="_blank"
+        >
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=412621&theme=light&period=daily"
+            alt="Patterns - Find&#0032;the&#0032;perfect&#0032;component | Product Hunt"
+            width="250"
+            height="54"
+          />
+        </a>
+        <a
+          href="https://www.producthunt.com/posts/patterns-5?utm_source=badge-top-post-topic-badge&utm_medium=badge&utm_souce=badge-patterns&#0045;5"
+          target="_blank"
+        >
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/top-post-topic-badge.svg?post_id=412621&theme=light&period=weekly&topic_id=44"
+            alt="Patterns - Find&#0032;the&#0032;perfect&#0032;component | Product Hunt"
+            width="250"
+            height="54"
+          />
+        </a>
+      </Flex>
       <Box
         mt={{
           initial: '4',

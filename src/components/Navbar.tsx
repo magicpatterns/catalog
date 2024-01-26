@@ -55,7 +55,7 @@ export function Navbar({
           align={{ initial: 'start', sm: 'start', md: 'center' }}
           direction={{ initial: 'column', sm: 'column', md: 'row' }}
         >
-          <Link href="/" style={{ textDecoration: 'none', color: 'initial' }}>
+          {/* <Link href="/" style={{ textDecoration: 'none', color: 'initial' }}>
             <Flex py="2" align="center" style={{ cursor: 'pointer' }}>
               <img
                 src="/magicpatterns_logo_light.svg"
@@ -66,7 +66,7 @@ export function Navbar({
                 }}
               />
             </Flex>
-          </Link>
+          </Link> */}
           <Flex
             display={{
               initial: 'none',

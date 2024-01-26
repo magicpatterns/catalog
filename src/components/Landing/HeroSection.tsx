@@ -121,7 +121,7 @@ export function HeroSection() {
           <Flex justify="center" align="center" direction="column">
             <Box style={{ maxWidth: '800px' }}>
               <AnnouncementPill
-                text="🎉 magic patterns: Your frontend assistant."
+                text="🎉 magic patterns: Your frontend AI"
                 href="/"
               />
               <Heading size="9" mt="6" style={{ color: 'white' }}>

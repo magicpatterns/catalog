@@ -11,7 +11,7 @@ import { HeroSection } from '@/components/Landing/HeroSection'
 import { NewsletterCta } from '@/components/NewsletterCta'
 
 export const metadata: Metadata = {
-  title: 'Patterns',
+  title: 'Catalog',
   description: 'A collection of design patterns for the web.',
   openGraph: {
     title: 'Find the perfect component.',

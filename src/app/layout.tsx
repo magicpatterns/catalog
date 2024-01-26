@@ -8,13 +8,13 @@ import 'react-loading-skeleton/dist/skeleton.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Magic Patterns',
-  description: 'Generate the perfect component from your design system.',
+  title: 'Catalog',
+  description: 'A collection of design patterns for the web.',
   openGraph: {
-    title: 'Your new frontend assistant.',
+    title: 'Find the perfect component.',
   },
   twitter: {
-    title: 'Your new frontend assistant.',
+    title: 'Find the perfect component.',
   },
 }
 
@@ -26,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
     </html>
   )
 }

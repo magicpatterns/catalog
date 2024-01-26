@@ -24,7 +24,11 @@
   </a>
 </h4>
 
-<img src="./public/catalog_libraries.png" width="100%" alt="Mirrorful" />
+<h4 align="center">
+<a href="https://www.producthunt.com/posts/patterns-5?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-patterns&#0045;5" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=412621&theme=light&period=daily" alt="Patterns - Find&#0032;the&#0032;perfect&#0032;component | Product Hunt" style="width: 150px; height: 27px;" width="150" height="27" /></a>
+</h4>
+
+<img src="./public/catalog_libraries.png" width="100%" alt="Catalog" />
 
 ## Features
 
