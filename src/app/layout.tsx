@@ -4,6 +4,7 @@ import './globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@radix-ui/themes/styles.css'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { PosthogProvider } from '@/components/PosthogProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +26,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <PosthogProvider>
+        <body className={inter.className}>{children}</body>
+      </PosthogProvider>
+
       <script async defer src="https://buttons.github.io/buttons.js"></script>
     </html>
   )
