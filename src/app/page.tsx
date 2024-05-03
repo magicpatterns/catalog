@@ -1,3 +1,4 @@
+'use client'
 import { Box, Theme } from '@radix-ui/themes'
 import { Metadata } from 'next'
 
