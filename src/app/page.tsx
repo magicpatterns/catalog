@@ -9,10 +9,11 @@ import { ComponentTypeSection } from '@/components/Landing/ComponentTypeSection'
 import { DesignSystemSection } from '@/components/Landing/DesignSystemSection'
 import { HeroSection } from '@/components/Landing/HeroSection'
 import { NewsletterCta } from '@/components/NewsletterCta'
+import { useEffect } from 'react'
 
 export const metadata: Metadata = {
   title: 'Catalog',
-  description: 'A collection of design patterns for the web.',
+  description: 'Components ready for production.',
   openGraph: {
     title: 'Find the perfect component.',
   },
@@ -21,6 +22,12 @@ export const metadata: Metadata = {
   },
 }
 export default function Catalog() {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.location.href = 'https://www.magicpatterns.com/catalog'
+    }
+  }, [])
+
   return (
     <Theme accentColor="indigo" panelBackground="translucent">
       <HeroSection />
