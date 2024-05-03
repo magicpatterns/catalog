@@ -2,7 +2,7 @@
   <img width="300" src="./public/catalog-logo.png" alt="Magic_Patterns">
 </h1>
 <p align="center">
-  <p align="center">Discover the perfect component from a variety of design systems with our <a href="https://www.catalog.magicpatterns.com/">Catalog</a>. The Catalog is maintained by <a href="https://www.magicpatterns.com/">Magic Patterns</a> and the open-source community.
+  <p align="center">Discover the perfect component from a variety of design systems with our <a href="https://www.magicpatterns.com/catalog">Catalog</a>. The Catalog is maintained by <a href="https://www.magicpatterns.com/">Magic Patterns</a>.
 </p>
 </p>
 
@@ -27,13 +27,6 @@
 <h4 align="center">
 <a href="https://www.producthunt.com/posts/patterns-5?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-patterns&#0045;5" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=412621&theme=light&period=daily" alt="Patterns - Find&#0032;the&#0032;perfect&#0032;component | Product Hunt" style="width: 150px; height: 27px;" width="150" height="27" /></a>
 </h4>
-
-<img src="./public/catalog_libraries.png" width="100%" alt="Catalog" />
-
-## Features
-
-- **Browse by Design System** — Find sets of visually consistent components.
-- **Browse by Component Type** — Compare components across to find the perfect one.
 
 ## Generating UI with Magic Patterns
 
