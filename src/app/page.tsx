@@ -12,7 +12,7 @@ import { NewsletterCta } from '@/components/NewsletterCta'
 
 export const metadata: Metadata = {
   title: 'Catalog',
-  description: 'A collection of design patterns for the web.',
+  description: 'Components ready for production.',
   openGraph: {
     title: 'Find the perfect component.',
   },
