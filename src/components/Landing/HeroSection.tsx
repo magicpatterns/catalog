@@ -38,6 +38,12 @@ export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState<number>(0)
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.location.href = 'https://www.magicpatterns.com/catalog'
+    }
+  }, [])
+
+  useEffect(() => {
     const typeCharacter = () => {
       setText((prevText) => prevText + fullText.charAt(index))
       setIndex((prevIndex) => prevIndex + 1)
